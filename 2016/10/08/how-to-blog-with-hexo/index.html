@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>用 Hexo 搭建自定义博客</title>
+  <meta name="author" content="TwentyNight">
+   <meta name="description" content="TwentyNight 的修行屋">
+  
+
+  <meta property="og:title" content="用 Hexo 搭建自定义博客"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑"/>
+ <meta property="og:image" content=""/>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+
+<body>
+  <div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp; 
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        用 Hexo 搭建自定义博客
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2016-10-08T06:45:13.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2016-10-08
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Hexo/">Hexo</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>如果不是闲，或无法忍受其他商业博客方案，不建议用 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>，因为自由意味着繁琐。</p>
+<p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 的用法大同小异，但每一步都有多种实现方法，接下来的操作都是在 Mac 电脑上的 Terminal（终端）里进行的。</p>
+<hr>
+<h3 id="使用-Hexo-前的环境准备"><a href="#使用-Hexo-前的环境准备" class="headerlink" title="使用 Hexo 前的环境准备"></a>使用 Hexo 前的环境准备</h3><p>安装 <a href="http://brew.sh" target="_blank" rel="noopener">Hombrew</a><br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ /usr/bin/ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre></td></tr></table></figure></p>
+<p>使用 <a href="http://brew.sh" target="_blank" rel="noopener">Hombrew</a> 安装 Node.js<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ brew install node</div></pre></td></tr></table></figure></p>
+<p>Node.js 安装后，会附带 npm（node package manager）工具，可用它来搜索、下载、管理 Node.js 套件。<br>接下来使用 npm 安装 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a><br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ npm install hexo-cli -g</div></pre></td></tr></table></figure></p>
+<p>安装 <a href="https://github.com/hexojs/hexo-deployer-git" target="_blank" rel="noopener">hexo-deployer-git</a> 套件，其用于之后一键部署 blog 到 Github 上<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure></p>
+<p>注：<br>这里的 <code>--save</code> 参数会让 npm 在安装 hexo-deployer-git 之后自动将它写入 package.json 文件里，这样之后我们<a href="/2016/10/08/sync-blog-between-multiple-Macs/">多电脑间同步博客</a>就不需要再单独运行这条命令了，只需要 npm install ，当然了，这条命令是<code>幂等</code>的（即该命令运行若干次和运行一次的效果一样），所以再运行一次问题也不大。该参数的具体描述可参考<a href="http://stackoverflow.com/questions/19578796/what-is-the-save-option-for-npm-install" target="_blank" rel="noopener">这里</a>。<br>PS: 目前使用 <code>npm install xxx</code> 命令安装模块时，似乎不再需要 <code>--save</code> 参数了<a href="http://blog.csdn.net/aaa333qwe/article/details/78021704" target="_blank" rel="noopener">。</a></p>
+<hr>
+<h3 id="开始使用-Hexo"><a href="#开始使用-Hexo" class="headerlink" title="开始使用 Hexo"></a>开始使用 Hexo</h3><p>使用 Hexo 新建一个文件夹命名为 blog ，该文件夹将作为你的博客网站<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo init ~/Documents/blog</div></pre></td></tr></table></figure></p>
+<p>进入新建的文件夹<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> ~/Documents/blog</div></pre></td></tr></table></figure></p>
+<p>刚才 hexo init 命令已经在 blog 文件夹下生成了一个叫 <code>package.json</code> 的文件，npm 会通过它得知需要安装的套件<br>所以接下来使用 npm 安装相关套件<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ npm install</div></pre></td></tr></table></figure></p>
+<p>使用 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 开启服务器<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo s</div></pre></td></tr></table></figure></p>
+<p>打开浏览器，输入网址 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 就能查看刚刚建好的博客页面。目前博客只有一篇名为 <code>Hello World</code> 的文章。</p>
+<p>在刚才的 Terminla（终端）中使用 <code>control + C</code> 的组合键即可关闭服务器。</p>
+<hr>
+<h3 id="开始写文章"><a href="#开始写文章" class="headerlink" title="开始写文章"></a>开始写文章</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ <span class="built_in">pwd</span></div><div class="line">~/Documents/blog</div></pre></td></tr></table></figure>
+<p>确保你在 <code>~/Documents/blog</code> 文件夹里之后，便可用 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 新建文章<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo new <span class="string">"文章标题"</span></div></pre></td></tr></table></figure></p>
+<p>之后，在 <code>~/Documents/blog/source</code> 这个文件夹里就能看到刚刚新建的，以文章标题命名的文件。点开编辑就好。</p>
+<p>这里有两点要注意：</p>
+<ul>
+<li>需要使用 Markdown 格式来排版文章</li>
+<li>我写文章用的编辑器是 <a href="https://www.sublimetext.com" target="_blank" rel="noopener">Sublime Text</a></li>
+</ul>
+<hr>
+<h3 id="预览你的文章"><a href="#预览你的文章" class="headerlink" title="预览你的文章"></a>预览你的文章</h3><p>写好文章之后，使用 <code>hexo s</code> 开启服务器，然后打开浏览器，输入网址 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 便可以预览写好的文章。</p>
+<p>修改文章内容之后，只需要刷新浏览器页面就可以看到效果。</p>
+<hr>
+<h3 id="把博客部署到-Github-上"><a href="#把博客部署到-Github-上" class="headerlink" title="把博客部署到 Github 上"></a>把博客部署到 Github 上</h3><p>先到 <a href="https://github.com" target="_blank" rel="noopener">Github</a> 上申请一个账号，然后新建一个 <code>repository</code>，命名为：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">你的用户名.github.io</div></pre></td></tr></table></figure></p>
+<p><code>注意！</code>这里需要严格按照这种格式命名，比如我的 Github 用户名是 <code>chpwang</code>，新建的 <code>repository</code> 就要叫：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">chpwang.github.io</div></pre></td></tr></table></figure></p>
+<p>然后在 <code>~/Documents/blog</code> 文件夹里找到 <code>_config.yml</code> 文件进行编辑，加入以下设置：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: </div><div class="line">    github: git@github.com:你的用户名/你的用户名.github.io.git</div></pre></td></tr></table></figure></p>
+<p>接下来，每次更新自己的文章之后，使用这三条命令进行部署<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo clean   <span class="comment">#清空缓存</span></div><div class="line">$ hexo g       <span class="comment">#生成静态页面至 public 目录</span></div><div class="line">$ hexo d       <span class="comment">#部署到 GitHub</span></div></pre></td></tr></table></figure></p>
+<p>部署完毕之后，打开浏览器输入网址 <a href="https://你的用户名.github.io" target="_blank" rel="noopener">https://你的用户名.github.io</a> 就能看到部署上去的博客网页了。</p>
+<p>如果想进阶使用 Hexo 的博客方案，请继续阅读<a href="/2016/10/08/sync-blog-between-multiple-Macs/">多台电脑间的 Hexo 博客同步</a></p>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt=""></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

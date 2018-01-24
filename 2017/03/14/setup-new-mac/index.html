@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>入手新 Mac 后的环境搭建</title>
+  <meta name="author" content="TwentyNight">
+   <meta name="description" content="TwentyNight 的修行屋">
+  
+
+  <meta property="og:title" content="入手新 Mac 后的环境搭建"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑"/>
+ <meta property="og:image" content=""/>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+
+<body>
+  <div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp; 
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        入手新 Mac 后的环境搭建
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2017-03-14T07:42:47.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2017-03-14
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Mac/">Mac</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>搬家都是耗时的，为了尽可能节省时间，在这里记录下个人基本环境搭建。</p>
+<hr>
+<h3 id="Command-Line-Tools"><a href="#Command-Line-Tools" class="headerlink" title="Command Line Tools"></a>Command Line Tools</h3><p>虽然通过完整安装 Xcode 就能获得 Command Line Tools ，但 Xcode 太大，太费时间，推荐使用以下方法：</p>
+<p>打开 Mac 自带的终端 Terminal.app 输入以下指令<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ git</div></pre></td></tr></table></figure></p>
+<p>Mac 会提示你 <code>git</code> 这一命令不存在，需要安装 Command Line Tools ，接着就根据提示联网安装即可</p>
+<p>下面这个是正式的安装命令，<strong>幂等</strong>的哦<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ xcode-select --install</div></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h3><p>安装 <a href="http://brew.sh" target="_blank" rel="noopener">Hombrew</a><br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ /usr/bin/ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>安装好 Command Line Tools 之后，就已经有 Git 了，但并非最新版，追求最新版 Git 需要使用 Homebrew 来安装<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ brew install git</div></pre></td></tr></table></figure></p>
+<p>安装好之后要记得设置一下 Git 的一些参数</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ git config --global user.name <span class="string">"xxx xxx"</span>        <span class="comment"># Git 用户名</span></div><div class="line">$ git config --global user.email <span class="string">"xxx@xxx.com"</span>   <span class="comment"># Git 邮箱</span></div><div class="line">$ git config --global color.ui <span class="literal">true</span>              <span class="comment"># Git 命令的输出文字色彩化</span></div><div class="line"></div><div class="line"><span class="comment">### Example</span></div><div class="line">$ git config --global user.name <span class="string">"chpwang"</span>        </div><div class="line">$ git config --global user.email <span class="string">"chpwang@gmail.com"</span></div></pre></td></tr></table></figure>
+<p>Git 的一些常用命令整理见<a href="/2018/01/02/Git-Basics/">这里</a></p>
+<hr>
+<h3 id="Rails-开发环境搭建"><a href="#Rails-开发环境搭建" class="headerlink" title="Rails 开发环境搭建"></a>Rails 开发环境搭建</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 安装 ImageMagick 函数库 - 用于今后 Rails 开发中处理图片</span></div><div class="line">$ brew install imagemagick</div><div class="line"></div><div class="line"><span class="comment"># 安装 PostgreSQL - Rails 网站开发常用数据库</span></div><div class="line">$ brew install postgresql</div><div class="line">$ brew services start postgresql  <span class="comment">#启动数据库服务</span></div><div class="line"></div><div class="line"><span class="comment"># 安装 RVM - Ruby Version Manager 用来管理 Ruby 的版本</span></div><div class="line">$ \curl <span class="_">-s</span>SL https://get.rvm.io | bash <span class="_">-s</span> stable</div><div class="line">$ <span class="built_in">source</span> ~/.rvm/scripts/rvm    <span class="comment">#安装完 rvm 会提示使用该命令来让 rvm 生效 </span></div><div class="line"></div><div class="line"><span class="comment"># 安装好 rvm 后再安装一个套件（后面开发会用到）</span></div><div class="line">$ brew install libxml2</div><div class="line"></div><div class="line"><span class="comment"># 安装所需版本的 Ruby - 以 2.3.1 版本为例</span></div><div class="line">$ rvm install 2.3.1</div><div class="line">$ rvm list                <span class="comment">#该命令可查看本地存在的所有 Ruby 的版本</span></div><div class="line">$ rvm use 2.3.1 --default <span class="comment">#该命令用于设置默认的 Ruby 版本</span></div><div class="line"></div><div class="line">$ gem update --system     <span class="comment">#用于救回安装 rvm 过程中网络等原因造成的中断失败</span></div><div class="line">$ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/  <span class="comment">#设置新的 gem 的来源网站</span></div></pre></td></tr></table></figure>
+<hr>
+<h3 id="Hexo-博客环境搭建"><a href="#Hexo-博客环境搭建" class="headerlink" title="Hexo 博客环境搭建"></a>Hexo 博客环境搭建</h3><p>按以下方法搭建 Hexo 博客的环境，更多参见<a href="/2016/10/08/sync-blog-between-multiple-Macs/">多电脑间同步 Hexo 博客</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 通过 Homebrew 安装 Node.js</span></div><div class="line">$ brew install node  </div><div class="line"></div><div class="line"><span class="comment"># 使用 Node.js 自带的 npm 安装 Hexo</span></div><div class="line">$ npm install hexo-cli -g</div><div class="line"></div><div class="line"><span class="comment"># 安装 SASS - 用 Ruby 语言写的 CSS 开发工具</span></div><div class="line">$ gem install sass</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="安装-Sublime"><a href="#安装-Sublime" class="headerlink" title="安装 Sublime"></a>安装 Sublime</h3><p>Sublime 是一款常用的编辑器，可以去其<a href="https://www.sublimetext.com" target="_blank" rel="noopener">官网</a>下载，如果不付费使用，则<strong>每</strong>数个保存操作后会跳出未注册的提示</p>
+<p>安装完成后打开 Sublime ，使用快捷键 <code>Command</code> + <code>,</code> 打开设置界面<br>在右侧 <strong>Preferences.sublime-settings - User</strong> 页的<code>{}</code>内添加以下两行</p>
+<ul>
+<li><code>&quot;translate_tabs_to_spaces&quot;: true,</code></li>
+<li><code>&quot;tab_size&quot;: 2</code></li>
+</ul>
+<p>注：<br>第一行末尾有英文输入法的逗号“<code>,</code>”；<br>第二行是最后一行，可以没有逗号；<br>这两行是设置 <strong>Tap 键</strong>和 <strong>Space 键</strong>的缩进（indentation）效果：第一行将所有 <strong>Tab</strong> 转换成 <strong>Space</strong>，第二行指定每个 <strong>Tab</strong> 换成 2 个 <strong>Space</strong>；</p>
+<p>接着建立快捷方式以便在 Terminal 里快速打开<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 以下命令可以在 /usr/local/bin/ 目录下建立 Sublime 的快捷方式，用于快速调用</span></div><div class="line">$ sudo ln <span class="_">-s</span> <span class="string">"/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl"</span> /usr/<span class="built_in">local</span>/bin/subl </div><div class="line"></div><div class="line"><span class="comment"># 建好快捷方式后的使用例子</span></div><div class="line">$ subl .   <span class="comment">#打开当前目录</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt=""></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>Git 基本操作（未完待续）</title>
+  <meta name="author" content="TwentyNight">
+   <meta name="description" content="TwentyNight 的修行屋">
+  
+
+  <meta property="og:title" content="Git 基本操作（未完待续）"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑"/>
+ <meta property="og:image" content=""/>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+
+<body>
+  <div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp; 
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Git 基本操作（未完待续）
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2018-01-01T17:23:41.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2018-01-02
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Tools/">Tools</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>这里记录了常用的 Git 命令和知识，主要用于检索</p>
+<hr>
+<h3 id="关于-Git-的一些概念"><a href="#关于-Git-的一些概念" class="headerlink" title="关于 Git 的一些概念"></a>关于 Git 的一些概念</h3><img src="/2018/01/02/Git-Basics/git_concepts_framework.png" title="git concepts framework">
+<ul>
+<li>Repository</li>
+<li>Remote</li>
+<li>Index / Stage</li>
+<li>Workspace</li>
+</ul>
+<hr>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>通常 Mac 已经自带 Git ，但若要追求最新版，可使用 <a href="http://brew.sh" target="_blank" rel="noopener">Hombrew</a> 来安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ brew install git</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ git init</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ git config --global user.name <span class="string">"xxx xxx"</span>        <span class="comment"># Git 用户名</span></div><div class="line">$ git config --global user.email <span class="string">"xxx@xxx.com"</span>   <span class="comment"># Git 邮箱</span></div><div class="line">$ git config --global color.ui <span class="literal">true</span>              <span class="comment"># Git 命令的输出文字色彩化</span></div><div class="line"></div><div class="line"><span class="comment"># 显示当前的Git配置</span></div><div class="line">$ git config --list</div><div class="line"></div><div class="line"><span class="comment"># Example</span></div><div class="line">$ git config --global user.name <span class="string">"chpwang"</span>        </div><div class="line">$ git config --global user.email <span class="string">"chpwang@gmail.com"</span></div></pre></td></tr></table></figure>
+<hr>
+<h3 id="代码提交"><a href="#代码提交" class="headerlink" title="代码提交"></a>代码提交</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ git add</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ git commit</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ git push -u</div><div class="line"></div><div class="line"><span class="comment">#第一次推送 master 分支时，加上 -u 参数，Git 不但会把本地的 master 分支内容推送的远程新的 master 分支，还会把本地的 master 分支和远程的 master 分支关联起来，在以后的推送或者拉取时就可以简化命令 - git push 和 git pull</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 缓存当前进度（只能缓存 tracked files，不能缓存 untracked files）- 以下两条命令效果一样</span></div><div class="line">$ git stash</div><div class="line">$ git stash save</div><div class="line"></div><div class="line"><span class="comment"># 缓存包括 untracked files 在内的所有文件</span></div><div class="line">$ git stash save --include-untracked</div><div class="line"></div><div class="line"><span class="comment"># 缓存当前进度的同时增加对该缓存的描述，以便之后恢复时查看</span></div><div class="line">$ git stash save <span class="string">"just add twentynight.html"</span></div><div class="line"></div><div class="line"><span class="comment"># 查看临时缓存里的各种存档</span></div><div class="line">$ git stash list</div><div class="line">stash@&#123;0&#125;: WIP on ch02: 5d65fd4 add flash messages at index</div><div class="line"></div><div class="line"><span class="comment"># 在当前分支上恢复存档，默认是恢复 stash@&#123;0&#125; 的存档</span></div><div class="line">$ git stash apply [存档ID名]</div><div class="line"><span class="comment"># Example</span></div><div class="line">$ git stash apply stash@&#123;1&#125;</div><div class="line"></div><div class="line"><span class="comment"># 删除掉临时缓存里（stash stack）所保存的内容，默认删除 stash@&#123;0&#125; - stash apply 之后不会自动删除内容，所以需要手动 drop 来删除</span></div><div class="line">$ git stash drop</div><div class="line"></div><div class="line"><span class="comment"># 以下命令相当于先运行 git stash apply ，再运行 git stash drop</span></div><div class="line">$ git stash pop</div><div class="line"></div><div class="line"><span class="comment"># 只缓存 Unstaged Area 的文件改动，保留 Staging Area</span></div><div class="line">$ git stash save --keep-index</div></pre></td></tr></table></figure>
+<p>如何重置，参考 commit git real level 2</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="comment">#已经 add 的如何撤销（unstage files）？</span></div><div class="line">$ git reset HEAD &lt;file&gt;...</div></pre></td></tr></table></figure>
+<p><code>HEAD</code> 作为指针指向最新的那个 commit，而 <code>HEAD^</code> 指向倒数第二新的 commit，<code>HEAD^^</code> 指向倒数第三新的 commit，以此类推，<code>HEAD^^^^^</code> 有 5 个 <code>^</code>（caret），所以它指向倒数第六新的 commit<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 已经 commit 的如何撤销？</span></div><div class="line">$ git reset --soft HEAD^   <span class="comment">#把最新的 commit 里的修改撤销到 Stage ，文件成为 Staging files，HEAD 指针进而指向倒数第二新的 commit</span></div><div class="line"></div><div class="line">$ git reset --hard HEAD^   <span class="comment">#慎用该命令！它会把最新的 commit 里的修改完全撤销，所有修改完全消失，HEAD 指针进而指向倒数第二新的 commit</span></div></pre></td></tr></table></figure></p>
+<p>如何合并 commit</p>
+<hr>
+<h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 切换分支</span></div><div class="line">$ git checkout [分支名]</div><div class="line"></div><div class="line"><span class="comment"># 新建分支</span></div><div class="line">$ git checkout -b [分支名]</div><div class="line"></div><div class="line"><span class="comment"># 删除分支（删除 A 分支需要切换到 A 之外的分支上）</span></div><div class="line">$ git branch <span class="_">-d</span> [分支名]   <span class="comment">#删除已经 merge 过了的分支，通常已经是 merge 到 master 分支上了</span></div><div class="line">$ git branch -D [分支名]   <span class="comment">#强制删除该分支，无论该分支是否 merge 到其他分支过</span></div></pre></td></tr></table></figure>
+<hr>
+<h3 id="远程同步"><a href="#远程同步" class="headerlink" title="远程同步"></a>远程同步</h3><p>生成 SSH 验证 - <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001374385852170d9c7adf13c30429b9660d0eb689dd43a000" target="_blank" rel="noopener">廖雪峰</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@example.com"</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ git remote add [远程主机名] [地址]</div><div class="line"></div><div class="line"><span class="comment"># 显示所有远程仓库</span></div><div class="line">$ git remote -v</div><div class="line"></div><div class="line"><span class="comment"># 移除本地记录的远程主机</span></div><div class="line">$ git remote rm [远程主机名]</div></pre></td></tr></table></figure>
+<p>设置远程</p>
+<hr>
+<h3 id="gitignore"><a href="#gitignore" class="headerlink" title=".gitignore"></a>.gitignore</h3><p>关于文件 .gitignore 的用法，参考<a href="https://help.github.com/articles/ignoring-files/" target="_blank" rel="noopener">这里</a></p>
+<hr>
+<h3 id="Git-Submodule"><a href="#Git-Submodule" class="headerlink" title="Git Submodule"></a>Git Submodule</h3><p>新建，更新和同步 Submodule</p>
+<hr>
+<h3 id="更新从别人那-Fork-来的-Repository"><a href="#更新从别人那-Fork-来的-Repository" class="headerlink" title="更新从别人那 Fork 来的 Repository"></a>更新从别人那 Fork 来的 Repository</h3><p>pull<br>upstream<br>push<br>origin</p>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt=""></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

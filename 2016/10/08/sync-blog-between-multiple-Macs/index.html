@@ -94,12 +94,17 @@
 <p>在 <code>pln</code> 里各种 <code>commit</code> 之后，我们终于感觉可以 <code>push</code> 了，于是<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ <span class="built_in">pwd</span></div><div class="line">~/Documents/blog/themes/pln     <span class="comment">#确保在正确的目录下</span></div><div class="line"></div><div class="line">$ git push</div></pre></td></tr></table></figure></p>
 <p>这样一来，Github 上我们之前 fork 过来的主题 <code>pln</code> 就成功同步更新了。</p>
 <p>这时我们切换到 <code>blog</code> 文件夹，运行 <code>git status</code>，可以看到 Terminal 提示 <code>pln</code> 文件夹有新的改动需要 commit<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> ~/Documents/blog</div><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">Your branch is up-to-date with <span class="string">'origin/master'</span>.</div><div class="line">Changes not staged <span class="keyword">for</span> commit:</div><div class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to update what will be committed)</div><div class="line">  (use <span class="string">"git checkout -- &lt;file&gt;..."</span> to discard changes <span class="keyword">in</span> working directory)</div><div class="line">  (commit or discard the untracked or modified content <span class="keyword">in</span> submodules)</div><div class="line"></div><div class="line">  modified:   themes/pln (modified content)</div><div class="line"></div><div class="line">no changes added to commit (use <span class="string">"git add"</span> and/or <span class="string">"git commit -a"</span>)</div></pre></td></tr></table></figure></p>
-<p>于是我们<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ <span class="built_in">pwd</span></div><div class="line">~/Documents/blog     <span class="comment">#注意当前目录是 blog</span></div><div class="line"></div><div class="line">$ git add .</div><div class="line">$ git commit -m <span class="string">"change submodule pln theme to meet my taste"</span></div><div class="line">$ git push</div></pre></td></tr></table></figure></p>
+<p>于是我们<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ <span class="built_in">pwd</span></div><div class="line">~/Documents/blog     <span class="comment">#注意当前目录是 blog</span></div><div class="line"></div><div class="line">$ git add themes/pln</div><div class="line">$ git commit -m <span class="string">"change submodule pln theme to meet my taste"</span></div><div class="line">$ git push</div></pre></td></tr></table></figure></p>
 <p>完成后，我们 Github 上 <code>blog</code> 所对应的 <code>repository</code> 也就成功和同步更新了。</p>
 <hr>
 <h3 id="中场解说"><a href="#中场解说" class="headerlink" title="中场解说"></a>中场解说</h3><p>感谢各位玩家勇敢地保持疑惑直到现在，对于已经迷路的各位我准备用一个简单的总结把大家拉回来：</p>
 <ul>
-<li><p>以上对<strong>第一台电脑</strong>的各种操作一共涉及 <code>3</code> 个 Github 上的 <code>repository</code>：<br><code>你的用户名.github.io</code>（如 chpwang.github.io）<br><code>blog</code><br><code>pln</code></p>
+<li><p>以上对<strong>第一台电脑</strong>的各种操作一共涉及 <code>3</code> 个 Github 上的 <strong><code>Repository</code></strong>：</p>
+<ul>
+<li><code>你的用户名.github.io</code>（如 chpwang.github.io）</li>
+<li><code>blog</code></li>
+<li><code>pln</code></li>
+</ul>
 </li>
 <li><p>Hexo 会把 <code>blog</code> 文件夹里的各种内容转化成 html 文件部署到 <code>你的用户名.github.io</code> 这个 <code>repository</code> 上，所以互联网上通过 <a href="http://你的用户名.github.io" target="_blank" rel="noopener">http://你的用户名.github.io</a> 这个网址看你的博客的人实际上看到的是 <code>你的用户名.github.io</code> 这个 <code>repository</code> 里的内容</p>
 </li>

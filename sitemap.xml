@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://cps.ninja/2018/01/31/rails-cheat-sheet/</loc>
+    <loc>http://cps.ninja/2018/01/02/Git-Basics/</loc>
     
-    <lastmod>2018-02-01T15:32:20.970Z</lastmod>
+    <lastmod>2018-02-01T18:31:12.551Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/01/02/Git-Basics/</loc>
+    <loc>http://cps.ninja/2018/01/31/rails-cheat-sheet/</loc>
     
-    <lastmod>2018-01-26T16:20:44.310Z</lastmod>
+    <lastmod>2018-02-01T17:17:10.802Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2016/10/08/sync-blog-between-multiple-Macs/</loc>
+    
+    <lastmod>2018-02-01T15:53:32.451Z</lastmod>
     
   </url>
   
@@ -26,13 +33,6 @@
     <loc>http://cps.ninja/2018/01/22/Ruby-Basics/</loc>
     
     <lastmod>2018-01-22T05:46:11.671Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2016/10/08/sync-blog-between-multiple-Macs/</loc>
-    
-    <lastmod>2018-01-14T22:29:25.026Z</lastmod>
     
   </url>
   

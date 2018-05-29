@@ -98,13 +98,13 @@
 <li><p>第五步，右键新建第二个 Workflow 对象：「 Actions 」-&gt;「 Run Script 」 <img src="/2016/10/14/how-to-write-alfred-workflow/run_script.jpg" title="keyword settings"></p>
 </li>
 <li><p>第六步，如图所示设置 Run Script 对象，并保存：<img src="/2016/10/14/how-to-write-alfred-workflow/run_script_settings.jpg" title="run script settings"><br>其中，填入 Script 一栏的代码如下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">networksetup -setairportpower en0 <span class="variable">$1</span></div><div class="line"></div><div class="line"><span class="comment"># 如果你在终端(terminal)中直接输入这段代码可以开关 Wifi</span></div><div class="line"><span class="comment"># 不过在终端(terminal)里，上面的 $1 要替换成「 on 」或者「 off 」</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">networksetup -setairportpower en0 <span class="variable">$1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果你在终端(terminal)中直接输入这段代码可以开关 Wifi</span></span><br><span class="line"><span class="comment"># 不过在终端(terminal)里，上面的 $1 要替换成「 on 」或者「 off 」</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>第七步，选中 Keyword 对象，拖拽边缘的凸起，连接 Run Script 对象：<img src="/2016/10/14/how-to-write-alfred-workflow/link_objects_1.jpg" title="link objects"> <img src="/2016/10/14/how-to-write-alfred-workflow/link_objects_2.jpg" title="link objects"></p>
 </li>
 </ul>
 <p>小功告成！现在可以通过 Alfred 使用 <code>wifi [on/off]</code> 指令快速开关 Wifi 了<br><img src="/2016/10/14/how-to-write-alfred-workflow/wifi_workflow.jpg" title="wifi workflow"></p>
-<p><code>快速解说:</code><br>上述实现 Wi-Fi Toggle 的 Workflow 本质上是实现终端中的一段命令：<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ networksetup -setairportpower en0 on</div><div class="line"></div><div class="line"><span class="comment"># 在终端(terminal)中直接输入这段代码可以打开 Wifi</span></div><div class="line"><span class="comment"># 注意到，在终端(terminal)里，「 第六步 」中的 $1 要替换成「 on 」或者「 off 」</span></div><div class="line"><span class="comment">#「 第六步 」中的 $1 其实代表的是 Keyword 对象中传过来的参数，即「 on 」或者「 off 」</span></div><div class="line"><span class="comment">#「 第七步 」的连接操作指明了参数的传递方向：「 Keyword 」-&gt;「 Run Script 」</span></div></pre></td></tr></table></figure></p>
+<p><code>快速解说:</code><br>上述实现 Wi-Fi Toggle 的 Workflow 本质上是实现终端中的一段命令：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ networksetup -setairportpower en0 on</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在终端(terminal)中直接输入这段代码可以打开 Wifi</span></span><br><span class="line"><span class="comment"># 注意到，在终端(terminal)里，「 第六步 」中的 $1 要替换成「 on 」或者「 off 」</span></span><br><span class="line"><span class="comment">#「 第六步 」中的 $1 其实代表的是 Keyword 对象中传过来的参数，即「 on 」或者「 off 」</span></span><br><span class="line"><span class="comment">#「 第七步 」的连接操作指明了参数的传递方向：「 Keyword 」-&gt;「 Run Script 」</span></span><br></pre></td></tr></table></figure></p>
 <hr>
 <h3 id="按需学习"><a href="#按需学习" class="headerlink" title="按需学习"></a>按需学习</h3><p>从上面的例子里我们不难发现，创建 Alfred 的 Workflow 大体只有三个环节：</p>
 <ul>

@@ -2,37 +2,79 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://cps.ninja/2018/01/22/Ruby-Basics/</loc>
+    <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
     
-    <lastmod>2018-02-14T01:49:53.305Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/01/02/Git-Basics/</loc>
-    
-    <lastmod>2018-02-08T17:45:51.806Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/01/31/rails-cheat-sheet/</loc>
-    
-    <lastmod>2018-02-08T13:42:25.730Z</lastmod>
+    <lastmod>2018-05-29T01:17:19.200Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://cps.ninja/2016/10/08/sync-blog-between-multiple-Macs/</loc>
     
-    <lastmod>2018-02-01T15:53:32.451Z</lastmod>
+    <lastmod>2018-05-29T01:04:21.338Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
+    <loc>http://cps.ninja/2018/05/25/vscode-intro/</loc>
     
-    <lastmod>2018-01-22T05:47:18.316Z</lastmod>
+    <lastmod>2018-05-29T00:24:13.208Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2016/10/08/how-to-blog-with-hexo/</loc>
+    
+    <lastmod>2018-05-29T00:24:13.206Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
+    
+    <lastmod>2018-05-29T00:24:13.206Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
+    
+    <lastmod>2018-05-29T00:24:13.206Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/01/31/rails-cheat-sheet/</loc>
+    
+    <lastmod>2018-05-29T00:24:13.206Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
+    
+    <lastmod>2018-05-29T00:24:13.206Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2016/10/09/customize-your-blog-domain/</loc>
+    
+    <lastmod>2018-05-29T00:24:13.205Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/01/02/Git-Basics/</loc>
+    
+    <lastmod>2018-05-29T00:24:13.204Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/01/22/Ruby-Basics/</loc>
+    
+    <lastmod>2018-02-14T01:49:53.305Z</lastmod>
     
   </url>
   
@@ -58,23 +100,9 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2016/10/08/how-to-blog-with-hexo/</loc>
-    
-    <lastmod>2018-01-14T21:52:05.043Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cps.ninja/2016/11/20/ethereum-for-newbies/</loc>
     
     <lastmod>2018-01-14T21:52:05.042Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2016/10/09/customize-your-blog-domain/</loc>
-    
-    <lastmod>2018-01-14T21:52:05.041Z</lastmod>
     
   </url>
   

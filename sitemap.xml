@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
+    
+    <lastmod>2018-05-30T22:01:35.371Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
     
     <lastmod>2018-05-30T03:14:50.670Z</lastmod>
@@ -37,13 +44,6 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2016/10/08/how-to-blog-with-hexo/</loc>
-    
-    <lastmod>2018-05-29T00:24:13.206Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
     
     <lastmod>2018-05-29T00:24:13.206Z</lastmod>
@@ -51,7 +51,7 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
+    <loc>http://cps.ninja/2016/10/08/how-to-blog-with-hexo/</loc>
     
     <lastmod>2018-05-29T00:24:13.206Z</lastmod>
     

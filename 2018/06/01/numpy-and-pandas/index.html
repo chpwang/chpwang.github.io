@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>NumPy 和 Pandas</title>
+  <meta name="author" content="TwentyNight">
+   <meta name="description" content="TwentyNight 的修行屋">
+  
+
+  <meta property="og:title" content="NumPy 和 Pandas"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑"/>
+ <meta property="og:image" content=""/>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+
+<body>
+  <div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp; 
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        NumPy 和 Pandas
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2018-05-31T20:08:41.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2018-06-01
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Data-Science/">Data Science</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><a href="https://docs.scipy.org/doc/numpy/user/quickstart.html" target="_blank" rel="noopener">numpy</a> - Numerical Python 和 <a href="https://pandas.pydata.org" target="_blank" rel="noopener">pandas</a> - Python Data Analysis Library 是 Python 语言处理数据时常用的两个库，专门用来进行诸如线性代数方面的计算。通过 Python 的库管理软件 <a href="/2018/05/27/set-up-anaconda/">Anaconda</a> 等可以很容易地安装。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 同时安装 numpy 和 pandas 两个软件包（Packages）</span></span><br><span class="line">(py3) $ conda install numpy pandas</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 载入 numpy 和 pandas - 演示文件 ~/demo_script.py </span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># code block</span></span><br><span class="line">...</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>NumPy 和 Pandas 包含很多好用的东西，这里只介绍常用的几个数据类型和相应的函数，更多风骚操作还是得看官方文档和 Google 。</p>
+<p>PS：<br>为了在描述过程中区分 numpy 里的 Array 数据类型和 Pandas 里的 Series 类型，下文对于 Array 将使用 <strong>position</strong> 来称呼它的引用，而对于 Series 则用 <strong>index</strong> 。你将很快看到两者的不同。</p>
+<hr>
+<h3 id="标题1"><a href="#标题1" class="headerlink" title="标题1"></a>标题1</h3><p> todo</p>
+<hr>
+<h3 id="标题2"><a href="#标题2" class="headerlink" title="标题2"></a>标题2</h3><p>todo</p>
+<hr>
+<h3 id="pandas-里的向量运算-Series-类型加减"><a href="#pandas-里的向量运算-Series-类型加减" class="headerlink" title="pandas 里的向量运算 - Series 类型加减"></a>pandas 里的向量运算 - Series 类型加减</h3><p>pandas 里的 Series 类型的相加是根据 <strong>index</strong> 匹配相加减的，而不是根据 <strong>position</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Python 3.6.5 |Anaconda, Inc.| (default, Apr 26 2018, 08:42:37)</span><br><span class="line">[GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)] on darwin</span><br><span class="line">Type <span class="string">"help"</span>, <span class="string">"copyright"</span>, <span class="string">"credits"</span> or <span class="string">"license"</span> <span class="keyword">for</span> more information.</span><br><span class="line">&gt;&gt;&gt; import pandas as pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># Addition when indexes are the same</span></span><br><span class="line">&gt;&gt;&gt; s1 = pd.Series([1, 2, 3, 4], index=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>])</span><br><span class="line">&gt;&gt;&gt; s2 = pd.Series([10, 20, 30, 40], index=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>])</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">print</span>(s1 + s2)</span><br><span class="line">a    11</span><br><span class="line">b    22</span><br><span class="line">c    33</span><br><span class="line">d    44</span><br><span class="line">dtype: int64</span><br><span class="line"></span><br><span class="line"><span class="comment"># Indexes have same elements in a different order</span></span><br><span class="line">s1 = pd.Series([1, 2, 3, 4], index=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>])</span><br><span class="line">s2 = pd.Series([10, 20, 30, 40], index=[<span class="string">'b'</span>, <span class="string">'d'</span>, <span class="string">'a'</span>, <span class="string">'c'</span>])</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">print</span>(s1 + s2)</span><br><span class="line">a    31</span><br><span class="line">b    12</span><br><span class="line">c    43</span><br><span class="line">d    24</span><br><span class="line">dtype: int64</span><br><span class="line"></span><br><span class="line"><span class="comment"># Indexes overlap, but do not have exactly the same elements</span></span><br><span class="line">&gt;&gt;&gt; s1 = pd.Series([1, 2, 3, 4], index=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>])</span><br><span class="line">&gt;&gt;&gt; s2 = pd.Series([10, 20, 30, 40], index=[<span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>, <span class="string">'f'</span>])</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">print</span>(s1 + s2)</span><br><span class="line">a     NaN</span><br><span class="line">b     NaN</span><br><span class="line">c    13.0</span><br><span class="line">d    24.0</span><br><span class="line">e     NaN</span><br><span class="line">f     NaN</span><br><span class="line">dtype: <span class="built_in">float</span>64</span><br><span class="line"></span><br><span class="line"><span class="comment"># Indexes do not overlap</span></span><br><span class="line">&gt;&gt;&gt; s1 = pd.Series([1, 2, 3, 4], index=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>])</span><br><span class="line">&gt;&gt;&gt; s2 = pd.Series([10, 20, 30, 40], index=[<span class="string">'e'</span>, <span class="string">'f'</span>, <span class="string">'g'</span>, <span class="string">'h'</span>])</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">print</span>(s1 + s2)</span><br><span class="line">a   NaN</span><br><span class="line">b   NaN</span><br><span class="line">c   NaN</span><br><span class="line">d   NaN</span><br><span class="line">e   NaN</span><br><span class="line">f   NaN</span><br><span class="line">g   NaN</span><br><span class="line">h   NaN</span><br><span class="line">dtype: <span class="built_in">float</span>64</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="标题3"><a href="#标题3" class="headerlink" title="标题3"></a>标题3</h3><p>todo</p>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt=""></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

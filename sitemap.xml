@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
+    
+    <lastmod>2018-06-04T03:19:22.072Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
+    
+    <lastmod>2018-06-04T03:19:07.605Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
     
-    <lastmod>2018-06-03T23:55:16.712Z</lastmod>
+    <lastmod>2018-06-04T03:18:54.362Z</lastmod>
     
   </url>
   
@@ -12,20 +26,6 @@
     <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
     
     <lastmod>2018-06-01T23:31:46.518Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
-    
-    <lastmod>2018-05-31T20:10:29.900Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
-    
-    <lastmod>2018-05-30T22:38:12.524Z</lastmod>
     
   </url>
   

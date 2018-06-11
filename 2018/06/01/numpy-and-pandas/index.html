@@ -76,15 +76,20 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 同时安装 numpy 和 pandas 两个软件包（Packages）</span></span><br><span class="line">(py3) $ conda install numpy pandas</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 载入 numpy 和 pandas - 演示文件 ~/demo_script.py </span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># code block</span></span><br><span class="line">...</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>NumPy 和 Pandas 包含很多好用的东西，这里只介绍常用的几个数据类型和相应的函数，更多风骚操作还是得看官方文档和 Google 。</p>
-<p>PS：<br>为了在描述过程中区分 numpy 里的 Array 数据类型和 Pandas 里的 Series 类型，下文对于 Array 将使用 <strong>position</strong> 来称呼它的引用，而对于 Series 则用 <strong>index</strong> 。你将很快看到两者的不同。</p>
+<p>PS：<br>为了在描述过程中区分 numpy 里的 Array 数据类型和 Pandas 里的 Series 类型，下文对于 Array 将使用 <strong>position</strong> 来称呼它的引用，而对于 Series 则用 <strong>index</strong> （Series 也有 <strong>position</strong>）。你将很快看到两者的不同。</p>
 <hr>
 <h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>使用 NumPy 和 Pandas 这两个库时，通常是使用里面的三个数据类型：</p>
 <ul>
 <li>NumPy 里的 <strong>Array</strong> 类型</li>
 <li>Pandas 里的 <strong>Series</strong> 类型</li>
-<li>Pandas 里的 <strong>DataFrame</strong> 类型</li>
+<li>Pandas 里的 <strong>DataFrame</strong> 类型 - 其中每列 (column) 都是一个 Series</li>
 </ul>
-<p>这些数据类型包含了常见的分析计算数据的方法，非常方便，更重要的是他们计算数据的速度比 Python 自带的 list 等类型要快</p>
+<p>这些数据类型包含了常见的分析计算数据的方法 (methods)，其计算数据的速度比 Python 自带的 list 等类型要快，以下是它们的特点和区别：</p>
+<ol>
+<li>NumPy 里的 <strong>Array</strong> 类型要求其中储存的数据类型必须一致，所以它主要用来处理大规模<strong>类型相同</strong>的 2 维或多维数据；</li>
+<li>Pandas 里的 <strong>Series</strong> 类型也要求其中储存的数据类型必须一致，不过它储存的数据是一维的；</li>
+<li>Pandas 里的 <strong>DataFrame</strong> 类型允许各个列 (column) 之间的数据类型不同（同列数据得相同）- 它每个列可以看成一个独立的 <strong>Series</strong> ；</li>
+</ol>
 <hr>
 <h3 id="NumPy-里的-Array-类型"><a href="#NumPy-里的-Array-类型" class="headerlink" title="NumPy 里的 Array 类型"></a>NumPy 里的 Array 类型</h3><p>todo</p>
 <hr>

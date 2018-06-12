@@ -80,6 +80,13 @@
 <hr>
 <h3 id="启动-Notebook-服务器"><a href="#启动-Notebook-服务器" class="headerlink" title="启动 Notebook 服务器"></a>启动 Notebook 服务器</h3><p>在终端中输入 <code>jupyter notebook</code>，服务器就会在你运行此命令的目录中启动，这意味着任何 notebook 文件都会保存在该目录下<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 当前所在目录</span></span><br><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/Users/user1/Documents/Udacity_Class/temp_test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动 notebooke 服务器 - 此例子里，服务器运行地址是 http://localhost:8888</span></span><br><span class="line">$ jupyter notebook</span><br><span class="line">[I 06:07:23.978 NotebookApp] Writing notebook server cookie secret to /Users/user1/Library/Jupyter/runtime/notebook_cookie_secret</span><br><span class="line">[I 06:07:24.147 NotebookApp] Serving notebooks from <span class="built_in">local</span> directory: /Users/user1/Documents/Udacity_Class/temp_test</span><br><span class="line">[I 06:07:24.147 NotebookApp] 0 active kernels</span><br><span class="line">[I 06:07:24.147 NotebookApp] The Jupyter Notebook is running at:</span><br><span class="line">[I 06:07:24.147 NotebookApp] http://localhost:8888/?token=479961dc55f3f37e3885c81bc4de0cfea8c78d51713d7c21</span><br><span class="line">[I 06:07:24.147 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).</span><br><span class="line">[C 06:07:24.148 NotebookApp]</span><br></pre></td></tr></table></figure></p>
 <hr>
+<h3 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h3><ol>
+<li><p>添加 <code>% matplotlib inline</code> 后可在 Notebook 内容流上显示图表</p>
+</li>
+<li><p>在代码末尾添加分号 <code>;</code> 可以隐藏输出，参考<a href="https://stackoverflow.com/questions/25790062/how-to-hide-matplotlib-lines-line2d-in-ipython-notebook" target="_blank" rel="noopener">这里</a></p>
+</li>
+</ol>
+<hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt=""></p>
 
 

@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
+    
+    <lastmod>2018-06-15T12:10:06.011Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
     
-    <lastmod>2018-06-15T08:13:29.436Z</lastmod>
+    <lastmod>2018-06-15T09:20:36.116Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
     
-    <lastmod>2018-06-12T12:26:21.350Z</lastmod>
+    <lastmod>2018-06-15T09:10:54.064Z</lastmod>
     
   </url>
   

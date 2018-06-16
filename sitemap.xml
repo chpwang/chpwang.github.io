@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
+    
+    <lastmod>2018-06-16T12:19:53.193Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
     
     <lastmod>2018-06-15T23:21:47.442Z</lastmod>
@@ -33,13 +40,6 @@
     <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
     
     <lastmod>2018-06-11T00:18:00.405Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
-    
-    <lastmod>2018-06-10T23:47:01.788Z</lastmod>
     
   </url>
   

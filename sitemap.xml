@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
+    
+    <lastmod>2018-06-16T18:31:16.729Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
     
-    <lastmod>2018-06-16T12:19:53.193Z</lastmod>
+    <lastmod>2018-06-16T18:04:53.378Z</lastmod>
     
   </url>
   
@@ -12,13 +19,6 @@
     <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
     
     <lastmod>2018-06-15T23:21:47.442Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
-    
-    <lastmod>2018-06-15T23:09:17.680Z</lastmod>
     
   </url>
   

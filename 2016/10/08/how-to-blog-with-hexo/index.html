@@ -105,9 +105,17 @@
 <h3 id="把博客部署到-Github-上"><a href="#把博客部署到-Github-上" class="headerlink" title="把博客部署到 Github 上"></a>把博客部署到 Github 上</h3><p>先到 <a href="https://github.com" target="_blank" rel="noopener">Github</a> 上申请一个账号，然后新建一个 <code>repository</code>，命名为：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">你的用户名.github.io</span><br></pre></td></tr></table></figure></p>
 <p><code>注意！</code>这里需要严格按照这种格式命名，比如我的 Github 用户名是 <code>chpwang</code>，新建的 <code>repository</code> 就要叫：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chpwang.github.io</span><br></pre></td></tr></table></figure></p>
 <p>然后在 <code>~/Documents/blog</code> 文件夹里找到 <code>_config.yml</code> 文件进行编辑，加入以下设置：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: </span><br><span class="line">    github: git@github.com:你的用户名/你的用户名.github.io.git</span><br></pre></td></tr></table></figure></p>
-<p>接下来，每次更新自己的文章之后，使用这三条命令进行部署<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean   <span class="comment">#清空缓存</span></span><br><span class="line">$ hexo g       <span class="comment">#生成静态页面至 public 目录</span></span><br><span class="line">$ hexo d       <span class="comment">#部署到 GitHub</span></span><br></pre></td></tr></table></figure></p>
+<p>接下来，每次更新自己的文章之后，使用这三条命令进行部署<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean   <span class="comment">#清空缓存</span></span><br><span class="line">$ hexo g       <span class="comment">#生成静态页面至 public 目录</span></span><br><span class="line">$ hexo d       <span class="comment">#部署到 GitHub</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果部署的时候卡住没反应（no response），可以加上 debug 参数查看输出日志（log）</span></span><br><span class="line">$ hexo d -debug</span><br></pre></td></tr></table></figure></p>
 <p>部署完毕之后，打开浏览器输入网址 <a href="https://你的用户名.github.io" target="_blank" rel="noopener">https://你的用户名.github.io</a> 就能看到部署上去的博客网页了。</p>
 <p>如果想进阶使用 Hexo 的博客方案，请继续阅读<a href="/2016/10/08/sync-blog-between-multiple-Macs/">多台电脑间的 Hexo 博客同步</a></p>
+<p>PS:<br>有时部署会遇到卡住没反应的问题，当使用 <code>hexo d -debug</code> 命令后，发现日志循环输出 <code>0 files generated in 81 ms</code>， 这可能是开启了 Github 的二次验证（2FA）导致的。解决方案要不就是重新绑定 Github 上的 <strong>SSH Key</strong>，或者根据<a href="http://fezl.me/2017/05/20/GitHub二次验证带来的问题/" target="_blank" rel="noopener">这里</a>设置 Personal access tokens 后用 <strong>https</strong> 地址来部署</p>
+<p>如果还没解决，可以参考以下案例：</p>
+<ul>
+<li><a href="https://github.com/hexojs/hexo/issues/3182" target="_blank" rel="noopener">hexo d 部署卡住</a></li>
+<li><a href="http://duanyifu.com/2016/08/23/hexo-deploy-problem/" target="_blank" rel="noopener">hexo deploy 命令卡住的奇怪问题</a></li>
+<li><a href="https://blog.csdn.net/jingbin_/article/details/80617210" target="_blank" rel="noopener">用 hexo d 命令部署的时候总是会卡住很久，查看日志发现信息一直在循环</a></li>
+<li><a href="https://github.com/hexojs/hexo/issues/1478" target="_blank" rel="noopener">hexo deploy 时不断 Error</a></li>
+</ul>
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt=""></p>
 

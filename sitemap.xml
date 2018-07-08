@@ -2,16 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2016/09/19/From-Logdown-to-Hexo/</loc>
+    
+    <lastmod>2018-07-08T06:56:27.461Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/05/25/vscode-intro/</loc>
+    
+    <lastmod>2018-07-08T06:54:07.310Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
+    
+    <lastmod>2018-07-08T06:54:07.309Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
     
-    <lastmod>2018-06-18T01:17:10.783Z</lastmod>
+    <lastmod>2018-07-08T06:54:07.309Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
     
-    <lastmod>2018-06-17T10:57:56.472Z</lastmod>
+    <lastmod>2018-07-08T06:54:07.309Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2016/10/08/how-to-blog-with-hexo/</loc>
+    
+    <lastmod>2018-07-08T06:54:07.308Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
+    
+    <lastmod>2018-07-08T06:54:07.308Z</lastmod>
     
   </url>
   
@@ -19,27 +54,6 @@
     <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
     
     <lastmod>2018-06-17T09:35:34.336Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
-    
-    <lastmod>2018-06-16T18:04:53.378Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
-    
-    <lastmod>2018-06-15T09:10:54.064Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/05/25/vscode-intro/</loc>
-    
-    <lastmod>2018-06-11T00:31:42.655Z</lastmod>
     
   </url>
   
@@ -61,13 +75,6 @@
     <loc>http://cps.ninja/2016/10/08/sync-blog-between-multiple-Macs/</loc>
     
     <lastmod>2018-05-29T01:04:21.338Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2016/10/08/how-to-blog-with-hexo/</loc>
-    
-    <lastmod>2018-05-29T00:24:13.206Z</lastmod>
     
   </url>
   
@@ -122,13 +129,6 @@
   
   <url>
     <loc>http://cps.ninja/2016/10/24/blockchain-for-newbies/</loc>
-    
-    <lastmod>2018-01-14T21:52:05.041Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2016/09/19/From-Logdown-to-Hexo/</loc>
     
     <lastmod>2018-01-14T21:52:05.041Z</lastmod>
     

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
+    
+    <lastmod>2018-07-09T05:10:29.220Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2016/09/19/From-Logdown-to-Hexo/</loc>
     
     <lastmod>2018-07-08T06:56:27.461Z</lastmod>
@@ -24,13 +31,6 @@
   
   <url>
     <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
-    
-    <lastmod>2018-07-08T06:54:07.309Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
     
     <lastmod>2018-07-08T06:54:07.309Z</lastmod>
     

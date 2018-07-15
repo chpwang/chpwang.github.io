@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
+    
+    <lastmod>2018-07-15T07:22:17.306Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
     
     <lastmod>2018-07-15T07:16:20.113Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>http://cps.ninja/2018/05/25/vscode-intro/</loc>
     
     <lastmod>2018-07-08T06:54:07.310Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
-    
-    <lastmod>2018-07-08T06:54:07.309Z</lastmod>
     
   </url>
   

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2018/01/02/Git-Basics/</loc>
+    
+    <lastmod>2018-08-07T08:27:18.306Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
     
     <lastmod>2018-07-15T07:22:17.306Z</lastmod>
@@ -82,13 +89,6 @@
     <loc>http://cps.ninja/2016/10/09/customize-your-blog-domain/</loc>
     
     <lastmod>2018-05-29T00:24:13.205Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/01/02/Git-Basics/</loc>
-    
-    <lastmod>2018-05-29T00:24:13.204Z</lastmod>
     
   </url>
   

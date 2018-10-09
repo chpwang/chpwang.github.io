@@ -7,12 +7,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="google-site-verification" content="" />
   
-  <title>2016/11</title>
+  <title>神经网络入门（更新中）</title>
   <meta name="author" content="TwentyNight">
    <meta name="description" content="TwentyNight 的修行屋">
   
 
-  
+  <meta property="og:title" content="神经网络入门（更新中）"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:site_name" content="行侠何须仗名剑"/>
  <meta property="og:image" content=""/>
@@ -36,102 +36,57 @@
       </div>
     </div>
     <div class="container">
-      <nav class="navigator"><nav class="navbar navbar-default navbar-fixed-top">
-  <div class="nav-container">
-
-  <ul class="nav navbar-nav navbar-left">
-    <li class="navbar-header">
-      <a href="/" style="font-family: 'STXihei', sans-serif; font-size: 1.3em;">A Little Schemer</a>
-    </li>
-  </ul>
-  <div id="site_search" class="">
-  <input type="text" id="local-search-input" name="q" placeholder="Search..." class="form-control"/>
-</div>
-<div id="local-search-result"></div>
-
-
-  <ul class="nav navbar-nav navbar-right">
-
-    
-      <li class="dropdown">
-        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-tags fa-lg"></i>
-        </a>
-        <ul class="dropdown-content">
-
-            
-             <li><a href="/tags/Miscellaneous/">Miscellaneous</a></li><li><a href="/tags/Tools/">Tools</a></li><li><a href="/tags/Machine-Learning/">Machine Learning</a></li><li><a href="/tags/Blockchain/">Blockchain</a></li><li><a href="/tags/Hexo/">Hexo</a></li><li><a href="/tags/Python/">Python</a></li><li><a href="/tags/Ruby-Rails/">Ruby & Rails</a></li><li><a href="/tags/Mac/">Mac</a></li>
-
-        </ul>
-      </li>
-    
-
-    <li class="archives"><a href="/archives">
-      <i class="fa fa-archive fa-lg"></i>
-    </a></li>
-
-    <li class="github">
-      <a href="https://github.com/chpwang">
-        <i class="fa fa-github-square fa-lg"></i>
-      </a>
-    </li>
-
-    <li class="dropdown">
-      <a href="/about" role="button" aria-haspopup="true" aria-expanded="false">
-        <i class="fa fa-user fa-lg"></i>
-      </a>
-    </li>
-  </ul>
-  </div>
-</nav>
-
-</nav>
-
-
-<h1 class="archive-title ">
-  
-  <i class="fa fa-archive"></i>
-  
-  2016/11
-</h1>
-<div class="archive-num">
-  There are 1 articles in total
-</div>
-<div class="archive">
-  
-    
       
 
+  <article class="standard post">
+    <div class="title">
       
+  
+    <h1 class="page-title center">
+        神经网络入门（更新中）
+    </h1>
+  
 
-        
 
-        
+    </div>
+    <div class="meta center">
+      
+<time datetime="2018-09-25T17:31:04.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2018-09-26
+</time>
 
-        
 
-        </ul></section>
-        <section data-link="year-2016" class="section-year">
-            <h2>2016</h2>
-            <ul class="archive-list">
-                <div class="archive-item">
-                    <div class="archive-time">
-                      11-20
-                    </div>
-                    <div class="archive-detail">
-                      <a href="/2016/11/20/ethereum-for-newbies/" class="archive-link">
-                        认识 Ethereum - 以太坊
-                      </a>
-                    </div>
-                </div>
-                <hr>
-                
+
+
+
+
     
-</div>
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Machine-Learning/">Machine Learning</a>
 
-<ul class="pager">
-    <span class="page-number current">1</span>
-</ul>
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>神经网络（Neural Network）是深度学习（Deep Learning）领域里的一种计算方法</p>
+<hr>
+<h3 id="基本神经网络"><a href="#基本神经网络" class="headerlink" title="基本神经网络"></a>基本神经网络</h3><p>TODO<br>由于非线性方程是通用的函数逼近方法（非常多的函数的值都可以使用多项式来逼近，比如「根号 2 」的计算就是计算机通过计算泰勒展开完成的，而泰勒展开就是一种非线性方程），所以神经网络的隐藏层要使用非线性方程来搭建</p>
+<p>神经网络的隐藏层里的非线性方程是由<strong>一个线性方程</strong>加上<strong>一个非线性激活函数</strong>组合而成</p>
+<hr>
+<h3 id="卷积神经网络（Convolutional-Neural-Network）"><a href="#卷积神经网络（Convolutional-Neural-Network）" class="headerlink" title="卷积神经网络（Convolutional Neural Network）"></a>卷积神经网络（Convolutional Neural Network）</h3><p><strong>卷积神经网络</strong>常用于解决图片分类的问题（image classification）。</p>
+<p>数字化的图片是由像素组成的，而每一个像素都有自己的颜色（比如若用 RGB 表示，单个像素具有「红」，「绿」和「蓝」 3 个颜色通道），这样，一张图片就能表示成一个三维数组（Width, Height, ColorChannels）</p>
+<p><strong>卷积神经网络</strong>的目标是让代表图片的三维数组在经过一系列的计算后，数组变得 much deeper，且 less wide and less high</p>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt=""></p>
+
+
+  </article>
+
+
 
     </div>
   </div>

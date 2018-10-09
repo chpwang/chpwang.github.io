@@ -2,44 +2,114 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://cps.ninja/2018/01/02/Git-Basics/</loc>
+    <loc>http://cps.ninja/2018/09/21/TensorFlow/</loc>
     
-    <lastmod>2018-08-08T13:42:55.393Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
-    
-    <lastmod>2018-07-15T07:22:17.306Z</lastmod>
+    <lastmod>2018-10-09T03:57:05.928Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
+    <loc>http://cps.ninja/2016/10/08/sync-blog-between-multiple-Macs/</loc>
     
-    <lastmod>2018-07-15T07:16:20.113Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2016/09/19/From-Logdown-to-Hexo/</loc>
-    
-    <lastmod>2018-07-08T06:56:27.461Z</lastmod>
+    <lastmod>2018-10-07T13:16:14.261Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://cps.ninja/2018/05/25/vscode-intro/</loc>
     
-    <lastmod>2018-07-08T06:54:07.310Z</lastmod>
+    <lastmod>2018-10-07T13:16:14.261Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
     
-    <lastmod>2018-07-08T06:54:07.309Z</lastmod>
+    <lastmod>2018-10-07T13:16:14.260Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
+    
+    <lastmod>2018-10-07T13:16:14.260Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
+    
+    <lastmod>2018-10-07T13:16:14.259Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
+    
+    <lastmod>2018-10-07T13:16:14.259Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
+    
+    <lastmod>2018-10-07T13:16:14.259Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
+    
+    <lastmod>2018-10-07T13:16:14.258Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
+    
+    <lastmod>2018-10-07T13:16:14.257Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
+    
+    <lastmod>2018-10-07T13:16:14.257Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/09/26/intro-to-neural-network/</loc>
+    
+    <lastmod>2018-10-07T13:16:14.257Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/09/21/keras/</loc>
+    
+    <lastmod>2018-10-07T13:16:14.257Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2016/11/20/ethereum-for-newbies/</loc>
+    
+    <lastmod>2018-10-07T13:16:14.256Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/01/02/Git-Basics/</loc>
+    
+    <lastmod>2018-10-07T13:16:14.255Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2016/09/19/From-Logdown-to-Hexo/</loc>
+    
+    <lastmod>2018-10-07T13:16:14.255Z</lastmod>
     
   </url>
   
@@ -51,37 +121,9 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
-    
-    <lastmod>2018-07-08T06:54:07.308Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
-    
-    <lastmod>2018-06-17T09:35:34.336Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cps.ninja/2018/01/31/rails-cheat-sheet/</loc>
     
     <lastmod>2018-05-29T14:28:54.691Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
-    
-    <lastmod>2018-05-29T14:20:51.909Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2016/10/08/sync-blog-between-multiple-Macs/</loc>
-    
-    <lastmod>2018-05-29T01:04:21.338Z</lastmod>
     
   </url>
   
@@ -117,13 +159,6 @@
     <loc>http://cps.ninja/2016/10/14/how-to-write-alfred-workflow/</loc>
     
     <lastmod>2018-01-14T21:52:05.043Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2016/11/20/ethereum-for-newbies/</loc>
-    
-    <lastmod>2018-01-14T21:52:05.042Z</lastmod>
     
   </url>
   

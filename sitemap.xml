@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
+    
+    <lastmod>2018-10-10T14:32:18.978Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2018/09/21/TensorFlow/</loc>
     
-    <lastmod>2018-10-09T03:57:05.928Z</lastmod>
+    <lastmod>2018-10-10T14:22:10.397Z</lastmod>
     
   </url>
   
@@ -23,13 +30,6 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
-    
-    <lastmod>2018-10-07T13:16:14.260Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
     
     <lastmod>2018-10-07T13:16:14.260Z</lastmod>
@@ -37,7 +37,7 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
+    <loc>http://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
     
     <lastmod>2018-10-07T13:16:14.259Z</lastmod>
     
@@ -51,7 +51,7 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
+    <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
     
     <lastmod>2018-10-07T13:16:14.259Z</lastmod>
     
@@ -61,6 +61,13 @@
     <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
     
     <lastmod>2018-10-07T13:16:14.258Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/09/21/keras/</loc>
+    
+    <lastmod>2018-10-07T13:16:14.257Z</lastmod>
     
   </url>
   
@@ -80,13 +87,6 @@
   
   <url>
     <loc>http://cps.ninja/2018/09/26/intro-to-neural-network/</loc>
-    
-    <lastmod>2018-10-07T13:16:14.257Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/09/21/keras/</loc>
     
     <lastmod>2018-10-07T13:16:14.257Z</lastmod>
     

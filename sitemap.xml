@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
+    
+    <lastmod>2018-10-17T12:14:24.488Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
     
     <lastmod>2018-10-17T09:12:47.665Z</lastmod>
@@ -23,14 +30,14 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2016/10/08/sync-blog-between-multiple-Macs/</loc>
+    <loc>http://cps.ninja/2018/05/25/vscode-intro/</loc>
     
     <lastmod>2018-10-07T13:16:14.261Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/05/25/vscode-intro/</loc>
+    <loc>http://cps.ninja/2016/10/08/sync-blog-between-multiple-Macs/</loc>
     
     <lastmod>2018-10-07T13:16:14.261Z</lastmod>
     
@@ -58,21 +65,14 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
-    
-    <lastmod>2018-10-07T13:16:14.258Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/09/21/keras/</loc>
+    <loc>http://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
     
     <lastmod>2018-10-07T13:16:14.257Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
+    <loc>http://cps.ninja/2018/09/21/keras/</loc>
     
     <lastmod>2018-10-07T13:16:14.257Z</lastmod>
     
@@ -86,7 +86,7 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
+    <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
     
     <lastmod>2018-10-07T13:16:14.257Z</lastmod>
     

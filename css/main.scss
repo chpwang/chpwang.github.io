@@ -72,8 +72,14 @@ p {
     font-size: 18px;
     line-height: 2em;
     letter-spacing: .5px;
-    list-style-type: disc;
     color: lighten($para, 10%);
+}
+
+ol>li {
+    list-style-type: decimal;
+}
+ul>li {
+    list-style-type: disc;
 }
 
 li {

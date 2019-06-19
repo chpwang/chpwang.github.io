@@ -1,32 +1,35 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-  <meta charset="utf-8">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="google-site-verification" content="" />
+  <meta name="google-site-verification" content>
   
   <title>Git 常用操作</title>
   <meta name="author" content="TwentyNight">
    <meta name="description" content="TwentyNight 的修行屋">
   
 
-  <meta property="og:title" content="Git 常用操作"/>
+  <meta property="og:title" content="Git 常用操作">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:site_name" content="行侠何须仗名剑"/>
- <meta property="og:image" content=""/>
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
   
   <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
   <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
   <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
   <link rel="stylesheet" href="/css/m.min.css">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-
+</html>
 <body>
-  <div id="main">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
     <div class="behind">
       <div class="back">
         <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -83,49 +86,280 @@
 </ul>
 <hr>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>通常 Mac 已经自带 Git ，但若要追求最新版，可使用 <a href="http://brew.sh" target="_blank" rel="noopener">Hombrew</a> 来安装</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ brew install git</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-bash">$ brew install git
+</code></pre>
 <hr>
-<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 进入需要用 Git 进行追踪以保存各个时间点进度的文件夹</span></span><br><span class="line">$ <span class="built_in">cd</span> ~/rails101</span><br><span class="line"><span class="comment"># 初始化当前所在文件夹</span></span><br><span class="line">$ git init</span><br></pre></td></tr></table></figure>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><pre><code class="lang-bash">## 进入需要用 Git 进行追踪以保存各个时间点进度的文件夹
+$ cd ~/rails101
+## 初始化当前所在文件夹
+$ git init
+</code></pre>
 <hr>
-<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">"xxx xxx"</span>        <span class="comment"># Git 用户名</span></span><br><span class="line">$ git config --global user.email <span class="string">"xxx@xxx.com"</span>   <span class="comment"># Git 邮箱</span></span><br><span class="line">$ git config --global color.ui <span class="literal">true</span>              <span class="comment"># Git 命令的输出文字色彩化</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前的Git配置</span></span><br><span class="line">$ git config --list</span><br><span class="line"></span><br><span class="line"><span class="comment"># Example</span></span><br><span class="line">$ git config --global user.name <span class="string">"chpwang"</span>        </span><br><span class="line">$ git config --global user.email <span class="string">"chpwang@gmail.com"</span></span><br></pre></td></tr></table></figure>
+<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><pre><code class="lang-bash">$ git config --global user.name &quot;xxx xxx&quot;        # Git 用户名
+$ git config --global user.email &quot;xxx@xxx.com&quot;   # Git 邮箱
+$ git config --global color.ui true              # Git 命令的输出文字色彩化
+
+# 显示当前的Git配置
+$ git config --list
+
+# Example
+$ git config --global user.name &quot;chpwang&quot;        
+$ git config --global user.email &quot;chpwang@gmail.com&quot;
+</code></pre>
 <hr>
-<h3 id="代码提交"><a href="#代码提交" class="headerlink" title="代码提交"></a>代码提交</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 常用基本指令</span></span><br><span class="line">$ git status            <span class="comment"># 查看当前文件更改状态      </span></span><br><span class="line">$ git add [文件名]       <span class="comment"># 添加更改文件到 staging area（顶图中的 index 区）</span></span><br><span class="line">$ git commit -m <span class="string">"该 commit 的注释内容"</span>    <span class="comment"># 保存 staging area 的文件（顶图中的 Repository 区）</span></span><br><span class="line">$ git <span class="built_in">log</span> --oneline | head -n 5         <span class="comment"># 查看前 5 个 commit 的信息（一行一个）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 撤销</span></span><br><span class="line">$ git checkout [file]            <span class="comment"># 恢复暂存区的指定文件到工作区（working area）</span></span><br><span class="line">$ git checkout [commit] [file]   <span class="comment"># 恢复指定 commit 的指定文件到工作区</span></span><br><span class="line">$ git checkout .                 <span class="comment"># 恢复上一个commit的所有文件到工作区</span></span><br><span class="line">$ git checkout -- [file]         <span class="comment"># 清空工作区（working area）的指定文件的改动（不影响 Staging area）</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># push 基本指令</span></span><br><span class="line">$ git push [远程主机名] [本地分支名]:[远程分支名]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Example</span></span><br><span class="line">$ git push heroku ch08:master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第一次推送 master 分支时，加上 -u 参数，Git 不但会把本地的 master 分支内容推送的远程新的 master 分支，还会把本地的 master 分支和远程的 master 分支关联起来，在以后的推送或者拉取时就可以简化命令 - git push 和 git pull</span></span><br><span class="line">$ git push -u origin master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送本地的 chpw-dev 分支到远程主机的 chpw-dev 分支上，并将本地的 chpw-dev 分支设置为追踪（track）远程分支 chpw-dev</span></span><br><span class="line"><span class="comment"># Branch 'chpw-dev' set up to track remote branch 'chpw-dev' from 'origin'</span></span><br><span class="line"><span class="comment"># 下次在本地的 chpw-dev 分支上就可以直接用简单命令 git push 来推送 chpw-dev 分支了</span></span><br><span class="line">$ git push -u origin chpw-dev:chpw-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送本地所有分支</span></span><br><span class="line">$ git push --all</span><br></pre></td></tr></table></figure>
+<h3 id="代码提交"><a href="#代码提交" class="headerlink" title="代码提交"></a>代码提交</h3><pre><code class="lang-bash">## 常用基本指令
+$ git status            ## 查看当前文件更改状态      
+$ git add [文件名]       ## 添加更改文件到 staging area（顶图中的 index 区）
+$ git commit -m &quot;该 commit 的注释内容&quot;    ## 保存 staging area 的文件（顶图中的 Repository 区）
+$ git log --oneline | head -n 5         ## 查看前 5 个 commit 的信息（一行一个）
+
+## 撤销
+$ git checkout [file]            ## 恢复暂存区的指定文件到工作区（working area）
+$ git checkout [commit] [file]   ## 恢复指定 commit 的指定文件到工作区
+$ git checkout .                 ## 恢复上一个commit的所有文件到工作区
+$ git checkout -- [file]         ## 清空工作区（working area）的指定文件的改动（不影响 Staging area）
+</code></pre>
+<pre><code class="lang-bash"># push 基本指令
+$ git push [远程主机名] [本地分支名]:[远程分支名]
+
+# Example
+$ git push heroku ch08:master
+
+# 第一次推送 master 分支时，加上 -u 参数，Git 不但会把本地的 master 分支内容推送的远程新的 master 分支，还会把本地的 master 分支和远程的 master 分支关联起来，在以后的推送或者拉取时就可以简化命令 - git push 和 git pull
+$ git push -u origin master
+
+# 推送本地的 chpw-dev 分支到远程主机的 chpw-dev 分支上，并将本地的 chpw-dev 分支设置为追踪（track）远程分支 chpw-dev
+# Branch &#39;chpw-dev&#39; set up to track remote branch &#39;chpw-dev&#39; from &#39;origin&#39;
+# 下次在本地的 chpw-dev 分支上就可以直接用简单命令 git push 来推送 chpw-dev 分支了
+$ git push -u origin chpw-dev:chpw-dev
+
+# 推送本地所有分支
+$ git push --all
+</code></pre>
 <hr>
-<h3 id="拉取远程代码"><a href="#拉取远程代码" class="headerlink" title="拉取远程代码"></a>拉取远程代码</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 从远程主机克隆一个版本库到本地并在本地生成一个目录，与远程主机的版本库同名</span></span><br><span class="line">$ git <span class="built_in">clone</span> [版本库的网址]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Example</span></span><br><span class="line">$ git <span class="built_in">clone</span> git@github.com:bitcoin/bitcoin.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 若要指定不同的目录名，可以用以下命令</span></span><br><span class="line">$ git <span class="built_in">clone</span> [版本库的网址] [本地目录名]</span><br></pre></td></tr></table></figure>
+<h3 id="拉取远程代码"><a href="#拉取远程代码" class="headerlink" title="拉取远程代码"></a>拉取远程代码</h3><pre><code class="lang-bash">## 从远程主机克隆一个版本库到本地并在本地生成一个目录，与远程主机的版本库同名
+$ git clone [版本库的网址]
+
+## Example
+$ git clone git@github.com:bitcoin/bitcoin.git
+
+## 若要指定不同的目录名，可以用以下命令
+$ git clone [版本库的网址] [本地目录名]
+</code></pre>
 <hr>
-<h3 id="临时缓存"><a href="#临时缓存" class="headerlink" title="临时缓存"></a>临时缓存</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 缓存当前进度（只能缓存 tracked files，不能缓存 untracked files）- 以下两条命令效果一样</span></span><br><span class="line">$ git stash</span><br><span class="line">$ git stash save</span><br><span class="line"></span><br><span class="line"><span class="comment"># 缓存包括 untracked files 在内的所有文件</span></span><br><span class="line">$ git stash save --include-untracked</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只缓存 Unstaged Area 的文件改动，保留 Staging Area</span></span><br><span class="line">$ git stash save --keep-index</span><br><span class="line"></span><br><span class="line"><span class="comment"># 缓存当前进度的同时增加对该缓存的描述，以便之后恢复时查看</span></span><br><span class="line">$ git stash save <span class="string">"just add twentynight.html"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看临时缓存里的各种存档</span></span><br><span class="line">$ git stash list</span><br><span class="line">stash@&#123;0&#125;: WIP on ch02: 5d65fd4 add flash messages at index</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在当前分支上恢复存档，默认是恢复 stash@&#123;0&#125; 的存档</span></span><br><span class="line">$ git stash apply [存档ID名]</span><br><span class="line"><span class="comment"># Example - 恢复 stash@&#123;1&#125; 的存档</span></span><br><span class="line">$ git stash apply 1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认删除临时缓存里所保存的最新一条内容，即删除 stash@&#123;0&#125; - stash apply 之后不会自动删除已被 apply 内容，所以需要手动 drop 来删除</span></span><br><span class="line">$ git stash drop</span><br><span class="line">Dropped refs/stash@&#123;0&#125; (bceb5b826e75881c82f83827605<span class="built_in">fc</span>81938d49a49)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果不小心 drop 掉了代码，可以用被 drop 掉的 stash 所对应的 ID 重新找回</span></span><br><span class="line">$ git stash apply bceb5b826e75881c82f83827605<span class="built_in">fc</span>81938d49a49</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除缓存里的所有内容</span></span><br><span class="line">$ git stash clear</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下命令相当于先运行 git stash apply ，再运行 git stash drop</span></span><br><span class="line">$ git stash pop</span><br></pre></td></tr></table></figure>
+<h3 id="临时缓存"><a href="#临时缓存" class="headerlink" title="临时缓存"></a>临时缓存</h3><pre><code class="lang-bash">## 缓存当前进度（只能缓存 tracked files，不能缓存 untracked files）- 以下两条命令效果一样
+$ git stash
+$ git stash save
+
+## 缓存包括 untracked files 在内的所有文件
+$ git stash save --include-untracked
+
+## 只缓存 Unstaged Area 的文件改动，保留 Staging Area
+$ git stash save --keep-index
+
+## 缓存当前进度的同时增加对该缓存的描述，以便之后恢复时查看
+$ git stash save &quot;just add twentynight.html&quot;
+
+## 查看临时缓存里的各种存档
+$ git stash list
+stash@{0}: WIP on ch02: 5d65fd4 add flash messages at index
+
+## 在当前分支上恢复存档，默认是恢复 stash@{0} 的存档
+$ git stash apply [存档ID名]
+## Example - 恢复 stash@{1} 的存档
+$ git stash apply 1
+
+## 默认删除临时缓存里所保存的最新一条内容，即删除 stash@{0} - stash apply 之后不会自动删除已被 apply 内容，所以需要手动 drop 来删除
+$ git stash drop
+Dropped refs/stash@{0} (bceb5b826e75881c82f83827605fc81938d49a49)
+
+## 如果不小心 drop 掉了代码，可以用被 drop 掉的 stash 所对应的 ID 重新找回
+$ git stash apply bceb5b826e75881c82f83827605fc81938d49a49
+
+## 删除缓存里的所有内容
+$ git stash clear
+
+## 以下命令相当于先运行 git stash apply ，再运行 git stash drop
+$ git stash pop
+</code></pre>
 <hr>
 <h3 id="重置和读档"><a href="#重置和读档" class="headerlink" title="重置和读档"></a>重置和读档</h3><p>参考 git real level 2</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#已经 add 的如何撤销（unstage files）？</span></span><br><span class="line">$ git reset HEAD &lt;file&gt;...</span><br></pre></td></tr></table></figure>
-<p><code>HEAD</code> 作为指针指向最新的那个 commit，而 <code>HEAD^</code> 指向倒数第二新的 commit，<code>HEAD^^</code> 指向倒数第三新的 commit，以此类推，<code>HEAD^^^^^</code> 有 5 个 <code>^</code>（caret），所以它指向倒数第六新的 commit<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 已经 commit 的如何撤销？</span></span><br><span class="line">$ git reset --soft HEAD^   <span class="comment">#把最新的 commit 里的修改撤销到 Stage ，文件成为 Staging files，HEAD 指针进而指向倒数第二新的 commit</span></span><br><span class="line"></span><br><span class="line">$ git reset --hard HEAD^   <span class="comment">#慎用该命令！它会把最新的 commit 里的修改完全撤销，所有修改完全消失，HEAD 指针进而指向倒数第二新的 commit</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如何清除 Working Area（工作台）里所有已改动的文件，恢复到 HEAD （最新一个 commit）的状态</span></span><br><span class="line"><span class="comment"># 可以先 Stash 缓存，然后再清空缓存</span></span><br><span class="line">$ git stash save --include-untracked</span><br><span class="line">$ git stash drop</span><br></pre></td></tr></table></figure></p>
+<pre><code class="lang-bash">## 已经 add 的如何撤销（unstage files）？
+$ git reset HEAD &lt;file&gt;...
+</code></pre>
+<p><code>HEAD</code> 作为指针指向最新的那个 commit，而 <code>HEAD^</code> 指向倒数第二新的 commit，<code>HEAD^^</code> 指向倒数第三新的 commit，以此类推，<code>HEAD^^^^^</code> 有 5 个 <code>^</code>（caret），所以它指向倒数第六新的 commit</p>
+<pre><code class="lang-bash">## 已经 commit 的如何撤销？
+$ git reset --soft HEAD^   ## 把最新的 commit 里的修改撤销到 Stage ，文件成为 Staging files，HEAD 指针进而指向倒数第二新的 commit
+
+$ git reset --hard HEAD^   ## 慎用该命令！它会把最新的 commit 里的修改完全撤销，所有修改完全消失，HEAD 指针进而指向倒数第二新的 commit
+
+## 如何清除 Working Area（工作台）里所有已改动的文件，恢复到 HEAD （最新一个 commit）的状态
+## 可以先 Stash 缓存，然后再清空缓存
+$ git stash save --include-untracked
+$ git stash drop
+</code></pre>
 <hr>
-<h3 id="更改已有-Commit-Interactive-Rebase"><a href="#更改已有-Commit-Interactive-Rebase" class="headerlink" title="更改已有 Commit - Interactive Rebase"></a>更改已有 Commit - Interactive Rebase</h3><p>下面展示了最新的 3 条 Commit 信息:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --oneline | head -n 3</span><br><span class="line">a58f305 arrange folders <span class="keyword">for</span> next Udacity Class - Deep Learning</span><br><span class="line">cf56d01 fix bugs, misunderstandings and mistakes <span class="keyword">in</span> P5 Boston Housing - Udacity ML<span class="keyword">for</span>NBs</span><br><span class="line">eacff8b complete P5 Boston Housing - Udacity ML<span class="keyword">for</span>NBs</span><br></pre></td></tr></table></figure></p>
-<p>使用命令 <code>git rebase -i HEAD~3</code> 进入一个使用 vi 编辑器打开的文件，编辑这个文件（更改文件中顶部的 Commit 的关键词 - 例如 <code>pick</code> 改成 <code>r</code> 表示要重命名 Commit 的信息 - 然后用 <code>:wq</code> 保存文件退出），可以实现对已有倒数 3 条 Commit 进行编辑更改（<code>HEAD~3</code> 代表倒数 3 条 Commit）:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pick eacff8b complete P5 Boston Housing - Udacity ML<span class="keyword">for</span>NBs</span><br><span class="line">pick cf56d01 fix bugs, misunderstandings and mistakes <span class="keyword">in</span> P5 Boston Housing - Udacity ML<span class="keyword">for</span>NBs</span><br><span class="line">pick a58f305 arrange folders <span class="keyword">for</span> next Udacity Class - Deep Learning</span><br><span class="line"></span><br><span class="line"><span class="comment"># Rebase 3e6e796..a58f305 onto 3e6e796 (3 commands)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Commands:</span></span><br><span class="line"><span class="comment"># p, pick = use commit</span></span><br><span class="line"><span class="comment"># r, reword = use commit, but edit the commit message</span></span><br><span class="line"><span class="comment"># e, edit = use commit, but stop for amending</span></span><br><span class="line"><span class="comment"># s, squash = use commit, but meld into previous commit</span></span><br><span class="line"><span class="comment"># f, fixup = like "squash", but discard this commit's log message</span></span><br><span class="line"><span class="comment"># x, exec = run command (the rest of the line) using shell</span></span><br><span class="line"><span class="comment"># d, drop = remove commit</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># These lines can be re-ordered; they are executed from top to bottom.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># If you remove a line here THAT COMMIT WILL BE LOST.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># However, if you remove everything, the rebase will be aborted.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Note that empty commits are commented out</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="更改已有-Commit-Interactive-Rebase"><a href="#更改已有-Commit-Interactive-Rebase" class="headerlink" title="更改已有 Commit - Interactive Rebase"></a>更改已有 Commit - Interactive Rebase</h3><p>下面展示了最新的 3 条 Commit 信息:</p>
+<pre><code class="lang-bash">$ git log --oneline | head -n 3
+a58f305 arrange folders for next Udacity Class - Deep Learning
+cf56d01 fix bugs, misunderstandings and mistakes in P5 Boston Housing - Udacity MLforNBs
+eacff8b complete P5 Boston Housing - Udacity MLforNBs
+</code></pre>
+<p>使用命令 <code>git rebase -i HEAD~3</code> 进入一个使用 vi 编辑器打开的文件，编辑这个文件（更改文件中顶部的 Commit 的关键词 - 例如 <code>pick</code> 改成 <code>r</code> 表示要重命名 Commit 的信息 - 然后用 <code>:wq</code> 保存文件退出），可以实现对已有倒数 3 条 Commit 进行编辑更改（<code>HEAD~3</code> 代表倒数 3 条 Commit）:</p>
+<pre><code class="lang-bash">  pick eacff8b complete P5 Boston Housing - Udacity MLforNBs
+  pick cf56d01 fix bugs, misunderstandings and mistakes in P5 Boston Housing - Udacity MLforNBs
+  pick a58f305 arrange folders for next Udacity Class - Deep Learning
+
+  # Rebase 3e6e796..a58f305 onto 3e6e796 (3 commands)
+  #
+  # Commands:
+  # p, pick = use commit
+  # r, reword = use commit, but edit the commit message
+  # e, edit = use commit, but stop for amending
+  # s, squash = use commit, but meld into previous commit
+  # f, fixup = like &quot;squash&quot;, but discard this commit&#39;s log message
+  # x, exec = run command (the rest of the line) using shell
+  # d, drop = remove commit
+  #
+  # These lines can be re-ordered; they are executed from top to bottom.
+  #
+  # If you remove a line here THAT COMMIT WILL BE LOST.
+  #
+  # However, if you remove everything, the rebase will be aborted.
+  #
+  # Note that empty commits are commented out
+</code></pre>
 <p>例子 - 重命名最新一条 Commit 的信息（message）:</p>
 <ol>
 <li><p>将目标 Commit 前的关键词 <code>pick</code> 改成 <code>r</code> :</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pick eacff8b complete P5 Boston Housing - Udacity ML<span class="keyword">for</span>NBs</span><br><span class="line">pick cf56d01 fix bugs, misunderstandings and mistakes <span class="keyword">in</span> P5 Boston Housing - Udacity ML<span class="keyword">for</span>NBs</span><br><span class="line">r a58f305 arrange folders <span class="keyword">for</span> next Udacity Class - Deep Learning</span><br><span class="line"></span><br><span class="line"><span class="comment"># Rebase 3e6e796..a58f305 onto 3e6e796 (3 commands)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Commands:</span></span><br><span class="line"><span class="comment"># p, pick = use commit</span></span><br><span class="line"><span class="comment"># r, reword = use commit, but edit the commit message</span></span><br><span class="line"><span class="comment"># e, edit = use commit, but stop for amending</span></span><br><span class="line"><span class="comment"># s, squash = use commit, but meld into previous commit</span></span><br><span class="line"><span class="comment"># f, fixup = like "squash", but discard this commit's log message</span></span><br><span class="line"><span class="comment"># x, exec = run command (the rest of the line) using shell</span></span><br><span class="line"><span class="comment"># d, drop = remove commit</span></span><br></pre></td></tr></table></figure>
+<pre><code class="lang-bash">pick eacff8b complete P5 Boston Housing - Udacity MLforNBs
+pick cf56d01 fix bugs, misunderstandings and mistakes in P5 Boston Housing - Udacity MLforNBs
+r a58f305 arrange folders for next Udacity Class - Deep Learning
+
+# Rebase 3e6e796..a58f305 onto 3e6e796 (3 commands)
+#
+# Commands:
+# p, pick = use commit
+# r, reword = use commit, but edit the commit message
+# e, edit = use commit, but stop for amending
+# s, squash = use commit, but meld into previous commit
+# f, fixup = like &quot;squash&quot;, but discard this commit&#39;s log message
+# x, exec = run command (the rest of the line) using shell
+# d, drop = remove commit
+</code></pre>
 </li>
 <li><p>用 <code>:wq</code> 保存文件退出（这是 vi 编辑器的保存退出方式）；</p>
 </li>
 <li><p>在弹出的又一个使用 vi 编辑器打开的文件中，修改 Commit 信息（commit message）；</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">arrange folders <span class="keyword">for</span> next Udacity Class - Deep Learning    <span class="comment"># &lt;- 修改这行信息</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Please enter the commit message for your changes. Lines starting</span></span><br><span class="line"><span class="comment"># with '#' will be ignored, and an empty message aborts the commit.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Date:      Wed Jul 4 15:59:36 2018 +0800</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># interactive rebase in progress; onto 929522f</span></span><br><span class="line"><span class="comment"># Last commands done (10 commands done):</span></span><br><span class="line"><span class="comment">#    pick cf56d01 fix bugs, misunderstandings and mistakes in P5 Boston Housing - Udacity MLforNBs</span></span><br><span class="line"><span class="comment">#    reword a58f305 arrange folders for next Udacity Class - Deep Learning</span></span><br><span class="line"><span class="comment"># Next commands to do (5 remaining commands):</span></span><br><span class="line"><span class="comment">#    pick b02f9b2 add new version of P5 with Python 3+</span></span><br><span class="line"><span class="comment">#    pick e2e1a5f add data visualized codes in Question 1st</span></span><br><span class="line"><span class="comment"># You are currently editing a commit while rebasing branch 'master' on '929522f'.</span></span><br></pre></td></tr></table></figure>
+<pre><code class="lang-bash">arrange folders for next Udacity Class - Deep Learning    # &lt;- 修改这行信息
+
+# Please enter the commit message for your changes. Lines starting
+# with &#39;#&#39; will be ignored, and an empty message aborts the commit.
+#
+# Date:      Wed Jul 4 15:59:36 2018 +0800
+#
+# interactive rebase in progress; onto 929522f
+# Last commands done (10 commands done):
+#    pick cf56d01 fix bugs, misunderstandings and mistakes in P5 Boston Housing - Udacity MLforNBs
+#    reword a58f305 arrange folders for next Udacity Class - Deep Learning
+# Next commands to do (5 remaining commands):
+#    pick b02f9b2 add new version of P5 with Python 3+
+#    pick e2e1a5f add data visualized codes in Question 1st
+# You are currently editing a commit while rebasing branch &#39;master&#39; on &#39;929522f&#39;.
+</code></pre>
 </li>
 <li><p>用 <code>:wq</code> 保存文件退出；</p>
 </li>
 <li><p>再次查看最新的 3 条 Commit 信息，可以发现刚刚的 Commit 被更改了（Commit 的 Hash 值也变了）:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --oneline | head -n 3</span><br><span class="line">670afa6 I changed this commit - arrange folders <span class="keyword">for</span> next Udacity Class - Deep Learning</span><br><span class="line">cf56d01 fix bugs, misunderstandings and mistakes <span class="keyword">in</span> P5 Boston Housing - Udacity ML<span class="keyword">for</span>NBs</span><br><span class="line">eacff8b complete P5 Boston Housing - Udacity ML<span class="keyword">for</span>NBs</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-bash">$ git log --oneline | head -n 3
+670afa6 I changed this commit - arrange folders for next Udacity Class - Deep Learning
+cf56d01 fix bugs, misunderstandings and mistakes in P5 Boston Housing - Udacity MLforNBs
+eacff8b complete P5 Boston Housing - Udacity MLforNBs
+</code></pre>
 </li>
 </ol>
 <p>Interactive Rebase 还可以实现「改变 Commit 的顺序」，「把两个 Commit 合并」还有「删除某个 Commit 」等操作，具体可以参考使用 <code>git rebase -i HEAD~3</code> 命令后，vi 编辑器打开的文件中注释部分的说明（上面的例子中也展示了注释部分）</p>
 <hr>
-<h3 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切换分支</span></span><br><span class="line">$ git checkout [分支名]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建分支</span></span><br><span class="line">$ git checkout -b [分支名]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看所有分支</span></span><br><span class="line">$ git branch <span class="_">-a</span> [分支名]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除分支（删除 A 分支需要切换到 A 之外的分支上）</span></span><br><span class="line">$ git branch <span class="_">-d</span> [分支名]   <span class="comment">#删除已经 merge 过了的分支，通常已经是 merge 到 master 分支上了</span></span><br><span class="line">$ git branch -D [分支名]   <span class="comment">#强制删除该分支，无论该分支是否 merge 到其他分支过</span></span><br></pre></td></tr></table></figure>
-<p><code>git checkout</code> 的另一种操作（实现从之前的 commit 处新发展一条分支）：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切换到某一个 commit</span></span><br><span class="line">$ git checkout [Commit ID]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Example</span></span><br><span class="line">$ git branch</span><br><span class="line">  master</span><br><span class="line">* chpw-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 Commit ID</span></span><br><span class="line">$ git <span class="built_in">log</span></span><br><span class="line">commit 86d2b225d27f3ba7<span class="built_in">fc</span>06164c9961a98a08e3f525 (HEAD -&gt; chpw-dev)</span><br><span class="line">Author: abc &lt;abc@gmail.com&gt;</span><br><span class="line">Date:   Tue Aug 7 15:40:29 2018 +0800</span><br><span class="line"></span><br><span class="line">    add senario that location info is unauthorized</span><br><span class="line"></span><br><span class="line">commit c9e39a3975dcd2d380a7436bd8e3c4bba34cb0b0</span><br><span class="line">Author: abc &lt;abc@gmail.com&gt;</span><br><span class="line">Date:   Tue Aug 7 13:57:28 2018 +0800</span><br><span class="line"></span><br><span class="line">    get and show current location on all pages</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据上面的 ID 信息，切换到前一个 Commit</span></span><br><span class="line">$ git checkout c9e39a3975dcd2d380a7436bd8e3c4bba34cb0b0</span><br><span class="line">Note: checking out <span class="string">'c9e39a3975dcd2d380a7436bd8e3c4bba34cb0b0'</span>.</span><br><span class="line"></span><br><span class="line">You are <span class="keyword">in</span> <span class="string">'detached HEAD'</span> state. You can look around, make experimental</span><br><span class="line">changes and commit them, and you can discard any commits you make <span class="keyword">in</span> this</span><br><span class="line">state without impacting any branches by performing another checkout.</span><br><span class="line"></span><br><span class="line">If you want to create a new branch to retain commits you create, you may</span><br><span class="line"><span class="keyword">do</span> so (now or later) by using -b with the checkout <span class="built_in">command</span> again. Example:</span><br><span class="line"></span><br><span class="line">  git checkout -b &lt;new-branch-name&gt;</span><br><span class="line"></span><br><span class="line">HEAD is now at c9e39a3... get and show current location on all pages</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换后处于一个 detached HEAD</span></span><br><span class="line">$ git branch</span><br><span class="line">* (HEAD detached at c9e39a3)</span><br><span class="line">  master</span><br><span class="line">  chpw-dev</span><br><span class="line">  </span><br><span class="line"><span class="comment"># 以当前的 detached HEAD 为起点，新建分支</span></span><br><span class="line">$ git checkout -b newBranchFromPreCommit</span><br><span class="line">Switched to a new branch <span class="string">'newBranchFromPreCommit'</span></span><br><span class="line"></span><br><span class="line">$ git branch</span><br><span class="line">  master</span><br><span class="line">  chpw-dev</span><br><span class="line">* newBranchFromPreCommit</span><br></pre></td></tr></table></figure></p>
+<h3 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h3><pre><code class="lang-bash">## 切换分支
+$ git checkout [分支名]
+
+## 新建分支
+$ git checkout -b [分支名]
+
+## 查看所有分支
+$ git branch -a [分支名]
+
+## 删除分支（删除 A 分支需要切换到 A 之外的分支上）
+$ git branch -d [分支名]   ## 删除已经 merge 过了的分支，通常已经是 merge 到 master 分支上了
+$ git branch -D [分支名]   ## 强制删除该分支，无论该分支是否 merge 到其他分支过
+</code></pre>
+<p><code>git checkout</code> 的另一种操作（实现从之前的 commit 处新发展一条分支）：</p>
+<pre><code class="lang-bash">## 切换到某一个 commit
+$ git checkout [Commit ID]
+
+## Example
+$ git branch
+  master
+* chpw-dev
+
+## 查看 Commit ID
+$ git log
+commit 86d2b225d27f3ba7fc06164c9961a98a08e3f525 (HEAD -&gt; chpw-dev)
+Author: abc &lt;abc@gmail.com&gt;
+Date:   Tue Aug 7 15:40:29 2018 +0800
+
+    add senario that location info is unauthorized
+
+commit c9e39a3975dcd2d380a7436bd8e3c4bba34cb0b0
+Author: abc &lt;abc@gmail.com&gt;
+Date:   Tue Aug 7 13:57:28 2018 +0800
+
+    get and show current location on all pages
+
+## 根据上面的 ID 信息，切换到前一个 Commit
+$ git checkout c9e39a3975dcd2d380a7436bd8e3c4bba34cb0b0
+Note: checking out &#39;c9e39a3975dcd2d380a7436bd8e3c4bba34cb0b0&#39;.
+
+You are in &#39;detached HEAD&#39; state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b &lt;new-branch-name&gt;
+
+HEAD is now at c9e39a3... get and show current location on all pages
+
+## 切换后处于一个 detached HEAD
+$ git branch
+* (HEAD detached at c9e39a3)
+  master
+  chpw-dev
+
+## 以当前的 detached HEAD 为起点，新建分支
+$ git checkout -b newBranchFromPreCommit
+Switched to a new branch &#39;newBranchFromPreCommit&#39;
+
+$ git branch
+  master
+  chpw-dev
+* newBranchFromPreCommit
+</code></pre>
+<h4 id="恢复被删除的-Git-分支"><a href="#恢复被删除的-Git-分支" class="headerlink" title="恢复被删除的 Git 分支"></a>恢复被删除的 Git 分支</h4><p>参考 <a href="https://stackoverflow.com/questions/3640764/can-i-recover-a-branch-after-its-deletion-in-git" target="_blank" rel="noopener">Can I recover a branch after its deletion in Git?</a></p>
 <hr>
 <h3 id="远程同步"><a href="#远程同步" class="headerlink" title="远程同步"></a>远程同步</h3><p>生成 SSH 验证 - <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001374385852170d9c7adf13c30429b9660d0eb689dd43a000" target="_blank" rel="noopener">廖雪峰</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~   <span class="comment"># 切换到 home 目录下</span></span><br><span class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@example.com"</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote add [远程主机名] [地址]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有远程仓库</span></span><br><span class="line">$ git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 移除本地记录的远程主机</span></span><br><span class="line">$ git remote rm [远程主机名]</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-bash">$ cd ~   ## 切换到 home 目录下
+$ ssh-keygen -t rsa -C &quot;youremail@example.com&quot;
+</code></pre>
+<pre><code class="lang-bash">$ git remote add [远程主机名] [地址]
+
+## 显示所有远程仓库
+$ git remote -v
+
+## 移除本地记录的远程主机
+$ git remote rm [远程主机名]
+</code></pre>
 <p>设置远程</p>
 <hr>
 <h3 id="gitignore"><a href="#gitignore" class="headerlink" title=".gitignore"></a>.gitignore</h3><p>关于文件 .gitignore 的用法，参考<a href="https://help.github.com/articles/ignoring-files/" target="_blank" rel="noopener">这里</a></p>
@@ -135,23 +369,41 @@
 <h3 id="更新从别人那-Fork-来的-Repository"><a href="#更新从别人那-Fork-来的-Repository" class="headerlink" title="更新从别人那 Fork 来的 Repository"></a>更新从别人那 Fork 来的 Repository</h3><p>假设我们 Fork 了 Repo <a href="https://github.com/cisco/ChezScheme" target="_blank" rel="noopener">cisco/ChezScheme</a>，接下来可以使用下面的步骤获取最新更新，进而更新我们 Fork：</p>
 <ol>
 <li><p>从自己的账号上下载 Fork 过来的 Repo:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> git@github.com:chpwang/ChezScheme.git</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>从自己的账号上下载 Fork 过来的 Repo:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> git@github.com:chpwang/ChezScheme.git</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-bash">$ git clone git@github.com:chpwang/ChezScheme.git
+</code></pre>
 </li>
 <li><p>设置 Repo 的 remote:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">~/ChezScheme   <span class="comment"># 当前处于了刚 Clone 下来的 Repo 目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 目前存在一个名为 origin 的 remote ，指向自己账号旗下的项目 Fork</span></span><br><span class="line">$ git remote -v</span><br><span class="line">origin  git@github.com:chpwang/ChezScheme.git (fetch)</span><br><span class="line">origin  git@github.com:chpwang/ChezScheme.git (push)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加原始 Repo 的 remote 地址（下面的代码将其命名为 upstream）</span></span><br><span class="line"><span class="comment"># 命令为 git remote add [upstream_name] [path_to_repo]</span></span><br><span class="line">$ git remote add upstream git@github.com:cisco/ChezScheme.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加新 remote 之后，一共存在两个 remote ，一个名为 origin 指向自己的 Repo ，一个名为 upstream 指向原始 Repo</span></span><br><span class="line">$ git remote -v</span><br><span class="line">origin  git@github.com:chpwang/ChezScheme.git (fetch)</span><br><span class="line">origin  git@github.com:chpwang/ChezScheme.git (push)</span><br><span class="line">upstream  git@github.com:cisco/ChezScheme.git (fetch)</span><br><span class="line">upstream  git@github.com:cisco/ChezScheme.git (push)</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-bash">$ pwd
+~/ChezScheme   ## 当前处于了刚 Clone 下来的 Repo 目录
+
+## 目前存在一个名为 origin 的 remote ，指向自己账号旗下的项目 Fork
+$ git remote -v
+origin  git@github.com:chpwang/ChezScheme.git (fetch)
+origin  git@github.com:chpwang/ChezScheme.git (push)
+
+## 添加原始 Repo 的 remote 地址（下面的代码将其命名为 upstream）
+## 命令为 git remote add [upstream_name] [path_to_repo]
+$ git remote add upstream git@github.com:cisco/ChezScheme.git
+
+## 添加新 remote 之后，一共存在两个 remote ，一个名为 origin 指向自己的 Repo ，一个名为 upstream 指向原始 Repo
+$ git remote -v
+origin  git@github.com:chpwang/ChezScheme.git (fetch)
+origin  git@github.com:chpwang/ChezScheme.git (push)
+upstream  git@github.com:cisco/ChezScheme.git (fetch)
+upstream  git@github.com:cisco/ChezScheme.git (push)
+</code></pre>
 </li>
 <li><p>从原始 Repo 下载更新（新的 Commit）然后合并在本地的 Repo 对应分支上（下面例子是 master 分支）:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git pull upstream master</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-bash">$ git pull upstream master
+</code></pre>
 </li>
 <li><p>上传本地更新后的代码到自己账户下 Fork 过来的 Repo ，进而实现更新:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-bash">$ git push origin master
+</code></pre>
 </li>
 </ol>
 <hr>
-<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt=""></p>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt></p>
 
 
   </article>
@@ -164,13 +416,13 @@
 </div>
 <div class="right-foot container">
     <div class="firstrow">
-        <a href="#top" >
+        <a href="#top">
         <i class="fa fa-arrow-right"></i>
         </a>
         
     </div>
     <div class="secondrow">
-        <a href="">
+        <a href>
         
         </a>
     </div>
@@ -180,6 +432,8 @@
 </footer>
   <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
 <script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
 
 // comments below to disable loading animation
@@ -196,7 +450,7 @@ $(window).on("scroll", revealOnScroll);
 $(document).ready(revealOnScroll)
 
 // disqus scripts
-
+/**/
 
 // dropdown scripts
 $(".dropdown").click(function(event) {
@@ -218,7 +472,24 @@ $("a[href='#top']").click(function() {
 var path = "/search.xml";
 searchFunc(path, 'local-search-input', 'local-search-result');
 
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
 </script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 </body>
 </html>

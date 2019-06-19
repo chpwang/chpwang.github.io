@@ -1,32 +1,35 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-  <meta charset="utf-8">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="google-site-verification" content="" />
+  <meta name="google-site-verification" content>
   
   <title>用 Hexo 搭建自定义博客</title>
   <meta name="author" content="TwentyNight">
    <meta name="description" content="TwentyNight 的修行屋">
   
 
-  <meta property="og:title" content="用 Hexo 搭建自定义博客"/>
+  <meta property="og:title" content="用 Hexo 搭建自定义博客">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:site_name" content="行侠何须仗名剑"/>
- <meta property="og:image" content=""/>
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
   
   <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
   <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
   <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
   <link rel="stylesheet" href="/css/m.min.css">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-
+</html>
 <body>
-  <div id="main">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
     <div class="behind">
       <div class="back">
         <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -75,23 +78,47 @@
     <p>如果不是闲，或无法忍受其他商业博客方案，不建议用 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>，因为自由意味着繁琐。</p>
 <p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 的用法大同小异，但每一步都有多种实现方法，接下来的操作都是在 Mac 电脑上的 Terminal（终端）里进行的。</p>
 <hr>
-<h3 id="使用-Hexo-前的环境准备"><a href="#使用-Hexo-前的环境准备" class="headerlink" title="使用 Hexo 前的环境准备"></a>使用 Hexo 前的环境准备</h3><p>安装 <a href="http://brew.sh" target="_blank" rel="noopener">Hombrew</a><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ /usr/bin/ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></span><br></pre></td></tr></table></figure></p>
-<p>使用 <a href="http://brew.sh" target="_blank" rel="noopener">Hombrew</a> 安装 Node.js<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ brew install node</span><br></pre></td></tr></table></figure></p>
-<p>Node.js 安装后，会附带 npm（node package manager）工具，可用它来搜索、下载、管理 Node.js 套件。<br>接下来使用 npm 安装 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure></p>
-<p>安装 <a href="https://github.com/hexojs/hexo-deployer-git" target="_blank" rel="noopener">hexo-deployer-git</a> 套件，其用于之后一键部署 blog 到 Github 上<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
-<p>安装 <a href="https://github.com/hexojs/hexo-generator-index" target="_blank" rel="noopener">hexo-generator-index</a> ，其用于单独设置主页（index）的文章（posts）数量——分页（pagination）功能会用到<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-generator-index --save</span><br></pre></td></tr></table></figure></p>
-<p>安装 <a href="https://github.com/hexojs/hexo-generator-archive" target="_blank" rel="noopener">hexo-generator-archive</a> ，其用于单独设置归档页面（archives）的文章数量——分页功能会用到<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-generator-archive --save</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用-Hexo-前的环境准备"><a href="#使用-Hexo-前的环境准备" class="headerlink" title="使用 Hexo 前的环境准备"></a>使用 Hexo 前的环境准备</h3><p>安装 <a href="http://brew.sh" target="_blank" rel="noopener">Hombrew</a></p>
+<pre><code class="lang-bash">$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre>
+<p>使用 <a href="http://brew.sh" target="_blank" rel="noopener">Hombrew</a> 安装 Node.js</p>
+<pre><code class="lang-bash">$ brew install node
+</code></pre>
+<p>Node.js 安装后，会附带 npm（node package manager）工具，可用它来搜索、下载、管理 Node.js 套件。<br>接下来使用 npm 安装 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a></p>
+<pre><code class="lang-bash">$ npm install hexo-cli -g
+</code></pre>
+<p>安装 <a href="https://github.com/hexojs/hexo-deployer-git" target="_blank" rel="noopener">hexo-deployer-git</a> 套件，其用于之后一键部署 blog 到 Github 上</p>
+<pre><code class="lang-bash">$ npm install hexo-deployer-git --save
+</code></pre>
+<p>安装 <a href="https://github.com/hexojs/hexo-generator-index" target="_blank" rel="noopener">hexo-generator-index</a> ，其用于单独设置主页（index）的文章（posts）数量——分页（pagination）功能会用到</p>
+<pre><code class="lang-bash">$ npm install hexo-generator-index --save
+</code></pre>
+<p>安装 <a href="https://github.com/hexojs/hexo-generator-archive" target="_blank" rel="noopener">hexo-generator-archive</a> ，其用于单独设置归档页面（archives）的文章数量——分页功能会用到</p>
+<pre><code class="lang-bash">$ npm install hexo-generator-archive --save
+</code></pre>
 <p>注：<br>这里的 <code>--save</code> 参数会让 npm 在安装 hexo-deployer-git 之后自动将它写入 package.json 文件里，这样之后我们<a href="/2016/10/08/sync-blog-between-multiple-Macs/">多电脑间同步博客</a>就不需要再单独运行这条命令了，只需要 npm install ，当然了，这条命令是<code>幂等</code>的（即该命令运行若干次和运行一次的效果一样），所以再运行一次问题也不大。该参数的具体描述可参考<a href="http://stackoverflow.com/questions/19578796/what-is-the-save-option-for-npm-install" target="_blank" rel="noopener">这里</a>。<br>PS: 目前使用 <code>npm install xxx</code> 命令安装模块时，似乎不再需要 <code>--save</code> 参数了<a href="http://blog.csdn.net/aaa333qwe/article/details/78021704" target="_blank" rel="noopener">。</a></p>
 <hr>
-<h3 id="开始使用-Hexo"><a href="#开始使用-Hexo" class="headerlink" title="开始使用 Hexo"></a>开始使用 Hexo</h3><p>使用 Hexo 新建一个文件夹命名为 blog ，该文件夹将作为你的博客网站<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init ~/Documents/blog</span><br></pre></td></tr></table></figure></p>
-<p>进入新建的文件夹<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/Documents/blog</span><br></pre></td></tr></table></figure></p>
-<p>刚才 hexo init 命令已经在 blog 文件夹下生成了一个叫 <code>package.json</code> 的文件，npm 会通过它得知需要安装的套件<br>所以接下来使用 npm 安装相关套件<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install</span><br></pre></td></tr></table></figure></p>
-<p>使用 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 开启服务器<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo s</span><br></pre></td></tr></table></figure></p>
+<h3 id="开始使用-Hexo"><a href="#开始使用-Hexo" class="headerlink" title="开始使用 Hexo"></a>开始使用 Hexo</h3><p>使用 Hexo 新建一个文件夹命名为 blog ，该文件夹将作为你的博客网站</p>
+<pre><code class="lang-bash">$ hexo init ~/Documents/blog
+</code></pre>
+<p>进入新建的文件夹</p>
+<pre><code class="lang-bash">$ cd ~/Documents/blog
+</code></pre>
+<p>刚才 hexo init 命令已经在 blog 文件夹下生成了一个叫 <code>package.json</code> 的文件，npm 会通过它得知需要安装的套件<br>所以接下来使用 npm 安装相关套件</p>
+<pre><code class="lang-bash">$ npm install
+</code></pre>
+<p>使用 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 开启服务器</p>
+<pre><code class="lang-bash">$ hexo s
+</code></pre>
 <p>打开浏览器，输入网址 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 就能查看刚刚建好的博客页面。目前博客只有一篇名为 <code>Hello World</code> 的文章。</p>
 <p>在刚才的 Terminla（终端）中使用 <code>control + C</code> 的组合键即可关闭服务器。</p>
 <hr>
-<h3 id="开始写文章"><a href="#开始写文章" class="headerlink" title="开始写文章"></a>开始写文章</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">~/Documents/blog</span><br></pre></td></tr></table></figure>
-<p>确保你在 <code>~/Documents/blog</code> 文件夹里之后，便可用 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 新建文章<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"文章标题"</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="开始写文章"><a href="#开始写文章" class="headerlink" title="开始写文章"></a>开始写文章</h3><pre><code class="lang-bash">$ pwd
+~/Documents/blog
+</code></pre>
+<p>确保你在 <code>~/Documents/blog</code> 文件夹里之后，便可用 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 新建文章</p>
+<pre><code class="lang-bash">$ hexo new &quot;文章标题&quot;
+</code></pre>
 <p>之后，在 <code>~/Documents/blog/source</code> 这个文件夹里就能看到刚刚新建的，以文章标题命名的文件。点开编辑就好。</p>
 <p>这里有两点要注意：</p>
 <ul>
@@ -102,10 +129,25 @@
 <h3 id="预览你的文章"><a href="#预览你的文章" class="headerlink" title="预览你的文章"></a>预览你的文章</h3><p>写好文章之后，使用 <code>hexo s</code> 开启服务器，然后打开浏览器，输入网址 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 便可以预览写好的文章。</p>
 <p>修改文章内容之后，只需要刷新浏览器页面就可以看到效果。</p>
 <hr>
-<h3 id="把博客部署到-Github-上"><a href="#把博客部署到-Github-上" class="headerlink" title="把博客部署到 Github 上"></a>把博客部署到 Github 上</h3><p>先到 <a href="https://github.com" target="_blank" rel="noopener">Github</a> 上申请一个账号，然后新建一个 <code>repository</code>，命名为：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">你的用户名.github.io</span><br></pre></td></tr></table></figure></p>
-<p><code>注意！</code>这里需要严格按照这种格式命名，比如我的 Github 用户名是 <code>chpwang</code>，新建的 <code>repository</code> 就要叫：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chpwang.github.io</span><br></pre></td></tr></table></figure></p>
-<p>然后在 <code>~/Documents/blog</code> 文件夹里找到 <code>_config.yml</code> 文件进行编辑，加入以下设置：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: </span><br><span class="line">    github: git@github.com:你的用户名/你的用户名.github.io.git</span><br></pre></td></tr></table></figure></p>
-<p>接下来，每次更新自己的文章之后，使用这三条命令进行部署<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean   <span class="comment">#清空缓存</span></span><br><span class="line">$ hexo g       <span class="comment">#生成静态页面至 public 目录</span></span><br><span class="line">$ hexo d       <span class="comment">#部署到 GitHub</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果部署的时候卡住没反应（no response），可以加上 debug 参数查看输出日志（log）</span></span><br><span class="line">$ hexo d -debug</span><br></pre></td></tr></table></figure></p>
+<h3 id="把博客部署到-Github-上"><a href="#把博客部署到-Github-上" class="headerlink" title="把博客部署到 Github 上"></a>把博客部署到 Github 上</h3><p>先到 <a href="https://github.com" target="_blank" rel="noopener">Github</a> 上申请一个账号，然后新建一个 <code>repository</code>，命名为：</p>
+<pre><code>你的用户名.github.io
+</code></pre><p><code>注意！</code>这里需要严格按照这种格式命名，比如我的 Github 用户名是 <code>chpwang</code>，新建的 <code>repository</code> 就要叫：</p>
+<pre><code class="lang-plaintext">chpwang.github.io
+</code></pre>
+<p>然后在 <code>~/Documents/blog</code> 文件夹里找到 <code>_config.yml</code> 文件进行编辑，加入以下设置：</p>
+<pre><code class="lang-yml">deploy:
+  type: git
+  repo: 
+    github: git@github.com:你的用户名/你的用户名.github.io.git
+</code></pre>
+<p>接下来，每次更新自己的文章之后，使用这三条命令进行部署</p>
+<pre><code class="lang-bash">$ hexo clean   ## 清空缓存
+$ hexo g       ## 生成静态页面至 public 目录
+$ hexo d       ## 部署到 GitHub
+
+## 如果部署的时候卡住没反应（no response），可以加上 debug 参数查看输出日志（log）
+$ hexo d -debug
+</code></pre>
 <p>部署完毕之后，打开浏览器输入网址 <a href="https://你的用户名.github.io" target="_blank" rel="noopener">https://你的用户名.github.io</a> 就能看到部署上去的博客网页了。</p>
 <p>如果想进阶使用 Hexo 的博客方案，请继续阅读<a href="/2016/10/08/sync-blog-between-multiple-Macs/">多台电脑间的 Hexo 博客同步</a></p>
 <p>PS:<br>有时部署会遇到卡住没反应的问题，当使用 <code>hexo d -debug</code> 命令后，发现日志循环输出 <code>0 files generated in 81 ms</code>， 这可能是开启了 Github 的二次验证（2FA）导致的。解决方案要不就是重新绑定 Github 上的 <strong>SSH Key</strong>，或者根据<a href="http://fezl.me/2017/05/20/GitHub二次验证带来的问题/" target="_blank" rel="noopener">这里</a>设置 Personal access tokens 后用 <strong>https</strong> 地址来部署</p>
@@ -117,7 +159,7 @@
 <li><a href="https://github.com/hexojs/hexo/issues/1478" target="_blank" rel="noopener">hexo deploy 时不断 Error</a></li>
 </ul>
 <hr>
-<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt=""></p>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt></p>
 
 
   </article>
@@ -130,13 +172,13 @@
 </div>
 <div class="right-foot container">
     <div class="firstrow">
-        <a href="#top" >
+        <a href="#top">
         <i class="fa fa-arrow-right"></i>
         </a>
         
     </div>
     <div class="secondrow">
-        <a href="">
+        <a href>
         
         </a>
     </div>
@@ -146,6 +188,8 @@
 </footer>
   <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
 <script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
 
 // comments below to disable loading animation
@@ -162,7 +206,7 @@ $(window).on("scroll", revealOnScroll);
 $(document).ready(revealOnScroll)
 
 // disqus scripts
-
+/**/
 
 // dropdown scripts
 $(".dropdown").click(function(event) {
@@ -184,7 +228,24 @@ $("a[href='#top']").click(function() {
 var path = "/search.xml";
 searchFunc(path, 'local-search-input', 'local-search-result');
 
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
 </script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 </body>
 </html>

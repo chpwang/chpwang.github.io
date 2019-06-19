@@ -1,32 +1,35 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-  <meta charset="utf-8">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="google-site-verification" content="" />
+  <meta name="google-site-verification" content>
   
   <title>NumPy 和 Pandas 入门</title>
   <meta name="author" content="TwentyNight">
    <meta name="description" content="TwentyNight 的修行屋">
   
 
-  <meta property="og:title" content="NumPy 和 Pandas 入门"/>
+  <meta property="og:title" content="NumPy 和 Pandas 入门">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:site_name" content="行侠何须仗名剑"/>
- <meta property="og:image" content=""/>
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
   
   <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
   <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
   <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
   <link rel="stylesheet" href="/css/m.min.css">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-
+</html>
 <body>
-  <div id="main">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
     <div class="behind">
       <div class="back">
         <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -73,8 +76,17 @@
       
     </div>
     <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><a href="https://docs.scipy.org/doc/numpy/user/quickstart.html" target="_blank" rel="noopener">numpy</a> - Numerical Python 和 <a href="https://pandas.pydata.org" target="_blank" rel="noopener">pandas</a> - Python Data Analysis Library 是 Python 语言处理数据时常用的两个库，专门用来进行诸如线性代数方面的计算。通过 Python 的库管理软件 Anaconda 等可以很容易地安装（进一步查看<a href="/2018/05/27/set-up-anaconda/">安装和配置 Anaconda </a> ）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 同时安装 numpy 和 pandas 两个软件包（Packages）- 左边的 (py3) 表示当前处于 Anaconda 的虚拟环境 py3 中</span></span><br><span class="line">(py3) $ conda install numpy pandas</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 载入 numpy 和 pandas - 演示文件 ~/demo_script.py </span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># code block</span></span><br><span class="line">...</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-bash">## 同时安装 numpy 和 pandas 两个软件包（Packages）- 左边的 (py3) 表示当前处于 Anaconda 的虚拟环境 py3 中
+(py3) $ conda install numpy pandas
+</code></pre>
+<pre><code class="lang-python"># 载入 numpy 和 pandas - 演示文件 ~/demo_script.py 
+import pandas as pd
+import numpy as np
+
+# code block
+...
+...
+</code></pre>
 <p>NumPy 和 Pandas 包含很多好用的东西，这里只介绍常用的几个数据类型和相应的函数，更多风骚操作还是得看官方文档和 Google 。</p>
 <p>PS：<br>为了在描述过程中区分 numpy 里的 ndArray 数据类型和 Pandas 里的 Series 类型，下文对于 ndArray 将使用 <strong>position</strong> 来称呼它的引用，而对于 Series 则用 <strong>index</strong> （Series 也有 <strong>position</strong>）。你将很快看到两者的不同。</p>
 <hr>
@@ -94,7 +106,7 @@
 <p>要进一步查询 NumPy 使用方法，除了<a href="https://pandas.pydata.org/pandas-docs/stable/" target="_blank" rel="noopener"> NumPy 官方文档</a>，还可参看 <a href="/2018/09/17/numpy-advanced-features/">Numpy 进阶</a></p>
 <p>要进一步查询 Pandas 使用方法，除了<a href="https://docs.scipy.org/doc/numpy/user/quickstart.html" target="_blank" rel="noopener"> Pandas 官方文档</a>，还可参看 <a href="/2018/09/17/pandas-advanced-features/">Pandas 进阶</a></p>
 <hr>
-<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt=""></p>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt></p>
 
 
   </article>
@@ -107,13 +119,13 @@
 </div>
 <div class="right-foot container">
     <div class="firstrow">
-        <a href="#top" >
+        <a href="#top">
         <i class="fa fa-arrow-right"></i>
         </a>
         
     </div>
     <div class="secondrow">
-        <a href="">
+        <a href>
         
         </a>
     </div>
@@ -123,6 +135,8 @@
 </footer>
   <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
 <script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
 
 // comments below to disable loading animation
@@ -139,7 +153,7 @@ $(window).on("scroll", revealOnScroll);
 $(document).ready(revealOnScroll)
 
 // disqus scripts
-
+/**/
 
 // dropdown scripts
 $(".dropdown").click(function(event) {
@@ -161,7 +175,24 @@ $("a[href='#top']").click(function() {
 var path = "/search.xml";
 searchFunc(path, 'local-search-input', 'local-search-result');
 
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
 </script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 </body>
 </html>

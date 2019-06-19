@@ -2,112 +2,175 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://cps.ninja/2019/02/04/yang-yi-gong-series-1/</loc>
-    
-    <lastmod>2019-02-12T09:28:45.051Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/12/24/yang-yi-gong-series-0/</loc>
-    
-    <lastmod>2019-02-12T03:33:31.901Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-2/</loc>
     
-    <lastmod>2019-02-10T06:20:02.683Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-3/</loc>
-    
-    <lastmod>2019-02-10T06:19:58.712Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/01/02/Git-Basics/</loc>
-    
-    <lastmod>2019-02-03T23:25:25.327Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
-    
-    <lastmod>2018-10-18T22:11:57.931Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
-    
-    <lastmod>2018-10-18T18:35:01.263Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/09/21/TensorFlow/</loc>
-    
-    <lastmod>2018-10-14T06:08:46.299Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
-    
-    <lastmod>2018-10-10T14:32:18.978Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/05/25/vscode-intro/</loc>
-    
-    <lastmod>2018-10-07T13:16:14.261Z</lastmod>
+    <lastmod>2019-06-19T22:39:09.380Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://cps.ninja/2016/10/08/sync-blog-between-multiple-Macs/</loc>
     
-    <lastmod>2018-10-07T13:16:14.261Z</lastmod>
+    <lastmod>2019-06-19T20:23:58.219Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/01/31/rails-cheat-sheet/</loc>
+    
+    <lastmod>2019-06-19T20:18:21.586Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/05/25/vscode-intro/</loc>
+    
+    <lastmod>2019-06-19T20:15:32.454Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
+    
+    <lastmod>2019-06-19T20:09:26.608Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/01/02/Git-Basics/</loc>
+    
+    <lastmod>2019-06-19T20:04:09.340Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2016/10/14/how-to-write-alfred-workflow/</loc>
+    
+    <lastmod>2019-06-19T19:58:34.162Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-3/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.842Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2019/02/04/yang-yi-gong-series-1/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.841Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/12/24/yang-yi-gong-series-0/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.841Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.840Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
     
-    <lastmod>2018-10-07T13:16:14.260Z</lastmod>
+    <lastmod>2019-06-14T17:08:00.840Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
     
-    <lastmod>2018-10-07T13:16:14.259Z</lastmod>
+    <lastmod>2019-06-14T17:08:00.838Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.838Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
     
-    <lastmod>2018-10-07T13:16:14.259Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
-    
-    <lastmod>2018-10-07T13:16:14.257Z</lastmod>
+    <lastmod>2019-06-14T17:08:00.838Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://cps.ninja/2018/09/21/keras/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.837Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.834Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2019/03/16/hexo-with-latex/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.833Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2016/10/08/how-to-blog-with-hexo/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.833Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2019/03/25/add-highlightjs-to-hexo-blog/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.832Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2016/10/09/customize-your-blog-domain/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.832Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/09/21/TensorFlow/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.832Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/01/22/Ruby-Basics/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.831Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2016/09/19/From-Logdown-to-Hexo/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.830Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
     
     <lastmod>2018-10-07T13:16:14.257Z</lastmod>
     
@@ -121,51 +184,9 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
-    
-    <lastmod>2018-10-07T13:16:14.257Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cps.ninja/2016/11/20/ethereum-for-newbies/</loc>
     
     <lastmod>2018-10-07T13:16:14.256Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2016/09/19/From-Logdown-to-Hexo/</loc>
-    
-    <lastmod>2018-10-07T13:16:14.255Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2016/10/08/how-to-blog-with-hexo/</loc>
-    
-    <lastmod>2018-07-08T06:54:07.308Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/01/31/rails-cheat-sheet/</loc>
-    
-    <lastmod>2018-05-29T14:28:54.691Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2016/10/09/customize-your-blog-domain/</loc>
-    
-    <lastmod>2018-05-29T00:24:13.205Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/01/22/Ruby-Basics/</loc>
-    
-    <lastmod>2018-02-14T01:49:53.305Z</lastmod>
     
   </url>
   
@@ -180,13 +201,6 @@
     <loc>http://cps.ninja/2016/10/29/zcash-mining-for-newbies/</loc>
     
     <lastmod>2018-01-14T21:52:05.051Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2016/10/14/how-to-write-alfred-workflow/</loc>
-    
-    <lastmod>2018-01-14T21:52:05.043Z</lastmod>
     
   </url>
   

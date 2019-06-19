@@ -1,32 +1,35 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-  <meta charset="utf-8">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="google-site-verification" content="" />
+  <meta name="google-site-verification" content>
   
   <title>上手 Visual Studio Code</title>
   <meta name="author" content="TwentyNight">
    <meta name="description" content="TwentyNight 的修行屋">
   
 
-  <meta property="og:title" content="上手 Visual Studio Code"/>
+  <meta property="og:title" content="上手 Visual Studio Code">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:site_name" content="行侠何须仗名剑"/>
- <meta property="og:image" content=""/>
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
   
   <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
   <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
   <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
   <link rel="stylesheet" href="/css/m.min.css">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-
+</html>
 <body>
-  <div id="main">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
     <div class="behind">
       <div class="back">
         <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -77,12 +80,19 @@
 <h3 id="VS-Code-安装"><a href="#VS-Code-安装" class="headerlink" title="VS Code 安装"></a>VS Code 安装</h3><p>安装很简单，从官网下载 App 正常安装即可，实在不懂就看<a href="https://code.visualstudio.com/docs/setup/mac" target="_blank" rel="noopener">官方教程</a></p>
 <hr>
 <h3 id="一般性设置"><a href="#一般性设置" class="headerlink" title="一般性设置"></a>一般性设置</h3><ul>
-<li><h4 id="设置从终端（Terminal）里打开-VS-Code-："><a href="#设置从终端（Terminal）里打开-VS-Code-：" class="headerlink" title="设置从终端（Terminal）里打开 VS Code ："></a>设置从终端（Terminal）里打开 VS Code ：</h4><blockquote>
-<p>使用<code>⇧⌘P</code>打开 <strong>Command Palette</strong>，输入 shell command 后搜索安装 <code>code</code> 这个命令即可<br><img src="https://code.visualstudio.com/assets/docs/setup/mac/shell-command.png" alt="VS Code Command Palette"><br>安装好后，使用以下方式从终端打开</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 单纯打开 VS Code</span></span><br><span class="line">$ code</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 VS Code 打开指定路径的文件</span></span><br><span class="line">$ code [文件路径]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Example - 使用 VS Code 打开当前文件夹</span></span><br><span class="line">$ code .</span><br></pre></td></tr></table></figure>
-</blockquote>
+<li><h4 id="设置从终端（Terminal）里打开-VS-Code-："><a href="#设置从终端（Terminal）里打开-VS-Code-：" class="headerlink" title="设置从终端（Terminal）里打开 VS Code ："></a>设置从终端（Terminal）里打开 VS Code ：</h4><p>使用<code>⇧⌘P</code>打开 <strong>Command Palette</strong>，输入 shell command 后搜索安装 <code>code</code> 这个命令即可<br><img src="https://code.visualstudio.com/assets/docs/setup/mac/shell-command.png" alt="VS Code Command Palette"><br>安装好后，使用以下方式从终端打开</p>
+<pre><code class="lang-bash"># 单纯打开 VS Code
+$ code
+
+# 使用 VS Code 打开指定路径的文件
+$ code [文件路径]
+
+# Example - 使用 VS Code 打开当前文件夹
+$ code .
+</code></pre>
 </li>
-<li><h4 id="设置使用-Emacs-快捷键（光标移动，Kill-和-Yank-等操作）："><a href="#设置使用-Emacs-快捷键（光标移动，Kill-和-Yank-等操作）：" class="headerlink" title="设置使用 Emacs 快捷键（光标移动，Kill 和 Yank 等操作）："></a>设置使用 Emacs 快捷键（光标移动，Kill 和 Yank 等操作）：</h4></li>
+<li><h4 id="设置使用-Emacs-快捷键（光标移动，Kill-和-Yank-等操作）："><a href="#设置使用-Emacs-快捷键（光标移动，Kill-和-Yank-等操作）：" class="headerlink" title="设置使用 Emacs 快捷键（光标移动，Kill 和 Yank 等操作）："></a>设置使用 Emacs 快捷键（光标移动，Kill 和 Yank 等操作）：</h4><p>同样使用<code>⇧⌘P</code>打开 <strong>Command Palette</strong>，搜索安装 <a href="https://marketplace.visualstudio.com/items?itemName=lfs.vscode-emacs-friendly" target="_blank" rel="noopener">Emacs Friendly Keymap</a></p>
+</li>
 </ul>
 <hr>
 <h3 id="个性化设置"><a href="#个性化设置" class="headerlink" title="个性化设置"></a>个性化设置</h3><p>VS Code 的设置通过添加代码指令来实现，有以下三个不同优先级的设置文件，它们之间是继承关系：</p>
@@ -91,11 +101,14 @@
 <li><strong>User Settings</strong> - 覆盖上述 Default Settings</li>
 <li><strong>Workspace Settings</strong> - 覆盖以上两者</li>
 </ol>
-<p>设置「Editor 和 Terminal 间切换」的快捷键<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// Toggle between terminal and editor focus</span><br><span class="line">&#123; &quot;key&quot;: &quot;ctrl+`&quot;, &quot;command&quot;: &quot;workbench.action.terminal.focus&quot;&#125;,</span><br><span class="line">&#123; &quot;key&quot;: &quot;ctrl+`&quot;, &quot;command&quot;: &quot;workbench.action.focusActiveEditorGroup&quot;, &quot;when&quot;: &quot;terminalFocus&quot;&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
+<p>设置「Editor 和 Terminal 间切换」的快捷键</p>
+<pre><code>// Toggle between terminal and editor focus
+{ &quot;key&quot;: &quot;ctrl+`&quot;, &quot;command&quot;: &quot;workbench.action.terminal.focus&quot;},
+{ &quot;key&quot;: &quot;ctrl+`&quot;, &quot;command&quot;: &quot;workbench.action.focusActiveEditorGroup&quot;, &quot;when&quot;: &quot;terminalFocus&quot;}
+</code></pre><hr>
 <p>有关 VS Code 的更多操作，可参考<a href="https://code.visualstudio.com/docs" target="_blank" rel="noopener">官方文档</a></p>
 <hr>
-<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt=""></p>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt></p>
 
 
   </article>
@@ -108,13 +121,13 @@
 </div>
 <div class="right-foot container">
     <div class="firstrow">
-        <a href="#top" >
+        <a href="#top">
         <i class="fa fa-arrow-right"></i>
         </a>
         
     </div>
     <div class="secondrow">
-        <a href="">
+        <a href>
         
         </a>
     </div>
@@ -124,6 +137,8 @@
 </footer>
   <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
 <script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
 
 // comments below to disable loading animation
@@ -140,7 +155,7 @@ $(window).on("scroll", revealOnScroll);
 $(document).ready(revealOnScroll)
 
 // disqus scripts
-
+/**/
 
 // dropdown scripts
 $(".dropdown").click(function(event) {
@@ -162,7 +177,24 @@ $("a[href='#top']").click(function() {
 var path = "/search.xml";
 searchFunc(path, 'local-search-input', 'local-search-result');
 
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
 </script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 </body>
 </html>

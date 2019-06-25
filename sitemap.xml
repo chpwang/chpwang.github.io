@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-3/</loc>
+    <loc>http://cps.ninja/2018/12/24/yang-yi-gong-series-0/</loc>
     
-    <lastmod>2019-06-25T23:25:43.848Z</lastmod>
+    <lastmod>2019-06-25T23:29:59.368Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/12/24/yang-yi-gong-series-0/</loc>
+    <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-3/</loc>
     
-    <lastmod>2019-06-25T23:24:35.054Z</lastmod>
+    <lastmod>2019-06-25T23:29:31.896Z</lastmod>
     
   </url>
   
@@ -72,6 +72,13 @@
   </url>
   
   <url>
+    <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.840Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
     
     <lastmod>2019-06-14T17:08:00.840Z</lastmod>
@@ -79,9 +86,9 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
+    <loc>http://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
     
-    <lastmod>2019-06-14T17:08:00.840Z</lastmod>
+    <lastmod>2019-06-14T17:08:00.838Z</lastmod>
     
   </url>
   
@@ -94,13 +101,6 @@
   
   <url>
     <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
-    
-    <lastmod>2019-06-14T17:08:00.838Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
     
     <lastmod>2019-06-14T17:08:00.838Z</lastmod>
     
@@ -135,6 +135,13 @@
   </url>
   
   <url>
+    <loc>http://cps.ninja/2018/09/21/TensorFlow/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.832Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2016/10/09/customize-your-blog-domain/</loc>
     
     <lastmod>2019-06-14T17:08:00.832Z</lastmod>
@@ -143,13 +150,6 @@
   
   <url>
     <loc>http://cps.ninja/2019/03/25/add-highlightjs-to-hexo-blog/</loc>
-    
-    <lastmod>2019-06-14T17:08:00.832Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/09/21/TensorFlow/</loc>
     
     <lastmod>2019-06-14T17:08:00.832Z</lastmod>
     

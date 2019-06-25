@@ -4,7 +4,7 @@
   <url>
     <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-2/</loc>
     
-    <lastmod>2019-06-25T21:35:46.996Z</lastmod>
+    <lastmod>2019-06-25T21:53:17.873Z</lastmod>
     
   </url>
   
@@ -72,13 +72,6 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
-    
-    <lastmod>2019-06-14T17:08:00.840Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
     
     <lastmod>2019-06-14T17:08:00.840Z</lastmod>
@@ -86,7 +79,14 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
+    <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.840Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
     
     <lastmod>2019-06-14T17:08:00.838Z</lastmod>
     
@@ -100,7 +100,7 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
+    <loc>http://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
     
     <lastmod>2019-06-14T17:08:00.838Z</lastmod>
     
@@ -135,14 +135,14 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2019/03/25/add-highlightjs-to-hexo-blog/</loc>
+    <loc>http://cps.ninja/2016/10/09/customize-your-blog-domain/</loc>
     
     <lastmod>2019-06-14T17:08:00.832Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cps.ninja/2016/10/09/customize-your-blog-domain/</loc>
+    <loc>http://cps.ninja/2019/03/25/add-highlightjs-to-hexo-blog/</loc>
     
     <lastmod>2019-06-14T17:08:00.832Z</lastmod>
     
@@ -170,14 +170,14 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/09/26/intro-to-neural-network/</loc>
+    <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
     
     <lastmod>2018-10-07T13:16:14.257Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
+    <loc>http://cps.ninja/2018/09/26/intro-to-neural-network/</loc>
     
     <lastmod>2018-10-07T13:16:14.257Z</lastmod>
     

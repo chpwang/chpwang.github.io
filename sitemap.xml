@@ -4,7 +4,7 @@
   <url>
     <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-2/</loc>
     
-    <lastmod>2019-07-10T07:40:23.473Z</lastmod>
+    <lastmod>2019-07-10T07:41:21.107Z</lastmod>
     
   </url>
   
@@ -72,13 +72,6 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
-    
-    <lastmod>2019-06-14T17:08:00.840Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
     
     <lastmod>2019-06-14T17:08:00.840Z</lastmod>
@@ -86,9 +79,9 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
+    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
     
-    <lastmod>2019-06-14T17:08:00.838Z</lastmod>
+    <lastmod>2019-06-14T17:08:00.840Z</lastmod>
     
   </url>
   
@@ -101,6 +94,13 @@
   
   <url>
     <loc>http://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.838Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
     
     <lastmod>2019-06-14T17:08:00.838Z</lastmod>
     

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-2/</loc>
+    
+    <lastmod>2019-07-10T07:37:47.055Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-3/</loc>
     
     <lastmod>2019-07-09T22:53:30.639Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://cps.ninja/2018/12/24/yang-yi-gong-series-0/</loc>
     
     <lastmod>2019-07-08T00:42:53.840Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-2/</loc>
-    
-    <lastmod>2019-07-02T23:28:16.335Z</lastmod>
     
   </url>
   
@@ -93,14 +93,14 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
+    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
     
     <lastmod>2019-06-14T17:08:00.838Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
+    <loc>http://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
     
     <lastmod>2019-06-14T17:08:00.838Z</lastmod>
     

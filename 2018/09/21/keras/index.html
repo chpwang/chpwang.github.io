@@ -143,7 +143,7 @@ model.add(Dense(10, activation=&#39;softmax&#39;))
 # 第 (n-1) 层 - 添加具有 2 个节点的全连接层（此 n-1 层的节点数为 2 ，说明预测模型最终只输出 2 个值）
 model.add(Dense(2))
 
-# 第 n 层 - 添加使用 Sigmoid 函数的激活层
+# 第 n 层 - 添加使用 Sigmoid 函数的激活层（如果超过 2 个输出值，就要用别的激活函数 比如 softmax 函数）
 model.add(Activation(&#39;sigmoid&#39;))
 </code></pre>
 </li>

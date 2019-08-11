@@ -4,7 +4,7 @@
   <url>
     <loc>http://cps.ninja/2018/09/21/keras/</loc>
     
-    <lastmod>2019-08-11T17:18:44.306Z</lastmod>
+    <lastmod>2019-08-11T17:23:12.146Z</lastmod>
     
   </url>
   
@@ -79,13 +79,6 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
-    
-    <lastmod>2019-06-14T17:08:00.840Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
     
     <lastmod>2019-06-14T17:08:00.840Z</lastmod>
@@ -93,14 +86,21 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
+    <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.840Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
     
     <lastmod>2019-06-14T17:08:00.838Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
+    <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
     
     <lastmod>2019-06-14T17:08:00.838Z</lastmod>
     
@@ -121,14 +121,14 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2019/03/16/hexo-with-latex/</loc>
+    <loc>http://cps.ninja/2016/10/08/how-to-blog-with-hexo/</loc>
     
     <lastmod>2019-06-14T17:08:00.833Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cps.ninja/2016/10/08/how-to-blog-with-hexo/</loc>
+    <loc>http://cps.ninja/2019/03/16/hexo-with-latex/</loc>
     
     <lastmod>2019-06-14T17:08:00.833Z</lastmod>
     
@@ -142,14 +142,14 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/09/21/TensorFlow/</loc>
+    <loc>http://cps.ninja/2019/03/25/add-highlightjs-to-hexo-blog/</loc>
     
     <lastmod>2019-06-14T17:08:00.832Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cps.ninja/2019/03/25/add-highlightjs-to-hexo-blog/</loc>
+    <loc>http://cps.ninja/2018/09/21/TensorFlow/</loc>
     
     <lastmod>2019-06-14T17:08:00.832Z</lastmod>
     

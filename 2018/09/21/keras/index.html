@@ -129,7 +129,7 @@ model = Sequential()
 <pre><code class="lang-python"># 载入构建神经网络的层（layer）的类型
 from keras.layers.core import Dense, Activation
 
-# 第 1 层 - 添加有 29 个节点的全连接层以及 32 个节点的「输入层（Input Layer）」
+# 第 1 层 - 添加有 29 个节点的全连接层以及 32 个节点的「输入层（Input Layer）」- 也就是每次有 32 个数据要输入 
 model.add(Dense(29, input_dim=32))
 
 # 第 2 层 - 添加使用 ReLU 函数的「激活层（Activation Layer）」

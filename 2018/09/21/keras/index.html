@@ -117,17 +117,15 @@ Executing transaction: done
 <hr>
 <h3 id="使用-Keras-建立神经网络"><a href="#使用-Keras-建立神经网络" class="headerlink" title="使用 Keras 建立神经网络"></a>使用 Keras 建立神经网络</h3><p>Keras 的使用非常简单，按照下面的步骤顺序即可制定出想要的「神经网络模型」。接下来只要向「模型」输入数据集就可以训练（training）了。训练完成后，再向「模型」输入数据就能得到预测结果：</p>
 <ol>
-<li>选择模型 - 序列模型（Sequential model）<br><a href="https://keras.io/models/sequential/" target="_blank" rel="noopener">Sequential</a> 是常用的神经网络结构模型，所以以它为例，其他都能依此类推</li>
-</ol>
+<li><p>选择模型 - 序列模型（Sequential model）<br><a href="https://keras.io/models/sequential/" target="_blank" rel="noopener">Sequential</a> 是常用的神经网络结构模型，所以以它为例，其他都能依此类推</p>
 <pre><code class="lang-python"># 载入 Sequential model
 from keras.models import Sequential
 
 # 创建一个 Sequential model
 model = Sequential()
 </code></pre>
-<ol>
-<li>添加层（Layer）<br>创建名为 <strong>model</strong> 的 Sequential 后，就可依次添加各种「层」。神经网络由「层」组成，选择需要的「层」的种类，然后通过 <code>.add()</code> 添加。这里以全连接层（Fully Connected Layer）为例</li>
-</ol>
+</li>
+<li><p>添加层（Layer）<br>创建名为 <strong>model</strong> 的 Sequential 后，就可依次添加各种「层」。神经网络由「层」组成，选择需要的「层」的种类，然后通过 <code>.add()</code> 添加。这里以全连接层（Fully Connected Layer）为例</p>
 <pre><code class="lang-python"># 载入构建神经网络的层（layer）的类型
 from keras.layers.core import Dense, Activation
 
@@ -148,7 +146,7 @@ model.add(Dense(2))
 # 第 n 层 - 添加使用 Sigmoid 函数的激活层
 model.add(Activation(&#39;sigmoid&#39;))
 </code></pre>
-<ol>
+</li>
 <li><p>编译模型（Compile）<br>经过上面两步设置后，就可以开始编译（compile）了：</p>
 <pre><code class="lang-python">model.compile(loss=&quot;categorical_crossentropy&quot;, optimizer=&quot;adam&quot;, metrics = [&#39;accuracy&#39;])
 </code></pre>

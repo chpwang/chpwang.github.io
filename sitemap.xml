@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://cps.ninja/2018/09/21/TensorFlow/</loc>
+    <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-3/</loc>
     
-    <lastmod>2019-09-06T04:04:42.745Z</lastmod>
+    <lastmod>2019-09-07T13:10:35.165Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-3/</loc>
+    <loc>http://cps.ninja/2018/09/21/TensorFlow/</loc>
     
-    <lastmod>2019-09-04T13:45:16.191Z</lastmod>
+    <lastmod>2019-09-06T04:04:42.745Z</lastmod>
     
   </url>
   
@@ -86,13 +86,6 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
-    
-    <lastmod>2019-06-14T17:08:00.840Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
     
     <lastmod>2019-06-14T17:08:00.840Z</lastmod>
@@ -100,7 +93,14 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
+    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.840Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
     
     <lastmod>2019-06-14T17:08:00.838Z</lastmod>
     
@@ -114,7 +114,7 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
+    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
     
     <lastmod>2019-06-14T17:08:00.838Z</lastmod>
     

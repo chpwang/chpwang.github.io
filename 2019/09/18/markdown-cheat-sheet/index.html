@@ -7,12 +7,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="google-site-verification" content>
   
-  <title>Tools</title>
+  <title>常用易忘的排版语法和技巧</title>
   <meta name="author" content="TwentyNight">
    <meta name="description" content="TwentyNight 的修行屋">
   
 
-  
+  <meta property="og:title" content="常用易忘的排版语法和技巧">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:site_name" content="行侠何须仗名剑">
  <meta property="og:image" content>
@@ -39,118 +39,86 @@
       </div>
     </div>
     <div class="container">
-      <nav class="navigator"><nav class="navbar navbar-default navbar-fixed-top">
-  <div class="nav-container">
+      
 
-  <ul class="nav navbar-nav navbar-left">
-    <li class="navbar-header">
-      <a href="/" style="font-family: 'STXihei', sans-serif; font-size: 1.3em;">A Little Schemer</a>
-    </li>
-  </ul>
-  <div id="site_search" class>
-  <input type="text" id="local-search-input" name="q" placeholder="Search..." class="form-control">
-</div>
-<div id="local-search-result"></div>
-
-
-  <ul class="nav navbar-nav navbar-right">
-
-    
-      <li class="dropdown">
-        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-tags fa-lg"></i>
-        </a>
-        <ul class="dropdown-content">
-
-            
-             <li><a href="/tags/Miscellaneous/">Miscellaneous</a></li><li><a href="/tags/Tools/">Tools</a></li><li><a href="/tags/Ruby-Rails/">Ruby & Rails</a></li><li><a href="/tags/Machine-Learning/">Machine Learning</a></li><li><a href="/tags/Blockchain/">Blockchain</a></li><li><a href="/tags/Hexo/">Hexo</a></li><li><a href="/tags/Mac/">Mac</a></li><li><a href="/tags/Python/">Python</a></li>
-
-        </ul>
-      </li>
-    
-
-    <li class="archives"><a href="/archives">
-      <i class="fa fa-archive fa-lg"></i>
-    </a></li>
-
-    <li class="github">
-      <a href="https://github.com/chpwang">
-        <i class="fa fa-github-square fa-lg"></i>
-      </a>
-    </li>
-
-    <li class="dropdown">
-      <a href="/about" role="button" aria-haspopup="true" aria-expanded="false">
-        <i class="fa fa-user fa-lg"></i>
-      </a>
-    </li>
-  </ul>
-  </div>
-</nav>
-
-</nav>
-
-
-<h1 class="archive-title  tag">
+  <article class="standard post">
+    <div class="title">
+      
   
-  <i class="fa fa-tag"></i>
+    <h1 class="page-title center">
+        常用易忘的排版语法和技巧
+    </h1>
   
-  Tools
-</h1>
-<div class="archive-num">
-  There are 2 articles in total
-</div>
-<div class="archive">
-  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2019-09-17T19:58:12.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2019-09-18
+</time>
+
+
+
+
+
+
     
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Hexo/">Hexo</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
       
-
-      
-
-        
-
-        
-
-        
-
-        
-        <section data-link="year-2018" class="section-year">
-            <h2>2018</h2>
-            <ul class="archive-list">
-                <div class="archive-item">
-                    <div class="archive-time">
-                      05-25
-                    </div>
-                    <div class="archive-detail">
-                      <a href="/2018/05/25/vscode-intro/" class="archive-link">
-                        上手 Visual Studio Code
-                      </a>
-                    </div>
-                </div>
-                <hr>
-                
-    
-      
-
-      
-                <div class="archive-item">
-                    <div class="archive-time">
-                      01-02
-                    </div>
-                    <div class="archive-detail">
-                      <a href="/2018/01/02/Git-Basics/" class="archive-link">
-                        Git 常用操作
-                      </a>
-                    </div>
-                </div>
-                <hr>
-      
-    
-</ul></section></div>
-
-<ul class="pager">
-    <span class="page-number current">1</span>
+    </div>
+    <p>Hexo 官方有很多帮助排版的语法，详细内容可以参见官网的 <a href="https://hexo.io/docs/tag-plugins.html" target="_blank" rel="noopener">Tag Plugins</a> 。这里列出的是常用的。</p>
+<p>需要说明的是，由于本博客 <a href="http://cps.ninja">cps.ninja</a> 加载了 <a href="https://highlightjs.org" target="_blank" rel="noopener">Highlight.js</a> ，所以有些语法会用不了，比如给代码块添加 <code>caption</code> 和 <code>URL</code> 等等。</p>
+<hr>
+<h3 id="列表技巧"><a href="#列表技巧" class="headerlink" title="列表技巧"></a>列表技巧</h3><p>如果希望以列表展现一大块内容，所有段落采用相同缩进即可，不需要一直挨着</p>
+<ul>
+<li><p>展示列表中的大段内容排版</p>
+<pre><code class="lang-scheme"> (define atom?
+  (lambda (x)
+    (and (not (pair? x))
+         (not (null? x))))
+</code></pre>
+<p>这是第三段</p>
+</li>
 </ul>
+<pre><code>- 展示列表中的大段内容排版
+
+  这是第二段代码块
+
+  ``` scheme
+   (define atom?
+    (lambda (x)
+      (and (not (pair? x))
+           (not (null? x))))
+  ``` （说明：这是第二段代码块，段落间有且只能有一个空行）
+
+  这是第三段
+</code></pre><hr>
+<h3 id="带超链接的代码"><a href="#带超链接的代码" class="headerlink" title="带超链接的代码"></a>带超链接的代码</h3><p><a href="/2019/09/18/markdown-cheat-sheet/"><code>blog/source/_posts/markdown-cheat-sheet.md</code></a></p>
+<pre><code>[`blog/source/_posts/markdown-cheat-sheet.md`](/2019/09/18/markdown-cheat-sheet/)
+</code></pre><hr>
+<h3 id="带作者的引用"><a href="#带作者的引用" class="headerlink" title="带作者的引用"></a>带作者的引用</h3><blockquote><p>Stay hungry, stay foolish.</p>
+<footer><strong>Steve Jobs</strong></footer></blockquote>
+<pre><code>{% blockquote Steve Jobs %}
+Stay hungry, stay foolish.
+{% endblockquote %}
+</code></pre><hr>
+<h3 id="若无论如何调整-Markdown-语法都无法实现想要的排版"><a href="#若无论如何调整-Markdown-语法都无法实现想要的排版" class="headerlink" title="若无论如何调整 Markdown 语法都无法实现想要的排版"></a>若无论如何调整 Markdown 语法都无法实现想要的排版</h3><p>直接写 HTML（在 Chrome 里调整 HTML 代码直到出现满意的排版效果，然后直接复制粘贴到文章里）</p>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt></p>
+
+
+  </article>
+
+
 
     </div>
   </div>

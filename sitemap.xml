@@ -4,7 +4,7 @@
   <url>
     <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-3/</loc>
     
-    <lastmod>2019-11-21T00:15:04.134Z</lastmod>
+    <lastmod>2019-11-21T00:19:02.925Z</lastmod>
     
   </url>
   
@@ -107,13 +107,6 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
-    
-    <lastmod>2019-06-14T17:08:00.840Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
     
     <lastmod>2019-06-14T17:08:00.840Z</lastmod>
@@ -121,9 +114,9 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
+    <loc>http://cps.ninja/2018/05/27/set-up-anaconda/</loc>
     
-    <lastmod>2019-06-14T17:08:00.838Z</lastmod>
+    <lastmod>2019-06-14T17:08:00.840Z</lastmod>
     
   </url>
   
@@ -136,6 +129,13 @@
   
   <url>
     <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
+    
+    <lastmod>2019-06-14T17:08:00.838Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
     
     <lastmod>2019-06-14T17:08:00.838Z</lastmod>
     
@@ -177,14 +177,14 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
+    <loc>http://cps.ninja/2018/09/26/intro-to-neural-network/</loc>
     
     <lastmod>2018-10-07T13:16:14.257Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/09/26/intro-to-neural-network/</loc>
+    <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
     
     <lastmod>2018-10-07T13:16:14.257Z</lastmod>
     

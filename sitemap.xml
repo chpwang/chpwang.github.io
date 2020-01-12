@@ -2,23 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-2/</loc>
-    
-    <lastmod>2020-01-12T05:39:36.836Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-3/</loc>
     
-    <lastmod>2020-01-12T05:32:16.056Z</lastmod>
+    <lastmod>2020-01-12T05:44:05.265Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://cps.ninja/2019/02/04/yang-yi-gong-series-1/</loc>
     
-    <lastmod>2019-12-21T02:01:54.588Z</lastmod>
+    <lastmod>2020-01-12T05:42:29.011Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-2/</loc>
+    
+    <lastmod>2020-01-12T05:39:36.836Z</lastmod>
     
   </url>
   
@@ -177,14 +177,14 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
+    <loc>http://cps.ninja/2018/09/26/intro-to-neural-network/</loc>
     
     <lastmod>2018-10-07T13:16:14.257Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/09/26/intro-to-neural-network/</loc>
+    <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
     
     <lastmod>2018-10-07T13:16:14.257Z</lastmod>
     

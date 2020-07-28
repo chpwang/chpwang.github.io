@@ -7,12 +7,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="google-site-verification" content>
   
-  <title>本博客常用的 Markdown 排版语法和技巧</title>
+  <title>思考题-计算机科学基础</title>
   <meta name="author" content="TwentyNight">
    <meta name="description" content="TwentyNight 的修行屋">
   
 
-  <meta property="og:title" content="本博客常用的 Markdown 排版语法和技巧">
+  <meta property="og:title" content="思考题-计算机科学基础">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:site_name" content="行侠何须仗名剑">
  <meta property="og:image" content>
@@ -46,7 +46,7 @@
       
   
     <h1 class="page-title center">
-        本博客常用的 Markdown 排版语法和技巧
+        思考题-计算机科学基础
     </h1>
   
 
@@ -54,9 +54,9 @@
     </div>
     <div class="meta center">
       
-<time datetime="2019-09-17T19:58:12.000Z">
+<time datetime="2020-04-14T12:45:23.000Z">
   <i class="fa fa-calendar"></i>&nbsp;
-  2019-09-18
+  2020-04-14
 </time>
 
 
@@ -67,7 +67,7 @@
     
     &nbsp;
     <i class="fa fa-tag"></i>&nbsp;
-    <a href="/tags/Hexo/">Hexo</a>
+    <a href="/tags/Programming-Language/">Programming Language</a>
 
 
     </div>
@@ -75,71 +75,16 @@
     <div class="picture-container">
       
     </div>
-    <p>Hexo 官方有很多帮助排版的语法，详细内容可以参见官网的 <a href="https://hexo.io/docs/tag-plugins.html" target="_blank" rel="noopener">Tag Plugins</a> 。这里列出的是常用的。</p>
-<p>需要说明的是，由于本博客 <a href="http://cps.ninja">cps.ninja</a> 加载了 <a href="https://highlightjs.org" target="_blank" rel="noopener">Highlight.js</a> ，所以有些语法会用不了，比如给代码块添加 <code>caption</code> 和 <code>URL</code> 等等。</p>
+    <h3 id="小思考题-1："><a href="#小思考题-1：" class="headerlink" title="小思考题 1："></a>小思考题 1：</h3><p><strong> <code>function f(x) { return x*2; }</code> 是一个语句（statement），而 <code>(x) =&gt; { return x*2; }</code> 却是一个表达式（expression）。为什么？</strong><br><strong>我：</strong>这个时代的计算机会对<strong>表达式</strong>类型的输入求值，于是可以认为<strong>表达式</strong>输入是有返回值的，进而通过是否有返回值来判断一个符号，或者一串符号，对计算机来说是否是<strong>表达式</strong>。<strong>语句</strong>只是声明一件事情，通常没有返回值（计算机一般会对语句的输入返回 <em>undefined</em> 字样，以表示没有返回值）。</p>
+<p><code>function f(x) { return x*2; }</code> 没有返回值，且它的意思是定义（创造）一个函数，所以它是<strong>语句</strong>。<code>(x) =&gt; { return x*2; }</code> 的返回值是 <code>(x) =&gt; { return x*2; }</code> ，所以从返回值的角度它是个典型的<strong>表达式</strong>。</p>
+<p><strong>老师：</strong>“回复 undefined 的都是语句，undefined 的意思是‘没有值’。<code>function f(x) { return x*2; }</code>等价于赋值语句。它创造了一个新的变量<code>f</code>，但这个动作本身没有值。被创造的变量<code>f</code>却是一个表达式，它有值。要区分‘创造变量的动作”和“变量本身’。”</p>
+<p><strong>老师：</strong>“打个比方，‘鞋子’是有值的表达式，‘把鞋放进盒子里’却没有值，它是一个动作。”</p>
+<p><code>注释1：尽管类似</code><a href="https://www.haskell.org" target="_blank" rel="noopener"><code>Haskell</code></a><code>的语言还能看到</code><a href="https://en.wikipedia.org/wiki/Lazy_evaluation" target="_blank" rel="noopener"><code>Lazy evaluation</code></a><code>这样的惰性求值设计，不过老师提到人类在走了很多弯路、踩了很多坑之后总结出的设计结论是：要先对表达式求值，之后再进行下一步计算或者传递。应当认为活性求值（</code><a href="https://en.wikipedia.org/wiki/Eager_evaluation" target="_blank" rel="noopener"><code>eager evaluation</code></a><code>）比惰性求值（lazy evaluation）更科学。</code></p>
+<p><code>注释2：有些语言的语句（statement）也有返回值。比如在</code><a href="https://en.wikipedia.org/wiki/History_of_the_Scheme_programming_language" target="_blank" rel="noopener"><code>Scheme</code></a><code>语言中，语句的返回值就是 void 。之所以这样，是因为 Scheme 的设计者希望该语言中不需要区分表达式和语句，这样整个语言的语法结构就非常简洁优雅，其解释器相比其他语言的解释器会少处理很多不必要的东西。</code></p>
+<p><code>注释3：从字符上看虽然表达式 (x) =&gt; { return x*2; } 的返回值是它本身，其实不应简单认为是它本身。真实情况是我们输入了 (x) =&gt; { return x*2; } 这一字符串（a pattern of rules），然后计算机对该字符串求值（解释），就得出这个值是一个函数，于是计算机返回这个值，即这个函数。然后这个函数的输出形式被设计成相同的字符串。就好像我们输入数字 3 ，计算机返回数字 3 ，这两个 3 不是同样的 3 ，前者是以字符形式输入的表达式，后者是值（计算机对输入解释后的结果）。老师给的一个形象的例子是，我们输入的是榨汁机的图纸，计算机给我们的是一个真正的榨汁机（求值的结果）。区别这两者会对今后的思维模型有重要的作用。</code></p>
+<p><code>注释4：该思考题中讨论的代码用的是 Javascript 语言。</code></p>
 <hr>
-<h3 id="列表技巧"><a href="#列表技巧" class="headerlink" title="列表技巧"></a>列表技巧</h3><p>如果希望以列表展现一大块内容，所有段落采用相同缩进即可，不需要一直挨着</p>
-<ul>
-<li><p>展示列表中的大段内容排版</p>
-<pre><code class="lang-scheme"> (define atom?
-  (lambda (x)
-    (and (not (pair? x))
-         (not (null? x))))
-</code></pre>
-<p>这是第三段</p>
-</li>
-</ul>
-<pre><code>- 展示列表中的大段内容排版
-
-  ``` scheme
-   (define atom?
-    (lambda (x)
-      (and (not (pair? x))
-           (not (null? x))))
-  ``` ## 说明：这是第二段代码块，段落间有且只能有一个空行
-
-  这是第三段
-</code></pre><hr>
-<h3 id="带超链接的代码"><a href="#带超链接的代码" class="headerlink" title="带超链接的代码"></a>带超链接的代码</h3><p><a href="/2019/09/18/markdown-cheat-sheet/"><code>blog/source/_posts/markdown-cheat-sheet.md</code></a></p>
-<pre><code>[`blog/source/_posts/markdown-cheat-sheet.md`](/2019/09/18/markdown-cheat-sheet/)
-</code></pre><hr>
-<h3 id="带作者的引用"><a href="#带作者的引用" class="headerlink" title="带作者的引用"></a>带作者的引用</h3><blockquote><p>China is a civilization, masquerading as a nation state.</p>
-<footer><strong>Lucian Pye</strong></footer></blockquote>
-<pre><code>{% blockquote Lucian Pye %}
-China is a civilization, masquerading as a nation state.
-{% endblockquote %}
-</code></pre><hr>
-<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p>（排版要抽空修复一下，<a href="https://github.com/gaoryrt/hexo-theme-pln" target="_blank" rel="noopener">pln</a> 这个三流主题下的表格很难看）</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Left-Aligned</th>
-<th style="text-align:center">Center Aligned</th>
-<th style="text-align:right">Right Aligned</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">col 3 is</td>
-<td style="text-align:center">some wordy text</td>
-<td style="text-align:right">$1600</td>
-</tr>
-<tr>
-<td style="text-align:left">col 2 is</td>
-<td style="text-align:center">centered</td>
-<td style="text-align:right">$12</td>
-</tr>
-<tr>
-<td style="text-align:left">zebra stripes</td>
-<td style="text-align:center">are neat</td>
-<td style="text-align:right">$1</td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr>
-<h3 id="若无论如何调整-Markdown-语法都无法实现想要的排版"><a href="#若无论如何调整-Markdown-语法都无法实现想要的排版" class="headerlink" title="若无论如何调整 Markdown 语法都无法实现想要的排版"></a>若无论如何调整 Markdown 语法都无法实现想要的排版</h3><p>直接写 HTML（在 Chrome 里调整 HTML 代码直到出现满意的排版效果，然后直接复制粘贴到文章里）</p>
+<h3 id="一个简单的思考题"><a href="#一个简单的思考题" class="headerlink" title="一个简单的思考题"></a>一个简单的思考题</h3><p><code>append(list1, list2)</code> 的过程中，有多少个新的 <code>pair</code> 被创造出来？</p>
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt></p>
 

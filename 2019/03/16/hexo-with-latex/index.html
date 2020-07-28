@@ -145,14 +145,14 @@ math:
 $ hexo s       ## 启动服务器 - 让 _config.yml 文件中的配置生效
 </code></pre>
 <h4 id="LaTeX-的常用语法如下（更多语法请参考基本语法）："><a href="#LaTeX-的常用语法如下（更多语法请参考基本语法）：" class="headerlink" title="LaTeX 的常用语法如下（更多语法请参考基本语法）："></a>LaTeX 的常用语法如下（更多语法请参考基本语法）：</h4><ul>
-<li><p>使用 <code>\\(</code> 和 <code>\\)</code> ，或者 <code>`$</code> 和 <code>$`</code> 来包裹一个内联（inline）的数学表达式，建议选用后者，因为前者经常容易出问题（参见 hexo-renderer-kramed 的<a href="https://github.com/sun11/hexo-renderer-kramed" target="_blank" rel="noopener">官方说明</a>了解更多 <strong>Tips</strong> ）</p>
+<li><p>使用 <code>\\(</code> 和 <code>\\)</code> ，或者 <code>`$</code> 和 <code>$`</code> 来包裹一个内联（inline）的数学表达式，建议优先用后者，前者常出现语法冲突。后者有问题再换用前者。（参见 hexo-renderer-kramed 的<a href="https://github.com/sun11/hexo-renderer-kramed" target="_blank" rel="noopener">官方说明</a>了解更多 <strong>Tips</strong> ）</p>
 <pre><code class="lang-tex hljs">`<span class="hljs-formula">$<span class="hljs-tag">\<span class="hljs-name">pi</span></span>$</span><span class="hljs-tag">`</span>
-<span class="hljs-tag">\<span class="hljs-name">\</span></span>(E=mc^2<span class="hljs-tag">\<span class="hljs-name">\</span></span>)
+`<span class="hljs-formula">$<span class="hljs-tag">\<span class="hljs-name">int_a^b f(x) dx</span></span>$</span><span class="hljs-tag">`</span>
 <span class="hljs-tag">\<span class="hljs-name">\</span></span>(lim_{x<span class="hljs-tag">\<span class="hljs-name">rightarrow</span></span> <span class="hljs-tag">\<span class="hljs-name">infty</span></span>}<span class="hljs-tag">\<span class="hljs-name">frac</span><span class="hljs-string">{1}</span><span class="hljs-string">{\sin x}</span></span><span class="hljs-tag">\<span class="hljs-name">\</span></span>)
 <span class="hljs-tag">\<span class="hljs-name">\</span></span>(lim_{n<span class="hljs-tag">\<span class="hljs-name">rightarrow</span></span> <span class="hljs-tag">\<span class="hljs-name">infty</span></span>}(1+2^n+3^n)^<span class="hljs-tag">\<span class="hljs-name">frac</span><span class="hljs-string">{1}</span><span class="hljs-string">{x+\sin n}</span></span><span class="hljs-tag">\<span class="hljs-name">\</span></span>)
 </code></pre>
 
-<p>上述代码分别显示为： <script type="math/tex">\pi</script> ，\(E=mc^2\) ，<script type="math/tex">lim_{x\rightarrow \infty}\frac{1}{\sin x}</script> 和 \(lim_{n\rightarrow \infty}(1+2^n+3^n)^\frac{1}{x + \sin n}\)</p>
+<p>上述代码分别显示为： <script type="math/tex">\pi</script> ，<script type="math/tex">\int_a^b f(x) dx</script> ，<script type="math/tex">lim_{x\rightarrow \infty}\frac{1}{\sin x}</script> 和 \(lim_{n\rightarrow \infty}(1+2^n+3^n)^\frac{1}{x + \sin n}\)</p>
 </li>
 </ul>
 <ul>
@@ -193,7 +193,23 @@ P(A_i \mid B) = \frac{P(B\mid A)P(A_i)}{\sum_{j=1}^{n}P(A_j)P(B \mid A_j)}
 $$
 </code></pre>
 <script type="math/tex; mode=display">
-P(A_i \mid B) = \frac{P(B\mid A)P(A_i)}{\sum_{j=1}^{n}P(A_j)P(B \mid A_j)}</script><p>其他看起来复杂的数学表达式：</p>
+P(A_i \mid B) = \frac{P(B\mid A)P(A_i)}{\sum_{j=1}^{n}P(A_j)P(B \mid A_j)}</script><p><code>sign</code> 函数：</p>
+<pre><code class="lang-tex">\begin{equation}
+  sign(x)=\begin{cases}
+        -1 &amp; \text{if $x&lt;0$},\\
+        0 &amp; \text{if $x=0$},\\
+        1 &amp; \text{if $x&gt;0$}.
+       \end{cases}
+\end{equation}
+</code></pre>
+<script type="math/tex; mode=display">
+\begin{equation}
+  sign(x)=\begin{cases}
+        -1 & \text{if $x<0$},\\
+        0 & \text{if $x=0$},\\
+        1 & \text{if $x>0$}.
+       \end{cases}
+\end{equation}</script><p>其他看起来复杂的数学表达式：</p>
 <pre><code class="lang-tex">$$
   \begin{split}
   \frac{\partial{\mathcal{E}}}{\partial{x_l}} &amp; = 

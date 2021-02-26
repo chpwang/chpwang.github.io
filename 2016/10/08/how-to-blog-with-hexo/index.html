@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -119,7 +119,16 @@
 <p>确保你在 <code>~/Documents/blog</code> 文件夹里之后，便可用 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 新建文章</p>
 <pre><code class="lang-bash">$ hexo new &quot;文章标题&quot;
 </code></pre>
-<p>之后，在 <code>~/Documents/blog/source</code> 这个文件夹里就能看到刚刚新建的，以文章标题命名的文件。点开编辑就好。</p>
+<p>之后，在 <code>~/Documents/blog/source</code> 这个文件夹里就能看到刚刚新建的，以文章标题命名的文件。点开编辑即可。</p>
+<p>文件内容会包含自动生成的信息头（front matter），直接在下面的位置编辑博客内容就好：</p>
+<pre><code class="lang-plaintext">---
+title: 用 Hexo 搭建自定义博客
+date: 2016-10-08 14:45:13
+tags: Hexo
+---
+
+[... 博客内容（支持 Markdown 和 html 进行排版） ...]
+</code></pre>
 <p>这里有两点要注意：</p>
 <ul>
 <li>需要使用 Markdown 格式来排版文章</li>
@@ -127,7 +136,36 @@
 </ul>
 <hr>
 <h3 id="预览你的文章"><a href="#预览你的文章" class="headerlink" title="预览你的文章"></a>预览你的文章</h3><p>写好文章之后，使用 <code>hexo s</code> 开启服务器，然后打开浏览器，输入网址 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 便可以预览写好的文章。</p>
-<p>修改文章内容之后，只需要刷新浏览器页面就可以看到效果。</p>
+<p>修改文章内容之后，只需要刷新浏览器页面就可以立刻看到效果。</p>
+<hr>
+<h3 id="给文章加密"><a href="#给文章加密" class="headerlink" title="给文章加密"></a>给文章加密</h3><p>这里我们使用的是 <a href="https://github.com/D0n9X1n/hexo-blog-encrypt" target="_blank" rel="noopener">hexo-blog-encrypt</a> 这个插件。</p>
+<p><strong>第一步</strong>，使用 npm 来安装 hexo-blog-encrypt：</p>
+<pre><code class="lang-bash"># --save 是确保插件记录在 package.jason 文件中，方便之后多终端同步
+npm install --save hexo-blog-encrypt
+</code></pre>
+<p><strong>第二步</strong>，更改根目录下的文件 <code>~/Documents/blog/_config.yml</code> ，增加 <strong>encrypt</strong> 字段：</p>
+<pre><code class="lang-yml"># Security
+## Docs: https://github.com/D0n9X1n/hexo-blog-encrypt
+encrypt: # hexo-blog-encrypt
+  abstract: 有东西被加密了, 请输入密码查看
+  message: 您好, 这里需要密码
+  wrong_pass_message: 抱歉, 密码不对
+</code></pre>
+<p><strong>第三步</strong>，将 <strong>password</strong> 字段添加到要加密的文章的信息头，就像这样：</p>
+<pre><code class="lang-plaintext">---
+title: Hello World
+date: 2016-03-30 21:18:02
+password: hello
+---
+
+[... 博客内容 ...]
+</code></pre>
+<p><strong>第四步</strong>，重启以激活新插件 <a href="https://github.com/D0n9X1n/hexo-blog-encrypt" target="_blank" rel="noopener">hexo-blog-encrypt</a>：</p>
+<pre><code class="lang-bash">$ hexo clean   ## 清空缓存
+$ hexo g       ## 生成静态页面至 public 目录
+$ hexo s       ## 打开本地服务器预览效果
+</code></pre>
+<p>PS:<br>输入密码解密文章之后，可以通过页面最底部的按钮来重新加密文章<br>更多设置请参考 <code>hexo-blog-encrypt</code> 的 Github</p>
 <hr>
 <h3 id="把博客部署到-Github-上"><a href="#把博客部署到-Github-上" class="headerlink" title="把博客部署到 Github 上"></a>把博客部署到 Github 上</h3><p>先到 <a href="https://github.com" target="_blank" rel="noopener">Github</a> 上申请一个账号，然后新建一个 <code>repository</code>，命名为：</p>
 <pre><code>你的用户名.github.io
@@ -135,7 +173,9 @@
 <pre><code class="lang-plaintext">chpwang.github.io
 </code></pre>
 <p>然后在 <code>~/Documents/blog</code> 文件夹里找到 <code>_config.yml</code> 文件进行编辑，加入以下设置：</p>
-<pre><code class="lang-yml">deploy:
+<pre><code class="lang-yml"># Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
   type: git
   repo: 
     github: git@github.com:你的用户名/你的用户名.github.io.git
@@ -172,13 +212,13 @@ $ hexo d -debug
 </div>
 <div class="right-foot container">
     <div class="firstrow">
-        <a href="#top">
+        <a href="#top" >
         <i class="fa fa-arrow-right"></i>
         </a>
         
     </div>
     <div class="secondrow">
-        <a href>
+        <a href="">
         
         </a>
     </div>

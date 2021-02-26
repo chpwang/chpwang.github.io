@@ -7,12 +7,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="google-site-verification" content>
   
-  <title>推导 Y Combinator（待完成）</title>
+  <title>推导 Y Combinator（待完成：Mutual，Javascript 等）</title>
   <meta name="author" content="TwentyNight">
    <meta name="description" content="TwentyNight 的修行屋">
   
 
-  <meta property="og:title" content="推导 Y Combinator（待完成）">
+  <meta property="og:title" content="推导 Y Combinator（待完成：Mutual，Javascript 等）">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:site_name" content="行侠何须仗名剑">
  <meta property="og:image" content>
@@ -46,7 +46,7 @@
       
   
     <h1 class="page-title center">
-        推导 Y Combinator（待完成）
+        推导 Y Combinator（待完成：Mutual，Javascript 等）
     </h1>
   
 
@@ -80,25 +80,25 @@
 <h3 id="先实现不使用-Define-的情况下能正常递归"><a href="#先实现不使用-Define-的情况下能正常递归" class="headerlink" title="先实现不使用 Define 的情况下能正常递归"></a>先实现不使用 Define 的情况下能正常递归</h3><p><strong>第一步</strong>，正常写出 <code>mylength</code> 函数作为最简单的模型。这是一个接受链表（list）作为参数，返回其长度（一个整数值，显示链表中有效负载的数量）的函数。</p>
 <pre><code class="lang-scheme">(define mylength
   (lambda (l)
-    (cond ((null? l) 0)
-          (else (+ 1 (mylength (cdr l)))))))
+    (cond [(null? l) 0]
+          [else (+ 1 (mylength (cdr l)))])))
 </code></pre>
 <p>测试 <code>mylength</code> 函数，输出正确的话就可以继续推导。</p>
 <pre><code class="lang-scheme">(mylength &#39;(9 19 29))  ;; 输出 3 (链表有 3 个有效负载：9, 19, 29)
 </code></pre>
-<p><strong>第二步</strong>，开始考虑如果没有 <code>define</code> 来绑定函数名的情况。于是，我们只能将上面 <code>mylength</code> 函数绑定在参数上。于是 <code>mylength</code> 函数作为参数传进去，以便能被调用。因此我们多加了一层嵌套，用这个嵌套带来的参数 <code>mylength</code> 绑定函数体内容。这样我们就可以使用它了。</p>
+<p><strong>第二步</strong>，思考如果没有 <code>define</code> 来绑定函数名，我们要如何递归？于是，我们只能将上面 <code>mylength</code> 函数绑定在<strong>参数</strong>上。于是 <code>mylength</code> 函数作为参数传进去，以便能被调用。因此我们多加了一层嵌套，用这个嵌套带来的参数 <code>mylength</code> 绑定函数体内容。这样我们就可以使用它了。</p>
 <pre><code class="lang-scheme">(
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (lambda (mylength)                           ;;
     (lambda (l)                                ;;
-      (cond ((null? l) 0)                      ;;
-            (else (+ 1 (mylength (cdr l))))))) ;;
+      (cond [(null? l) 0]                      ;;
+            [else (+ 1 (mylength (cdr l)))]))) ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (lambda (l)                                ;;
-    (cond ((null? l) 0)                      ;;
-          (else (+ 1 (mylength (cdr l))))))  ;;
+    (cond [(null? l) 0]                      ;;
+          [else (+ 1 (mylength (cdr l)))]))  ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 )
 </code></pre>
@@ -107,15 +107,15 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (lambda (mylength)                           ;;
     (lambda (l)                                ;;
-      (cond ((null? l) 0)                      ;;
-            (else (+ 1 (mylength (cdr l))))))) ;;
+      (cond [(null? l) 0]                      ;;
+            [else (+ 1 (mylength (cdr l)))]))) ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (lambda (mylength)                           ;;
     (lambda (l)                                ;;
-      (cond ((null? l) 0)                      ;;
-            (else (+ 1 (mylength (cdr l))))))) ;;
+      (cond [(null? l) 0]                      ;;
+            [else (+ 1 (mylength (cdr l)))]))) ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 )
 </code></pre>
@@ -124,15 +124,15 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (lambda (mylength)                                      ;;
     (lambda (l)                                           ;;
-      (cond ((null? l) 0)                                 ;;
-            (else (+ 1 ((mylength mylength) (cdr l))))))) ;;
+      (cond [(null? l) 0]                                 ;;
+            [else (+ 1 ((mylength mylength) (cdr l)))]))) ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (lambda (mylength)                                      ;;
     (lambda (l)                                           ;;
-      (cond ((null? l) 0)                                 ;;
-            (else (+ 1 ((mylength mylength) (cdr l))))))) ;;
+      (cond [(null? l) 0]                                 ;;
+            [else (+ 1 ((mylength mylength) (cdr l)))]))) ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 )
 </code></pre>
@@ -140,13 +140,13 @@
 <pre><code class="lang-scheme">(
 ((lambda (mylength)
   (lambda (l)
-    (cond ((null? l) 0)
-          (else (+ 1 ((mylength mylength) (cdr l)))))))
+    (cond [(null? l) 0]
+          [else (+ 1 ((mylength mylength) (cdr l)))])))
 
  (lambda (mylength)
   (lambda (l)
-    (cond ((null? l) 0)
-          (else (+ 1 ((mylength mylength) (cdr l))))))))
+    (cond [(null? l) 0]
+          [else (+ 1 ((mylength mylength) (cdr l)))]))))
 
 &#39;(9 19 29))   ;; 输出 3
 </code></pre>
@@ -155,8 +155,8 @@
 <h3 id="推导-Y-算子"><a href="#推导-Y-算子" class="headerlink" title="推导 Y 算子"></a>推导 Y 算子</h3><p>我们先观察一下最早有 <code>define</code> 的时候函数的样子：</p>
 <pre><code class="lang-scheme">(define mylength
   (lambda (l)
-    (cond ((null? l) 0)
-          (else (+ 1 (mylength (cdr l)))))))
+    (cond [(null? l) 0]
+          [else (+ 1 (mylength (cdr l)))])))
 </code></pre>
 <p>我们的目标是把上一节最后看起来很多的代码转化成「一个函数的调用」，将「一块和最开始 define 的代码模式很像的代码」作为参数输入该函数。如果成功，那么该函数就是 <strong>Y</strong> 算子啦。可以用它来作用在其他更多的函数上实现递归。（如果看不明白目标，可以往下看完推导在回来看这段描述）</p>
 <p><strong>第 1 次转换：</strong>我们看到有两小块重复的代码，于是先提取它们</p>
@@ -164,8 +164,8 @@
 
  (lambda (mylength)
   (lambda (l)
-    (cond ((null? l) 0)
-          (else (+ 1 ((mylength mylength) (cdr l))))))))
+    (cond [(null? l) 0]
+          [else (+ 1 ((mylength mylength) (cdr l)))]))))
 </code></pre>
 <p>观察发现，第 1 次转换之后，代码已经很像原来有 <code>define</code> 时候的代码了。那么是不是 <code>(lambda (f) (f f))</code> 就是 <strong>Y</strong> 算子呢？不是的，因为目前还不够像。<code>(mylength mylength) (cdr l)</code> 这一块的代码和原来的 <code>(mylength (cdr l))</code> 相比，多了一次函数调用。我们要继续提取，把它变成调用次数一样的模式。也就是一个函数将 <code>(mylength mylength)</code> 想办法变成 <code>mylength</code> 。</p>
 <p><strong>第 2 次转换：</strong>把 <code>(mylength mylength)</code> 提取出来，通过函数调用来将它传入函数体</p>
@@ -177,8 +177,8 @@
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
      (lambda (g)                          ;;
       (lambda (l)                         ;;
-        (cond ((null? l) 0)               ;;
-              (else (+ 1 (g (cdr l))))))) ;;
+        (cond [(null? l) 0]               ;;
+              [else (+ 1 (g (cdr l)))]))) ;;
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
       (mylength mylength)
     )
@@ -195,8 +195,8 @@
       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
        (lambda (g)                          ;;
         (lambda (l)                         ;;
-          (cond ((null? l) 0)               ;;
-                (else (+ 1 (g (cdr l))))))) ;;
+          (cond [(null? l) 0]               ;;
+                [else (+ 1 (g (cdr l)))]))) ;;
       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
         (mylength mylength)
       )
@@ -216,8 +216,8 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    (lambda (g)                          ;;
     (lambda (l)                         ;;
-      (cond ((null? l) 0)               ;;
-            (else (+ 1 (g (cdr l))))))) ;;
+      (cond [(null? l) 0]               ;;
+            [else (+ 1 (g (cdr l)))]))) ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     (mylength mylength)
   )
@@ -229,8 +229,8 @@
 (lambda (mylength)                      ;;
   ((lambda (g)                          ;;
     (lambda (l)                         ;;
-      (cond ((null? l) 0)               ;;
-            (else (+ 1 (g (cdr l))))))) ;;
+      (cond [(null? l) 0]               ;;
+            [else (+ 1 (g (cdr l)))]))) ;;
     (mylength mylength)))               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -238,8 +238,8 @@
 (lambda (mylength)                      ;;
   ((lambda (g)                          ;;
     (lambda (l)                         ;;
-      (cond ((null? l) 0)               ;;
-            (else (+ 1 (g (cdr l))))))) ;;
+      (cond [(null? l) 0]               ;;
+            [else (+ 1 (g (cdr l)))]))) ;;
     (mylength mylength)))               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 )
@@ -256,8 +256,8 @@
       (lambda (mylength)                      ;;
         ((lambda (g)                          ;;
           (lambda (l)                         ;;
-            (cond ((null? l) 0)               ;;
-                  (else (+ 1 (g (cdr l))))))) ;;
+            (cond [(null? l) 0]               ;;
+                  [else (+ 1 (g (cdr l)))]))) ;;
           (mylength mylength)))               ;;
       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -265,8 +265,8 @@
       (lambda (mylength)                      ;;
         ((lambda (g)                          ;;
           (lambda (l)                         ;;
-            (cond ((null? l) 0)               ;;
-                  (else (+ 1 (g (cdr l))))))) ;;
+            (cond [(null? l) 0]               ;;
+                  [else (+ 1 (g (cdr l)))]))) ;;
           (mylength mylength)))               ;;
       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     )
@@ -284,7 +284,7 @@
 </ul>
 <hr>
 <h3 id="继续推导-Y-算子"><a href="#继续推导-Y-算子" class="headerlink" title="继续推导 Y 算子"></a>继续推导 Y 算子</h3><p>上一节我们发现了问题所在，就是表达式 <code>(mylength mylength)</code> 被提取出来之后会导致计算机要先对它求值之后才能进行之后的步骤。而它又会在被求值后中生成新的「自己」，并且这个「自己」也需要同样被求值之后计算机才能进行之后的计算步骤。我们希望它像被提取出来前一样，「对其求值」的这一步骤能再次被放进函数的分支内。</p>
-<p><strong>第 3 次转换：</strong>将表达式 <code>(mylength mylength)</code> 打包进一个函数来延缓对它求值的时间。这种转换被称为 Eta-Expansion ( Eta-Conversion 的反向操作)。</p>
+<p><strong>第 3 次转换：</strong>将表达式 <code>(mylength mylength)</code> 打包进一个函数来延缓对它求值的时间。这种转换被称为 <em>Eta-Expansion</em> ( <em>Eta-Conversion</em> 的反向操作)。</p>
 <pre><code class="lang-scheme">(
   (lambda (f) (f f))
 
@@ -293,8 +293,8 @@
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
      (lambda (g)                          ;;
       (lambda (l)                         ;;
-        (cond ((null? l) 0)               ;;
-              (else (+ 1 (g (cdr l))))))) ;;
+        (cond [(null? l) 0]               ;;
+              [else (+ 1 (g (cdr l)))]))) ;;
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
       (lambda (x) ((mylength mylength) x))
     )
@@ -310,8 +310,8 @@
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
      (lambda (g)                          ;;
       (lambda (l)                         ;;
-        (cond ((null? l) 0)               ;;
-              (else (+ 1 (g (cdr l))))))) ;;
+        (cond [(null? l) 0]               ;;
+              [else (+ 1 (g (cdr l)))]))) ;;
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
       (lambda (x) ((mylength mylength) x))
     )
@@ -321,7 +321,7 @@
 &#39;(9 19 29) )   ;; 输出 3
 </code></pre>
 <p>成功了。我们可以接着转换了（每一步转换都要保证代码能正确运行才能进行下一步）。</p>
-<p><strong>第 4 次转换：</strong>更改变量名，让内部被注释框选的函数更像 <code>define</code> 阶段的函数（Modulo Alpha-Equivalence）</p>
+<p><strong>第 4 次转换：</strong>更改变量名，让内部被注释框选的函数更像 <code>define</code> 阶段的函数（<em>Alpha-Equivalence</em>）</p>
 <pre><code class="lang-scheme">(
   (lambda (f) (f f))
 
@@ -330,26 +330,26 @@
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
      (lambda (mylength)                          ;;
       (lambda (l)                                ;;
-        (cond ((null? l) 0)                      ;;
-              (else (+ 1 (mylength (cdr l))))))) ;;
+        (cond [(null? l) 0]                      ;;
+              [else (+ 1 (mylength (cdr l)))]))) ;;
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
       (lambda (x) ((g g) x))
     )
   )
 )
 </code></pre>
-<p>经过第 4 次转换（已经输入计算机测试了代码），我们得到了和 <code>define</code> 阶段几乎一样的函数。除了 <code>define</code> 的位置使用了 <code>lambda</code> 之外，其他部分几乎一样了。</p>
+<p>经过第 4 次转换（已经输入计算机测试了代码），我们得到了和 <code>define</code> 阶段几乎一样的函数。除了 <code>define</code> 的位置使用了 <code>lambda</code> 之外，其他部分几乎一样了。对比如下：</p>
 <pre><code class="lang-scheme">;;; 使用 define 的时候 ;;;
 (define mylength
   (lambda (l)
-    (cond ((null? l) 0)
-          (else (+ 1 (mylength (cdr l)))))))
+    (cond [(null? l) 0]
+          [else (+ 1 (mylength (cdr l)))])))
 
 ;;; 没有 define 的时候 ;;;
 (lambda (mylength)
   (lambda (l)
-    (cond ((null? l) 0)
-          (else (+ 1 (mylength (cdr l)))))))
+    (cond [(null? l) 0]
+          [else (+ 1 (mylength (cdr l)))])))
 </code></pre>
 <p><strong>第 5 次转换：</strong>把和使用 <code>define</code> 阶段的代码很像的部分提取出来</p>
 <pre><code class="lang-scheme">(
@@ -359,7 +359,7 @@
       (lambda (f) (f f))                       ;;
                                                ;;
       (lambda (g)                              ;;
-        ( y                                    ;;  Y 算子
+        ( y                                    ;;  这个函数（块）就是 Y 算子
           (lambda (x) ((g g) x))               ;;
         )                                      ;;
       )                                        ;;
@@ -370,12 +370,12 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    (lambda (mylength)                          ;;
     (lambda (l)                                ;;
-      (cond ((null? l) 0)                      ;;  目标函数
-            (else (+ 1 (mylength (cdr l))))))) ;;
+      (cond [(null? l) 0]                      ;;
+            [else (+ 1 (mylength (cdr l)))]))) ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 )
 </code></pre>
-<p>第 5 次转换后（已经输入计算机测试了代码），我们最终获得 <strong>Y</strong> 算子，整理后如下：</p>
+<p>第 5 次转换后（已经输入计算机测试了代码），我们最终获得 <strong>Y</strong> 算子，整理后（<em>Alpha-Equivalence</em>）如下：</p>
 <pre><code class="lang-scheme">;;; Y 算子 ;;;
 (lambda (g)
   ((lambda (f) (f f))
@@ -387,14 +387,14 @@
 <p>比如有 <code>define</code> 的时候函数的样子：</p>
 <pre><code class="lang-scheme">(define mylength
   (lambda (l)
-    (cond ((null? l) 0)
-          (else (+ 1 (mylength (cdr l)))))))
+    (cond [(null? l) 0]
+          [else (+ 1 (mylength (cdr l)))])))
 </code></pre>
 <p>这时候我们把 <code>define</code> 改成 <code>lambda</code>（这样就去掉了 <code>define</code>）变成：</p>
 <pre><code class="lang-scheme">(lambda (mylength)
   (lambda (l)
-    (cond ((null? l) 0)
-          (else (+ 1 (mylength (cdr l)))))))
+    (cond [(null? l) 0]
+          [else (+ 1 (mylength (cdr l)))])))
 </code></pre>
 <p>然后再用 <strong>Y</strong> 算子作用于这个 <code>lambda</code> 匿名函数就可以得到相应的递归函数 <code>F</code> 了：</p>
 <pre><code class="lang-scheme">(define Y
@@ -406,11 +406,35 @@
 (define F
   (Y (lambda (mylength)
        (lambda (l)
-         (cond ((null? l) 0)
-               (else (+ 1 (mylength (cdr l)))))))))
+         (cond [(null? l) 0]
+               [else (+ 1 (mylength (cdr l)))])))))
 
 (F &#39;(9 19 29))  ;; 输出 3 (链表有 3 个有效负载：9, 19, 29)
 </code></pre>
+<p><strong>注释:</strong><br><em>Alpha-Equivalence</em>：不同的变量名可以等价地替换。即 <code>(lambda (x) (+ x x))</code> 和 <code>(lambda (y) (+ y y))</code> 效果一样。<br><em>Eta-Expansion</em>：函数 <code>(lambda (x) (+ x 1))</code> 可以扩展为 <code>(lambda (y) ((lambda (x) (+ x 1)) y))</code>，效果一样。</p>
+<hr>
+<h3 id="用-Javascript-的语法来写出-Y-算子"><a href="#用-Javascript-的语法来写出-Y-算子" class="headerlink" title="用 Javascript 的语法来写出 Y 算子"></a>用 Javascript 的语法来写出 Y 算子</h3><p>… TO DO …</p>
+<hr>
+<h3 id="进一步推导针对-Mutual-Recursive-的-Y-算子"><a href="#进一步推导针对-Mutual-Recursive-的-Y-算子" class="headerlink" title="进一步推导针对 Mutual Recursive 的 Y 算子"></a>进一步推导针对 Mutual Recursive 的 Y 算子</h3><p>上面所推导的 <strong>Y</strong> 算子只对 <code>mylength</code> 这样的 <em>Direct Recursive</em> 函数有用，对下面这种 <em>Mutual Recursive</em> 的函数就没用了：</p>
+<pre><code class="lang-scheme">;; 其实 even? 函数可以去掉 (= n 1) 这个判断，不过这样看起来可能会因为不对称而产生疑惑
+;; 加上这条冗余的代码后带来的对称性不但能让大脑对正确性更放心，也能在 (even? 1) 这种情况下减少一次递归。
+;; 所以判断奇偶的函数都要判断 0 和 1 这两个边界。让代码简洁而不是单纯地简短。
+
+(define odd?
+  (lambda (n)
+    (cond [(= n 0) #f]
+          [(= n 1) #t]
+          [else (even? (- n 1))])))
+
+(define even?
+  (lambda (n)
+    (cond [(= n 0) #t]
+          [(= n 1) #f]
+          [else (odd? (- n 1))])))
+</code></pre>
+<p>根据上面的结果，我们来继续推导适用于<em>Mutual Recursive</em> 函数的 <strong>Y</strong> 算子：</p>
+<p><strong>第一步：</strong></p>
+<p>… TO DO …</p>
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt></p>
 

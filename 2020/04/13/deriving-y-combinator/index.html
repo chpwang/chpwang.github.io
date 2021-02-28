@@ -422,7 +422,7 @@ var Y = f =&gt;
   (x =&gt; f(v =&gt; x(x)(v)));
 </code></pre>
 <hr>
-<h3 id="进一步推导针对-Mutual-Recursive-的-Y-算子"><a href="#进一步推导针对-Mutual-Recursive-的-Y-算子" class="headerlink" title="进一步推导针对 Mutual Recursive 的 Y 算子"></a>进一步推导针对 Mutual Recursive 的 Y 算子</h3><p>上面所推导的 <strong>Y</strong> 算子只对 <code>mylength</code> 这样的 <em>Directly Recursive</em> 函数有用，对下面这种 <a href="https://en.wikipedia.org/wiki/Mutual_recursion" target="_blank" rel="noopener"><em>Mutually Recursive</em></a> 的函数就没用了：</p>
+<h3 id="进一步推导针对-Mutual-Recursive-的-Y-算子"><a href="#进一步推导针对-Mutual-Recursive-的-Y-算子" class="headerlink" title="进一步推导针对 Mutual Recursive 的 Y 算子"></a>进一步推导针对 Mutual Recursive 的 Y 算子</h3><p>上面所推导的 <strong>Y</strong> 算子只对 <code>mylength</code> 这样的 <em>Directly Recursive</em> 函数有用，对下面这种 <a href="https://en.wikipedia.org/wiki/Mutual_recursion" target="_blank" rel="noopener"><em>Mutually Recursive</em></a> 函数就没用了：</p>
 <pre><code class="lang-scheme">;; 这里容易下意识认为要判断 0 和 1 这两个边界，其实只需要判断 0 这一个边界即可。
 ;; 简洁带来严密。
 
@@ -616,18 +616,18 @@ var Y = f =&gt;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (lambda (odd?)                       ;; (很像 odd? 的代码块)
+  (lambda (even?)                      ;; (很像 odd? 的代码块)
     (lambda (n)                        ;;
       (cond [(= n 0) #f]               ;;
-            [else (odd? (- n 1))])))   ;;
+            [else (even? (- n 1))])))  ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   )
 
  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
- (lambda (even?)                      ;; (很像 even? 的代码块)
+ (lambda (odd?)                       ;; (很像 even? 的代码块)
    (lambda (n)                        ;;
      (cond [(= n 0) #t]               ;; 
-           [else (even? (- n 1))])))  ;;
+           [else (odd? (- n 1))])))   ;;
  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 )
 </code></pre>
@@ -663,24 +663,25 @@ var Y = f =&gt;
        (lambda (h)
          (k (lambda (x) ((h h) x))))))))
 
-;;; 把函数的 define 换成 lambda ，递归分支中的对方变成自己 ;;;
-;;; 注释：此操作可以理解为 Mutually Recursive 的函数也会递归回到自身 ;;;
+;;; 把函数的 define 换成 lambda 然后把参数名变为对方 ;;;
+;;; 注释：此操作可以理解为自己需要对方来定义所以对方要作为输入 ;;;
 (define o
-  (lambda (odd?)
-    (lambda (n)                        
-      (cond [(= n 0) #f]               
-            [else (odd? (- n 1))]))))
-
-(define e
   (lambda (even?)
     (lambda (n)                        
-      (cond [(= n 0) #t]               
+      (cond [(= n 0) #f]               
             [else (even? (- n 1))]))))
 
+(define e
+  (lambda (odd?)
+    (lambda (n)                        
+      (cond [(= n 0) #t]               
+            [else (odd? (- n 1))]))))
 
-;;; 输入 Y 算子的先后顺序决定了函数的效果是判断奇数还是偶数 ;;;
-(map ((Ym o) e) &#39;(0 1 2 3 4 5 6 7 8 9 10))          ;;; 判断是否为奇数，输出 (#f #t #f #t #f #t #f #t #f #t #f)
-(map ((Ym e) o) &#39;(0 1 2 3 4 5 6 7 8 9 10))          ;;; 判断是否为偶数，输出 (#t #f #t #f #t #f #t #f #t #f #t)
+
+;;; 通过 Y 算子可以很容易得到 odd? 和 even? 函数 ;;;
+;;; 输入 Y 算子的先后顺序决定了函数的效果是 odd? 还是 even? ;;;
+(map ((Ym o) e) &#39;(0 1 2 3 4 5 6 7 8 9 10))          ;;; odd? 函数判断是否为奇，输出 (#f #t #f #t #f #t #f #t #f #t #f)
+(map ((Ym e) o) &#39;(0 1 2 3 4 5 6 7 8 9 10))          ;;; even? 函数判断是否为偶，输出 (#t #f #t #f #t #f #t #f #t #f #t)
 </code></pre>
 <p>PS：<br>更多关于 <strong>Mutual Recursion</strong> 的信息可查阅维基百科 <a href="https://en.wikipedia.org/wiki/Mutual_recursion" target="_blank" rel="noopener"><em>Mutual Recursion</em></a></p>
 <hr>

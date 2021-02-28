@@ -119,7 +119,9 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 )
 </code></pre>
-<p>但这样还不够，因为两小块代码要求其输入参数 <code>mylength</code> 是个函数，不能是 <code>(cdr l)</code> 这种链表。运行到 <code>(mylength (cdr l))</code> 这段的代码就会报错。于是我们再改代码，变成下面这样：</p>
+<p>但这样还不够，因为两块代码要求其输入参数 <code>mylength</code> 是个函数，不能是 <code>(cdr l)</code> 这种链表。运行到 <code>(mylength (cdr l))</code> 这段的代码就会报错。于是我们再改代码，把 <code>(mylength (cdr l))</code> 改为 <code>(mylength mylength)</code> 变成下面这样：</p>
+<p><strong>注释：<br>之所以要这么改动，除了让输入参数符合要求（输入需是个函数）之外，更重要的是让这个作为输入的函数携带足够的信息以便之后的递归。即每次运行到 <code>else</code> 这一分支，函数都会通过 <code>(mylength mylength)</code> 保存一次自己后再进行对 <code>(cdr l)</code> 的运算。而正是因为函数每次都保存了自己（的信息），所以每次都能调用自己，进而实现没有 <code>define</code> 的递归。</strong></p>
+<p><code>PS：使用函数包裹（保存）信息后，能实现各种精妙的传递、嵌套和展开，要着重关注和练习这样的数据技巧</code></p>
 <pre><code class="lang-scheme">(
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (lambda (mylength)                                      ;;
@@ -413,10 +415,16 @@
 </code></pre>
 <p><strong>注释:</strong><br><em>Alpha-Equivalence</em>：不同的变量名可以等价地替换。即 <code>(lambda (x) (+ x x))</code> 和 <code>(lambda (y) (+ y y))</code> 效果一样。<br><em>Eta-Expansion</em>：函数 <code>(lambda (x) (+ x 1))</code> 可以扩展为 <code>(lambda (y) ((lambda (x) (+ x 1)) y))</code>，效果一样。</p>
 <hr>
-<h3 id="用-Javascript-的语法来写出-Y-算子"><a href="#用-Javascript-的语法来写出-Y-算子" class="headerlink" title="用 Javascript 的语法来写出 Y 算子"></a>用 Javascript 的语法来写出 Y 算子</h3><p>… TO DO …</p>
+<h3 id="用-Javascript-的语法来写出-Y-算子"><a href="#用-Javascript-的语法来写出-Y-算子" class="headerlink" title="用 Javascript 的语法来写出 Y 算子"></a>用 Javascript 的语法来写出 Y 算子</h3><p>在 <a href="https://www.javascript.com" target="_blank" rel="noopener">Javascript</a> 的语法下， <strong>Y</strong> 算子的定义如下，可以利用上面的经验尝试推导</p>
+<pre><code class="lang-javascript">// Y combinator 的定义
+var Y = f =&gt; 
+  (x =&gt; f(v =&gt; x(x)(v)))
+  (x =&gt; f(v =&gt; x(x)(v)));
+</code></pre>
 <hr>
 <h3 id="进一步推导针对-Mutual-Recursive-的-Y-算子"><a href="#进一步推导针对-Mutual-Recursive-的-Y-算子" class="headerlink" title="进一步推导针对 Mutual Recursive 的 Y 算子"></a>进一步推导针对 Mutual Recursive 的 Y 算子</h3><p>上面所推导的 <strong>Y</strong> 算子只对 <code>mylength</code> 这样的 <em>Directly Recursive</em> 函数有用，对下面这种 <a href="https://en.wikipedia.org/wiki/Mutual_recursion" target="_blank" rel="noopener"><em>Mutually Recursive</em></a> 的函数就没用了：</p>
-<pre><code class="lang-scheme">;; 这里容易下意识认为要判断 0 和 1 这两个边界，其实只需要判断 0 这一个边界即可。简洁带来严密。
+<pre><code class="lang-scheme">;; 这里容易下意识认为要判断 0 和 1 这两个边界，其实只需要判断 0 这一个边界即可。
+;; 简洁带来严密。
 
 (define odd?
   (lambda (n)
@@ -429,22 +437,252 @@
           [else (odd? (- n 1))])))
 </code></pre>
 <p>根据上面的结果，我们来继续推导适用于 <a href="https://en.wikipedia.org/wiki/Mutual_recursion" target="_blank" rel="noopener"><em>Mutually Recursive</em></a> 函数的 <strong>Y</strong> 算子。</p>
-<p><strong>第一步：</strong></p>
+<p><strong>分析</strong></p>
 <p>先明确我们的目的是什么：我们的目的是在没有 <code>define</code> 的情况下实现函数 <code>odd?</code> 和 <code>even?</code> ，然后从这个实现中提取出 <strong>Y</strong> 算子。</p>
-<p><strong>第二步：</strong></p>
 <p>和上面同样的思路，没有了 <code>define</code> ，我们只能将上面 <code>odd?</code> 和 <code>even?</code> 函数绑定在<strong>参数</strong>上。下面我们先来尝试实现 <code>odd?</code> 函数。</p>
-<pre><code class="lang-scheme">;; 这里容易下意识认为要判断 0 和 1 这两个边界，其实只需要判断 0 这一个边界即可。简洁带来严密。
-
-(define odd?
+<pre><code class="lang-scheme">(define odd?
   (lambda (n)
     (cond [(= n 0) #f]
           [else (even? (- n 1))])))
-
-(define even?
-  (lambda (n)
-    (cond [(= n 0) #t]
-          [else (odd? (- n 1))])))
 </code></pre>
+<p><strong>推导</strong></p>
+<p>首先我们很容易知道需要在新的 <code>odd?</code> 的函数体内储存 <code>even?</code> 函数的信息，可以得到：</p>
+<pre><code class="lang-scheme">(
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (even?)                       ;;
+    (lambda (n)                         ;; (这是没有 define 之后的 odd? 函数)
+      (cond [(= n 0) #f]                ;;
+            [else (even? (- n 1))])))   ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (odd?)                        ;;
+    (lambda (n)                         ;; (这是没有 define 之后的 even? 函数)
+      (cond [(= n 0) #t]                ;;
+            [else (odd? (- n 1))])))    ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p>然后我们要像前面的 <code>(mylength mylength)</code> 一样，设法让 <code>odd?</code> 和 <code>even?</code> 两个函数在进入递归（ <code>else</code> 分支）的时候都打包保存一次自己，以供之后的递归（ <code>else</code> 分支）可以继续保存和调用“自己”。于是代码先做如下修改：</p>
+<pre><code class="lang-scheme">(
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (even?)                              ;;
+    (lambda (n)                                ;; (这是没有 define 之后的 odd? 函数)
+      (cond [(= n 0) #f]                       ;;
+            [else ((even? even?) (- n 1))])))  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (odd?)                               ;;
+    (lambda (n)                                ;; (这是没有 define 之后的 even? 函数)
+      (cond [(= n 0) #t]                       ;;
+            [else ((odd? odd?) (- n 1))])))    ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p>观察上面的 <code>odd?</code> 函数体内的 <code>else</code> 分支，可以看到当进入此分支，就要使用 <code>even?</code> 对 <code>(- n 1)</code> 进行计算了。而 <code>even?</code> 函数是要接收 <code>odd?</code>函数作为输入的，这样它的函数体内才有 <code>odd?</code> 函数的信息来实现它的 <code>else</code> 递归分支。所以这里的 <code>(even? even?)</code> 要改成 <code>(even? odd?)</code> ，这样 <code>odd?</code> 函数才能作为参数被输入进 <code>even?</code> ，进而实现传递（保存）。代码修改如下：</p>
+<pre><code class="lang-scheme">(
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (even?)                              ;;
+    (lambda (n)                                ;; (这是没有 define 之后的 odd? 函数)
+      (cond [(= n 0) #f]                       ;;
+            [else ((even? odd?) (- n 1))])))   ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (odd?)                               ;;
+    (lambda (n)                                ;; (这是没有 define 之后的 even? 函数)
+      (cond [(= n 0) #t]                       ;;
+            [else ((odd? odd?) (- n 1))])))    ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p>到这步后，目前的代码仍然有问题。因为现在面对的是 <a href="https://en.wikipedia.org/wiki/Mutual_recursion#Conversion_to_direct_recursion" target="_blank" rel="noopener"><em>Mutual Recursion</em></a> ，两个函数相互定义彼此。要想办法在 <code>else</code> 递归分支处保存双方信息。继续观察 <code>odd?</code>（当前正在尝试实现的是没有 <code>define</code> 的 <code>odd?</code> 函数），发现 <code>odd?</code> 函数在获得输入后，已经包含了 <code>even?</code> 函数的信息，还差它自己。所以我们修改代码，让 <code>odd?</code> 函数把包含 <code>even?</code> 的自己一起存入下一次递归，这样下一次递归就同时有了 <code>odd?</code> 和 <code>even?</code>，进而一直传递和递归调用下去，直到触碰边界条件停止。代码如下：</p>
+<pre><code class="lang-scheme">(
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (even?)                                 ;;
+   ((lambda (f) (f f))                            ;; (这是没有 define 之后的 odd? 函数)
+    (lambda (odd?)                                ;;
+      (lambda (n)                                 ;;
+        (cond [(= n 0) #f]                        ;;
+              [else ((even? odd?) (- n 1))])))))  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (odd?)                               ;;
+    (lambda (n)                                ;; (这是没有 define 之后的 even? 函数)
+      (cond [(= n 0) #t]                       ;;
+            [else ((odd? odd?) (- n 1))])))    ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p>现在，我们得到了没有 <code>define</code> 的 <code>odd?</code> 函数。可以使用上面这个代码测试一下各种奇偶数了。于是再一次，<strong>Y</strong> 算子已经隐藏在其中，可以开始各种转化提取整理出 Y 算子了。</p>
+<hr>
+<h3 id="整理和提取-Y-算子-Mutual-Recursion"><a href="#整理和提取-Y-算子-Mutual-Recursion" class="headerlink" title="整理和提取 Y 算子 - Mutual Recursion"></a>整理和提取 Y 算子 - Mutual Recursion</h3><p>有了之前的经验，接下来的整理和提取轻车熟路，同样是 <em>Alpha-Equivalence</em> 和 <em>Eta-Expansion</em> 。<br>记得每一步变换都要确认代码能正确运行才继续哈。</p>
+<p><strong>第一步</strong>，分别把 <code>(even? odd?)</code> 和 <code>(odd? odd?)</code> 提取出来：</p>
+<pre><code class="lang-scheme">(
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (even?)                        ;;
+   ((lambda (f) (f f))                   ;;
+    (lambda (odd?)                       ;;
+      ((lambda (g)                       ;; (这是没有 define 之后的 odd? 函数)
+         (lambda (n)                     ;;
+           (cond [(= n 0) #f]            ;;
+                 [else (g (- n 1))])))   ;;
+       (even? odd?)))))                  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (odd?)                         ;;
+       ((lambda (j)                      ;;
+          (lambda (n)                    ;;
+            (cond [(= n 0) #t]           ;; (这是没有 define 之后的 even? 函数)
+                  [else (j (- n 1))])))  ;;
+        (lambda (n) ((odd? odd?) n))))   ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p><strong>第二步</strong>，分别两块很像 <code>odd?</code> 和 <code>even?</code> 函数的代码提取出来。</p>
+<pre><code class="lang-scheme">(
+ (lambda (even?)
+   ((lambda (f) (f f))
+    (lambda (odd?)
+      (
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+       (lambda (j)                       ;; (很像 odd? 的代码块)
+         (lambda (n)                     ;;
+           (cond [(= n 0) #f]            ;;
+                 [else (j (- n 1))])))   ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+       (even? odd?)))))                  
+
+  (lambda (odd?)
+       (
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        (lambda (k)                      ;; (很像 even? 的代码块)
+          (lambda (n)                    ;;
+            (cond [(= n 0) #t]           ;; 
+                  [else (k (- n 1))])))  ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        (lambda (n) ((odd? odd?) n))))
+)
+</code></pre>
+<p>提取后：</p>
+<pre><code class="lang-scheme">(
+  (
+   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   (lambda (j)                             ;;
+     (lambda (k)                           ;;
+       (                                   ;;
+        (lambda (even?)                    ;;
+          ((lambda (f) (f f))              ;; (Y 算子)
+           (lambda (odd?)                  ;;
+             (j                            ;;
+              (even? odd?)))))             ;;                  
+                                           ;;
+        (lambda (odd?)                     ;;
+          (k                               ;;
+           (lambda (n) ((odd? odd?) n))))  ;;
+        )))                                ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   (lambda (j)                       ;; (很像 odd? 的代码块)
+     (lambda (n)                     ;;
+       (cond [(= n 0) #f]            ;;
+             [else (j (- n 1))])))   ;;
+   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  )
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (k)                      ;; (很像 even? 的代码块)
+    (lambda (n)                    ;;
+      (cond [(= n 0) #t]           ;; 
+            [else (k (- n 1))])))  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p><strong>第三步</strong>，修改变量名（<em>Alpha-Equivalence</em>），让 Y 算子还有 <code>odd?</code> 和 <code>even?</code> 函数都更加明显：</p>
+<pre><code class="lang-scheme">((
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (j)                            ;;
+    (lambda (k)                          ;;
+      ((lambda (g)                       ;;
+         ((lambda (f) (f f))             ;; (Y 算子)
+          (lambda (h)                    ;;
+            (j (g h)))))                 ;;
+       (lambda (h)                       ;;
+         (k (lambda (x) ((h h) x)))))))  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (odd?)                       ;; (很像 odd? 的代码块)
+    (lambda (n)                        ;;
+      (cond [(= n 0) #f]               ;;
+            [else (odd? (- n 1))])))   ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  )
+
+ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ (lambda (even?)                      ;; (很像 even? 的代码块)
+   (lambda (n)                        ;;
+     (cond [(= n 0) #t]               ;; 
+           [else (even? (- n 1))])))  ;;
+ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p>最终，针对 <strong>Mutual Recursions</strong> 的 <strong>Y</strong> 算子为：</p>
+<pre><code class="lang-scheme">;;; Mutual Recursions 的 Y 算子 ;;;
+(lambda (j)
+  (lambda (k)
+    ((lambda (g)
+       ((lambda (f) (f f)) 
+        (lambda (h)
+          (j (g h)))))
+     (lambda (h)
+       (k (lambda (x) ((h h) x)))))))
+</code></pre>
+<p>可以对比一下 <strong>Direct Recursions</strong> 的 <strong>Y</strong> 算子：</p>
+<pre><code class="lang-scheme">;;; Direct Recursions 的 Y 算子 ;;;
+(lambda (g)
+  ((lambda (f) (f f))
+    (lambda (f)
+      (g (lambda (x) ((f f) x))))))
+</code></pre>
+<p>观察这两个 <strong>Y</strong> 算子，是不是感觉 <strong>Mutual Recursion</strong> 似乎实际上就相当于两个相互定义的函数跑完（递归完？）一个「来回（周期）」之后，再进行针对这个「来回（周期）」的 <strong>Direct Recursion</strong>？</p>
+<hr>
+<h3 id="使用-Y-算子-For-Mutually-Recursive-Functions"><a href="#使用-Y-算子-For-Mutually-Recursive-Functions" class="headerlink" title="使用 Y 算子 - For Mutually Recursive Functions"></a>使用 Y 算子 - For Mutually Recursive Functions</h3><p>为了方便，用 <code>define</code> 来帮助定义，以减少代码符号，让演示更直观：</p>
+<pre><code class="lang-scheme">;;; Mutual Recursions 的 Y 算子 ;;;
+(define Ym
+  (lambda (j)
+    (lambda (k)
+      ((lambda (g)
+         ((lambda (f) (f f)) 
+          (lambda (h)
+            (j (g h)))))
+       (lambda (h)
+         (k (lambda (x) ((h h) x))))))))
+
+;;; 把函数的 define 换成 lambda ，递归分支中的对方变成自己 ;;;
+;;; 注释：此操作可以理解为 Mutually Recursive 的函数也会递归回到自身 ;;;
+(define o
+  (lambda (odd?)
+    (lambda (n)                        
+      (cond [(= n 0) #f]               
+            [else (odd? (- n 1))]))))
+
+(define e
+  (lambda (even?)
+    (lambda (n)                        
+      (cond [(= n 0) #t]               
+            [else (even? (- n 1))]))))
+
+
+;;; 输入 Y 算子的先后顺序决定了函数的效果是判断奇数还是偶数 ;;;
+(map ((Ym o) e) &#39;(0 1 2 3 4 5 6 7 8 9 10))          ;;; 判断是否为奇数，输出 (#f #t #f #t #f #t #f #t #f #t #f)
+(map ((Ym e) o) &#39;(0 1 2 3 4 5 6 7 8 9 10))          ;;; 判断是否为偶数，输出 (#t #f #t #f #t #f #t #f #t #f #t)
+</code></pre>
+<p>PS：<br>更多关于 <strong>Mutual Recursion</strong> 的信息可查阅维基百科 <a href="https://en.wikipedia.org/wiki/Mutual_recursion" target="_blank" rel="noopener"><em>Mutual Recursion</em></a></p>
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt></p>
 

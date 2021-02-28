@@ -415,26 +415,36 @@
 <hr>
 <h3 id="用-Javascript-的语法来写出-Y-算子"><a href="#用-Javascript-的语法来写出-Y-算子" class="headerlink" title="用 Javascript 的语法来写出 Y 算子"></a>用 Javascript 的语法来写出 Y 算子</h3><p>… TO DO …</p>
 <hr>
-<h3 id="进一步推导针对-Mutual-Recursive-的-Y-算子"><a href="#进一步推导针对-Mutual-Recursive-的-Y-算子" class="headerlink" title="进一步推导针对 Mutual Recursive 的 Y 算子"></a>进一步推导针对 Mutual Recursive 的 Y 算子</h3><p>上面所推导的 <strong>Y</strong> 算子只对 <code>mylength</code> 这样的 <em>Direct Recursive</em> 函数有用，对下面这种 <em>Mutual Recursive</em> 的函数就没用了：</p>
-<pre><code class="lang-scheme">;; 其实 even? 函数可以去掉 (= n 1) 这个判断，不过这样看起来可能会因为不对称而产生疑惑
-;; 加上这条冗余的代码后带来的对称性不但能让大脑对正确性更放心，也能在 (even? 1) 这种情况下减少一次递归。
-;; 所以判断奇偶的函数都要判断 0 和 1 这两个边界。让代码简洁而不是单纯地简短。
+<h3 id="进一步推导针对-Mutual-Recursive-的-Y-算子"><a href="#进一步推导针对-Mutual-Recursive-的-Y-算子" class="headerlink" title="进一步推导针对 Mutual Recursive 的 Y 算子"></a>进一步推导针对 Mutual Recursive 的 Y 算子</h3><p>上面所推导的 <strong>Y</strong> 算子只对 <code>mylength</code> 这样的 <em>Directly Recursive</em> 函数有用，对下面这种 <a href="https://en.wikipedia.org/wiki/Mutual_recursion" target="_blank" rel="noopener"><em>Mutually Recursive</em></a> 的函数就没用了：</p>
+<pre><code class="lang-scheme">;; 这里容易下意识认为要判断 0 和 1 这两个边界，其实只需要判断 0 这一个边界即可。简洁带来严密。
 
 (define odd?
   (lambda (n)
     (cond [(= n 0) #f]
-          [(= n 1) #t]
           [else (even? (- n 1))])))
 
 (define even?
   (lambda (n)
     (cond [(= n 0) #t]
-          [(= n 1) #f]
           [else (odd? (- n 1))])))
 </code></pre>
-<p>根据上面的结果，我们来继续推导适用于<em>Mutual Recursive</em> 函数的 <strong>Y</strong> 算子：</p>
+<p>根据上面的结果，我们来继续推导适用于 <a href="https://en.wikipedia.org/wiki/Mutual_recursion" target="_blank" rel="noopener"><em>Mutually Recursive</em></a> 函数的 <strong>Y</strong> 算子。</p>
 <p><strong>第一步：</strong></p>
-<p>… TO DO …</p>
+<p>先明确我们的目的是什么：我们的目的是在没有 <code>define</code> 的情况下实现函数 <code>odd?</code> 和 <code>even?</code> ，然后从这个实现中提取出 <strong>Y</strong> 算子。</p>
+<p><strong>第二步：</strong></p>
+<p>和上面同样的思路，没有了 <code>define</code> ，我们只能将上面 <code>odd?</code> 和 <code>even?</code> 函数绑定在<strong>参数</strong>上。下面我们先来尝试实现 <code>odd?</code> 函数。</p>
+<pre><code class="lang-scheme">;; 这里容易下意识认为要判断 0 和 1 这两个边界，其实只需要判断 0 这一个边界即可。简洁带来严密。
+
+(define odd?
+  (lambda (n)
+    (cond [(= n 0) #f]
+          [else (even? (- n 1))])))
+
+(define even?
+  (lambda (n)
+    (cond [(= n 0) #t]
+          [else (odd? (- n 1))])))
+</code></pre>
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt></p>
 

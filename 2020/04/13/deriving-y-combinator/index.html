@@ -381,8 +381,8 @@
 <pre><code class="lang-scheme">;;; Y 算子 ;;;
 (lambda (g)
   ((lambda (f) (f f))
-    (lambda (f)
-      (g (lambda (x) ((f f) x))))))
+   (lambda (f)
+     (g (lambda (x) ((f f) x))))))
 </code></pre>
 <hr>
 <h3 id="使用-Y-算子"><a href="#使用-Y-算子" class="headerlink" title="使用 Y 算子"></a>使用 Y 算子</h3><p><strong>Y</strong> 算子的使用非常简单，只需要在目标函数外再嵌套一层函数，把这层额外的函数所带来的参数名作为递归函数名就行。</p>
@@ -421,6 +421,20 @@ var Y = f =&gt;
   (x =&gt; f(v =&gt; x(x)(v)))
   (x =&gt; f(v =&gt; x(x)(v)));
 </code></pre>
+<p>提示：</p>
+<pre><code class="lang-scheme">;;; 上面推导出的 Y 算子 ;;;
+(lambda (g)
+  ((lambda (f) (f f))
+   (lambda (f)
+     (g (lambda (x) ((f f) x))))))
+
+
+;;; 改一下变量名（Alpha-Equivalence）可以得到 ;;;
+(lambda (f)
+  ((lambda (f) (f f))
+   (lambda (x)
+     (f (lambda (v) ((x x) v))))))
+</code></pre>
 <hr>
 <h3 id="进一步推导针对-Mutual-Recursive-的-Y-算子"><a href="#进一步推导针对-Mutual-Recursive-的-Y-算子" class="headerlink" title="进一步推导针对 Mutual Recursive 的 Y 算子"></a>进一步推导针对 Mutual Recursive 的 Y 算子</h3><p>上面所推导的 <strong>Y</strong> 算子只对 <code>mylength</code> 这样的 <em>Directly Recursive</em> 函数有用，对下面这种 <a href="https://en.wikipedia.org/wiki/Mutual_recursion" target="_blank" rel="noopener"><em>Mutually Recursive</em></a> 函数就没用了：</p>
 <pre><code class="lang-scheme">;; 这里容易下意识认为要判断 0 和 1 这两个边界，其实只需要判断 0 这一个边界即可。
@@ -450,14 +464,14 @@ var Y = f =&gt;
 <pre><code class="lang-scheme">(
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (lambda (even?)                       ;;
-    (lambda (n)                         ;; (这是没有 define 之后的 odd? 函数)
+    (lambda (n)                         ;; (这是没有 define 的 odd? 函数)
       (cond [(= n 0) #f]                ;;
             [else (even? (- n 1))])))   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (lambda (odd?)                        ;;
-    (lambda (n)                         ;; (这是没有 define 之后的 even? 函数)
+    (lambda (n)                         ;; (这是没有 define 的 even? 函数)
       (cond [(= n 0) #t]                ;;
             [else (odd? (- n 1))])))    ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -467,14 +481,14 @@ var Y = f =&gt;
 <pre><code class="lang-scheme">(
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (lambda (even?)                              ;;
-    (lambda (n)                                ;; (这是没有 define 之后的 odd? 函数)
+    (lambda (n)                                ;; (这是没有 define 的 odd? 函数)
       (cond [(= n 0) #f]                       ;;
             [else ((even? even?) (- n 1))])))  ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (lambda (odd?)                               ;;
-    (lambda (n)                                ;; (这是没有 define 之后的 even? 函数)
+    (lambda (n)                                ;; (这是没有 define 的 even? 函数)
       (cond [(= n 0) #t]                       ;;
             [else ((odd? odd?) (- n 1))])))    ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -484,14 +498,14 @@ var Y = f =&gt;
 <pre><code class="lang-scheme">(
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (lambda (even?)                              ;;
-    (lambda (n)                                ;; (这是没有 define 之后的 odd? 函数)
+    (lambda (n)                                ;; (这是没有 define 的 odd? 函数)
       (cond [(= n 0) #f]                       ;;
             [else ((even? odd?) (- n 1))])))   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (lambda (odd?)                               ;;
-    (lambda (n)                                ;; (这是没有 define 之后的 even? 函数)
+    (lambda (n)                                ;; (这是没有 define 的 even? 函数)
       (cond [(= n 0) #t]                       ;;
             [else ((odd? odd?) (- n 1))])))    ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -501,7 +515,7 @@ var Y = f =&gt;
 <pre><code class="lang-scheme">(
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (lambda (even?)                                 ;;
-   ((lambda (f) (f f))                            ;; (这是没有 define 之后的 odd? 函数)
+   ((lambda (f) (f f))                            ;; (这是没有 define 的 odd? 函数)
     (lambda (odd?)                                ;;
       (lambda (n)                                 ;;
         (cond [(= n 0) #f]                        ;;
@@ -510,7 +524,7 @@ var Y = f =&gt;
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (lambda (odd?)                               ;;
-    (lambda (n)                                ;; (这是没有 define 之后的 even? 函数)
+    (lambda (n)                                ;; (这是没有 define 的 even? 函数)
       (cond [(= n 0) #t]                       ;;
             [else ((odd? odd?) (- n 1))])))    ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -525,7 +539,7 @@ var Y = f =&gt;
   (lambda (even?)                        ;;
    ((lambda (f) (f f))                   ;;
     (lambda (odd?)                       ;;
-      ((lambda (g)                       ;; (这是没有 define 之后的 odd? 函数)
+      ((lambda (g)                       ;; (这是没有 define 的 odd? 函数)
          (lambda (n)                     ;;
            (cond [(= n 0) #f]            ;;
                  [else (g (- n 1))])))   ;;
@@ -536,7 +550,7 @@ var Y = f =&gt;
   (lambda (odd?)                         ;;
        ((lambda (j)                      ;;
           (lambda (n)                    ;;
-            (cond [(= n 0) #t]           ;; (这是没有 define 之后的 even? 函数)
+            (cond [(= n 0) #t]           ;; (这是没有 define 的 even? 函数)
                   [else (j (- n 1))])))  ;;
         (lambda (n) ((odd? odd?) n))))   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

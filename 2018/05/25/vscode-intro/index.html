@@ -79,7 +79,7 @@
 <hr>
 <h3 id="VS-Code-安装"><a href="#VS-Code-安装" class="headerlink" title="VS Code 安装"></a>VS Code 安装</h3><p>安装很简单，从官网下载 App 正常安装即可，实在不懂就看<a href="https://code.visualstudio.com/docs/setup/mac" target="_blank" rel="noopener">官方教程</a></p>
 <hr>
-<h3 id="立马上手"><a href="#立马上手" class="headerlink" title="立马上手"></a>立马上手</h3><p>打开 VS Code 之后，右边栏从上往下第 5 个图标就是插件。也可以通过快捷键 <code>Cmd + Shift + X</code> 来进入插件搜索界面。推荐安装下面两个插件：</p>
+<h3 id="立马上手"><a href="#立马上手" class="headerlink" title="立马上手"></a>立马上手</h3><p>打开 VS Code 后，点击右边栏倒数第一个图标或通过快捷键 <code>Cmd + Shift + X</code> 来进入插件搜索界面。推荐安装下面两个插件：</p>
 <ul>
 <li><p>搜索安装 <a href="https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner" target="_blank" rel="noopener">Code Runner</a> 插件来运行主流语言的代码。安装完后，用 <code>⌘ + ,</code> 打开设置页面，通过「User」选项卡 -&gt; 「Extensions」-&gt; 「Run Code configuration」可以勾选设置「<em>Whether to clear previous output before each run.</em>」即是否每次运行输出前清除之前的输出内容。</p>
 </li>
@@ -88,15 +88,27 @@
 </ul>
 <p><strong>快捷键：</strong><br>使用 <code>⇧⌘P</code> 打开 <strong>Command Palette</strong> 可以搜索各种命令的快捷键，比如注释 / 取消注释某一行代码（光标位于这一行后再按快捷键组合）：<code>⌘ + /</code> 。如果是块注释，则是选中代码后按：<code>⇧ + Option + A</code> 。</p>
 <p><strong>运行代码：</strong><br>点击界面右上角的三角形 Run Code 按钮或者使用快捷键 <code>Ctrl + Option + N</code> 来运行的代码。</p>
-<p>下面是 Javascript 常用语法，可以用来试试上面的操作：</p>
-<pre><code class="lang-javascript">// 函数
+<p>下面是 JavaScript 常用语法，可以用来试试上面的操作：</p>
+<pre><code class="lang-javascript">// 函数声明
 function show(x) {
     return console.log(x);
 }
 
-// 匿名函数
-(n) =&gt; { return n + 1; }
+(n) =&gt; { return n + 1; } // 匿名函数：有大括号就需要 return ，没有就不用；只有一个参数时圆括号是可选的；
+x =&gt; x + 1 ;             // param =&gt; expression; 等于 param =&gt; { return expression; } 或者说 param =&gt; { statements }
+
+// 条件分支
+if (n &gt; 0) {
+    show(&quot;Baroque&quot;);    // 函数调用
+}
+else if (n == 0) {
+    show(&quot;Classical&quot;); 
+}
+else {
+    show(&quot;Romantic&quot;); 
+}
 </code></pre>
+<p>更多 JS 语法参见<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="noopener">箭头函数</a></p>
 <hr>
 <h3 id="其他设置"><a href="#其他设置" class="headerlink" title="其他设置"></a>其他设置</h3><p><strong>终端（Terminal）里打开 VS Code ：</strong><br>使用 <code>⇧⌘P</code> 打开 <strong>Command Palette</strong>，输入 shell command 后搜索安装 <code>code</code> 这个命令即可</p>
 <p><img src="https://code.visualstudio.com/assets/docs/setup/mac/shell-command.png" alt="VS Code Command Palette"></p>

@@ -87,7 +87,7 @@
 </li>
 </ul>
 <p><strong>快捷键：</strong><br>使用 <code>⇧⌘P</code> 打开 <strong>Command Palette</strong> 可以搜索各种命令的快捷键，比如注释 / 取消注释某一行代码（光标位于这一行后再按快捷键组合）：<code>⌘ + /</code> 。如果是块注释，则是选中代码后按：<code>⇧ + Option + A</code> 。</p>
-<p><strong>运行代码：</strong><br>点击界面右上角的三角形 Run Code 按钮或者使用快捷键 <code>Ctrl + Option + N</code> 来运行的代码。</p>
+<p><strong>运行代码：</strong><br>VS Code 需要以目录（而不是文件）为最小单位打开（载入）。打开存放代码的目录就能看到代码文件。<br>选择文件后点击界面右上角的三角形 Run Code 按钮或者使用快捷键 <code>Ctrl + Option + N</code> 来运行的代码。</p>
 <p>下面是 JavaScript 常用语法，可以用来试试上面的操作：</p>
 <pre><code class="lang-javascript">// 函数声明
 function show(x) {
@@ -122,17 +122,15 @@ $ code [文件路径]
 # Example - 使用 VS Code 打开当前文件夹
 $ code .
 </code></pre>
-<p>VS Code 的设置通过添加代码指令来实现，有以下三个不同优先级的设置文件，它们之间是继承关系：</p>
+<p><strong>设置按一次 <code>Tab</code> 键相当于输入几个空格键：</strong><br>用 <code>Cmd + ,</code> 打开设置，然后搜索「Tab Size」关键词找到对应的选项，勾选即可。这里要注意观察另一个叫「Detect Indentation」的设置，它如果被勾选会覆盖「Tab Size」的设置。</p>
+<p>这里注意 VS Code 的设置有以下两个不同优先级的设置文件，它们之间是继承关系：</p>
 <ol>
-<li><strong>Default User Settings</strong> - 基础 Settings</li>
-<li><strong>User Settings</strong> - 覆盖上述 Default Settings</li>
-<li><strong>Workspace Settings</strong> - 覆盖以上两者</li>
+<li><strong>User Settings</strong> - 用户设置</li>
+<li><strong>Workspace Settings</strong> - 工作站设置（覆盖上者）</li>
 </ol>
-<p>设置「Editor 和 Terminal 间切换」的快捷键</p>
-<pre><code>// Toggle between terminal and editor focus
-{ &quot;key&quot;: &quot;ctrl+`&quot;, &quot;command&quot;: &quot;workbench.action.terminal.focus&quot;},
-{ &quot;key&quot;: &quot;ctrl+`&quot;, &quot;command&quot;: &quot;workbench.action.focusActiveEditorGroup&quot;, &quot;when&quot;: &quot;terminalFocus&quot;}
-</code></pre><p>有关 VS Code 的更多操作，可参考<a href="https://code.visualstudio.com/docs" target="_blank" rel="noopener">官方文档</a></p>
+<p><strong>设置格式化代码中的花括号位置：</strong><br>vscode 缺省的格式化方式是「埃及括号」，也就是把花括号放在一行的末尾，而 ian 推荐的样式是把花括号放在新的一行，这样前两行不至于挨得太近。只需要在设置搜索栏搜索「open brace on new line」找到对应的条件分支（Control Blocks）和函数（Functions）两个选项，打上勾就可以了。</p>
+<p>上面两个设置好后，之后的格式化代码操作（右键单击后选择 Format Document）就可以让代码调整为这些格式显示。</p>
+<p>更多有关 VS Code 的操作，可参考<a href="https://code.visualstudio.com/docs" target="_blank" rel="noopener">官方文档</a></p>
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt></p>
 

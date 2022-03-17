@@ -1,0 +1,648 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>快速熟悉 Python</title>
+  <meta name="author" content="TwentyNight">
+   <meta name="description" content="TwentyNight 的修行屋">
+  
+
+  <meta property="og:title" content="快速熟悉 Python">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        快速熟悉 Python
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2018-05-10T11:23:26.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2018-05-10
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Python/">Python</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p><code>由于很多内容都可以 Google ，这里只简单介绍一些 Python 重要的基本操作，方便未来完全忘记之后可以根据这篇文章很快上手。</code></p>
+<hr>
+<h3 id="Python-编辑器"><a href="#Python-编辑器" class="headerlink" title="Python 编辑器"></a>Python 编辑器</h3><p>一般推荐两个编辑器，或者说 IDE ，来快速实践各种代码：</p>
+<ul>
+<li><a href="https://code.visualstudio.com" target="_blank" rel="noopener">VS Code</a>：微软开发的一款超轻量 IDE ，<a href="http://teahour.fm/2017/12/12/why-vscode-is-better-than-atom.html" target="_blank" rel="noopener">Teahour 91期</a> 有介绍，使用方法参考 <a href="/2018/05/25/vscode-intro/">快速上手 VS Code</a></li>
+<li><a href="https://www.jetbrains.com/pycharm/" target="_blank" rel="noopener">PyCharm</a>：JetBrains 团队开发的一款 Python 的 IDE ，安装和使用方法参考这个 <a href="https://www.youtube.com/watch?v=BPC-bGdBSM8" target="_blank" rel="noopener">YouTube 视频</a> </li>
+</ul>
+<p>此外，还可以选择 <a href="/2018/05/27/set-up-anaconda/">安装配置 Anaconda</a> ，以使用 Anaconda 附带的 Python 在终端里运行。</p>
+<pre><code class="lang-bash"># 查看 Python 的版本
+$ python --version
+Python 3.6.5 :: Anaconda custom (64-bit)
+
+# 运行 *.py 的 Python 脚本文件
+$ cat ~/scripts/first_script.py
+print(&#39;Congratulations on running this script!!&#39;)
+
+$ python ~/scripts/first_script.py
+Congratulations on running this script!!
+
+# 直接输入命令 python ，不带任何文件和参数，会进入 interactive interpreter（交互式解释器），可进行各种 Python 的语法测试
+$ python
+[GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)] on darwin
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt;exit()
+$
+</code></pre>
+<p>PS:<br>个人推荐新手使用 VS Code ，这东西介于编辑器和 IDE（Integrated Development Environment）之间，既有编辑器的简洁，又有 IDE 的强大功能，关键是安装配置起来特别简单，最适合新手。</p>
+<hr>
+<h3 id="Python-的一些基本规则"><a href="#Python-的一些基本规则" class="headerlink" title="Python 的一些基本规则"></a>Python 的一些基本规则</h3><ol>
+<li>变量区分大小写，即 case sensitive</li>
+<li>空格重要，附带语意，即 spacing matters</li>
+<li>运算符号有优先级（比如乘除法 * / 优先级高于加减法 +-）</li>
+<li>运算的优先级可以使用括号来确定：优先级方向为从里往外</li>
+<li>Python 中名为 <code>_</code> 的特殊变量（underscore variable）参见<a href="https://hackernoon.com/understanding-the-underscore-of-python-309d1a029edc" target="_blank" rel="noopener">这里</a></li>
+<li><p>Python 赋值时是「传址」效果，而不是「传值」效果。见下例：</p>
+<pre><code class="lang-python"># 感受一下「传址」效果
+def li_round_change_value(li):
+ for i,l in enumerate(li):
+   li[i] = round(float(l), 3)
+
+def li_round_doesnt_change_value(li):
+ # 使用 map(function_to_apply, list_of_inputs) 将 list 里元素的类型变为浮点（float）型
+ li = list(map(lambda k:round(float(k), 3), li))
+ return li
+
+test_li = [9,13,5,2]
+print(li_round_doesnt_change_value(test_li)) # 输出 [9.0, 13.0, 5.0, 2.0] 
+print(test_li) # 输出 [9, 13, 5, 2]
+
+li_round_change_value(test_li)
+print(test_li) # 输出 [9.0, 13.0, 5.0, 2.0]
+</code></pre>
+</li>
+</ol>
+<p>附：<br><a href="https://www.jianshu.com/p/a793c0d960fe" target="_blank" rel="noopener">Python 命名规范</a></p>
+<hr>
+<h3 id="Python-中的注释"><a href="#Python-中的注释" class="headerlink" title="Python 中的注释"></a>Python 中的注释</h3><ul>
+<li>以 <code>#</code> 开头的行</li>
+<li>以 <code>&quot;&quot;&quot;</code>（三个双引号）包裹的代码块（Code Block）</li>
+</ul>
+<pre><code class="lang-python"># codes by chpwang - 2018-05-17 04:57:56
+
+&quot;&quot;&quot;
+任务3:
+xxxxxx
+&quot;&quot;&quot;
+</code></pre>
+<hr>
+<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><p>这里介绍的是常用的输出语法，更详细的介绍可以参考这篇 <a href="https://www.digitalocean.com/community/tutorials/how-to-use-string-formatters-in-python-3" target="_blank" rel="noopener">How to use <strong><em>str.format()</em></strong></a></p>
+<pre><code class="lang-bash"># 普通输出 - 使用 {} 占位，.format() 填充占位符
+&gt;&gt;&gt; print(&quot;{} ~ {}% dog wins.&quot;.format(3, 9))
+3 ~ 9% dog wins.
+
+# 保留 5 位小数
+&gt;&gt;&gt; print(&quot;{} - {:.5f}&quot;.format(3,9.0/3.5))
+3 - 2.57143
+
+# 保留 1 位小数
+&gt;&gt;&gt; print(&quot;{} - {:.1f}&quot;.format(3,9.0/3.5))
+3 - 2.6
+</code></pre>
+<hr>
+<h3 id="自解释器"><a href="#自解释器" class="headerlink" title="自解释器"></a>自解释器</h3><p>Python 中的内置函数 <code>eval</code> 可以将字符串解析成 Python 的代码</p>
+<pre><code class="lang-python"># test.py
+num = 30
+x = eval(&quot;num + 29&quot;)
+print(x)
+</code></pre>
+<pre><code class="lang-bash">$ python test.py
+59
+</code></pre>
+<hr>
+<h3 id="字符串-String"><a href="#字符串-String" class="headerlink" title="字符串 - String"></a>字符串 - String</h3><p><a href="https://docs.python.org/3/library/stdtypes.html#str.split" target="_blank" rel="noopener">str.split()</a></p>
+<pre><code class="lang-bash">&gt;&gt;&gt; &#39;1,2,3&#39;.split(&#39;,&#39;)
+[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
+&gt;&gt;&gt; &#39;1,2,3&#39;.split(&#39;,&#39;, maxsplit=1)
+[&#39;1&#39;, &#39;2,3&#39;]
+&gt;&gt;&gt; &#39;1,2,,3,&#39;.split(&#39;,&#39;)
+[&#39;1&#39;, &#39;2&#39;, &#39;&#39;, &#39;3&#39;, &#39;&#39;]
+</code></pre>
+<hr>
+<h3 id="列表-List"><a href="#列表-List" class="headerlink" title="列表 - List"></a>列表 - List</h3><pre><code class="lang-bash">&gt;&gt;&gt; li = [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
+
+# 计算列表长度
+&gt;&gt;&gt; len(li)
+3
+
+# 列表里增加新元素（element）
+# 效果一
+&gt;&gt;&gt; li.append([4])
+&gt;&gt;&gt; li
+[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, [4]]  # 可以看到 list 里每个元素的类型不一定要相同 
+
+# 效果二
+&gt;&gt;&gt; li.extend([4])
+&gt;&gt;&gt; li
+[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, [4], 4]
+
+# 效果三
+&gt;&gt;&gt; li + [5]
+[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, [4], 4, 5]
+&gt;&gt;&gt; li
+[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, [4], 4]
+
+# 使用「列表推导式（List Comprehension）」来生成 List
+&gt;&gt;&gt; li_c = [x**2 for x in range(10)]
+&gt;&gt;&gt; li_c
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+# 「列表推导式」中的 if
+&gt;&gt;&gt; [x for x in li_c if x % 2 == 0]
+[0, 4, 16, 36, 64]
+
+# 「列表推导式」中的 if-else
+# 注意这里用了跟上面单纯的 if 不同的结构，所以 if 和 for 的位置顺序也不一样  
+# The expression 「 x if C else y 」 first evaluates the condition, C rather than x. 
+# If C is true, x is evaluated and its value is returned.
+# Otherwise, y is evaluated and its value is returned.
+&gt;&gt;&gt; [x if x % 2 == 0 else 3 for x in li_c]
+[0, 3, 4, 3, 16, 3, 36, 3, 64, 3]
+
+# 「列表推导式」中的「列表推导式」- 嵌套
+&gt;&gt;&gt; [ [x**2 for x in li] for li in [[1,3,5], [2,4,6]] ]
+[[1, 9, 25], [4, 16, 36]]
+
+# 对 List 中的元素进行 map 操作
+&gt;&gt;&gt; list(map(lambda x:x+1, li_c))
+[1, 2, 5, 10, 17, 26, 37, 50, 65, 82]
+</code></pre>
+<hr>
+<h3 id="字典-Dictionary"><a href="#字典-Dictionary" class="headerlink" title="字典 - Dictionary"></a>字典 - Dictionary</h3><p>字典本质上就是键值对（key-value pair），比如对于 <code>{&#39;Ace&#39;: 1, &#39;Queen&#39;: 12}</code> 这一字典来说，<strong>‘Ace’</strong> 和 <strong>‘Queen’</strong> 就是<strong>键</strong>（Key），而对应的 <strong>1</strong> 和 <strong>12</strong> 就是<strong>值</strong>（Value）</p>
+<pre><code class="lang-bash"># 判断某个 key 是否存在与某个字典中（注：case sensitive）
+&gt;&gt;&gt; &quot;ace&quot; in {&#39;ace&#39;: 1}
+True
+
+# 计算字典长度
+&gt;&gt;&gt; state_value = {(6, 10, False): -1.0, (15, 10, False): -1.0}
+&gt;&gt;&gt; len(state_value)
+2
+
+# 使用「列表推导式（List Comprehension）」来生成字典（dictionary）
+&gt;&gt;&gt; vocab_to_int = {word: ii for ii, word in int_to_vocab.items()}
+
+# 这里也可以用「列表推导式（List Comprehension）」来实现使用函数 f 来对字典的内容进行 Map
+{k: f(v) for k, v in my_dictionary.items()}
+</code></pre>
+<p>模组 <a href="https://docs.python.org/3/library/collections.html" target="_blank" rel="noopener"><strong>collections</strong></a> 中的 <strong>defaultdict</strong> 类能更方便地处理 value 为列表（list）、字典（dictionary）的情况，其用法参见<a href="https://www.accelebrate.com/blog/using-defaultdict-python/" target="_blank" rel="noopener">Using defaultdict in Python</a></p>
+<pre><code class="lang-bash">&gt;&gt;&gt; from collections import defaultdict
+&gt;&gt;&gt; city_list = [(&#39;TX&#39;,&#39;Austin&#39;), (&#39;TX&#39;,&#39;Houston&#39;), (&#39;NY&#39;,&#39;Albany&#39;), (&#39;NY&#39;, &#39;Syracuse&#39;), (&#39;NY&#39;, &#39;Buffalo&#39;), (&#39;NY&#39;, &#39;Rochester&#39;), (&#39;TX&#39;, &#39;Dallas&#39;), (&#39;CA&#39;,&#39;Sacramento&#39;), (&#39;CA&#39;, &#39;Palo Alto&#39;), (&#39;GA&#39;, &#39;Atlanta&#39;)]
+&gt;&gt;&gt;
+&gt;&gt;&gt; cities_by_state = defaultdict(list)
+&gt;&gt;&gt; for state, city in city_list:
+...     cities_by_state[state].append(city)
+...
+for state, cities in cities_by_state.iteritems():
+...     print state, &#39;, &#39;.join(cities)
+...
+NY Albany, Syracuse, Buffalo, Rochester
+CA Sacramento, Palo Alto
+GA Atlanta
+TX Austin, Houston, Dallas
+</code></pre>
+<hr>
+<h3 id="分支-if-语句"><a href="#分支-if-语句" class="headerlink" title="分支 - if 语句"></a>分支 - if 语句</h3><pre><code class="lang-python">if season == &#39;spring&#39;:
+    print(&#39;plant the garden!&#39;)
+elif season == &#39;summer&#39;:
+    print(&#39;water the garden!&#39;)
+else:
+    print(&#39;unrecognized season&#39;)
+
+
+# lambda 中的 if - 无法在 lambda 匿名函数中使用 print 或者 raise
+lambda x: True if x % 2 == 0 else False
+</code></pre>
+<hr>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><pre><code class="lang-bash"># 和 range(start, stop, step) 函数结合使用
+&gt;&gt;&gt; for i in range(0, 2, 1):
+...     print(i)
+...
+0
+1
+
+# 和 zip() 函数结合使用
+&gt;&gt;&gt; alist = [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;]
+&gt;&gt;&gt; blist = [&#39;b1&#39;, &#39;b2&#39;, &#39;b3&#39;]
+&gt;&gt;&gt; for a, b in zip(alist, blist):
+...     print(a, b)
+...
+a1 b1
+a2 b2
+a3 b3
+
+# upack 一个 list 也是常用的循环 - 若觉得下行的说明不清楚就开终端试一试
+# 此例第 1 次循环取出第一个元素 [1, 3]，然后把第一项和第二项分别赋值给 a 和 b
+&gt;&gt;&gt; for a, b in [[1,3],[2,4]]:
+...     print(a)
+...     print(b)
+...
+1
+3
+2
+4
+
+# 使用 * （星号 star）和 zip 来操作 list
+# 下划线符号：_ 在 Python 中代表占位符，相当于吃掉这两个位置的输出 - 下面的代码原本会输出 3 个结果，但只想要其中最后一个结果，所以使用下划线来抛弃前两个结果 
+&gt;&gt;&gt; _, _, rewards = zip(*[((6, 10, False), 1, 0), ((17, 10, True), 1, 0), ((21, 10, True), 0, 1.0)])
+&gt;&gt;&gt; rewards
+(0, 0, 1.0)
+
+# while 循环
+&gt;&gt;&gt; while i &lt; 6:
+...   print(i)
+...   if i==3:
+...     break
+...   i += 1
+...
+1
+2
+3
+</code></pre>
+<hr>
+<h3 id="创建与导入脚本"><a href="#创建与导入脚本" class="headerlink" title="创建与导入脚本"></a>创建与导入脚本</h3><p>处理大型项目时，可以将代码分割，整理成多个 <code>*.py</code> 文件以便重复利用这些文件中的代码。这些 <code>*.py</code> 文件称为脚本（script）。如果你要导入的 Python 脚本与当前脚本位于同一个目录下，只需输入 import，然后是文件名，无需扩展名 <code>.py</code></p>
+<pre><code class="lang-python"># demo.py
+import useful_functions as uf
+
+scores = [88, 92, 79, 93, 85]
+mean = uf.mean(scores)
+
+print(&quot;Demo Mean:&quot;, mean)
+print(&quot;__name__ value:&quot;, __name__)
+print(&quot;uf.__name__ value:&quot;, uf.__name__)
+</code></pre>
+<pre><code class="lang-python"># useful_functions.py
+
+def mean(num_list):
+    return sum(num_list) / len(num_list)
+
+def main():
+    n_list = [34, 44, 23, 46, 12, 24]
+    print(&quot;Useful Functions&#39; Mean:&quot;, mean(n_list))
+
+# 检测当前脚本（即 useful_functions.py）是否做为主模块被运行
+# 当前脚本若是被其他脚本的 import 语句导入，则下面的 if main 块代码不运行
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre>
+<p>运行结果如下：</p>
+<pre><code class="lang-bash">$ ls
+demo.py             useful_functions.py
+$ python demo.py
+Demo Mean: 87.4
+__name__ value: __main__
+uf.__name__ value: useful_functions
+</code></pre>
+<p>人们通常只希望重复使用被导入脚本里的「函数」或「类」，而不是其他可执行代码（如 <code>print()</code>），所以为避免「<strong>脚本A</strong>」被导入后，其中的可执行语句被运行，应该要将这些语句包含在 <code>if __name__ == &quot;__main__&quot;</code>块中，或者，将它们包含在函数 <code>main()</code> 中并在上述 <code>if main</code> 块中调用该函数。</p>
+<p>每当运行脚本时（<code>*.py</code> 文件），Python 会为所有模块（module）设置一个特殊的内置变量 <code>__name__</code>。这些模块包含导入模块（用 <code>import</code> 语句导入的），还有主模块（即当前脚本）。主模块的 <code>__name__</code> 变量值会被设为字符串 <code>&quot;__main__&quot;</code>，而对于被导入的模块，<code>__name__</code> 变量会设为该模块的名称。因此 <code>if main</code> 代码块常用来判断是否为主模块。</p>
+<p>PS：<br>从输出结果可看到，上述例子中，被导入模块的 <code>__name__</code> 值为 <code>&quot;useful_functions&quot;</code></p>
+<hr>
+<h3 id="自定义一个类"><a href="#自定义一个类" class="headerlink" title="自定义一个类"></a>自定义一个类</h3><pre><code class="lang-python">import math
+from decimal import Decimal, getcontext
+
+# 设置 Decimal 数据类型的小数点后保留的位数
+getcontext().prec = 19
+# 用来辅助判断一个数是否为零（小于此值则为零）
+TOLERANCE = 1e-10
+
+class Vector(object):
+
+  # 设置报错信息
+  ALL_ELEMENT_MUST_BE_NUM_MSG = &quot;Element must be number!&quot;
+
+  # 实例（instance）的创建
+  def __init__(self, coordinates):
+    try:
+      if not coordinates:
+          raise ValueError
+      self.coordinates = tuple([Decimal(x) for x in coordinates])
+      self.dimension = len(coordinates)
+
+    except ValueError:
+      raise ValueError(&#39;The coordinates must be nonempty&#39;)
+
+    except TypeError:
+      raise TypeError(&#39;The coordinates must be an iterable&#39;)
+
+  # print 输出内容
+  def __str__(self):
+    return &#39;Vector: {}&#39;.format(self.coordinates)
+
+  # 定义相等
+  def __eq__(self, v):
+    return self.coordinates == v.coordinates
+
+  def __len__(self):
+    return len(self.planes)
+
+  # __getitem__ 这个函数使得对于 v = Vector([5, 3, -2]) ，可使用索引方式 v[1] 得到数字 3
+  def __getitem__(self, i):
+    return self.coordinates[i]
+
+  # __setitem__ 这个函数使得对于 v = Vector([5, 3, -2]) ，可使用索引方式 v[1] = 9 将 v[1] 的值设置为 9
+  def __setitem__(self, i, x):
+    try:
+      assert x.dimension == self.dimension  # 如果设置的 x 不是数字，则报错
+      self.coordinates[i] = x
+
+    except AssertionError:
+      raise Exception(self.ALL_ELEMENT_MUST_BE_NUM_MSG)
+
+  # 计算向量的加法
+  def plus(self, v):
+    new_coordinates = [x+y for x,y in zip(self.coordinates, v.coordinates)]
+    return Vector(new_coordinates)
+
+  # 计算向量的减法
+  def minus(self, v):
+    return self.plus(v.times_scalar(-1))
+
+  # 计算向量的数乘
+  def times_scalar(self, c):
+    new_coordinates = [x*c for x in self.coordinates]
+    return Vector(new_coordinates)
+
+  # 计算向量与另一向量的点积（内积）
+  def dot_product_with(self, v):
+    new_coordinates = [x*y for x,y in zip(self.coordinates, v.coordinates)]
+    return sum(new_coordinates)
+
+  # 计算向量的模
+  def magnitude(self):
+    return Decimal(math.sqrt(self.dot_product_with(self)))
+
+  # 计算向量标准化后的向量（同方向上的单位向量）
+  def normalization(self):
+    try:
+      mag = self.magnitude()
+      return self.times_scalar(Decimal(1)/mag)
+    except ZeroDivisionError:
+      #print(&quot;You can&#39;t normalize Zero Vector!&quot;)
+      raise Exception(&quot;You can&#39;t normalize Zero Vector!&quot;)
+
+  # 计算向量与另一向量的夹角
+  def angle_with(self, v, in_degrees=False):
+    try:
+
+      mag_1 = self.magnitude()
+      mag_2 = v.magnitude()
+      if in_degrees:
+        return math.degrees(math.acos(self.dot_product_with(v)/(mag_1*mag_2)))
+      else:
+        return math.acos(self.dot_product_with(v)/(mag_1*mag_2))
+
+    except ZeroDivisionError:
+      #print(&quot;At least one of the vector is Zero Vector! No angle defined.&quot;)
+      raise Exception(&quot;One of the vector is Zero Vector! No angle defined.&quot;)
+
+  # 私有函数（private function）和变量，以两个下划线开头来命名
+  def __is_zero_vector(self):
+    return self.magnitude() &lt; TOLERANCE
+
+  def is_parallel_to(self, v):
+    if v.__is_zero_vector() or self.__is_zero_vector():
+      return True
+    else:
+      s_m = self.normalization()
+      v_m = v.normalization()
+      return s_m.minus(v_m).__is_zero_vector() or s_m.plus(v_m).__is_zero_vector() 
+
+  def is_orthogonal_to(self, v):
+    return abs(self.dot_product_with(v)) &lt; TOLERANCE
+
+  # 向量的分解 - 计算向量水平方向的分量
+  def component_parallel_to(self, base_vactor):
+    u_b = base_vactor.normalization()
+    mag = self.dot_product_with(u_b)
+    return u_b.times_scalar(mag)
+
+  # 向量的分解 - 计算向量竖直方向的分量
+  def component_orthogonal_to(self, base_vactor):
+    c_p = self.component_parallel_to(base_vactor)
+    return self.minus(c_p)
+
+  # 计算向量与另一向量的叉乘
+  def cross_product_with(self, v):
+    if self.dimension != 3 or v.dimension != 3:
+      raise Exception(&quot;Both cross product vectors must be three dimensional&quot;)
+
+    if self.is_parallel_to(v):
+      return Vector([0 for i in range(self.dimension)])
+    else:
+      x = self.coordinates[1]*v.coordinates[2] - self.coordinates[2]*v.coordinates[1]
+      y = self.coordinates[2]*v.coordinates[0] - self.coordinates[0]*v.coordinates[2]
+      z = self.coordinates[0]*v.coordinates[1] - self.coordinates[1]*v.coordinates[0]
+      return Vector([x, y, z])
+
+  # 计算向量与另一向量的所围成的四边形的面积
+  def area_of_parallelogram_spanned_with(self, v):
+    new_self = self
+    new_v = v
+    if self.dimension == 2:
+      new_self = Vector(self.coordinates + (0,))
+    if v.dimension == 2:
+      new_v = Vector(v.coordinates + (0,))
+
+    return new_self.cross_product_with(new_v).magnitude()
+
+  # 计算向量与另一向量的所围成的三角形的面积
+  def area_of_triangle_spanned_with(self, v):
+    return self.area_of_parallelogram_spanned_with(v) / Decimal(2)
+</code></pre>
+<hr>
+<h3 id="常用模组-Module"><a href="#常用模组-Module" class="headerlink" title="常用模组 - Module"></a>常用模组 - Module</h3><p><a href="https://docs.python.org/3/library/" target="_blank" rel="noopener">Python 的标准库</a>里包含了常用的 Module ，使用 <code>import</code> 语句可导入</p>
+<p>以下是一些实用的模组（Module）：</p>
+<ul>
+<li><p><a href="https://docs.python.org/3/library/sys.html" target="_blank" rel="noopener">sys</a>：内建了很多好用的工具</p>
+<pre><code class="lang-python">import sys
+
+# 工具一：sys.stdout.flush() 
+# 不断更新输出内容，而不是叠加输出（即每次删除上次的「显示结果」，然后显示当次的「显示结果」）
+for i_episode in range(1, num_episodes+1):
+        # monitor progress
+        if i_episode % 1000 == 0:
+            print(&quot;\rEpisode {}/{}.&quot;.format(i_episode, num_episodes), end=&quot;&quot;)
+            sys.stdout.flush()
+</code></pre>
+</li>
+<li><p><a href="https://docs.python.org/3/library/re.html" target="_blank" rel="noopener">re</a> ：通过正则表达式在字符串中进行模式匹配</p>
+</li>
+<li><p><a href="https://docs.python.org/3/library/math.html" target="_blank" rel="noopener">math</a> ：一些标准数学函数</p>
+</li>
+<li><p><a href="https://docs.python.org/3.6/library/fractions.html" target="_blank" rel="noopener">fractions</a>：此库最常用的是里面的 <code>Fraction</code>，分数（有理数）计算超方便</p>
+<pre><code class="lang-python">from fractions import Fraction
+</code></pre>
+</li>
+<li><p><a href="https://docs.python.org/3/library/random.html" target="_blank" rel="noopener">random</a> ：生成假随机数字，随机打乱序列并选择随机项 </p>
+</li>
+<li><p><a href="https://docs.python.org/3/library/json.html" target="_blank" rel="noopener">json</a> ：适用于读写 json 文件（面向网络开发）</p>
+</li>
+<li><p><a href="https://docs.python.org/3/library/datetime.html" target="_blank" rel="noopener">datime</a> ：读取当前时间和日期</p>
+</li>
+<li><p><a href="https://docs.python.org/3/library/os.html" target="_blank" rel="noopener">os</a> ：与操作系统交互的操作</p>
+<pre><code class="lang-python">import os
+os.chdir(path)  # 更改当前的工作目录（working directory）
+</code></pre>
+</li>
+<li><p><a href="https://docs.python.org/3/library/csv.html" target="_blank" rel="noopener">csv</a> ：处理 <code>.csv</code> 类型的文件</p>
+</li>
+<li><p><a href="https://docs.python.org/3/library/zipfile.html" target="_blank" rel="noopener">zipfile</a> ：处理 <code>.zip</code> 压缩文件</p>
+</li>
+<li><p><a href="https://docs.python.org/3/library/collections.html" target="_blank" rel="noopener">collections</a> ：常见数据类型的实用扩展，包括 OrderedDict、defaultdict 和 namedtuple</p>
+</li>
+<li><p><a href="https://docs.python.org/3/library/timeit.html" target="_blank" rel="noopener">timeit</a> ：显示<strong>简短的代码</strong>运行所花费的时间</p>
+</li>
+<li><p><a href="https://docs.python.org/3/library/profile.html" target="_blank" rel="noopener">cProfile 或 profile</a> ：显示<strong>大型项目</strong>运行所花费的时间</p>
+</li>
+</ul>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

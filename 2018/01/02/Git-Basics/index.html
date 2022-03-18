@@ -161,6 +161,9 @@ $ git stash save --include-untracked
 ## 只缓存 Unstaged Area 的文件改动，保留 Staging Area
 $ git stash save --keep-index
 
+## 只缓存 Unstaged Area（包含 untracked files 在内）的文件改动，保留 Staging Area
+$ git stash save --keep-index --include-untracked
+
 ## 缓存当前进度的同时增加对该缓存的描述，以便之后恢复时查看
 $ git stash save &quot;just add twentynight.html&quot;
 

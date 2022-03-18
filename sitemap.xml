@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2018/01/02/Git-Basics/</loc>
+    
+    <lastmod>2022-03-18T19:32:15.246Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2022/02/21/yang-yi-gong-series-4/</loc>
     
-    <lastmod>2022-03-17T14:54:34.004Z</lastmod>
+    <lastmod>2022-03-18T19:30:39.835Z</lastmod>
     
   </url>
   
@@ -173,13 +180,6 @@
     <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
     
     <lastmod>2019-06-19T20:09:26.608Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/01/02/Git-Basics/</loc>
-    
-    <lastmod>2019-06-19T20:04:09.340Z</lastmod>
     
   </url>
   

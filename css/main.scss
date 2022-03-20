@@ -27,6 +27,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Pacifico);
+@import url('https://fonts.googleapis.com/css?family=Special+Elite');
 
 .index-title, .navbar-brand, .section-year, .archive-title, .pager {
     font-family: 'Open Sans Condensed', Helvetica Neue, Helvetica, PingFang SC, Lantinghei SC, Hiragino Sans GB, Microsoft YaHei, \\5FAE\8F6F\96C5\9ED1, STHeitiSC-Light, simsun, WenQuanYi Zen Hei, WenQuanYi Micro Hei, Arial, sans-serif;
@@ -158,16 +159,46 @@ article {
 }
 
 blockquote {
-    margin: 30px 0;
-    font-style: italic;
-    padding: 0;
-    padding-left: 3rem;
+    margin: 30px auto;
+    font-family: "PingFang SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-weight: 100;
+    font-size: 2rem;
+    max-width: 720px;
+    position: relative;
     border: 0;
+
     p {
-        color: #333;
-        line-height: 1.48;
-        font-size: 1.2em;
+        color: #6e4832;
+        line-height: 1.7;
+        font-size: 0.9em;
     }
+
+    strong {
+        font-style: italic;
+    }
+}
+
+blockquote:before,
+blockquote:after {
+    position: absolute;
+    color: #f1efe6;
+    font-size: 8rem;
+    width: 4rem;
+    height: 4rem;
+}
+
+blockquote:before {
+    font-family: 'Special Elite', cursive;
+    content: '“';
+    left: -3rem;
+    top: -2rem;
+}
+
+blockquote:after {
+    font-family: 'Special Elite', cursive;
+    content: '”';
+    right: -3rem;
+    bottom: 1rem;
 }
 
 

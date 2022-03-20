@@ -122,7 +122,9 @@
 <hr>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>完成上文提到的所有操作之后，使用下面代码让高亮设置生效：</p>
 <pre><code class="lang-bash">## 生成压缩版的 css（让 pln 主题的相关设置生效）
-$ sass --style compressed themes/pln/source/css/main.scss:source/css/m.min.css  
+$ pwd
+~/Documents/blog  ## 确认当前目录，因为下面 sass 命令要输入相关路径
+$ sass --style compressed themes/pln/source/css/main.scss:themes/pln/source/css/m.min.css  
 
 ## 清空缓存，并重新生成文件（让 _config.yml 里的设置生效）
 $ hexo clean

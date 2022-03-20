@@ -204,6 +204,12 @@ $ hexo d -debug
 <li><a href="https://blog.csdn.net/jingbin_/article/details/80617210" target="_blank" rel="noopener">用 hexo d 命令部署的时候总是会卡住很久，查看日志发现信息一直在循环</a></li>
 <li><a href="https://github.com/hexojs/hexo/issues/1478" target="_blank" rel="noopener">hexo deploy 时不断 Error</a></li>
 </ul>
+<p>另一种常见的报错如下，这是网络连接问题导致的，需要换个网络环境。要注意各种终端（Terminal）的流量默认不走代理。要使用增强模式之类的设置。更多内容参考<a href="https://www.alankeene.com/2019/0702/Connection-reset-by-peer.html" target="_blank" rel="noopener">解决 hexo d 提示：ssh_exchange_identification：read：Connection reset by peer 的问题</a></p>
+<pre><code class="lang-bash">$ hexo d
+......
+kex_exchange_identification: read: Connection reset by peer
+......
+</code></pre>
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img src="/images/donate.jpg" alt></p>
 

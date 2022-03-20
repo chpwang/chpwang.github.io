@@ -221,9 +221,26 @@ img {
     height: auto;
     position: relative;
     left: 50%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #555;
     -webkit-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
     transform: translateX(-50%);
+    -webkit-box-shadow: 0 0 10px #555;
+}
+
+#donate_QR_Code {
+    margin-top: 30px;
+    display: block;
+    height: auto;
+    position: relative;
+    left: 50%;
+    border-radius: 10px;
+    box-shadow: 0 0 0px #fff;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    -webkit-box-shadow: 0 0 0px #fff;
 }
 
 .busuanzi {

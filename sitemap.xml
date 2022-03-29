@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2022/03/24/scheme-basics-and-IDE-configuration/</loc>
+    
+    <lastmod>2022-03-29T02:50:31.241Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2022/02/21/yang-yi-gong-series-4/</loc>
     
     <lastmod>2022-03-28T23:40:11.055Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://cps.ninja/2016/09/19/From-Logdown-to-Hexo/</loc>
     
     <lastmod>2022-03-28T22:41:49.599Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2022/03/24/scheme-basics-and-IDE-configuration/</loc>
-    
-    <lastmod>2022-03-25T15:02:30.363Z</lastmod>
     
   </url>
   

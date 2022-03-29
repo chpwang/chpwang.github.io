@@ -94,22 +94,26 @@
 <p><strong>运行代码：</strong><br>VS Code 需要以目录（而不是文件）为最小单位打开（载入）。打开存放代码的目录就能看到代码文件。<br>选择文件后点击界面右上角的三角形 Run Code 按钮或者使用快捷键 <code>Ctrl + Option + N</code> 来运行的代码。</p>
 <p>下面是 JavaScript 常用语法，可以用来试试上面的操作：</p>
 <pre><code class="lang-javascript">// 函数声明
-function show(x) {
-    return console.log(x);
+function show(x) 
+{
+  return console.log(x);
 }
 
 (n) =&gt; { return n + 1; } // 匿名函数：有大括号就需要 return ，没有就不用；只有一个参数时圆括号是可选的；
 x =&gt; x + 1 ;             // param =&gt; expression; 等于 param =&gt; { return expression; } 或者说 param =&gt; { statements }
 
 // 条件分支
-if (n &gt; 0) {
-    show(&quot;Baroque&quot;);    // 函数调用
+if (n &lt; 0) 
+{
+  show(&quot;Baroque&quot;);    // 函数调用
 }
-else if (n == 0) {
-    show(&quot;Classical&quot;); 
+else if (n == 0) 
+{
+  show(&quot;Classical&quot;); 
 }
-else {
-    show(&quot;Romantic&quot;); 
+else 
+{
+  show(&quot;Romantic&quot;); 
 }
 </code></pre>
 <p>更多 JS 语法参见<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="noopener">箭头函数</a></p>

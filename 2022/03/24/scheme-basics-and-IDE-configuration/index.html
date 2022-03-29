@@ -85,10 +85,8 @@
 <p>早期的 <strong>Lisp</strong> 语言的函数就是一个符号链表，它不会自带一个 <code>env</code>（解释器中的闭包环境，或者说上下文语境），会出现严重的问题：<a href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scope_vs._dynamic_scope" target="_blank" rel="noopener">Dynamic Scoping</a> 。<strong>Scheme</strong> 不是第一个实现针对该问题的 <a href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scope_vs._dynamic_scope" target="_blank" rel="noopener">Lexical Scoping</a> 特性的编程语言，但确实是第一个实现 <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)" target="_blank" rel="noopener">Closure</a>（闭包）的 <strong>Lisp</strong> 语言。</p>
 <p>其他八卦：</p>
 <ul>
-<li><p>Racket 从 8.0 版本开始，默认的实现（implementation）会切换成 <a href="https://blog.racket-lang.org/2021/01/racket-status.html" target="_blank" rel="noopener">Racket on Chez Scheme (Racket CS) </a></p>
-</li>
-<li><p>查资料的时候还发现一篇关于 Racket 和 Chez Scheme 的文章：<a href="https://beautifulracket.com/appendix/racket-and-chez-scheme.html" target="_blank" rel="noopener">Thoughts on Racket &amp; Chez Scheme</a></p>
-</li>
+<li>Racket 从 8.0 版本开始，默认的实现（implementation）会切换成 <a href="https://blog.racket-lang.org/2021/01/racket-status.html" target="_blank" rel="noopener">Racket on Chez Scheme (Racket CS) </a></li>
+<li>查资料的时候还发现一篇关于 Racket 和 Chez Scheme 的文章：<a href="https://beautifulracket.com/appendix/racket-and-chez-scheme.html" target="_blank" rel="noopener">Thoughts on Racket &amp; Chez Scheme</a></li>
 </ul>
 <hr>
 <h3 id="Scheme-常用的语法"><a href="#Scheme-常用的语法" class="headerlink" title="Scheme 常用的语法"></a>Scheme 常用的语法</h3><p>Scheme 编程语言采用的是前缀表达式，即位于第一个位置的就是「操作符」，之后位置的就是「操作数」。而计算的<strong>优先级</strong>由「括号」来确定。括号内部的最先计算。</p>

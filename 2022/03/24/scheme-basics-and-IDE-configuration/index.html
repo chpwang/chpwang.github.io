@@ -138,6 +138,36 @@
           [else
            (+ (fib (- n 1))
               (fib (- n 2)))])))
+
+;; 比较两个数字可以用 =
+(= 1 2)                       ; 输出 #f
+
+;; 比较两个符号（symbol）则要用 eq?
+(eq? &#39;x &#39;y)                   ; 输出 #f
+(eq? &#39;x &#39;x)                   ; 输出 #t
+</code></pre>
+</li>
+<li><p><strong>数据结构 pair 及其操作</strong>： pair 属于编程语言里最简单而又最重要的数据结构。</p>
+<pre><code class="lang-scheme">;; 在 scheme 中专门有一组操作符函数来实现 pair 的构造和对它内部负载的访问
+(define p1 (cons 2 3))
+&#39;(2 . 3)
+
+;; car 和 cdr 这两个名字是有历史原因的，因为早期计算机的寄存器就叫 car 和 cdr - 参见 SCIP 的解释
+(car (cons 3 4))
+(cdr (cons 3 4))
+
+;; 使用 pair? 来判断一个东西是不是 pair
+(pair? p1)
+(pair? null)
+</code></pre>
+</li>
+<li><p><strong>链表</strong>（list）：有了 pair 结构，很自然地就会有链表结构</p>
+<pre><code class="lang-scheme">;; 在 scheme 中专门有一组操作符函数来实现 pair 的构造和对它内部负载的访问
+(cons 1 (cons 2 cons (3 (cons 4)))
+&#39;(1 2 3 4)
+(define ls1 (list 1 2 3 4))
+
+(car (cdr (cdr ls1)))   ;; 3
 </code></pre>
 </li>
 <li><p><strong>quote 操作</strong>：quote 可以把代码变成数据，这将便于运行和测试「语言的实现（implementation）」</p>
@@ -173,8 +203,8 @@
 
 &#39;(quot ())            ;; 输出 (quot ())
 </code></pre>
-<p><strong>解答</strong>：<code>&#39;()</code> 其实就是 <code>(quote ())</code> 。当 DrRacket 在输出一个链表时，如果是 <strong>(1 2 3)</strong> 这种普通链表，那就会输出 <code>(1 2 3)</code> 。如果输出的链表中包含 <a href="https://docs.racket-lang.org/guide/binding.html" target="_blank" rel="noopener">identifiers</a> 时，比如 <a href="https://docs.racket-lang.org/guide/quote.html" target="_blank" rel="noopener">quote</a> ，那么，它的输出可能不会显示 <code>(quote ())</code> 这样直观能看到有效负载的链表，而是会显示简化后的 <code>&#39;()</code> 。</p>
-<p>这点可以通过观察 <code>&#39;(quote ())</code> 和 <code>&#39;(quot ())</code> 这两个代码的输出结果进一步理解：由于 quot 不再是关键词 identifier ，于是输出结果回复直观显示有效负载的 <code>(quot ())</code> 。</p>
+<p><strong>解答</strong>：<code>&#39;()</code> 其实就是 <code>(quote ())</code> 。当 DrRacket 在输出一个链表时，如果是 <strong>(1 2 3)</strong> 这种普通链表，那就会输出 <code>(1 2 3)</code> 。如果输出的链表中包含 <a href="https://docs.racket-lang.org/guide/binding.html" target="_blank" rel="noopener">identifiers</a> 时，比如 <a href="https://docs.racket-lang.org/guide/quote.html" target="_blank" rel="noopener">quote</a> ，那么，它的输出可能不会显示 <code>(quote ())</code> 这样直观能看到「有效负载」的链表，而是会显示简化后的 <code>&#39;()</code> 。</p>
+<p>这点可以通过观察 <code>&#39;(quote ())</code> 和 <code>&#39;(quot ())</code> 这两个代码的输出结果进一步理解：由于 quot 不再是关键词 identifier ，于是输出结果回复直观显示「有效负载」的 <code>(quot ())</code> 。</p>
 </li>
 <li><p><strong>quasiquote 和 unquote 操作</strong>：如果想读取变量的值，就需要用到 <a href="https://docs.racket-lang.org/guide/qq.html" target="_blank" rel="noopener">quasiquote</a> 操作了</p>
 <pre><code class="lang-scheme">(define x 6)     ;; 定义变量 x 为 6
@@ -186,33 +216,22 @@
 `(1 2 3 ,x)      ;; 运行输出 (1 2 3 6)
 </code></pre>
 </li>
-<li><p><strong>数据结构 pair 及其操作</strong>： pair 属于编程语言里最简单而又最重要的数据结构。</p>
-<pre><code class="lang-scheme">;; 在 scheme 中专门有一组操作符函数来实现 pair 的构造和对它内部负载的访问
-(define p1 (cons 2 3))
-&#39;(2 . 3)
-
-;; car 和 cdr 这两个名字是有历史原因的，因为早期计算机的寄存器就叫 car 和 cdr - 参见 SCIP 的解释
-(car (cons 3 4))
-(cdr (cons 3 4))
-
-;; 使用 pair? 来判断一个东西是不是 pair
-(pair? p1)
-(pair? null)
-</code></pre>
-</li>
-<li><p><strong>链表</strong>（list）：有了 pair 结构，很自然地就会有链表结构</p>
-<pre><code class="lang-scheme">;; 在 scheme 中专门有一组操作符函数来实现 pair 的构造和对它内部负载的访问
-(cons 1 (cons 2 cons (3 (cons 4)))
-&#39;(1 2 3 4)
-(define ls1 (list 1 2 3 4))
-
-(car (cdr (cdr ls1)))   ;; 3
-</code></pre>
-</li>
-<li><p><strong>模式匹配</strong>（Pattern Matching）：这个其实是属于 <a href="https://docs.racket-lang.org/guide/match.html" target="_blank" rel="noopener">Racket 的语法</a>，<a href="https://schemers.org" target="_blank" rel="noopener">Scheme</a> 本身是没有模式匹配的，尽管它可以用宏来实现这个语言特性。</p>
+<li><p><strong>模式匹配</strong>（Pattern Matching）：<a href="https://docs.racket-lang.org/guide/match.html" target="_blank" rel="noopener">match</a> 是属于 <strong>Racket</strong> 特有的，<strong>Scheme</strong> 本身是没有模式匹配的，尽管它可以用宏来实现这个语言特性。</p>
 <pre><code class="lang-syntax">;; 模式匹配的基本语法
 (match target-expr
   [pattern expr ...+] ...)
+</code></pre>
+</li>
+<li><p><strong>构造函数 struct</strong>：</p>
+<pre><code class="lang-scheme">;; 创建 shoe 和 hat 这两个结构 - 相当于其他语言里定义一个对象
+(struct shoe (size color))
+(struct hat (size style))
+
+(match (hat 23 &#39;bowler)
+ [(shoe 10 &#39;white) &quot;bottom&quot;]
+ [(hat 23 &#39;bowler) &quot;top&quot;])
+
+;; 构造闭包 closure
 </code></pre>
 </li>
 <li><p><strong>注释</strong>：用 <code>;</code> 来注释代码</p>
@@ -222,13 +241,20 @@
 </ul>
 <ul>
 <li><p><strong>输出</strong></p>
-<pre><code class="lang-scheme">(newline)  ; 空行
+<pre><code class="lang-scheme">(newline)           ; 空行（换行）
+(display &quot;\n&quot;)      ; &quot;\n&quot; 代表换行
 </code></pre>
 </li>
 </ul>
 <hr>
-<h3 id="编程环境配置-DrRacket（待完善）"><a href="#编程环境配置-DrRacket（待完善）" class="headerlink" title="编程环境配置 - DrRacket（待完善）"></a>编程环境配置 - DrRacket（待完善）</h3><p>直接去 <strong>Racket</strong> 的<a href="https://racket-lang.org" target="_blank" rel="noopener">官网</a> 下载安装。</p>
-<p>这里有一些 DrRacket 的使用小技巧：<a href="https://rebelsky.cs.grinnell.edu/Courses/CSC151/2018S/handouts/drracket-tips" target="_blank" rel="noopener">Some tips and tricks for DrRacket</a></p>
+<h3 id="编程环境配置-DrRacket（待完善）"><a href="#编程环境配置-DrRacket（待完善）" class="headerlink" title="编程环境配置 - DrRacket（待完善）"></a>编程环境配置 - DrRacket（待完善）</h3><p>直接去 <strong>Racket</strong> 的<a href="https://racket-lang.org" target="_blank" rel="noopener">官网</a> 下载安装即可。</p>
+<p>常用快捷键：</p>
+<ul>
+<li>运行代码：<code>cmd + r</code>（ MacOS 系统）；</li>
+<li>快速缩进排版所有代码：<code>cmd + i</code>（ MacOS 系统）；</li>
+<li>注释代码块（code block）：<code>control + esc + ;</code>（ MacOS 系统）；<code>Ctrl + Alt + ;</code>（ Win 系统）；</li>
+</ul>
+<p>更多使用使用小技巧可参考 <a href="https://rebelsky.cs.grinnell.edu/Courses/CSC151/2018S/handouts/drracket-tips" target="_blank" rel="noopener">Some tips and tricks for DrRacket</a></p>
 <hr>
 <h3 id="编程环境配置-Emacs（待完善）"><a href="#编程环境配置-Emacs（待完善）" class="headerlink" title="编程环境配置 - Emacs（待完善）"></a>编程环境配置 - Emacs（待完善）</h3><hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>

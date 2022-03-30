@@ -116,6 +116,13 @@
 (define square (lambda (x) (* x x)))
 </code></pre>
 </li>
+<li><p><strong>逻辑操作符</strong></p>
+<pre><code class="lang-scheme">(and (&lt; 2 3) (&gt; 5 4))
+(or (&lt; 2 3) (&gt; 5 4))
+(not #f)
+(not &#39;(1 2))
+</code></pre>
+</li>
 <li><p><strong>条件分支</strong></p>
 <pre><code class="lang-scheme">;; 普通的 if 语句在 scheme 中和其他前缀表达式的形式相同，由 1 个“操作符”搭配后面 3 个操作数
 ;; scheme 中 true 和 false 分别用 #t 和 #f 来表示
@@ -205,6 +212,7 @@
 </code></pre>
 <p><strong>解答</strong>：<code>&#39;()</code> 其实就是 <code>(quote ())</code> 。当 DrRacket 在输出一个链表时，如果是 <strong>(1 2 3)</strong> 这种普通链表，那就会输出 <code>(1 2 3)</code> 。如果输出的链表中包含 <a href="https://docs.racket-lang.org/guide/binding.html" target="_blank" rel="noopener">identifiers</a> 时，比如 <a href="https://docs.racket-lang.org/guide/quote.html" target="_blank" rel="noopener">quote</a> ，那么，它的输出可能不会显示 <code>(quote ())</code> 这样直观能看到「有效负载」的链表，而是会显示简化后的 <code>&#39;()</code> 。</p>
 <p>这点可以通过观察 <code>&#39;(quote ())</code> 和 <code>&#39;(quot ())</code> 这两个代码的输出结果进一步理解：由于 quot 不再是关键词 identifier ，于是输出结果回复直观显示「有效负载」的 <code>(quot ())</code> 。</p>
+<p>这里涉及到 Scheme 里面字符号（Symbol）和符串（String）两个概念的区别。具体来说 <code>&#39;quote</code> 和 <code>&quot;quote&quot;</code> 这两个表达式的输出结果是不一样的。前者是符号后者是字符串。</p>
 </li>
 <li><p><strong>quasiquote 和 unquote 操作</strong>：如果想读取变量的值，就需要用到 <a href="https://docs.racket-lang.org/guide/qq.html" target="_blank" rel="noopener">quasiquote</a> 操作了</p>
 <pre><code class="lang-scheme">(define x 6)     ;; 定义变量 x 为 6

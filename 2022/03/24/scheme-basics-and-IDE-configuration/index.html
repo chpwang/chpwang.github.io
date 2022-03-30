@@ -140,12 +140,10 @@
               (fib (- n 2)))])))
 </code></pre>
 </li>
-<li><p><strong>quote 操作</strong></p>
-<pre><code class="lang-scheme">;; 通过使用单引号 &#39; ，可以很便捷地把代码变成数据，这将有利于语言的实现
-&#39;(+ 1 (* 2 3))
+<li><p><strong>quote 操作</strong>：quote 可以把代码变成数据，这将便于运行和测试「语言的实现（implementation）」</p>
+<pre><code class="lang-scheme">(quote (+ 1 (* 2 3)))  ;; 运行输出 (+ 1 (* 2 3))
 
-;; 上面的单引号相当于这串代码 (quote ...)
-(quote (+ 1 (* 2 3)))
+&#39;(+ 1 (* 2 3))         ;; 上面的 quote 的操作可以用单引号 &#39; 来更简洁地实现。两者等价。运行输出 (+ 1 (* 2 3))
 
 ;; quote 和 &#39; 都可以将代码变成 symbol ，你可以使用 symbol? 来询问判断一个东西是不是 symbol
 (symbol? &#39;(1 2 3))
@@ -153,8 +151,11 @@
 ;; 对于数字，则可以用 number?
 (number? 2)
 </code></pre>
+<p>如果</p>
 </li>
-<li><p><strong>数据结构 pair 及其操作：</strong> pair 属于编程语言里最简单而又最重要的数据结构。</p>
+<li><p><strong>quasiquote 和 unquote 操作</strong></p>
+</li>
+<li><p><strong>数据结构 pair 及其操作</strong>： pair 属于编程语言里最简单而又最重要的数据结构。</p>
 <pre><code class="lang-scheme">;; 在 scheme 中专门有一组操作符函数来实现 pair 的构造和对它内部负载的访问
 (define p1 (cons 2 3))
 &#39;(2 . 3)

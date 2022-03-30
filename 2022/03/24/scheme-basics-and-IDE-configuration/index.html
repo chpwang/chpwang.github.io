@@ -239,11 +239,17 @@
 <pre><code class="lang-scheme">; 代码注释
 </code></pre>
 </li>
-</ul>
-<ul>
 <li><p><strong>输出</strong></p>
 <pre><code class="lang-scheme">(newline)           ; 空行（换行）
 (display &quot;\n&quot;)      ; &quot;\n&quot; 代表换行
+
+;; 连续 display 的话，内容之间是连在一起的，没有换行显示
+(display &quot;1st line&quot;)
+(display &quot;2nd line&quot;)
+
+;; 使用 println 会在显示完内容后，自动另起一行
+(println &quot;1st line&quot;)
+(println &quot;2nd line&quot;)
 </code></pre>
 </li>
 </ul>

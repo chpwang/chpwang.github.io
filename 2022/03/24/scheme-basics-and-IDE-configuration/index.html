@@ -90,10 +90,11 @@
 <li>查资料的时候还发现一篇关于 Racket 和 Chez Scheme 的文章：<a href="https://beautifulracket.com/appendix/racket-and-chez-scheme.html" target="_blank" rel="noopener"><em>Thoughts on Racket &amp; Chez Scheme</em></a> 。该文章出自 <a href="https://beautifulracket.com" target="_blank" rel="noopener"><em>Beautiful Racket by Matthew Butterick</em></a> 这本书</li>
 <li><p>还搜到一个 2014 年写的 <a href="https://the-little-schemer.readthedocs.io/zh_CN/latest/index.html#" target="_blank" rel="noopener"><em>The Little Schemer 笔记</em></a> ，作者 <a href="http://chenjiee815.github.io" target="_blank" rel="noopener">chenjiee815</a> 似乎也很久没<a href="https://readthedocs.org/profiles/chenjiee815/" target="_blank" rel="noopener">更新</a>了，2014 年后也不再活跃。由于好奇，尝试继续深入了一下，发现 chenjiee815（<a href="https://www.linkedin.com/in/杰-陈-b55a2285/?originalSubdomain=cn" target="_blank" rel="noopener">陈杰</a>）这家伙 2009 年从南京的中国药科大学毕业，本科专业居然是「中药学」。毕业后工作，一年后考计算机研究生失败，转行进行计算机行业在南京某公司当个 IT 小讲师，然后是 IT 团队小领导（这篇笔记就是做小领导期间写的）。南京公司被阿里巴巴收购后，陈到杭州阿里工作。一年多后进入华为回到南京，至今仍在华为。从中药学到计算机，真是个急速扩张的人生。不过 09 年毕业，意味着「华为」、「35岁」双关键词条件达成，目前还叠加了「疫情」、「战争」、「金融去杠杆」等新关键词，还是要提高危机意识的。祝他顺利。看来我也要抽空去更新一下我的 LinkedIn 了。</p>
 </li>
-<li><p>陈杰 2014 年的这篇笔记在很多地方都被引用，这不由得使我想起来自己第一次知道这本书也是 2014 年（_李路 老师可能不知道他的热情对我影响也是很大，他应该不记得我了）。看来 TLS 的出圈时间节点很可能就是 2014 。另一个细节是，<a href="https://www.yinwang.org/blog-cn/2012/07/04/dan-friedman" target="_blank" rel="noopener"><em>GTF - Great Teacher Friedman</em></a> 的第一版却是在 2012 年写的。</p>
+<li><p>陈杰 2014 年的这篇笔记在很多地方都被引用，这不由得使我想起来自己第一次知道这本书也是 2014 年（李路肯定不知道他的热情分享对我影响很大，他应该不记得我了）。看来 TLS 的出圈时间节点很可能就是 2014 。另一个细节是，<a href="https://www.yinwang.org/blog-cn/2012/07/04/dan-friedman" target="_blank" rel="noopener"><em>GTF - Great Teacher Friedman</em></a> 的第一版是在 2012 年写的。</p>
 </li>
 </ul>
 <img src="/2022/03/24/scheme-basics-and-IDE-configuration/li_lu_promotes_TLS.jpg" title="Li Lu promotes TLS">
+<img src="/2022/03/24/scheme-basics-and-IDE-configuration/Li_Lu_s_kindness.jpeg" title="Li Lu and Wang">
 <hr>
 <h3 id="Scheme-常用的语法"><a href="#Scheme-常用的语法" class="headerlink" title="Scheme 常用的语法"></a>Scheme 常用的语法</h3><p>Scheme 采用的是前缀表达式，即处于第一位置的就是「操作符」，之后位置的就是「操作数」。计算的<strong>优先级</strong>由「括号」来确定。括号内部的最先计算。具体顺序为：先对括号中的每一个表达式求值，然后再将操作符作用在操作数上，对整个括号的表达式求值。</p>
 <ul>

@@ -266,6 +266,7 @@ clause    =   [pat body ...+]
 ;; 如果是，则匹配成功，此时，exp 这个 list 的元素 lvp2 和 lvp3 的值就会分别被赋予 e1 和 e2 ，
 ;; 然后在 body 部分 (+ (calc e1) (calc e2)) 就能使用变量 e1 和 e2 进行求值
 
+;; 使用 match 实现简易二元操作的计算器 calc
 (define calc
 (lambda (exp)
   (match exp
@@ -295,23 +296,14 @@ clause    =   [pat body ...+]
 (match (shoe (hat 23 29) &#39;bowler)
   [(shoe (hat sz stl) col) sz]
   [else &quot;something else.&quot;])
-
-;; 使用 match 轻松实现简易二元操作的计算器 calc
-;; match 最后一行的 else 分支也是如此
-(define calc
-(lambda (exp)
-  (match exp
-    [(? number? exp) exp]
-    [`(+ ,e1 ,e2) (+ (calc e1) (calc e2))]
-    [`(- ,e1 ,e2) (- (calc e1) (calc e2))]
-    [`(* ,e1 ,e2) (* (calc e1) (calc e2))]
-    [`(/ ,e1 ,e2) (/ (calc e1) (calc e2))]
-    [else
-     (error &quot;Error: unsupported operation or illegal expression!&quot;)])))
 </code></pre>
 </li>
 <li><p><strong>注释</strong>：用 <code>;</code> 来注释代码</p>
-<pre><code class="lang-scheme">; 代码注释
+<pre><code class="lang-scheme">; 代码「行」注释
+
+#|
+代码「块」注释
+|#
 </code></pre>
 </li>
 <li><p><strong>输出与显示</strong><br>在 DrRacket 里，输出代码的结果不需要专门写类似 <code>console.log</code> 的函数，它会在窗口自行显示各表达式的值。但在 Debug 的时候，有可能需要在代码中间显示各种变量的值，这时候下面这些输出函数就很有用了</p>
@@ -364,10 +356,11 @@ clause    =   [pat body ...+]
 <p>常用快捷键：</p>
 <ul>
 <li>运行代码：<code>cmd + r</code>（ MacOS 系统）；</li>
-<li>快速缩进排版所有代码：<code>cmd + i</code>（ MacOS 系统）；</li>
-<li>注释代码块（code block）：<code>control + esc + ;</code>（ MacOS 系统）；<code>Ctrl + Alt + ;</code>（ Win 系统）；</li>
+<li>快速缩进排版所有代码（reindent）：<code>cmd + i</code>（ MacOS 系统）；</li>
+<li>注释代码（块）：<code>control + esc + ;</code>（ MacOS 系统）；<code>Ctrl + Alt + ;</code>（ Win 系统）；</li>
+<li><strong>取消</strong>注释代码（块）：<code>control + esc + =</code>（ MacOS 系统）；<code>Ctrl + Alt + =</code>（ Win 系统）；</li>
 </ul>
-<p>更多使用使用小技巧可参考 <a href="https://rebelsky.cs.grinnell.edu/Courses/CSC151/2018S/handouts/drracket-tips" target="_blank" rel="noopener">Some tips and tricks for DrRacket</a></p>
+<p>更多快捷键组合可以打开 <strong>Keybindings</strong> 窗口查询：<code>Edit</code> -&gt; <code>Keybindings</code> -&gt; <code>Show Active Keybindings</code><br>其他使用使用小技巧可参考 <a href="https://rebelsky.cs.grinnell.edu/Courses/CSC151/2018S/handouts/drracket-tips" target="_blank" rel="noopener">Some tips and tricks for DrRacket</a> ，或者查看 <a href="https://docs.racket-lang.org/guide/index.html" target="_blank" rel="noopener"><em>The Racket Guide</em></a> 和 <a href="https://plt.cs.northwestern.edu/snapshots/current/pdf-doc/drracket.pdf" target="_blank" rel="noopener"><em>DrRacket: The Racket Programming Environment</em></a></p>
 <hr>
 <h3 id="编程环境配置-Emacs（待完善）"><a href="#编程环境配置-Emacs（待完善）" class="headerlink" title="编程环境配置 - Emacs（待完善）"></a>编程环境配置 - Emacs（待完善）</h3><hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>

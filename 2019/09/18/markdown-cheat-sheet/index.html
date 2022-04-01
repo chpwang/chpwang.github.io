@@ -82,7 +82,7 @@
     <p>Hexo 官方有很多帮助排版的语法，详细内容可以参见官网的 <a href="https://hexo.io/docs/tag-plugins.html" target="_blank" rel="noopener">Tag Plugins</a> 。这里列出的是常用的。</p>
 <p>需要说明的是，由于本博客 <a href="http://cps.ninja">cps.ninja</a> 加载了 <a href="https://highlightjs.org" target="_blank" rel="noopener">Highlight.js</a> ，所以有些语法会用不了，比如给代码块添加 <code>caption</code> 和 <code>URL</code> 等等。</p>
 <hr>
-<h3 id="列表技巧"><a href="#列表技巧" class="headerlink" title="列表技巧"></a>列表技巧</h3><p>如果希望以列表展现一大块内容，所有段落采用相同缩进即可，不需要一直挨着</p>
+<h3 id="列表技巧"><a href="#列表技巧" class="headerlink" title="列表技巧"></a>列表技巧</h3><p>如果希望以列表展现一大块内容，所有段落采用相同缩进即可，不需要、也不能挨着，要空一行，否则遇到代码块（code block）会显示不出代码排版。<br>代码块中的内容不能出现 <strong>2 个连续的空行</strong>，否则排版也会错误显示。</p>
 <ul>
 <li><p>展示列表中的大段内容排版</p>
 <pre><code class="lang-scheme"> (define atom?

@@ -166,14 +166,19 @@
 ;; 比较两个数字可以用 =
 (= 1 2)                       ; 输出 #f
 
-;; 比较两个符号（symbol）则要用 eq?
+;; 比较两个符号（symbol）或字符串（String）则要用 eq? 或者 equal?
 (eq? &#39;x &#39;y)                   ; 输出 #f
 (eq? &#39;x &#39;x)                   ; 输出 #t
+(equal? &#39;x &#39;y)                ; 输出 #f
 
-;; 比较两个字符串的大小
+;; 比较两个字符串（String）的大小
 (string&gt;? &quot;x&quot; &quot;y&quot;)            ; 输出 #f
 (string&lt;? &quot;x&quot; &quot;y&quot;)            ; 输出 #t
 (string=? &quot;x&quot; &quot;x&quot;)            ; 输出 #t - 这里字符串的相等等价于使用 eq?
+
+;; 比较两个符号（Symbol）的大小，可先转成字符串再比较
+;; 若是判断两个符号（Symbol）是否相等，直接用 equal? 或 eq? 就行，不必转换后用 string=?
+(string&lt;? &quot;x&quot; (symbol-&gt;string &#39;y)) ; 输出 #f
 </code></pre>
 </li>
 <li><p><strong>数据结构 pair 及其操作</strong>： pair 属于编程语言里最简单而又最重要的数据结构。</p>

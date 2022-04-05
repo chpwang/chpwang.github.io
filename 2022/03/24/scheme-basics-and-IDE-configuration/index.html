@@ -127,8 +127,18 @@
 <li><p><strong>条件分支</strong></p>
 <pre><code class="lang-scheme">;; 普通的 if 语句在 scheme 中和其他前缀表达式的形式相同，由 1 个“操作符”搭配后面 3 个操作数
 ;; scheme 中 true 和 false 分别用 #t 和 #f 来表示
+;; 语法为：(if pred true-exp false-exp)
 (if (&lt; 3 5) #t #f)
 
+;; 另一种条件分支的写法是 cond
+;; 语法如下：
+;;(cond
+;;  [pred1 exp1]
+;;  [pred2 exp2]
+;;  [else
+;;   exp3])
+
+;; cond 的例子 fact 和 fib：
 ;; scheme 中不需要写 == 了，因为 scheme 中没有赋值语句，所以符号 = 没有被占用
 ;; 现代的 scheme 也允许使用方括号 [] ，在 cond 语句中用方括号逻辑结构会看得更清楚
 ;; 求 n 的阶乘的函数 fact
@@ -158,9 +168,12 @@
 <li><p><strong>数据结构 pair 及其操作</strong>： pair 属于编程语言里最简单而又最重要的数据结构。</p>
 <pre><code class="lang-scheme">;; 在 scheme 中专门有一组操作符函数来实现 pair 的构造和对它内部负载的访问
 (define p1 (cons 2 3))
+
+;; 也可以这么构造
 &#39;(2 . 3)
 
-;; car 和 cdr 这两个名字是有历史原因的，因为早期计算机的寄存器就叫 car 和 cdr - 参见 SCIP 的解释
+;; car 和 cdr 能分别取出 pair 结构的第一个和第二个「有效负载」
+;; 因为早期计算机的寄存器就叫 car 和 cdr - 参见 SCIP 的解释
 (car (cons 3 4))
 (cdr (cons 3 4))
 
@@ -184,6 +197,7 @@
 &#39;(+ 1 (* 2 3))         ;; 上面的 quote 的操作可以用单引号 &#39; 来更简洁地实现。两者等价。运行输出 (+ 1 (* 2 3))
 
 ;; quote 和 &#39; 都可以将代码变成 symbol ，你可以使用 symbol? 来询问判断一个东西是不是 symbol
+;; 注意，symbol（符号）和 string（字符串）是两种不同的数据类型
 (symbol? &#39;(1 2 3))      ;; #f
 (symbol? &#39;x)            ;; #t
 

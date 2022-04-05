@@ -111,10 +111,15 @@
   (+ a b))
 </code></pre>
 </li>
-<li><p><strong>定义变量</strong></p>
-<pre><code class="lang-scheme">(define x 2)
+<li><p><strong>定义</strong></p>
+<pre><code class="lang-scheme">;; 定义变量
+(define x 2)
 
+;; 定义函数 - 函数语法：(lambda (param1 param2 ...) expression)
 (define square (lambda (x) (* x x)))
+
+;; 调用 square 函数
+(square x)         ;; 输出 4
 </code></pre>
 </li>
 <li><p><strong>赋值操作</strong></p>

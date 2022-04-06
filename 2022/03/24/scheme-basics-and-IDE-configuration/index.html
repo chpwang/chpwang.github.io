@@ -387,6 +387,37 @@ clause    =   [pat body ...+]
 </li>
 </ul>
 <hr>
+<h3 id="DrRacket-IDE-里的一些常用库"><a href="#DrRacket-IDE-里的一些常用库" class="headerlink" title="DrRacket IDE 里的一些常用库"></a>DrRacket IDE 里的一些常用库</h3><p>在 Racket 里你可以使用 <a href="https://docs.racket-lang.org/guide/module-require.html" target="_blank" rel="noopener">require</a> 来载入各种 <a href="https://docs.racket-lang.org/guide/module-basics.html" target="_blank" rel="noopener">Module</a>（模块/库）。你可以自己创造 Module ，不过这里主要介绍一些 DrRaket 自带的常用 Module：</p>
+<ul>
+<li><p>有关数据结构的 Module - 队列 <a href="https://docs.racket-lang.org/data/Imperative_Queues.html" target="_blank" rel="noopener">Queues</a> </p>
+<pre><code class="lang-scheme">;; 调用 require 载入库 data/queue
+(require data/queue)
+
+;; (make-queue) 可以创建一个空队列（empty queue）- 队列创建后开始是空的，之后可往里加东西
+;; 定义一个队列 q1
+(define q1 (make-queue))
+
+;; (enqueue! queue value) 可将元素添加到队列的【末尾】
+;; 往队列 q1 中依次添加数字 1 、2 和 3
+(enqueue! q1 1)
+(enqueue! q1 2)
+(enqueue! q1 3)
+
+;; (enqueue-front! queue value) 可将元素添加到队列的【开头】
+;; 往队列 q1 的开头添加数字 9
+(enqueue-front! q1 9)
+
+;; 调用 queue-&gt;list 可以把队列转换成链表（list）
+(queue-&gt;list q1)          ;; 输出 &#39;(9 1 2 3)
+</code></pre>
+</li>
+<li><p>有关 continuation 的控制 - <a href="https://docs.racket-lang.org/reference/cont.html#%28form._%28%28lib._racket%2Fcontrol..rkt%29._reset%29%29" target="_blank" rel="noopener">reset / shift</a></p>
+<pre><code class="lang-scheme">;; 调用 require 载入库 racket/control - 这样就能使用 reset 和 shift 了
+(require racket/control)
+</code></pre>
+</li>
+</ul>
+<hr>
 <h3 id="编程环境配置-DrRacket（待完善）"><a href="#编程环境配置-DrRacket（待完善）" class="headerlink" title="编程环境配置 - DrRacket（待完善）"></a>编程环境配置 - DrRacket（待完善）</h3><p>直接去 <strong>Racket</strong> 的<a href="https://racket-lang.org" target="_blank" rel="noopener">官网</a> 下载安装即可。</p>
 <p>常用快捷键：</p>
 <ul>

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2022/03/24/scheme-basics-and-IDE-configuration/</loc>
+    
+    <lastmod>2022-04-08T13:11:12.764Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2020/04/14/ian-cs-course-gossip/</loc>
     
     <lastmod>2022-04-08T07:03:23.501Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>http://cps.ninja/2018/12/24/yang-yi-gong-series-0/</loc>
     
     <lastmod>2022-04-07T16:50:16.470Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2022/03/24/scheme-basics-and-IDE-configuration/</loc>
-    
-    <lastmod>2022-04-06T11:31:08.165Z</lastmod>
     
   </url>
   

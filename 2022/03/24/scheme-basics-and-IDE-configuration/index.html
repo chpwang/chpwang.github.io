@@ -409,6 +409,9 @@ clause    =   [pat body ...+]
 
 ;; 调用 queue-&gt;list 可以把队列转换成链表（list）
 (queue-&gt;list q1)          ;; 输出 &#39;(9 1 2 3)
+
+;; (dequeue! queue) 可以将 queue 中的第一个位置的元素移除，并返回
+(dequeue! q1)             ;; 输出 9
 </code></pre>
 </li>
 <li><p>有关 continuation 的控制 - <a href="https://docs.racket-lang.org/reference/cont.html#%28form._%28%28lib._racket%2Fcontrol..rkt%29._reset%29%29" target="_blank" rel="noopener">reset / shift</a></p>

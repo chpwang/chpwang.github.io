@@ -385,6 +385,19 @@ clause    =   [pat body ...+]
 (error &quot;Error: &quot; x (+ 2 x))           ; 还可以输入表达式，显示表达式的值，运行显示 &quot;Error: 6 8&quot;
 </code></pre>
 </li>
+<li><p><strong>call/cc - Call with Current Continuation</strong></p>
+<pre><code class="lang-scheme">;; call/cc 会接收一个单参数函数，该函数的参数 k 会取得当前位置的 continuation
+;; 例子：
+(* 3 (+ 1 (call/cc (lambda (k) (+ 1 (k 2))))))   ;; 输出 9 - 内部的 (+ 1 ... ) 被丢弃了
+
+;; 通常会定义一个变量来存放 call/cc 捕捉到的 continuation
+;; 例子：
+(define saved-k #f)
+
+(* 3 (+ 1 (call/cc (lambda (k) (set! saved-k k) (+ 1 (k 2))))))  ;; 输出 9 
+(saved-k 1)             ;; 输出 6 - 此时的 saved-k 相当于函数: (lambda (x) (* 3 (+ 1 x)))
+</code></pre>
+</li>
 </ul>
 <hr>
 <h3 id="DrRacket-IDE-里的一些常用库"><a href="#DrRacket-IDE-里的一些常用库" class="headerlink" title="DrRacket IDE 里的一些常用库"></a>DrRacket IDE 里的一些常用库</h3><p>在 Racket 里你可以使用 <a href="https://docs.racket-lang.org/guide/module-require.html" target="_blank" rel="noopener">require</a> 来载入各种 <a href="https://docs.racket-lang.org/guide/module-basics.html" target="_blank" rel="noopener">Module</a>（模块/库）。你可以自己创造 Module ，不过这里主要介绍一些 DrRaket 自带的常用 Module：</p>
@@ -417,6 +430,13 @@ clause    =   [pat body ...+]
 <li><p>有关 continuation 的控制 - <a href="https://docs.racket-lang.org/reference/cont.html#%28form._%28%28lib._racket%2Fcontrol..rkt%29._reset%29%29" target="_blank" rel="noopener">reset / shift</a></p>
 <pre><code class="lang-scheme">;; 调用 require 载入库 racket/control - 这样就能使用 reset 和 shift 了
 (require racket/control)
+
+;; shift 后面的 k 的内容也是当前位置的 continuation
+(reset (* 3 (+ 1 (shift k (+ 1 (k 2))))))         ;; 输出 10 - 这里内部的 (+ 1 ...) 没被丢弃，可以对比一下 call/cc
+
+(reset (* 3 (+ 1 (shift k (set! saved-k k) 2))))  ;; 输出 2 - 丢弃了 reset 到 shift 之间的计算（上下文）- 没有调用 k ，k 所代表的的上下文也就被抛弃了
+
+(saved-k 3)              ;; 输出 12 - 此时的 saved-k 相当于函数: (lambda (x) (* 3 (+ 1 x)))
 </code></pre>
 </li>
 </ul>

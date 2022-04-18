@@ -438,9 +438,15 @@ clause    =   [pat body ...+]
 
 (saved-k 3)              ;; 输出 12 - 此时的 saved-k 相当于函数: (lambda (x) (* 3 (+ 1 x)))
 
-(reset (* 3 (+ 1 (shift k (+ 17 (shift k1 (k1 2)))))))    ;; 输出 19 - k1 代表前面的操作，算出的 19 作为了前面 reset shift 的值
+(reset (* 3 (+ 1 (shift k1 (+ 17 (shift k2 (k2 2)))))))    ;; 输出 19 - k1 代表前面的操作，算出的 19 作为了前面 reset shift 的值
 
-(reset (* 3 (+ 1 (shift k0 (+ 17 (shift k1 (k0 (k1 2)))))))) ;; 输出 60 - 可以看到，调用 k1 并不会丢弃第二个调用 k0
+(reset (* 3 (+ 1 (shift k1 (+ 9 (shift k2 (k2 (k1 2)))))))) ;; 输出 18 - 可以看到，调用 k1 并不会丢弃第二个调用 k2
+
+;; 如果单独用 reset 则 (reset exp)会正常输出表达式 exp 的值
+;; 如果单独使用 shift 则此时的 shift 和 call/cc 类似，调用 k 会丢弃 shift 内部的上下文
+(+ 1 (* 2 (shift k (k 3))))       ;; 输出 7 - 这里的 k 相当于 (lambda (x) (+ 1 (* 2 x)))
+
+(+ 1 (* 2 (shift k (+ 4 (k 3))))) ;; 输出 7 - 内部的 (+ 4 ...) 被丢弃了
 </code></pre>
 </li>
 </ul>

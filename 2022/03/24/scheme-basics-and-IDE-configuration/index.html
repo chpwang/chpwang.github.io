@@ -432,6 +432,10 @@ clause    =   [pat body ...+]
 (require racket/control)
 
 ;; shift 后面的 k 的内容也是当前位置的 continuation
+(reset (shift k (k 1)))  ;; 输出 1 - k 是之后要做的事，之后啥也没做，所以 k 相当于 identity 函数，(k 1) 作为 (reset (shift k ...)) 的结果输出
+
+(reset (shift k 1))      ;; 输出 1 - 没有调用 k ，于是上下文被丢弃，1 作为 (reset (shift k ...)) 的结果输出
+
 (reset (* 3 (+ 1 (shift k (+ 1 (k 2))))))         ;; 输出 10 - 这里内部的 (+ 1 ...) 没被丢弃，可以对比一下 call/cc
 
 (reset (* 3 (+ 1 (shift k (set! saved-k k) 2))))  ;; 输出 2 - 丢弃了 reset 到 shift 之间的计算（上下文）- 没有调用 k ，k 所代表的的上下文也就被抛弃了

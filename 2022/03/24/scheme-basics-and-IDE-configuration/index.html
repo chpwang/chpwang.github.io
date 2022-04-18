@@ -437,6 +437,10 @@ clause    =   [pat body ...+]
 (reset (* 3 (+ 1 (shift k (set! saved-k k) 2))))  ;; 输出 2 - 丢弃了 reset 到 shift 之间的计算（上下文）- 没有调用 k ，k 所代表的的上下文也就被抛弃了
 
 (saved-k 3)              ;; 输出 12 - 此时的 saved-k 相当于函数: (lambda (x) (* 3 (+ 1 x)))
+
+(reset (* 3 (+ 1 (shift k (+ 17 (shift k1 (k1 2)))))))    ;; 输出 19 - k1 代表前面的操作，算出的 19 作为了前面 reset shift 的值
+
+(reset (* 3 (+ 1 (shift k0 (+ 17 (shift k1 (k0 (k1 2)))))))) ;; 输出 60 - 可以看到，调用 k1 并不会丢弃第二个调用 k0
 </code></pre>
 </li>
 </ul>

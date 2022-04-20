@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2018/01/02/Git-Basics/</loc>
+    
+    <lastmod>2022-04-20T11:49:04.128Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2022/03/24/scheme-basics-and-IDE-configuration/</loc>
     
     <lastmod>2022-04-19T16:41:57.506Z</lastmod>
@@ -222,13 +229,6 @@
     <loc>http://cps.ninja/2019/03/16/hexo-with-latex/</loc>
     
     <lastmod>2022-03-20T16:03:13.467Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/01/02/Git-Basics/</loc>
-    
-    <lastmod>2022-03-20T16:03:03.517Z</lastmod>
     
   </url>
   

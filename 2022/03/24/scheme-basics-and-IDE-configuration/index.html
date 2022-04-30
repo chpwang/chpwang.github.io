@@ -88,7 +88,7 @@
 <ul>
 <li>经 <a href="https://github.com/melp" target="_blank" rel="noopener">melp</a> 同学提醒，Racket 从 8.0 版本开始，默认实现（implementation）会变成 <a href="https://blog.racket-lang.org/2021/01/racket-status.html" target="_blank" rel="noopener">Racket on Chez Scheme (Racket CS) </a></li>
 <li>查资料的时候还发现一篇关于 Racket 和 Chez Scheme 的文章：<a href="https://beautifulracket.com/appendix/racket-and-chez-scheme.html" target="_blank" rel="noopener"><em>Thoughts on Racket &amp; Chez Scheme</em></a> 。该文章出自 <a href="https://beautifulracket.com" target="_blank" rel="noopener"><em>Beautiful Racket by Matthew Butterick</em></a> 这本书</li>
-<li><p>还搜到一个 2014 年写的 <a href="https://the-little-schemer.readthedocs.io/zh_CN/latest/index.html#" target="_blank" rel="noopener"><em>The Little Schemer 笔记</em></a> ，作者 <a href="http://chenjiee815.github.io" target="_blank" rel="noopener">chenjiee815</a> 似乎也很久没<a href="https://readthedocs.org/profiles/chenjiee815/" target="_blank" rel="noopener">更新</a>了，2014 年后也不再活跃。由于好奇，尝试继续深入了一下，发现 chenjiee815（<a href="https://www.linkedin.com/in/杰-陈-b55a2285/?originalSubdomain=cn" target="_blank" rel="noopener">陈杰</a>）这家伙 2009 年从南京的中国药科大学毕业，本科专业居然是「中药学」。毕业后工作，一年后考计算机研究生失败，转行进行计算机行业在南京某公司当个 IT 小讲师，然后是 IT 团队小领导（这篇笔记就是做小领导期间写的）。南京公司被阿里巴巴收购后，陈到杭州阿里工作。一年多后进入华为回到南京，至今仍在华为。从中药学到计算机，真是个急速扩张的人生。不过 09 年毕业，意味着「华为」、「35岁」双关键词条件达成，目前还叠加了「疫情」、「战争」、「金融去杠杆」等新关键词，希望他能加强危机意识，一切顺利。看来我也要抽空去更新一下我的 LinkedIn 了。</p>
+<li><p>还搜到一个 2014 年写的 <a href="https://the-little-schemer.readthedocs.io/zh_CN/latest/index.html#" target="_blank" rel="noopener"><em>The Little Schemer 笔记</em></a> ，作者 <a href="http://chenjiee815.github.io" target="_blank" rel="noopener">chenjiee815</a> 似乎也很久没<a href="https://readthedocs.org/profiles/chenjiee815/" target="_blank" rel="noopener">更新</a>了，2014 年后也不再活跃。由于好奇，尝试继续深入了一下，发现 chenjiee815（<a href="https://www.linkedin.com/in/杰-陈-b55a2285/?originalSubdomain=cn" target="_blank" rel="noopener">陈杰</a>）这家伙 2009 年从南京的中国药科大学毕业，本科专业居然是「中药学」。毕业后工作，一年后考计算机研究生失败，转行进行计算机行业在南京某公司当个 IT 小讲师，然后是 IT 团队小领导（这篇笔记就是做小领导期间写的）。南京公司被阿里巴巴收购后，陈到杭州阿里工作。一年多后进入华为回到南京，至今仍在华为。从中药学到计算机，真是个急速扩张的人生。不过 09 年毕业，意味着「华为」、「35岁」双关键词达成。加上这个时代「疫情」、「战争」、「金融去杠杆」等新关键词之后，希望他能加强危机意识，一切顺利。看来我也要抽空去更新一下我的 LinkedIn 了。</p>
 </li>
 <li><p>陈杰 2014 年的这篇笔记在很多地方都被引用，这让我想起来自己第一次知道这本书也是 2014 年（李路肯定不知道他的热情分享对我影响很大，他应该不记得我了）。看来 TLS 的出圈时间节点很可能就是 2014 。另一个有意思的细节是，<a href="https://www.yinwang.org/blog-cn/2012/07/04/dan-friedman" target="_blank" rel="noopener"><em>GTF - Great Teacher Friedman</em></a> 的第一版似乎是在 2012 年写的。</p>
 </li>
@@ -103,19 +103,21 @@
 (* 1 2 (+ 3 4 5))
 </code></pre>
 </li>
-<li><p><strong>匿名函数</strong></p>
-<pre><code class="lang-scheme">(lambda (x) (* x x x))
+<li><p><strong>函数</strong></p>
+<pre><code class="lang-scheme">;; 语法为：(lambda (参数1 参数2 ...) 表达式)
+
+(lambda (x) (* x x x))  ;; x =&gt; x * x * x
 
 (lambda
   (a b)
-  (+ a b))
+  (+ a b))     ;; (a, b) =&gt; a + b
 </code></pre>
 </li>
 <li><p><strong>定义</strong></p>
 <pre><code class="lang-scheme">;; 定义变量
 (define x 2)
 
-;; 定义函数 - 函数语法：(lambda (param1 param2 ...) expression)
+;; 定义 square 函数
 (define square (lambda (x) (* x x)))
 
 ;; 调用 square 函数
@@ -271,8 +273,15 @@
 ;; 构造二元操作类型（结构）
 (struct Binop (op e1 e2))
 
-;; 使用上面的 Closure 类型创建实例（instance）
-(Closure (Fun &#39;x (Binop &#39;+ 2 &#39;)))
+;; 使用上面的类型创建实例（instance）
+(Closure (Fun &#39;x (Binop &#39;+ 2 &#39;x)))
+
+(define b1 (Binop &#39;+ 2 3))
+
+;; 取出 struct 里的内容
+(Binop-op b1)   ;; 输出 &#39;+
+(Binop-e1 b1)   ;; 输出 &#39;+
+(Binop-e2 b1)   ;; 输出 &#39;3
 </code></pre>
 </li>
 <li><p><strong>模式匹配</strong>（Pattern Matching）：<a href="https://docs.racket-lang.org/reference/match.html" target="_blank" rel="noopener">match</a> 是属于 <strong>Racket</strong> 特有的，<strong>Scheme</strong> 本身是没有模式匹配的，尽管它可以用宏来实现这个语言特性。</p>
@@ -387,6 +396,8 @@ clause    =   [pat body ...+]
 </li>
 <li><p><strong>call/cc - Call with Current Continuation</strong></p>
 <pre><code class="lang-scheme">;; call/cc 会接收一个单参数函数，该函数的参数 k 会取得当前位置的 continuation
+;; 这里涉及到一个对新人来说陌生的概念：continuation 是什么东西？
+;; 关于这个，参见本节末尾的文章
 ;; 例子：
 (* 3 (+ 1 (call/cc (lambda (k) (+ 1 (k 2))))))   ;; 输出 9 - 内部的 (+ 1 ... ) 被丢弃了
 
@@ -398,7 +409,13 @@ clause    =   [pat body ...+]
 (saved-k 1)             ;; 输出 6 - 此时的 saved-k 相当于函数: (lambda (x) (* 3 (+ 1 x)))
 </code></pre>
 </li>
+<li><p><strong>宏（Macro）</strong></p>
+<pre><code class="lang-scheme">;; 这里涉及到一个对新人来说陌生的概念：continuation 是什么东西？
+;; 关于 Macro 的概念，可参见本节末尾的文章
+</code></pre>
+</li>
 </ul>
+<p>Macro（宏）和 Continuation 是两个对新手来说比较难理解的概念，除了 Racket 官方文档之外，官方还推荐了另一篇有趣的文章来介绍：<a href="https://www.greghendershott.com/fear-of-macros/index.html" target="_blank" rel="noopener"><em>Fear of Macros - by Greg Hendershott</em></a></p>
 <hr>
 <h3 id="DrRacket-IDE-里的一些常用库"><a href="#DrRacket-IDE-里的一些常用库" class="headerlink" title="DrRacket IDE 里的一些常用库"></a>DrRacket IDE 里的一些常用库</h3><p>在 Racket 里你可以使用 <a href="https://docs.racket-lang.org/guide/module-require.html" target="_blank" rel="noopener">require</a> 来载入各种 <a href="https://docs.racket-lang.org/guide/module-basics.html" target="_blank" rel="noopener">Module</a>（模块/库）。你可以自己创造 Module ，不过这里主要介绍一些 DrRaket 自带的常用 Module：</p>
 <ul>

@@ -397,7 +397,7 @@ clause    =   [pat body ...+]
 <li><p><strong>call/cc - Call with Current Continuation</strong></p>
 <pre><code class="lang-scheme">;; call/cc 会接收一个单参数函数，该函数的参数 k 会取得当前位置的 continuation
 ;; 这里涉及到一个对新人来说陌生的概念：continuation 是什么东西？
-;; 关于这个，参见本节末尾的文章
+;; 关于这个，会新开一篇文章专门介绍。但目前简单地理解，continuation 就是接下来要做的所有计算
 ;; 例子：
 (* 3 (+ 1 (call/cc (lambda (k) (+ 1 (k 2))))))   ;; 输出 9 - 内部的 (+ 1 ... ) 被丢弃了
 
@@ -411,11 +411,15 @@ clause    =   [pat body ...+]
 </li>
 <li><p><strong>宏（Macro）</strong></p>
 <pre><code class="lang-scheme">;; 这里涉及到一个对新人来说陌生的概念：continuation 是什么东西？
-;; 关于 Macro 的概念，可参见本节末尾的文章
+;; 关于 Macro 的概念，可参见本节末尾 Greg Hendershott 的文章
+
+(define-syntax foo
+  (lambda (stx)
+    (syntax &quot;I am foo&quot;)))
 </code></pre>
 </li>
 </ul>
-<p>Macro（宏）和 Continuation 是两个对新手来说比较难理解的概念，除了 Racket 官方文档之外，官方还推荐了另一篇有趣的文章来介绍：<a href="https://www.greghendershott.com/fear-of-macros/index.html" target="_blank" rel="noopener"><em>Fear of Macros - by Greg Hendershott</em></a></p>
+<p>Macro（宏）和 Continuation 是两个对新手来说比较难理解的概念，除了<a href="https://docs.racket-lang.org/guide/macros.html" target="_blank" rel="noopener">官方文档</a>之外，官方还推荐了另一篇有趣的文章来介绍：<a href="https://www.greghendershott.com/fear-of-macros/index.html" target="_blank" rel="noopener"><em>Fear of Macros - by Greg Hendershott</em></a></p>
 <hr>
 <h3 id="DrRacket-IDE-里的一些常用库"><a href="#DrRacket-IDE-里的一些常用库" class="headerlink" title="DrRacket IDE 里的一些常用库"></a>DrRacket IDE 里的一些常用库</h3><p>在 Racket 里你可以使用 <a href="https://docs.racket-lang.org/guide/module-require.html" target="_blank" rel="noopener">require</a> 来载入各种 <a href="https://docs.racket-lang.org/guide/module-basics.html" target="_blank" rel="noopener">Module</a>（模块/库）。你可以自己创造 Module ，不过这里主要介绍一些 DrRaket 自带的常用 Module：</p>
 <ul>

@@ -228,9 +228,11 @@
 (number? 2)
 </code></pre>
 <p>下面这串有趣的测试可以运行尝试一下，会对 quote 有深入理解：</p>
-<pre><code class="lang-scheme">&#39;(quote ())           ;; 输出 &#39;()
+<pre><code class="lang-scheme">(quote ())            ;; 输出 &#39;()
 
-&#39;&#39;()                  ;; 这个和上面的代码等价。运行输出 &#39;()
+&#39;(quote ())           ;; 输出 &#39;&#39;()
+
+&#39;&#39;()                  ;; 这个和上面的代码等价。运行输出 &#39;&#39;()
 
 (pair? &#39;&#39;())          ;; 输出 #t - 这东西是个 pair
 
@@ -240,15 +242,13 @@
 
 (symbol? (car &#39;&#39;()))  ;; 输出 #t - 第一个「有效负载」 quote 是 symbol
 
-(cdr &#39;&#39;())            ;; 输出 (()) - 第二个「有效负载」是 null
+(cdr &#39;&#39;())            ;; 输出 &#39;(()) - 第二个「有效负载」是 null
 
-&#39;(1 quote ())         ;; 输出 (1 quote ())
+&#39;(1 quote ())         ;; 输出 &#39;(1 quote ())
 
-&#39;(quote ())           ;; 输出 &#39;()
-
-&#39;(quot ())            ;; 输出 (quot ())
+&#39;(quot ())            ;; 输出 &#39;(quot ())
 </code></pre>
-<p><strong>解答</strong>：<code>&#39;()</code> 其实就是 <code>(quote ())</code> 。当 DrRacket 在输出一个链表时，如果是 <strong>(1 2 3)</strong> 这种普通链表，那就会输出 <code>(1 2 3)</code> 。如果输出的链表中包含 <a href="https://docs.racket-lang.org/guide/binding.html" target="_blank" rel="noopener">identifiers</a> 时，比如 <a href="https://docs.racket-lang.org/guide/quote.html" target="_blank" rel="noopener">quote</a> ，那么，它的输出可能不会显示 <code>(quote ())</code> 这样直观能看到「有效负载」的链表，而是会显示简化后的 <code>&#39;()</code> 。</p>
+<p><strong>解答</strong>：<code>&#39;()</code> 其实就是 <code>(quote ())</code> 。当 DrRacket 在输出一个链表时，如果是 <strong>(1 2 3)</strong> 这种普通链表，那就会输出 <code>(1 2 3)</code> 。如果输出的链表中包含 <a href="https://docs.racket-lang.org/guide/quote.html" target="_blank" rel="noopener">quote</a> ，那么，它的输出可能不会显示 <code>(quote ())</code> 这样直观能看到「有效负载」的链表，而是会显示简化后的 <code>&#39;()</code> 。</p>
 <p>这点可以通过观察 <code>&#39;(quote ())</code> 和 <code>&#39;(quot ())</code> 这两个代码的输出结果进一步理解：由于 quot 不再是关键词 identifier ，于是输出结果回复直观显示「有效负载」的 <code>(quot ())</code> 。</p>
 <p>这里涉及到 Scheme 里面字符号（Symbol）和符串（String）两个概念的区别。具体来说 <code>&#39;quote</code> 和 <code>&quot;quote&quot;</code> 这两个表达式的输出结果是不一样的。前者是符号后者是字符串。</p>
 </li>

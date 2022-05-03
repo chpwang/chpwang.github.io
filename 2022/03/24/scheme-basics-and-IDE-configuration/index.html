@@ -320,8 +320,8 @@ clause    =   [pat body ...+]
 (define calc
 (lambda (exp)
   (match exp
-    [(? number? v) v]
-    [exp #:when (boolean? exp) &quot;boolean&quot;]      ; 应尽量用 #:when 而不是 (? ...)
+    [(? number? v) v]                          ; 难以直观看出 pattern 是什么
+    [exp #:when (boolean? exp) &quot;boolean&quot;]      ; 所以应尽量用 #:when 而不是 (? ...)
     [`(+ ,e1 ,e2) (+ (calc e1) (calc e2))]     ; quasiquote 和 unquote 写的 pattern
     [`(- ,e1 ,e2) (- (calc e1) (calc e2))]
     [(list &#39;* e1 e2) (* (calc e1) (calc e2))]  ; list 写的 pattern

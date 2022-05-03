@@ -292,14 +292,20 @@
 <pre><code class="lang-scheme">;; pat 代表 pattern ，用来判断是否和表达式 val-expr 的值匹配
 ;; 若 pat 和 val-expr 匹配成功，就会对表达式 body 求值，并以它的值作为整个 match 的值
 clause    =   [pat body ...+]
-          |   [pat (=&gt; id) body ...+]
           |   [pat #:when cond-expr body ...+]
 </code></pre>
 <p>下面举例说明上述 <strong>clause</strong> 中 <code>pat</code> 位置的常用语法，更多相关语法可查看文档：<a href="https://docs.racket-lang.org/reference/match.html" target="_blank" rel="noopener">9 Pattern Matching</a></p>
-<pre><code class="lang-scheme">;; [(? number? v) v] 这行的 pat 部分用到的语法为 (? expr pat ...)
-;; 该语法的意思是，如果表达式 (expr val-expr) 值为真，就匹配 pat 位置的模式
+<pre><code class="lang-scheme">;; [(? number? v) v] 这行的 pat 部分用到的语法为 (? pred pat ...)
+;; 该语法的意思是，如果表达式 (pred val-expr) 值为真，就匹配 pat 这个模式
 ;; [(? number? v) v] 会先对表达式 (number? exp) 求值，
 ;; 若值为 #t ，就用变量 v 来匹配 exp，然后输出 v 的值（即 exp 的值）
+
+;; [exp #:when (boolean? exp) &quot;boolean&quot;] 这分支的语法为
+;; [pat #:when cond-expr body ...+]
+;; 意思是，如果表达式 cond-expr 值为真，就匹配 pat 这个模式
+;; 应该尽量用 #:when 而不是 (? ...) ，这样 pat 看起来就简洁很多
+;; 不然 pattern 本身里面嵌套了复杂的判断，看起来就不直观了，pattern 的意义就失去了
+
 ;; 同理 [(? list? `(,lvp1 ,lvp2 ,lvp3)) lvp3] 会在 (list? exp) 的值为 #t 之后，
 ;; 匹配 `(,lvp1 ,lvp2 ,lvp3) ，然后会输出 lvp3 的值
 
@@ -315,6 +321,7 @@ clause    =   [pat body ...+]
 (lambda (exp)
   (match exp
     [(? number? v) v]
+    [exp #:when (boolean? exp) &quot;boolean&quot;]      ; 应尽量用 #:when 而不是 (? ...)
     [`(+ ,e1 ,e2) (+ (calc e1) (calc e2))]     ; quasiquote 和 unquote 写的 pattern
     [`(- ,e1 ,e2) (- (calc e1) (calc e2))]
     [(list &#39;* e1 e2) (* (calc e1) (calc e2))]  ; list 写的 pattern
@@ -325,6 +332,7 @@ clause    =   [pat body ...+]
 
 (calc &#39;(+ 1 (* 9 3)))     ; 输出 28
 (calc &#39;(9 19 29))         ; 输出 29 - 匹配到了倒数第 2 分支
+(calc #f)                 ; 输出 &quot;boolean&quot;
 </code></pre>
 <p><code>match</code> 和 <code>struct</code> 配合可以实现很强大的表达</p>
 <pre><code class="lang-scheme">;; 创建 shoe 和 hat 这两个结构

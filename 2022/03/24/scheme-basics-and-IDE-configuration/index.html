@@ -310,21 +310,21 @@ clause    =   [pat body ...+]
 ;; 如果是，则匹配成功，此时，exp 这个 list 的元素 lvp2 和 lvp3 的值就会分别被赋予 e1 和 e2 ，
 ;; 然后在 body 部分 (+ (calc e1) (calc e2)) 就能使用变量 e1 和 e2 进行求值
 
-;; 使用 match 实现简易二元操作的计算器 calc
+;; 示例：使用 match 实现简易二元操作的计算器 calc
 (define calc
 (lambda (exp)
   (match exp
     [(? number? v) v]
-    [(? list? `(,lvp1 ,lvp2 ,lvp3)) lvp3]
-    [`(+ ,e1 ,e2) (+ (calc e1) (calc e2))]
+    [`(+ ,e1 ,e2) (+ (calc e1) (calc e2))]     ; quasiquote 和 unquote 写的 pattern
     [`(- ,e1 ,e2) (- (calc e1) (calc e2))]
-    [`(* ,e1 ,e2) (* (calc e1) (calc e2))]
-    [`(/ ,e1 ,e2) (/ (calc e1) (calc e2))]
+    [(list &#39;* e1 e2) (* (calc e1) (calc e2))]  ; list 写的 pattern
+    [(list &#39;/ e1 e2) (/ (calc e1) (calc e2))]
+    [(? list? `(,lvp1 ,lvp2 ,lvp3)) lvp3]
     [else
      (error &quot;Error: unsupported operation or illegal expression!&quot;)])))
 
 (calc &#39;(+ 1 (* 9 3)))     ; 输出 28
-(calc &#39;(9 19 29))         ; 输出 29
+(calc &#39;(9 19 29))         ; 输出 29 - 匹配到了倒数第 2 分支
 </code></pre>
 <p><code>match</code> 和 <code>struct</code> 配合可以实现很强大的表达</p>
 <pre><code class="lang-scheme">;; 创建 shoe 和 hat 这两个结构
@@ -413,7 +413,7 @@ clause    =   [pat body ...+]
 <pre><code class="lang-scheme">;; 这里又涉及到一个对新人陌生的概念：Macro（宏）是什么东西？
 ;; 简单地说，Macro 就是你自己定义的语法，这些语法是 Scheme 中原本没有的
 ;; 比如你可以有 (my-lambda ...) 这样的表达，它和函数的区别是，省略号部分的参数不会被求值
-;; Macro 的操作有点像在解释器里新增了一个分支来处理你定义的新语法
+;; Macro 的操作有点像在解释器里添加了一个分支来处理你所定义的新语法
 ;; 更多关于 Macro 的概念和作用，可参见本节末尾 Greg Hendershott 的文章
 ;; 我稍后也会写一篇关于 Macro 的文章
 (define-syntax foo

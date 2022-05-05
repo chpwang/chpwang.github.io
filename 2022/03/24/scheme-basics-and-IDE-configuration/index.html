@@ -408,14 +408,16 @@ clause    =   [pat body ...+]
 ;; 关于这个，会新开一篇文章专门介绍。目前简单地理解，continuation 就是接下来要做的所有计算
 ;; 调用这个 k ，程序会丢弃上下文
 ;; 例子：
-(* 3 (+ 1 (call/cc (lambda (k) (+ 1 (k 2))))))   ;; 输出 9 - 内部的 (+ 1 ... ) 被丢弃了
+(* 3 (+ 1 (call/cc (lambda (k) (+ 1 (k 2)))))) ;; 输出 9 - 内部的 (+ 1 ... ) 被丢弃了
 
-;; 通常会定义一个变量来存放 call/cc 捕捉到的 continuation
+;; 通常会定义一个变量来存放 call/cc 捕获的 continuation ，共后续调用
 ;; 例子：
 (define saved-k #f)
 
 (* 3 (+ 1 (call/cc (lambda (k) (set! saved-k k) (+ 1 (k 2))))))  ;; 输出 9 
-(saved-k 1)             ;; 输出 6 - 此时的 saved-k 相当于函数: (lambda (x) (* 3 (+ 1 x)))
+(saved-k 1)          ;; 输出 6 - 此时的 saved-k 相当于函数: (lambda (x) (* 3 (+ 1 x)))
+
+(+ 9 (saved-k 1))    ;; 输出 6 - (+ 9 ...) 这个上下文被忽略了
 </code></pre>
 </li>
 <li><p><strong>宏（Macro）</strong>：宏特别容易被滥用。一个基本的原则是，如果一个宏它实际上做的是函数的事情，那你应该使用函数，而不是宏。</p>

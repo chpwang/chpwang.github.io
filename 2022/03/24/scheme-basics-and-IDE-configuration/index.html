@@ -402,10 +402,11 @@ clause    =   [pat body ...+]
 (error &quot;Error: &quot; x (+ 2 x))           ; 还可以输入表达式，显示表达式的值，运行显示 &quot;Error: 6 8&quot;
 </code></pre>
 </li>
-<li><p><strong>call/cc - Call with Current Continuation</strong></p>
+<li><p><strong>call/cc</strong>：这个“奇怪”却影响深远的东西最早也是由本篇开头提到的 <a href="https://en.wikipedia.org/wiki/Daniel_P._Friedman" target="_blank" rel="noopener">Daniel Paul Friedman</a> 想出来的，相关 paper 叫 <a href="https://legacy.cs.indiana.edu/ftp/techreports/TR133.pdf" target="_blank" rel="noopener"><em>A Scheme for a Higher-Level Semantic Algebra</em></a>。后来 <a href="https://en.wikipedia.org/wiki/Gerald_Jay_Sussman" target="_blank" rel="noopener">Gerald Susman</a>（SICP 的作者之一） 给了它一个名字 <a href="https://en.wikipedia.org/wiki/Call-with-current-continuation" target="_blank" rel="noopener">call-with-current-continuation</a> ，从那以后 <a href="https://en.wikipedia.org/wiki/Daniel_P._Friedman" target="_blank" rel="noopener">Friedman</a> 的名字就再也没有和 call/cc 被人联系在一起过了。之后更先进的 shift/reset 这类 <a href="https://en.wikipedia.org/wiki/Delimited_continuation" target="_blank" rel="noopener">Delimited Continuation</a> 则是 Friedman 的学生弄的。</p>
 <pre><code class="lang-scheme">;; call/cc 会接收一个单参数函数，该函数的参数 k 会取得当前位置的 continuation
-;; 这里涉及到一个对新人陌生的概念：continuation 是什么东西？
-;; 关于这个，会新开一篇文章专门介绍。但目前简单地理解，continuation 就是接下来要做的所有计算
+;; 这里涉及到一个对新人陌生的概念：continuation 是什么东西？它有什么用？
+;; 关于这个，会新开一篇文章专门介绍。目前简单地理解，continuation 就是接下来要做的所有计算
+;; 调用这个 k ，程序会丢弃上下文
 ;; 例子：
 (* 3 (+ 1 (call/cc (lambda (k) (+ 1 (k 2))))))   ;; 输出 9 - 内部的 (+ 1 ... ) 被丢弃了
 

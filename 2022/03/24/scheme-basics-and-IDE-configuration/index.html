@@ -422,11 +422,12 @@ clause    =   [pat body ...+]
 </li>
 <li><p><strong>宏（Macro）</strong>：宏特别容易被滥用。一个基本的原则是，如果一个宏它实际上做的是函数的事情，那你应该使用函数，而不是宏。</p>
 <pre><code class="lang-scheme">;; 这里又涉及到一个对新人陌生的概念：Macro（宏）是什么东西？
-;; 简单地说 Macro 是一个语法转换器（Syntax Transformer），接收一个 syntax 返回新的 syntax
+;; 简单地说 Macro 是一个语法转换器（Syntax Transformer）
+;; 宏接收一个 syntax object（语法对象），返回新的 syntax object ，相当于翻译（替换）操作
 ;; 于是你可以通过宏定义的自己语法，这些语法是 Scheme 中原本没有的
 ;; 比如你可以有 (my-lambda ...) 这样的表达，它和函数的区别是，省略号部分的参数不会被求值
 ;; 因为转换过程是在 compile time（程序编译阶段），而不是 run time（程序运行阶段）
-;; Macro 的操作有点像在解释器里添加了一个分支来处理你所定义的新语法（语法糖的感觉）
+;; Macro 有点像在解释器里添加一个分支来支持的新语法，这时，当前语言相当于被扩展了
 ;; 从这个意义上，Macro 像个小型解释器
 ;; 更多关于 Macro 的概念和作用，可参见本节末尾 Greg Hendershott 的文章
 ;; 我稍后也会写一篇关于 Macro 的应用的文章
@@ -439,20 +440,36 @@ clause    =   [pat body ...+]
 (define-syntax (foo stx)
   (syntax &quot;I am foo&quot;))
 
-;; 下面这个表达式会先被转换成 (syntax &quot;I am foo&quot;)
+;; 下面这个表达式会先被转换（翻译）成 (syntax &quot;I am foo&quot;)
 ;; (+ 1 2) 这个参数部分在转换过程中不会被求值，因为转换过程是在 compile time
 ;; 最后对返回的 (syntax &quot;I am foo&quot;) 求值，输出 &quot;I am foo&quot;
 (foo (+ 1 2))
 
-;; 上面 foo 也可以写成 lambda 形式
+;; 宏也可以写成 lambda 形式
 ;; 我倾向于这样写，这样子可以清楚看到“参数” stx ，比较模块化
-(define-syntax fooo
+(define-syntax show-stx
   (lambda (stx)
-    (syntax &quot;I am fooo&quot;)))
+    (println (syntax-&gt;datum stx))  ;; stx 的内容是个 syntax ，把它转化成数据后显示出来
+    (datum-&gt;syntax stx             ;; 这里第一个参数先不用管，只需知道目前有它才能顺利转换
+                   (cadr (syntax-&gt;datum stx))))) ;; 宏最终都需要返回一个 syntax object
+
+;; 第一个输出是 &#39;(show-stx (+ 1 2)) ，这是 (println ...) 的输出，代表 stx 中所装载的内容
+;; 第二个输出是 3
+;; 这里的过程是用 cadr 来获得了 &#39;(+ 1 2)
+;; 然后通过 datum-&gt;syntax 把它转成了语法对象 (syntax (+ 1 2)) 作为宏 show-stx 的结果返回
+;; 最后，程序会计算 (syntax (+ 1 2)) 的值，得到结果 3
+;; 总结：
+;; (show-stx (+ 1 2)) 会在编译过程中被翻译（替换）成 (+ 1 2)
+;; (println ...) 是宏 show-stx 的副作用，输出参数 stx 的内容
+(show-stx (+ 1 2))
+
+#&#39;(+ 1 2)     ;; (syntax ...) 像 (quote ...) 一样可简写，这里等价于 (syntax (+ 1 2))
+
+(eval #&#39;(+ 1 2))   ;; 对该语法对象（树）求值，输出 3
 </code></pre>
 </li>
 </ul>
-<p>Macro（宏）和 Continuation 是两个对新手来说比较难理解的概念，除了<a href="https://docs.racket-lang.org/guide/macros.html" target="_blank" rel="noopener">官方文档</a>之外，官方还推荐了另一篇有趣的文章来介绍：<a href="https://www.greghendershott.com/fear-of-macros/index.html" target="_blank" rel="noopener"><em>Fear of Macros - by Greg Hendershott</em></a></p>
+<p>Macro（宏）和 Continuation 是两个对新手来说看似难理解，但实际很简单的概念。关于宏除了<a href="https://docs.racket-lang.org/guide/macros.html" target="_blank" rel="noopener">官方文档</a>之外，官方还推荐了另一篇有趣的文章来介绍：<a href="https://www.greghendershott.com/fear-of-macros/index.html" target="_blank" rel="noopener"><em>Fear of Macros - by Greg Hendershott</em></a></p>
 <hr>
 <h3 id="DrRacket-IDE-里的一些常用库"><a href="#DrRacket-IDE-里的一些常用库" class="headerlink" title="DrRacket IDE 里的一些常用库"></a>DrRacket IDE 里的一些常用库</h3><p>在 Racket 里你可以使用 <a href="https://docs.racket-lang.org/guide/module-require.html" target="_blank" rel="noopener">require</a> 来载入各种 <a href="https://docs.racket-lang.org/guide/module-basics.html" target="_blank" rel="noopener">Module</a>（模块/库）。你可以自己创造 Module ，不过这里主要介绍一些 DrRaket 自带的常用 Module：</p>
 <ul>

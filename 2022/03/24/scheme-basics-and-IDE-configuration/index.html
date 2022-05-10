@@ -422,14 +422,33 @@ clause    =   [pat body ...+]
 </li>
 <li><p><strong>宏（Macro）</strong>：宏特别容易被滥用。一个基本的原则是，如果一个宏它实际上做的是函数的事情，那你应该使用函数，而不是宏。</p>
 <pre><code class="lang-scheme">;; 这里又涉及到一个对新人陌生的概念：Macro（宏）是什么东西？
-;; 简单地说，Macro 就是你自己定义的语法，这些语法是 Scheme 中原本没有的
+;; 简单地说 Macro 是一个语法转换器（Syntax Transformer），接收一个 syntax 返回新的 syntax
+;; 于是你可以通过宏定义的自己语法，这些语法是 Scheme 中原本没有的
 ;; 比如你可以有 (my-lambda ...) 这样的表达，它和函数的区别是，省略号部分的参数不会被求值
-;; Macro 的操作有点像在解释器里添加了一个分支来处理你所定义的新语法
+;; 因为转换过程是在 compile time（程序编译阶段），而不是 run time（程序运行阶段）
+;; Macro 的操作有点像在解释器里添加了一个分支来处理你所定义的新语法（语法糖的感觉）
+;; 从这个意义上，Macro 像个小型解释器
 ;; 更多关于 Macro 的概念和作用，可参见本节末尾 Greg Hendershott 的文章
-;; 我稍后也会写一篇关于 Macro 的文章
-(define-syntax foo
+;; 我稍后也会写一篇关于 Macro 的应用的文章
+
+;; 宏会标记（接收）一串语法，然后根据定义转换成另一串语法返回
+;; 举例来说，下面的 define-syntax 会定义一个名字为 foo 的宏
+;; 当我们代码中出现 (foo ...) 这样的表达式，程序会根据名字 foo 判断出这是个宏
+;; 然后表达式 (foo ...) 会在 compile time 先被转换成我们在宏 foo 中所定义的语法
+;; 然后转换之后的语法接下来才会被求值
+(define-syntax (foo stx)
+  (syntax &quot;I am foo&quot;))
+
+;; 下面这个表达式会先被转换成 (syntax &quot;I am foo&quot;)
+;; (+ 1 2) 这个参数部分在转换过程中不会被求值，因为转换过程是在 compile time
+;; 最后对返回的 (syntax &quot;I am foo&quot;) 求值，输出 &quot;I am foo&quot;
+(foo (+ 1 2))
+
+;; 上面 foo 也可以写成 lambda 形式
+;; 我倾向于这样写，这样子可以清楚看到“参数” stx ，比较模块化
+(define-syntax fooo
   (lambda (stx)
-    (syntax &quot;I am foo&quot;)))
+    (syntax &quot;I am fooo&quot;)))
 </code></pre>
 </li>
 </ul>

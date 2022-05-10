@@ -446,8 +446,8 @@ clause    =   [pat body ...+]
 ;; 最后对返回的 (syntax &quot;I am foo&quot;) 求值，输出 &quot;I am foo&quot;
 (foo (+ 1 2))
 
-;; 宏也可以写成 lambda 形式
-;; 我倾向于这样写，这样子可以清楚看到“参数” stx ，比较模块化
+;; 宏的定义也可以写成 lambda 形式
+;; 我倾向于这样写，这样子可以清楚区分“参数” stx 和宏的名字，更加「模块化」
 (define-syntax show-stx
   (lambda (stx)
     (println (syntax-&gt;datum stx))  ;; stx 的内容是个 syntax ，把它转化成数据后显示出来
@@ -485,7 +485,7 @@ clause    =   [pat body ...+]
 
 (my-if-sc (&lt; (* 7 8) 9) &quot;true&quot; &quot;false&quot;)   ;; 输出 &quot;false&quot;
 
-;; 另一个更简单点的写法是 syntax-rules ，它也更像 match ，所以更便于阅读，推荐使用
+;; 另一个更好用的写法是 syntax-rules ，它更像 match ，所以更便于阅读，推荐优先使用
 ;; 在 syntax-case 中，返回的表达式要用 syntax 之类的方式转成一个 syntax object（语法对象）
 ;; 而在 syntax-rules 只需要直接写转换完的表达式就行了，它会自行帮你转换成 syntax object
 (define-syntax my-if-sr

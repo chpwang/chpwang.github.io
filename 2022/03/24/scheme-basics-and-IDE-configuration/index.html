@@ -450,7 +450,7 @@ clause    =   [pat body ...+]
 (define-syntax show-stx
   (lambda (stx)
     (println (syntax-&gt;datum stx))  ;; stx 的内容是个 syntax ，把它转化成数据后显示出来
-    (datum-&gt;syntax stx             ;; 这里第一个参数先不用管，只需知道目前有它才能顺利转换
+    (datum-&gt;syntax stx             ;; 这里第一个参数先不用管，目前只需知道有它才能顺利转换
                    (cadr (syntax-&gt;datum stx))))) ;; 宏最终都需要返回一个 syntax object
 
 ;; 第一个输出是 &#39;(show-stx (+ 1 2)) ，这是 (println ...) 的输出，代表 stx 中所装载的内容
@@ -467,8 +467,33 @@ clause    =   [pat body ...+]
 
 (eval #&#39;(+ 1 2))   ;; 对该语法对象（树）求值，输出 3
 
-;; 通过上面的例子知道了 stx 装的大概就是个链表的结构，Racket 提供了
-;;
+;; 通过上面的例子知道了 stx 装的大概就是个链表的结构（主要因为 scheme 的语法也是链表的形式）
+;; 链表的结构，自然会希望有个模式匹配的功能，毕竟定义新语法的常规操作就是重新组合调整各个部分
+;; 虽然能用上面提到的 match ，但是宏的转义是在编译过程中，编译过程默认是看不到 match 的
+;; 于是就有了专门针对宏的模式匹配 syntax-case ，用来匹配第一个参数 stx 的内容
+;; 下面这个例子我们自定义了一个 if 的表达式，功能和 scheme 的 if 一样
+;; 不用函数来实现 if 的原因是函数在调用时会对所有参数求值，但条件分支的俩分支不应该被同时求值
+;; 这里也显示了宏的一个常见用法，就是你需要「惰性求值」的时候就可以考虑使用宏
+(define-syntax my-if-sc
+  (lambda (stx)
+    (syntax-case stx ()             ;; 第二个参数暂时不用管，目前只需知道给个 () 就行
+      [(_ pred true-exp false-exp)  ;; 用 _ 来匹配并忽略 stx 中首位的 my-if-sc
+       (syntax
+        (cond [pred true-exp]       ;; my-if-sc 所在表达式被转义成了相应的 cond 表达式
+              [else false-exp]))]))) 
+
+(my-if-sc (&lt; (* 7 8) 9) &quot;true&quot; &quot;false&quot;)   ;; 输出 &quot;false&quot;
+
+;; 另一个更简单点的写法是 syntax-rules ，它也更像 match ，所以更便于阅读，推荐使用
+;; 在 syntax-case 中，返回的表达式要用 syntax 之类的方式转成一个 syntax object（语法对象）
+;; 而在 syntax-rules 只需要直接写转换完的表达式就行了，它会自行帮你转换成 syntax object
+(define-syntax my-if-sr
+  (syntax-rules ()
+    [(_ pred true-exp false-exp)
+     (cond [pred true-exp]
+           [else false-exp])]))
+
+(my-if-sr (&lt; 2 3) &quot;true&quot; &quot;false&quot;)  ;; 输出 &quot;true&quot;
 </code></pre>
 </li>
 </ul>

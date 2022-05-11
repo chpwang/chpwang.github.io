@@ -172,17 +172,17 @@
               (fib (- n 2)))])))
 
 ;; 比较两个数字可以用 =
-(= 1 2)                       ; 输出 #f
+(= 1 2)          ;; 输出 #f
 
 ;; 比较两个符号（symbol）或字符串（String）则要用 eq? 或者 equal?
-(eq? &#39;x &#39;y)                   ; 输出 #f
-(eq? &#39;x &#39;x)                   ; 输出 #t
-(equal? &#39;x &#39;y)                ; 输出 #f
+(eq? &#39;x &#39;y)      ;; 输出 #f
+(eq? &#39;x &#39;x)      ;; 输出 #t
+(equal? &#39;x &#39;y)   ;; 输出 #f
 
 ;; 比较两个字符串（String）的大小
-(string&gt;? &quot;x&quot; &quot;y&quot;)            ; 输出 #f
-(string&lt;? &quot;x&quot; &quot;y&quot;)            ; 输出 #t
-(string=? &quot;x&quot; &quot;x&quot;)            ; 输出 #t - 这里字符串的相等等价于使用 eq?
+(string&gt;? &quot;x&quot; &quot;y&quot;)  ;; 输出 #f
+(string&lt;? &quot;x&quot; &quot;y&quot;)  ;; 输出 #t
+(string=? &quot;x&quot; &quot;x&quot;)  ;; 输出 #t - 这里字符串的相等等价于使用 eq?
 
 ;; 比较两个符号（Symbol）的大小，可先转成字符串再比较
 ;; 若是判断两个符号（Symbol）是否相等，直接用 equal? 或 eq? 就行，不必转换后用 string=?
@@ -254,13 +254,13 @@
 <p>这里涉及到 Scheme 里面字符号（Symbol）和符串（String）两个概念的区别。具体来说 <code>&#39;quote</code> 和 <code>&quot;quote&quot;</code> 这两个表达式的输出结果是不一样的。前者是符号后者是字符串。</p>
 </li>
 <li><p><strong>quasiquote 和 unquote 操作</strong>：如果想读取变量的值，就需要用到 <a href="https://docs.racket-lang.org/guide/qq.html" target="_blank" rel="noopener">quasiquote</a> 操作了</p>
-<pre><code class="lang-scheme">(define x 6)     ;; 定义变量 x 为 6
+<pre><code class="lang-scheme">(define x 6) ;; 定义变量 x 为 6
 
-&#39;(1 2 3 x)       ;; 运行输出 (1 2 3 x)
+&#39;(1 2 3 x)   ;; 运行输出 (1 2 3 x)
 
-`(1 2 3 x)       ;; 运行输出 (1 2 3 x)
+`(1 2 3 x)   ;; 运行输出 (1 2 3 x)
 
-`(1 2 3 ,x)      ;; 运行输出 (1 2 3 6)
+`(1 2 3 ,x)  ;; 运行输出 (1 2 3 6)
 </code></pre>
 </li>
 <li><p><strong>构造类型 struct</strong>：和下面的模式匹配 <code>match</code> 配合使用很厉害。使用 <code>struct</code> 构造数据结构和类型是有好处的，因为是专用的。符号链表（list）构造的类型还是太<strong>通用</strong>，容易弄混淆，尤其是配合 <code>match</code> 的时候。</p>
@@ -280,9 +280,9 @@
 (define b1 (Binop &#39;+ 2 3))
 
 ;; 取出 struct 里的内容
-(Binop-op b1)   ;; 输出 &#39;+
-(Binop-e1 b1)   ;; 输出 &#39;+
-(Binop-e2 b1)   ;; 输出 &#39;3
+(Binop-op b1)  ;; 输出 &#39;+
+(Binop-e1 b1)  ;; 输出 &#39;+
+(Binop-e2 b1)  ;; 输出 &#39;3
 </code></pre>
 </li>
 <li><p><strong>模式匹配</strong>（Pattern Matching）：<a href="https://docs.racket-lang.org/reference/match.html" target="_blank" rel="noopener">match</a> 是属于 <strong>Racket</strong> 特有的，<strong>Scheme</strong> 本身是没有模式匹配的，尽管它可以用宏来实现这个语言特性。</p>

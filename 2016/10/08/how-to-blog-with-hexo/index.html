@@ -145,6 +145,17 @@ tags: Hexo
 <h3 id="预览你的文章"><a href="#预览你的文章" class="headerlink" title="预览你的文章"></a>预览你的文章</h3><p>写好文章之后，使用 <code>hexo s</code> 开启服务器，然后打开浏览器，输入网址 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 便可以预览写好的文章。</p>
 <p>修改文章内容之后，只需要刷新浏览器页面就可以立刻看到效果。</p>
 <hr>
+<h3 id="更改文章标签"><a href="#更改文章标签" class="headerlink" title="更改文章标签"></a>更改文章标签</h3><p>你也许会给你的文章打上标签（tags）进行分类，但是后期如果想更改，会发现用 <code>hexo clean</code> 命令无法更新网页上博客的标签。尤其是当你删除某个标签之后，发现旧标签始终存在。</p>
+<p>这时可以手动删除 <code>/blog/public</code> 文件夹，然后再用 <code>hexo clean</code> 和 <code>hexo g</code> 两个命令就可以了。你过去的各种标签被保存（缓存）在 <code>public/tags</code> 文件夹中，只要这个文件夹不更新，你网页上的旧标签也会继续存在。</p>
+<pre><code class="lang-plaintext">---
+title: 用 Hexo 搭建自定义博客
+date: 2016-10-08 14:45:13
+tags: 旧标签1 旧标签2 旧标签3
+---
+
+[... 博客内容 ...]
+</code></pre>
+<hr>
 <h3 id="给文章加密"><a href="#给文章加密" class="headerlink" title="给文章加密"></a>给文章加密</h3><p>这里我们使用的是 <a href="https://github.com/D0n9X1n/hexo-blog-encrypt" target="_blank" rel="noopener">hexo-blog-encrypt</a> 这个插件。</p>
 <p><strong>第一步</strong>，使用 npm 来安装 hexo-blog-encrypt：</p>
 <pre><code class="lang-bash"># --save 是确保插件记录在 package.jason 文件中，方便之后多终端同步

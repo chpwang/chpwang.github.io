@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2016/10/08/how-to-blog-with-hexo/</loc>
+    
+    <lastmod>2022-05-11T01:31:15.774Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2022/03/24/scheme-basics-and-IDE-configuration/</loc>
     
     <lastmod>2022-05-11T01:09:46.763Z</lastmod>
@@ -194,13 +201,6 @@
     <loc>http://cps.ninja/2020/04/14/ian-cs-basics-assignments/</loc>
     
     <lastmod>2022-03-20T16:05:00.508Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2016/10/08/how-to-blog-with-hexo/</loc>
-    
-    <lastmod>2022-03-20T16:05:00.501Z</lastmod>
     
   </url>
   

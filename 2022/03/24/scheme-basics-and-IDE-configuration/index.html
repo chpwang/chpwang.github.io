@@ -422,13 +422,13 @@ clause    =   [pat body ...+]
 (+ 9 (saved-k 1))    ;; 输出 6 - (+ 9 ...) 这个上下文被忽略了
 </code></pre>
 </li>
-<li><p><strong>宏（Macro）</strong>：宏特别容易被滥用。一个基本的原则是，如果一个宏它实际上做的是函数的事情，那你应该使用函数，而不是宏。</p>
+<li><p><strong>宏（Macro）</strong>：宏特别容易被滥用。<strong>第一</strong>使用原则是，你的宏不应该<strong>显著改变</strong>当前编程语言的语义，尽量都只做简单的重新排列组合动作。另一个基本的原则是，如果一个宏它实际上做的是函数的事情，那你都应该尽量使用函数，而不是宏，除非宏相比函数能实现某种<strong>效果更好</strong>的「封装打包」。</p>
 <pre><code class="lang-scheme">;; 这里又涉及到一个对新人陌生的概念：Macro（宏）是什么东西？
 ;; 简单地说 Macro 是一个语法转换器（Syntax Transformer）
 ;; 宏接收一个 syntax object（语法对象），返回新的 syntax object ，相当于翻译（替换）操作
 ;; 于是你可以通过宏定义的自己语法，这些语法是 Scheme 中原本没有的
 ;; 比如你可以有 (my-lambda ...) 这样的表达，它和函数的区别是，省略号部分的参数不会被求值
-;; 因为转换过程是在 compile time（程序编译阶段），而不是 run time（程序运行阶段）
+;; 因为转换（翻译）过程是在 compile time（程序编译阶段），而不是 run time（程序运行阶段）
 ;; Macro 有点像在解释器里添加一个分支来支持的新语法，这时，当前语言相当于被扩展了
 ;; 从这个意义上，Macro 像个小型解释器
 ;; 更多关于 Macro 的概念和作用，可参见本节末尾 Greg Hendershott 的文章
@@ -436,15 +436,14 @@ clause    =   [pat body ...+]
 
 ;; 宏会标记（接收）一串语法，然后根据定义转换成另一串语法返回
 ;; 举例来说，下面的 define-syntax 会定义一个名字为 foo 的宏
-;; 当我们代码中出现 (foo ...) 这样的表达式，程序会根据名字 foo 判断出这是个宏
-;; 然后表达式 (foo ...) 会在 compile time 先被转换成我们在宏 foo 中所定义的语法
-;; 然后转换之后的语法接下来才会被求值
+;; 当代码中出现 (foo ...) 这样的表达式，程序会根据名字 foo 判断出这是个宏，需要转译整个表达式
+;; 然后表达式 (foo ...) 会在 compile time 先被转换成我们在宏 foo 中所定义的表达式
+;; 即 (foo ...) 被替换成 (syntax &quot;I am foo&quot;)
+;; (syntax &quot;I am foo&quot;) 会在接下来的 run time 阶段被求值
 (define-syntax (foo stx)
   (syntax &quot;I am foo&quot;))
 
-;; 下面这个表达式会先被转换（翻译）成 (syntax &quot;I am foo&quot;)
-;; (+ 1 2) 这个参数部分在转换过程中不会被求值，因为转换过程是在 compile time
-;; 最后对返回的 (syntax &quot;I am foo&quot;) 求值，输出 &quot;I am foo&quot;
+;; 对返回的 (syntax &quot;I am foo&quot;) 求值，输出 &quot;I am foo&quot;
 (foo (+ 1 2))
 
 ;; 宏的定义也可以写成 lambda 形式
@@ -455,15 +454,19 @@ clause    =   [pat body ...+]
     (datum-&gt;syntax stx             ;; 这里第一个参数先不用管，目前只需知道有它才能顺利转换
                    (cadr (syntax-&gt;datum stx))))) ;; 宏最终都需要返回一个 syntax object
 
-;; 第一个输出是 &#39;(show-stx (+ 1 2)) ，这是 (println ...) 的输出，代表 stx 中所装载的内容
+;; 第一个输出是 &#39;(show-stx (+ 1 2))
 ;; 第二个输出是 3
-;; 这里的过程是用 cadr 来获得了 &#39;(+ 1 2)
+(show-stx (+ 1 2))
+
+;; 第一个输出是 (println ...) 的输出，代表 stx 中所装载的内容
+;; 第二个输出过程如下：
+;; (syntax-&gt;datum stx) 会转换语法对象 stx 的内容，得到 &#39;(show-stx (+ 1 2))
+;; 用 cadr 取得“参数”部分 &#39;(+ 1 2)
 ;; 然后通过 datum-&gt;syntax 把它转成了语法对象 (syntax (+ 1 2)) 作为宏 show-stx 的结果返回
 ;; 最后，程序会计算 (syntax (+ 1 2)) 的值，得到结果 3
 ;; 总结：
 ;; (show-stx (+ 1 2)) 会在编译过程中被翻译（替换）成 (+ 1 2)
 ;; (println ...) 是宏 show-stx 的副作用，输出参数 stx 的内容
-(show-stx (+ 1 2))
 
 #&#39;(+ 1 2)     ;; (syntax ...) 像 (quote ...) 一样可简写，这里等价于 (syntax (+ 1 2))
 
@@ -471,7 +474,7 @@ clause    =   [pat body ...+]
 
 ;; 通过上面的例子知道了 stx 装的大概就是个链表的结构（主要因为 scheme 的语法也是链表的形式）
 ;; 链表的结构，自然会希望有个模式匹配的功能，毕竟定义新语法的常规操作就是重新组合调整各个部分
-;; 虽然能用上面提到的 match ，但是宏的转义是在编译过程中，编译过程默认是看不到 match 的
+;; 虽然能用上面提到的 match ，但是宏的转译是在编译过程中，编译过程默认是看不到 match 的
 ;; 于是就有了专门针对宏的模式匹配 syntax-case ，用来匹配第一个参数 stx 的内容
 ;; 下面这个例子我们自定义了一个 if 的表达式，功能和 scheme 的 if 一样
 ;; 不用函数来实现 if 的原因是函数在调用时会对所有参数求值，但条件分支的俩分支不应该被同时求值
@@ -481,14 +484,14 @@ clause    =   [pat body ...+]
     (syntax-case stx ()             ;; 第二个参数暂时不用管，目前只需知道给个 () 就行
       [(_ pred true-exp false-exp)  ;; 用 _ 来匹配并忽略 stx 中首位的 my-if-sc
        (syntax
-        (cond [pred true-exp]       ;; my-if-sc 所在表达式被转义成了相应的 cond 表达式
+        (cond [pred true-exp]       ;; my-if-sc 所在表达式被转译成了相应的 cond 表达式
               [else false-exp]))]))) 
 
 (my-if-sc (&lt; (* 7 8) 9) &quot;true&quot; &quot;false&quot;)   ;; 输出 &quot;false&quot;
 
 ;; 另一个更好用的写法是 syntax-rules ，它更像 match ，所以更便于阅读，推荐优先使用
 ;; 在 syntax-case 中，返回的表达式要用 syntax 之类的方式转成一个 syntax object（语法对象）
-;; 而在 syntax-rules 只需要直接写转换完的表达式就行了，它会自行帮你转换成 syntax object
+;; 而用 syntax-rules 只需直接写要返回的表达式就行了，它在后台会自行帮你转换成 syntax object
 (define-syntax my-if-sr
   (syntax-rules ()
     [(_ pred true-exp false-exp)
@@ -573,7 +576,9 @@ clause    =   [pat body ...+]
 </ul>
 <p>更多快捷键组合可以打开 <strong>Keybindings</strong> 窗口查询：<code>Edit</code> -&gt; <code>Keybindings</code> -&gt; <code>Show Active Keybindings</code><br>其他使用使用小技巧可参考 <a href="https://rebelsky.cs.grinnell.edu/Courses/CSC151/2018S/handouts/drracket-tips" target="_blank" rel="noopener">Some tips and tricks for DrRacket</a> ，或者查看 <a href="https://docs.racket-lang.org/guide/index.html" target="_blank" rel="noopener"><em>The Racket Guide</em></a> 和 <a href="https://plt.cs.northwestern.edu/snapshots/current/pdf-doc/drracket.pdf" target="_blank" rel="noopener"><em>DrRacket: The Racket Programming Environment</em></a></p>
 <hr>
-<h3 id="编程环境配置-Emacs（待完善）"><a href="#编程环境配置-Emacs（待完善）" class="headerlink" title="编程环境配置 - Emacs（待完善）"></a>编程环境配置 - Emacs（待完善）</h3><hr>
+<h3 id="编程环境配置-Emacs（待完善）"><a href="#编程环境配置-Emacs（待完善）" class="headerlink" title="编程环境配置 - Emacs（待完善）"></a>编程环境配置 - Emacs（待完善）</h3><p>这里的设置主要参考对新手相当不友好的教程：<a href="http://www.yinwang.org/blog-cn/2013/04/11/scheme-setup" target="_blank" rel="noopener">Scheme 编程环境的设置</a><br>再加上 emacs <a href="https://www.gnu.org/software/emacs/download.html#nonfree" target="_blank" rel="noopener">官网</a> 上的重口味言论，让我觉得还是 Racket 更适合广大计算新人。</p>
+<p>由于感觉需要各种探索和试错，这部分内容之后找个大块的时间再慢慢补完。</p>
+<hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
 
 

@@ -553,6 +553,7 @@ clause    =   [pat body ...+]
 
 ;; 如果单独用 reset 则 (reset exp)会正常输出表达式 exp 的值
 ;; 如果单独使用 shift 则此时的 shift 和 call/cc 类似，调用 k 会丢弃 shift 内部的上下文
+;; 强烈不建议单独使用 shift ，因为程序会出现不符合预期的奇怪行为，reset 和 shift 要成对使用
 
 (+ 1 (* 2 (shift k (k 3))))       ;; 输出 7 - 这里的 k 相当于 (lambda (x) (+ 1 (* 2 x)))
 
@@ -576,8 +577,13 @@ clause    =   [pat body ...+]
 </ul>
 <p>更多快捷键组合可以打开 <strong>Keybindings</strong> 窗口查询：<code>Edit</code> -&gt; <code>Keybindings</code> -&gt; <code>Show Active Keybindings</code><br>其他使用使用小技巧可参考 <a href="https://rebelsky.cs.grinnell.edu/Courses/CSC151/2018S/handouts/drracket-tips" target="_blank" rel="noopener">Some tips and tricks for DrRacket</a> ，或者查看 <a href="https://docs.racket-lang.org/guide/index.html" target="_blank" rel="noopener"><em>The Racket Guide</em></a> 和 <a href="https://plt.cs.northwestern.edu/snapshots/current/pdf-doc/drracket.pdf" target="_blank" rel="noopener"><em>DrRacket: The Racket Programming Environment</em></a></p>
 <hr>
-<h3 id="编程环境配置-Emacs（待完善）"><a href="#编程环境配置-Emacs（待完善）" class="headerlink" title="编程环境配置 - Emacs（待完善）"></a>编程环境配置 - Emacs（待完善）</h3><p>这里的设置主要参考对新手相当不友好的教程：<a href="http://www.yinwang.org/blog-cn/2013/04/11/scheme-setup" target="_blank" rel="noopener">Scheme 编程环境的设置</a><br>再加上 emacs <a href="https://www.gnu.org/software/emacs/download.html#nonfree" target="_blank" rel="noopener">官网</a> 上的重口味言论，让我觉得还是 Racket 更适合广大计算新人。</p>
-<p>由于感觉需要各种探索和试错，这部分内容之后找个大块的时间再慢慢补完。</p>
+<h3 id="编程环境配置-Emacs（待完善）"><a href="#编程环境配置-Emacs（待完善）" class="headerlink" title="编程环境配置 - Emacs（待完善）"></a>编程环境配置 - Emacs（待完善）</h3><p>这部分的内容主要参考自：</p>
+<ul>
+<li>对新手相当<strong>不</strong>友好的教程：<a href="http://www.yinwang.org/blog-cn/2013/04/11/scheme-setup" target="_blank" rel="noopener">Scheme 编程环境的设置</a></li>
+<li>对新手相当<strong>友好</strong>的教程：<a href="https://youtu.be/48JlgiBpw_I" target="_blank" rel="noopener">The Absolute Beginner’s Guide to Emacs</a></li>
+</ul>
+<p>由于感觉需要各种探索和试错，再加上 emacs <a href="https://www.gnu.org/software/emacs/download.html#nonfree" target="_blank" rel="noopener">官网</a>上的重口味言论，让这部分内容应该需要一个很大块的时间慢慢补完。</p>
+<p>还是 Racket 更适合广大计算新人。</p>
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
 

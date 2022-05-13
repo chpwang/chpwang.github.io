@@ -97,6 +97,29 @@
 <img src="/2022/03/24/scheme-basics-and-IDE-configuration/li_lu_promotes_TLS.jpg" title="Li Lu promotes TLS">
 <img src="/2022/03/24/scheme-basics-and-IDE-configuration/Li_Lu_s_kindness.jpeg" title="Li Lu and Wang">
 <hr>
+<h3 id="编程环境配置-DrRacket"><a href="#编程环境配置-DrRacket" class="headerlink" title="编程环境配置 - DrRacket"></a>编程环境配置 - DrRacket</h3><p>直接去 <strong>Racket</strong> 的<a href="https://racket-lang.org" target="_blank" rel="noopener">官网</a>下载对应的安装包到本地即可双击安装。支持 Windows 和 MacOS 。</p>
+<p>常用快捷键：</p>
+<ul>
+<li>运行代码：<code>cmd + R</code>（ MacOS 系统）；</li>
+<li>快速缩进排版所有代码（Reindent All）：<code>cmd + I</code>（ MacOS 系统）；</li>
+<li>注释代码（块）：<code>control + esc + ;</code>（ MacOS 系统）；<code>Ctrl + Alt + ;</code>（ Win 系统）；</li>
+<li>显示代码整体轮廓（Show Program Contour）：<code>cmd + U</code>（ MacOS 系统）；</li>
+<li><strong>取消</strong>注释代码（块）：<code>control + esc + =</code>（ MacOS 系统）；<code>Ctrl + Alt + =</code>（ Win 系统）；</li>
+<li>将<strong>输出</strong>窗口显示在<strong>右侧</strong>，使编辑窗口的区域更大：<code>cmd + shift + L</code>（ MacOS 系统）；<br>也可以通过选择 <code>View</code> -&gt; <code>Use Horizontal Layout</code> 实现；</li>
+<li>在输出窗口测试的时候，调出<strong>上一个</strong>运行的代码：<code>esc + P</code>（ MacOS 系统）；</li>
+<li>在输出窗口测试的时候，调出<strong>下一个</strong>运行的代码：<code>esc + N</code>（ MacOS 系统）；</li>
+<li>光标定位到一个变量，重命名所有这个变量（会根据 Scope 来而不是简单的同名）：<code>control + X + M</code>（ MacOS 系统）；</li>
+</ul>
+<p>更多快捷键组合可以打开 <strong>Keybindings</strong> 窗口查询：<code>Edit</code> -&gt; <code>Keybindings</code> -&gt; <code>Show Active Keybindings</code><br>其他使用使用小技巧可参考 <a href="https://rebelsky.cs.grinnell.edu/Courses/CSC151/2018S/handouts/drracket-tips" target="_blank" rel="noopener">Some tips and tricks for DrRacket</a> ，或者查看 <a href="https://docs.racket-lang.org/guide/index.html" target="_blank" rel="noopener"><em>The Racket Guide</em></a> 和 <a href="https://plt.cs.northwestern.edu/snapshots/current/pdf-doc/drracket.pdf" target="_blank" rel="noopener"><em>DrRacket: The Racket Programming Environment</em></a></p>
+<hr>
+<h3 id="编程环境配置-Emacs（待完善）"><a href="#编程环境配置-Emacs（待完善）" class="headerlink" title="编程环境配置 - Emacs（待完善）"></a>编程环境配置 - Emacs（待完善）</h3><p>这部分的内容主要参考自：</p>
+<ul>
+<li>对新手相当<strong>不</strong>友好的教程：<a href="http://www.yinwang.org/blog-cn/2013/04/11/scheme-setup" target="_blank" rel="noopener">Scheme 编程环境的设置</a></li>
+<li>对新手相当<strong>友好</strong>的教程：<a href="https://youtu.be/48JlgiBpw_I" target="_blank" rel="noopener">The Absolute Beginner’s Guide to Emacs</a></li>
+</ul>
+<p>由于感觉需要各种探索和试错，再加上 emacs <a href="https://www.gnu.org/software/emacs/download.html#nonfree" target="_blank" rel="noopener">官网</a>上令人不安的嚣张言论，这部分内容应该需要一个很大块的时间慢慢补完。</p>
+<p>还是 Racket 更适合广大计算新人。</p>
+<hr>
 <h3 id="Scheme-常用的语法"><a href="#Scheme-常用的语法" class="headerlink" title="Scheme 常用的语法"></a>Scheme 常用的语法</h3><p>Scheme 采用的是前缀表达式，即处于第一位置的就是「操作符」，之后位置的就是「操作数」。计算的<strong>优先级</strong>由「括号」来确定。括号内部的最先计算。具体顺序为：先对括号中的每一个表达式求值，然后再将操作符作用在操作数上，对整个括号的表达式求值。</p>
 <ul>
 <li><p><strong>前缀表达式</strong></p>
@@ -561,29 +584,6 @@ clause    =   [pat body ...+]
 </code></pre>
 </li>
 </ul>
-<hr>
-<h3 id="编程环境配置-DrRacket"><a href="#编程环境配置-DrRacket" class="headerlink" title="编程环境配置 - DrRacket"></a>编程环境配置 - DrRacket</h3><p>直接去 <strong>Racket</strong> 的<a href="https://racket-lang.org" target="_blank" rel="noopener">官网</a> 下载安装即可。支持 Windows 和 MacOS 。</p>
-<p>常用快捷键：</p>
-<ul>
-<li>运行代码：<code>cmd + R</code>（ MacOS 系统）；</li>
-<li>快速缩进排版所有代码（Reindent All）：<code>cmd + I</code>（ MacOS 系统）；</li>
-<li>注释代码（块）：<code>control + esc + ;</code>（ MacOS 系统）；<code>Ctrl + Alt + ;</code>（ Win 系统）；</li>
-<li>显示代码整体轮廓（Show Program Contour）：<code>cmd + U</code>（ MacOS 系统）；</li>
-<li><strong>取消</strong>注释代码（块）：<code>control + esc + =</code>（ MacOS 系统）；<code>Ctrl + Alt + =</code>（ Win 系统）；</li>
-<li>将<strong>输出</strong>窗口显示在<strong>右侧</strong>，使编辑窗口的区域更大：<code>cmd + shift + L</code>（ MacOS 系统）；<br>也可以通过选择 <code>View</code> -&gt; <code>Use Horizontal Layout</code> 实现；</li>
-<li>在输出窗口测试的时候，调出<strong>上一个</strong>运行的代码：<code>esc + P</code>（ MacOS 系统）；</li>
-<li>在输出窗口测试的时候，调出<strong>下一个</strong>运行的代码：<code>esc + N</code>（ MacOS 系统）；</li>
-<li>光标定位到一个变量，重命名所有这个变量（会根据 Scope 来而不是简单的同名）：<code>control + X + M</code>（ MacOS 系统）；</li>
-</ul>
-<p>更多快捷键组合可以打开 <strong>Keybindings</strong> 窗口查询：<code>Edit</code> -&gt; <code>Keybindings</code> -&gt; <code>Show Active Keybindings</code><br>其他使用使用小技巧可参考 <a href="https://rebelsky.cs.grinnell.edu/Courses/CSC151/2018S/handouts/drracket-tips" target="_blank" rel="noopener">Some tips and tricks for DrRacket</a> ，或者查看 <a href="https://docs.racket-lang.org/guide/index.html" target="_blank" rel="noopener"><em>The Racket Guide</em></a> 和 <a href="https://plt.cs.northwestern.edu/snapshots/current/pdf-doc/drracket.pdf" target="_blank" rel="noopener"><em>DrRacket: The Racket Programming Environment</em></a></p>
-<hr>
-<h3 id="编程环境配置-Emacs（待完善）"><a href="#编程环境配置-Emacs（待完善）" class="headerlink" title="编程环境配置 - Emacs（待完善）"></a>编程环境配置 - Emacs（待完善）</h3><p>这部分的内容主要参考自：</p>
-<ul>
-<li>对新手相当<strong>不</strong>友好的教程：<a href="http://www.yinwang.org/blog-cn/2013/04/11/scheme-setup" target="_blank" rel="noopener">Scheme 编程环境的设置</a></li>
-<li>对新手相当<strong>友好</strong>的教程：<a href="https://youtu.be/48JlgiBpw_I" target="_blank" rel="noopener">The Absolute Beginner’s Guide to Emacs</a></li>
-</ul>
-<p>由于感觉需要各种探索和试错，再加上 emacs <a href="https://www.gnu.org/software/emacs/download.html#nonfree" target="_blank" rel="noopener">官网</a>上的重口味言论，让这部分内容应该需要一个很大块的时间慢慢补完。</p>
-<p>还是 Racket 更适合广大计算新人。</p>
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
 

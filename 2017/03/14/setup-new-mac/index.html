@@ -96,12 +96,12 @@
 </code></pre>
 <p>Homebrew 常用指令</p>
 <pre><code class="lang-bash">## 安装（软件），更新，检查可更新的软件
-$ brew search [formulae]       # 查询包含关键词的软件 formulae
-$ brew install [formulae]      # 安装指定的软件 formulae
-$ brew update                  # brew 自我更新
-$ brew upgrade [formulae]      # 更新指定的软件 formulae
-$ brew outdated                # 查询本地版本低于当前最新版本的软件
-$ brew cleanup [formulae]      # 清除本地软件安装包，以释放硬盘空间 - 加关键词就清除指定的安装包，不加就全部清除
+$ brew search [formulae]   # 查询包含关键词的软件 formulae
+$ brew install [formulae]  # 安装指定的软件 formulae
+$ brew update              # brew 自我更新
+$ brew upgrade [formulae]  # 更新指定的软件 formulae
+$ brew outdated            # 查询本地版本低于当前最新版本的软件
+$ brew cleanup [formulae]  # 清除本地安装包，释放硬盘空间 - 加关键词就清除指定安装包，不加就全部清除
 </code></pre>
 <p>更多信息可以参考官网<a href="https://docs.brew.sh/FAQ" target="_blank" rel="noopener">这里</a>，包括重新安装 Homebrew</p>
 <hr>
@@ -219,11 +219,14 @@ $ set -e https_proxy
 ## 以下命令会将 /usr/local/bin 永久添加到 $fish_user_paths ，进而每次登陆 Terminal 都会自动载入该路径
 $ set -U fish_user_paths /usr/local/bin $fish_user_paths
 
-## fish_user_paths = /Users/user1/gems /Users/user1/ruby /Users/user1/.rvm
+## 查看当前 fish_user_paths 的内容
+$ echo $fish_user_paths
+/usr/local/bin /Users/user1/ruby /Users/user1/.rvm
+
 ## 永久移除（影响今后每次的登陆）变量 $fish_user_paths 中右起第 2 个元素
 $ set --erase --universal fish_user_paths[2]
 $ echo $fish_user_paths
-/Users/user1/gems /Users/user1/.rvm
+/usr/local/bin /Users/user1/.rvm
 </code></pre>
 <p>自定义 fish shell 的提示符内容（Customize Prompt）可以通过更改配置文件 <code>fish_prompt.fish</code> 中的函数 <strong>fish_prompt</strong> 来实现：</p>
 <pre><code class="lang-bash">## ~/.config/fish/functions/fish_prompt.fish

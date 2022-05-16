@@ -7,12 +7,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="google-site-verification" content>
   
-  <title>Scheme 的基本语法和编程环境配置（待完善）</title>
+  <title>Scheme 的基本语法和编程环境配置</title>
   <meta name="author" content="TwentyNight">
    <meta name="description" content="TwentyNight 的修行屋">
   
 
-  <meta property="og:title" content="Scheme 的基本语法和编程环境配置（待完善）">
+  <meta property="og:title" content="Scheme 的基本语法和编程环境配置">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:site_name" content="行侠何须仗名剑">
  <meta property="og:image" content>
@@ -51,7 +51,7 @@
       
   
     <h1 class="page-title center">
-        Scheme 的基本语法和编程环境配置（待完善）
+        Scheme 的基本语法和编程环境配置
     </h1>
   
 
@@ -112,19 +112,16 @@
 </ul>
 <p>更多快捷键组合可以打开 <strong>Keybindings</strong> 窗口查询：<code>Edit</code> -&gt; <code>Keybindings</code> -&gt; <code>Show Active Keybindings</code><br>其他使用使用小技巧可参考 <a href="https://rebelsky.cs.grinnell.edu/Courses/CSC151/2018S/handouts/drracket-tips" target="_blank" rel="noopener">Some tips and tricks for DrRacket</a> ，或者查看 <a href="https://docs.racket-lang.org/guide/index.html" target="_blank" rel="noopener"><em>The Racket Guide</em></a> 和 <a href="https://plt.cs.northwestern.edu/snapshots/current/pdf-doc/drracket.pdf" target="_blank" rel="noopener"><em>DrRacket: The Racket Programming Environment</em></a></p>
 <hr>
-<h3 id="编程环境配置-Emacs（待完善）"><a href="#编程环境配置-Emacs（待完善）" class="headerlink" title="编程环境配置 - Emacs（待完善）"></a>编程环境配置 - Emacs（待完善）</h3><p>这部分的内容主要参考自：</p>
-<ul>
-<li>对新手相当<strong>不</strong>友好的教程：<a href="http://www.yinwang.org/blog-cn/2013/04/11/scheme-setup" target="_blank" rel="noopener">Scheme 编程环境的设置</a></li>
-<li>对新手相当<strong>友好</strong>的教程：<a href="https://youtu.be/48JlgiBpw_I" target="_blank" rel="noopener">The Absolute Beginner’s Guide to Emacs</a></li>
-</ul>
-<p>由于感觉需要各种探索和试错，再加上 emacs <a href="https://www.gnu.org/software/emacs/download.html#nonfree" target="_blank" rel="noopener">官网</a>上令人不安的嚣张言论，这部分内容应该需要一个很大块的时间慢慢补完。</p>
-<p>还是 Racket 更适合广大计算新人。</p>
+<h3 id="编程环境配置-Emacs"><a href="#编程环境配置-Emacs" class="headerlink" title="编程环境配置 - Emacs"></a>编程环境配置 - Emacs</h3><p>Emacs 可以通过配置，方便地（也没有特别方便）使用由 <strong>R. Kent Dybvig</strong> 设计的、世界上性能和可靠性都最强的 <a href="https://github.com/cisco/ChezScheme" target="_blank" rel="noopener">Chez Scheme</a> 来运行我们的代码。</p>
+<p>但无论是配置的过程，还是使用的过程，Emacs 的操作对新手来说始终不是特别友好。还是 Racket 更适合广大计算新人。而且上文已经说了，Racket 的默认实现今后会变成 <a href="https://blog.racket-lang.org/2021/01/racket-status.html" target="_blank" rel="noopener">Racket on Chez Scheme </a>。</p>
+<p>所以目前的建议是，新手就用 <a href="https://racket-lang.org" target="_blank" rel="noopener">DrRacket</a> 作为主力编辑器写 Scheme 代码。有需要再在终端里用 <a href="https://github.com/cisco/ChezScheme" target="_blank" rel="noopener">Chez Scheme</a> 运行<code>.scm</code> 代码文件。</p>
+<p>如果仍然想使用 Emacs ，可以看 <a href="/2022/05/16/emacs-setup/">Emacs 编程环境设置</a>，里面也提到了如何安装和使用 <a href="https://github.com/cisco/ChezScheme" target="_blank" rel="noopener">Chez Scheme</a> 。</p>
 <hr>
-<h3 id="Scheme-常用的语法"><a href="#Scheme-常用的语法" class="headerlink" title="Scheme 常用的语法"></a>Scheme 常用的语法</h3><p>Scheme 采用的是前缀表达式，即处于第一位置的就是「操作符」，之后位置的就是「操作数」。计算的<strong>优先级</strong>由「括号」来确定。括号内部的最先计算。具体顺序为：先对括号中的每一个表达式求值，然后再将操作符作用在操作数上，对整个括号的表达式求值。</p>
+<h3 id="Scheme-常用的语法"><a href="#Scheme-常用的语法" class="headerlink" title="Scheme 常用的语法"></a>Scheme 常用的语法</h3><p>编程语言 Scheme 采用的是前缀表达式的语法。即处于第一位置的就是「操作符」，之后位置的就是「操作数」。计算的<strong>优先级</strong>由「括号」来确定。括号内部的最先计算。具体顺序为：先对括号中的每一个表达式求值，然后再将操作符作用在操作数上，对整个括号的表达式求值。</p>
 <ul>
 <li><p><strong>前缀表达式</strong></p>
-<pre><code class="lang-scheme">(+ 2 3)
-(* 1 2 (+ 3 4 5))
+<pre><code class="lang-scheme">(+ 2 3)        ;; 分别对 + 、2 、3 这三个表达式求值，再将 + 的值（操作符）作用在 2 和 3 上
+(* 1 (+ 3 5))
 </code></pre>
 </li>
 <li><p><strong>函数</strong></p>
@@ -145,13 +142,15 @@
 (define square (lambda (x) (* x x)))
 
 ;; 调用 square 函数
-(square x)         ;; 输出 4
+(square x)        ;; 输出 4
 </code></pre>
 </li>
 <li><p><strong>赋值操作</strong></p>
 <pre><code class="lang-scheme">;; 语法：
 ;; (set! variable-name expression)
 (set! x 6)
+
+(square x)        ;; 输出 36
 </code></pre>
 </li>
 <li><p><strong>逻辑操作符</strong></p>

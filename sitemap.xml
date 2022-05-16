@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2022/03/24/scheme-basics-and-IDE-configuration/</loc>
+    
+    <lastmod>2022-05-16T06:17:41.489Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2022/05/16/emacs-setup/</loc>
+    
+    <lastmod>2022-05-16T06:02:27.574Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/05/25/vscode-intro/</loc>
+    
+    <lastmod>2022-05-16T02:23:28.225Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
+    
+    <lastmod>2022-05-15T19:44:37.912Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-3/</loc>
     
     <lastmod>2022-05-14T11:29:50.696Z</lastmod>
@@ -12,13 +40,6 @@
     <loc>http://cps.ninja/2020/04/14/ian-cs-course-quotes/</loc>
     
     <lastmod>2022-05-13T14:21:00.309Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2022/03/24/scheme-basics-and-IDE-configuration/</loc>
-    
-    <lastmod>2022-05-13T14:07:24.676Z</lastmod>
     
   </url>
   
@@ -44,23 +65,9 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
-    
-    <lastmod>2022-05-11T01:08:28.081Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cps.ninja/2018/01/02/Git-Basics/</loc>
     
     <lastmod>2022-05-11T01:08:09.292Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/05/25/vscode-intro/</loc>
-    
-    <lastmod>2022-05-11T01:07:59.404Z</lastmod>
     
   </url>
   

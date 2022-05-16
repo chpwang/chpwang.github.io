@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2020/04/14/fun-quotes/</loc>
+    
+    <lastmod>2022-05-16T21:41:30.779Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2022/05/16/emacs-setup/</loc>
     
-    <lastmod>2022-05-16T20:10:02.097Z</lastmod>
+    <lastmod>2022-05-16T21:36:22.717Z</lastmod>
     
   </url>
   
@@ -33,13 +40,6 @@
     <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-3/</loc>
     
     <lastmod>2022-05-14T11:29:50.696Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2020/04/14/ian-cs-course-quotes/</loc>
-    
-    <lastmod>2022-05-13T14:21:00.309Z</lastmod>
     
   </url>
   

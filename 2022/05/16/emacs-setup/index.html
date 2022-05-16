@@ -145,11 +145,25 @@ $ cat ~/Documents/prog/demo.scm
 <img src="/2022/05/16/emacs-setup/emacs-interface-01.jpeg" title="emacs default welcome interface">
 <p>上图中我标注了 Emacs 的一些<strong>基本概念</strong>术语，这样后续你就会知道这些名词分别是在说什么区域：</p>
 <ul>
-<li>红色标注区的 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/The-Echo-Area.html" target="_blank" rel="noopener">Echo Area</a></li>
-<li>绿色标注去的 <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Mode-Line.html" target="_blank" rel="noopener">Mode Line</a></li>
-<li>紫色标注区的 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Basic-Windows.html" target="_blank" rel="noopener">Window</a></li>
-<li>青色标注区的 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Frames.html" target="_blank" rel="noopener">Frame</a> </li>
+<li><strong style="color:rgb(108, 27, 44);">红色</strong>标注区的 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/The-Echo-Area.html" target="_blank" rel="noopener">Echo Area</a>：显示你的各种输入，进行简单的交互，比如查找文件，查找关键词；</li>
+<li><strong style="color:rgb(62, 93, 34);">绿色</strong>标注区的 <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Mode-Line.html" target="_blank" rel="noopener">Mode Line</a>：显示当前 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Basics.html" target="_blank" rel="noopener">Buffer</a> 的一些信息。后期可以自行定义显示内容；</li>
+<li><strong style="color:rgb(98, 0, 169);">紫色</strong>标注区的 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Basic-Windows.html" target="_blank" rel="noopener">Window</a>：显示当前 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Basics.html" target="_blank" rel="noopener">Buffer</a> 的内容。</li>
+<li><strong style="color:rgb(108, 191, 167);">青色</strong>标注区的 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Frames.html" target="_blank" rel="noopener">Frame</a>：一个 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Frames.html" target="_blank" rel="noopener">Frame</a> 内部区域可以分割成多个 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Basic-Windows.html" target="_blank" rel="noopener">Window</a>，这样可以<strong>同时</strong>看多个 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Basics.html" target="_blank" rel="noopener">Buffer</a>；</li>
 </ul>
+<p>除了上述四个描述用户界面的概念，Emacs 里还有个重要概念是 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Basics.html" target="_blank" rel="noopener">Buffer</a> 。对新手来说，现阶段只需要把 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Basics.html" target="_blank" rel="noopener">Buffer</a> 简单理解为「任务」就行了。比如，你打开了 3 个文件，就相当于有了 3 个 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Basics.html" target="_blank" rel="noopener">Buffer</a> ，每个文件对应一个；浏览器开了 2 个页面，就有 2 个 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Basics.html" target="_blank" rel="noopener">Buffer</a> ……所以，在不同 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Basics.html" target="_blank" rel="noopener">Buffer</a> 之间切换，就相当于在你的 3 个文件之间、2 个浏览器页面之间切换，然后 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Basics.html" target="_blank" rel="noopener">Buffer</a> 的内容会显示在你的 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Basic-Windows.html" target="_blank" rel="noopener">Window</a> 区域里。</p>
+<p>接下来就是「<strong>操作</strong>」了。虽然也能用鼠标，但 Emacs 的<strong>主流</strong>操作是以<strong>键盘快捷键</strong>为主的。因为它多数情况下比鼠标效率高，尽管这也增加了新手的学习成本。</p>
+<p>Emacs 的<strong>快捷键组合</strong>会多数会配合 <code>Ctrl</code> 和 <code>Meta</code> 这两个按键来使用。这两个按键分别会用大写字母 <code>C</code> 和 <code>M</code> 来表示。比如 <code>Ctrl + G</code> 这样的组合按键会写成 <code>C-g</code> ，表示同时按键盘上的 <code>Ctrl</code> 键和字母 <code>G</code> 键。同理，<code>M-x</code> 表示同时按键盘上的 <code>Meta</code> 键和字母 <code>X</code> 键。<code>C-x C-s</code> 表示先按 <code>C-x</code> 组合键，再按 <code>C-s</code> 组合键。现在再看上文的界面图，就能知道 <strong>echo area</strong> 区域在提示你可以用快捷键 <code>C-x C-s</code> 来查看更多信息。</p>
+<p>苹果电脑的键盘上没有 <code>Meta</code> 按键，默认会用 <code>Option</code> 按键来替代（可自定义）。</p>
+<p>下面是最基础的快捷键，耐心适应后，会感觉还算好用：</p>
+<ul>
+<li><code>C-g</code> ：这个是新手首先要学会的「<strong>撤销</strong>」操作，如果你快捷键输入到一半错了想撤销就按它；</li>
+<li><code>C-x C-f</code> ：<strong>打开</strong>文件的操作。在 <strong>echo area</strong> 区域交互，输入文件路径后如果不存在就会新建；</li>
+<li><code>C-x C-s</code> ：<strong>保存</strong>当前文件。不过在 MacOS 下，你也可以直接用 <code>Cmd + S</code> 这样通用的保存操作；</li>
+<li><code>C-x C-w</code> ：将当前文件另存为。相当于<strong>复制</strong>文件的操作；</li>
+<li><code>C-x b</code> : <strong>切换</strong> Buffer 。可以用 <code>Tab</code> 键来自动补全或查看当前可切换的 Buffer ；</li>
+<li><code>C-x C-c</code> : <strong>关闭</strong> Emacs 编辑器；</li>
+</ul>
+<p>掌握了上述基础操作后，就可以进行下一个部分的配置了。其他额外知识可以随着 Emacs 的使用慢慢掌握，我们首要目标是能尽快地写 Scheme 代码和运行它。</p>
 <hr>
 <h3 id="配置-Emacs"><a href="#配置-Emacs" class="headerlink" title="配置 Emacs"></a>配置 Emacs</h3><p>我们这里只需要做很少的几个关键设置即可。</p>
 <ul>
@@ -157,6 +171,23 @@ $ cat ~/Documents/prog/demo.scm
 <p><code>bash</code></p>
 </li>
 </ul>
+<hr>
+<h3 id="更多的-Emacs-操作和技巧"><a href="#更多的-Emacs-操作和技巧" class="headerlink" title="更多的 Emacs 操作和技巧"></a>更多的 Emacs 操作和技巧</h3><blockquote><p>Emacs 是一个好的操作系统，它只是缺少一个好的编辑器。</p>
+<footer><strong>Ian</strong></footer></blockquote>
+<p>常用内容编辑快捷键：</p>
+<ul>
+<li><code>C-p</code> : 光标向<strong>上</strong>移动；</li>
+<li><code>C-n</code> : 光标向<strong>下</strong>移动；</li>
+<li><code>C-f</code> : 光标向<strong>前</strong>移动；</li>
+<li><code>C-b</code> : 光标向<strong>后</strong>移动；</li>
+<li><code>C-e</code> : 光标向移动到这一段文字的<strong>末尾</strong>；</li>
+<li><code>C-a</code> : 光标向移动到这一段文字的<strong>开头</strong>；</li>
+<li><code>C-k</code> : 删除并复制光标处开始后面的这一段文字（类似<strong>剪切</strong>操作）；</li>
+<li><code>C-y</code> : 于光标处粘贴最近一次被 <code>C-k</code> 复制的内容（类似<strong>粘贴</strong>操作）；</li>
+<li><code>M-y</code> : 在 <code>C-y</code> 操作后，切换 <code>C-k</code> 复制的内容（ <code>C-k</code> 复制的内容都被储存在 <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Kill-Ring.html" target="_blank" rel="noopener">kill ring</a> 里）；</li>
+</ul>
+<p>……<br>……</p>
+<p>TODO</p>
 <p>参考资料：</p>
 <ul>
 <li>对新手相当<strong>不</strong>友好的<strong>过于简洁</strong>的教程：<a href="http://www.yinwang.org/blog-cn/2013/04/11/scheme-setup" target="_blank" rel="noopener"><em>Scheme 编程环境的设置</em></a></li>

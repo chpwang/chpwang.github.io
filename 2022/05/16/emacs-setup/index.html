@@ -139,13 +139,28 @@ $ cat ~/Documents/prog/demo.scm
 (printf &quot;~a ~a ~n&quot; words punctuation)
 </code></pre>
 <hr>
-<h3 id="Emacs-安装"><a href="#Emacs-安装" class="headerlink" title="Emacs 安装"></a>Emacs 安装</h3><p>Emacs 的安装并不难，从<a href="https://emacsformacosx.com" target="_blank" rel="noopener">官网</a>下载 <code>.dmg</code> 文件到本地正常安装即可。它对于新手主要的障碍在于后续的配置和软件的使用。</p>
+<h3 id="Emacs-安装"><a href="#Emacs-安装" class="headerlink" title="Emacs 安装"></a>Emacs 安装</h3><p>Emacs 的安装<strong>并不难</strong>，从<a href="https://emacsformacosx.com" target="_blank" rel="noopener">官网</a>下载 <code>.dmg</code> 文件到本地正常安装即可。它对于新手的<strong>主要障碍</strong>在于后续的配置和软件的使用。</p>
 <hr>
-<h3 id="配置-Emacs"><a href="#配置-Emacs" class="headerlink" title="配置 Emacs"></a>配置 Emacs</h3><p>TODO</p>
+<h3 id="开始使用-Emacs"><a href="#开始使用-Emacs" class="headerlink" title="开始使用 Emacs"></a>开始使用 Emacs</h3><p>刚安装好的 Emacs 是十分简陋的，我们首先需要对它进行配置，才能勉强达到一个稍微好用的状态。但是从顺序上来说，<strong>先</strong>知道如何使用，后续配置的过程才会更加游刃有余。打开后界面如下所示：</p>
+<img src="/2022/05/16/emacs-setup/emacs-interface-01.jpeg" title="emacs default welcome interface">
+<p>上图中我标注了 Emacs 的一些<strong>基本概念</strong>术语，这样后续你就会知道这些名词分别是在说什么区域：</p>
+<ul>
+<li>红色标注区的 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/The-Echo-Area.html" target="_blank" rel="noopener">Echo Area</a></li>
+<li>绿色标注去的 <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Mode-Line.html" target="_blank" rel="noopener">Mode Line</a></li>
+<li>紫色标注区的 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Basic-Windows.html" target="_blank" rel="noopener">Window</a></li>
+<li>青色标注区的 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Frames.html" target="_blank" rel="noopener">Frame</a> </li>
+</ul>
+<hr>
+<h3 id="配置-Emacs"><a href="#配置-Emacs" class="headerlink" title="配置 Emacs"></a>配置 Emacs</h3><p>我们这里只需要做很少的几个关键设置即可。</p>
+<ul>
+<li><p>第 1 步：</p>
+<p><code>bash</code></p>
+</li>
+</ul>
 <p>参考资料：</p>
 <ul>
-<li>对新手相当<strong>不</strong>友好的教程：<a href="http://www.yinwang.org/blog-cn/2013/04/11/scheme-setup" target="_blank" rel="noopener"><em>Scheme 编程环境的设置</em></a></li>
-<li>对新手<strong>勉强算</strong>友好的教程：<a href="https://youtu.be/48JlgiBpw_I" target="_blank" rel="noopener"><em>The Absolute Beginner’s Guide to Emacs</em></a></li>
+<li>对新手相当<strong>不</strong>友好的<strong>过于简洁</strong>的教程：<a href="http://www.yinwang.org/blog-cn/2013/04/11/scheme-setup" target="_blank" rel="noopener"><em>Scheme 编程环境的设置</em></a></li>
+<li>对新手<strong>勉强算</strong>友好的<strong>过于全面</strong>的教程：<a href="https://systemcrafters.net/emacs-essentials/absolute-beginners-guide-to-emacs/" target="_blank" rel="noopener"><em>The Absolute Beginner’s Guide to Emacs</em></a></li>
 <li>官方文档（有关 Emacs 初始化配置文件的位置）：<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html" target="_blank" rel="noopener"><em>The Emacs Initialization File</em></a></li>
 </ul>
 <hr>

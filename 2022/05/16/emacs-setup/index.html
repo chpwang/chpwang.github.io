@@ -157,7 +157,7 @@ $ cat ~/Documents/prog/demo.scm
 <p>下面是最基础的快捷键，耐心适应后，会感觉还算好用：</p>
 <ul>
 <li><code>C-g</code> ：这个是新手首先要学会的「<strong>撤销</strong>」操作，如果你快捷键输入到一半错了想撤销就按它；</li>
-<li><code>C-x C-f</code> ：<strong>打开</strong>文件的操作。在 <strong>echo area</strong> 区域交互，输入文件路径后如果不存在就会新建；</li>
+<li><code>C-x C-f</code> ：<strong>打开</strong>文件的操作。在 <strong>echo area</strong> 输入文件路径后如果不存在就会<strong>新建</strong>；</li>
 <li><code>C-x C-s</code> ：<strong>保存</strong>当前文件。不过在 MacOS 下，你也可以直接用 <code>Cmd + S</code> 这样通用的保存操作；</li>
 <li><code>C-x C-w</code> ：将当前文件另存为。相当于<strong>复制</strong>文件的操作；</li>
 <li><code>C-x b</code> : <strong>切换</strong> Buffer 。可以用 <code>Tab</code> 键来自动补全或查看当前可切换的 Buffer ；</li>
@@ -165,12 +165,98 @@ $ cat ~/Documents/prog/demo.scm
 </ul>
 <p>掌握了上述基础操作后，就可以进行下一个部分的配置了。其他额外知识可以随着 Emacs 的使用慢慢掌握，我们首要目标是能尽快地写 Scheme 代码和运行它。</p>
 <hr>
-<h3 id="配置-Emacs"><a href="#配置-Emacs" class="headerlink" title="配置 Emacs"></a>配置 Emacs</h3><p>我们这里只需要做很少的几个关键设置即可。</p>
+<h3 id="配置-Emacs"><a href="#配置-Emacs" class="headerlink" title="配置 Emacs"></a>配置 Emacs</h3><p>我们这里只需要做很少的几个关键设置即可。建议直接使用 Emacs 编辑器来做各种编辑操作，这样能更快熟悉它。</p>
 <ul>
-<li><p>第 1 步：</p>
-<p><code>bash</code></p>
+<li><p><strong>第 1 步</strong>：<br>编辑 Emacs 的初始化文件 <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html" target="_blank" rel="noopener"><code>init.el</code></a>（刚安装好的 Emacs 没有这个文件，需要我们自己新建）。<br>使用快捷键 <code>C-x C-f</code> <strong>新建</strong>并打开文件 <code>~/.emacs.d/init.el</code> ，然后将下面的代码复制进去保存：</p>
+<pre><code class="lang-lisp">(add-to-list &#39;load-path &quot;~/.emacs.d/scheme&quot;)
+(autoload &#39;paredit-mode &quot;paredit&quot;
+  &quot;Minor mode for pseudo-structurally editing Lisp code.&quot;
+  t)
+
+(require &#39;parenface)
+(set-face-foreground &#39;paren-face &quot;DimGray&quot;)
+
+;;;;;;;;;;;;
+;; Yin&#39;s Scheme Configuration
+;;;;;;;;;;;;
+
+(require &#39;cmuscheme)
+(setq scheme-program-name &quot;scheme&quot;) ;; 指定用 Chez Scheme ，若用 Racket 就写 &quot;racket&quot;
+
+;; bypass the interactive question and start the default interpreter
+(defun scheme-proc ()
+  &quot;Return the current Scheme process, starting one if necessary.&quot;
+  (unless (and scheme-buffer
+               (get-buffer scheme-buffer)
+               (comint-check-proc scheme-buffer))
+    (save-window-excursion
+      (run-scheme scheme-program-name)))
+  (or (scheme-get-process)
+      (error &quot;No current process. See variable `scheme-buffer&#39;&quot;)))
+
+(defun switch-other-window-to-buffer (name)
+    (other-window 1)
+    (switch-to-buffer name)
+    (other-window 1))
+
+(defun scheme-split-window ()
+  (cond
+   ((= 1 (count-windows))
+    ;;(split-window-vertically (floor (* 0.68 (window-height))))
+    (split-window-horizontally (floor (* 0.68 (window-width))))
+    (switch-other-window-to-buffer &quot;*scheme*&quot;))
+   ((not (member &quot;*scheme*&quot;
+               (mapcar (lambda (w) (buffer-name (window-buffer w)))
+                       (window-list))))
+    (switch-other-window-to-buffer &quot;*scheme*&quot;))))
+
+(defun scheme-send-last-sexp-split-window ()
+  (interactive)
+  (scheme-split-window)
+  (scheme-send-last-sexp))
+
+(defun scheme-send-definition-split-window ()
+  (interactive)
+  (scheme-split-window)
+  (scheme-send-definition))
+
+(add-hook &#39;scheme-mode-hook
+  (lambda ()
+    (paredit-mode 1)
+    (define-key scheme-mode-map (kbd &quot;&lt;f5&gt;&quot;) &#39;scheme-send-last-sexp-split-window)
+    (define-key scheme-mode-map (kbd &quot;&lt;f6&gt;&quot;) &#39;scheme-send-definition-split-window)))
+</code></pre>
+</li>
+<li><p><strong>第 2 步</strong>：<br>下载 <a href="http://mumble.net/~campbell/emacs/paredit.el" target="_blank" rel="noopener"><code>paredit.el</code></a> 文件，并将其放在 <code>~/.emacs.d/scheme</code> 目录下。<br>可以试一试 Emacs 的快捷键操作 <code>C-x C-w</code> 来将 <a href="http://mumble.net/~campbell/emacs/paredit.el" target="_blank" rel="noopener"><code>paredit.el</code></a> 文件复制（另存为）到该目录。</p>
+</li>
+<li><p><strong>第 3 步（可选）</strong>：<br>这一步是把 Scheme 代码的括号颜色调淡，不做也不影响我们编辑、运行代码。<br>下载 <a href="https://www.dropbox.com/s/v0ejctd1agrt95x/parenface.el" target="_blank" rel="noopener"><code>parenface.el</code></a> 文件，并将其放在 <code>~/.emacs.d/scheme</code> 目录下。<br>这里同样可以使用 Emacs 的快捷键操作 <code>C-x C-w</code> 。</p>
 </li>
 </ul>
+<hr>
+<h3 id="使用-Emacs-来写-Scheme-代码"><a href="#使用-Emacs-来写-Scheme-代码" class="headerlink" title="使用 Emacs 来写 Scheme 代码"></a>使用 Emacs 来写 Scheme 代码</h3><p>相信现在你已基本熟悉 Emacs 的快捷键操作 <code>C-x C-f</code> 了。就用它来新建文件 <code>~/Documents/length.scm</code> ，看看如何编辑运行 Scheme 吧。</p>
+<p>还是写我们的老朋友 <code>length</code> 函数：</p>
+<pre><code class="lang-scheme">(define length
+  (lambda (l)
+    (cond [(null? l) 0]
+          [else (+ 1 (length (cdr l)))])))
+
+(length &#39;(1 2 3))
+
+(length `(4 ,(+ 5 6) 7))
+</code></pre>
+<p>我们上面的配置中把 <code>F5</code> 这个按键设置为了「<strong>运行光标所在处的前一个表达式</strong>」。所以我们先把光标移动到第一个 <code>define</code> 表达式的<strong>最末尾</strong>，按一下 <code>F5</code> 。这时你可以看到 Emacs 出现了一个新的 <strong>Window</strong> ，开启了 <strong>REPL</strong> 交互模式，并且成功运行了我们的 <code>define</code> 表达式。</p>
+<p>同理，我们分别把光标移动到后面两个表达式的末尾，按 <code>F5</code> ，就能分别得到这两个表达式的值了：</p>
+<img src="/2022/05/16/emacs-setup/emacs-interface-02.jpeg" title="emacs scheme code interface">
+<p>如果代码很多，也要一个个表达式这样运行？这样的话，我建议打开文件后，先 <code>Cmd + A</code> 全选内容，然后用 Emacs 的快捷键 <code>C-c C-r</code> 来载入所选内容（scheme-send-region）。这样，整个文件的内容就都被送到 Chez Scheme 里了。然后，你就可以用 <code>F5</code> 一个个地运行测试你的表达式了。</p>
+<p>你也可以用 <code>C-c C-l</code> 来载入（运行）某个文件（scheme-load-file）。总的来说，在用 <code>F5</code> 依次运行表达式之前，要先确保各种变量都已完成定义。</p>
+<p>在编辑 Scheme 文件时的其他常用快捷键：</p>
+<pre><code class="lang-plaintext">C-c C-k         scheme-compile-file               
+C-c C-l         scheme-load-file 
+C-c C-r         scheme-send-region          
+C-c C-e         scheme-send-definition
+C-x C-e         scheme-send-last-sexp
+</code></pre>
+<p>本节参考资料：<br><a href="https://alexott.net/en/writings/emacs-devenv/EmacsScheme.html" target="_blank" rel="noopener">Support for the Scheme programming language</a><br><a href="https://www.cs.ucf.edu/~leavens/ui54/WWW/scheme.shtml" target="_blank" rel="noopener">Running Scheme</a><br><a href="https://doc.endlessparentheses.com/Fun/inferior-scheme-mode.html" target="_blank" rel="noopener">inferior-scheme-mode</a></p>
 <hr>
 <h3 id="更多的-Emacs-操作和技巧"><a href="#更多的-Emacs-操作和技巧" class="headerlink" title="更多的 Emacs 操作和技巧"></a>更多的 Emacs 操作和技巧</h3><blockquote><p>Emacs 是一个好的操作系统，它只是缺少一个好的编辑器。</p>
 <footer><strong>Ian</strong></footer></blockquote>
@@ -188,11 +274,12 @@ $ cat ~/Documents/prog/demo.scm
 </ul>
 <p>……<br>……</p>
 <p>TODO</p>
-<p>参考资料：</p>
+<p>本文参考与拓展资料：</p>
 <ul>
 <li>对新手相当<strong>不</strong>友好的<strong>过于简洁</strong>的教程：<a href="http://www.yinwang.org/blog-cn/2013/04/11/scheme-setup" target="_blank" rel="noopener"><em>Scheme 编程环境的设置</em></a></li>
 <li>对新手<strong>勉强算</strong>友好的<strong>过于全面</strong>的教程：<a href="https://systemcrafters.net/emacs-essentials/absolute-beginners-guide-to-emacs/" target="_blank" rel="noopener"><em>The Absolute Beginner’s Guide to Emacs</em></a></li>
-<li>官方文档（有关 Emacs 初始化配置文件的位置）：<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html" target="_blank" rel="noopener"><em>The Emacs Initialization File</em></a></li>
+<li><strong>官方</strong>文档（有关 Emacs 初始化配置文件的位置）：<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html" target="_blank" rel="noopener"><em>The Emacs Initialization File</em></a></li>
+<li>作者 Pavinberg 吐槽 Emacs 中文社区的教程质量不高于是<strong>亲自专栏</strong>：<a href="https://www.zhihu.com/column/c_1440829147212279808" target="_blank" rel="noopener"><em>专业 Emacs 入门教程系列</em></a></li>
 </ul>
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>

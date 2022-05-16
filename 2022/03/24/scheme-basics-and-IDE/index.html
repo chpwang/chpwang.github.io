@@ -82,7 +82,7 @@
     </div>
     <p><a href="https://en.wikipedia.org/wiki/Lisp_(programming_language" target="_blank" rel="noopener"><strong>Lisp</strong></a> 这个语言的家族里包括了 <a href="https://schemers.org" target="_blank" rel="noopener">Scheme</a> 、<a href="https://racket-lang.org" target="_blank" rel="noopener">Racket</a> 、<a href="https://en.wikipedia.org/wiki/Common_Lisp" target="_blank" rel="noopener">Common Lisp</a> 、<a href="https://en.wikipedia.org/wiki/Emacs_Lisp" target="_blank" rel="noopener">Emacs Lisp</a> 等各式各样以「<strong>括号</strong>」、「<strong>lambda</strong>」和「<strong>链表</strong>（list）」为特征的语言。</p>
 <p><a href="https://en.wikipedia.org/wiki/Daniel_P._Friedman" target="_blank" rel="noopener">Daniel Paul Friedman</a> 算是 <strong>Scheme</strong> 的带头人物，尽管 <a href="https://en.wikipedia.org/wiki/Scheme_(programming_language" target="_blank" rel="noopener">Scheme</a> 最初不是他发明的。然后这个 <a href="https://racket-lang.org" target="_blank" rel="noopener">Racket</a> 其实本身是属于一种 <a href="https://schemers.org" target="_blank" rel="noopener">Scheme</a> 的（即 <strong>Racket</strong> 应算是 <strong>Scheme</strong> 语言的一个实现）。但是呢，<a href="https://racket-lang.org/plt.html" target="_blank" rel="noopener">PLT</a> 这帮人他们现在不承认他们是 <strong>Scheme</strong> 了，就另外起了一个名叫 <strong>Racket</strong> （以前的名字叫 <strong>PLT Scheme</strong>，改名试图脱离 Scheme 的阴影。实际上，好像并没有比 Scheme 超出多少）。反正这帮人的头目应该就是 <a href="https://mitpress.mit.edu/books/little-schemer-fourth-edition" target="_blank" rel="noopener"><em>The Little Schemer</em></a> 的第二作者、同时也是 <a href="https://en.wikipedia.org/wiki/Daniel_P._Friedman" target="_blank" rel="noopener">Dan Friedman</a> 的学生：<a href="https://felleisen.org/matthias/" target="_blank" rel="noopener">Matthias Felleisen</a> 。</p>
-
+<img src="/2022/03/24/scheme-basics-and-IDE/mit-dnj-2.png" title="Matthias Felleisen">
 <p>早期的 <strong>Lisp</strong> 语言的函数就是一个符号链表，它不会自带一个 <code>env</code>（解释器中的闭包环境，或者说上下文语境），会出现严重的问题：<a href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scope_vs._dynamic_scope" target="_blank" rel="noopener">Dynamic Scoping</a> 。<strong>Scheme</strong> 不是第一个实现针对该问题的 <a href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scope_vs._dynamic_scope" target="_blank" rel="noopener">Lexical Scoping</a> 特性的编程语言，但确实是第一个实现 <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)" target="_blank" rel="noopener">Closure</a>（闭包）的 <strong>Lisp</strong> 语言。</p>
 <p><strong>Scheme</strong> 语言有一个很好的特征，就是你可以把你的「<strong>代码</strong>」，用很简单的方式就变成「<strong>数据</strong>」，这将非常适合用来实现各种语言和语言特性。如果用其他编程语言，比如 <a href="https://www.javascript.com" target="_blank" rel="noopener">JavaScript</a> ，来做这件事的话，那种数据结构的形式（ <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank" rel="noopener">AST</a> 抽象语法树）会让人写得很痛苦，看起来也不像正常的代码。</p>
 <p>其他搜索时的八卦：</p>
@@ -94,8 +94,8 @@
 <li><p>陈杰 2014 年的这篇笔记在很多地方都被引用，这让我想起来自己第一次知道这本书也是 2014 年（李路肯定不知道他的热情分享对我影响很大，他应该不记得我了）。看来 TLS 的出圈时间节点很可能就是 2014 。另一个有意思的细节是，<a href="https://www.yinwang.org/blog-cn/2012/07/04/dan-friedman" target="_blank" rel="noopener"><em>GTF - Great Teacher Friedman</em></a> 的第一版似乎是在 2012 年写的。</p>
 </li>
 </ul>
-
-
+<img src="/2022/03/24/scheme-basics-and-IDE/li_lu_promotes_TLS.jpg" title="Li Lu promotes TLS">
+<img src="/2022/03/24/scheme-basics-and-IDE/Li_Lu_s_kindness.jpeg" title="Li Lu and Wang">
 <hr>
 <h3 id="编程软件-DrRacket"><a href="#编程软件-DrRacket" class="headerlink" title="编程软件 - DrRacket"></a>编程软件 - DrRacket</h3><p>直接去 <strong>Racket</strong> 的<a href="https://racket-lang.org" target="_blank" rel="noopener">官网</a>下载对应的安装包到本地即可双击安装。支持 Windows 和 MacOS 。</p>
 <p>常用快捷键：</p>
@@ -115,7 +115,7 @@
 <h3 id="编程软件-Emacs"><a href="#编程软件-Emacs" class="headerlink" title="编程软件 - Emacs"></a>编程软件 - Emacs</h3><p>Emacs 可以通过配置，方便地（也没有特别方便）使用由 <strong>R. Kent Dybvig</strong> 设计的、世界上性能和可靠性都最强的 <a href="https://github.com/cisco/ChezScheme" target="_blank" rel="noopener">Chez Scheme</a> 来运行我们的代码。</p>
 <p>但无论是配置的过程，还是使用的过程，Emacs 的操作对新手来说始终不是特别友好。还是 Racket 更适合广大计算新人。而且上文已经说了，Racket 的默认实现今后会变成 <a href="https://blog.racket-lang.org/2021/01/racket-status.html" target="_blank" rel="noopener">Racket on Chez Scheme </a>。</p>
 <p>所以目前的建议是，新手就用 <a href="https://racket-lang.org" target="_blank" rel="noopener">DrRacket</a> 作为主力编辑器写 Scheme 代码。有需要再在终端里用 <a href="https://github.com/cisco/ChezScheme" target="_blank" rel="noopener">Chez Scheme</a> 运行<code>.scm</code> 代码文件。</p>
-<p>如果仍然想使用 Emacs ，可以看我写的「<a href="/2022/05/16/emacs-setup/"><em>针对 Scheme 的 Emacs 编程环境设置</em></a>」，里面也提到了如何安装和使用 <a href="https://github.com/cisco/ChezScheme" target="_blank" rel="noopener">Chez Scheme</a> 。</p>
+<p>如果仍然想使用 Emacs ，可以看我写的<a href="/2022/05/16/emacs-setup/"><em>针对 Scheme 的 Emacs 编程环境设置</em></a>，里面也提到了如何安装和使用 <a href="https://github.com/cisco/ChezScheme" target="_blank" rel="noopener">Chez Scheme</a> 。</p>
 <hr>
 <h3 id="Scheme-常用的语法"><a href="#Scheme-常用的语法" class="headerlink" title="Scheme 常用的语法"></a>Scheme 常用的语法</h3><p>编程语言 Scheme 采用的是前缀表达式的语法。即处于第一位置的就是「操作符」，之后位置的就是「操作数」。计算的<strong>优先级</strong>由「括号」来确定。括号内部的最先计算。具体顺序为：先对括号中的每一个表达式求值，然后再将操作符作用在操作数上，对整个括号的表达式求值。</p>
 <ul>

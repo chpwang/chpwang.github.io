@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-3/</loc>
+    
+    <lastmod>2022-05-18T14:59:00.345Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2022/05/16/emacs-setup/</loc>
     
-    <lastmod>2022-05-17T00:01:02.407Z</lastmod>
+    <lastmod>2022-05-17T23:24:27.055Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://cps.ninja/2022/03/24/scheme-basics-and-IDE/</loc>
     
-    <lastmod>2022-05-16T23:07:53.325Z</lastmod>
+    <lastmod>2022-05-17T23:18:51.891Z</lastmod>
     
   </url>
   
@@ -33,13 +40,6 @@
     <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
     
     <lastmod>2022-05-15T19:44:37.912Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-3/</loc>
-    
-    <lastmod>2022-05-14T11:29:50.696Z</lastmod>
     
   </url>
   

@@ -100,20 +100,20 @@
 <h3 id="编程软件-DrRacket"><a href="#编程软件-DrRacket" class="headerlink" title="编程软件 - DrRacket"></a>编程软件 - DrRacket</h3><p>直接去 <strong>Racket</strong> 的<a href="https://racket-lang.org" target="_blank" rel="noopener">官网</a>下载对应的安装包到本地即可双击安装。支持 Windows 和 MacOS 。</p>
 <p>常用快捷键：</p>
 <ul>
-<li>运行代码：<code>cmd + R</code>（ MacOS 系统）；</li>
-<li>快速缩进排版所有代码（Reindent All）：<code>cmd + I</code>（ MacOS 系统）；</li>
-<li>注释代码（块）：<code>control + esc + ;</code>（ MacOS 系统）；<code>Ctrl + Alt + ;</code>（ Win 系统）；</li>
-<li>显示代码整体轮廓（Show Program Contour）：<code>cmd + U</code>（ MacOS 系统）；</li>
+<li><strong>运行</strong>代码：<code>cmd + R</code>（ MacOS 系统）；</li>
+<li>快速<strong>缩进排版</strong>所有代码（Reindent All）：<code>cmd + I</code>（ MacOS 系统）；</li>
+<li><strong>注释</strong>代码（块）：<code>control + esc + ;</code>（ MacOS 系统）；<code>Ctrl + Alt + ;</code>（ Win 系统）；</li>
+<li>显示代码整体<strong>轮廓</strong>（Show Program Contour）：<code>cmd + U</code>（ MacOS 系统）；</li>
 <li><strong>取消</strong>注释代码（块）：<code>control + esc + =</code>（ MacOS 系统）；<code>Ctrl + Alt + =</code>（ Win 系统）；</li>
 <li>将<strong>输出</strong>窗口显示在<strong>右侧</strong>，使编辑窗口的区域更大：<code>cmd + shift + L</code>（ MacOS 系统）；<br>也可以通过选择 <code>View</code> -&gt; <code>Use Horizontal Layout</code> 实现；</li>
 <li>在输出窗口测试的时候，调出<strong>上一个</strong>运行的代码：<code>esc + P</code>（ MacOS 系统）；</li>
 <li>在输出窗口测试的时候，调出<strong>下一个</strong>运行的代码：<code>esc + N</code>（ MacOS 系统）；</li>
-<li>光标定位到一个变量，重命名所有这个变量（会根据 Scope 来而不是简单的同名）：<code>control + X + M</code>（ MacOS 系统）；</li>
+<li>光标定位到一个变量，<strong>重命名</strong>所有这个变量（会根据 Scope 来而不是简单的同名）：<code>control + X + M</code>（ MacOS 系统）；</li>
 </ul>
 <p>更多快捷键组合可以打开 <strong>Keybindings</strong> 窗口查询：<code>Edit</code> -&gt; <code>Keybindings</code> -&gt; <code>Show Active Keybindings</code><br>其他使用使用小技巧可参考 <a href="https://rebelsky.cs.grinnell.edu/Courses/CSC151/2018S/handouts/drracket-tips" target="_blank" rel="noopener">Some tips and tricks for DrRacket</a> ，或者查看 <a href="https://docs.racket-lang.org/guide/index.html" target="_blank" rel="noopener"><em>The Racket Guide</em></a> 和 <a href="https://plt.cs.northwestern.edu/snapshots/current/pdf-doc/drracket.pdf" target="_blank" rel="noopener"><em>DrRacket: The Racket Programming Environment</em></a></p>
 <hr>
 <h3 id="编程软件-Emacs"><a href="#编程软件-Emacs" class="headerlink" title="编程软件 - Emacs"></a>编程软件 - Emacs</h3><p>Emacs 可以通过配置，方便地（也没有特别方便）使用由 <strong>R. Kent Dybvig</strong> 设计的、世界上性能和可靠性都最强的 <a href="https://github.com/cisco/ChezScheme" target="_blank" rel="noopener">Chez Scheme</a> 来运行我们的代码。</p>
-<p>但无论是配置的过程，还是使用的过程，Emacs 的操作对新手来说始终不是特别友好。还是 Racket 更适合广大计算新人。而且上文已经说了，Racket 的默认实现今后会变成 <a href="https://blog.racket-lang.org/2021/01/racket-status.html" target="_blank" rel="noopener">Racket on Chez Scheme </a>。</p>
+<p>但无论是配置的过程，还是使用的过程，Emacs 的操作对新手来说始终不是特别友好。Racket 更适合广大计算新人。而且上文已经说了，Racket 的默认实现今后会变成 <a href="https://blog.racket-lang.org/2021/01/racket-status.html" target="_blank" rel="noopener">Racket on Chez Scheme </a>。</p>
 <p>所以目前的建议是，新手就用 <a href="https://racket-lang.org" target="_blank" rel="noopener">DrRacket</a> 作为主力编辑器写 Scheme 代码。有需要再在终端里用 <a href="https://github.com/cisco/ChezScheme" target="_blank" rel="noopener">Chez Scheme</a> 运行<code>.scm</code> 代码文件。</p>
 <p>如果仍然想使用 Emacs ，可以看我写的<a href="/2022/05/16/emacs-setup/"><em>针对 Scheme 的 Emacs 编程环境设置</em></a>，里面也提到了如何安装和使用 <a href="https://github.com/cisco/ChezScheme" target="_blank" rel="noopener">Chez Scheme</a> 。</p>
 <hr>

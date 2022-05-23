@@ -165,7 +165,7 @@ $ cat ~/Documents/prog/demo.scm
 </ul>
 <p>掌握了上述基础操作后，就可以进行下一个部分的配置了。其他额外知识可以随着 Emacs 的使用慢慢掌握，我们<strong>首要目标</strong>是能尽快地写 Scheme 代码和运行它。</p>
 <hr>
-<h3 id="配置-Emacs"><a href="#配置-Emacs" class="headerlink" title="配置 Emacs"></a>配置 Emacs</h3><p>这里只需要做 <strong>3 个</strong>关键设置即可。建议直接使用 Emacs 来做各种编辑操作，这样能更快熟悉它。为了简单，我将直接列出<strong>可执行</strong>的步骤，<strong>不会深入</strong>讲解其中的原理。新手在最初的 Emacs 使用中也<strong>无需</strong>过度探索，确保<strong>尽快</strong>进入 Scheme 编程阶段。扩展知识我都给了链接，之后再慢慢深入。</p>
+<h3 id="配置-Emacs"><a href="#配置-Emacs" class="headerlink" title="配置 Emacs"></a>配置 Emacs</h3><p>这里只需要做 <strong>3 个</strong>关键设置即可。建议直接使用 Emacs 来做各种编辑操作，这样能更快熟悉它。为了简单，我将直接列出<strong>可执行</strong>的步骤，<strong>不会深入</strong>讲解其中的原理。新手在最初的 Emacs 使用中也<strong>无须</strong>过度探索，确保<strong>尽快</strong>进入 Scheme 编程阶段。扩展知识我都给了链接，之后再慢慢深入。</p>
 <ul>
 <li><p><strong>第 1 步</strong>：<br>编辑 Emacs 的初始化文件 <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html" target="_blank" rel="noopener"><code>init.el</code></a> 。刚安装好的 Emacs 没有这个文件，需要我们自己新建。我们还需要<strong>删除</strong>原始的初始化文件 <code>~/.emacs</code> ，避免它的内容覆盖我们之后设置好的 <code>init.el</code><br>使用快捷键 <code>C-x C-f</code> <strong>新建</strong>并打开文件 <code>~/.emacs.d/init.el</code> ，然后将下面的代码复制进去保存：</p>
 <pre><code class="lang-lisp">(add-to-list &#39;load-path &quot;~/.emacs.d/scheme&quot;)

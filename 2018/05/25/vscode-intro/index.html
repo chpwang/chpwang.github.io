@@ -91,7 +91,6 @@
 <li><p>搜索安装 <a href="https://marketplace.visualstudio.com/items?itemName=lfs.vscode-emacs-friendly" target="_blank" rel="noopener">Emacs Friendly Keymap</a>。这样就可以使用好用的 Emacs 快捷键（光标移动，Kill 和 Yank 等操作）。</p>
 </li>
 </ul>
-<p><strong>快捷键：</strong><br>使用 <code>Shift + ⌘ + P</code> 打开 <strong>Command Palette</strong> 可以搜索各种命令的快捷键，比如注释 / 取消注释某一行代码（光标位于这一行后再按快捷键组合）：<code>⌘ + /</code> 。如果是块注释，则是选中代码后按：<code>Shift + Option + A</code> 。</p>
 <p><strong>运行代码：</strong><br>VS Code 需要以目录（而不是文件）为最小单位打开（载入）。打开存放代码的目录就能看到代码文件。<br>选择文件后点击界面右上角的三角形 Run Code 按钮或者使用快捷键 <code>Ctrl + Option + N</code> 来运行的代码。</p>
 <p>下面是 JavaScript 常用语法，可以用来试试上面的操作：</p>
 <pre><code class="lang-javascript">// 函数声明
@@ -119,7 +118,7 @@ else
 </code></pre>
 <p>更多 JS 语法参见<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="noopener">箭头函数</a></p>
 <hr>
-<h3 id="其他设置"><a href="#其他设置" class="headerlink" title="其他设置"></a>其他设置</h3><p><strong>终端（Terminal）里打开 VS Code ：</strong><br>使用 <code>⇧⌘P</code> 打开 <strong>Command Palette</strong>，输入 shell command 后搜索安装 <code>code</code> 这个命令即可</p>
+<h3 id="其他设置"><a href="#其他设置" class="headerlink" title="其他设置"></a>其他设置</h3><p><strong>终端（Terminal）里打开 VS Code ：</strong><br>打开 <strong>Command Palette</strong>（快捷键 <code>⇧⌘P</code> ），输入 shell command 后搜索安装 <code>code</code> 这个命令即可</p>
 <p><img src="https://code.visualstudio.com/assets/docs/setup/mac/shell-command.png" alt="VS Code Command Palette"></p>
 <p>安装好后，使用以下方式从终端打开</p>
 <pre><code class="lang-bash"># 单纯打开 VS Code
@@ -139,6 +138,17 @@ $ code .
 </ol>
 <p><strong>设置格式化代码中的花括号位置：</strong><br>vscode 缺省的格式化方式是「埃及括号」，也就是把花括号放在一行的末尾，而 ian 推荐的样式是把花括号放在新的一行，这样前两行不至于挨得太近。只需要在设置搜索栏搜索「open brace on new line」找到对应的条件分支（Control Blocks）和函数（Functions）两个选项，打上勾就可以了。</p>
 <p>上面两个设置好后，之后的格式化代码操作（右键单击后选择 Format Document）就可以让代码调整为这些格式显示。</p>
+<p><strong>一些更方便的设置：</strong></p>
+<ul>
+<li>右键单击输出窗口（OUTPUT）的顶部，选择 <code>Move Panel Right</code> ，可以将输出窗口移动到右侧；</li>
+<li>右键单击文件的 <strong>Tab</strong> ，选择 <code>Split Right</code> ，可以在右边新开一个面板（Panel）来显示该文件，这样可以同时看多个文件内容；</li>
+</ul>
+<p><strong>VS Code 常用快捷键：</strong></p>
+<ul>
+<li>打开 <strong>Command Palette</strong> 可以搜索各种命令的快捷键：<code>Shift + ⌘ + P</code> ；</li>
+<li>注释 / 取消注释某一行代码（光标位于这一行后再按快捷键组合）：<code>⌘ + /</code> ；</li>
+<li>块注释（选中代码后）：<code>Shift + Option + A</code> ；</li>
+</ul>
 <p>更多有关 VS Code 的操作，可参考<a href="https://code.visualstudio.com/docs" target="_blank" rel="noopener">官方文档</a></p>
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>

@@ -90,7 +90,23 @@
 <pre><code class="lang-bash">$ brew install node
 </code></pre>
 <p>Node.js 安装后，会附带 npm（node package manager）工具，可用它来搜索、下载、管理 Node.js 套件。</p>
-<p><strong>注意：</strong><br>新版 Node 也许和 hexo 不<a href="https://formulae.brew.sh/formula/node@12#default" target="_blank" rel="noopener">兼容</a>，可通过 <code>brew uninstall node</code> 卸载新版 node ，然后参考以下链接安装旧版本的 Node<br><a href="https://ammomercy.cn/2021/03/08/2021-03-08-解决hexo-d-The-modeargument-must-be-integer.-问题/" target="_blank" rel="noopener">解决 node.js@14+ 与 hexo 不兼容</a><br><a href="https://stackoverflow.com/questions/12607155/error-the-brew-link-step-did-not-complete-successfully/12751548" target="_blank" rel="noopener">先 <code>npm</code> 卸载 <code>npm</code> 再 <code>brew install node@12</code> ，然后再 <code>brew link node@12</code></a></p>
+<p><strong>注意：</strong><br>有些版本的 Node 有 Bug（比如 Node 14），和 hexo 不兼容，此时等不了更新修复可以先安装旧版，比如 <a href="https://formulae.brew.sh/formula/node@12#default" target="_blank" rel="noopener">Node 12</a> 来确保 Hexo 能用。可通过 <code>brew uninstall node</code> 卸载新版 node ，然后参考以下方式（链接）安装旧版本的 Node<br><a href="https://ammomercy.cn/2021/03/08/2021-03-08-解决hexo-d-The-modeargument-must-be-integer.-问题/" target="_blank" rel="noopener">解决 node.js@14+ 与 hexo 不兼容：作者选择安装 Node 13.14</a><br><a href="https://stackoverflow.com/questions/12607155/error-the-brew-link-step-did-not-complete-successfully/12751548" target="_blank" rel="noopener">先用 <code>npm uninstall npm -g</code> 卸载 <strong>npm</strong> 。再 <code>brew install node@12</code> 安装旧版 <strong>node</strong>，最后再 <code>brew link node@12</code></a>【主要看来自 <a href="https://stackoverflow.com/users/179583/natevw" target="_blank" rel="noopener">@natevw</a> 网友的回复】</p>
+<pre><code class="lang-bash"># 重新安装 Node 要先删除。从 npm 开始删
+# 若此前 npm 是通过 brew 安装的，就用 brew uninstall npm 指令删除
+$ brew uninstall npm
+
+# 若此前 npm 是单独安装的（比如官网下载安装包），则用 npm uninstall npm -g 指令删除
+$ npm uninstall npm -g
+
+# 删除当前的 Nodejs - 若此前是通过 brew 安装的 node
+$ brew uninstall node
+
+# 删除当前的 Nodejs - 若是自行独立安装（如官网下载）的 node
+$ sudo rm -rf /usr/local/lib/node_modules
+
+# 重新安装指定版本的 Node 来确保兼容性 - 下面是安装 Node 12 的版本
+$ brew install node@12
+</code></pre>
 <p>Node 会自带 npm 工具包，接下来使用 npm 安装 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a></p>
 <pre><code class="lang-bash">$ npm install hexo-cli -g
 </code></pre>

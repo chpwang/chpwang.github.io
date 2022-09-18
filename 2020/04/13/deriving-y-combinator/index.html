@@ -8,8 +8,8 @@
   <meta name="google-site-verification" content>
   
   <title>推导 Y Combinator</title>
-  <meta name="author" content="TwentyNight">
-   <meta name="description" content="TwentyNight 的修行屋">
+  <meta name="author" content="chpwang">
+   <meta name="description" content="chpwang 的修行驿站">
   
 
   <meta property="og:title" content="推导 Y Combinator">
@@ -699,8 +699,8 @@ var Y = f =&gt;
 
 ;;; 通过 Y 算子可以很容易得到 odd? 和 even? 函数 ;;;
 ;;; 输入 Y 算子的先后顺序决定了函数的效果是 odd? 还是 even? ;;;
-(map ((Ym o) e) &#39;(0 1 2 3 4 5 6 7 8 9 10))          ;;; odd? 函数判断是否为奇，输出 (#f #t #f #t #f #t #f #t #f #t #f)
-(map ((Ym e) o) &#39;(0 1 2 3 4 5 6 7 8 9 10))          ;;; even? 函数判断是否为偶，输出 (#t #f #t #f #t #f #t #f #t #f #t)
+(map ((Ym o) e) &#39;(0 1 2 3))          ;; odd? 函数判断是否为奇，输出 (#f #t #f #t)
+(map ((Ym e) o) &#39;(0 1 2 3))          ;; even? 函数判断是否为偶，输出 (#t #f #t #f)
 </code></pre>
 <p>PS：<br>更多关于 <strong>Mutual Recursion</strong> 的信息可查阅维基百科 <a href="https://en.wikipedia.org/wiki/Mutual_recursion" target="_blank" rel="noopener"><em>Mutual Recursion</em></a></p>
 <hr>

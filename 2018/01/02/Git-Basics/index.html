@@ -9,7 +9,7 @@
   
   <title>Git 常用操作</title>
   <meta name="author" content="chpwang">
-   <meta name="description" content="chpwang 的修行驿站">
+   <meta name="description" content="王哈哈的修行驿站">
   
 
   <meta property="og:title" content="Git 常用操作">
@@ -112,37 +112,25 @@ $ git config --global user.name &quot;chpwang&quot;
 $ git config --global user.email &quot;chpwang@gmail.com&quot;
 </code></pre>
 <hr>
-<h3 id="代码提交"><a href="#代码提交" class="headerlink" title="代码提交"></a>代码提交</h3><pre><code class="lang-bash">## 常用基本指令
+<h3 id="本地代码提交"><a href="#本地代码提交" class="headerlink" title="本地代码提交"></a>本地代码提交</h3><pre><code class="lang-bash">## 常用基本指令
 $ git status            ## 查看当前文件更改状态      
 $ git add [文件名]       ## 添加更改文件到 staging area（顶图中的 index 区）
 $ git commit -m &quot;该 commit 的注释内容&quot;    ## 保存 staging area 的文件（顶图中的 Repository 区）
 $ git log --oneline | head -n 5         ## 查看前 5 个 commit 的信息（一行一个）
 
 ## 撤销
-$ git checkout [file]            ## 恢复暂存区的指定文件到工作区（working area）
-$ git checkout [commit] [file]   ## 恢复指定 commit 的指定文件到工作区
-$ git checkout .                 ## 恢复上一个commit的所有文件到工作区
-$ git checkout -- [file]         ## 清空工作区（working area）的指定文件的改动（不影响 Staging area）
-</code></pre>
-<pre><code class="lang-bash"># push 基本指令
-$ git push [远程主机名] [本地分支名]:[远程分支名]
+$ git checkout [文件名]            ## 恢复暂存区的指定文件到工作区（working area）
+$ git checkout [commit] [文件名]   ## 恢复指定 commit 的指定文件到工作区
+$ git checkout .                  ## 恢复上一个commit的所有文件到工作区
+$ git checkout -- [文件名]         ## 清空工作区（working area）的指定文件的改动（不影响 Staging area）
 
-# Example
-$ git push heroku ch08:master
-
-# 第一次推送 master 分支时，加上 -u 参数，Git 不但会把本地的 master 分支内容推送的远程新的 master 分支，还会把本地的 master 分支和远程的 master 分支关联起来，在以后的推送或者拉取时就可以简化命令 - git push 和 git pull
-$ git push -u origin master
-
-# 推送本地的 chpw-dev 分支到远程主机的 chpw-dev 分支上，并将本地的 chpw-dev 分支设置为追踪（track）远程分支 chpw-dev
-# Branch &#39;chpw-dev&#39; set up to track remote branch &#39;chpw-dev&#39; from &#39;origin&#39;
-# 下次在本地的 chpw-dev 分支上就可以直接用简单命令 git push 来推送 chpw-dev 分支了
-$ git push -u origin chpw-dev:chpw-dev
-
-# 推送本地所有分支
-$ git push --all
+## 查看某个文件修改了什么
+$ git diff [文件名]                ## 查看指定文件对比最后一次 commit 的状态修改了那些内容
 </code></pre>
 <hr>
-<h3 id="拉取远程代码"><a href="#拉取远程代码" class="headerlink" title="拉取远程代码"></a>拉取远程代码</h3><pre><code class="lang-bash">## 从远程主机克隆一个版本库到本地并在本地生成一个目录，与远程主机的版本库同名
+<h3 id="拉取远程代码"><a href="#拉取远程代码" class="headerlink" title="拉取远程代码"></a>拉取远程代码</h3><pre><code class="lang-bash">## 从远程主机克隆一个版本库到本地，并在本地当前目录下生成一个文件夹，文件夹与远程主机的版本库同名
+$ pwd 
+~/Documents                 # 当前所在目录为 ~/Documents
 $ git clone [版本库的网址]
 
 ## Example
@@ -358,8 +346,21 @@ $ git branch
 <hr>
 <h3 id="远程同步"><a href="#远程同步" class="headerlink" title="远程同步"></a>远程同步</h3><p>生成 SSH 验证 - <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001374385852170d9c7adf13c30429b9660d0eb689dd43a000" target="_blank" rel="noopener">廖雪峰</a></p>
 <pre><code class="lang-bash">$ cd ~   ## 切换到 home 目录下
-$ ssh-keygen -t rsa -C &quot;youremail@example.com&quot;
+
+## 这个命令会在当前文件夹下生成一个 .ssh 目录，里面包含 id_rsa 和 id_rsa.pub 两个文件
+## 我们一会儿要用的是 id_rsa.pub 里的内容，这个是公钥 
+## id_rsa 则是私钥，里面的内容则不能泄露
+$ ssh-keygen -t rsa -C &quot;youremail@example.com&quot;   # 这里的 youremail@example.com 指的是你的邮箱名字
 </code></pre>
+<p>设置 SSH 验证，以 <a href="https://github.com" target="_blank" rel="noopener">Github</a> 为例</p>
+<pre><code class="lang-bash">## 这个命令可以查看 id_rsa.pub 里的内容
+$ cat .ssh/id_rsa.pub
+
+
+## 复制这段以 ssh-rsa 开头的内容
+## 在 Github 的「Setting」-&gt;「SSH and GPG keys」中输入，完成添加
+</code></pre>
+<p>设置远程主机</p>
 <pre><code class="lang-bash">$ git remote add [远程主机名] [地址]
 
 ## 显示所有远程仓库
@@ -368,7 +369,24 @@ $ git remote -v
 ## 移除本地记录的远程主机
 $ git remote rm [远程主机名]
 </code></pre>
-<p>设置远程</p>
+<p>将本地最新代码推送到远程主机完成更新</p>
+<pre><code class="lang-bash"># push 基本指令
+$ git push [远程主机名] [本地分支名]:[远程分支名]
+
+# Example
+$ git push heroku ch08:master
+
+# 第一次推送 master 分支时，加上 -u 参数，Git 不但会把本地的 master 分支内容推送的远程新的 master 分支，还会把本地的 master 分支和远程的 master 分支关联起来，在以后的推送或者拉取时就可以简化命令 - git push 和 git pull
+$ git push -u origin master
+
+# 推送本地的 chpw-dev 分支到远程主机的 chpw-dev 分支上，并将本地的 chpw-dev 分支设置为追踪（track）远程分支 chpw-dev
+# Branch &#39;chpw-dev&#39; set up to track remote branch &#39;chpw-dev&#39; from &#39;origin&#39;
+# 下次在本地的 chpw-dev 分支上就可以直接用简单命令 git push 来推送 chpw-dev 分支了
+$ git push -u origin chpw-dev:chpw-dev
+
+# 推送本地所有分支
+$ git push --all
+</code></pre>
 <hr>
 <h3 id="gitignore"><a href="#gitignore" class="headerlink" title=".gitignore"></a>.gitignore</h3><p>关于文件 .gitignore 的用法，参考<a href="https://help.github.com/articles/ignoring-files/" target="_blank" rel="noopener">这里</a></p>
 <hr>

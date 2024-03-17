@@ -1,0 +1,246 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>Matplotlib 使用指南</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="Matplotlib 使用指南">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Matplotlib 使用指南
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2018-06-15T10:00:03.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2018-06-15
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Machine-Learning/">Machine Learning</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>Matplotlib 是 python 世界里常用的绘图函数库，包含很多好用的方法，此处只展示几个简单的示例，更多绘图方式参见<a href="https://pandas.pydata.org/pandas-docs/stable/visualization.html" target="_blank" rel="noopener">这里</a></p>
+<hr>
+<h3 id="示例1-用-Matplotlib-创建柱状图"><a href="#示例1-用-Matplotlib-创建柱状图" class="headerlink" title="示例1 - 用 Matplotlib 创建柱状图"></a>示例1 - 用 Matplotlib 创建柱状图</h3><pre><code class="lang-python">import matplotlib.pyplot as plt
+import seaborn as sns    # seaborn 的载入是为了让图像更好看，通常都会搭配 matplotlib.pyplot 一同载入使用
+</code></pre>
+<p>pyplot 的 <a href="https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.bar" target="_blank" rel="noopener">bar</a> 功能中有两个必要参数：条柱的 x 坐标和条柱的高度。</p>
+<pre><code class="lang-python">plt.bar([1, 2, 3], [224, 620, 425])
+</code></pre>
+<p>可以利用 pyplot 的 <code>xticks</code> 功能，或通过在 <code>bar</code> 功能中指定另一个参数，指定 x 轴刻度标签。以下两个框的结果相同。</p>
+<pre><code class="lang-python"># 绘制条柱
+plt.bar([1, 2, 3], [224, 620, 425])
+
+# 为 x 轴指定刻度标签及其标签
+plt.xticks([1, 2, 3], [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])
+</code></pre>
+<pre><code class="lang-python"># 用 x 轴的刻度标签绘制条柱
+plt.bar([1, 2, 3], [224, 620, 425], tick_label=[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])
+</code></pre>
+<p>用以下方法设置轴标题和标签。</p>
+<pre><code class="lang-python">plt.bar([1, 2, 3], [224, 620, 425], tick_label=[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])
+plt.title(&#39;Some Title&#39;)
+plt.xlabel(&#39;Some X Label&#39;)
+plt.ylabel(&#39;Some Y Label&#39;)
+</code></pre>
+<hr>
+<h3 id="示例2-折线图（设定-x-和-y-更一般性的作图）"><a href="#示例2-折线图（设定-x-和-y-更一般性的作图）" class="headerlink" title="示例2 - 折线图（设定 x 和 y 更一般性的作图）"></a>示例2 - 折线图（设定 x 和 y 更一般性的作图）</h3><pre><code class="lang-python"># 用合适的标签创建线图
+y_axis = df.groupby(&#39;acidity_levels&#39;)[&quot;quality&quot;].mean()
+labels = [&#39;Extreme&#39;, &#39;High&#39;, &#39;Moderate&#39;, &#39;Low acidic&#39;]
+x_axis = range(len(labels))
+plt.plot(x_axis, y_axis)
+plt.title(&#39;Average Quality Ratings by Acidic Levels&#39;)
+plt.xlabel(&#39;Acidic Levels&#39;)
+plt.ylabel(&#39;Average Quality Rating&#39;);
+plt.xticks(x_axis, labels);      # 设定 x 轴上的标签（不是 x 轴变量的名字，而是把原先 x_axis 的每个值对应地换成相应的 label）
+</code></pre>
+<hr>
+<h3 id="示例3-柱状图（Bar-chart）"><a href="#示例3-柱状图（Bar-chart）" class="headerlink" title="示例3 - 柱状图（Bar chart）"></a>示例3 - 柱状图（Bar chart）</h3><pre><code class="lang-python"># genre_counts 的类型是 Series
+&#39;&#39;&#39;
+genre_counts :
+    Action             57
+    Adventure          56
+    Science Fiction    41
+    Thriller           31
+    Fantasy            28
+    Drama              28
+    Family             20
+    Crime              15
+    Comedy             13
+    Animation           7
+    Mystery             7
+    War                 4
+    Western             3
+    Romance             2
+    Horror              2
+    History             1
+    dtype: int64
+&#39;&#39;&#39;
+
+labels = list(genre_counts.index)
+# 使用 pandas 自带的 .plot() 快速出图后，再用 plt 进行细节设置
+genre_counts.plot(kind=&quot;bar&quot;, title=&quot;Top Popular Movie Genres&quot;);
+plt.xlabel(&#39;Genre&#39;)
+plt.ylabel(&#39;Movies Count&#39;);
+</code></pre>
+<hr>
+<h3 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h3><pre><code class="lang-python"># 设置显示说明图例（legend）
+plt.legend()
+
+# 设置好各种参数后，用以下指令生成图像
+plt.show()
+</code></pre>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

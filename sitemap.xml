@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
+    
+    <lastmod>2024-03-18T00:27:58.136Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/05/25/vscode-intro/</loc>
+    
+    <lastmod>2024-03-18T00:18:59.021Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2016/10/09/customize-your-blog-domain/</loc>
+    
+    <lastmod>2024-03-18T00:02:51.193Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
     
     <lastmod>2024-03-17T12:09:10.738Z</lastmod>
@@ -86,13 +107,6 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/05/25/vscode-intro/</loc>
-    
-    <lastmod>2022-07-15T16:44:28.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cps.ninja/2019/02/10/yang-yi-gong-series-3/</loc>
     
     <lastmod>2022-05-23T07:29:52.000Z</lastmod>
@@ -163,7 +177,7 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
+    <loc>http://cps.ninja/2018/09/21/keras/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     
@@ -177,14 +191,7 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
-    
-    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/09/21/keras/</loc>
+    <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     
@@ -192,6 +199,13 @@
   
   <url>
     <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
+    
+    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     
@@ -206,13 +220,6 @@
   
   <url>
     <loc>http://cps.ninja/2018/01/31/rails-cheat-sheet/</loc>
-    
-    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     
@@ -250,13 +257,6 @@
     <loc>http://cps.ninja/2016/11/20/ethereum-for-newbies/</loc>
     
     <lastmod>2022-03-20T16:02:53.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2016/10/09/customize-your-blog-domain/</loc>
-    
-    <lastmod>2022-03-20T16:02:32.000Z</lastmod>
     
   </url>
   

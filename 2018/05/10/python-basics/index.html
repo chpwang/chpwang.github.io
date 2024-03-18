@@ -72,7 +72,7 @@
     
     &nbsp;
     <i class="fa fa-tag"></i>&nbsp;
-    <a href="/tags/Python/">Python</a>
+    <a href="/tags/Programming-Language/">Programming Language</a>
 
 
     </div>
@@ -88,25 +88,28 @@
 <li><a href="https://www.jetbrains.com/pycharm/" target="_blank" rel="noopener">PyCharm</a>：JetBrains 团队开发的一款 Python 的 IDE ，安装和使用方法参考这个 <a href="https://www.youtube.com/watch?v=BPC-bGdBSM8" target="_blank" rel="noopener">YouTube 视频</a> </li>
 </ul>
 <p>此外，还可以选择 <a href="/2018/05/27/set-up-anaconda/">安装配置 Anaconda</a> ，以使用 Anaconda 附带的 Python 在终端里运行。</p>
-<pre><code class="lang-bash"># 查看 Python 的版本
-$ python --version
+<pre><code class="lang-bash">## 通过 Homebrew 安装 python
+$ brew install python3
+
+# 查看 Python 的版本
+$ python3 --version
 Python 3.6.5 :: Anaconda custom (64-bit)
 
 # 运行 *.py 的 Python 脚本文件
 $ cat ~/scripts/first_script.py
 print(&#39;Congratulations on running this script!!&#39;)
 
-$ python ~/scripts/first_script.py
+$ python3 ~/scripts/first_script.py
 Congratulations on running this script!!
 
 # 直接输入命令 python ，不带任何文件和参数，会进入 interactive interpreter（交互式解释器），可进行各种 Python 的语法测试
-$ python
+$ python3
 [GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)] on darwin
 Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
 &gt;&gt;&gt;exit()
 $
 </code></pre>
-<p>PS:<br>个人推荐新手使用 VS Code ，这东西介于编辑器和 IDE（Integrated Development Environment）之间，既有编辑器的简洁，又有 IDE 的强大功能，关键是安装配置起来特别简单，最适合新手。</p>
+<p>PS:<br>个人推荐新手使用 <a href="https://code.visualstudio.com" target="_blank" rel="noopener"><strong>VS Code</strong></a> ，这东西介于编辑器和 IDE（Integrated Development Environment）之间，既有编辑器的简洁，又有 IDE 的强大功能，关键是安装配置起来特别简单，最适合新手。<br>可以参考<a href="/2018/05/25/vscode-intro/">上手 Visual Studio Code</a> 设置 Python 的运行环境。</p>
 <hr>
 <h3 id="Python-的一些基本规则"><a href="#Python-的一些基本规则" class="headerlink" title="Python 的一些基本规则"></a>Python 的一些基本规则</h3><ol>
 <li>变量区分大小写，即 case sensitive</li>
@@ -114,7 +117,8 @@ $
 <li>运算符号有优先级（比如乘除法 * / 优先级高于加减法 +-）</li>
 <li>运算的优先级可以使用括号来确定：优先级方向为从里往外</li>
 <li>Python 中名为 <code>_</code> 的特殊变量（underscore variable）参见<a href="https://hackernoon.com/understanding-the-underscore-of-python-309d1a029edc" target="_blank" rel="noopener">这里</a></li>
-<li><p>Python 赋值时是「传址」效果，而不是「传值」效果。见下例：</p>
+<li>Python 变量名的规则不用 listSum 这种大小写混合，而是用下划线分隔多个单词，写成 list_sum 这样</li>
+<li><p>Python 赋值时是「传址（引用）」效果，而不是「传值」效果。见下例：</p>
 <pre><code class="lang-python"># 感受一下「传址」效果
 def li_round_change_value(li):
  for i,l in enumerate(li):

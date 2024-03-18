@@ -91,7 +91,47 @@
 <li><p>搜索安装 <a href="https://marketplace.visualstudio.com/items?itemName=lfs.vscode-emacs-friendly" target="_blank" rel="noopener">Emacs Friendly Keymap</a>。这样就可以使用好用的 Emacs 快捷键（光标移动，Kill 和 Yank 等操作）。</p>
 </li>
 </ul>
-<p><strong>运行代码：</strong><br>VS Code 需要以目录（而不是文件）为最小单位打开（载入）。打开存放代码的目录就能看到代码文件。<br>选择文件后点击界面右上角的三角形 Run Code 按钮或者使用快捷键 <code>Ctrl + Option + N</code> 来运行的代码。</p>
+<hr>
+<h3 id="Code-Runner-设置"><a href="#Code-Runner-设置" class="headerlink" title="Code Runner 设置"></a>Code Runner 设置</h3><p><a href="https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner" target="_blank" rel="noopener">Code Runner</a> 安装完之后并不能马上可以运行各种代码，因为它其实是调用各种终端命令来运行代码的，也就是终端里得有这个命令。</p>
+<p>比如要运行 JavaScript ，就要确保安装了 <a href="https://nodejs.org/en/about" target="_blank" rel="noopener">Node.js</a> ，而运行 Python 则要安装 python：</p>
+<pre><code class="lang-bash">## 通过 Homebrew 安装 Node
+$ brew install node
+
+## 或者通过 nvm 安装 Node
+$ nvm install latest    # 安装并使用最新版本的 Node
+
+$ nvm install v13.14.0  # 安装并使用 v13.14.0 版本的 Node
+
+## 通过 Homebrew 安装 python
+$ brew install python3
+</code></pre>
+<p>安装完成后，<strong>Code Runner</strong> 就会自动调用相应的命令来运行对应的文件。比如对于<code>.js</code> 文件，就会调用 <code>node</code> 命令来运行，而对于<code>.py</code> 文件，则会调用 <code>python3</code> 来运行。</p>
+<p>如果没安装，或者终端里的环境变量 <code>$PATH</code> 没设置对，<strong>Code Runner</strong> 就会因找不到这些命令而运行失败。</p>
+<ul>
+<li><p><strong>进一步设置命令如何运行</strong><br>在 <a href="https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner" target="_blank" rel="noopener">Code Runner</a> 的设置页面找到齿轮图标，点击展开，然后：<br><code>Extensions Settings</code> -&gt; <code>Code-runner:</code> <strong><code>Executor Map</code></strong> -&gt; <code>Edit in settings.jason</code><br>可以打开如下设置文件：</p>
+<pre><code class="lang-jason">{
+&quot;code-runner.clearPreviousOutput&quot;: true,
+&quot;editor.tabSize&quot;: 2,
+&quot;editor.detectIndentation&quot;: false,
+&quot;code-runner.executorMap&quot;: {
+
+  &quot;javascript&quot;: &quot;node --trace-uncaught&quot;,
+  &quot;java&quot;: &quot;cd $dir &amp;&amp; javac $fileName &amp;&amp; java $fileNameWithoutExt&quot;,
+  ...
+  ...
+  &quot;python&quot;: &quot;python3 -u&quot;,
+  &quot;perl&quot;: &quot;perl&quot;,
+  &quot;perl6&quot;: &quot;perl6&quot;,
+  ...
+  ...
+}
+}
+</code></pre>
+<p>可以更具体地看到，当运行<code>.js</code> 文件，会调用 <code>node --trace-uncaught</code> 命令来运行，而 <code>.py</code> 文件，则会调用 <code>python3 -u</code> 来运行。<br>这些命令都是可以更改的。比如你可以去掉参数 <code>--trace-uncaught</code> ，只用 <code>node</code> 来运行。或者把 <code>python3</code> 改为 <code>python</code> 。</p>
+</li>
+</ul>
+<hr>
+<h3 id="运行代码"><a href="#运行代码" class="headerlink" title="运行代码"></a>运行代码</h3><p>VS Code 需要以目录（而不是文件）为最小单位打开（载入）。打开存放代码的目录就能看到代码文件。<br>选择文件后点击界面右上角的三角形 Run Code 按钮或者使用快捷键 <code>Ctrl + Option + N</code> 来运行的代码。</p>
 <p>下面是 JavaScript 常用语法，可以用来试试上面的操作：</p>
 <pre><code class="lang-javascript">// 函数声明
 function show(x) 

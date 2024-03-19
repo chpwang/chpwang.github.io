@@ -181,7 +181,8 @@ def square2(x): return x*x
 
 ## 这里「缩进」很重要，python 靠缩进来判断函数体
 ## 如果函数体语句多，注意缩进要对齐，不能有的缩进 2 格，有的只缩进 1 格
-## 这种缩进其实不是个好设计，有时候 return 缩进错了，可能就跑到外部去了
+## 「缩进」是一种危险的糟糕设计，容易出错，比如有时 return 缩进错了，可能就跑到外部去了
+## 缩进设计似乎只是为了少写一些括号
 def square3(x):
   return x*x
 
@@ -267,6 +268,12 @@ False
 True
 &gt;&gt;&gt; type(1==2) == type(False) # Python 的类型设计是要比 JavaScript 严格很多的
 True                          # 所以做科学计算或者 AI 用的就是 Python 而不是 JavaScript
+
+## 正规判断类型的方法是用 isinstance(object, type)
+&gt;&gt;&gt; isinstance(2, bool)
+False
+&gt;&gt;&gt; isinstance(2 &lt; 3, bool)
+True
 </code></pre>
 </li>
 <li><p><strong>None</strong><br>这是 Python 里面的一种专门的数据类型，代表「没有」，类似 JavaScript 里的 Null</p>
@@ -481,7 +488,7 @@ GA Atlanta
 TX Austin, Houston, Dallas
 </code></pre>
 </li>
-<li><p>集合 - <strong>set</strong><br><code>tuple</code> 和 </p>
+<li><p>集合 - <strong>set</strong><br>集合也是数学计算中会常用到的数据结构：</p>
 <pre><code class="lang-bash">## Set 也是花括号，可以注意到内部的顺序是乱的
 &gt;&gt;&gt; s = {&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;t&#39;, &#39;hello&#39;}
 &gt;&gt;&gt; s
@@ -512,7 +519,7 @@ False
 </li>
 </ul>
 <hr>
-<h3 id="分支-if-语句"><a href="#分支-if-语句" class="headerlink" title="分支 - if 语句"></a>分支 - if 语句</h3><p><strong>注意</strong>，<code>else if</code> 分支在这里写作 <code>elif</code></p>
+<h3 id="条件分支-if-语句"><a href="#条件分支-if-语句" class="headerlink" title="条件分支 - if 语句"></a>条件分支 - if 语句</h3><p><strong>注意</strong>，<code>else if</code> 分支在这里写作 <code>elif</code></p>
 <pre><code class="lang-python">def fib(n):
   if n == 0:
     return 0
@@ -650,6 +657,20 @@ class Hash:
 ## 保留 1 位小数
 &gt;&gt;&gt; print(&quot;{} - {:.1f}&quot;.format(3,9.0/3.5))
 3 - 2.6
+</code></pre>
+<p>在 Python 中，还可以使用 <code>f-string</code> 这种种字符串格式化的方法来输出。只需在<strong>字符串</strong>前加上字母 <code>f</code> 或 <code>F</code> ，然后在字符串中使用花括号 <code>{}</code> 包裹要插入的变量或表达式：</p>
+<pre><code class="lang-python">name = &quot;Alice&quot;
+age = 30
+height = 1.75
+
+print(f&quot;My name is {name}, I am {age} years old.&quot;)    # 使用 f-string 插入变量值
+# My name is Alice, I am 30 years old.
+
+print(f&quot;Next year, I will be {age + 1} years old.&quot;)   # 可以在 f-string 中进行简单的表达式计算
+# Next year, I will be 31 years old.
+
+print(f&quot;My height is {height:.2f} meters.&quot;)           # 使用 f-string 格式化浮点数
+# My height is 1.75 meters.
 </code></pre>
 <hr>
 <h3 id="自解释器"><a href="#自解释器" class="headerlink" title="自解释器"></a>自解释器</h3><p>Python 中的内置函数 <code>eval</code> 可以将字符串解析成 Python 的代码</p>

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
+    
+    <lastmod>2024-03-23T08:37:07.307Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2016/10/08/how-to-blog-with-hexo/</loc>
     
     <lastmod>2024-03-23T08:32:27.387Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
     
     <lastmod>2024-03-23T03:58:51.074Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
-    
-    <lastmod>2024-03-23T03:44:19.004Z</lastmod>
     
   </url>
   
@@ -170,13 +170,6 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/09/26/intro-to-neural-network/</loc>
-    
-    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cps.ninja/2020/04/14/ian-cs-basics-assignments/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
@@ -185,6 +178,13 @@
   
   <url>
     <loc>http://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
+    
+    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/09/26/intro-to-neural-network/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     

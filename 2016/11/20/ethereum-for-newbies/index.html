@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>认识 Ethereum - 以太坊</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="认识 Ethereum - 以太坊">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        认识 Ethereum - 以太坊
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2016-11-20T11:43:50.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2016-11-20
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Blockchain/">Blockchain</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>以太坊（ <a href="https://ethereum.org" target="_blank" rel="noopener">Ethereum</a> ）是区块链世界里举足轻重的项目之一。事实上，对很多刚进入区块链行业的人来说，了解了以太坊，几乎就具备了在区块链世界里生存所必须的所有技术性的知识。</p>
+<p>希望这些知识有助于大家对区块链世界里五花八门的项目进行理解和价值判断。</p>
+<hr>
+<h3 id="计算的本质"><a href="#计算的本质" class="headerlink" title="计算的本质"></a>计算的本质</h3><p>以太坊的起源和比特币（ <a href="https://bitcoin.org" target="_blank" rel="noopener">Bitcoin</a> ）有很大的关系，为此我们需要重新了解一下比特币的交易（ Transaction ）过程，也就是说，比特币网络中产生一笔交易的时候，到底发生了什么？而为了简单且精准地解释这个问题，让我们抛开比特币、以太坊还有区块链，先来看看计算的本质是什么，然后从本质出发，一步步类比下去。</p>
+<p>以下三个例子都是生活中常见的计算，而每一种计算的过程都可以用下图中所展示的<strong><code>「 输入输出模型 」</code></strong>来描绘：</p>
+<ul>
+<li>「 1 + 1 」   <code>-&gt;</code> 「 计算器 」   <code>-&gt;</code> 「 2 」</li>
+<li>「 手指纹 」   <code>-&gt;</code> 「 Touch ID 」<code>-&gt;</code> 「 软件解锁行为 」</li>
+<li>「 上升的温度 」 <code>-&gt;</code> 「 水银温度计 」<code>-&gt;</code> 「 温度计示数 」<img src="/2016/11/20/ethereum-for-newbies/inout.gif" title="IO model">
+</li>
+</ul>
+<p>可以看到，作为<strong>「 输入 」</strong>和<strong>「 输出 」</strong>的东西不限于数字和符号，而作为处理这些「 输入 」并给出「 输出 」的<strong>「 设备 」</strong>也不一定是电脑。它们甚至可以是更加奇妙的东西，比如真空，比如暗物质，比如你的梦境。</p>
+<p>比特币的交易也是这样一个<strong>「 输入输出 」</strong>的过程，它的输入输出如下：</p>
+<ul>
+<li>「 发币地址，收币地址，币的数量 」<code>-&gt;</code>「 比特币的区块链 」<code>-&gt;</code>「 发币地址币的数量，收币地址币的数量」</li>
+</ul>
+<p>对于这些<strong>「 输入输出 」</strong>的过程，我们不必去关心其中的计算是如何实现的，只需知道<strong>「 设备 」</strong>所要求的「 输入 」是怎样的，以及对应的预期「 输出 」即可。比如，我们只需要知道「 比特币的区块链 」这一<strong>设备</strong>能在接收了特定的「 输入 」后，给出特定的「 输出 」就行了。</p>
+<p><code>PS:</code><br><code>注意，区块链世界里，你必须拥有「 密钥 」才能发起「 输入 」行为</code></p>
+<hr>
+<h3 id="以太坊的诞生"><a href="#以太坊的诞生" class="headerlink" title="以太坊的诞生"></a>以太坊的诞生</h3><p>通过以上<strong><code>「 输入输出模型 」</code></strong>的介绍，你不难发现，其中的<strong>「 设备 」</strong>扮演了一个很重要的角色，正是<code>它</code>，决定了人们到底能给什么样的「 输入 」并得到什么样的「 输出 」。</p>
+<p>举个例子来说，「 水银温度计 」这一设备就无法接收「 1 + 1 」这种数据，它只能接收「 温度 」这一类型的数据。</p>
+<p>同样的，「 比特币的区块链 」也只能接收 <code>「 发币地址，收币地址，币的数量，手续费 」</code>这类数据，因为「 比特币的区块链 」作为<strong>「 设备 」</strong>，只有记账这个单一的功能。</p>
+<p>那么「 区块链 」能否有记账以外的其他功能呢？能否接收更多种类的「 输入 」并给出更多种类的「 输出 」？或者再进一步，「 区块链 」这一设备能不能成为电脑，具有无限可能性，而不仅仅是记账呢？</p>
+<p>以太坊（ Ethereum ）正是在这一背景下诞生的，它的目标是：</p>
+<blockquote>
+<p><code>在「 区块链 」上实现一台世界性的电脑，一台全世界共用的电脑。</code></p>
+</blockquote>
+<hr>
+<h3 id="以太坊的特点"><a href="#以太坊的特点" class="headerlink" title="以太坊的特点"></a>以太坊的特点</h3><p>由于区块链技术的特征，即通过挖矿行为来维护整条链的数据和运作，以太坊这台电脑与生俱来地具有以下特点：</p>
+<ul>
+<li><p>和作为账簿记录每个钱包里有多少钱的「 比特币区块链 」不同，以太坊区块链（简称以太坊，和<strong>比特币的区块链</strong>是两条不同的链）作为一台电脑，记录的是所有在它上面运行的软件的数据和代码；</p>
+</li>
+<li><p>在以太坊这台电脑上运行软件是需要付钱的，通过以太币（ ETH ）这一代币支付。以太币可以在各大交易所买到；</p>
+</li>
+<li><p>「 比特币的区块链 」这本账簿是由整个网络一起维护的，即每个结点（ Node ）都有一本完整账簿。这些众多相互独立的结点各自记账相互制约，保证了账簿的安全性，正确性和可信度（数据不可更改）；同样，以太坊这台电脑也是由整个网络一起维护的，每个结点（ Node ）都运行着一整台电脑，并存储了这台电脑上的所有数据。这些众多相互独立的结点各自运行着的电脑所组成的网络，也保证了以太坊这台电脑的可靠性（永不关机不掉线）和可信度（数据不可更改）；</p>
+</li>
+<li><p>由于处于区块链上，软件的某个操作最终会在成千上万台电脑上都进行一遍，上万台电脑只相当于一台电脑的性能。尽管这个问题今后会慢慢改进，但在未来相当长的时间里，会一直这样；</p>
+</li>
+<li><p>以太坊这台电脑升级起来非常麻烦，它要求以太坊社区里的所有人一起升级，即硬分叉；</p>
+</li>
+<li><p>对电脑来说，定期的升级是必要的，所以会经常看到以太坊进行硬分叉；</p>
+</li>
+<li><p>以太坊目前的出块时间是 15 秒，也就是说，以太坊这台电脑上的程序运行起来会有 15 秒的卡顿。当然，这个时间将来会继续减少。顺便说一句，每次以太坊遭遇 DDOS 攻击也会造成卡顿，其原理是丢给以太坊一个极其消耗性能的程序，让电脑卡机。不过在以太坊这台电脑上运行程序需要支付以太币，昨天的硬分叉后发动 DDOS 攻击已经非常昂贵，基本只有土豪或以太一生黑才玩得起；</p>
+</li>
+<li><p>区块链现在计算能力和存储能力都不强，还只能处理数字这种简单的东西，所以以太坊这台电脑的性能目前还只有八九十年代的水平；</p>
+</li>
+<li><p>以太坊这台世界性电脑适用于需要解决大规模信用问题的场景，还适用于对账过程中的冲突问题以及类似问题——比如银行的对账，再就是适用于有「 永不<code>被</code>关机 」需求的领域；</p>
+</li>
+</ul>
+<p><code>PS:</code><br><a href="https://firstblood.io" target="_blank" rel="noopener">Firstblood</a> <code>是即将在以太坊上运行的 App 之一，有兴趣可以点击了解</code></p>
+<hr>
+<h3 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h3><p>问：哪里可以查看以太坊的出块信息和以太坊上的应用代币信息？</p>
+<p><strong>答：</strong>可以前往以太坊的<a href="https://etherscan.io" target="_blank" rel="noopener">区块链浏览器</a>查看。</p>
+<p>问：如何知道以太坊的最新进展？</p>
+<p><strong>答：</strong>前往以太坊的<a href="https://blog.ethereum.org" target="_blank" rel="noopener">官方博客</a>查看。</p>
+<p>问：如果即将出现硬分叉，哪里可以查看以太坊的分叉时间？</p>
+<p><strong>答：</strong><a href="https://fork.codetract.io" target="_blank" rel="noopener">这里</a>。</p>
+<p>问：有没有靠谱的以太坊中文社区？</p>
+<p><strong>答：</strong>有，<a href="http://ethfans.org" target="_blank" rel="noopener">ETHFANS</a> 。</p>
+<p>问：以太坊主网频繁出问题对上面的应用的影响程度有多大？</p>
+<p><strong>答：</strong>要看是什么问题，分叉还是被 DDOS 攻击。分叉通常没问题，因为分叉意味着以太坊的升级。DDOS 攻击则会造成网络拥堵，让以太坊上的软件无法正常执行，可以通过硬分叉修复以太网的 Bug ，进而恢复网络。</p>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

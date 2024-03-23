@@ -1,0 +1,385 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>针对 Scheme 的 Emacs 编程环境设置</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="针对 Scheme 的 Emacs 编程环境设置">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        针对 Scheme 的 Emacs 编程环境设置
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2022-05-16T01:54:43.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2022-05-16
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Mac-Tools/">Mac Tools</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p><a href="https://www.gnu.org/software/emacs/" target="_blank" rel="noopener">GNU Emacs</a> 是开源社区中 <a href="https://www.gnu.org" target="_blank" rel="noopener">GNU</a> 操作系统的一款古老而嚣张的编辑器。软件的上手涉及一些麻烦的初始设置，对新手来说不算友好。但之所以要用它，主要是为了更好地用 <a href="https://schemers.org" target="_blank" rel="noopener">Scheme</a> 语言来编程。相比对于新手最友好的上手软件 <a href="https://racket-lang.org" target="_blank" rel="noopener">Racket</a> 来说，Emacs 可以通过设置，方便地（其实刚开始也没有特别方便）使用由 <strong>R. Kent Dybvig</strong> 设计的、当今性能和可靠性都最强的 <a href="https://github.com/cisco/ChezScheme" target="_blank" rel="noopener">Chez Scheme</a> 来运行我们的代码。</p>
+<blockquote><p>I am the principal developer of the now open-source Chez Scheme, a highly reliable, highly efficient dynamic language and implementation.</p>
+<footer><strong>R. Kent Dybvig</strong></footer></blockquote>
+<p>本文内容将以 MacOS 系统为例进行讲解，其他系统的操作是类似的。</p>
+<hr>
+<h3 id="安装使用-Chez-Scheme"><a href="#安装使用-Chez-Scheme" class="headerlink" title="安装使用 Chez Scheme"></a>安装使用 Chez Scheme</h3><p><a href="https://github.com/cisco/ChezScheme" target="_blank" rel="noopener">Chez Scheme</a> 的安装在<a href="https://github.com/cisco/ChezScheme/blob/main/BUILDING" target="_blank" rel="noopener">介绍页面</a>中的描述看似很复杂（对新手算是不友好的），实际则十分简单：</p>
+<pre><code class="lang-bash">## 这里准备将 Chez Scheme 安装在 ~/apps 这个目录下
+## 打开终端 terminal 输入 cd 命令进入该目录（你也可以选择其他的目录安装）
+$ cd ~/apps
+
+## 运行 git clone 命令，将 Chez Scheme 下载到当前目录中
+## 内容大小 1.48 GB 左右，确保你的网络畅通，不然下载过程容易出错
+$ git clone git@github.com:cisco/ChezScheme.git
+
+## 下载完成后进入文件夹，准备运行安装命令
+$ cd ChezScheme/
+$ pwd               # pwd 会显示当前所在目录
+~/apps/ChezScheme
+
+## 如果你电脑的 CPU 是 x86_64 架构的，直接运行这个配置命令（程序）即可
+## 确保网络畅通，配置过程需要下载相关依赖库
+$ ./configure
+
+## 如果你的电脑是 Apple Silicon 的 Mac ，比如 CPU 是 M1 的 Mac
+## 那么就要在上面这个配置命令（程序）前面加上 arch -x86_64
+## 这是强制让 M1 Mac 的 arm 架构的 CPU 模拟 x86_64 架构来运行配置命令（程序）
+$ arch -x86_64 ./configure
+
+## 上面的配置命令成功结束后，就可以运行下面的命令进行安装了
+## 这个环节需要输入电脑的密码进行授权
+## Chez Scheme 自编译速度很快，整个过程不会超过 1 分钟（一般是 30 秒内）
+$ sudo make install
+
+## 安装完成后就能在终端中使用 scheme 命令来运行代码文件了（scheme 代码的文件名常用后缀是 .scm）
+## 运行（加载）文件后会进入 REPL 的交互解释器模式。测试完代码后，可以用 (exit) 退出
+$ scheme ~/Documents/prog/demo.scm
+Chez Scheme Version 9.5.9
+Copyright 1984-2022 Cisco Systems, Inc.
+
+Hello World ! 
+&gt; words
+&quot;Hello World&quot;
+&gt; punctuation
+&quot;!&quot;
+&gt; (+ 2 3)
+5
+&gt; (exit)      ## 调用函数 (exit) 退出 REPL 交互模式
+</code></pre>
+<p>实际上，如果只是要用 <a href="https://github.com/cisco/ChezScheme" target="_blank" rel="noopener">Chez Scheme</a> 来运行我们的代码，完全可以<strong>只使用</strong>终端来运行。搭配你自己喜欢的编辑器来写代码即可，不一定非要用对新手不友好的 <a href="https://www.gnu.org/software/emacs/" target="_blank" rel="noopener">Emacs</a> 。比如我就用 <a href="https://racket-lang.org" target="_blank" rel="noopener">DrRacket</a> 作为主力编辑器写 Scheme 代码。有需要再在终端里用 <code>scheme</code> 命令运行。</p>
+<pre><code class="lang-bash">## 注意，终端不像 DrRacket 那样会自动输出结果，
+## 如果要在代码文件中实现输出，得用 printf 函数
+## 可以看一下上文 demo.scm 文件中的代码内容
+$ cat ~/Documents/prog/demo.scm
+(define words &quot;Hello World&quot;)
+(define punctuation &quot;!&quot;)
+
+(printf &quot;~a ~a ~n&quot; words punctuation)
+</code></pre>
+<hr>
+<h3 id="Emacs-安装"><a href="#Emacs-安装" class="headerlink" title="Emacs 安装"></a>Emacs 安装</h3><p>Emacs 的安装<strong>并不难</strong>，从<a href="https://emacsformacosx.com" target="_blank" rel="noopener">官网</a>下载 <code>.dmg</code> 文件到本地正常安装即可。它对于新手的<strong>主要障碍</strong>在于后续的配置和软件的使用。</p>
+<hr>
+<h3 id="开始使用-Emacs"><a href="#开始使用-Emacs" class="headerlink" title="开始使用 Emacs"></a>开始使用 Emacs</h3><p>刚安装好的 Emacs <strong>十分简陋</strong>。需要对它进行配置，才能<strong>勉强</strong>达到一个稍微好用的状态。但是从顺序上来说，<strong>先</strong>知道如何使用，后续配置的过程才会更加游刃有余。首次打开 Emacs 界面如下图：</p>
+<img src="/2022/05/16/emacs-setup/emacs-interface-01.jpeg" title="emacs default welcome interface">
+<p>上图中我标注了 Emacs 的一些<strong>基本概念</strong>术语，这样后续你就会知道这些名词分别是在说什么区域：</p>
+<ul>
+<li><strong style="color:rgb(108, 27, 44);">红色</strong>标注区的 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/The-Echo-Area.html" target="_blank" rel="noopener">Echo Area</a>：显示你的各种输入，进行简单的交互，比如查找文件，查找关键词；</li>
+<li><strong style="color:rgb(62, 93, 34);">绿色</strong>标注区的 <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Mode-Line.html" target="_blank" rel="noopener">Mode Line</a>：显示当前 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Basics.html" target="_blank" rel="noopener">Buffer</a> 的状态信息。后期可以自行定义显示内容；</li>
+<li><strong style="color:rgb(98, 0, 169);">紫色</strong>标注区的 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Basic-Windows.html" target="_blank" rel="noopener">Window</a>：内容区。显示当前 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Basics.html" target="_blank" rel="noopener">Buffer</a> 的内容。</li>
+<li><strong style="color:rgb(108, 191, 167);">青色</strong>标注区的 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Frames.html" target="_blank" rel="noopener">Frame</a>：一个 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Frames.html" target="_blank" rel="noopener">Frame</a> 内部区域可以分割成多个 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Basic-Windows.html" target="_blank" rel="noopener">Window</a>，这样可以<strong>同时</strong>看多个 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Basics.html" target="_blank" rel="noopener">Buffer</a>；</li>
+</ul>
+<p>除了上述四个描述用户界面的概念，Emacs 里还有个重要概念是 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Basics.html" target="_blank" rel="noopener">Buffer</a> 。对新手来说，现阶段只需要把 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Basics.html" target="_blank" rel="noopener">Buffer</a> 简单理解为「<strong>任务</strong>」就行了。比如，你打开了 3 个文件，就相当于有了 3 个 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Basics.html" target="_blank" rel="noopener">Buffer</a> ，每个文件对应一个；浏览器开了 2 个页面，就有 2 个 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Basics.html" target="_blank" rel="noopener">Buffer</a> ……所以，在不同 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Basics.html" target="_blank" rel="noopener">Buffer</a> 之间切换，就相当于在你的 3 个文件之间、2 个浏览器页面之间切换，然后 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Basics.html" target="_blank" rel="noopener">Buffer</a> 的内容会显示在你的 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Basic-Windows.html" target="_blank" rel="noopener">Window</a> 区域里。</p>
+<p>接下来就是「<strong>操作</strong>」了。虽然也能用鼠标，但 Emacs 的<strong>主流</strong>操作是以<strong>键盘快捷键</strong>为主的。因为它多数情况下比鼠标效率高，尽管这也增加了新手的学习成本。</p>
+<p>Emacs 的<strong>快捷键组合</strong>多数会配合 <code>Ctrl</code> 和 <code>Meta</code> 这两个按键。这两个键分别会用大写字母 <code>C</code> 和 <code>M</code> 来表示。比如 <code>Ctrl + G</code> 这样的组合按键会写成 <code>C-g</code> ，表示同时按键盘上的 <code>Ctrl</code> 键和字母 <code>G</code> 键。同理，<code>M-x</code> 表示同时按键盘上的 <code>Meta</code> 键和字母 <code>X</code> 键。<code>C-x C-s</code> 表示先按 <code>C-x</code> 组合键，再按 <code>C-s</code> 组合键。现在再看上文的界面图，就能知道 <strong>echo area</strong> 区域在提示你可以用快捷键 <code>C-x C-s</code> 来查看更多信息。</p>
+<p>苹果电脑的键盘上没有 <code>Meta</code> 按键，默认会用 <code>Option</code> 按键来替代（可自定义）。</p>
+<p>下面是最基础的快捷键，耐心适应后，会感觉还算好用：</p>
+<ul>
+<li><code>C-g</code> ：这个是<strong>撤销</strong>操作。比如你快捷键输入到一半错了想撤销就按它；</li>
+<li><code>C-x C-f</code> ：<strong>打开</strong>文件的操作。在 <strong>echo area</strong> 输入文件路径后如果文件不存在就会<strong>新建</strong>；</li>
+<li><code>C-x C-s</code> ：<strong>保存</strong>当前文件。不过在 MacOS 下，你也可以直接用 <code>cmd + S</code> 这样通用的保存操作；</li>
+<li><code>C-x C-w</code> ：将当前文件另存为。相当于<strong>复制</strong>文件的操作；</li>
+<li><code>C-x b</code> : <strong>切换</strong> Buffer 。可以用 <code>Tab</code> 键来自动补全或查看当前可切换的 Buffer ；</li>
+<li><code>C-x C-c</code> : <strong>关闭</strong> Emacs 编辑器；</li>
+</ul>
+<p>掌握了上述基础操作后，就可以进行下一个部分的配置了。其他额外知识可以随着 Emacs 的使用慢慢掌握，我们<strong>首要目标</strong>是能尽快地写 Scheme 代码和运行它。</p>
+<hr>
+<h3 id="配置-Emacs"><a href="#配置-Emacs" class="headerlink" title="配置 Emacs"></a>配置 Emacs</h3><p>这里只需要做 <strong>3 个</strong>关键设置即可。建议直接使用 Emacs 来做各种编辑操作，这样能更快熟悉它。为了简单，我将直接列出<strong>可执行</strong>的步骤，<strong>不会深入</strong>讲解其中的原理。新手在最初的 Emacs 使用中也<strong>无须</strong>过度探索，确保<strong>尽快</strong>进入 Scheme 编程阶段。扩展知识我都给了链接，之后再慢慢深入。</p>
+<ul>
+<li><p><strong>第 1 步</strong>：<br>编辑 Emacs 的初始化文件 <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html" target="_blank" rel="noopener"><code>init.el</code></a> 。刚安装好的 Emacs 没有这个文件，需要我们自己新建。我们还需要<strong>删除</strong>原始的初始化文件 <code>~/.emacs</code> ，避免它的内容覆盖我们之后设置好的 <code>init.el</code><br>使用快捷键 <code>C-x C-f</code> <strong>新建</strong>并打开文件 <code>~/.emacs.d/init.el</code> ，然后将下面的代码复制进去保存：</p>
+<pre><code class="lang-lisp">(add-to-list &#39;load-path &quot;~/.emacs.d/scheme&quot;)
+(autoload &#39;paredit-mode &quot;paredit&quot;
+  &quot;Minor mode for pseudo-structurally editing Lisp code.&quot;
+  t)
+
+(require &#39;parenface)
+(set-face-foreground &#39;paren-face &quot;DimGray&quot;)
+
+;;;;;;;;;;;;
+;; Yin&#39;s Scheme Configuration
+;;;;;;;;;;;;
+
+(require &#39;cmuscheme)
+(setq scheme-program-name &quot;scheme&quot;) ;; 指定用 Chez Scheme ，若用 Racket 就写 &quot;racket&quot;
+
+;; bypass the interactive question and start the default interpreter
+(defun scheme-proc ()
+  &quot;Return the current Scheme process, starting one if necessary.&quot;
+  (unless (and scheme-buffer
+               (get-buffer scheme-buffer)
+               (comint-check-proc scheme-buffer))
+    (save-window-excursion
+      (run-scheme scheme-program-name)))
+  (or (scheme-get-process)
+      (error &quot;No current process. See variable `scheme-buffer&#39;&quot;)))
+
+(defun switch-other-window-to-buffer (name)
+    (other-window 1)
+    (switch-to-buffer name)
+    (other-window 1))
+
+(defun scheme-split-window ()
+  (cond
+   ((= 1 (count-windows))
+    ;;(split-window-vertically (floor (* 0.68 (window-height))))
+    (split-window-horizontally (floor (* 0.68 (window-width))))
+    (switch-other-window-to-buffer &quot;*scheme*&quot;))
+   ((not (member &quot;*scheme*&quot;
+               (mapcar (lambda (w) (buffer-name (window-buffer w)))
+                       (window-list))))
+    (switch-other-window-to-buffer &quot;*scheme*&quot;))))
+
+(defun scheme-send-last-sexp-split-window ()
+  (interactive)
+  (scheme-split-window)
+  (scheme-send-last-sexp))
+
+(defun scheme-send-definition-split-window ()
+  (interactive)
+  (scheme-split-window)
+  (scheme-send-definition))
+
+(add-hook &#39;scheme-mode-hook
+  (lambda ()
+    (paredit-mode 1)
+    (define-key scheme-mode-map (kbd &quot;&lt;f5&gt;&quot;) &#39;scheme-send-last-sexp-split-window)
+    (define-key scheme-mode-map (kbd &quot;&lt;f6&gt;&quot;) &#39;scheme-send-definition-split-window)))
+</code></pre>
+<p>之所以用 <code>~/.emacs.d/init.el</code> 而不是传统的 <code>~/.emacs</code> 来作为初始化文件是为了「<strong>模块化管理</strong>」。后续所有关于 Emacs 的配置文件都将<strong>集中</strong>存放在 <code>~/.emacs.d</code> 文件夹中，便于管理。比如关于 Scheme 代码的设置文件我就在 <code>.emacs.d</code> 文件夹下建立了一个子文件夹 <code>scheme</code> 来存放。顶层只放初始化文件。</p>
+</li>
+<li><p><strong>第 2 步</strong>：<br>下载 <a href="http://mumble.net/~campbell/emacs/paredit.el" target="_blank" rel="noopener"><code>paredit.el</code></a> 文件，将它放到 <code>~/.emacs.d/scheme</code> 目录下。可用快捷键 <code>C-x C-w</code> 来将文件复制（另存为）到该目录。你可能会对 <a href="http://mumble.net/~campbell/emacs/paredit.el" target="_blank" rel="noopener"><code>paredit.el</code></a> 文件中 <code>^L</code> 这样的内容感到奇怪，不用管它，参见<a href="https://stackoverflow.com/questions/1576887/what-does-l-in-emacs-lisp-source-code-mean" target="_blank" rel="noopener">这里</a>。<br><a href="http://mumble.net/~campbell/emacs/paredit.el" target="_blank" rel="noopener"><code>paredit.el</code></a> 文件提供了<strong>高效可靠</strong>的括号操作，提升我们 Scheme 代码的编辑体验。</p>
+</li>
+<li><p><strong>第 3 步（可选）</strong>：<br>这步是把代码的括号颜色调淡，不做也不影响我们编辑、运行代码。但因为简单，推荐做一下。<br>下载 <a href="https://www.dropbox.com/s/v0ejctd1agrt95x/parenface.el" target="_blank" rel="noopener"><code>parenface.el</code></a> 文件，并将其放在 <code>~/.emacs.d/scheme</code> 目录下。同样可用 <code>C-x C-w</code> 快捷键操作。</p>
+</li>
+</ul>
+<hr>
+<h3 id="使用-Emacs-来写-Scheme-代码"><a href="#使用-Emacs-来写-Scheme-代码" class="headerlink" title="使用 Emacs 来写 Scheme 代码"></a>使用 Emacs 来写 Scheme 代码</h3><p>相信现在你已基本熟悉 Emacs 的快捷键 <code>C-x C-f</code> 了。就用它来新建文件 <code>~/Documents/length.scm</code> ，看看如何编辑运行 Scheme 吧。</p>
+<p>还是写我们的老朋友 <code>length</code> 函数：</p>
+<pre><code class="lang-scheme">(define length
+  (lambda (l)
+    (cond [(null? l) 0]
+          [else (+ 1 (length (cdr l)))])))
+
+(length &#39;(1 2 3))
+
+(length `(4 ,(+ 5 6) 7))
+</code></pre>
+<p>我们上面的配置中把 <code>F5</code> 这个按键设置为了「<strong>运行光标所在处的前一个表达式</strong>（scheme-send-last-sexp）」。所以我们先把光标移动到第一个 <code>define</code> 表达式的<strong>最末尾</strong>，按一下 <code>F5</code> 。这时你可以看到 Emacs 出现了一个新的 <strong>Window</strong> ，开启了 <strong>REPL</strong> 交互模式，并且成功运行了我们的 <code>define</code> 表达式。</p>
+<p>同理，我们分别把光标移动到后面两个表达式的末尾，按 <code>F5</code> ，就能分别得到这两个表达式的值了：</p>
+<img src="/2022/05/16/emacs-setup/emacs-interface-02.jpeg" title="emacs scheme code interface">
+<p>多数时候，我们的代码很多，依次运行一个个表达式太麻烦。这时，可先按 <code>cmd + A</code> 全选内容，然后用 Emacs 的快捷键 <code>C-c C-r</code> 来向 <strong>REPL</strong> 载入所选内容（scheme-send-region）。这样，整个文件的内容就都被送到 Chez Scheme 里了。然后，你就可以用 <code>F5</code> 一个个地运行测试你的表达式了。</p>
+<p>你也可以用 <code>C-c C-l</code> 来载入（运行）某个文件（scheme-load-file）。总的来说，在用 <code>F5</code> 依次运行表达式之前，要先确保各种变量都已完成定义。</p>
+<p>编辑 Scheme 文件时的常用快捷键：</p>
+<ul>
+<li><code>C-c C-k</code>：scheme-compile-file               </li>
+<li><code>C-c C-l</code>：scheme-load-file </li>
+<li><code>C-c C-r</code>：scheme-send-region          </li>
+<li><code>C-c C-e</code>：scheme-send-definition</li>
+<li><code>C-x C-e</code>：scheme-send-last-sexp</li>
+<li><code>Control + 右箭头</code>：paredit-forward-slurp-sexp 括号向右<strong>扩展</strong>，<strong>吃掉</strong>右边最近的一个表达式</li>
+<li><code>Control + 左箭头</code>：paredit-forward-barf-sexp  括号向左<strong>收缩</strong>，<strong>吐出</strong>左边最近的一个表达式</li>
+</ul>
+<p>本<strong>节</strong>参考资料：</p>
+<ul>
+<li><a href="https://alexott.net/en/writings/emacs-devenv/EmacsScheme.html" target="_blank" rel="noopener"><em>Support for the Scheme programming language</em></a></li>
+<li><a href="https://www.cs.ucf.edu/~leavens/ui54/WWW/scheme.shtml" target="_blank" rel="noopener"><em>Running Scheme</em></a></li>
+<li><a href="https://doc.endlessparentheses.com/Fun/inferior-scheme-mode.html" target="_blank" rel="noopener"><em>Emacs Online Documentation</em></a></li>
+</ul>
+<hr>
+<h3 id="更多的-Emacs-操作和技巧（待完善）"><a href="#更多的-Emacs-操作和技巧（待完善）" class="headerlink" title="更多的 Emacs 操作和技巧（待完善）"></a>更多的 Emacs 操作和技巧（待完善）</h3><blockquote><p>Emacs 是一个好的操作系统，它只是缺少一个好的编辑器。</p>
+<footer><strong>Ian</strong></footer></blockquote>
+<p>常用内容编辑快捷键：</p>
+<ul>
+<li><code>C-p</code> : 光标向<strong>上</strong>移动；</li>
+<li><code>C-n</code> : 光标向<strong>下</strong>移动；</li>
+<li><code>C-f</code> : 光标向<strong>前</strong>移动；</li>
+<li><code>C-b</code> : 光标向<strong>后</strong>移动；</li>
+<li><code>C-e</code> : 光标向移动到这一段文字的<strong>末尾</strong>；</li>
+<li><code>C-a</code> : 光标向移动到这一段文字的<strong>开头</strong>；</li>
+<li><code>C-k</code> : 删除并复制光标处开始后面的这一段文字（类似<strong>剪切</strong>操作）；</li>
+<li><code>C-y</code> : 于光标处粘贴最近一次被 <code>C-k</code> 复制的内容（类似<strong>粘贴</strong>操作）；</li>
+<li><code>M-y</code> : 在 <code>C-y</code> 操作后，切换 <code>C-k</code> 复制的内容（ <code>C-k</code> 复制的内容都被储存在 <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Kill-Ring.html" target="_blank" rel="noopener">kill ring</a> 里）；</li>
+</ul>
+<p>……<br>……</p>
+<p>TODO</p>
+<p><strong>本文</strong>参考与拓展资料：</p>
+<ul>
+<li>对新手相当<strong>不</strong>友好的<strong>过于简洁</strong>的教程：<a href="http://www.yinwang.org/blog-cn/2013/04/11/scheme-setup" target="_blank" rel="noopener"><em>Scheme 编程环境的设置</em></a></li>
+<li>对新手<strong>勉强算</strong>友好的<strong>过于全面</strong>的教程：<a href="https://systemcrafters.net/emacs-essentials/absolute-beginners-guide-to-emacs/" target="_blank" rel="noopener"><em>The Absolute Beginner’s Guide to Emacs</em></a></li>
+<li><strong>官方</strong>文档（有关 Emacs 初始化配置文件的位置）：<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html" target="_blank" rel="noopener"><em>The Emacs Initialization File</em></a></li>
+<li>作者 Pavinberg 吐槽 Emacs 中文社区的教程质量不高于是<strong>亲自专栏</strong>：<a href="https://www.zhihu.com/column/c_1440829147212279808" target="_blank" rel="noopener"><em>专业 Emacs 入门教程系列</em></a></li>
+</ul>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

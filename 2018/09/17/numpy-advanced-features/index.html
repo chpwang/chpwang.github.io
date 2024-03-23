@@ -1,0 +1,344 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>Numpy 进阶（待完善）</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="Numpy 进阶（待完善）">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Numpy 进阶（待完善）
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2018-09-16T22:35:25.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2018-09-17
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Machine-Learning/">Machine Learning</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>在机器学习等相关数据行业中，NumPy 库里经常用到的是 <a href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.ndarray.html" target="_blank" rel="noopener">ndArray</a> 类型，该类包含了很多方便的函数（方法和函数本质上是同一个东西），下面就详细介绍它们，可通过全文检索来查询</p>
+<hr>
+<h3 id="载入"><a href="#载入" class="headerlink" title="载入"></a>载入</h3><p><a href="/2018/06/01/numpy-and-pandas/">NumPy 和 Pandas 入门</a>一文里已介绍了 Numpy 的安装方式，这里我们终端里进入 Python 的交互式解释器（interactive interpreter）后，将直接载入 Numpy 库</p>
+<pre><code class="lang-bash">$ python
+Python 3.6.5 |Anaconda custom (64-bit)| (default, Apr 26 2018, 08:42:37) 
+[GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)] on darwin
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; import numpy as np
+</code></pre>
+<hr>
+<h3 id="ndArray-类型的常见-Methods"><a href="#ndArray-类型的常见-Methods" class="headerlink" title="ndArray 类型的常见 Methods"></a>ndArray 类型的常见 Methods</h3><pre><code class="lang-bash">## shape - 查看线性空间的维度（注意观察以下 3 个例子的 shape 输出区别
+&gt;&gt;&gt; tensor_0 = np.array(5)
+&gt;&gt;&gt; tensor_0.shape
+()     ## 零维张量（zero dimensional Tensor），即标量（Scalar）
+
+&gt;&gt;&gt; tensor_1 = np.array([1, 2, 3, 4])
+&gt;&gt;&gt; tensor_1.shape
+(4,)   ## 一维张量（one dimensional Tensor），即矢量（Vector）—— 注：Python 不能将 (4) 识别为具有一个项的元组（tuple），所以它需要逗号，类似 1 被识别为 int ，1. 则被识别为 float  
+
+&gt;&gt;&gt; tensor_2 = np.array([[1], [2], [3], [4]])
+&gt;&gt;&gt; tensor_2.shape
+(4, 1) ## 二维张量（two dimensional Tensor），即矩阵（Matrix）
+
+&gt;&gt;&gt; tensor_4 = np.array([[[[1],[2]],[[3],[4]],[[5],[6]]],[[[7],[8]],\
+...     [[9],[10]],[[11],[12]]],[[[13],[14]],[[15],[16]],[[17],[17]]]])
+&gt;&gt;&gt; tensor_3.shape
+(3, 3, 2, 1)  ## 四维张量（four dimensional Tensor）) —— 维度大于 2 的，全部统一称为 Tensor
+
+## 注意 numpy 的 ndArray 类型是传「址」的，不是传「值」的
+## 要用 numpy.copy() 来传「值」
+&gt;&gt;&gt; tensor_1_addr = tensor_1
+&gt;&gt;&gt; tensor_1_value = np.copy(tensor_1)
+&gt;&gt;&gt; tensor_1[3]=1
+&gt;&gt;&gt; tensor_1[0]=4
+&gt;&gt;&gt; tensor_1
+array([4, 2, 3, 1])
+&gt;&gt;&gt; tensor_1_addr     ## 更改 tensor_1 之后，tensor_1_addr 随之改变
+array([4, 2, 3, 1])
+&gt;&gt;&gt; tensor_1_value    ## 更改 tensor_1 之后，tensor_1_value 不受影响
+array([1, 2, 3, 4])
+
+## 计算平均值
+&gt;&gt;&gt; np.mean(tensor_1)
+2.5
+
+## 计算最大值
+&gt;&gt;&gt; np.amax(tensor_1)
+4
+
+## 计算最大值所对应的 index（tensor_1[3] 是 array 中的最大值 4）
+&gt;&gt;&gt; np.argmax(tensor_1)
+3
+
+## 计算最小值
+&gt;&gt;&gt; np.amin(tensor_1)
+1
+
+## 计算中位数
+&gt;&gt;&gt; np.median(tensor_1)
+2.5
+
+## 计算标准差 - ddof 参数代表贝塞尔校正，当用样本标准差估算总体标准差的时候需要调整求平均时的分母（通常调整为 N-1）
+## ddof 参数默认值为 0 ，代表分母使用的是数据的总量 N ，更准确的来说分母是（N - ddof），当 ddof = 0 分母为 N
+## The divisor used in calculations is (N - ddof), where N represents the number of elements.  
+&gt;&gt;&gt; np.std(tensor_1, ddof=0)
+1.118033988749895
+
+&gt;&gt;&gt; items = [1, 2, 3, 4, 5]
+## 计算自然对数的底 e 的幂 - 即 2.71828... 的幂
+&gt;&gt;&gt; np.exp(1)
+2.718281828459045
+&gt;&gt;&gt; np.exp(items)  # 注意输入类型是 list , 返回的类型则是 ndArray
+array([  2.71828183,   7.3890561 ,  20.08553692,  54.59815003,
+       148.4131591 ])
+
+## 计算自然对数的值 - 即以 2.71828... 为底的对数的值
+&gt;&gt;&gt; np.e
+2.718281828459045
+&gt;&gt;&gt; np.log(np.e)
+1.0
+
+## 将两个 ndArray 类型简单首尾连接结合在一起
+&gt;&gt;&gt; np.append(tensor_1_addr, tensor_1_value)
+array([4, 2, 3, 1, 1, 2, 3, 4])
+</code></pre>
+<hr>
+<h3 id="ndArray-类型的矩阵相关计算"><a href="#ndArray-类型的矩阵相关计算" class="headerlink" title="ndArray 类型的矩阵相关计算"></a>ndArray 类型的矩阵相关计算</h3><pre><code class="lang-bash">&gt;&gt;&gt; matrx_a = np.array([[1,2,3,4],[5,6,7,8]])
+&gt;&gt;&gt; matrx_a
+array([[1, 2, 3, 4],
+       [5, 6, 7, 8]])
+
+&gt;&gt;&gt; matrx_b = np.array([[1,2,3],[4,5,6],[7,8,9],[10,11,12]])
+&gt;&gt;&gt; matrx_b
+array([[ 1,  2,  3],
+       [ 4,  5,  6],
+       [ 7,  8,  9],
+       [10, 11, 12]])
+
+## 矩阵的转置 - 返回的是新索引，共享相同的数据（同一内存地址），要谨慎修改
+## NumPy 在进行转置时不会实际移动内存中的任何数据，只是改变对原始矩阵的索引方式
+&gt;&gt;&gt; matrx_b.T
+array([[ 1,  4,  7, 10],
+       [ 2,  5,  8, 11],
+       [ 3,  6,  9, 12]])
+
+## 矩阵的元素级计算（注意区别于矩阵的乘法）
+&gt;&gt;&gt; matrx_a * 0.25
+array([[0.25, 0.5 , 0.75, 1.  ],
+       [1.25, 1.5 , 1.75, 2.  ]])
+
+## 找出矩阵中所有元素的最大值
+&gt;&gt;&gt; np.nanmax(matrx_a)
+8
+
+## 向量点积
+&gt;&gt;&gt; a = [[1, 0], [0, 1]]
+&gt;&gt;&gt; b = [[4, 1], [2, 2]]
+&gt;&gt;&gt; np.dot(a, b)
+array([[4, 1],
+       [2, 2]])
+
+## 矩阵的乘法
+&gt;&gt;&gt; np.matmul(matrx_a, matrx_b)
+array([[ 70,  80,  90],
+       [158, 184, 210]])
+
+## 使用 reshape() 调整矩阵形状，以便进行矩阵的乘法
+&gt;&gt;&gt; matrx_a.reshape([1,8])
+array([[1, 2, 3, 4, 5, 6, 7, 8]])
+&gt;&gt;&gt; matrx_a.reshape([8,1])
+array([[1],
+       [2],
+       [3],
+       [4],
+       [5],
+       [6],
+       [7],
+       [8]])
+
+## 创建一个和矩阵 matrx_a 相同行数和列数的新矩阵，并以 0 填充
+&gt;&gt;&gt; np.zeros_like(matrx_a)
+array([[0, 0, 0, 0],
+       [0, 0, 0, 0]])
+</code></pre>
+<hr>
+<h3 id="ndArray-类型的风骚操作"><a href="#ndArray-类型的风骚操作" class="headerlink" title="ndArray 类型的风骚操作"></a>ndArray 类型的风骚操作</h3><pre><code class="lang-bash">## 根据另一个 list 里的 True 或 False（真假布尔值）来选出指定 list 里的元素
+## True 或 False（真假布尔值）的 list 里的元素也可以是 0 和 1（0 在 python 中是 False，1 是 True）
+&gt;&gt;&gt; from itertools import compress   # 载入 intertools 库里的 compress 函数
+&gt;&gt;&gt; list_a = [1, 2, 4, 6]
+&gt;&gt;&gt; fil = [True, False, True, False]
+&gt;&gt;&gt; list(compress(list_a, fil))
+[1, 4]
+</code></pre>
+<hr>
+<h3 id="Axis-参数"><a href="#Axis-参数" class="headerlink" title="Axis 参数"></a>Axis 参数</h3><p>Numpy 里的 Array 类型，Pandas 里的 Series 类型和 DataFrame 类型都通常能设置一个 axis 参数，代表操作方向（是对 column 操作，还是对 row 操作），但每次用的时候都需要先测试一下，才能确保参数值 <code>1</code> 和 <code>0</code> 到底分别代表哪个方向</p>
+<p>对于 Array 类型和 Series 类型：</p>
+<ul>
+<li><p><code>axis = 0</code></p>
+</li>
+<li><p><code>axis = 1</code></p>
+</li>
+</ul>
+<p>对于 DataFrame 类型：</p>
+<ul>
+<li><p><code>axis = 0</code> 或 <code>axis = &quot;index&quot;</code><br>along the index（沿着 index 方向 - 垂直纵向）</p>
+</li>
+<li><p><code>axis = 1</code> 或 <code>axis = &quot;columns&quot;</code><br>along the column（沿着 column 的方向 - 水平横向）</p>
+</li>
+</ul>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

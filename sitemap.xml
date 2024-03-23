@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
+    
+    <lastmod>2024-03-23T11:24:12.155Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2020/04/14/fun-quotes/</loc>
+    
+    <lastmod>2024-03-23T11:15:25.949Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2017/03/14/setup-new-mac/</loc>
     
     <lastmod>2024-03-23T08:37:07.307Z</lastmod>
@@ -26,20 +40,6 @@
     <loc>http://cps.ninja/2019/09/18/markdown-cheat-sheet/</loc>
     
     <lastmod>2024-03-23T06:24:23.822Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
-    
-    <lastmod>2024-03-23T03:58:51.074Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2020/04/14/fun-quotes/</loc>
-    
-    <lastmod>2024-03-19T21:19:29.292Z</lastmod>
     
   </url>
   
@@ -177,13 +177,6 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
-    
-    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cps.ninja/2018/09/26/intro-to-neural-network/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
@@ -191,7 +184,7 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
+    <loc>http://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     
@@ -199,6 +192,13 @@
   
   <url>
     <loc>http://cps.ninja/2018/09/21/keras/</loc>
+    
+    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     

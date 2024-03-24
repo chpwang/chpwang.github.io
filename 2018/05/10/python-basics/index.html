@@ -571,8 +571,8 @@ lambda x: True if x % 2 == 0 else False
 ## range(5) 会返回一个 range 对象，按需计算元素的值，内存高效（memory efficient）
 
 ## python 中的 for 循环都要用 for x in ... 这种形式，如果 x 是是数字，就要用这个 range
-## 有人认为这样的 for 循环的表达能力有限，不能表达复杂的逻辑，这个 range 表达力不行
-## 比如无法写出类似 for(var i =0, j=array.length-1; i &lt; j; i++, j--) 的代码
+## 有人认为这样的 for 循环表达能力有限，不能表达复杂的逻辑，range 只能表达简单的数字
+## 比如无法写出类似 for(var i=0, j=array.length-1; i &lt; j; i++, j--) 的代码
 ## 但其实这是 python 的一个好设计。当你不能表达的时候，你就不应该使用 for 循环，而要改用 while 循环
 ## 上面那个复杂的 for 循环需要思考到底是先判断 i &lt; j 还是先计算 i++ 和 j--
 ## 代码阅读上会非常绕

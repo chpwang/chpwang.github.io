@@ -4,7 +4,7 @@
   <url>
     <loc>http://cps.ninja/2018/05/10/python-basics/</loc>
     
-    <lastmod>2024-03-23T11:24:12.155Z</lastmod>
+    <lastmod>2024-03-24T05:16:40.387Z</lastmod>
     
   </url>
   
@@ -198,6 +198,13 @@
   </url>
   
   <url>
+    <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
+    
+    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
@@ -206,13 +213,6 @@
   
   <url>
     <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
-    
-    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     

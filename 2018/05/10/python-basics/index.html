@@ -552,6 +552,25 @@ lambda x: True if x % 2 == 0 else False
 4
 6
 
+## 可以使用这种模式匹配来直接取出 key 和 value 而不用后续访问下标 - 这是好设计
+&gt;&gt;&gt; for [k, v] in [[&quot;dog&quot;, 1], [&quot;cat&quot;, 2], [&quot;fish&quot;, 3]]:
+...     print(f&quot;{k}: {v}&quot;)
+...
+dog: 1
+cat: 2
+fish: 3
+
+## 模式匹配（pattern match）还可以用于赋值，比如交换变量的数据
+&gt;&gt;&gt; [x, y] = [3, 4]
+&gt;&gt;&gt; x
+3
+&gt;&gt;&gt; y
+4
+&gt;&gt;&gt; [x, y] = [y, x]
+&gt;&gt;&gt; x
+4
+&gt;&gt;&gt; y
+3
 
 ## 和 range(start, stop, step) 函数结合使用
 &gt;&gt;&gt; for i in range(0, 2, 1):
@@ -572,10 +591,20 @@ lambda x: True if x % 2 == 0 else False
 
 ## python 中的 for 循环都要用 for x in ... 这种形式，如果 x 是是数字，就要用这个 range
 ## 有人认为这样的 for 循环表达能力有限，不能表达复杂的逻辑，range 只能表达简单的数字
-## 比如无法写出类似 for(var i=0, j=array.length-1; i &lt; j; i++, j--) 的代码
-## 但其实这是 python 的一个好设计。当你不能表达的时候，你就不应该使用 for 循环，而要改用 while 循环
-## 上面那个复杂的 for 循环需要思考到底是先判断 i &lt; j 还是先计算 i++ 和 j--
-## 代码阅读上会非常绕
+## 比如无法写出类似 for(var i=0, j=array.length; i &lt; j; i++, j--) 的代码
+## 但其实这是 python 的一个好设计。当表达不了的时候，就不应该使用 for 循环，而要改用 while 循环
+## 上述复杂的 for 循环需要思考到底是先判断 i &lt; j 还是先计算 i++ 和 j--，不利于代码阅读理解
+
+## 用 reversed 配合 range 倒数
+## 写成 for i in range(4, -1, -1) 虽然是同样的效果，但阅读理解上不直观
+&gt;&gt;&gt; for i in reversed(range(0, 5)):
+...     print(i)
+...
+4
+3
+2
+1
+0
 
 # 和 zip() 函数结合使用
 &gt;&gt;&gt; alist = [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;]

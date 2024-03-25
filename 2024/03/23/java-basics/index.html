@@ -106,7 +106,7 @@ OpenJDK 64-Bit Server VM Homebrew (build 21.0.2, mixed mode, sharing)
 </li>
 <li><p>安装 <strong>IntelliJ IDEA</strong><br><a href="https://www.jetbrains.com/idea/download/" target="_blank" rel="noopener">IntelliJ IDEA</a> 是 <a href="https://www.jetbrains.com" target="_blank" rel="noopener">JetBrains</a> 公司推出的集成开发环境（IDE）。对 <strong>Java</strong> 编程来说，使用上比 <a href="https://code.visualstudio.com" target="_blank" rel="noopener">VS Code</a> 更加方便一些。对于初学者，下载安装 <strong>IntelliJ IDEA Community Edition</strong> 这个<strong>免费的</strong>版本就够用了。</p>
 <p><img src="IntelliJ.png" alt="Welcome to IntelliJ IDEA" style="width: 800px; height: auto;"></p>
-<p>可以看到，<strong>IntelliJ IDEA</strong> 有极其友好的 onboarding 入门教程。点击 <strong>Start Tour in Java</strong> 试试吧。<br>这个 <strong>Quick onbording tour</strong> 的过程还可以根据提示，非常方便地安装 <strong>JDK</strong></p>
+<p>可以看到，<strong>IntelliJ IDEA</strong> 有极其友好的 onboarding 入门教程。点击 <strong>Start Tour in Java</strong> 试试吧。<br>这个 <strong>Quick onbording tour</strong> 的过程还可以根据提示，非常方便地安装 <strong>JDK</strong> 。</p>
 </li>
 </ul>
 <hr>
@@ -142,7 +142,7 @@ OpenJDK 64-Bit Server VM Homebrew (build 21.0.2, mixed mode, sharing)
 </code></pre>
 <p>  <strong>Lesson9.java</strong> 文件里定义了一个类 <code>Lesson9</code> 。类里则定义了一个函数 <code>main</code> 。该函数接收一个参数 <code>args</code> 。其中 <code>String[]</code> 标记了参数 <code>args</code> 的类型。它是一个存储字符串对象的<strong>数组类型</strong>。<code>void</code> 代表这个函数没有返回值，也可以认为该函数的返回类型是 <strong>void</strong> 。<strong>main</strong> 函数里是个打印语句，打印出字符串 <code>&quot;Magnifique&quot;</code>。</p>
 <p>  <code>public</code> 表示 <strong>main</strong> 函数在 <strong>Lesson9</strong> 这个类的外面也可以被访问和调用。与之相对的是 <code>private</code> ，表示只能在类内部才能访问调用这个函数。如果两者都没有，那这个函数就有<strong>另外的作用范围</strong>。</p>
-<p>  <code>static</code> 表示 <strong>main</strong> 是一个普通的函数（function），而不是类中的方法（method），它的调用方式是 <code>main(args)</code> 。如果没有 <code>static</code> 标记，它的调用方式就是 <code>(New Lesson9()).main(args)</code> 了。</p>
+<p>  <code>static</code> 表示 <strong>main</strong> 是一个<strong>普通的函数</strong>（function），而不是类中的<strong>方法</strong>（method），它的调用方式是 <code>main(args)</code> 。如果没有 <code>static</code> 标记，它的调用方式就是 <code>(New Lesson9()).main(args)</code> 了。<br>  Java 默认所有的函数都是方法（method）。方法存在一个内部可用的参数是 <code>this</code> ，用 <code>static</code> 标记的普通函数则没有 <code>this</code> 这个参数。</p>
 <p>  <code>public</code> 和 <code>static</code> 的位置可以互换。</p>
 </li>
 </ul>
@@ -170,7 +170,24 @@ OpenJDK 64-Bit Server VM Homebrew (build 21.0.2, mixed mode, sharing)
 </li>
 </ul>
 <hr>
-<h3 id="Java-语言基本知识"><a href="#Java-语言基本知识" class="headerlink" title="Java 语言基本知识"></a>Java 语言基本知识</h3><p>Java 的文件里要有一个 main 函数<br>Java 的 Class 标准上都要放在同名的文件里，这样后续文件多的时候，这些 Class 找起来就比较方便。<br>凡是写了 <code>static</code> 的都是普通函数，而不是类函数（方法），可以在各种地方当作普通函数调用<br><code>public</code> 表示外部能访问这个函数，<code>private</code> 则表示只能在这个类里调用，如果什么都不写的话，则这个函数有一个其他的范围<br>Java 默认所有的函数都是方法，要是需要一个普通的函数，就要写 <code>static</code> 关键词。方法的第一个参数是 <code>this</code> ，普通函数则没有 <code>this</code> 这个参数<br><code>static</code> 和 <code>public</code> 前后关系可以变化，哪个写在前面都可以<br>语法上，若你的 if 里只有一行，可以不打花括号，但这不是一个好的做法。好一点的编程规则都要求打上花括号，哪怕只有一行。<br>Java 的类要用关键词 <code>new</code> ，这是一个好设计。比如 <code>new Dog()</code> 如果写成 <code>Dog()</code> ，就和普通函数混淆了。加一个 <code>new</code> 就能知道不是普通函数，而是一个类，或者某种构造函数。<br><code>Dog entends Animal</code><br>你的值，它的实际的类型是这个变量标记类型的子类型，你就可以用这个父类的变量指向一个子类的对象：<code>Animal dog = new Dog();</code><br>为了通用，变量的类型一般都尽可能标记成上层的父类型（写高一点），这样后期更改实现就简单很多</p>
+<h3 id="更顺手的-IntelliJ"><a href="#更顺手的-IntelliJ" class="headerlink" title="更顺手的 IntelliJ"></a>更顺手的 IntelliJ</h3><p>当需要频繁使用 Java 写些严肃点的东西时，上面的方式就不那么好用了。使用 <a href="https://www.jetbrains.com/idea/download/" target="_blank" rel="noopener">IntelliJ IDEA</a> 编程会更加高效。跟着 IntelliJ 的 onboarding 入门教程走一遍就能很快上手，这里主要记录一下常用快捷键和技巧：</p>
+<p><strong>快捷键：</strong></p>
+<ul>
+<li><strong>编译并运行</strong>代码：<code>control + R</code>（ MacOS 系统）；</li>
+<li>快速<strong>排版</strong>（格式化）所有代码：<code>cmd + option + L</code>（ MacOS 系统）；</li>
+<li><strong>注释/取消注释</strong>代码（选中后按）：<code>cmd + /</code>（ MacOS 系统）；</li>
+<li>显示光标位置代码可能的改善操作（常用于处理 warning）：<code>option + Return</code>（ MacOS 系统）；</li>
+<li>搜索（若有选中的内容，则它会自动进入搜索框）：连续按 <strong>2</strong> 次 <code>Shift</code> 键；</li>
+</ul>
+<p><strong>技巧：</strong></p>
+<ul>
+<li>设置缩进空格数：<code>Preferences</code> -&gt; <code>Editor</code> -&gt; <code>Code Style</code> -&gt; <code>Java</code> -&gt; <code>Tabs and Indents</code> -&gt; 设置 <code>Indents</code> 空格数；</li>
+<li>设置 <strong>if-else</strong> 另起一行：<code>Preferences</code> -&gt; <code>Editor</code> -&gt; <code>Code Style</code> -&gt; <code>Java</code> -&gt; <code>Wrapping and Braces</code> -&gt; <code>&#39;if()&#39; statement</code> -&gt; 勾选 <code>&#39;else&#39; on new line</code>；</li>
+<li>关闭类型、变量名等提示：<code>Preferences</code> -&gt; <code>Editor</code> -&gt; <code>Inlay Hints</code> -&gt; 取消勾选 <code>Code vision</code>、<code>Parameter names</code> 和 <code>Types</code>；</li>
+<li><strong>Run with Coverage</strong> 功能可以检查测试代码的覆盖率</li>
+</ul>
+<hr>
+<h3 id="Java-语言基本知识"><a href="#Java-语言基本知识" class="headerlink" title="Java 语言基本知识"></a>Java 语言基本知识</h3><p>Java 的文件里要有一个 main 函数<br>语法上，若你的 if 里只有一行，可以不打花括号，但这不是一个好的做法。好一点的编程规则都要求打上花括号，哪怕只有一行。<br>Java 的类要用关键词 <code>new</code> ，这是一个好设计。比如 <code>new Dog()</code> 如果写成 <code>Dog()</code> ，就和普通函数混淆了。加一个 <code>new</code> 就能知道不是普通函数，而是一个类，或者某种构造函数。<br><code>Dog entends Animal</code><br>如果你的值，它的实际的类型是这个变量标记类型的子类型，你就可以用这个父类的变量指向一个子类的对象：<code>Animal dog = new Dog();</code><br>为了通用，变量的类型一般都尽可能标记成上层的父类型（写高一点），这样后期更改实现就简单很多</p>
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
 

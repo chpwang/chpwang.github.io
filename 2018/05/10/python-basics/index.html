@@ -117,7 +117,7 @@ $
 <li>空格重要，附带语意，即 spacing matters</li>
 <li>运算符号有优先级（比如乘除法 * / 优先级高于加减法 +-）</li>
 <li>运算的优先级可以使用括号来确定：优先级方向为从里往外</li>
-<li>Python 中名为 <code>_</code> 的特殊变量（underscore variable）参见<a href="https://hackernoon.com/understanding-the-underscore-of-python-309d1a029edc" target="_blank" rel="noopener">这里</a></li>
+<li>Python 中名为 <code>_</code> 的特殊变量（underscore variable）通常代表忽略这个值，其他详细参见<a href="https://hackernoon.com/understanding-the-underscore-of-python-309d1a029edc" target="_blank" rel="noopener">这里</a></li>
 <li>Python 变量名的规则不用 listSum 这种大小写混合，而是用下划线分隔多个单词，写成 list_sum 这样</li>
 <li><p>Python 赋值时是「传址（引用）」效果，而不是「传值」效果。见下例：</p>
 <pre><code class="lang-python"># 感受一下「传址」效果
@@ -140,86 +140,6 @@ print(test_li) # 输出 [9.0, 13.0, 5.0, 2.0]
 </li>
 </ol>
 <p>附：<br><a href="https://www.jianshu.com/p/a793c0d960fe" target="_blank" rel="noopener">Python 命名规范</a></p>
-<hr>
-<h3 id="Python-中的注释"><a href="#Python-中的注释" class="headerlink" title="Python 中的注释"></a>Python 中的注释</h3><ul>
-<li>以 <code>#</code> 开头的行</li>
-<li>以 <code>&quot;&quot;&quot;</code>（三个双引号）包裹的代码块（Code Block）</li>
-</ul>
-<pre><code class="lang-python">## codes by chpwang - 2018-05-17 04:57:56
-
-&quot;&quot;&quot;
-任务3:
-xxxxxx
-&quot;&quot;&quot;
-</code></pre>
-<hr>
-<h3 id="变量定义"><a href="#变量定义" class="headerlink" title="变量定义"></a>变量定义</h3><p>Python 里面定义变量不需要 <code>var</code> 这类关键词，直接写就行，末尾也不用分号。</p>
-<pre><code class="lang-python">## 变量定义
-x = 2 * 3
-
-## 赋值
-x = 12
-
-## 变量定义还可以解析结构
-l1 = [9, 8]
-[u, v] = l1
-
-print(u)  # 9
-print(v)  # 8
-</code></pre>
-<hr>
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>Python 里面经常用「冒号」来分隔语言的各个部分。这里参数后面是冒号。新手要注意，冒号容易忘记写。</p>
-<pre><code class="lang-python">## 匿名函数 x =&gt; x * x
-lambda x: x * x
-
-## 函数调用
-(lambda x: x * x)(3)
-
-## 函数定义
-square1 = lambda x: x*x
-
-def square2(x): return x*x
-
-## 这里「缩进」很重要，python 靠缩进来判断函数体
-## 如果函数体语句多，注意缩进要对齐，不能有的缩进 2 格，有的只缩进 1 格
-## 「缩进」是一种危险的糟糕设计，容易出错，比如有时 return 缩进错了，可能就跑到外部去了
-## 缩进设计似乎只是为了少写一些括号
-def square3(x):
-  return x*x
-
-
-result1 = 10
-result2 = 10
-
-## square4 中的 result 是局部变量，不改变外面的 result
-def square4(x):
-  result1 = x*x
-  return result
-
-## 加了 global 关键词后，square5 中的 result 就是全局变量了
-## 调用 square5 会改变外面的 result
-def square5(x):
-  global result
-  result = x*x
-  return result
-
-print(square4(4))  # 16
-print(result1)     # 10
-print(square5(4))  # 16
-print(result1)     # 16
-
-
-## 函数也可以什么都不做，但要写一个 pass ，不能什么都不写
-def do_nothing(x):
-  pass
-</code></pre>
-<pre><code class="lang-bash">&gt;&gt;&gt; def minus(x, y): return x - y
-...
-&gt;&gt;&gt; minus(9, 6)
-3
-&gt;&gt;&gt; minus(y=9, x=6)  # python 的函数调用可以指定参数的值，这样可以无视参数的调用顺序
--3                   # 好处是如果参数比较多，把各参数名和值写上，代码阅读起来就很直观 - 这是个好设计
-</code></pre>
 <hr>
 <h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><ul>
 <li><p>整数 - <strong>int</strong></p>
@@ -520,6 +440,86 @@ False
 </li>
 </ul>
 <hr>
+<h3 id="Python-中的注释"><a href="#Python-中的注释" class="headerlink" title="Python 中的注释"></a>Python 中的注释</h3><ul>
+<li>以 <code>#</code> 开头的行</li>
+<li>以 <code>&quot;&quot;&quot;</code>（三个双引号）包裹的代码块（Code Block）</li>
+</ul>
+<pre><code class="lang-python">## codes by chpwang - 2018-05-17 04:57:56
+
+&quot;&quot;&quot;
+任务3:
+xxxxxx
+&quot;&quot;&quot;
+</code></pre>
+<hr>
+<h3 id="变量定义"><a href="#变量定义" class="headerlink" title="变量定义"></a>变量定义</h3><p>Python 里面定义变量不需要 <code>var</code> 这类关键词，直接写就行，末尾也不用分号。</p>
+<pre><code class="lang-python">## 变量定义
+x = 2 * 3
+
+## 赋值
+x = 12
+
+## 变量定义还可以解析结构
+l1 = [9, 8]
+[u, v] = l1
+
+print(u)  # 9
+print(v)  # 8
+</code></pre>
+<hr>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>Python 里面经常用「冒号」来分隔语言的各个部分。这里参数后面是冒号。新手要注意，冒号容易忘记写。</p>
+<pre><code class="lang-python">## 匿名函数 x =&gt; x * x
+lambda x: x * x
+
+## 函数调用
+(lambda x: x * x)(3)
+
+## 函数定义
+square1 = lambda x: x*x
+
+def square2(x): return x*x
+
+## 这里「缩进」很重要，python 靠缩进来判断函数体
+## 如果函数体语句多，注意缩进要对齐，不能有的缩进 2 格，有的只缩进 1 格
+## 「缩进」是一种危险的糟糕设计，容易出错，比如有时 return 缩进错了，可能就跑到外部去了
+## 缩进设计似乎只是为了少写一些括号
+def square3(x):
+  return x*x
+
+
+result1 = 10
+result2 = 10
+
+## square4 中的 result 是局部变量，不改变外面的 result
+def square4(x):
+  result1 = x*x
+  return result
+
+## 加了 global 关键词后，square5 中的 result 就是全局变量了
+## 调用 square5 会改变外面的 result
+def square5(x):
+  global result
+  result = x*x
+  return result
+
+print(square4(4))  # 16
+print(result1)     # 10
+print(square5(4))  # 16
+print(result1)     # 16
+
+
+## 函数也可以什么都不做，但要写一个 pass ，不能什么都不写
+def do_nothing(x):
+  pass
+</code></pre>
+<pre><code class="lang-bash">&gt;&gt;&gt; def minus(x, y): return x - y
+...
+&gt;&gt;&gt; minus(9, 6)
+3
+&gt;&gt;&gt; minus(y=9, x=6)  # python 的函数调用可以指定参数的值，这样可以无视参数的调用顺序
+-3                   # 好处是如果参数比较多，把各参数名和值写上，代码阅读起来就很直观 - 这是个好设计
+</code></pre>
+<hr>
 <h3 id="条件分支-if-语句"><a href="#条件分支-if-语句" class="headerlink" title="条件分支 - if 语句"></a>条件分支 - if 语句</h3><p><strong>注意</strong>，<code>else if</code> 分支在这里写作 <code>elif</code></p>
 <pre><code class="lang-python">def fib(n):
   if n == 0:
@@ -538,7 +538,10 @@ else:
     print(&#39;unrecognized season&#39;)
 
 
-## lambda 中的 if - 无法在 lambda 匿名函数中使用 print 或者 raise
+## 三元操作符（Ternary Operator）写法
+x = true_value if condition else false_value
+
+## lambda 中的 if - 无法在 lambda 匿名函数中使用 print 打印，或者 raise 报错
 lambda x: True if x % 2 == 0 else False
 </code></pre>
 <hr>

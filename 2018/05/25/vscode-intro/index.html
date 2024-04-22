@@ -93,7 +93,7 @@
 </ul>
 <hr>
 <h3 id="Code-Runner-设置"><a href="#Code-Runner-设置" class="headerlink" title="Code Runner 设置"></a>Code Runner 设置</h3><p><a href="https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner" target="_blank" rel="noopener">Code Runner</a> 安装完之后并不能马上可以运行各种代码，因为它其实是调用各种终端命令来运行代码的，也就是终端里得有这个命令。</p>
-<p>比如要运行 JavaScript ，就要确保安装了 <a href="https://nodejs.org/en/about" target="_blank" rel="noopener">Node.js</a> ，而运行 Python 则要安装 python：</p>
+<p>比如要运行 JavaScript ，就要确保安装了 <a href="https://nodejs.org/en/about" target="_blank" rel="noopener">Node.js</a> ，而运行 Python 则要安装 <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python</a> ，以此类推：</p>
 <pre><code class="lang-bash">## 通过 Homebrew 安装 Node
 $ brew install node
 
@@ -120,8 +120,7 @@ $ brew install python3
   ...
   ...
   &quot;python&quot;: &quot;python3 -u&quot;,
-  &quot;perl&quot;: &quot;perl&quot;,
-  &quot;perl6&quot;: &quot;perl6&quot;,
+  &quot;rust&quot;: &quot;cd $dir &amp;&amp; rustc $fileName &amp;&amp; $dir$fileNameWithoutExt&quot;,
   ...
   ...
 }

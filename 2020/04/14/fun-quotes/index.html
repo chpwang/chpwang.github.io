@@ -80,19 +80,25 @@
     <div class="picture-container">
       
     </div>
-    <p><strong>Ian：</strong> 反正它们这些语言都是……有些时候它会学到一些经验教训，但是呢它又加进自己的一些误解。嗯…对，比如说 C# 。你看到它把这个（Type Erasure）改进了，学到了历史的教训，你就以为它都做对了，其实它…Java 已经做对的东西它却没有做对，对吧。就是…C# 它没有那个 checked exception 。</p>
-<p><strong>Ian：</strong> 总的说来，就是说这个 Java 的 <strong>JVM</strong> 里面它其实没有这个泛型（Generics）。只是说你这个编译器能看到这个东西。但是它运行的时候它其实是没有的。因为最初 <strong>JVM</strong> 就没有这个东西，后来可能又加不进去了。加不进去它就只有把它叫做 <strong>Type Erasure</strong> 。就是说「编译之后它（类型）就不见了」。然后你还以为它是什么很先进的功能。</p>
-<p><strong>Ian：</strong> 如果你去查这个 <a href="https://docs.oracle.com/javase/tutorial/java/generics/erasure.html" target="_blank" rel="noopener">Type Erasure</a> 的话，你还以为它是一个 feature 。但是我觉得它就是一个历史遗留局限。然后呢，被当成 feature ，哦不，呵呵，被<strong>宣传为</strong> feature 。（你）还以为 erasure 是 Java 专门实现的一种功能，它其实就是一个没有完整实现的 Generics 的系统。所以这个代码编译以后，这个 <code>T</code> 的这个东西在 <strong>JVM</strong> 里面是不存在的。</p>
-<p><strong>Ian：</strong> ……就是为什么加了这个泛型之后，它才报这个错，对吧。你没泛型的时候，它为啥就没这个错？所以这个就是一个……我感觉就是这个 Java 它这个…它的类型系统的实现…其实它并不是一个很完善的实现。因为它最初没有这些东西，后来又加进去。加进去它的 JVM 又没法改了。为了兼容它以前的代码，所以 Java 有所谓的 <a href="https://docs.oracle.com/javase/tutorial/java/generics/erasure.html" target="_blank" rel="noopener">Type Erasure</a> 就是这个原因。</p>
-<p><strong>Ian：</strong> 像 Haskell 之类的有类型的函数式语言它其实就是这个 interface （Java interface），只不过它把它叫另外一个名字（type class）。所以你不要觉得这个东西是面向对象语言才有的。它是一种……其实是一种通用的、制造抽象的思想。</p>
-<p><strong>Ian：</strong> 有些东西吸取了教训，但又加进了自己的一些误解。</p>
-<p><strong>Ian：</strong> 你看它（<a href="https://github.com/features/copilot" target="_blank" rel="noopener">Copilot</a>）好像能猜出我想写什么，我都没打 <code>fib</code> 呢，它就知道我下一步要写 <code>fib</code> 了。就这个东西比较危险啊。你打的代码它全都看去了，它还知道你下一步要打什么。</p>
-<p><strong>Ian：</strong> 语言的特性有些是通过解释器实现的，有些是通过编译器实现的。</p>
-<p><strong>Ian：</strong> 所以这个灵活的定义有好处也有坏处。坏处就是，不知道这个东西怎么用的人，他就喜欢滥用这个，对吧。</p>
-<p><strong>Ian：</strong> 有些东西它虽然提供给你了，但是你最好不要用，对吧。</p>
-<p><strong>Ian：</strong> 你把它写成这种 <code>for</code> 循环，你就每次你都要利用你对这个 <code>for</code> 循环的“深刻理解”，你才能知道，啊~这个是先执行了，然后这个判断才执行。然后实际上你还不如你就写成 <code>while</code> 这种样子。</p>
-<p><strong>Ian：</strong> 好了，这样我们的解释器应该就写完了。虽然功能特别少，但是这是一个很有原则的解释器。</p>
-<p><strong>Ian：</strong> 这些练习不一定要做完的，因为考虑到让有时间的同学多练习，所以数量很多。要是你为了做完而没有学到经验，就比较不划算了。</p>
+    <p><strong>Ian：</strong>你要付出表达能力的代价，来满足…来达到它可以好像自动把类型都给你推导出来的这种幻觉。结果你的代码为了能够表达你想要写的那个思路，你就要绕一个弯子才能写出来。所以我不觉得它的这个类型推导是个什么好东西……但是总有一些人他很迷信这个类型推导。因为他也不知道类型推导是怎么回事，他也没有实现过这些东西。他就觉得好神奇啊，我可以不写类型，多好啊。但是代价蛮大的。</p>
+<p><strong>Ian：</strong>……就是很多本来你可以…Java 里面你可以写的代码，你到 Haskell 里面就不能写了。就是因为你那样写了它就推导不出类型。那并不是…因为你的思路有问题或者是你不应该写那样的代码，而是因为它的这个类型推导是有局限性的。它为了能够反着推出这个类型，它就规定了这样的代码、这样的代码你不能写，这种子类型关系你不能有。呵呵~</p>
+<p><strong>Ian：</strong>……但你们不要以为这个…它这种类型推导是什么好东西。就你这里不写类型，然后它给你推导出来。这样的代价其实蛮大的。</p>
+<p><strong>Ian：</strong>你就要找到你的 bug 在哪里。你把它修好，你这个异常就不会发生了。不会发生了你又 try-catch 它干嘛？然后你 catch 到它你又能干嘛？对吧。你啥都做不了，因为那是你的 bug 。呵呵……下标越界这个异常，你 catch 它是没有意义的。</p>
+<p><strong>Ian：</strong>……然后呢，我不是去把这一行（代码）改对，（而是）我在这里去 catch 这个异常，然后处理这个异常，你觉得这样合理吗对吧？正确地处理下标越界的办法，就是你写出的代码就不应该下标越界。</p>
+<p><strong>Ian：</strong>反正它们这些语言都是……有些时候它会学到一些经验教训，但是呢它又加进自己的一些误解。嗯…对，比如说 C# 。你看到它把这个（Type Erasure）改进了，学到了历史的教训，你就以为它都做对了，其实它…Java 已经做对的东西它却没有做对，对吧。就是…C# 它没有那个 checked exception 。</p>
+<p><strong>Ian：</strong>总的说来，就是说这个 Java 的 <strong>JVM</strong> 里面它其实没有这个泛型（Generics）。只是说你这个编译器能看到这个东西。但是它运行的时候它其实是没有的。因为最初 <strong>JVM</strong> 就没有这个东西，后来可能又加不进去了。加不进去它就只有把它叫做 <strong>Type Erasure</strong> 。就是说「编译之后它（类型）就不见了」。然后你还以为它是什么很先进的功能。</p>
+<p><strong>Ian：</strong>如果你去查这个 <a href="https://docs.oracle.com/javase/tutorial/java/generics/erasure.html" target="_blank" rel="noopener">Type Erasure</a> 的话，你还以为它是一个 feature 。但是我觉得它就是一个历史遗留局限。然后呢，被当成 feature ，哦不，呵呵，被<strong>宣传为</strong> feature 。（你）还以为 erasure 是 Java 专门实现的一种功能，它其实就是一个没有完整实现的 Generics 的系统。所以这个代码编译以后，这个 <code>T</code> 的这个东西在 <strong>JVM</strong> 里面是不存在的。</p>
+<p><strong>Ian：</strong>……就是为什么加了这个泛型之后，它才报这个错，对吧。你没泛型的时候，它为啥就没这个错？所以这个就是一个……我感觉就是这个 Java 它这个…它的类型系统的实现…其实它并不是一个很完善的实现。因为它最初没有这些东西，后来又加进去。加进去它的 JVM 又没法改了。为了兼容它以前的代码，所以 Java 有所谓的 <a href="https://docs.oracle.com/javase/tutorial/java/generics/erasure.html" target="_blank" rel="noopener">Type Erasure</a> 就是这个原因。</p>
+<p><strong>Ian：</strong>像 Haskell 之类的有类型的函数式语言它其实就是这个 interface （Java interface），只不过它把它叫另外一个名字（type class）。所以你不要觉得这个东西是面向对象语言才有的。它是一种……其实是一种通用的、制造抽象的思想。</p>
+<p><strong>Ian：</strong>有些东西吸取了教训，但又加进了自己的一些误解。</p>
+<p><strong>Ian：</strong>你看它（<a href="https://github.com/features/copilot" target="_blank" rel="noopener">Copilot</a>）好像能猜出我想写什么，我都没打 <code>fib</code> 呢，它就知道我下一步要写 <code>fib</code> 了。就这个东西比较危险啊。你打的代码它全都看去了，它还知道你下一步要打什么。</p>
+<p><strong>Ian：</strong>语言的特性有些是通过解释器实现的，有些是通过编译器实现的。</p>
+<p><strong>Ian：</strong>所以这个灵活的定义有好处也有坏处。坏处就是，不知道这个东西怎么用的人，他就喜欢滥用这个，对吧。</p>
+<p><strong>Ian：</strong>有些东西它虽然提供给你了，但是你最好不要用，对吧。</p>
+<p><strong>Ian：</strong>你把它写成这种 <code>for</code> 循环，你就每次你都要利用你对这个 <code>for</code> 循环的“深刻理解”，你才能知道，啊~这个是先执行了，然后这个判断才执行。然后实际上你还不如你就写成 <code>while</code> 这种样子。</p>
+<p><strong>Ian：</strong>好了，这样我们的解释器应该就写完了。虽然功能特别少，但是这是一个很有原则的解释器。</p>
+<p><strong>Ian：</strong>为什么这个函数是递归的？因为它处理的数据是递归的。为什么这个函数里面有 3 个分支？因为它处理的数据就是有 3 种情况。就是这么简单。</p>
+<p><strong>Ian：</strong>这些练习不一定要做完的，因为考虑到让有时间的同学多练习，所以数量很多。要是你为了做完而没有学到经验，就比较不划算了。</p>
 <p><strong>Ian：</strong>很多设计错误都是因为设计者为了“用户方便”而产生的。结果带来的麻烦比方便多很多。</p>
 <p><strong>Ian：</strong>现在就像你们刚学开车，我先拿了一辆有点毛病的便宜车给你们先掌握基本的油门和方向盘的使用。之后换一辆毛病少点的车照样可以开。没必要去记住这车的毛病。</p>
 <p><strong>Ian：</strong>要记得，函数是一个动作，它含有它自己所需的一切信息。很多函数的参数是一个函数，它表示“具体要做什么”。它不是一个字符串，而是一个动作自己。</p>

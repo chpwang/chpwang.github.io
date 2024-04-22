@@ -1,0 +1,286 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>Rust 入门</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="Rust 入门">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Rust 入门
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2024-04-21T17:16:00.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2024-04-22
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Programming-Language/">Programming Language</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p><a href="https://www.rust-lang.org" target="_blank" rel="noopener">Rust</a> 算是一个系统编程语言。它和有<a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)" target="_blank" rel="noopener">垃圾回收(garbage collection)</a> 的语言不一样。在内存管理方面，Rust 作为一种底层的系统语言，有一些特殊的地方。</p>
+<hr>
+<h3 id="Rust-编程环境设置"><a href="#Rust-编程环境设置" class="headerlink" title="Rust 编程环境设置"></a>Rust 编程环境设置</h3><p>新手建议使用友好的 <a href="https://code.visualstudio.com" target="_blank" rel="noopener">VS Code</a> 来学习 <strong>Rust</strong>。不过我们要先<a href="https://doc.rust-lang.org/book/ch01-01-installation.html" target="_blank" rel="noopener">安装 Rust</a> ：</p>
+<pre><code class="lang-bash">## 官方推荐的安装方式，适用于 Linux 和 MacOS
+$ curl --proto &#39;=https&#39; --tlsv1.2 https://sh.rustup.rs -sSf | sh
+
+## 如果有 Homebrew ，也可以使用它安装 Rust
+$ brew install rust
+
+## 安装完后调用下面的 rustc 命令应该能正确查看版本号
+$ rustc --version
+rustc 1.77.2 (25ef9e3d8 2024-04-09) (Homebrew)
+</code></pre>
+<p>最后参考<a href="/2018/05/25/vscode-intro/">上手 Visual Studio Code</a> 把 <strong>VS Code</strong> 软件安装设置完成即可。</p>
+<hr>
+<h3 id="开始编程"><a href="#开始编程" class="headerlink" title="开始编程"></a>开始编程</h3><p>每次接触新的编程语言，基本都可以从「<strong>变量定义</strong>」，「<strong>函数调用</strong>」，「<strong>常见数据结构</strong>」这 3 个方向入手快速熟悉。至于语言的一些特有的特性，之后再根据需要补充学习即可。</p>
+<p>由于 <strong>Rust</strong> 代码需要编译，加上期间产生的各式各样的文件，最好专门建一个文件夹 <code>demo</code> 来进行下面的编程操作。以便管理。</p>
+<p>在文件夹 <code>demo</code> 中新建后缀为 <code>.rs</code> 的文件 <code>demo.rs</code> ，之后编辑完代码，就能用 <strong>VS Code</strong> 里的 <strong>Code Runner</strong> 来一键调用上面安装的 <code>rustc</code> 完成编译并运行。关于 VS Code 的具体操作和设置参见<a href="/2018/05/25/vscode-intro/">上手 Visual Studio Code</a> 。</p>
+<pre><code class="lang-rust">// 这部分 allow 代码是消除 rust 编译器警告的信息
+// 这样就能只看到代码打印出的结果，没有多余视线干扰
+#[allow(unused_variables)]
+#[allow(dead_code)]
+#[allow(unused_mut)]
+#[allow(unused_imports)]
+
+// 和 Java 类似，Rust 需要一个 main 函数作为入口来运行其中的代码
+// fn 相当于 function ，是定义函数的关键词
+fn main() 
+{
+  let x = 2 * 3;
+
+  // 格式化字符串中的变量有时可以写在花括号里，有时不行
+  // 所以统一写到外面比较好，统一视觉，避免写 &quot;x = {x}&quot;
+  println!(&quot;x = {}&quot;, x);  
+
+  // Rust 是需要写类型的，i32 代表 32 位带符号的整数，上面 x 没写是因为有类型推导
+  // Rust 是系统编程的语言，每个类型的尺寸（占内存的空间）都是固定的
+  let y: i32 = 1 + x;
+  println!(&quot;y = {}&quot;, y);
+
+  // 定义好的变量默认不能赋值修改
+  // y = &quot;9&quot;;
+  // error: cannot assign twice to immutable variable
+
+  // 用 mut 关键词来定义可赋值的变量（mut 表示 mutable）
+  let mut z = 5;
+  println!(&quot;first z = {z}&quot;);
+
+  // 这样的写法不好，任何变量都应该给一个初始值才对
+  // 设计得好的语言里面没有 variable declaration 这个概念
+  // let mut z;
+
+  z = 10;
+  println!(&quot;first z = {z}&quot;);
+
+  // 同名变量在 rust 里可以重复定义，且可以不同类型（这里同样有类型推导 type inferred）
+  // 注意！Rust 里，此时 y 的类型不是 String ，而是 &amp;str 类型，该类型是指向字符串的一个【引用】
+  let y = &quot;Hello&quot;;
+  println!(&quot;y = {}&quot;, y);
+
+  // 数组 - 默认也是不能更改，若要可更改则用 let mut a: [i32; 3] = [1, 2, 3]
+  let a: [i32; 3] = [1, 2, 3];
+  println!(&quot;a = {:?}&quot;, a);
+  println!(&quot;a[0] = {}, a[1] = {}, a[2] = {}&quot;, a[0], a[1], a[2]);
+
+  // 定义重复数组内容的方便写法 - 全是 5 的数组为例
+  let b = [5; 20];
+  println!(&quot;b = {:?}&quot;, b);
+
+  // 元组 - tuples（可以存在不同类型的内容）
+  // tuple 定义虽没有用 mut 关键词，但 t 的内容是可以赋值更改的：t.1 = True
+  let t: (i32, bool, char) = (42, false, &#39;X&#39;);
+  println!(&quot;t = {:?}&quot;, t);
+  println!(&quot;t.0 = {}, t.1 = {}, t.2 = {}&quot;, t.0, t.1, t.2);
+  println!(&quot;{}&quot;, (42, false, &#39;X&#39;).1);
+
+  // 匿名函数：x =&gt; x + 1
+  println!(&quot;(|x| x + 1)(5) = {}&quot;, (|x| x + 1)(5));
+
+  // 定义 add1 函数 - 不标记(输入和返回)类型，依赖类型推导
+  // Rust 是从下一行的 println! 里的调用 add1(5) 推导出来的
+  let add1 = |x| x + 1;
+  println!(&quot;add1(5) = {}&quot;, add1(5));   // 若无 add1(5)，Rust 推不出类型会报错，除非标记类型
+
+  // 标记类型的函数定义
+  let add2 = |x: i32| -&gt; i32 { x + 2 };
+  println!(&quot;add2(5) = {}&quot;, add2(5));
+
+  // 上面展示的类型推导有局限，比如 identity 函数
+  let id = |x| x;
+  println!(&quot;id(5) = {}&quot;, id(5));  // 正常输出 5
+
+  // 但下面这行会报错，因为从上面的 id(5) 推导出输入类型是 i32 ，不能是 bool
+  // 然而 id 函数应该是无论你输入什么类型的数据都能原封不动返回它
+  println!(&quot;id(5) = {}&quot;, id(True));  
+
+  // 正确实现 identity 函数，需要用到「泛型」
+  // 下面第 1 个 T 代表 T 是类型参数，它先会生成类似这样一个东西：
+  // T =&gt; fn id2(x: T) -&gt; T { return x; }
+  // 类型 T 作为输入，然后构造出一个具有类型标记的函数 id2
+  // 第 2 个 T 是输入参数 x 的类型；第 3 个 T 是函数 id2 的返回类型；
+  fn id2&lt;T&gt;(x: T) -&gt; T { x }
+  println!(&quot;id2(5) = {}&quot;, id2(5));
+  println!(&quot;id2(true) = {}&quot;, id2(true));
+
+  // curried functions: x =&gt; y =&gt; x + y
+  // 这里需要用到关键词 move 才能让 y 取到 3 这个操作数，这和 Rust 的内存管理有关
+  // Rust 制造了这些麻烦设计，是为了不用垃圾回收特性（Garbage Collection）
+  println!(&quot;(|x| (move |y| x + y))(2)(3) = {}&quot;, (|x| (move |y| x + y))(2)(3));
+}
+</code></pre>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

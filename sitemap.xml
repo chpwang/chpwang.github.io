@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cps.ninja/2024/04/27/cpp-basics/</loc>
+    
+    <lastmod>2024-05-01T04:22:03.093Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2024/03/23/java-basics/</loc>
+    
+    <lastmod>2024-05-01T04:20:41.663Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2024/04/22/rust-basics/</loc>
     
-    <lastmod>2024-04-23T16:39:21.834Z</lastmod>
+    <lastmod>2024-05-01T04:17:32.332Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://cps.ninja/2020/04/14/fun-quotes/</loc>
     
-    <lastmod>2024-04-22T20:01:49.196Z</lastmod>
+    <lastmod>2024-05-01T03:10:29.699Z</lastmod>
     
   </url>
   
@@ -19,13 +33,6 @@
     <loc>http://cps.ninja/2016/10/14/alfred-workflow/</loc>
     
     <lastmod>2024-04-22T18:22:42.675Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2024/03/23/java-basics/</loc>
-    
-    <lastmod>2024-04-22T03:25:25.928Z</lastmod>
     
   </url>
   
@@ -177,6 +184,13 @@
   </url>
   
   <url>
+    <loc>http://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
+    
+    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cps.ninja/2018/09/26/intro-to-neural-network/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
@@ -185,13 +199,6 @@
   
   <url>
     <loc>http://cps.ninja/2020/04/14/ian-cs-basics-assignments/</loc>
-    
-    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     
@@ -212,13 +219,6 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
-    
-    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
@@ -226,14 +226,21 @@
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
+    <loc>http://cps.ninja/2018/01/31/rails-cheat-sheet/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cps.ninja/2018/01/31/rails-cheat-sheet/</loc>
+    <loc>http://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
+    
+    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     

@@ -81,7 +81,7 @@
       
     </div>
     <p><a href="https://www.java.com" target="_blank" rel="noopener">Java</a> 是一门非常成熟的工业级静态类型语言。对于新手来说，它是<strong>体验</strong>了解「静态类型系统」的绝佳语言之一。</p>
-<p>所谓<a href="https://en.wikipedia.org/wiki/Type_system" target="_blank" rel="noopener"><strong>静态类型</strong></a>，就是对程序中各数据的类型进行<strong>严格规范</strong>的一种语言特性。比如在 <strong>Java</strong> 中，<strong>所有</strong>变量在定义的时候都需要声明标记它的数据类型。这会让代码看起来有点“啰嗦”，不够简洁。但好处是，代码可以无需运行就能通过类型不匹配提前发现问题，保证代码可靠性（静态类型检查）。此外，标记类型也让编译后的程序不用每次都询问一下数据的类型而减小了计算开销，提高程序性能。</p>
+<p>所谓<a href="https://en.wikipedia.org/wiki/Type_system" target="_blank" rel="noopener"><strong>静态类型</strong></a>，就是对程序中各数据的类型进行<strong>严格规范</strong>的一种语言特性。比如在 <strong>Java</strong> 中，<strong>所有</strong>变量在定义的时候都需要声明标记它的数据类型。这会让代码看起来有点“啰嗦”，不够简洁。但好处是，代码可以无需运行就能通过类型不匹配提前发现问题，保证代码可靠性（静态类型检查）。此外，标记类型也让编译后的程序不用每次都询问一下数据的类型而减小了计算开销，提高程序性能。比如 <strong>Java</strong> 比非编译执行的语言 <strong>Python</strong> 就快 30 多倍。</p>
 <p>静态类型的语言也使得 IDE（集成开发环境，比如下文介绍的 IntelliJ IDEA）能更好地支持它，比如可以实现精准的<strong>语义跳转</strong>和<strong>重构</strong>（比如可靠的变量换名）等操作。</p>
 <p>通过 <strong>Java</strong> 还可以体验面向对象（<a href="https://en.wikipedia.org/wiki/Object-oriented_programming" target="_blank" rel="noopener">OOP</a>）的设计精髓：面向对象主要不在于节省代码、重用代码——这些其他非面向对象语言也能做到——而在于<strong>表达各种类型之间的关系</strong>（其实就是数学上集合的包含关系）。</p>
 <blockquote><p>它本来这种类型它不是这种集合的包含关系，他还去继承一下。就因为他能省…少打一点代码。结果后来就越弄越复杂。看不懂了。</p>
@@ -196,8 +196,24 @@ OpenJDK 64-Bit Server VM Homebrew (build 21.0.2, mixed mode, sharing)
 <li><strong>Run with Coverage</strong> 功能可以检查测试代码的覆盖率</li>
 </ul>
 <hr>
-<h3 id="Java-语言基本知识"><a href="#Java-语言基本知识" class="headerlink" title="Java 语言基本知识"></a>Java 语言基本知识</h3><p>Java 的文件里要有一个 main 函数<br>语法上，若你的 if 里只有一行，可以不打花括号，但这不是一个好的做法。好一点的编程规则都要求打上花括号，哪怕只有一行。<br>Java 的类要用关键词 <code>new</code> ，这是一个好设计。比如 <code>new Dog()</code> 如果写成 <code>Dog()</code> ，就和普通函数混淆了。加一个 <code>new</code> 就能知道不是普通函数，而是一个类，或者某种构造函数。<br><code>Dog entends Animal</code><br>如果你的值，它的实际的类型是这个变量标记类型的子类型，你就可以用这个父类的变量指向一个子类的对象：<code>Animal dog = new Dog();</code><br>为了通用，变量的类型一般都尽可能标记成上层的父类型（写高一点），这样后期更改实现就简单很多<br>在 Java 中，类的名称通常遵循一种命名约定，即类名的首字母应该大写。这是一种广泛接受的编程规范，被称为“大驼峰命名法”（PascalCase）。按照这个规范，类名的每个单词的首字母都要大写，而单词之间不使用下划线或其他分隔符。</p>
-<p>虽然在 Java 中，类名的首字母一般应该大写，但从语法上讲，类名的首字母也可以小写。但是，强烈建议遵循命名约定，使用大写字母开头的类名，以便与变量名（小驼峰命名法）等其他命名约定区分开来，并且符合 Java 社区的编程习惯和规范。这样可以增加代码的可读性和可维护性，使代码更符合行业标准。</p>
+<h3 id="Java-语言基本知识"><a href="#Java-语言基本知识" class="headerlink" title="Java 语言基本知识"></a>Java 语言基本知识</h3><ul>
+<li><p>Java 的文件里要有一个 main 函数</p>
+</li>
+<li><p>语法上，若你的 if 里只有一行，可以不打花括号，但这不是一个好的做法。好一点的编程规则都要求打上花括号，哪怕只有一行。</p>
+</li>
+<li><p>Java 的类要用关键词 <code>new</code> ，这是一个好设计。比如 <code>new Dog()</code> 如果写成 <code>Dog()</code> ，就和普通函数混淆了。加一个 <code>new</code> 就能知道不是普通函数，而是一个类，或者某种构造函数。</p>
+</li>
+<li><p>如果你的值，它的实际的类型是这个变量标记类型的子类型，你就可以用这个父类的变量指向一个子类的对象：<code>Animal dog = new Dog();</code></p>
+</li>
+<li><p>为了通用，变量的类型一般都尽可能标记成上层的父类型（写高一点），这样后期更改实现就简单很多</p>
+</li>
+<li><p>在 Java 中，类的名称通常遵循一种命名约定，即类名的首字母应该大写。这是一种广泛接受的编程规范，被称为“大驼峰命名法”（PascalCase）。按照这个规范，类名的每个单词的首字母都要大写，而单词之间不使用下划线或其他分隔符。</p>
+</li>
+<li><p>虽然在 Java 中，类名的首字母一般应该大写，但从语法上讲，类名的首字母也可以小写。但是，强烈建议遵循命名约定，使用大写字母开头的类名，以便与变量名（小驼峰命名法）等其他命名约定区分开来，并且符合 Java 社区的编程习惯和规范。这样可以增加代码的可读性和可维护性，使代码更符合行业标准。</p>
+</li>
+<li><p>Java 里面，所有不是整数之类那种特别小的类型的，凡是你用 <code>new</code> 创建的那些对象——虽然你没有写那个指针的符号——它全都是指针。Java 里面几乎全都是 <strong><a href="https://www.ibm.com/docs/en/i/7.4?topic=calls-pass-by-reference" target="_blank" rel="noopener">Pass by Reference</a></strong> ，除了 <code>int</code> 之类的它拷贝了一下。</p>
+</li>
+</ul>
 <hr>
 <h3 id="Java-基本数据类型"><a href="#Java-基本数据类型" class="headerlink" title="Java 基本数据类型"></a>Java 基本数据类型</h3><ul>
 <li><p>整数 - <strong>int</strong></p>

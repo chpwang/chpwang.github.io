@@ -80,9 +80,12 @@
     <div class="picture-container">
       
     </div>
-    <p><a href="https://www.rust-lang.org" target="_blank" rel="noopener">Rust</a> 算是一个系统编程语言。它和有<a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)" target="_blank" rel="noopener">垃圾回收(garbage collection)</a> 的语言不一样。在内存管理方面，Rust 作为一种底层的系统语言，有一些特殊的地方。</p>
+    <p><a href="https://www.rust-lang.org" target="_blank" rel="noopener">Rust</a> 算是一个系统编程语言。和有<a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)" target="_blank" rel="noopener">垃圾回收（Garbage Collection）</a>的语言不一样，Rust 作为一种底层的系统语言，在内存管理方面有一些特殊的地方。它用某种语言特性设计（<a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html" target="_blank" rel="noopener">ownership</a>）（<strong>部分</strong>）取代了垃圾回收。</p>
+<p>Rust 的这些 <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html" target="_blank" rel="noopener">ownership</a>，<a href="https://doc.rust-lang.org/rust-by-example/scope/lifetime.html" target="_blank" rel="noopener">lifetime</a> 之类的静态检查设计，主要目的是让人们可以尽量少地使用 <a href="https://doc.rust-lang.org/book/ch15-04-rc.html" target="_blank" rel="noopener">Rc（引用计数）</a>。不过到了复杂的数据结构，比如<a href="https://en.wikipedia.org/wiki/Interpreter_(computing)" target="_blank" rel="noopener">解释器</a>，仍然是要用 <strong>Rc</strong> 的。只是比较简单的那一部分代码你可以不用 <strong>Rc</strong> 。</p>
+<p>由于 Rust 语言的内存管理使得它相比使用垃圾回收管理内存的语言，据说性能在某些情况下快得多（不用 Rc 就减少了 Rc 的开销）。所以可以稍微重视一下。当然，它的这种设计并没有很完善，有一些多余而复杂东西（比如 Rust 总有一些自以为方便的隐式操作，而非写什么代码就是什么的所见即所得），但理解它的内存管理思路能给人们提供启发，也许可以改进自己的代码性能。比如 <a href="https://en.wikipedia.org/wiki/C%2B%2B" target="_blank" rel="noopener">C++</a> 稍微“扩展”一下 <a href="https://en.cppreference.com/w/cpp/memory/unique_ptr" target="_blank" rel="noopener">unique_ptr</a>，也能实现 Rust 的内存管理精髓。</p>
 <hr>
-<h3 id="Rust-编程环境设置"><a href="#Rust-编程环境设置" class="headerlink" title="Rust 编程环境设置"></a>Rust 编程环境设置</h3><p>新手建议使用友好的 <a href="https://code.visualstudio.com" target="_blank" rel="noopener">VS Code</a> 来学习 <strong>Rust</strong>。不过我们要先<a href="https://doc.rust-lang.org/book/ch01-01-installation.html" target="_blank" rel="noopener">安装 Rust</a> ：</p>
+<h3 id="Rust-编程环境设置"><a href="#Rust-编程环境设置" class="headerlink" title="Rust 编程环境设置"></a>Rust 编程环境设置</h3><p>简单的代码可以直接先去官网的 <a href="https://play.rust-lang.org/" target="_blank" rel="noopener">Rust Playground</a> 在线运行。这样不用进行任何配置和安装，最方便。之后的正式学习，建议使用友好的 <a href="https://code.visualstudio.com" target="_blank" rel="noopener">VS Code</a> 来运行 <strong>Rust</strong> 代码。</p>
+<p>以 <strong>MacOS</strong> 操作系统为例，先<a href="https://doc.rust-lang.org/book/ch01-01-installation.html" target="_blank" rel="noopener">安装 Rust</a> ：</p>
 <pre><code class="lang-bash">## 官方推荐的安装方式，适用于 Linux 和 MacOS
 $ curl --proto &#39;=https&#39; --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
@@ -101,7 +104,7 @@ $ rustup component add rustfmt
 ## 如果是 Homebrew 安装的 Rust ，就要用 Homebrew 来安装 rustfmt
 $ brew install rustfmt
 </code></pre>
-<p>完成安装之后根据 <a href="https://rust-lang.github.io/rustfmt/" target="_blank" rel="noopener">rustfmt 文档</a>新建 <code>rustfmt.toml</code> 文件设置好想要的格式，即可在 <strong>VS Code</strong> 中右键点击 <code>Format Document</code> 或是快捷键：<code>option</code> + <code>shift</code> + <code>F</code> 来格式化代码。</p>
+<p>完成安装之后根据 <a href="https://rust-lang.github.io/rustfmt/" target="_blank" rel="noopener">rustfmt 文档</a>新建 <code>rustfmt.toml</code> 文件设置好想要的格式，即可在 <strong>VS Code</strong> 中右键点击 <code>Format Document</code> 或是快捷键：<code>option</code> + <code>shift</code> + <code>F</code> 来格式化代码。注意，<code>rustfmt.toml</code> 文件里的设置项分为 stable 和 unstable ，如果要开启 unstable 的设置项，需要使用 <a href="https://rust-lang.github.io/rustup/concepts/channels.html" target="_blank" rel="noopener">Nightly</a> 版本的 Rust ，即最不稳定版。</p>
 <p>也可以在终端中调用 <code>rustfmt</code> 命令来格式化：</p>
 <pre><code class="lang-bash">$ rustfmt demo.rs
 </code></pre>
@@ -111,6 +114,7 @@ $ brew install rustfmt
 <p>在文件夹 <code>demo</code> 中新建后缀为 <code>.rs</code> 的文件，比如 <code>demo.rs</code> ，之后编辑完代码，就能用 <strong>VS Code</strong> 里的 <strong>Code Runner</strong> 来一键调用上面安装的 <code>rustc</code> 完成编译并运行。关于 VS Code 的具体操作和设置参见<a href="/2018/05/25/vscode-intro/">上手 Visual Studio Code</a> 。</p>
 <pre><code class="lang-rust">// 这部分 allow 代码是消除 rust 编译器警告的信息
 // 这样就能只看到代码打印出的结果，没有多余视线干扰
+// 注意这不是全局生效的，对每一个需要的函数，都要写一次
 #[allow(unused_variables)]
 #[allow(dead_code)]
 #[allow(unused_mut)]
@@ -127,6 +131,8 @@ fn main()
   println!(&quot;x = {}&quot;, x);  
 
   // Rust 是需要写类型的，i32 代表 32 位带符号的整数，上面 x 没写是因为有类型推导
+  // 「类型推导」其实是错误的语言设计，应该在定义处直接标记类型。方便阅读，且提高代码的表达能力
+  // 「类型推导」会限制代码的表达能力，导致很多写法不能写，否则没法正确推导出这些写法下的数据类型
   // Rust 是系统编程的语言，每个类型的尺寸（占内存的空间）都是固定的
   let y: i32 = 1 + x;
   println!(&quot;y = {}&quot;, y);
@@ -204,9 +210,9 @@ fn main()
   // 条件分支
   let x = 3;
   if x &lt; 5 {
-      println!(&quot;condition was true&quot;);
+    println!(&quot;condition was true&quot;);
   } else {
-      println!(&quot;condition was false&quot;);
+    println!(&quot;condition was false&quot;);
   }
 
   fn fib(n: u64) -&gt; u64
@@ -240,7 +246,11 @@ fn main()
 
 
   // for loop
-  let mut a = [2, 3, 5, 7, 11, 13, 17];
+  let mut a = [2, 3, 5, 7, 11, 13, 17];  // a 的类型为 [i32; 7]
+  // 由于数组 a 的内容是 i32 整数
+  // 所以定义 type_test 变量会 copy 数组内容，而不会 move ，和 i32 一样
+  // 如果内容是 String 字符串，那 let type_test: [String; 7] = a; 就会 move 了
+  let type_test: [i32; 7] = a;           
   for x in a {
     println!(&quot;array element: {}&quot;, x);
   }
@@ -260,7 +270,11 @@ fn main()
   }
 
   // vector - 类似 Java 中的 ArrayList ，长度不固定，可添加数据（上面的数组长度固定不能添加）
-  let mut v = vec![1, 2, 3, 4, 5];
+  // 变量 v 的类型是 Vec&lt;i32&gt;，且注意就算内容是 i32 ，也不能像上面的 a 变量那样默认 copy
+  // let type_test: Vec&lt;i32&gt; = v; 会发生 move
+  let mut v = vec![1, 2, 3, 4, 5];   
+
+  // 这里如果不用 &amp;v 而采用 v ，虽然仍然能顺利输出，但会发生 move ，后续 v 变量就不能用了
   for x in &amp;v {
     println!(&quot;vector element: {x}&quot;);
   }
@@ -291,16 +305,24 @@ fn main()
   println!(&quot;----- hash map -----&quot;);
   use std::collections::HashMap;
 
-  let mut table = HashMap::new();  // 注意这里没有声明 table 类型，Rust 会从后面推导该类型
+  // 注意这里没有声明 table 类型
+  // Rust 会从后面的 table.insert(&quot;one&quot;, 1); 推导出 table 的类型
+  // table 的完整类型是 HashMap&lt;&amp;str, i32&gt;
+  // 为什么整数部分是 i32 而不是 i64 ？其实 Rust 编译器无法确切地知道是 i32 还是 i64
+  // Rust 编译器会根据上下文和已知的类型信息尝试找到最适合的类型，以满足所有 insert 的值的类型
+  // 下方 insert 的值 1 、2 、3 通常在 Rust 中默认为 i32 类型，所以这里是 i32
+  // 但是如果在其他部分的代码中，插入了 i64 类型的值，那么编译器则会认为是 HashMap&lt;&amp;str, i64&gt;
+  // 「类型推导」是错误的设计，会限制语言的表达，正确做法应该在定义的地方显式标记类型
+  let mut table = HashMap::new();  
 
   table.insert(&quot;one&quot;, 1);
   table.insert(&quot;two&quot;, 2);
   table.insert(&quot;three&quot;, 3);
 
-  // 可以通过下标访问 table 的值
+  // 可以通过 key 访问 table 的值
   println!(&quot;table[\&quot;one\&quot;] = {}&quot;, table[&quot;one&quot;]);
 
-  // 但是如果下标访问的值不存在，程序会报错中断
+  // 但如果 key 来访问的值不存在，程序会报错中断
   // println!(&quot;table[\&quot;four\&quot;] = {}&quot;, table[&quot;four&quot;]);
 
   // 所以更合理的方式是调用 get 函数配合 {:?} 来尝试取值，这样程序不会中断
@@ -312,8 +334,16 @@ fn main()
   // Rust 是不会出现 null pointer exception 的
   println!(&quot;table[\&quot;two\&quot;] = {:?}&quot;, table.get(&quot;two&quot;));           // table[&quot;two&quot;] = Some(2)
 
+  // Tips: 直接打印 None 会报错
+  // println!(&quot;None: {:?}&quot;, None); 
+
+  // 需要添加类型 T 即 None::&lt;T&gt; 才能顺利打印出 None: None
+  // 这说明 table.get(&quot;four&quot;) 得到的 None 其实是 None::&lt;i32&gt; ，编译器类型推导出了这个 T
+  println!(&quot;None: {:?}&quot;, None::&lt;i32&gt;);  
+
   // 处理这种 option 类型可以用 match ，对不同的取值进行不同的操作
-  match table.get(&quot;three&quot;) {
+  match table.get(&quot;three&quot;) 
+  {
     Some(value) =&gt; println!(&quot;value: {}&quot;, value),   // value 在这里直接被取出
     None =&gt; println!(&quot;one: not found&quot;),
   }
@@ -321,7 +351,7 @@ fn main()
   // match 是一种程序语言里通用的构造，有点像 if 的那个分支的构造
 
 
-   // struct - 类似面向对象里的「对象」
+   // struct - 结构体，类似面向对象里的「对象」
   struct User {
     username: String,
     email: String,
@@ -343,8 +373,10 @@ fn main()
   println!(&quot;changed user1: username = {}, email = {}&quot;, user1.username, user1.email);
 
   // struct constructor - 构造函数来创建 struct instance
-  fn build_user(email: String, username: String) -&gt; User {
-    User {
+  fn build_user(email: String, username: String) -&gt; User 
+  {
+    User {  // 注意这里没有写 return ，Rust 会自动隐式返回最后一个表达式的值
+            // 除非表达式有分号或者没有表达式。表达式末尾有分号就要显示地写 return
 
         // 在 Rust 语法里，这里可以就只写 username 和 email，值也能正确对应
         // 但这样并不好，还是写 username: username 这样看起来更直观逻辑更清楚
@@ -356,7 +388,7 @@ fn main()
         username: username,   
         email: email,
         active: true,
-    }
+    }  // 这里不能加分号，否则函数 build_user 无法隐式返回，只能写 return
   }
 
   let user2 = build_user(String::from(&quot;user2@example.com&quot;), String::from(&quot;user2&quot;));
@@ -398,6 +430,7 @@ fn main()
   // 使用 #[derive(Debug)] 可以方便地实现 Debug trait ，所以类型的调试输出一般用这个
   // #[derive(Debug)] 需要直接应用于每个需要它的结构体或枚举上。它不是全局性的，不能应用一次就影响整个模块或包
   // 这意味着每个想用 {:?} 格式化输出的类型都要单独写一次 #[derive(Debug)]
+  // 注意这个 derive 只能用于 struct ，enum 和 union
 
   // methods - Struct 的方法是定义在外面的
   // 这里给 Point 这个 struct 添加（定义）方法
@@ -421,7 +454,7 @@ fn main()
   println!(&quot;distance between p1 and p2 = {}&quot;, p1.distance(&amp;p2));
 
 
-  // enum (like abstract class in OOP, sum type in FP) -  类似 Java 中的 abstract class
+  // enum (like abstract class in OOP, sum type in FP) -  枚举，类似 Java 中的 abstract class
   // 这里定义了一个 Mybool 类型，它包含 2 个子类型 MyTrue 和 MyFalse
   enum MyBool
   {
@@ -510,7 +543,8 @@ fn main()
         // 注意，我把所有的「引用」和「指针」都打了引号，代表 Rust 的引用和 C 语言、C++ 的引用（指针）概念不一样
         // &amp; 和 * 只能暂时近似理解为「创建引用」和「解引用」的效果，不能认为是等同的概念
         // 之后会有例子暴露 Rust 的问题：&amp;&amp;String 和 &amp;String 的类型是否一样
-        // 准确的理解应该抛弃 C 语言的指针思维，进一步还得查看 Rust 官方文档
+        // 准确的理解应该抛弃 C 语言的指针思维，进一步还得查看 Rust 官方文档关于 ownership 的说明
+        // https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html
         // 由于这里的 e1 和 e2 都是 Box&lt;Exp&gt; ，上面提到 Box 其实是“指针”，所以要通过 * 把对应的值取出来
         let v1 = calc(*e1);  
         let v2 = calc(*e2);
@@ -607,34 +641,520 @@ fn main()
 <hr>
 <h3 id="Rust-的内存管理"><a href="#Rust-的内存管理" class="headerlink" title="Rust 的内存管理"></a>Rust 的内存管理</h3><p><strong>Rust</strong> 最重要的功能就是「<strong>内存管理</strong>」。它和其他语言（比如 <strong>Java</strong>）不一样。因为它没有<a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)" target="_blank" rel="noopener">垃圾回收(GC)</a> 。它是靠编译器的静态检查来实现内存管理的。<strong>Rust</strong> 可以静态地保证大部分的内存不会出问题。</p>
 <p><strong>Rust</strong> 的内存管理导致有很多代码写法上的限制，使得 <strong>Rust</strong> 写一些复杂的代码会有点痛苦。这就是为啥这个语言<strong>很</strong>不适合作为初学者的第一门语言。因为太多这个内存管理的东西夹在里面。你就没法思考你的那些逻辑。写一个链表都要想想 <code>Box</code> 。</p>
-<pre><code class="lang-Rust">// ---------------------------- Ownership ----------------------------
+<pre><code class="lang-Rust">  // ---------------------------- Ownership ----------------------------
 
-println!(&quot;--------------- Ownership ---------------&quot;);
+  println!(&quot;--------------- Ownership ---------------&quot;);
 
-let x = 5;
-let y = x;  // copy (because i32 is Copy)
-println!(&quot;x: {}, y: {}&quot;, x, y);
+  let x = 5;
+  let y = x;  // copy (because i32 is Copy)
+  println!(&quot;x: {}, y: {}&quot;, x, y);
 
-// Example 1: String
-let s1 = String::from(&quot;hello&quot;);
-let s2 = s1;  // move
-println!(&quot;s2: {}&quot;, s2);
-// error: value borrowed here after move
-// println!(&quot;s1: {}&quot;, s1);
+  // Example 1: String
+  let s1 = String::from(&quot;hello&quot;);
+  let s2 = s1;  // move
+  println!(&quot;s2: {}&quot;, s2);
+  // error: value borrowed here after move
+  // println!(&quot;s1: {}&quot;, s1);
 
-// clone
-println!(&quot;----- clone -----&quot;);
-let s1 = String::from(&quot;hello&quot;);
-let s2 = s1.clone();
-println!(&quot;s1: {}&quot;, s1);
-println!(&quot;s2: {}&quot;, s2);
+  // Rust 里的传递基本都是 move ，只有专门标记 &amp; 才是 borrow
 
-// borrow
-println!(&quot;----- borrow -----&quot;);
-let s1 = String::from(&quot;hello&quot;);
-let s2 = &amp;s1;
-println!(&quot;s1: {}&quot;, s1);
-println!(&quot;s2: {}&quot;, s2);
+  // clone
+  println!(&quot;----- clone -----&quot;);
+  let s1 = String::from(&quot;hello&quot;);
+  let s2 = s1.clone();
+  println!(&quot;s1: {}&quot;, s1);
+  println!(&quot;s2: {}&quot;, s2);
+
+  // borrow
+  println!(&quot;----- borrow -----&quot;);
+  let s1 = String::from(&quot;hello&quot;);
+  let s2 = &amp;s2;
+  println!(&quot;s1: {}&quot;, s1);
+  println!(&quot;s2: {}&quot;, s2);
+
+
+  // function that takes ownership
+  fn take_ownership(s: String)
+  {
+    println!(&quot;take_ownership: {}&quot;, s);
+  }
+
+  let s = String::from(&quot;hello&quot;);
+  take_ownership(s);
+  // error: value borrowed here after move
+  // println!(&quot;s: {}&quot;, s);
+
+
+  // function that gives ownership
+  fn give_ownership() -&gt; String
+  {
+    let s = String::from(&quot;hello&quot;);
+    println!(&quot;give_ownership: {}&quot;, s);
+    return s;
+  }
+
+  let s = give_ownership();
+  println!(&quot;s: {}&quot;, s);
+
+  fn take_and_give_back(s: String) -&gt; String
+  {
+    println!(&quot;take_and_give_back: {}&quot;, s);
+    return s;
+  }
+
+  let s = String::from(&quot;hello&quot;);
+  let s1 = take_and_give_back(s);
+  println!(&quot;s1: {}&quot;, s1);
+  // borrow of moved value: `s`
+  // println!(&quot;s: {}&quot;, s);
+
+
+  // function that borrows
+  fn borrow(s: &amp;String)
+  {
+    println!(&quot;borrow: {}&quot;, s);
+  }
+
+  let s = String::from(&quot;hello&quot;);
+  borrow(&amp;s);
+  println!(&quot;s: {}&quot;, s);
+
+
+  // mutable borrow
+  fn mutate(s: &amp;mut String)
+  {
+    s.push_str(&quot;, world&quot;);
+  }
+
+  let mut s = String::from(&quot;hello&quot;);
+  mutate(&amp;mut s);
+  println!(&quot;after mutatable borrow, s: {}&quot;, s);
+
+  // only one mutable borrow is allowed
+  // let s1 = &amp;mut s;
+  // let s2 = &amp;mut s;
+  // println!(&quot;s1: {}, s2: {}&quot;, s1, s2);
+  // cannot borrow `s` as mutable more than once at a time
+
+  let s1 = &amp;mut s;
+  println!(&quot;s1: {}&quot;, s1);
+
+  // can borrow because s1 is no longer used later
+  let s2 = &amp;mut s;
+  println!(&quot;s2: {}&quot;, s2);
+  // println!(&quot;s1: {}&quot;, s1);
+
+
+  // can&#39;t have immutable and mutable borrows at the same time
+  // let s1 = &amp;s;
+  // let s2 = &amp;mut s;
+  // println!(&quot;s1: {}, s2: {}&quot;, s1, s2);
+
+  // fn dangle() -&gt; &amp;String {
+  //   let s = String::from(&quot;hello&quot;);
+  //   return &amp;s;
+  // }
+
+  // string slice is borrowed reference
+  let s = String::from(&quot;hello&quot;);
+  let slice1 = &amp;s[0..2];
+
+  // will not compile with this line
+  // let s1 = s;
+  println!(&quot;slice1: {}&quot;, slice1);
+
+
+  // Generics
+  println!(&quot;----- Generics -----&quot;);
+
+  // revisit id function
+  fn id3&lt;T&gt;(x: T) -&gt; T { x }
+  println!(&quot;id3(5) = {}&quot;, id3(5));
+  println!(&quot;id3(true) = {}&quot;, id3(true));
+
+
+  // Two arguments must be the same time
+  fn second1&lt;T&gt;(x: T, y: T) -&gt; T
+  {
+    return y;
+  }
+
+  println!(&quot;second1(1, 2) = {}&quot;, second1(1, 2));
+  println!(&quot;second1(true, false) = {}&quot;, second1(true, false));
+  // error: mismatched types
+  // println!(&quot;second1(1, true) = {}&quot;, second1(1, true));
+
+
+  // Two arguments can be different types
+  fn second2&lt;T, U&gt;(x: T, y: U) -&gt; U
+  {
+    return y;
+    // Change to return x will not compile
+    // return x;
+  }
+
+  println!(&quot;second2(1, 2) = {}&quot;, second2(1, 2));
+  println!(&quot;second2(true, false) = {}&quot;, second2(true, false));
+  println!(&quot;second2(1, true) = {}&quot;, second2(1, true));
+
+
+  // Lifetime (very similar to generics)
+  // Lifetime is a way to specify relationship between references
+
+  println!(&quot;----- Lifetime -----&quot;);
+
+  // Won&#39;t compile without lifetime specifier (why?)
+
+  // fn second_string1(s1: &amp;String, s2: &amp;String) -&gt; &amp;String
+  // {
+  //   return s2;
+  // }
+
+
+  // broad lifetime (not knowing exact which one is returned)
+  fn second_string2&lt;&#39;a&gt;(s1: &amp;&#39;a String, s2: &amp;&#39;a String) -&gt; &amp;&#39;a String
+  {
+    return s2;
+  }
+
+  let s1 = String::from(&quot;s1&quot;);
+  let s2 = String::from(&quot;s2&quot;);
+  let s3 = second_string2(&amp;s1, &amp;s2);
+
+  // s1 moved here, but compiler doesn&#39;t know s3 is not referring to s1
+  // compiler thinks s3 could refer to both s1 and s2
+  // let s4 = s1;
+  println!(&quot;s3: {}&quot;, s3);
+
+
+  // This one works because we know s3 refers to s2, not s1
+  fn second_string3&lt;&#39;a,&#39;b&gt;(s1: &amp;&#39;a String, s2: &amp;&#39;b String) -&gt; &amp;&#39;b String
+  {
+    return s2;
+    // Change to return s1 will not compile
+    // return s1;
+  }
+
+  let s1 = String::from(&quot;s1&quot;);
+  let s2 = String::from(&quot;s2&quot;);
+
+  let s3 = second_string3(&amp;s1, &amp;s2);
+
+  // s1 moved here, but compiler konws know s3 is not referring to s1
+  let s4 = s1;
+  println!(&quot;s3: {}&quot;, s3);
+
+
+  // We don&#39;t know which is longer string
+  // so lifetime of returned reference could be either of s1 or s2
+  fn longer_string&lt;&#39;a&gt;(s1: &amp;&#39;a String, s2: &amp;&#39;a String) -&gt; &amp;&#39;a String
+  {
+    if s1.len() &gt; s2.len()
+    {
+      return s1;
+    }
+    else
+    {
+      return s2;
+    }
+  }
+
+  let s1 = String::from(&quot;hello&quot;);
+  let s2 = String::from(&quot;world!&quot;);
+  let s3 = longer_string(&amp;s1, &amp;s2);
+
+  // s1 moved here, and compiler knows s3 could refer to s1 or s2
+  // so uncommenting either of the following lines will not compile
+  // let s4 = s1;
+  // let s4 = s2;
+  println!(&quot;longer string: {}&quot;, s3);
+
+
+  // Lifetime in struct
+  println!(&quot;----- Lifetime in struct -----&quot;);
+
+  // Error: missing lifetime specifier
+  // struct Person {
+  //   name: &amp;String,
+  //   email: &amp;String
+  // }
+
+  // Struct 里标记 lifetime 是 Rust 复杂多余的设计
+  // 这意味着这个 Struct 只能临时用一下
+  // 一旦出了 name1 和 email1 的作用域，p1 就用不了了
+  // 正常的 Struct 都应该是内部成员的 owner 而不是 borrow
+  // 这和函数参数的 lifetime 是不一样的
+  // GitHub 上的 Rust 项目，只有【极少数】的 Struct 里存在这种 reference
+  // 所以建议 struct 的成员不使用 &amp; ，即不使用 reference 这样的引用成员
+
+  struct Person&lt;&#39;a&gt; {
+    name: &amp;&#39;a String,
+    email: &amp;&#39;a String
+  }
+
+  let name1 = String::from(&quot;name1&quot;);
+  let email1 = String::from(&quot;email1&quot;);
+  let p1 = Person { name: &amp;name1, email: &amp;email1 };
+
+  // name1 moved here, compiler knows p1 contains reference to name1 and email1
+  // so uncommenting either of following lines will not compile
+  // let name2 = name1;
+  // let email2 = email1;
+  println!(&quot;p1: name = {}, email = {}&quot;, p1.name, p1.email);
+
+
+  // Lifetime of hashmaps
+  println!(&quot;----- Lifetime of hashmaps -----&quot;);
+  let mut table = HashMap::new();      
+
+  // 这里 HashMap 的类型应为 HashMap&lt;String, String&gt;
+  // 但 Rust 是通过下面的 table.insert(key1, value1); 推导出这个类型的
+  // 这是个错误的设计，不应该从调用的地方反推 HashMap 类型，应该在定义的时候就写清楚
+  // 逻辑上，类型标记本来就是要检查后续数据是否正确使用，而现在却要从后续数据的使用推导，万一后续数据用错了呢？
+  // 此外，定义的时候不写类型，就要用人脑来推导一下才能理解代码，大大降低了代码可读性，增加理解难度
+
+  let key1 = &quot;key1&quot;.to_string();
+  let value1 = &quot;value1&quot;.to_string();
+
+  table.insert(key1, value1);
+
+  // Can no longer use key1 and value1
+  // println!(&quot;key1: {}&quot;, key1);
+  // println!(&quot;value1: {}&quot;, value1);
+
+
+  // boxes
+  println!(&quot;----- boxes -----&quot;);
+  let x = 5;
+  let y = Box::new(5);    // Box 相当于指针，Box::new(5) 效果相当于创造一个指向 5 的指针：&amp;5
+  // let y = &amp;x;          // also work
+  println!(&quot;y: {}&quot;, y);
+
+
+  // assert_eq! 接受两个参数（表达式），比较它们是否相等。若不相等，程序将 panic，并显示两个不匹配值的信息
+  // 主要用于测试中，确保代码在开发和维护过程中符合预期行为
+  assert_eq!(5, x);
+  assert_eq!(5, *y);
+
+  // Box 会转移所有权（ownership） ，即 move 操作
+  // 下面 Box::new(s) 使得 s 的所有权转移给了 Box ，b 这个 Box 是 &quot;hello&quot; 的新 owner
+  // 所以下一行 move s 给 s1 的操作就会报错
+  // 后续的 Rc (Reference Counted) 也是同样的这个行为，Rc::new(x) 也会拥有 x 的数据
+  let s = String::from(&quot;hello&quot;);
+  let b = Box::new(s);
+  // let s1 = s;
+  // error: use of moved value: `s`
+
+
+  // Define smart pointer - 可以认为 Box 和 Rc 都是 Smart Pointer 和 C++ 的原理一样
+  // 提示：MyBox 是上文提到的 tuple struct ，里面只存有一个数据，通过下标来访问，如 mb.0
+  struct MyBox&lt;T&gt;(T);
+
+  impl&lt;T&gt; MyBox&lt;T&gt; {
+      fn new(x: T) -&gt; MyBox&lt;T&gt; {
+          MyBox(x)
+      }
+  }
+
+  let x = String::from(&quot;hello&quot;);
+  let y = MyBox::new(x);      // 这行把 x 数据 move 给了一个 MyBox ，然后这个 MyBox 的 owner 则是 y
+  // let z = x;               // error: use of moved value: x
+
+  // 使用 C++ 的代码里的 unique_ptr 可以实现同样的效果
+  // 不过 C++ 中要明确写出是在 move ，即 move(x) ，而 Rust 中默认就是 move 操作
+  // unique_ptr&lt;string&gt; x = make_unique&lt;string&gt;(&quot;hello&quot;);
+  // unique_ptr&lt;string&gt; z = move(x);
+
+  let x = 5;
+  let y = MyBox::new(x);
+  // let z = MyBox(x);    // also work
+
+  // 直接使用 MyBox(x) 构造实例的方式直接通过类型的构造器初始化，适用于简单的包装或当不需要额外逻辑处理的情况。
+  // 这通常更简单，但功能上可能较为有限，主要用于简单地包装或转换类型。
+  // MyBox::new(x) 是一个更常见的构造函数模式，其中 new 是一个静态方法，用于创建并初始化类型的实例。
+  // 这种方式可以包含更复杂的初始化逻辑。如设置默认值、进行验证或其他必要的设置步骤。
+
+  use std::ops::Deref;
+
+  // Deref Trait - trait 相当于 Java 中 interface 的概念，即要求实现 interface 中规定的方法，如 get 和 add 等
+  impl&lt;T&gt; Deref for MyBox&lt;T&gt; {
+    type Target = T;   // 指定 Target 为 T 类型
+
+    // Self::Target 是 Deref trait 的一个关联类型，表示被解引用时得到的目标类型，即 self.0 的类型
+    // 所以，这里 deref 函数返回的 &amp;self.0 是 &amp;Self::Target 类型，&amp; 代表它是个引用的类型
+    fn deref(&amp;self) -&gt; &amp;Self::Target {
+        &amp;self.0
+    }
+
+    // C++ 中类似的 smart pointer 定义
+    // T&amp; operator * () const { *return m_ptr; }
+    // T* operator -&gt; () const { return m_ptr; }
+  }
+
+  // 当使用 * 符号的时候，其实就是在调用这个 deref 函数
+  // 所以 *y 相当于 y.deref() ，从上面的代码得知此时返回的是一个引用，即 &amp;self.0
+  // 然后 Rust 又会再自动地隐式解引用一次，于是得到嘞 self.0 ，也就是真正的值
+  assert_eq!(5, x);
+  assert_eq!(5, *y);  // equiv to *(y.deref()) , *y is &amp;i32 type
+  assert_eq!(5, *(y.deref()));
+
+  fn foo(x: &amp;i32) {
+    println!(&quot;x: {}&quot;, x);
+  }
+
+  foo(&amp;y);
+
+
+  // Drop trait
+  println!(&quot;----- Drop trait -----&quot;);
+
+  struct Pointer {
+    data: String,
+  }
+
+  // 这个 drop trait 相当于 C++ 里的 destructor
+  impl Drop for Pointer {
+    fn drop(&amp;mut self) {
+
+      // drop 出了作用域后就会打印这些信息作为 debug 信息，让人知道确实 drop 掉了
+      println!(&quot;Dropping Pointer with data `{}`!&quot;, self.data);
+    }
+  }
+
+  let a = Pointer {
+    data: String::from(&quot;a&quot;),
+  };
+
+  {
+    let b = Pointer {
+        data: String::from(&quot;b&quot;),
+    };
+  }
+
+  drop(a);
+
+  let c = Pointer {
+      data: String::from(&quot;c&quot;),
+  };
+
+  let d = Pointer {
+      data: String::from(&quot;d&quot;),
+  };
+
+  println!(&quot;Pointers created.&quot;);
+
+
+  // Rc (Reference Counted)
+  println!(&quot;----- Rc -----&quot;);
+
+  // shared list can&#39;t work with Box
+  // let a = List::Cons(2, Box::new(List::Cons(3, Box::new(List::Nil))));
+  // let b = List::Cons(5, Box::new(a));  // a moved here
+  // let c = List::Cons(8, Box::new(a));  // can&#39;t use a again
+
+  fn append(ls1: List&lt;i32&gt;, ls2: List&lt;i32&gt;) -&gt; List&lt;i32&gt;
+  {
+    match ls1
+    {
+      List::Cons(head, tail) =&gt; List::Cons(head, Box::new(append(*tail, ls2))),
+      List::Nil =&gt; ls2
+    }
+  }
+
+  let ls1 = List::Cons(2, Box::new(List::Cons(3, Box::new(List::Nil))));
+  let ls2 = List::Cons(5, Box::new(List::Cons(8, Box::new(List::Nil))));
+  let ls3 = append(ls1, ls2);
+  println!(&quot;ls3 length = {}&quot;, length(&amp;ls3));
+
+  // Can&#39;t use ls1 again
+  // println!(&quot;ls1 length = {}&quot;, length(&amp;ls1));
+
+
+  use std::rc::Rc;
+
+  enum List2 {
+    Cons(i32, Rc&lt;List2&gt;),
+    Nil,
+  }
+
+  let a = Rc::new(List2::Cons(2, Rc::new(List2::Cons(3, Rc::new(List2::Nil)))));
+  let b = Rc::new(List2::Cons(5, Rc::clone(&amp;a)));    // Rc::clone(arg) 接收的参数类型 arg 必须是一个 Rc 的引用：&amp;Rc&lt;_&gt;
+  let c = Rc::new(List2::Cons(8, Rc::clone(&amp;a)));    // 这里 a 是一个 Rc ，所以 &amp;a 就是一个 &amp;Rc&lt;_&gt;
+
+  println!(&quot;a&#39;s ref count: {}&quot;, Rc::strong_count(&amp;a));
+  println!(&quot;b&#39;s ref count: {}&quot;, Rc::strong_count(&amp;b));
+  println!(&quot;c&#39;s ref count: {}&quot;, Rc::strong_count(&amp;c));
+  drop(b);
+  drop(c);
+  println!(&quot;a&#39;s ref count after dropping b, c: {}&quot;, Rc::strong_count(&amp;a));
+
+
+
+  // 虽然 Rc 可以让我们在多个地方共享数据，但它并不提供数据的内部可变性。
+  // 如果你需要在多个地方共享可变数据，你应该使用 RefCell
+  // RefCell - 本质相当于 Reader-Writer Lock（读写锁）
+  // 可以有 2 个（多个）immutable 的 borrow
+  // 但只能有 1 个 mutable 的 borrow
+  println!(&quot;----- RefCell -----&quot;);
+  use std::cell::RefCell;
+
+  // Reader-Writer Lock（读写锁）是一种常用的同步机制，用来解决多个线程同时访问同一资源（如数据或文件）时的并发问题。
+  // 读写锁非常适合那些读操作远多于写操作的场景，因为它允许多个读线程同时访问资源，而写线程则需要独占访问。
+  // 与读写锁并列的还有互斥锁（mutex）等
+
+  let value = RefCell::new(42);
+
+  // 可修改的 mut_borrow 相当于 writer
+  // 如果一个 writer 把一个对象锁掉了，那所有的 reader 就都没法读取了
+  let mut mut_borrow = value.borrow_mut(); // 调用 .borrow_mut 函数，并加关键词 mut 来定义
+  println!(&quot;value: {}&quot;, *mut_borrow);
+
+  *mut_borrow = 9;                         // 改变指针（引用） mut_borrow 所指向的数据
+  println!(&quot;value: {}&quot;, *mut_borrow);
+
+  // 不可修改的 imm_borrow 相当于 reader
+  // 同理，如果一个 reader 拿到了锁，那 writer 就拿不到这个锁（没法写入）
+  // 但是其他的 reader 也能拿到这个锁
+  // let imm_borrow1 = value.borrow();
+  // println!(&quot;value: {}&quot;, *imm_borrow1);
+
+  // let imm_borrow2 = value.borrow();
+  // println!(&quot;value: {}&quot;, *imm_borrow2);
+
+
+  // 有了 RefCell ，我们就可以造出一个「环」来：
+  // A -&gt; B -&gt; A（ A 指向 B ，B 又指向 A ）
+  // 这样内存就可能会泄露了，因为 Rc（Reference Counting）互相指来指去就不会为 0 了
+  // 这会使得内存就会无法释放，导致泄露（Memory Leak）
+  // reference cycles
+  println!(&quot;----- reference cycles -----&quot;);
+  struct Node {
+    value: i32,
+    next: Option&lt;Rc&lt;RefCell&lt;Node&gt;&gt;&gt;,
+  }
+
+  // 定义 node1 和 node2 两个被 Rc 和 RefCell 封装包裹的 Node
+  let node1 = Rc::new(RefCell::new(Node {
+      value: 1,
+      next: None,
+  }));
+
+  // 这里 Node2 的成员（field）next 通过 Rc::clone 指向了 node1
+  let node2 = Rc::new(RefCell::new(Node {
+      value: 2,
+      next: Some(Rc::clone(&amp;node1)),
+  }));
+
+  // 由于有 RefCell ，所以可以使用 borrow_mut
+  // 这里 borrow_mut 取得一个指向 node1 数据且可以改变这些数据的东西
+  // 然后 .next = Some(Rc::clone(&amp;node2)) 让 node1 中本来为 None 的值换成了 Node2
+  // 这样 node1 和 node2 就相互指向了
+  // creating cycle
+  node1.borrow_mut().next = Some(Rc::clone(&amp;node2));
+
+  // node2 也可以指向自己
+  node2.borrow_mut().next = Some(Rc::clone(&amp;node2));
+}
 </code></pre>
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>

@@ -124,7 +124,7 @@ $ brew install rustfmt
 
 // 和 Java 类似，Rust 需要一个 main 函数作为入口来运行其中的代码
 // fn 相当于 function ，是定义函数的关键词
-fn main() 
+fn main()
 {
   let x = 2 * 3;
 
@@ -643,14 +643,20 @@ fn main()
 <hr>
 <h3 id="Rust-的内存管理"><a href="#Rust-的内存管理" class="headerlink" title="Rust 的内存管理"></a>Rust 的内存管理</h3><p><strong>Rust</strong> 最重要的功能就是「<strong>内存管理</strong>」。它和其他语言（比如 <strong>Java</strong>）不一样。因为它没有<a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)" target="_blank" rel="noopener">垃圾回收(GC)</a> 。它是靠编译器的静态检查来实现内存管理的。<strong>Rust</strong> 可以静态地保证大部分的内存不会出问题。</p>
 <p><strong>Rust</strong> 的内存管理导致有很多代码写法上的限制，使得 <strong>Rust</strong> 写一些复杂的代码会有点痛苦。这就是为啥这个语言<strong>很</strong>不适合作为初学者的第一门语言。因为太多这个内存管理的东西夹在里面。你就没法思考你的那些逻辑。写一个链表都要想想 <code>Box</code> 。</p>
-<p>总的来说，这里的核心思路有 2 个：</p>
+<p>总的来说，这里的核心思路有 3 个：</p>
 <ul>
+<li><p>拥有数据所有权 <strong>ownership</strong> 的变量，才能确保数据不会随便失效；borrow 来的数据，别人失效了，你就失效了</p>
+</li>
 <li><p><code>move</code> 转移 <strong>ownership</strong> 会让原变量失效，<code>borrow</code> 不会，要思考是否希望（允许）原变量失效</p>
 </li>
 <li><p>要注意什么情况下可以 <code>move</code> ，什么情况下可以 <code>borrow</code> ，以及这两种情况下数据是否可修改、如何修改</p>
 </li>
 </ul>
-<pre><code class="lang-Rust">  // ---------------------------- Ownership ----------------------------
+<pre><code class="lang-Rust">  // ......
+  // ...... 下面这些代码是接着上文的代码写在 main 函数的函数体里的
+  // ......
+
+  // ---------------------------- Ownership ----------------------------
 
   println!(&quot;--------------- Ownership ---------------&quot;);
 
@@ -660,12 +666,14 @@ fn main()
 
   // Example 1: String
   let s1 = String::from(&quot;hello&quot;);
-  let s2 = s1;  // move
+  let s2 = s1;                     // move - move 之后变量 s1 就失效了
   println!(&quot;s2: {}&quot;, s2);
   // error: value borrowed here after move
   // println!(&quot;s1: {}&quot;, s1);
 
   // Rust 里的传递基本都是 move ，只有专门标记 &amp; 才是 borrow
+  // 函数调用的操作数也是发生 move ，例如  f(s2) 后，s2 就失效了（下文有描述）
+  // 因为你把值传递给函数的参数，本质和变量定义没有差别
 
   // clone
   println!(&quot;----- clone -----&quot;);
@@ -1057,32 +1065,17 @@ fn main()
   println!(&quot;Pointers created.&quot;);
 
 
-  // Rc (Reference Counted)
+  // Rc (Reference Counted) - 引用计数
   println!(&quot;----- Rc -----&quot;);
 
-  // shared list can&#39;t work with Box
+  // shared list can&#39;t work with Box - Box 的链表实现无法共享数据
   // let a = List::Cons(2, Box::new(List::Cons(3, Box::new(List::Nil))));
   // let b = List::Cons(5, Box::new(a));  // a moved here
   // let c = List::Cons(8, Box::new(a));  // can&#39;t use a again
 
-  fn append(ls1: List&lt;i32&gt;, ls2: List&lt;i32&gt;) -&gt; List&lt;i32&gt;
-  {
-    match ls1
-    {
-      List::Cons(head, tail) =&gt; List::Cons(head, Box::new(append(*tail, ls2))),
-      List::Nil =&gt; ls2
-    }
-  }
-
-  let ls1 = List::Cons(2, Box::new(List::Cons(3, Box::new(List::Nil))));
-  let ls2 = List::Cons(5, Box::new(List::Cons(8, Box::new(List::Nil))));
-  let ls3 = append(ls1, ls2);
-  println!(&quot;ls3 length = {}&quot;, length(&amp;ls3));
-
-  // Can&#39;t use ls1 again
-  // println!(&quot;ls1 length = {}&quot;, length(&amp;ls1));
-
-
+  // Rc 的主要功能就是共享数据，也就是 Rc::clone 这个操作
+  // Rc::clone 不会复制数据，只会复制一个引用
+  // Rc::clone 的参数类型也必须是一个 Rc 类型
   use std::rc::Rc;
 
   enum List2 {
@@ -1094,20 +1087,47 @@ fn main()
   let b = Rc::new(List2::Cons(5, Rc::clone(&amp;a)));    // Rc::clone(arg) 接收的参数类型 arg 必须是一个 Rc 的引用：&amp;Rc&lt;_&gt;
   let c = Rc::new(List2::Cons(8, Rc::clone(&amp;a)));    // 这里 a 是一个 Rc ，所以 &amp;a 就是一个 &amp;Rc&lt;_&gt;
 
-  println!(&quot;a&#39;s ref count: {}&quot;, Rc::strong_count(&amp;a));
+  println!(&quot;a&#39;s ref count: {}&quot;, Rc::strong_count(&amp;a));  // 查看变量 a 的引用次数
   println!(&quot;b&#39;s ref count: {}&quot;, Rc::strong_count(&amp;b));
   println!(&quot;c&#39;s ref count: {}&quot;, Rc::strong_count(&amp;c));
   drop(b);
   drop(c);
-  println!(&quot;a&#39;s ref count after dropping b, c: {}&quot;, Rc::strong_count(&amp;a));
+
+  // 释放 b 和 c 之后，a 的引用次数减少
+  println!(&quot;a&#39;s ref count after dropping b, c: {}&quot;, Rc::strong_count(&amp;a));  
+
+  // 虽然 Rc::clone 可以让我们在多个地方共享数据，但它并不提供数据的内部可变性
+  // 以下面这个 struct 为例，使用 Rc 之后，无法更改成员 name 的值
+  #[derive(Debug)]
+  struct TestRc
+  {
+    name: String,
+    age: i32,
+  }
+
+  let mut tr1 = TestRc 
+  {
+    name: String::from(&quot;user1&quot;),
+    age: 19,
+  };
+
+  println!(&quot;original tr1: {:?}&quot;, tr1);
+
+  tr1.name = String::from(&quot;guest&quot;);   // 可更改 tr1 内部成员 name 的内容
+  println!(&quot;changed tr1: {:?}&quot;, tr1);
+
+  // 套上 Rc 封装之后，就无法更改 tr1 内部数据的内容了
+  // 注意这里 tr1 发生 move 了，tr1 失效，新 owner 是 Rc ，而 Rc 的 owner 是变量 rc_tr1
+  let rc_tr1 = Rc::new(tr1);
+
+  // rc_tr1.name = String::from(&quot;guest_2nd&quot;);   // cannot assign to data in an `Rc
+  // *rc_tr1.name = String::from(&quot;guest_3rd&quot;);  // mismatched types
 
 
-
-  // 虽然 Rc 可以让我们在多个地方共享数据，但它并不提供数据的内部可变性。
-  // 如果你需要在多个地方共享可变数据，你应该使用 RefCell
+  // 如果希望用 Rc::clone 共享数据的同时，还能够改变变量内部数据，就要配合 RefCell 使用
   // RefCell - 本质相当于 Reader-Writer Lock（读写锁）
-  // 可以有 2 个（多个）immutable 的 borrow
-  // 但只能有 1 个 mutable 的 borrow
+  // 可以有 2 个（多个）immutable 的 borrow（Reader）
+  // 但只能有 1 个 mutable 的 borrow（Writer）
   println!(&quot;----- RefCell -----&quot;);
   use std::cell::RefCell;
 
@@ -1125,20 +1145,48 @@ fn main()
   *mut_borrow = 9;                         // 改变指针（引用） mut_borrow 所指向的数据
   println!(&quot;value: {}&quot;, *mut_borrow);
 
+  drop(mut_borrow);   // 释放 mut_borrow 后，下面才能调用 .borrow() ，因为读写锁不能同时读和写
+
   // 不可修改的 imm_borrow 相当于 reader
   // 同理，如果一个 reader 拿到了锁，那 writer 就拿不到这个锁（没法写入）
   // 但是其他的 reader 也能拿到这个锁
-  // let imm_borrow1 = value.borrow();
-  // println!(&quot;value: {}&quot;, *imm_borrow1);
+  let imm_borrow1 = value.borrow();
+  println!(&quot;value: {}&quot;, *imm_borrow1);
 
-  // let imm_borrow2 = value.borrow();
-  // println!(&quot;value: {}&quot;, *imm_borrow2);
+  let imm_borrow2 = value.borrow();
+  println!(&quot;value: {}&quot;, *imm_borrow2);
+
+  // Rc 配合 RefCell 可以让我们既可以 Rc::clone 共享数据，又可以 .borrow_mut 来改变数据
+  // 这对复杂一点的数据结构来说是必要而实用的工具，比如解释器里的数据结构
+  // 不过新手也许还有个疑问：封装到底是谁包裹谁？是 Rc&lt;RefCell&lt;_&gt;&gt; 还是 RefCell&lt;Rc&lt;_&gt;&gt; ？
+  // 其实从上面 Rc 部分的例子就能知道，我们可以改动 tr1 ，但无法改动 Rc&lt;tr1&gt;
+  // 对于 RefCell&lt;Rc&gt; ，当我们调用 .borrow_mut() 之后，拿到的就是 Rc&lt;_&gt; ，而我们无法改动 Rc&lt;_&gt;
+  // 对于 Rc&lt;RefCell&lt;_&gt;&gt; ，调用 .borrow_mut() 后拿到的是数据，可以被更改
+  // 所以正确的封装顺序应该是 Rc&lt;RefCell&gt;
+  println!(&quot;----- Rc with RefCell -----&quot;);
+
+  let tr2 = TestRc     // 这里定义 tr2 不需要 mut
+  {
+    name: String::from(&quot;user2&quot;),
+    age: 17,
+  };
+
+  let tr2_rfrc = Rc::new(RefCell::new(tr2));  // tr2 发生 move 转移所有权，新 owner 是 RefCell
+
+  println!(&quot;tr2_rfrc: {:?}&quot;, tr2_rfrc.borrow());
+  // tr2_rfrc: TestRc { name: &quot;user2&quot;, age: 17 }
+
+  tr2_rfrc.borrow_mut().name = String::from(&quot;admin&quot;);  // 改变 name 成员（field）的值
+
+  println!(&quot;changed tr2_rfc: {:?}&quot;, tr2_rfrc);
+  // tr2_rfrc: TestRc { name: &quot;admin&quot;, age: 17 }
 
 
-  // 有了 RefCell ，我们就可以造出一个「环」来：
+  // 有了 RefCell 和 Rc，我们还可以造出一个「环」来：
   // A -&gt; B -&gt; A（ A 指向 B ，B 又指向 A ）
   // 这样内存就可能会泄露了，因为 Rc（Reference Counting）互相指来指去就不会为 0 了
   // 这会使得内存就会无法释放，导致泄露（Memory Leak）
+  // 不过正常的垃圾回收机制可以正确地处理这类「循环引用」导致的问题
   // reference cycles
   println!(&quot;----- reference cycles -----&quot;);
   struct Node {
@@ -1167,7 +1215,8 @@ fn main()
 
   // node2 也可以指向自己
   node2.borrow_mut().next = Some(Rc::clone(&amp;node2));
-}
+
+} // &lt;--- 这个是 main 函数的花括号
 </code></pre>
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>

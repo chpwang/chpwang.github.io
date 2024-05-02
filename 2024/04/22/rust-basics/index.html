@@ -85,6 +85,7 @@
 <p>Rust 的这些 <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html" target="_blank" rel="noopener">ownership</a>，<a href="https://doc.rust-lang.org/rust-by-example/scope/lifetime.html" target="_blank" rel="noopener">lifetime</a> 之类的<strong>静态检查设计</strong>，主要目的是让人们可以尽量少地使用 <a href="https://doc.rust-lang.org/book/ch15-04-rc.html" target="_blank" rel="noopener">Rc（引用计数）</a>。不过到了复杂的数据结构，比如<a href="https://en.wikipedia.org/wiki/Interpreter_(computing)" target="_blank" rel="noopener">解释器</a>，仍然是要用 <strong>Rc</strong> 的。只是比较简单的那一部分代码你可以不用 <strong>Rc</strong> 。</p>
 <p>由于 Rust 语言的内存管理使得它相比使用垃圾回收管理内存的语言，性能据说在某些情况下快得多（不用 Rc 就减少了 Rc 的开销）。所以可以稍微重视一下。当然，它的这种设计并没有很完善，其中有一些多余而复杂东西（比如 Rust 总有一些自以为方便的隐式操作，而非写什么代码就是什么的所见即所得，类型系统也反直觉地水），但理解它的内存管理思路能给人们提供启发。进而可以改进自己的代码思路。</p>
 <p>像 <a href="https://en.wikipedia.org/wiki/C%2B%2B" target="_blank" rel="noopener">C++</a> 稍微“扩展”一下 <a href="https://en.cppreference.com/w/cpp/memory/unique_ptr" target="_blank" rel="noopener">unique_ptr</a>，也能实现 Rust 的内存管理精髓。但若没有 Rust 这套内存规则的作为大方向指导我们的思路，那我们可能就会不知道如何正确有效地使用这些 <code>unique_ptr</code> 等指针。</p>
+<p>初次使用 Rust 语言编程很可能会非常痛苦，除了没有所见即所得的设计，期间还有各种内存管理的规则要适应。不过如果能耐心坚持到成功写出一个解释器，对内存管理的理解会上升一个台阶。</p>
 <hr>
 <h3 id="Rust-编程环境设置"><a href="#Rust-编程环境设置" class="headerlink" title="Rust 编程环境设置"></a>Rust 编程环境设置</h3><p>简单的代码可以直接先去官网的 <a href="https://play.rust-lang.org/" target="_blank" rel="noopener">Rust Playground</a> 在线运行。这样不用进行任何配置和安装，最方便。之后的正式学习，建议使用友好的 <a href="https://code.visualstudio.com" target="_blank" rel="noopener">VS Code</a> 来运行 <strong>Rust</strong> 代码。</p>
 <p>以 <strong>MacOS</strong> 操作系统为例，先<a href="https://doc.rust-lang.org/book/ch01-01-installation.html" target="_blank" rel="noopener">安装 Rust</a> ：</p>
@@ -643,7 +644,7 @@ fn main()
 <hr>
 <h3 id="Rust-的内存管理"><a href="#Rust-的内存管理" class="headerlink" title="Rust 的内存管理"></a>Rust 的内存管理</h3><p><strong>Rust</strong> 最重要的功能就是「<strong>内存管理</strong>」。它和其他语言（比如 <strong>Java</strong>）不一样。因为它没有<a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)" target="_blank" rel="noopener">垃圾回收(GC)</a> 。它是靠编译器的静态检查来实现内存管理的。<strong>Rust</strong> 可以静态地保证大部分的内存不会出问题。</p>
 <p><strong>Rust</strong> 的内存管理导致有很多代码写法上的限制，使得 <strong>Rust</strong> 写一些复杂的代码会有点痛苦。这就是为啥这个语言<strong>很</strong>不适合作为初学者的第一门语言。因为太多这个内存管理的东西夹在里面。你就没法思考你的那些逻辑。写一个链表都要想想 <code>Box</code> 。</p>
-<p>总的来说，这里的核心思路有 3 个：</p>
+<p>总的来说，核心思路有 3 个：</p>
 <ul>
 <li><p>拥有数据所有权 <strong>ownership</strong> 的变量，才能确保数据不会随便失效；borrow 来的数据，别人失效了，你就失效了</p>
 </li>

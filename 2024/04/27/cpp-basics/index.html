@@ -83,10 +83,9 @@
     <p>在理解 Rust 内存管理的本质之后（参见<a href="/2024/04/22/rust-basics/"> Rust 入门</a> ），再来了解一下 <a href="https://en.wikipedia.org/wiki/C%2B%2B" target="_blank" rel="noopener">C++ 语言</a>和它的内存管理。这样和 Rust 对比一下，就能更加理解 Rust 内存管理方式和特点。进而更好地使用 C++ 进行编程。</p>
 <p>如果从具有<a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)" target="_blank" rel="noopener">垃圾回收（Garbage Collection）</a>的语言出发来类比和理解，可能到后来你就始终弄不明白 C++ 这样的语言到底要怎么写代码。</p>
 <p>当年 Ian 刚开始学计算机是从 <a href="https://en.wikipedia.org/wiki/Pascal_(programming_language)" target="_blank" rel="noopener">Pascal</a> 语言开始的。之后马上又学了 <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank" rel="noopener">C 语言</a> 。因为传言 C 语言比 Pascal 好。而 C 语言的内存管理都是手动的。所以经常会出现一些很奇怪的问题。但是通过学习 Rust 或者 C++ ，你就能从本质上理解用 C 语言怎么会遇到那么稀奇古怪的一些问题：要么你内存泄漏了，要么你就是出现一些内存错误。比如说有一个地方的值莫名其妙地被人改了，你就不知道哪里的代码在改那个内存。因为内存管理弄错了之后，你的指针就有可能指向它不该指的地方。</p>
-<p>Rust 语言会强制你去思考这些内存问题，所以你就被迫就要把这些事情按照它的规则做对。然后 Rust 的内存管理思路大致上是对的。就是它强制你有个 <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html" target="_blank" rel="noopener">ownership</a> 。这样通常情况下只有一个变量可以指向这个对象。然后如果你需要共享的话，你就得自己显式地使用那个 <a href="https://doc.rust-lang.org/book/ch15-04-rc.html" target="_blank" rel="noopener">Rc</a>（引用计数）的方式。习惯了 Rust 之后再去写 C 语言或者 C++ ，就不会那么容易有问题了——你还是可能会犯错的。</p>
-<p>C++ 的 <a href="https://learn.microsoft.com/en-us/cpp/cpp/smart-pointers-modern-cpp?view=msvc-170" target="_blank" rel="noopener">Smart Pointer</a> 设计，使用的方式稍微改一点，就能实现和 Rust 同样的目标，而不太增加思维负担。</p>
-<p>不过 C++ 有一个<strong>讨厌</strong>的地方是，它的出错信息太难以阅读了。写错代码之后的报错信息令人困惑，不知哪里错了。因为它的 <a href="https://learn.microsoft.com/en-us/cpp/cpp/smart-pointers-modern-cpp?view=msvc-170" target="_blank" rel="noopener">Smart Pointer</a> 这些东西是靠 <a href="https://en.wikipedia.org/wiki/Template_(C%2B%2B)" target="_blank" rel="noopener">Template</a> 和<a href="https://learn.microsoft.com/en-us/cpp/preprocessor/macros-c-cpp?view=msvc-170" target="_blank" rel="noopener">宏</a>展开之后实现出来的，它并不是 C++ 直接实现了这些东西。所以你一旦出点错，它是展开了一堆内部实现的代码，最后给你说展开之后的代码哪里错了。但展开之后的代码跟你写的代码完全是两码事了。这就是 C++ 的一个问题。</p>
-<p>最后可以思考一下 C++ 关于内存的做法和 Rust 的优缺点。</p>
+<p>Rust 语言会强制你去思考这些内存问题，所以你就被迫就要把这些事情按照它的规则做对。然后 Rust 的内存管理思路大致上是对的。就是它强制你有个 <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html" target="_blank" rel="noopener">ownership</a> 。这样通常情况下只有一个变量可以指向这个对象。然后如果你需要共享的话，你就得自己显式地使用那个 <a href="https://doc.rust-lang.org/book/ch15-04-rc.html" target="_blank" rel="noopener">Rc</a>（引用计数）的方式。习惯了 Rust 之后再去写 C 语言或者 C++ ，就不会那么容易有问题了——当然，你还是可能会犯错的。</p>
+<p>C++ 的 <a href="https://learn.microsoft.com/en-us/cpp/cpp/smart-pointers-modern-cpp?view=msvc-170" target="_blank" rel="noopener">Smart Pointer</a> 设计，其使用的方式稍微改一点，就能实现和 Rust 同样的目标，而不太增加思维负担。不过 C++ 有一个<strong>讨厌</strong>的地方是，它的出错信息太难以阅读了。写错代码之后的报错信息令人困惑，不知哪里错了。因为它的 <a href="https://learn.microsoft.com/en-us/cpp/cpp/smart-pointers-modern-cpp?view=msvc-170" target="_blank" rel="noopener">Smart Pointer</a> 这些东西是靠 <a href="https://en.wikipedia.org/wiki/Template_(C%2B%2B)" target="_blank" rel="noopener">Template</a> 和<a href="https://learn.microsoft.com/en-us/cpp/preprocessor/macros-c-cpp?view=msvc-170" target="_blank" rel="noopener">宏</a>展开之后实现出来的，它并不是 C++ 语言直接实现了这些东西。所以你一旦出点错，它是展开了一堆内部实现的代码，最后给你说展开之后的代码哪里错了。但展开之后的代码跟你写的代码完全是两码事了。这就是 C++ 的一个问题。</p>
+<p>在熟悉 C++ 之后，可以进一步思考一下 C++ 和 Rust 关于内存做法的各自优缺点。</p>
 <hr>
 <h3 id="C-编程环境设置"><a href="#C-编程环境设置" class="headerlink" title="C++ 编程环境设置"></a>C++ 编程环境设置</h3><p>首推自然是使用友好功能强大的 <a href="https://www.jetbrains.com/clion/" target="_blank" rel="noopener">CLion</a> 作为 <strong>C++</strong> 的 <strong>IDE</strong>。不过这是收费的软件，30 天免费试用期过后就需要付费订阅。适合需要长期使用 C++ 的玩家们。</p>
 <p>作为入门学习体验，也可以退而求其次继续选择免费的 <a href="https://code.visualstudio.com" target="_blank" rel="noopener">VS Code</a> 。此时要先安装 <a href="https://gcc.gnu.org" target="_blank" rel="noopener">GNU C++</a> 或者 <a href="https://clang.llvm.org" target="_blank" rel="noopener">Clang C++</a> 的编译器。对于 MacOS 的用户，推荐用 Clang ，因为它包含在 Xcode 命令行工具里，安装非常方便。</p>
@@ -102,12 +101,11 @@ InstalledDir: /Library/Developer/CommandLineTools/usr/bin
 </code></pre>
 <p>安装完 Clang 之后，在 VS Code 中新建后缀为 <code>.cpp</code> 的文件比如 <code>demo.cpp</code> 就能开始编程了：</p>
 <pre><code class="lang-c++">#include &lt;iostream&gt;
-using namespace std;
 
 // C++ 的 main 函数一定要返回 int
 int main()
 {
-  cout &lt;&lt; &quot;Hello C++&quot; ;
+  std::cout &lt;&lt; &quot;Hello C++&quot; ;
   return 0;
 }
 </code></pre>

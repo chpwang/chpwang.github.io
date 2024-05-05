@@ -1,0 +1,257 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>本博客常用的 Markdown 排版语法和技巧</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="本博客常用的 Markdown 排版语法和技巧">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        本博客常用的 Markdown 排版语法和技巧
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2019-09-17T19:58:12.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2019-09-18
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Hexo/">Hexo</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 官方有很多帮助排版的语法，详细内容可以参见官网的 <a href="https://hexo.io/docs/tag-plugins.html" target="_blank" rel="noopener">Tag Plugins</a> 。这里列出的是常用的。</p>
+<p>需要说明的是，由于本博客 <a href="http://cps.ninja">cps.ninja</a> 加载了 <a href="https://highlightjs.org" target="_blank" rel="noopener">Highlight.js</a> ，所以有些语法会用不了，比如给代码块添加 <code>caption</code> 和 <code>URL</code> 等等。</p>
+<hr>
+<h3 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h3><p><strong>Hexo</strong> 采用 <a href="https://hexo.io/docs/asset-folders.html" target="_blank" rel="noopener">Asset Folders</a> 的方式来管理和博客相关的各种文件，比如 <strong>CSS</strong> 文件，JavaScript 文件，图片文件等。</p>
+<p>首先开打开这个功能，需要在 Hexo 博客文件夹的<strong>根目录</strong>下的配置文件 <code>_config.yml</code> 中加入这一段代码：</p>
+<pre><code class="lang-bash">## ~/blog/_config.yml
+
+post_asset_folder: true
+</code></pre>
+<p>之后，每当使用 <code>hexo new</code> 创建新的博文时，都会生成一个对应的 <strong>asset</strong> 文件夹来存放这篇博文的图片等文件<br>比如：<code>hexo new java basics</code> 在生成 <code>java-basics.md</code> 文件的同时，还会生成一个文件夹 <code>java-basics</code><br>把图片 <code>IntelliJ.png</code> 移动到 <code>java-basics</code> 里，就能在 <code>java-basics.md</code> 里使用以下代码插入这张图片：</p>
+<pre><code class="lang-html">&lt;!-- 方法一：使用 &lt;img&gt; 标签插入图片，可设置宽度为 800 像素，高度自适应等 --&gt;
+&lt;img src=&quot;IntelliJ.png&quot; alt=&quot;Welcome to IntelliJ IDEA&quot; style=&quot;width: 800px; height: auto;&quot;&gt;
+
+&lt;!-- 方法二：使用辅助函数 asset_img 插入图片，此方法无法设置图片的排版，比如对齐或大小 --&gt;
+{% asset_img IntelliJ.png Welcome to IntelliJ IDEA %}
+</code></pre>
+<p>如果多个不同的 <code>.md</code> 博客文章要共用同样的图片，就可以使用 <strong>Global Asset Folder</strong> 。该文件夹路径为 <strong>Hexo</strong> 博客根目录下的 <code>source/images</code><br>例如 <strong>Global Asset Folder</strong> 里面一张图片 <code>source/images/donate.jpg</code> ，就可以通过以下代码插入到文章中：</p>
+<pre><code class="lang-html">&lt;img src=&quot;/images/donate.jpg&quot; alt=&quot;QR Code for donation&quot;&gt;
+</code></pre>
+<hr>
+<h3 id="列表技巧"><a href="#列表技巧" class="headerlink" title="列表技巧"></a>列表技巧</h3><p>如果希望以列表展现一大块内容，所有段落采用相同缩进即可，不需要、也不能挨着，要空一行，否则遇到代码块（code block）会显示不出代码排版。<br>代码块中的内容不能出现 <strong>2 个连续的空行</strong>，否则排版也会错误显示。</p>
+<ul>
+<li><p>展示列表中的大段内容排版</p>
+<pre><code class="lang-scheme"> (define atom?
+  (lambda (x)
+    (and (not (pair? x))
+         (not (null? x))))
+</code></pre>
+<p>这是第三段</p>
+</li>
+</ul>
+<pre><code>- 展示列表中的大段内容排版
+
+  ``` scheme
+   (define atom?
+    (lambda (x)
+      (and (not (pair? x))
+           (not (null? x))))
+  ``` ## 说明：这是第二段代码块，段落间有且只能有一个空行
+
+  这是第三段
+</code></pre><hr>
+<h3 id="带超链接的代码"><a href="#带超链接的代码" class="headerlink" title="带超链接的代码"></a>带超链接的代码</h3><p><a href="/2019/09/18/markdown-cheat-sheet/"><code>blog/source/_posts/markdown-cheat-sheet.md</code></a></p>
+<pre><code>[`blog/source/_posts/markdown-cheat-sheet.md`](/2019/09/18/markdown-cheat-sheet/)
+</code></pre><hr>
+<h3 id="带作者的引用"><a href="#带作者的引用" class="headerlink" title="带作者的引用"></a>带作者的引用</h3><blockquote><p>China is a civilization, masquerading as a nation state.</p>
+<footer><strong>Lucian Pye</strong></footer></blockquote>
+<pre><code>{% blockquote Lucian Pye %}
+China is a civilization, masquerading as a nation state.
+{% endblockquote %}
+</code></pre><hr>
+<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p>（排版要抽空修复一下，<a href="https://github.com/gaoryrt/hexo-theme-pln" target="_blank" rel="noopener">pln</a> 这个三流主题下的表格很难看）</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Left-Aligned</th>
+<th style="text-align:center">Center Aligned</th>
+<th style="text-align:right">Right Aligned</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">col 3 is</td>
+<td style="text-align:center">some wordy text</td>
+<td style="text-align:right">$1600</td>
+</tr>
+<tr>
+<td style="text-align:left">col 2 is</td>
+<td style="text-align:center">centered</td>
+<td style="text-align:right">$12</td>
+</tr>
+<tr>
+<td style="text-align:left">zebra stripes</td>
+<td style="text-align:center">are neat</td>
+<td style="text-align:right">$1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="若无论如何调整-Markdown-语法都无法实现想要的排版"><a href="#若无论如何调整-Markdown-语法都无法实现想要的排版" class="headerlink" title="若无论如何调整 Markdown 语法都无法实现想要的排版"></a>若无论如何调整 Markdown 语法都无法实现想要的排版</h3><p>直接写 HTML（在 Chrome 里调整 HTML 代码直到出现满意的排版效果，然后直接复制粘贴到文章里）</p>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

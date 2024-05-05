@@ -1,0 +1,437 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>入手新 Mac 后的环境搭建</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="入手新 Mac 后的环境搭建">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        入手新 Mac 后的环境搭建
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2017-03-14T07:42:47.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2017-03-14
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Mac-Tools/">Mac Tools</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>搬家都是耗时的，为了尽可能节省时间，在这里记录下个人基本环境搭建。</p>
+<hr>
+<h3 id="Command-Line-Tools"><a href="#Command-Line-Tools" class="headerlink" title="Command Line Tools"></a>Command Line Tools</h3><p>虽然通过完整安装 Xcode 就能获得 Command Line Tools ，但 Xcode 太大，太费时间，推荐使用以下方法：</p>
+<p>打开 Mac 自带的终端 Terminal.app 输入以下指令</p>
+<pre><code class="lang-bash">$ git
+</code></pre>
+<p>Mac 会提示你 <code>git</code> 这一命令不存在，需要安装 Command Line Tools ，接着就根据提示联网安装即可</p>
+<p>下面这个是正式的安装命令，<strong>幂等</strong>的哦</p>
+<pre><code class="lang-bash">$ xcode-select --install
+</code></pre>
+<p>Command Line Tools 里包含很多 Linux 默认安装里有的实用工具软件（命令）。</p>
+<p>可在 <code>/Library/Developer/CommandLineTools/usr/bin/</code> 里查看这些软件。</p>
+<hr>
+<h3 id="安装-Homebrew"><a href="#安装-Homebrew" class="headerlink" title="安装 Homebrew"></a>安装 Homebrew</h3><p><a href="http://brew.sh" target="_blank" rel="noopener">Hombrew</a> 是一款软件管理工具，拥有安装、卸载、更新、查看、搜索等很多实用的功能，很方便。</p>
+<pre><code class="lang-bash">$ /bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;
+</code></pre>
+<p>Homebrew 常用指令</p>
+<pre><code class="lang-bash">## 安装（软件），更新，检查可更新的软件
+$ brew search [formulae]   # 查询包含关键词的软件 formulae
+$ brew install [formulae]  # 安装指定的软件 formulae
+$ brew update              # brew 自我更新
+$ brew upgrade [formulae]  # 更新指定的软件 formulae
+$ brew outdated            # 查询本地版本低于当前最新版本的软件
+$ brew cleanup [formulae]  # 清除本地安装包，释放硬盘空间 - 加关键词就清除指定安装包，不加就全部清除
+</code></pre>
+<p>更多信息可以参考官网<a href="https://docs.brew.sh/FAQ" target="_blank" rel="noopener">这里</a>，包括重新安装 Homebrew</p>
+<hr>
+<h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>安装好 Command Line Tools 之后，就已经有 Git 了，但并非最新版，追求最新版 Git 需要使用 Homebrew 来安装</p>
+<pre><code class="lang-bash">$ brew install git
+
+# 查看 Git 的版本号
+$ git -v
+git version 2.44.0
+</code></pre>
+<p>安装好之后要记得设置一下 Git 的一些参数</p>
+<pre><code class="lang-bash">$ git config --global user.name &quot;xxxxx&quot;         ## Git 用户名
+$ git config --global user.email &quot;xxx@xxx.com&quot;  ## Git 邮箱
+$ git config --global color.ui true             ## Git 命令的输出文字色彩化
+
+# 显示当前的 Git 配置
+$ git config --list
+</code></pre>
+<p>Git 的一些常用命令整理见<a href="/2018/01/02/Git-Basics/">这里</a></p>
+<hr>
+<h3 id="安装-Fish-Shell"><a href="#安装-Fish-Shell" class="headerlink" title="安装 Fish Shell"></a>安装 Fish Shell</h3><p><a href="https://fishshell.com" target="_blank" rel="noopener">Fish</a> 是一款更好用的 shell ，各种操作都比较符合直觉，在 MacOS 上安装也方便</p>
+<pre><code class="lang-bash">## 成功安装 fish 后会提示如何设置才能开始正常使用 fish shell
+$ brew install fish
+==&gt; Installing fish
+==&gt; Downloading https://homebrew.bintray.com/bottles/fish-2.7.1.high_sierra.bottle.tar.gz
+######################################################################## 100.0%
+==&gt; Pouring fish-2.7.1.high_sierra.bottle.tar.gz
+==&gt; Caveats
+You will need to add:
+  /opt/homebrew/bin/fish
+to /etc/shells.
+
+Then run:
+  chsh -s /opt/homebrew/bin/fish
+to make fish your default shell.
+
+## 如果已经安装过 fish shell , 可以使用以下方式来升级 fish
+$ brew upgrade fish
+</code></pre>
+<p>根据上面的提示，fish 安装在 <code>/opt/homebrew/bin/fish</code> 目录下（目录可能会变，以实际为准），所以还需要将其添加到 <code>/etc/shells</code><br>因为只有在 <code>/etc/shells</code> 文档里记录的 shell 才能正常访问电脑（正常登陆）</p>
+<pre><code class="lang-bash">## 此操作会更改 /etc/shells 内容，需要输入管理员密码
+$ echo &quot;/opt/homebrew/bin/fish&quot; | sudo tee -a /etc/shells
+
+## 查看当前所有可用的 shell
+$ cat /etc/shells
+
+## 查看当前正在使用的 shell
+$ echo $SHELL
+</code></pre>
+<p>接着将 fish 设置成终端默认的 shell</p>
+<pre><code class="lang-bash">$ chsh -s /opt/homebrew/bin/fish
+</code></pre>
+<p>最后是一些常用的自定义设置，更多教程可参看<a href="https://fishshell.com/docs/current/tutorial.html" target="_blank" rel="noopener">官网</a>或者这篇<a href="https://hackercodex.com/guide/install-fish-shell-mac-ubuntu/" target="_blank" rel="noopener">博客</a></p>
+<pre><code class="lang-bash">## 建立 config.fish 文件，该文件相当于 ~/.bashrc 或者 ~/.zshrc 文件，用于 shell 的初始化设置
+$ mkdir -p ~/.config/fish
+$ vi ~/.config/fish/config.fish
+
+## 设置一个名为 CPPFLAGS 的环境变量，并将它的值设定为 &quot;-I/opt/homebrew/opt/openjdk/include&quot;
+## -gx 是两个选项的组合
+## -g 表示这个变量是全局的，意味着它在当前会话及其之后启动的任何子进程中都可用
+## -x 表示这个变量将被导出到环境变量，这样其他程序也能访问它。
+$ set -gx CPPFLAGS &quot;-I/opt/homebrew/opt/openjdk/include&quot;
+
+## 在 fish 中注销变量
+$ set -e [变量名]
+## Example
+$ set -e https_proxy
+
+## 环境变量 $PATH 包含了各种命令（软件）的路径，各个 shell 们运行命令时都会从里面找
+## 在 fish shell 中，环境变量 $PATH 的数据类型是一个链表（List），而不是一个包含分号（;）的字符串（String）
+## 登陆 Terminal 时，fish 预载入的环境变量其实是  $fish_user_paths + $PATH ，所以常用以下方式来初始化当前用户的环境变量
+## 以下命令会将 /opt/homebrew/bin 永久添加到 $fish_user_paths ，进而每次登陆 Terminal 都会自动载入该路径
+$ fish_add_path /opt/homebrew/bin
+
+## 查看当前 fish_user_paths 的内容
+$ echo $fish_user_paths
+/opt/homebrew/bin
+
+## 查看当前 PATH 的内容
+$ echo $PATH
+/opt/homebrew/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin
+</code></pre>
+<p>自定义 fish shell 的提示符内容（Customize Prompt）可以通过更改配置文件 <code>fish_prompt.fish</code> 中的函数 <strong>fish_prompt</strong> 来实现：</p>
+<pre><code class="lang-bash">## ~/.config/fish/functions/fish_prompt.fish
+### Example ###
+function fish_prompt --description &#39;Write out the prompt&#39;
+        set -l home_escaped (echo -n $HOME | sed &#39;s/\//\\\\\//g&#39;)
+   set -l pwd (echo -n $PWD | sed &quot;s/^$home_escaped/~/&quot; | sed &#39;s/ /%20/g&#39;)
+   set -l prompt_symbol &#39;&#39;
+   switch $USER
+       case root toor; set prompt_symbol &#39;#&#39;
+       case &#39;*&#39;;  set prompt_symbol &#39;$&#39;
+   end
+   printf &quot;%s@%s: %s%s%s %s &quot; $USER (hostname -s) (set_color $fish_color_cwd) $pwd (set_color normal) $prompt_symbol
+end
+
+###########################
+## 上述配置下提示符的输出格式为：
+## username@hostname: ~ $
+</code></pre>
+<hr>
+<h3 id="安装-Fisher"><a href="#安装-Fisher" class="headerlink" title="安装 Fisher"></a>安装 Fisher</h3><p><a href="https://github.com/jorgebucaran/fisher" target="_blank" rel="noopener">Fisher</a> 也是一款软件管理工具，专门配合 <a href="https://fishshell.com" target="_blank" rel="noopener">Fish Shell</a>  使用。这里主要是为了后续安装 <a href="https://github.com/jorgebucaran/nvm.fish" target="_blank" rel="noopener">nvm.fish</a> 方便。</p>
+<pre><code class="lang-bash">## 可以直接通过 Hombrew 来安装
+$ brew install fisher
+
+## 这个是官方的安装方式
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source &amp;&amp; fisher install jorgebucaran/fisher
+
+## 查看当前已安装的插件
+$ fisher list
+
+## 更新指定软件
+$ fisher update jorgebucaran/fisher
+
+## 卸载 fisher 和所有通过 fisher 安装的软件
+$ fisher list | fisher remove
+</code></pre>
+<hr>
+<h3 id="安装-NVM-Node-Version-Manager"><a href="#安装-NVM-Node-Version-Manager" class="headerlink" title="安装 NVM - Node Version Manager"></a>安装 NVM - Node Version Manager</h3><p><a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">NVM</a> 是用来管理 <a href="https://nodejs.org/en/about" target="_blank" rel="noopener">Node.js</a> 的，让我们可以在不同版本的 <a href="https://nodejs.org/en/about" target="_blank" rel="noopener">Node.js</a> 之间切换。<br>后续搭建博客用的 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 依赖于老版本的 <a href="https://nodejs.org/en/about" target="_blank" rel="noopener">Node.js</a> 。所以用 NVM 来安装和切换新老版本是最明智的。<br>由于用的是 <a href="https://fishshell.com" target="_blank" rel="noopener">Fish Shell</a> ，所以这里安装的是更方便的 <a href="https://github.com/jorgebucaran/nvm.fish" target="_blank" rel="noopener">nvm.fish</a>。</p>
+<pre><code class="lang-bash">## 通过 fisher 安装 nvm.fish
+$ fisher install jorgebucaran/nvm.fish
+
+## 安装并使用最新版本的 Node.js
+$ nvm install latest
+
+## 查看远程有哪些 Node.js 版本可以下载
+$ nvm list-remote
+    ...
+    ...
+    v13.14.0 
+     v14.0.0
+     v14.1.0
+    ...
+    ...
+
+## 安装 v13.14.0 版本的 Node.js
+$ nvm install v13.14.0
+
+## 切换到 v13 版本的 Node.js 来使用
+## 由于只安装了 v13.14.0 版本，本地的 v13 只有它，所以会切换到这个版本
+$ nvm use v13
+
+## 显示本地有哪些版本的 Node.js 以及当前正在使用的版本
+$ nvm list
+     system
+ ▶ v13.14.0
+</code></pre>
+<hr>
+<h3 id="安装并设置-iTerm2"><a href="#安装并设置-iTerm2" class="headerlink" title="安装并设置 iTerm2"></a>安装并设置 iTerm2</h3><p>如果觉得 MacOS 自带的 Terminal 还不够好用和个性化，可以考虑使用 iTerm2 。</p>
+<p>从<a href="https://www.iterm2.com" target="_blank" rel="noopener">官网</a>下载 iTerm2 安装完后，再下载主题样式（Theme）<a href="http://ethanschoonover.com/solarized/files/solarized.zip" target="_blank" rel="noopener">Solarized</a> (你也可去找其他的 Theme，安装同理)</p>
+<p>解压刚刚下载的 <code>solarized.zip</code> 文件之后，打开 <strong>iTerm2</strong> 做以下操作：</p>
+<ul>
+<li><code>Preferences</code> -&gt; <code>Profiles</code> -&gt; <code>Colors</code> -&gt; <code>Color Presets</code> -&gt; <code>Import</code>，载入 iterm2-colors-solarized 目录下的两个 itermcolors 文件</li>
+<li><code>Preferences</code> -&gt; <code>Profiles</code> -&gt; <code>Colors</code> -&gt; <code>Color Presets</code> ，选择 Solarized Dark</li>
+<li><code>Preferences</code> -&gt; <code>Profiles</code> -&gt; <code>Text</code> -&gt; <code>Change Font</code>，可选择字体和字号（建议 Menlo 字体）</li>
+</ul>
+<p>将 Mac 键盘上的左 <strong>option</strong> 键映射为 <strong>Esc+</strong> ，以便在 iTerm2 里就可以使用 <strong>option</strong> + <strong>delete</strong> 组合来删除一个单词，设置方法如下：</p>
+<ul>
+<li><code>Preferences</code> -&gt; <code>Profiles</code> -&gt; <code>Keys</code></li>
+</ul>
+<hr>
+<h3 id="Hexo-博客环境搭建"><a href="#Hexo-博客环境搭建" class="headerlink" title="Hexo 博客环境搭建"></a>Hexo 博客环境搭建</h3><p>按以下方法搭建 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 博客的环境，更多参见<a href="/2016/10/08/sync-blog-between-multiple-Macs/">多电脑间同步 Hexo 博客</a></p>
+<pre><code class="lang-bash">## 上面安装 nvm.fish 的环节已经安装了 Node.js ，所以这里就有 npm 命令了
+## 使用 Node.js 自带的 npm 安装 Hexo
+$ npm install hexo-cli -g
+
+## 安装 SASS - 将 .scss 文件编译成 .css 文件的工具
+$ brew install node-sass   
+
+## 还有以下两个常用命令来更新和查看 package.json 里所记录的套件
+$ npm update    #更新套件
+$ npm outdated  #查看哪些套件过期（即有新版本）
+</code></pre>
+<hr>
+<h3 id="安装-Sublime"><a href="#安装-Sublime" class="headerlink" title="安装 Sublime"></a>安装 Sublime</h3><p>Sublime 是一款常用的编辑器，可以去其<a href="https://www.sublimetext.com" target="_blank" rel="noopener">官网</a>下载，如果不付费使用，则<strong>每</strong>数个保存操作后会跳出未注册的提示</p>
+<p>安装完成后打开 Sublime ，使用快捷键 <code>Command</code> + <code>,</code> 打开设置界面<br>在右侧 <strong>Preferences.sublime-settings - User</strong> 页的<code>{}</code>内添加以下两行</p>
+<ul>
+<li><code>&quot;translate_tabs_to_spaces&quot;: true,</code></li>
+<li><code>&quot;tab_size&quot;: 2</code></li>
+</ul>
+<p>注：<br>第一行末尾有英文输入法的逗号“<code>,</code>”；<br>第二行是最后一行，可以没有逗号；<br>这两行是设置 <strong>Tap 键</strong>和 <strong>Space 键</strong>的缩进（indentation）效果：第一行将所有 <strong>Tab</strong> 转换成 <strong>Space</strong>，第二行指定每个 <strong>Tab</strong> 换成 2 个 <strong>Space</strong>；</p>
+<p>接着建立快捷方式以便在 Terminal 里快速打开</p>
+<pre><code class="lang-bash">## 以下命令可以在 /usr/local/bin/ 目录下建立 Sublime 的快捷方式，用于快速调用
+$ sudo ln -s &quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&quot; /usr/local/bin/subl 
+
+## 建好快捷方式后的使用例子
+$ subl .   #打开当前目录
+</code></pre>
+<h4 id="Sublime-的常用操作："><a href="#Sublime-的常用操作：" class="headerlink" title="Sublime 的常用操作："></a>Sublime 的常用操作：</h4><ul>
+<li><p><strong>注释代码</strong>：选中目标内容后，使用快捷键 <code>Command + /</code> 。 sublime 会自动识别当前文件的语言（也可以在 sublime 窗口右下角手动选择语言类型），并使用当前语言的注释方法注释选中内容。如果当前文件包含多语言，那注释的时候就要<strong>右下角手动选择语言</strong>，注释完后再改回来；</p>
+</li>
+<li><p><strong>文件夹里全文件搜索和替换</strong>：鼠标右键 Sublime 左侧导航窗口中的某个文件夹 -&gt; <code>Find in Folder...</code> ，在弹出的窗口里，Find 一栏输入关键词即可搜索该文件夹中<strong>所有</strong>包含关键词的文件。如果要同时替换，就在 Replace 一栏输入用于替换关键词的内容即可；</p>
+</li>
+<li><p><strong>保存所有已打开文件</strong>：可通过 <code>File</code> -&gt; <code>Save All</code> 保存，Mac 也可用快捷键：<code>Option + Command + S</code>；</p>
+</li>
+<li><p><strong>关闭所有已打开文件</strong>：可通过 <code>File</code> -&gt; <code>Close All Files</code> 关闭；</p>
+</li>
+</ul>
+<hr>
+<h3 id="Rails-开发环境搭建（可选）"><a href="#Rails-开发环境搭建（可选）" class="headerlink" title="Rails 开发环境搭建（可选）"></a>Rails 开发环境搭建（可选）</h3><p>安装 <code>ImageMagick</code> 函数库 - 用于今后 Rails 开发中处理图片</p>
+<pre><code class="lang-bash">$ brew install imagemagick
+</code></pre>
+<p>安装 <code>PostgreSQL</code> - Rails 网站开发常用数据库</p>
+<pre><code class="lang-bash">$ brew install postgresql
+$ brew services start postgresql  ## 启动数据库服务
+</code></pre>
+<p>安装 <code>RVM</code> - Ruby Version Manager 用来管理 Ruby 的版本</p>
+<pre><code class="lang-bash">$ \curl -sSL https://get.rvm.io | bash -s stable
+$ source ~/.rvm/scripts/rvm    ## 安装完 rvm 会提示使用该命令来让 rvm 生效
+</code></pre>
+<p>如果用的是 <strong>Fish</strong> Shell 而不是 <strong>Bash</strong> Shell, 则 <code>RVM</code> 需要用以下方法安装，参考<a href="https://rvm.io/integration/fish" target="_blank" rel="noopener">RVM 官网说明</a>，因为 Fish 不兼容 Bash (not bash-compatible)<br>此外，如果是从 <strong>Bash</strong> Shell 切换到 <strong>Fish</strong> Shell ，发现各种 RVM 等开发的相关种命令都找不到了，也可通过以下设置来使得 RVM 和原来的 Rails 正常运行</p>
+<pre><code class="lang-bash">## 这串命令本质上是从 Github 上下载一套指令集放在 Fish Shell 的初始化设置文件夹里，让 Fish Shell 每次启动的时候都运行一次，设置好各种环境变量
+$ curl -L --create-dirs -o ~/.config/fish/functions/rvm.fish https://raw.github.com/lunks/fish-nuggets/master/functions/rvm.fish
+
+# activate the default Ruby manually in your config.fish file:
+$ echo &quot;rvm default&quot; &gt;&gt; ~/.config/fish/config.fish
+</code></pre>
+<p>安装好 <code>RVM</code> 后再安装一个套件 <code>libxml</code>（后面开发会用到）</p>
+<pre><code class="lang-bash">$ brew install libxml2
+</code></pre>
+<p>安装所需版本的 <code>Ruby</code> - 以 2.3.1 版本为例</p>
+<pre><code class="lang-bash">$ rvm install 2.3.1
+$ rvm list                ## 该命令可查看本地存在的所有 Ruby 的版本
+$ rvm use 2.3.1 --default ## 该命令用于设置默认的 Ruby 版本
+
+$ gem update --system     ## 用于救回安装 rvm 过程中网络等原因造成的中断失败
+$ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/  ## 设置新的 gem 的来源网站
+</code></pre>
+<p>搞定了 Ruby 之后我们就有了 <code>gem</code> 这个命令，接下来用它安装 <strong>Rails</strong></p>
+<pre><code class="lang-bash">$ gem install rails
+
+## 也可以指定 Rails 的版本来安装
+$ gem install rails -v 5.0.0
+
+## 看情况可尝试管理员模式安装
+$ sudo gem install rails
+</code></pre>
+<p><strong>注意</strong>：2017 年以后的 MacOS 抛弃了 <code>OpenSSL</code>，导致需要安装 <code>OpenSSL</code> 才能运行 <code>gem</code> 这个命令。</p>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

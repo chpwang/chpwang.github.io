@@ -1,0 +1,285 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>上手 Visual Studio Code</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="上手 Visual Studio Code">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        上手 Visual Studio Code
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2018-05-24T16:03:16.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2018-05-25
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Mac-Tools/">Mac Tools</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><a href="https://code.visualstudio.com" target="_blank" rel="noopener">VS Code</a> 是微软开发的一款编辑器，迭代速度很快 ，产品定位是介于 IDE 和纯编辑器（如 vim ）之间，更多八卦可收听 <strong>Teahour.fm</strong> 第 91 期：<a href="http://teahour.fm/2017/12/12/why-vscode-is-better-than-atom.html" target="_blank" rel="noopener"><em>Why VS Code is better than atom ?</em></a> </p>
+<hr>
+<h3 id="VS-Code-安装"><a href="#VS-Code-安装" class="headerlink" title="VS Code 安装"></a>VS Code 安装</h3><p>安装很简单，从<a href="https://code.visualstudio.com" target="_blank" rel="noopener">官网</a>下载安装包到本地正常安装即可。实在不懂就看<a href="https://code.visualstudio.com/docs/setup/mac" target="_blank" rel="noopener">官方教程</a></p>
+<hr>
+<h3 id="立马上手"><a href="#立马上手" class="headerlink" title="立马上手"></a>立马上手</h3><p>打开 VS Code 后，点击右边栏倒数第一个图标或通过快捷键 <code>Cmd + Shift + X</code> 来进入插件搜索界面。推荐安装下面两个插件：</p>
+<ul>
+<li><p>搜索安装 <a href="https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner" target="_blank" rel="noopener">Code Runner</a> 插件来运行主流语言的代码。安装完后，用 <code>⌘ + ,</code> 打开设置页面，通过「User」选项卡 -&gt; 「Extensions」-&gt; 「Run Code configuration」可以勾选设置「<em>Whether to clear previous output before each run.</em>」即是否每次运行输出前清除之前的输出内容。</p>
+</li>
+<li><p>搜索安装 <a href="https://marketplace.visualstudio.com/items?itemName=lfs.vscode-emacs-friendly" target="_blank" rel="noopener">Emacs Friendly Keymap</a>。这样就可以使用好用的 Emacs 快捷键（光标移动，Kill 和 Yank 等操作）。</p>
+</li>
+</ul>
+<hr>
+<h3 id="Code-Runner-设置"><a href="#Code-Runner-设置" class="headerlink" title="Code Runner 设置"></a>Code Runner 设置</h3><p><a href="https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner" target="_blank" rel="noopener">Code Runner</a> 安装完之后并不能马上可以运行各种代码，因为它其实是调用各种终端命令来运行代码的，也就是终端里得有这个命令。</p>
+<p>比如要运行 JavaScript ，就要确保安装了 <a href="https://nodejs.org/en/about" target="_blank" rel="noopener">Node.js</a> ，而运行 Python 则要安装 <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python</a> ，以此类推：</p>
+<pre><code class="lang-bash">## 通过 Homebrew 安装 Node
+$ brew install node
+
+## 或者通过 nvm 安装 Node
+$ nvm install latest    # 安装并使用最新版本的 Node
+
+$ nvm install v13.14.0  # 安装并使用 v13.14.0 版本的 Node
+
+## 通过 Homebrew 安装 python
+$ brew install python3
+</code></pre>
+<p>安装完成后，<strong>Code Runner</strong> 就会自动调用相应的命令来运行对应的文件。比如对于<code>.js</code> 文件，就会调用 <code>node</code> 命令来运行，而对于<code>.py</code> 文件，则会调用 <code>python3</code> 来运行。</p>
+<p>如果没安装，或者终端里的环境变量 <code>$PATH</code> 没设置对，<strong>Code Runner</strong> 就会因找不到这些命令而运行失败。</p>
+<ul>
+<li><p><strong>进一步设置命令如何运行</strong><br>在 <a href="https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner" target="_blank" rel="noopener">Code Runner</a> 的设置页面找到齿轮图标，点击展开，然后：<br><code>Extensions Settings</code> -&gt; <code>Code-runner:</code> <strong><code>Executor Map</code></strong> -&gt; <code>Edit in settings.jason</code><br>可以打开如下设置文件：</p>
+<pre><code class="lang-jason">{
+&quot;code-runner.clearPreviousOutput&quot;: true,
+&quot;editor.tabSize&quot;: 2,
+&quot;editor.detectIndentation&quot;: false,
+&quot;code-runner.executorMap&quot;: {
+
+  &quot;javascript&quot;: &quot;node --trace-uncaught&quot;,
+  &quot;java&quot;: &quot;cd $dir &amp;&amp; javac $fileName &amp;&amp; java $fileNameWithoutExt&quot;,
+  ...
+  ...
+  &quot;python&quot;: &quot;python3 -u&quot;,
+  &quot;rust&quot;: &quot;cd $dir &amp;&amp; rustc $fileName &amp;&amp; $dir$fileNameWithoutExt&quot;,
+  &quot;cpp&quot;: &quot;cd $dir &amp;&amp; g++ -std=c++11 $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&quot;,
+  ...
+  ...
+}
+}
+</code></pre>
+<p>可以更具体地看到，当运行<code>.js</code> 文件，会调用 <code>node --trace-uncaught</code> 命令来运行，而 <code>.py</code> 文件，则会调用 <code>python3 -u</code> 来运行。<br>这些命令都是可以更改的。比如你可以去掉参数 <code>--trace-uncaught</code> ，只用 <code>node</code> 来运行。或者根据本地安装的情况，把 <code>python3</code> 改为 <code>python</code> 来运行。</p>
+</li>
+</ul>
+<hr>
+<h3 id="运行代码"><a href="#运行代码" class="headerlink" title="运行代码"></a>运行代码</h3><p>VS Code 需要以目录（<strong>而不是文件</strong>）为最小单位打开（载入）。打开存放代码的目录就能看到代码文件。<br>选择文件后点击界面右上角的三角形 Run Code 按钮或者使用快捷键 <code>Ctrl + Option + N</code> 来运行的代码。</p>
+<p>下面是 JavaScript 常用语法，可以用来试试上面的操作：</p>
+<pre><code class="lang-javascript">// 函数声明
+function show(x) 
+{
+  return console.log(x);
+}
+
+(n) =&gt; { return n + 1; } // 匿名函数：有大括号就需要 return ，没有就不用；只有一个参数时圆括号是可选的；
+x =&gt; x + 1 ;             // param =&gt; expression; 等于 param =&gt; { return expression; } 或者 param =&gt; { statements }
+
+// 条件分支
+if (n &lt; 0) 
+{
+  show(&quot;Baroque&quot;);    // 函数调用
+}
+else if (n == 0) 
+{
+  show(&quot;Classical&quot;); 
+}
+else 
+{
+  show(&quot;Romantic&quot;); 
+}
+</code></pre>
+<p>更多 JS 语法参见<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="noopener">箭头函数</a></p>
+<hr>
+<h3 id="其他设置"><a href="#其他设置" class="headerlink" title="其他设置"></a>其他设置</h3><p><strong>终端（Terminal）里打开 VS Code ：</strong><br>打开 <strong>Command Palette</strong>（快捷键 <code>⇧⌘P</code> ），输入 shell command 后搜索安装 <code>code</code> 这个命令即可</p>
+<p><img src="https://code.visualstudio.com/assets/docs/setup/mac/shell-command.png" alt="VS Code Command Palette"></p>
+<p>安装好后，使用以下方式从终端打开</p>
+<pre><code class="lang-bash"># 单纯打开 VS Code
+$ code
+
+# 使用 VS Code 打开指定路径的文件
+$ code [文件路径]
+
+# Example - 使用 VS Code 打开当前文件夹
+$ code .
+</code></pre>
+<p><strong>设置按一次 <code>Tab</code> 键相当于输入几个空格键：</strong><br>用 <code>Cmd + ,</code> 打开设置，然后搜索「Tab Size」关键词找到对应的选项，勾选即可。这里要注意观察另一个叫「Detect Indentation」的设置，它如果被勾选会覆盖「Tab Size」的设置。</p>
+<p>这里注意 VS Code 的设置有以下两个不同优先级的设置文件，它们之间是继承关系：</p>
+<ol>
+<li><strong>User Settings</strong> - 用户设置</li>
+<li><strong>Workspace Settings</strong> - 工作站设置（覆盖上者）</li>
+</ol>
+<p><strong>设置格式化代码中的花括号位置：</strong><br>vscode 缺省的格式化方式是「埃及括号」，也就是把花括号放在一行的末尾，而 ian 推荐的样式是把花括号放在新的一行，这样前两行不至于挨得太近。只需要在设置搜索栏搜索「open brace on new line」找到对应的条件分支（Control Blocks）和函数（Functions）两个选项，打上勾就可以了。</p>
+<p>上面两个设置好后，之后的格式化代码操作（右键单击后选择 Format Document）就可以让代码调整为这些格式显示。</p>
+<p><strong>一些更方便的设置：</strong></p>
+<ul>
+<li>右键单击输出窗口（OUTPUT）的顶部，选择 <code>Move Panel Right</code> ，可以将输出窗口移动到右侧；</li>
+<li>右键单击文件的 <strong>Tab</strong> ，选择 <code>Split Right</code> ，可以在右边新开一个面板（Panel）来显示该文件，这样可以同时看多个文件内容；</li>
+</ul>
+<p><strong>VS Code 常用快捷键：</strong></p>
+<ul>
+<li>打开 <strong>Command Palette</strong> 可以搜索各种命令的快捷键：<code>Shift + ⌘ + P</code> ；</li>
+<li>注释 / 取消注释某一行代码（光标位于这一行后再按快捷键组合）：<code>⌘ + /</code> ；</li>
+<li>块注释（选中代码后）：<code>Shift + Option + A</code> ；</li>
+</ul>
+<p>更多有关 VS Code 的操作，可参考<a href="https://code.visualstudio.com/docs" target="_blank" rel="noopener">官方文档</a></p>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

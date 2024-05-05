@@ -1,0 +1,863 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>Pandas 进阶（待完善）</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="Pandas 进阶（待完善）">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Pandas 进阶（待完善）
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2018-09-16T22:35:36.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2018-09-17
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Machine-Learning/">Machine Learning</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>在<a href="/2018/06/01/numpy-and-pandas/"> NumPy 和 Pandas 入门</a>一文里已介绍了 Pandas 的安装方式，本文会直接详细介绍 Pandas 的常用类型 <strong>Series</strong> 和 <strong>DataFrame</strong> 所包含的各种方法，推荐全文检索</p>
+<hr>
+<h3 id="载入"><a href="#载入" class="headerlink" title="载入"></a>载入</h3><p>终端里进入 Python 的 交互式解释器（interactive interpreter），并载入 Pandas</p>
+<pre><code class="lang-bash">$ python
+Python 3.6.5 |Anaconda, Inc.| (default, Apr 26 2018, 08:42:37)
+[GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)] on darwin
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; import pandas as pd
+</code></pre>
+<hr>
+<h3 id="Pandas-里的-Series-类型"><a href="#Pandas-里的-Series-类型" class="headerlink" title="Pandas 里的 Series 类型"></a>Pandas 里的 Series 类型</h3><ul>
+<li><h4 id="Series-类型的常见-Methods"><a href="#Series-类型的常见-Methods" class="headerlink" title="Series 类型的常见 Methods"></a>Series 类型的常见 Methods</h4><pre><code class="lang-bash">## 把 list 类型转换为 Series 类型
+&gt;&gt;&gt; s = pd.Series(list(&#39;abbca&#39;))
+
+## Series 的数据结构由左边的 index 和右边的 values 组成，还有隐藏参数 position（根据从上到下的顺序，按位置排列，0 是第一位，1是第二位）
+## Series 里的 index 可以是其他类型，不一定是整数
+&gt;&gt;&gt; s
+0    a
+1    b
+2    b
+3    c
+4    a
+dtype: object
+
+## 判断某个元素（element）是否在 Series 的 index 里
+&gt;&gt;&gt; 1 in s
+True
+&gt;&gt;&gt; &quot;a&quot; in s
+False
+
+## 将 Series 里的元素去重 - 相当于变为集合（set）
+&gt;&gt;&gt; s.unique()
+array([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], dtype=object)
+
+## 取出 Series 里值为 b 的所有元素（element），返回一个 Series 类型的子集
+&gt;&gt;&gt; s[s == &quot;b&quot;]
+1    b
+2    b
+
+## 寻找 Series 里值为 b 的元素（element）所对应的 index 的值
+&gt;&gt;&gt; s[s == &quot;b&quot;].index
+Int64Index([1, 2], dtype=&#39;int64&#39;)
+## 取第一个 index 的值
+&gt;&gt;&gt; s[s == &quot;b&quot;].index[0]
+1
+
+## 根据 index 移除 Series 里的某一个元素 - 返回新的 Series 而不改变原来的变量 s 的值 
+&gt;&gt;&gt; s.drop(index=1)
+0    a
+2    b
+3    c
+4    a
+dtype: object
+
+## 接下来就可以判断某个元素（element）否在 Series 的值（value）里
+&gt;&gt;&gt; &quot;a&quot; in s.unique()
+True
+
+## 根据 index 排序 - 返回一个新的 Series ，内部元素根据 index 大小排列
+&gt;&gt;&gt; s.sort_index()
+
+&gt;&gt;&gt; s_list = pd.Series([
+...           [&#39;slim&#39;, &#39;waist&#39;, &#39;man&#39;],
+...           [&#39;slim&#39;, &#39;waistline&#39;],
+...           [&#39;santa&#39;]])
+
+&gt;&gt;&gt; s_list
+0    [slim, waist, man]
+1     [slim, waistline]
+2               [santa]
+dtype: object
+
+## 将一个 Series 里的所有 list 类型数据的元素合成一个新的 Series
+&gt;&gt;&gt; one_united_series = s_list.apply(pd.Series).stack().reset_index(drop=True)
+
+&gt;&gt;&gt; one_united_series
+0         slim
+1        waist
+2          man
+3         slim
+4    waistline
+5        santa
+dtype: object
+</code></pre>
+</li>
+<li><h4 id="Series-类型的向量运算"><a href="#Series-类型的向量运算" class="headerlink" title="Series 类型的向量运算"></a>Series 类型的向量运算</h4><p>pandas 里的 Series 类型的相加是根据 <strong>index</strong> 匹配相加减的，而不是根据 <strong>position</strong></p>
+<pre><code class="lang-bash">## 相加的几种情况
+## Addition when indexes are the same
+&gt;&gt;&gt; s1 = pd.Series([1, 2, 3, 4], index=[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;])
+&gt;&gt;&gt; s2 = pd.Series([10, 20, 30, 40], index=[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;])
+&gt;&gt;&gt; print(s1 + s2)
+a    11
+b    22
+c    33
+d    44
+dtype: int64
+
+## Indexes have same elements in a different order
+s3 = pd.Series([10, 20, 30, 40], index=[&#39;b&#39;, &#39;d&#39;, &#39;a&#39;, &#39;c&#39;])
+&gt;&gt;&gt; print(s1 + s3)
+a    31
+b    12
+c    43
+d    24
+dtype: int64
+
+## Indexes overlap, but do not have exactly the same elements
+&gt;&gt;&gt; s4 = pd.Series([10, 20, 30, 40], index=[&#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;])
+&gt;&gt;&gt; print(s1 + s4)
+a     NaN
+b     NaN
+c    13.0
+d    24.0
+e     NaN
+f     NaN
+dtype: float64
+
+## Indexes do not overlap
+&gt;&gt;&gt; s5 = pd.Series([10, 20, 30, 40], index=[&#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;h&#39;])
+&gt;&gt;&gt; print(s1 + s5)
+a   NaN
+b   NaN
+c   NaN
+d   NaN
+e   NaN
+f   NaN
+g   NaN
+h   NaN
+dtype: float64
+</code></pre>
+</li>
+</ul>
+<p>一维数据<br><code>s1.loc[&#39;a&#39;]</code> 按照 Series 类型的索引（index）读取<br><code>s1.iloc[1]</code> 按照 Series 类型的位置（position）读取，相当于 <code>s1[1]</code></p>
+<hr>
+<h3 id="Pandas-里的-DataFrame-类型"><a href="#Pandas-里的-DataFrame-类型" class="headerlink" title="Pandas 里的 DataFrame 类型"></a>Pandas 里的 DataFrame 类型</h3><p><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html" target="_blank" rel="noopener">pandas.DataFrame</a> 是一种能够有效处理 <code>.csv</code> 文件内容的二维数据结构，允许每一列（column）各不相同的数据类型。</p>
+<p>二维数据<br>读取行（row）的方式参照一维数据<br>读取列（column）的方式为 <code>s1[&#39;column_name&#39;]</code><br><code>s1.values</code> 返回的是 NumPy 的 Array 类型的数据（二维数组）- 注意该类型的数据要求全部元素都是同一类型 - 一般这样做是为了求所有元素的平均值，即 <code>s1.values.mean()</code></p>
+<ul>
+<li><h4 id="DataFrame-类型的创建"><a href="#DataFrame-类型的创建" class="headerlink" title="DataFrame 类型的创建"></a>DataFrame 类型的创建</h4><pre><code class="lang-bash">## DataFrame creation - 创建 DataFrame 类型要有 column 的值
+&gt;&gt;&gt; import pandas as pd
+## You can create a DataFrame out of a dictionary mapping column names to values
+&gt;&gt;&gt; df_1 = pd.DataFrame({&#39;A&#39;: [0, 1, 2], &#39;B&#39;: [3, 4, 5]})
+&gt;&gt;&gt; df_1
+   A  B
+0  0  3
+1  1  4
+2  2  5
+
+## You can also use a list of lists or a 2D NumPy array
+&gt;&gt;&gt; acid_df = pd.DataFrame([[3.51], [3.20], [3.26], [3.01], [3.16]], columns=[&#39;pH&#39;])
+&gt;&gt;&gt; acid_df
+     pH
+0  3.51
+1  3.20
+2  3.26
+3  3.01
+4  3.16
+
+## Subway ridership for 3 stations on 4 different days
+&gt;&gt;&gt; ridership_df = pd.DataFrame(
+...      data=[[   0,    0,    2],
+...            [1478, 3877, 3674],
+...            [1613, 4088, 3991],
+...            [1560, 3392, 3826]],
+...      index=[&#39;05-01-11&#39;, &#39;05-02-11&#39;, &#39;05-03-11&#39;, &#39;05-04-11&#39;],
+...      columns=[&#39;R003&#39;, &#39;R004&#39;, &#39;R005&#39;]
+... )
+&gt;&gt;&gt; ridership_df
+          R003  R004  R005
+05-01-11     0     0     2
+05-02-11  1478  3877  3674
+05-03-11  1613  4088  3991
+05-04-11  1560  3392  3826
+
+## Grads for 4 students at two exams
+&gt;&gt;&gt; grades_df = pd.DataFrame(
+...      data={&#39;exam1&#39;: [43, 81, 78, 75],
+...            &#39;exam2&#39;: [24, 63, 56, 56],
+...            &#39;gender&#39;: [&quot;Male&quot;, &quot;Male&quot;, &quot;Female&quot;, &quot;Male&quot;]},
+...      index=[&#39;Andre&#39;, &#39;Barry&#39;, &#39;Chris&#39;, &#39;Dan&#39;]
+...  )
+&gt;&gt;&gt; grades_df
+       exam1  exam2  gender
+Andre     43     24    Male
+Barry     81     63    Male
+Chris     78     56  Female
+Dan       75     56    Male
+</code></pre>
+</li>
+<li><h4 id="DataFrame-类型的常用方法（methods）"><a href="#DataFrame-类型的常用方法（methods）" class="headerlink" title="DataFrame 类型的常用方法（methods）"></a>DataFrame 类型的常用方法（methods）</h4><pre><code class="lang-bash">## 查看整体数据的信息 - 有几行；有几列；每列的数据类型；每列多少非空数据；
+## 有些列的数据是 object ，实际上它们是字符串，且这是因为它们将指针存储到字符串，而不是字符串本身
+&gt;&gt;&gt; grades_df.info()
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Index: 4 entries, Andre to Dan
+Data columns (total 3 columns):
+exam1     4 non-null int64
+exam2     4 non-null int64
+gender    4 non-null object
+dtypes: int64(2), object(1)
+memory usage: 128.0+ bytes
+
+## Accessing elements
+## 读取第一行，即 position = 0 的数据
+&gt;&gt;&gt; ridership_df.iloc[0]
+
+## 读取 index = &#39;05-05-11&#39; 的数据，即第 5 行
+&gt;&gt;&gt; ridership_df.loc[&#39;05-05-11&#39;]
+
+## 读取 column = &#39;R003&#39; 的数据，即第 1 列
+&gt;&gt;&gt; ridership_df[&#39;R003&#39;]
+&gt;&gt;&gt; ridership_df.R003  ## 虽然这种方式也能读 R003 列的数据，但 column 是中文名就不行了，故还是推荐上面的方式
+
+## 读取 position = [1, 3] 的数据
+&gt;&gt;&gt; ridership_df.iloc[1, 3]
+
+## slicing 切片 - 二维数据包含两个 axis，所以第一个 row_indexer 是指定沿着 index 方向的切片，第二个是指定沿着 column 方向的切片 
+&gt;&gt;&gt; df.loc[row_indexer,column_indexer]      ## 按照 index 取值
+&gt;&gt;&gt; df.iloc[row_indexer,column_indexer]     ## 按照 position 取值
+
+## Example - 读取 position = [1:4] 的数据 - 即 2 到 5 行（row）的数据
+## 两个表达式效果一样，因为右侧不填就默认是 :（即取全部）
+&gt;&gt;&gt; ridership_df.iloc[1:4]
+&gt;&gt;&gt; ridership_df.iloc[1:4, :]
+&gt;&gt;&gt; df_cancer.loc[:,&#39;id&#39;:&#39;fractal_dimension_mean&#39;]  ## 取所有行（row），取 &quot;id&quot; 列到 &quot;fractal_dimension_mean&quot; 列之间的所有列 
+
+## 读取 column = &#39;R003&#39; 和 column = &#39;R005&#39; 的数据，即第 1，3 列（column）数据
+&gt;&gt;&gt; ridership_df[[&#39;R003&#39;, &#39;R005&#39;]]
+
+## 取出 ridership_df 里 &quot;R003&quot; 这一列的值大于 0 的所有行（row）
+&gt;&gt;&gt; ridership_df[ridership_df[&#39;R003&#39;] &gt; 0]
+
+## 读取第一行，即 position = 0 的数据里，最大值所在的列（column）的名字
+&gt;&gt;&gt; ridership_df.iloc[0].idxmax()
+&#39;R005&#39;
+
+## 读取第一列，即 column = &#39;R003&#39; 的数据里，最大值所在的行（row）的名字
+&gt;&gt;&gt; ridership_df[&#39;R003&#39;].idxmax()
+&#39;05-03-11&#39;
+
+## 读取前 3 行 - 输出数据里的一个小片段，看数据是否正常符合预期
+## 如果直接使用 .head() 不指定数字，默认是前 5 行
+&gt;&gt;&gt; ridership_df.head(3)
+          R003  R004  R005
+05-01-11     0     0     2
+05-02-11  1478  3877  3674
+05-03-11  1613  4088  3991
+05-04-11  1560  3392  3826
+
+## 直接改变 Dataframe 表格的某一列（columns）- 缩小为原来的 1/2
+&gt;&gt;&gt; ridership_df[&quot;R005&quot;] = ridership_df[&quot;R005&quot;]/2
+&gt;&gt;&gt; ridership_df
+          R003  R004    R005
+05-01-11     0     0     1.0
+05-02-11  1478  3877  1837.0
+05-03-11  1613  4088  1995.5
+05-04-11  1560  3392  1913.0
+
+# Pandas axis
+&gt;&gt;&gt; df_1
+   A  B
+0  0  3
+1  1  4
+2  2  5
+
+# 求和 - 针对每列求和
+&gt;&gt;&gt; df_1.sum()
+A     3
+B    12
+dtype: int64
+
+# 求和 - 针对每行求和
+&gt;&gt;&gt; df_1.sum(axis=1)
+0    3
+1    5
+2    7
+dtype: int64
+
+# 求和 - 针对全体数据求和
+&gt;&gt;&gt; df_1.values.sum()
+15
+
+# 矩阵的转置 - 反转 column 和 index，两者互换，不会改动原变量 df_1，不会动到同一块内存，而是返回一个生成新的值
+&gt;&gt;&gt; df_1.transpose()
+   0  1  2
+A  0  1  2
+B  3  4  5
+</code></pre>
+</li>
+<li><h4 id="apply-和-applymap-（未完待做）"><a href="#apply-和-applymap-（未完待做）" class="headerlink" title="apply 和 applymap （未完待做）"></a>apply 和 applymap （未完待做）</h4><p><code>.apply()</code> 作用在每一行或者每一列上（通过参数 axis 指定），而 <code>.applymap()</code> 作用在每个元素上</p>
+<pre><code class="lang-bash"># 基本形式 df.apply(func, axis=&quot;columns&quot;)
+# axis 的值设为 0 或 &quot;index&quot; 则将函数 func 作用到 每一列（column）上
+# axis 的值设为 1 或 &quot;columns&quot; 则将函数 func 作用到 每一行（row）上
+&gt;&gt;&gt; df_1.apply(lambda x:x/2, axis=0)
+     A    B
+0  0.0  1.5
+1  0.5  2.0
+2  1.0  2.5
+
+# 作用在特定的某一列上 - Dataframe 类型的列就是 Series 类型，Series 也有 .apply()
+# 此处 apply 里的函数 func 接收的参数类型是 Series 里的元素，而上面的 func 接收的参数类型是 Series 类型
+&gt;&gt;&gt; df_1[&quot;A&quot;].apply(lambda x:x/2)
+0    0.0
+1    0.5
+2    1.0
+Name: A, dtype: float64
+
+# To do
+&gt;&gt;&gt; df.applymap()
+</code></pre>
+</li>
+<li><h4 id="用-Pandas-读取文件，储存为-DataFrame-数据类型进行操作"><a href="#用-Pandas-读取文件，储存为-DataFrame-数据类型进行操作" class="headerlink" title="用 Pandas 读取文件，储存为 DataFrame 数据类型进行操作"></a>用 Pandas 读取文件，储存为 DataFrame 数据类型进行操作</h4><pre><code class="lang-bash"># 读取 .csv 文件，返回一个 DataFrame 类型的数据，包含了该 .csv 文件的内容
+&gt;&gt;&gt; df = pd.read_csv(&quot;filename.csv&quot;)
+
+# Example - 可设定分隔符号（默认是逗号，此处设定为分号），也可设定 index_col 参数来指定使用数据中的某一列作为索引（index）
+&gt;&gt;&gt; subway_df = pd.read_csv(&quot;nyc_subway_weather.csv&quot;, sep=&quot;;&quot;, index_col=[&#39;Longitude&#39;, &#39;Latitude&#39;])
+
+# 生成包含数据的 .csv 文件
+# index=False 是指定不保存索引（index），index=True（默认值）则索引被保存为新的一列 Unnamed:0
+&gt;&gt;&gt; subway_df.to_csv(&#39;nyc_subway_weather_edited.csv&#39;, index=False)
+
+# 显示前 5 行（row）的数据 
+&gt;&gt;&gt; df.head(5)
+
+# 显示倒数 5 行（row）的数据 
+&gt;&gt;&gt; df.tail(5)
+
+# 显示 DataFrame 数据包含的列的名字（column names）
+&gt;&gt;&gt; df.columns
+
+# 显示用于描述该组数据特征的内容 - 数量(count)，平均值(mean)，标准差(std)，最小值(min)，最大值(max)
+&gt;&gt;&gt; df.describe()
+
+# 显示数据的储存方面的信息 - 包含的数据类型，非空(non-null)数量，数据占用内存容量(memory usage)
+&gt;&gt;&gt; df.info()
+
+# 显示数据的行（rows）数和列（columns）数 - 返回的是 tuple 数据类型
+&gt;&gt;&gt; df.shape
+
+# 统计名为 column_name 的某列（column）中，有多少种不同的值
+&gt;&gt;&gt; df[&#39;column_name&#39;].value_counts()
+
+# 统计名为 column_name 的某列中，有多少「非空」行（row）- 即有多少「非空」样本
+&gt;&gt;&gt; df[&#39;column_name&#39;].count()
+
+# Example - 统计 Gender 这列中 &quot;Male&quot; 和 &quot;Female&quot; 这两种取值的数量（因为此列只有这两种取值）
+# 在此其实就是统计男女数量
+&gt;&gt;&gt; df_share_bike[&#39;Gender&#39;].value_counts()
+Male      244
+Female     86
+Name: Gender, dtype: int64
+
+# 返回名为 column_name 的某列中，数据的集合（去除相同重复的数据）
+&gt;&gt;&gt; df[&#39;column_name&#39;].unique()
+
+# 将某列的数据类型转换成 datetime 类型
+&gt;&gt;&gt; df[&quot;time_column_name&quot;] = pd.to_datetime(df[&quot;time_column_name&quot;])
+
+# 删除（remove）不需要的列 - 注意此处 axis=1
+&gt;&gt;&gt; df.drop([&quot;column_name_01&quot;, &quot;column_name_02&quot;], axis=1, inplace=True)
+# 也可以这样 drop 不需要的列，效果一样
+&gt;&gt;&gt; df.drop(columns=[&quot;column_name_01&quot;, &quot;column_name_02&quot;])
+
+# 提取出某列中，值为 some_value 的所有行，组成一个新的 DataFrame 数据 df_new
+&gt;&gt;&gt; df_new = df[df[&quot;column_name&quot;] == &quot;some_value&quot; ]
+# 等效于以下 .query() 方法 - 注意引号位置，.query() 采用 string to evaluate 的方式对待传入参数
+&gt;&gt;&gt; df_new = df.query(&quot;column_name == &#39;some_value&#39;&quot;)
+&gt;&gt;&gt; df_new = df.query(&quot;column_name == @var&quot;)         # 若要配合变量 var 使用，则要在变量前添加符号 @ 
+
+# 使用 .cut() 按照取值范围分组（类似切片） - 常配合 .groupby() 一起使用
+&gt;&gt;&gt; bin_edges = [2.72, 3.11, 3.21, 3.32, 4.01]         # 规定各个的取值范围的边界：[2.72 ~ 3.11]、[3.11 ~ 3.21]、[3.21 ~ 3.32] 和 [3.32 ~ 4.01] 
+&gt;&gt;&gt; bin_names = [&quot;extreme&quot;, &quot;high&quot;, &quot;moderate&quot;, &quot;low&quot;] # 对每个酸度水平类别（取值范围）进行命名
+# 创建 levels 列 - .cut() 返回的是 Series 类型
+&gt;&gt;&gt; acid_df[&#39;levels&#39;] = pd.cut(acid_df[&#39;pH&#39;], bin_edges, labels=bin_names)
+&gt;&gt;&gt; acid_df
+     pH    levels
+0  3.51       low
+1  3.20      high
+2  3.26  moderate
+3  3.01   extreme
+4  3.16      high
+</code></pre>
+</li>
+<li><h4 id="整理-DataFrame-数据"><a href="#整理-DataFrame-数据" class="headerlink" title="整理 DataFrame 数据"></a>整理 DataFrame 数据</h4><p>通常原始数据都有各种瑕疵，比如重复项和丢失项，DataFrame 类型提供了一些处理方法（methods）</p>
+<pre><code class="lang-bash">&gt;&gt;&gt; df_missing = pd.DataFrame(
+...                data=[[np.nan, 2, np.nan, 0],
+...                      [3, 4, np.nan, 1],
+...                      [np.nan, np.nan, 1, 4],
+...                      [np.nan, 3, np.nan, 4],
+...                      [0, 3, 1, 0]],
+...                columns=list(&#39;ABCD&#39;),
+...                index=list(&#39;abcce&#39;))
+
+&gt;&gt;&gt; df_missing
+     A    B    C  D
+a  NaN  2.0  NaN  0
+b  3.0  4.0  NaN  1
+c  NaN  NaN  1.0  4
+c  NaN  3.0  NaN  4
+e  0.0  3.0  1.0  0
+
+# 取每一列的均值来填充该列的丢失项 - C 列全部丢失，所以没有均值，也就没填充
+# 注意要加上 inplace=True 参数才能修改 df_missing，否则就只是返回新数据而已
+&gt;&gt;&gt; df_filled = df_missing.fillna(df_missing.mean())
+&gt;&gt;&gt; df_filled
+     A    B    C  D
+a  1.5  2.0  1.0  0
+b  3.0  4.0  1.0  1
+c  1.5  3.0  1.0  4
+c  1.5  3.0  1.0  4
+e  0.0  3.0  1.0  0
+
+# 查看重复项（默认显示第一个重复 row 的值为 True）- 默认只有全部列（column）的值都相同的行（row）
+&gt;&gt;&gt; df_filled.duplicated()
+a    False
+b    False
+c    False
+c     True
+e    False
+dtype: bool
+
+# 大型数据库用以下方法直接看「总重复数」，避免输出一堆数据
+&gt;&gt;&gt; sum(df_filled.duplicated())
+1
+
+# 剔除掉重复项 - 用 inplace=True 参数修改 df_filled 本身
+&gt;&gt;&gt; df_filled.drop_duplicates(inplace=True)
+&gt;&gt;&gt; df_filled
+     A    B    C  D
+a  1.5  2.0  1.0  0
+b  3.0  4.0  1.0  1
+c  1.5  3.0  1.0  4
+e  0.0  3.0  1.0  0
+
+# 剔除掉含有至少含有一个丢失项的行（rows） - Drop the rows where at least one element is missing
+# 可以设置参数 axis=1 来剔除列（columns）
+&gt;&gt;&gt; df_drop_missed = df_missing.dropna()
+&gt;&gt;&gt; df_drop_missed
+     A    B    C  D
+e  0.0  3.0  1.0  0
+
+# 任何列是否有空值 - 返回 False 则没有空值，返回 True 则存在空值
+&gt;&gt;&gt; df_drop_missed.isnull().sum().any()
+False
+&gt;&gt;&gt; df_missing.isnull().sum().any()
+True
+</code></pre>
+</li>
+<li><h4 id="groupby-用法-pandas-DataFrame-groupby"><a href="#groupby-用法-pandas-DataFrame-groupby" class="headerlink" title="groupby 用法 - pandas.DataFrame.groupby"></a>groupby 用法 - pandas.DataFrame.groupby</h4><p>DataFrame 类型的 <a href="http://pandas.pydata.org/pandas-docs/version/0.23/generated/pandas.DataFrame.groupby.html" target="_blank" rel="noopener">groupby</a> 也是常用的分析数据的 method</p>
+<pre><code class="lang-bash">&gt;&gt;&gt; df1 = pd.DataFrame({&quot;X&quot; : [&#39;A&#39;, &#39;B&#39;, &#39;A&#39;, &#39;B&#39;],
+...                     &quot;Y&quot; : [1, 4, 3, 2],
+...                     &quot;Z&quot; : [1, 2, 2, 1],
+...                     &quot;M&quot; : [24,29,9,19]})
+
+# 用 groupby 按照列 &#39;X&#39; 的取值分组 - &#39;X&#39; 列中，取值相同的行（row）将被划分为同一组
+# 看中括号可知参数可以是一个 list，即按照多个列分组，此时不同列之间的「取值组合」所对应的行（row），构成了不同的组
+&gt;&gt;&gt; grouped_df1=df1.groupby([&quot;X&quot;])
+
+# 读取分组后的 grouped_df1 中，名为 &#39;A&#39; 的组 - 即得到一个由所有 X 取值为 &#39;A&#39; 的行（row）构成的 dataFrame 数据
+&gt;&gt;&gt; grouped_df1.get_group(&#39;A&#39;)
+   X  Y  Z   M
+0  A  1  1  24
+2  A  3  2   9
+
+# 分组后可直接求出所有列（columns）中，各组的平均数等
+&gt;&gt;&gt; grouped_df1.mean()
+     Y    Z     M
+X
+A  2.0  1.5  16.5
+B  3.0  1.5  24.0
+
+# 也可以单独查看某一列（column）里，各个组的平均数
+&gt;&gt;&gt; grouped_df1[&quot;Y&quot;].mean()
+X
+A    2
+B    3
+Name: Y, dtype: int64
+
+# 查看一共分了几个组
+&gt;&gt;&gt; grouped_df1.ngroups
+2
+&gt;&gt;&gt; len(grouped_df1)
+2
+
+# 查看每个组的大小（Size）- 包含内容多（也就是 rows 多）的组，Size 比较大
+# 此例中，值为 A 的组和值为 B 的组都包含了两个「行」（rows），即他们的 Size 一样
+&gt;&gt;&gt; grouped_df1.size()
+X
+A    2
+B    2
+dtype: int64
+
+# .size() 返回的是一个 Series 类型，所以可以用以下方法查看 Size 排名第前 N 或后 N 的 Group
+&gt;&gt;&gt; s = grouped_df1.size()
+&gt;&gt;&gt; s.nlargest(1)
+X
+A    2
+dtype: int64
+&gt;&gt;&gt; s.nlargest(2)
+X
+A    2
+B    2
+dtype: int64
+</code></pre>
+</li>
+<li><h4 id="使用-pandas-get-dummies-来对数据进行-One-hot-编码"><a href="#使用-pandas-get-dummies-来对数据进行-One-hot-编码" class="headerlink" title="使用 pandas.get_dummies 来对数据进行 One-hot 编码"></a>使用 pandas.get_dummies 来对数据进行 One-hot 编码</h4><p>在处理数据时，有时需要将数据中的类别信息转换成数字（数字便于计算），人们会给不同类别分别设定一个独立的变量，这些变量就被称为 dummy variables 。以性别为例（性别通常为 2 类），这时就有 2 个变量（two variables），如果是「male」则代表男性的变量值为 1 ，代表女性的变量值为 0 —— 即变量取值组合 (1,0) 为男性，(0,1) 为女性。再比如区分猫狗猪三类，此时就有 3 个变量，变量取值组合 (1,0,0) 为「猫」，(0,1,0) 为「狗」，(0,0,1) 为「猪」。这种编码方式就称为 One-hot 编码 —— 之所以不用单一变量通过取值 0 , 1 和 2 来分别编码猫狗猪，是因为这样会暗含这三个类别具有<strong>相关性</strong>而不是<strong>独立</strong>的<br>这个 <a href="https://www.youtube.com/watch?v=0s_1IsROgDc" target="_blank" rel="noopener">Youtube 视频</a>也介绍了 <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html" target="_blank" rel="noopener">get_dummies</a> 的用法，推荐参考</p>
+<pre><code class="lang-bash"># 使用上文的 acid_df 为例介绍 pandas.get_dummies 用法
+&gt;&gt;&gt; acid_df
+     pH    levels
+0  3.51       low
+1  3.20      high
+2  3.26  moderate
+3  3.01   extreme
+4  3.16      high
+
+# 对 column = &quot;levels&quot; 这一列的值进行编码（该列的值共有 4 种）
+&gt;&gt;&gt; pd.get_dummies(acid_df[&quot;levels&quot;])
+   extreme  high  moderate  low
+0        0     0         0    1
+1        0     1         0    0
+2        0     0         1    0
+3        1     0         0    0
+4        0     1         0    0
+
+# 根据传统，编码时要加上前缀（prefix），以进一步说明编码信息
+# 此外该列的值共有 4 种，但只需要对其中 3 种进行编码就能知道所有信息，所以人们通常会抛弃其中一列
+# 使用 iloc 切片实现抛弃其中一列 - 取所有行（row），取第 2 列（column）和第 2 列之后的所有列（参考上文对 iloc 的描述）
+&gt;&gt;&gt; pd.get_dummies(acid_df[&quot;levels&quot;], prefix=&quot;level&quot;).iloc[:, 1:]    
+   level_high  level_moderate  level_low
+0           0               0          1
+1           1               0          0
+2           0               1          0
+3           0               0          0
+4           1               0          0
+
+# 一步实现 5 个操作
+#「编码指定的所有列（columns）」,「添加前缀（默认添加的是原列名称）」,「切片抛弃」,「整合编码后数据表和原始表 acid_df」和「把原始表 acid_df 中的 &quot;levels&quot; 这一列删除」
+# 注意，操作后 acid_df 的内容并没有改变，整个操作只是输出一个整合后的表，需要新建变量来保存
+&gt;&gt;&gt; pd.get_dummies(acid_df, columns=[&quot;levels&quot;], drop_first=True)
+     pH  levels_high  levels_moderate  levels_low
+0  3.51            0                0           1
+1  3.20            1                0           0
+2  3.26            0                1           0
+3  3.01            0                0           0
+4  3.16            1                0           0
+</code></pre>
+</li>
+<li><h4 id="合并两个-DataFrame"><a href="#合并两个-DataFrame" class="headerlink" title="合并两个 DataFrame"></a>合并两个 DataFrame</h4><p>使用 <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.merge.html" target="_blank" rel="noopener">DataFrame.merge</a> 来合并两个 DataFrame 类型的数据，可以参考<a href="https://pandas.pydata.org/pandas-docs/stable/merging.html#database-style-dataframe-joining-merging" target="_blank" rel="noopener">这里</a>查看 Merge 更详细的规则：</p>
+<pre><code class="lang-bash">## 语法：left_df.merge(right_df, how=&#39;inner&#39;, on=&quot;column_name&quot;)
+## how=&quot;left&quot; - 合并 column_name 之外的所有列，以左边（left_df）column_name 列的取值为准，在右边（right_df）寻找同样的取值合并，找不到则合并后右列的取值为 NaN
+## how=&quot;right&quot; - 合并 column_name 之外的所有列，以右边（right_df）column_name 列的取值为准，在左边（left_df）寻找同样的取值合并，找不到则合并后左列的取值为 NaN 
+## how=&quot;inner&quot; - 在左右的 column_name 列取值相同的行（row），才会合并
+## how=&quot;outer&quot; - 无论左右的 column_name 一列是否有相同取值的行（row），都会合并，相应的列（column）的值以 NaN 填充
+## 语言是苍白的，只有尝试几次才能明白，或者查看上述官方文档的链接
+
+# 数据一
+&gt;&gt;&gt; sub_df = pd.DataFrame(
+...             [[&quot;05-01-11&quot;, 4388333, 2911002, &quot;R003&quot;, 0, 40.689945, -73.872564],
+...              [&quot;05-02-11&quot;, 4388348, 2911036, &quot;R004&quot;, 1, 40.691320, -73.867135]],
+...             columns=[&quot;DATEn&quot;, &quot;ENTRIESn&quot;, &quot;EXITSn&quot;, &quot;UNIT&quot;, &quot;hour&quot;, &quot;latitude&quot;, &quot;longitude&quot;]) 
+&gt;&gt;&gt; sub_df
+      DATEn  ENTRIESn   EXITSn  UNIT  hour   latitude  longitude
+0  05-01-11   4388333  2911002  R003     0  40.689945 -73.872564
+1  05-02-11   4388348  2911036  R004     1  40.691320 -73.867135
+
+# 数据二
+&gt;&gt;&gt; wea_df = pd.DataFrame(
+...             [[&quot;05-01-11&quot;, 0, 40.689945, -73.872564, 30.24],
+...              [&quot;05-02-11&quot;, 1, 40.691320, -73.867135, 30.32]],
+...             columns=[&quot;DATEn&quot;, &quot;hour&quot;, &quot;latitude&quot;, &quot;longitude&quot;, &quot;pressurei&quot;])
+&gt;&gt;&gt; wea_df
+      DATEn  hour   latitude  longitude  pressurei
+0  05-01-11     0  40.689945 -73.872564      30.24
+1  05-02-11     1  40.691320 -73.867135      30.32
+
+# 合并
+&gt;&gt;&gt; sub_df.merge(wea_df, on=[&quot;DATEn&quot;, &quot;latitude&quot;, &quot;longitude&quot;, &quot;hour&quot;], how=&quot;inner&quot;)
+      DATEn  ENTRIESn   EXITSn  UNIT  hour   latitude  longitude  pressurei
+0  05-01-11   4388333  2911002  R003     0  40.689945 -73.872564      30.24
+1  05-02-11   4388348  2911036  R004     1  40.691320 -73.867135      30.32
+
+# 数据三 - date 这一列和 sub_df 中的 DATEn 列名字虽然不同，但描述的是同一个东西
+&gt;&gt;&gt; wea_df_date
+      date  hour   latitude  longitude  pressurei
+0  05-01-11     0  40.689945 -73.872564      30.24
+1  05-02-11     1  40.691320 -73.867135      30.32
+
+# 此时我们的合并语法要加上 left_on 和 right_on 这两个参数
+&gt;&gt;&gt; sub_df.merge(wea_df_date,
+...           left_on=[&quot;DATEn&quot;, &quot;latitude&quot;, &quot;longitude&quot;, &quot;hour&quot;],
+...           right_on=[&quot;date&quot;, &quot;latitude&quot;, &quot;longitude&quot;, &quot;hour&quot;],
+...           how=&quot;inner&quot;)
+</code></pre>
+</li>
+<li><h4 id="将一个-DataFrame-数据添加到另一个-DataFrame-里"><a href="#将一个-DataFrame-数据添加到另一个-DataFrame-里" class="headerlink" title="将一个 DataFrame 数据添加到另一个 DataFrame 里"></a>将一个 DataFrame 数据添加到另一个 DataFrame 里</h4><p>使用 <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.append.html" target="_blank" rel="noopener">DataFrame.append</a> 来实现添加一个 DataFrame 类型的数据：</p>
+<pre><code class="lang-bash">&gt;&gt;&gt; df_base = pd.DataFrame([[1, 2], [3, 4]], columns=list(&#39;AB&#39;))
+&gt;&gt;&gt; df_base
+   A  B
+0  1  2
+1  3  4
+&gt;&gt;&gt; df_addition = pd.DataFrame([[5, 6], [7, 8]], columns=list(&#39;Ab&#39;))
+&gt;&gt;&gt; df_addition
+   A  b
+0  5  6
+1  7  8
+
+# 添加 df_addition 到 df_base 尾部 - 返回新的 DataFrame 而不改变原来的 df_base
+&gt;&gt;&gt; df_base.append(df_addition)
+   A    B    b
+0  1  2.0  NaN
+1  3  4.0  NaN
+0  5  NaN  6.0
+1  7  NaN  8.0
+
+# 重命名列的名字（column name）- 默认返回新的 DataFrame，要改动原变量要设置参数 inplace=True
+&gt;&gt;&gt; df_addition.rename(columns={&quot;b&quot;: &quot;B&quot;})
+
+# 参数 columns 也可以接收函数 - 此处多余的 else 是为了展示 lambda 中的完整 if 语法
+&gt;&gt;&gt; df_addition.rename(columns=lambda x: &quot;B&quot; if x == &quot;b&quot; else x, inplace=True)
+
+# 确认两个数据集的列标签相同
+&gt;&gt;&gt; df_addition.columns == df_base.columns
+array([ True,  True])
+# 如果数据太多，也可以这样确认 - 当且仅当元素（elements）都为非空，非零或者 True，.all() 返回 True
+&gt;&gt;&gt; (df_addition.columns == df_base.columns).all()
+True
+
+# 再次合并 - 返回新的 DataFrame 而不改变原来的 df_base
+&gt;&gt;&gt; df_base.append(df_addition)
+   A  B
+0  1  2
+1  3  4
+0  5  6
+1  7  8
+
+# 设置 ignore_index=True 即可“解决” index 问题（默认 ignore_index=False），如果这是你想要的效果的话 
+&gt;&gt;&gt; df_base.append(df_addition, ignore_index=True)
+   A  B
+0  1  2
+1  3  4
+2  5  6
+3  7  8
+</code></pre>
+</li>
+</ul>
+<hr>
+<h3 id="用-Pandas-绘制数据分析图"><a href="#用-Pandas-绘制数据分析图" class="headerlink" title="用 Pandas 绘制数据分析图"></a>用 Pandas 绘制数据分析图</h3><p>Pandas 库里本身就提供的绘制图像的方法（Methods）可以作用于 <strong>Series</strong> 和 <strong>DataFrame</strong> 两种类型的数据上，这些方法（Methods）都是基于常用绘图库 <a href="https://matplotlib.org" target="_blank" rel="noopener">matplotlib</a> 封装的（wrappers around matplotlib functions），所以名字大都和 matplotlib 里的一样。用 Pandas 绘图主要是为了快速可视化，若要更加复杂的分析图，还是得载入 Matplotlib 库（进一步查看<a href="/2018/06/15/matplotlib-cheat-sheet/"> Matplotlib 使用指南</a>）</p>
+<pre><code class="lang-bash"># 生成直方图（histogram）- figsize 参数是设定直方图的大小（即宽高）
+&gt;&gt;&gt; df.hist(figsize=(8, 8))
+
+# 可对 Series 数据类型使用
+&gt;&gt;&gt; df[&quot;column_name&quot;].hist(figsize=(8, 8))
+
+# 生成直方图的另一种方法 - 使用 title 参数添加标题
+&gt;&gt;&gt; df[&quot;column_name&quot;].plot(kind=&quot;hist&quot;, title=&quot;title_name&quot;)
+
+# 如果列的数据类型是 String ，可以配合上述的 .value_counts() 方法统计数字，然后生成图表
+# 下面 kind=&quot;bar&quot; 是生成柱状图（bar charts）- 注意区别于直方图
+&gt;&gt;&gt; df[&quot;string_column&quot;].value_counts().plot(kind=&quot;bar&quot;)
+
+# 生成饼图（pie chart）
+&gt;&gt;&gt; df[&quot;string_column&quot;].value_counts().plot(kind=&quot;pie&quot;, figsize=(8, 8))
+
+# 同时显示所有变量间的相关关系图（散点图 scatter）和直方图 - 类似锤子科技 TNT 的 Poker Dealer
+&gt;&gt;&gt; pd.plotting.scatter_matrix(df, figsize=(15, 15))
+
+# 显示具体的两个变量的数据图 - 配合上述的 Poker Dealer 全变量显示后
+&gt;&gt;&gt; df.plot(x=&quot;column_1_name&quot;, y=&quot;column_2_name&quot;, kind=&quot;scatter&quot;)
+</code></pre>
+<p>PS:<br>如果你用 <a href="http://jupyter.org" target="_blank" rel="noopener">Jupyter notebook</a>，记得加上 <code>% matplotlib inline</code> 以让图标显示在内容流中。<br>如果是在终端里使用 <a href="https://ipython.org" target="_blank" rel="noopener">IPython</a>，则要用 <code>plt.show()</code> 来显示图像：</p>
+<pre><code class="lang-python">import matplotlib.pyplot as plt
+plt.plot([1,2,3,4])
+plt.show()
+</code></pre>
+<hr>
+<h3 id="Axis-参数"><a href="#Axis-参数" class="headerlink" title="Axis 参数"></a>Axis 参数</h3><p>Numpy 里的 Array 类型，Pandas 里的 Series 类型和 DataFrame 类型都通常能设置一个 axis 参数，代表操作方向（是对 column 操作，还是对 row 操作），但每次用的时候都需要先测试一下，才能确保参数值 <code>1</code> 和 <code>0</code> 到底分别代表哪个方向</p>
+<p>对于 Array 类型和 Series 类型：</p>
+<ul>
+<li><p><code>axis = 0</code></p>
+</li>
+<li><p><code>axis = 1</code></p>
+</li>
+</ul>
+<p>对于 DataFrame 类型：</p>
+<ul>
+<li><p><code>axis = 0</code> 或 <code>axis = &quot;index&quot;</code><br>along the index（沿着 index 方向 - 垂直纵向）</p>
+</li>
+<li><p><code>axis = 1</code> 或 <code>axis = &quot;columns&quot;</code><br>along the column（沿着 column 的方向 - 水平横向）</p>
+</li>
+</ul>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

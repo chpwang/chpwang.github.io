@@ -401,7 +401,8 @@ void reference_test()
 // 且这里数组传递的是 reference ，但又不像 pass_by_reference 那样写成 int&amp; arr[]
 void pass_array(int arr[])  
 {
-  for (int i = 0; i &lt; 5; i++) {
+  for (int i = 0; i &lt; 5; i++) 
+  {
     cout &lt;&lt; &quot;pass_array: &quot; &lt;&lt; arr[i] &lt;&lt; endl;
   }
   arr[0] = 100;
@@ -415,7 +416,8 @@ void pass_array_test()
   // 在栈（stack）上定义一个 array
   int arr[] = {1, 2, 3, 4, 5}; // stack 上
 
-  for (int i = 0; i &lt; sizeof(arr)/sizeof(int); i++) {
+  for (int i = 0; i &lt; sizeof(arr)/sizeof(int); i++) 
+  {
     cout &lt;&lt; &quot;before pass_array: &quot; &lt;&lt; arr[i] &lt;&lt; endl;
   }
 
@@ -423,7 +425,8 @@ void pass_array_test()
 
   // a[0] 的值在函数 pass_array 中被改变了，说明数组传递进去的时候不是复制一份
   // 而是 arr[] 本身直接进去（很上面的 pass_by_reference 行为相同）
-  for (int i = 0; i &lt; sizeof(arr)/sizeof(int); i++) {
+  for (int i = 0; i &lt; sizeof(arr)/sizeof(int); i++) 
+  {
     cout &lt;&lt; &quot;after pass_array: &quot; &lt;&lt; arr[i] &lt;&lt; endl;
   }
 }
@@ -858,36 +861,41 @@ void shared_ptr_mutation()
   cout &lt;&lt; &quot;shared_ptr (after +=1): *p = &quot; &lt;&lt; *p &lt;&lt; endl;
 }
 
-class Example {
+class Example 
+{
 public:
     void sayHello() { cout &lt;&lt; &quot;Hello, world!\n&quot;; }
 };
 
-void misuseSharedPtr() {
-    Example example; // example 是 stack 上的对象，不是指针
-    // std::shared_ptr&lt;Example&gt; ptr(&amp;example); // 错误用法！
-    // shared_ptr&lt;Example&gt; ptr(&amp;example, [](Example*){});  // OK
+void misuseSharedPtr() 
+{
+  Example example; // example 是 stack 上的对象，不是指针
+  // std::shared_ptr&lt;Example&gt; ptr(&amp;example); // 错误用法！
+  // shared_ptr&lt;Example&gt; ptr(&amp;example, [](Example*){});  // OK
 
-    // make_shared&lt;Example&gt;(example) 在 heap 上复制了一份 example 的数据，所以看起来没问题
-    // 但是一般也不要这么写
-    shared_ptr&lt;Example&gt; ptr = make_shared&lt;Example&gt;(example);  // seems OK, used copy constructor?
-    ptr-&gt;sayHello();
+  // make_shared&lt;Example&gt;(example) 在 heap 上复制了一份 example 的数据，所以看起来没问题
+  // 但是一般也不要这么写
+  shared_ptr&lt;Example&gt; ptr = make_shared&lt;Example&gt;(example);  // seems OK, used copy constructor?
+  ptr-&gt;sayHello();
 }
 
-class Example2 {
+class Example2 
+{
 public:
-    shared_ptr&lt;int&gt; data;
+  shared_ptr&lt;int&gt; data;
 
-    Example2(shared_ptr&lt;int&gt; data) : data(data) {
-        cout &lt;&lt; &quot;Example2 created with value: &quot; &lt;&lt; *data &lt;&lt; endl;
-    }
+  Example2(shared_ptr&lt;int&gt; data) : data(data) 
+  {
+      cout &lt;&lt; &quot;Example2 created with value: &quot; &lt;&lt; *data &lt;&lt; endl;
+  }
 
-    // 使用默认的拷贝构造函数
-    Example2(const Example2&amp; other) = default;
+  // 使用默认的拷贝构造函数
+  Example2(const Example2&amp; other) = default;
 
-    ~Example2() {
-        cout &lt;&lt; &quot;Example2 destroyed, value was: &quot; &lt;&lt; *data &lt;&lt; endl;
-    }
+  ~Example2() 
+  {
+      cout &lt;&lt; &quot;Example2 destroyed, value was: &quot; &lt;&lt; *data &lt;&lt; endl;
+  }
 };
 
 void shared_ptr_test2()
@@ -1072,7 +1080,7 @@ void unique_container_test()
   cout &lt;&lt; &quot;---------------- unqiue_container_test ----------------&quot; &lt;&lt; endl;
 
   unique_ptr&lt;int&gt; int_unique = make_unique&lt;int&gt;(10);
-  int *int_raw = int_unique.get();
+  int* int_raw = int_unique.get();
 
   unique_ptr&lt;IntContainer&gt; int_container_unique = make_unique&lt;IntContainer&gt;(int_raw);
 //  unique_ptr&lt;IntContainer&gt; int_container_unique2 = std::move(int_container_unique);
@@ -1085,7 +1093,8 @@ void unique_container_test()
   cout &lt;&lt; &quot;int_raw points to = &quot; &lt;&lt; int_raw &lt;&lt; endl;
   cout &lt;&lt; &quot;int_container_unique has been moved = &quot; &lt;&lt; (int_container_unique ? &quot;No, not null&quot; : &quot;Yes, nullptr&quot;) &lt;&lt; endl;
 
-  if (unique_container &amp;&amp; unique_container-&gt;ic) {
+  if (unique_container &amp;&amp; unique_container-&gt;ic) 
+  {
     cout &lt;&lt; &quot;unique_container-&gt;ic-&gt;x points to = &quot; &lt;&lt; unique_container-&gt;ic-&gt;x &lt;&lt; endl;
     cout &lt;&lt; &quot;*unique_container-&gt;ic-&gt;x = &quot; &lt;&lt; *unique_container-&gt;ic-&gt;x &lt;&lt; endl;
   }

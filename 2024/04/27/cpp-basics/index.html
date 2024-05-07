@@ -231,6 +231,17 @@ void basic_test()
   {
     string name;
     int age;
+
+    // 如果 struct 定义函数的话，这个函数是单独存放的
+    // 不算 struct 里的 field
+    // 比如你这里定义了一个 printUser() 函数，然后 unique_ptr&lt;User&gt; u1
+    // 然后 move 它：unique_ptr&lt;User&gt; u2 move(u1)
+    // 按理说此时 u1 被清零了（地址为 0），但 u1.printUser() 仍然能调用
+    // 除了 struct 外 class 的行为也是如此
+    // 思考：struct 和 class 有什么区别？哪些情况下时候分别用哪个？
+    // class 中，默认的成员访问级别是 private，而在 struct 中，默认的成员访问级别是 public；
+    // class 常用于定义复杂行为和数据封装的对象，如包含多种类方法；而 struct 则用于轻量级的数据结构，如坐标；
+
   }; // C++ 这里要加一个分号
 
   // User u1 = {&quot;John&quot;, 25};
@@ -445,7 +456,7 @@ class Animal
   // 强制继承的子类定义 speak 方法
   // C++ 中得写成这中奇怪的样子
   // 如果不加 virtual ，那子类就无法 override 这个 speak 方法了
-  // 如果不写 = 0 ，就无法强制子类定义 speak
+  // 如果不写 = 0 ，就无法强制子类定义 speak 函数
   virtual void speak() = 0;  
 };
 
@@ -536,8 +547,14 @@ void inheritance_test()
   a1-&gt;speak();
 }
 
-template &lt;typename T&gt;
-class Auto_ptr
+// ###########################################################
+//                        模板（Template）
+// ###########################################################
+
+// template 模板类似 Java 的泛型，使得同一段代码可以适应不同的数据类型，从而增加代码的复用性和灵活性
+
+template &lt;typename T&gt;   // T 是类型参数
+class Auto_ptr         // 这里用 template 功能创建智能指针 Auto_ptr 实现在生命周期结束后自动释放
 {
   T* m_ptr;
 public:
@@ -636,8 +653,12 @@ void pointer_of_pointer_test()
 
 
 // ###########################################################
-//                        Unique Pointer
+//                  智能指针之 Unique Pointer
 // ###########################################################
+
+// 智能指针的“智能”体现在于它们在生命周期结束时自动释放资源，避免手动管理内存带来的问题，提高代码的安全性和可靠性
+// 普通指针需要手动释放内存 delete rawPtr; 而智能指针会在不再需要使用时自动释放分配的内存，从而避免了内存泄漏的风险
+// 智能指针还会在底层实现一些机制，如引用计数或所有权管理，以确保内存安全性，避免悬垂指针或重复释放内存等问题
 
 int* pass_pointer(int* p)
 {
@@ -667,7 +688,8 @@ unique_ptr&lt;IntOwner&gt; create_int_owner(unique_ptr&lt;int&gt; p)
 {
   // 这一行代码创建了一个 unique_ptr 智能指针对象 owner
   // &lt;IntOwner&gt; 表示 owner 指针所指向的数据类型是 IntOwner
-  // owner(new IntOwner()) 是将其初始化为指向 heap 上 new IntOwner() 实例的地址
+  // new IntOwner() 作为参数传入构造类型为 unique_ptr&lt;IntOwner&gt; 的指针
+  // 所以 owner(new IntOwner()) 是将其初始化为指向 heap 上 new IntOwner() 实例的地址
   // 下文的 shared_ptr&lt;int&gt; p4(p3); 也用到类似语法
   unique_ptr&lt;IntOwner&gt; owner(new IntOwner());
   owner-&gt;p = std::move(p);
@@ -735,7 +757,7 @@ void unique_ptr_test()
 }
 
 // ###########################################################
-//                        Shared Pointer
+//                   智能指针之 Shared Pointer
 // ###########################################################
 
 void shared_ptr_test()
@@ -825,6 +847,7 @@ void shared_ptr_test()
 void shared_ptr_bug()
 {
   // 和上文的 p4w 一样，不应该把普通指针转为 shared pointer
+  // C++ 里，永远不应该从一个普通的 pointer 造出一个 shared pointer
   int* x = new int(10);
   shared_ptr&lt;int&gt; p1(x);    // 能编译通过，但埋下隐患
   // shared_ptr&lt;int&gt; p2(x);  // can&#39;t have this
@@ -863,7 +886,7 @@ void shared_ptr_mutation()
 
 class Example 
 {
-public:
+  public:
     void sayHello() { cout &lt;&lt; &quot;Hello, world!\n&quot;; }
 };
 
@@ -886,15 +909,19 @@ public:
 
   Example2(shared_ptr&lt;int&gt; data) : data(data) 
   {
-      cout &lt;&lt; &quot;Example2 created with value: &quot; &lt;&lt; *data &lt;&lt; endl;
+    cout &lt;&lt; &quot;Example2 created with value: &quot; &lt;&lt; *data &lt;&lt; endl;
   }
 
-  // 使用默认的拷贝构造函数
+  // 使用默认的拷贝构造函数：
+  // 这个构造函数的作用是用于创建一个新的 Example2 对象
+  // 其成员变量 data 的值与另一个 Example2 对象相同
+  // 使用 = default 来声明拷贝构造函数，表示使用编译器生成的默认实现
+  // 这种语法通常用于避免手动实现拷贝构造函数，特别是当类中没有需要手动管理的资源时。
   Example2(const Example2&amp; other) = default;
 
   ~Example2() 
   {
-      cout &lt;&lt; &quot;Example2 destroyed, value was: &quot; &lt;&lt; *data &lt;&lt; endl;
+    cout &lt;&lt; &quot;Example2 destroyed, value was: &quot; &lt;&lt; *data &lt;&lt; endl;
   }
 };
 
@@ -913,6 +940,10 @@ void shared_ptr_test2()
   cout &lt;&lt; &quot;b&#39;s value: &quot; &lt;&lt; *b.data &lt;&lt; endl; // 输出 100
   cout &lt;&lt; &quot;data&#39;s value: &quot; &lt;&lt; *data &lt;&lt; endl; // 输出 100
 }
+
+// ###########################################################
+//                        其他代码行为测试
+// ###########################################################
 
 void ref_of_ref()
 {

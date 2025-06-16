@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>使用 Highlight.js 优化代码块高亮效果</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="使用 Highlight.js 优化代码块高亮效果">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        使用 Highlight.js 优化代码块高亮效果
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2019-03-25T13:20:50.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2019-03-25
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Hexo/">Hexo</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>对博客的代码块（code block）部分的显示一直不是很满意，拖延到今天算起来一共是两年多了。这次总算下定决心搞一把。虽然当前是满意了，不过过程遇到各种坑让我觉得有必要写一篇博客来帮助未来的自己和其他有缘的过客。</p>
+<hr>
+<h3 id="为什么是-Highlight-js"><a href="#为什么是-Highlight-js" class="headerlink" title="为什么是 Highlight.js"></a>为什么是 Highlight.js</h3><p>Hexo 本身就自带高亮功能，只不过不完美，比如 <a href="https://en.wikipedia.org/wiki/Scheme_(programming_language" target="_blank" rel="noopener">Scheme</a> 这个我常用的语言它就没有高亮效果。话虽如此，这个自带的高亮功能在我所用的<a href="https://github.com/chpwang/hexo-theme-pln" target="_blank" rel="noopener">主题</a>里也比市场上的其他插件（例如 <a href="https://github.com/ele828/hexo-prism-plugin" target="_blank" rel="noopener">Hexo-Prism-Plugin</a> ，<a href="https://github.com/Jamling/hexo-filter-highlight" target="_blank" rel="noopener">hexo-filter-highlight</a> 和 <a href="https://github.com/google/code-prettify" target="_blank" rel="noopener">Prettify</a> 这三个坑货）要好用得多。这里说的好用，主要体现在最终渲染出来的排版效果上的美观、设置上的便捷，且不会引入过多 Markdown 和 Latex 之间语法的冲突。</p>
+<p>经过一番调研，最终我放弃安装 Plugin（插件）版本的 Highlight.js（ <a href="https://github.com/Jamling/hexo-filter-highlight" target="_blank" rel="noopener">hexo-filter-highlight</a> 就是一个基于 Highlight.js 开发的 Plugin 。这些 Plugin 虽然安装设置方便，其模块化属性也方便管理，但如果效果不好，不如不用），直接选择使用原版的 <a href="https://highlightjs.org" target="_blank" rel="noopener">Highlight.js</a> 。你可以在<a href="https://highlightjs.org/static/demo/" target="_blank" rel="noopener">官方 Demo </a>页面查看它各个语言在各个风格（Style）下的显示效果。</p>
+<hr>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>由于 <a href="http://cps.ninja">cps.ninja</a> 使用的是<a href="https://github.com/chpwang/hexo-theme-pln" target="_blank" rel="noopener"> pln 主题</a>，所以下面的步骤将以该主题为例来设置 <strong>Highlight.js</strong> 。</p>
+<h4 id="步骤一："><a href="#步骤一：" class="headerlink" title="步骤一："></a>步骤一：</h4><p>前往 Highlight.js 的<a href="https://highlightjs.org/download/" target="_blank" rel="noopener">官方下载页面</a>，在 <strong>Custom package</strong> 的部分勾选你希望获得高亮支持的语言（想一步到位就全选），勾选完毕后点击 Download 按钮下载，得到 <code>highlight.zip</code> 压缩包；</p>
+<h4 id="步骤二："><a href="#步骤二：" class="headerlink" title="步骤二："></a>步骤二：</h4><p>解压刚刚的 <code>highlight.zip</code> 压缩包，得到 <code>highlight.pack.js</code> 文件和 <code>styles</code>文件夹（该文件夹中包含了各种<a href="https://highlightjs.org/static/demo/" target="_blank" rel="noopener">显示风格</a>的 CSS 文件）。接着，将 <code>highlight.pack.js</code> 文件移动到 <code>themes/pln/source/js/</code> 目录下，而 <code>styles</code> 文件夹（包括里面的所有 CSS 文件）则移动到 <code>themes/pln/source/css/highlight</code> 目录下；</p>
+<h4 id="步骤三："><a href="#步骤三：" class="headerlink" title="步骤三："></a>步骤三：</h4><p>修改根目录下 <code>_config.yml</code> 文件中 highlight 部分的设置（主要目的是关闭它，其他设置只是顺便说明一下）：</p>
+<pre><code class="lang-yml">highlight:
+  enable: false          ## 关闭 hexo 自带的 highlight 
+  line_number: false
+  # auto_detect: false   ## 这里要注释掉是因为 hexo 自带的 highlight 的 auto_detect 这个属性有 bug ，且之后要被官方抛弃  
+  tab_replace: 2
+</code></pre>
+<h4 id="步骤四："><a href="#步骤四：" class="headerlink" title="步骤四："></a>步骤四：</h4><p>修改 <code>themes/pln/layout/_partial/after_footer.ejs</code> ，增加了以下两行（目的是调用第二步里我们下载的 <code>highlight.pack.js</code> 文件）：</p>
+<pre><code class="lang-html">&lt;script src=&quot;/js/highlight.pack.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt;
+</code></pre>
+<p>修改 <code>themes/pln/layout/_partial/head.ejs</code> ，增加了以下一行（通过调用指定的 CSS 文件选择相应的高亮风格，下面的例子里选择的风格是 <a href="https://highlightjs.org/static/demo/" target="_blank" rel="noopener">Vs 2015</a>）：</p>
+<pre><code class="lang-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/highlight/styles/vs2015.css&quot;&gt;
+</code></pre>
+<hr>
+<h3 id="其他微调"><a href="#其他微调" class="headerlink" title="其他微调"></a>其他微调</h3><ul>
+<li><p>修改文件 <code>themes/pln/source/css/main.scss</code>，在末尾（为了覆盖前面的设置，所以加在末尾）添加 CSS 设置，<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/white-space" target="_blank" rel="noopener"><code>white-space</code></a> 和 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/word-wrap" target="_blank" rel="noopener"><code>word-wrap</code></a> 属性会分别让 Chrome 和 Safari 浏览器支持代码块（code block）左右滑动显示超出内容（overflow）：</p>
+<pre><code class="lang-css">pre code {
+  white-space: pre;  /* this code line alone can make code block to slide in Chrome */
+  word-wrap: normal; /* add this line to make code block to slide in Safari */
+}
+</code></pre>
+</li>
+<li><p>修改 <code>themes/pln/source/css/highlight.scss</code> 文件里 <strong>.code-block</strong> 类的 <em>border-color</em> 属性为 <code>#2d2d2d</code> ，使得代码块的边框颜色与背景一致；</p>
+<pre><code class="lang-css">.code-block {
+  // ...
+  border-color: #2d2d2d;
+  // ... 
+}
+</code></pre>
+</li>
+</ul>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>完成上文提到的所有操作之后，使用下面代码让高亮设置生效：</p>
+<pre><code class="lang-bash">## 生成压缩版的 css（让 pln 主题的相关设置生效）
+$ pwd
+~/Documents/blog  ## 确认当前目录，因为下面 sass 命令要输入相关路径
+$ sass --style compressed themes/pln/source/css/main.scss:themes/pln/source/css/m.min.css  
+
+## 清空缓存，并重新生成文件（让 _config.yml 里的设置生效）
+$ hexo clean
+$ hexo g
+</code></pre>
+<h4 id="一些心得："><a href="#一些心得：" class="headerlink" title="一些心得："></a>一些心得：</h4><ul>
+<li><p>写文章的过程中，有时候会遇到 Markdown 和 Tex 语法冲突或者奇怪显示的情况，不要慌，只需要调整一下写法就能实现想要的效果。实在不行，还可以在 Chrome 的开发者模式下调节 html ，设定出想要的效果后直接复制 html 代码，然后粘贴在 .md 文件里；</p>
+</li>
+<li><p>按照以上方式挂载 Highlight.js 之后（此时，Tex 语法也已通过<a href="/2019/03/16/hexo-with-latex/">这篇介绍</a>配置支持）， Markdown 语法中在使用 <code>``` </code> 标记代码块（code block）时，其间不能有<strong>连续两个</strong>空白的行，只能有<strong>一个</strong>；</p>
+</li>
+<li><p>不能紧贴着 Markdown 的 list 标记内容写，之间要有一行空格。之前的「紧贴」是为了实现把代码块（code block）归属于某 list 的 bullet 的那种缩进效果。现在请直接使用 tab 来缩进；</p>
+</li>
+</ul>
+<hr>
+<h3 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h3><p>添加 Hightlight.js 参考了：</p>
+<ul>
+<li><a href="https://xiaobailong24.me/2017/05/26/Blog-Code-Highlightjs/" target="_blank" rel="noopener">使用 Highlightjs 为 hexo-theme-indigo 主题配置代码高亮</a></li>
+<li><a href="https://www.ieclipse.cn/2016/08/10/Web/hexo-filter-highlight/" target="_blank" rel="noopener">Highlight.js 添加代码行号</a></li>
+</ul>
+<p>修复代码显示 Bug 的过程参考了：</p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Selectors" target="_blank" rel="noopener">CSS Selectors - CSS：叠层样式表 | MDN</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/white-space" target="_blank" rel="noopener">white-space - CSS：叠层样式表 | MDN</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/word-wrap" target="_blank" rel="noopener">word-wrap - CSS：叠层样式表 | MDN</a></li>
+<li><a href="https://stackoverflow.com/questions/44754987/getting-osx-safari-to-honor-css-white-space-pre" target="_blank" rel="noopener">Getting OSX Safari to honor css “white-space: pre”</a></li>
+<li><a href="https://www.w3schools.com/cssref/css3_pr_word-wrap.asp" target="_blank" rel="noopener">CSS word-wrap property - W3Schools</a></li>
+</ul>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

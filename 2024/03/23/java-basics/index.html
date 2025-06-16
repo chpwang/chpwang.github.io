@@ -1,0 +1,373 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>上手 Java</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="上手 Java">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        上手 Java
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2024-03-23T03:07:28.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2024-03-23
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Programming-Language/">Programming Language</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p><a href="https://www.java.com" target="_blank" rel="noopener">Java</a> 是一门非常成熟的工业级静态类型语言。对于新手来说，它是<strong>体验</strong>了解「静态类型系统」的绝佳语言之一。</p>
+<p>所谓<a href="https://en.wikipedia.org/wiki/Type_system" target="_blank" rel="noopener"><strong>静态类型</strong></a>，就是对程序中各数据的类型进行<strong>严格规范</strong>的一种语言特性。比如在 <strong>Java</strong> 中，<strong>所有</strong>变量在定义的时候都需要声明标记它的数据类型。这会让代码看起来有点“啰嗦”，不够简洁。但好处是，代码可以无需运行就能通过类型不匹配提前发现问题，保证代码可靠性（静态类型检查）。此外，标记类型也让编译后的程序不用每次都询问一下数据的类型而减小了计算开销，提高程序性能。比如 <strong>Java</strong> 比非编译执行的语言 <strong>Python</strong> 就快 30 多倍。</p>
+<p>静态类型的语言也使得 IDE（集成开发环境，比如下文介绍的 IntelliJ IDEA）能更好地支持它，比如可以实现精准的<strong>语义跳转</strong>和<strong>重构</strong>（比如可靠的变量换名）等操作。</p>
+<p>通过 <strong>Java</strong> 还可以体验面向对象（<a href="https://en.wikipedia.org/wiki/Object-oriented_programming" target="_blank" rel="noopener">OOP</a>）的设计精髓：面向对象主要不在于节省代码、重用代码——这些其他非面向对象语言也能做到——而在于<strong>表达各种类型之间的关系</strong>（其实就是数学上集合的包含关系）。</p>
+<blockquote><p>它本来这种类型它不是这种集合的包含关系，他还去继承一下。就因为他能省…少打一点代码。结果后来就越弄越复杂。看不懂了。</p>
+<footer><strong>Ian</strong></footer></blockquote>
+<p>还有就是面向对象的设计把各种函数以它的方式整理起来（使用类似 <code>object.method</code> 这样的方式访问），让函数更有“组织性”：</p>
+<ul>
+<li>都是访问 <code>e1</code> 的内容，对比 <code>binopE1(exp)</code> 和 <code>binop.e1</code> 这两种表达方式，后者阅读上会更加直观一点</li>
+</ul>
+<hr>
+<h3 id="Java-编程环境"><a href="#Java-编程环境" class="headerlink" title="Java 编程环境"></a>Java 编程环境</h3><p><a href="https://www.java.com" target="_blank" rel="noopener">Java</a> 是一个需要<strong>编译</strong>才能运行的语言，不像其他一些语言那样 <code>.py</code> <code>.js</code> 等文件写好了直接就能运行。在学习和开发的时候，最好能打开一个命令行窗口（Ternimal），进行相关操作才比较方便。</p>
+<ul>
+<li><p>安装 <strong>JDK</strong><br><a href="https://www.oracle.com/hk/java/technologies/downloads/#jdk22-mac" target="_blank" rel="noopener">JDK</a>（Java Development Kit）是用于开发 Java 应用程序的软件包，提供了运行 Java 代码所需的工具和库，比如编译器（javac）。通过 <a href="https://formulae.brew.sh/formula/openjdk" target="_blank" rel="noopener">Hombrew</a> 来安装。完成后就可以在终端命令行里使用 <code>java</code> 和 <code>javac</code> 了：</p>
+<pre><code class="lang-bash">## 东西比较多，注意保持网络通畅
+$ brew install openjdk
+
+## brew install java
+## 安装的是由 Apple 或者 Apple 授权的 Java 版本，通常是 Oracle JDK
+
+## brew install openjdk 
+## 安装的是由 OpenJDK 项目提供的开源 Java 版本，与 Oracle JDK 功能上是兼容的
+## 不同的是 OpenJDK 是由社区维护的
+
+## 安装完成之后，应该要能用这个命令查看 Java 的版本
+$ java --version
+openjdk 21.0.2 2024-01-16
+OpenJDK Runtime Environment Homebrew (build 21.0.2)
+OpenJDK 64-Bit Server VM Homebrew (build 21.0.2, mixed mode, sharing)
+</code></pre>
+<p><code>Tips：新手推荐在下文 IntelliJ IDEA 的 onboarding tour 教学过程中安装 JDK，省去各种复杂的配置</code></p>
+</li>
+<li><p>安装 <strong>IntelliJ IDEA</strong><br><a href="https://www.jetbrains.com/help/idea/creating-and-running-your-first-java-application.html" target="_blank" rel="noopener">IntelliJ IDEA</a> 是 <a href="https://www.jetbrains.com" target="_blank" rel="noopener">JetBrains</a> 公司推出的集成开发环境（IDE）。对 <strong>Java</strong> 编程来说，使用上比 <a href="https://code.visualstudio.com" target="_blank" rel="noopener">VS Code</a> 更加方便一些。对于初学者，下载安装 <strong>IntelliJ IDEA Community Edition</strong> 这个<strong>免费的</strong>版本就够用了。</p>
+<p><img src="IntelliJ.png" alt="Welcome to IntelliJ IDEA" style="width: 800px; height: auto;"></p>
+<p>可以看到，<strong>IntelliJ IDEA</strong> 有极其友好的 onboarding 入门教程。点击 <strong>Start Tour in Java</strong> 试试吧。<br>这个 <strong>Quick onbording tour</strong> 的过程还可以根据提示，非常方便地安装 <strong>JDK</strong> 。</p>
+</li>
+</ul>
+<hr>
+<h3 id="开始编程"><a href="#开始编程" class="headerlink" title="开始编程"></a>开始编程</h3><p>先来简单地走一遍完整流程，了解一下整个 Java 编程作业的大体过程。</p>
+<ul>
+<li><p><strong>新建 <code>.java</code> 文件：</strong></p>
+<pre><code class="lang-bash">  ## 打开 Terminal，进入到要进行编程的目录
+  $ cd ~/Documents/prog
+
+  ## 创建新的工作目录
+  $ mkdir lesson9
+  $ cd lesson9/
+
+  ## 在这个目录下建立一个 .java 文件
+  ## 注意这里文件名第一个字母要大写，因为后续文件里要写一个类 class Lesson9
+  $ touch Lesson9.java
+</code></pre>
+<p>  对代码的分散管理是 Java 的特点。这也导致了 Java 编程的过程中会产生很多文件。所以通常会建立一个工作目录来进行作业。这里 <code>.java</code> 文件的名字是有命名规则要求的，这是 Java 语言的一个规范：</p>
+<ol>
+<li>若文件中有公共类 <code>public class</code> ，则文件名<strong>必须</strong>和该类的名字一样，一个文件<strong>只能有一个</strong>公共类；</li>
+<li>若无公共类，则文件名无要求，但最好用易理解可维护的名字，如此处用代表性类的名字 <code>Lesson9</code>；</li>
+</ol>
+</li>
+<li><p><strong>编辑上述文件写入 <code>Java</code> 代码：</strong></p>
+<pre><code class="lang-Java">  // Lesson9.java 
+  class Lesson9
+  {
+    public static void main(String[] args)
+    {
+      System.out.println(&quot;Magnifique！&quot;);
+    }
+  }
+</code></pre>
+<p>  <strong>Lesson9.java</strong> 文件里定义了一个类 <code>Lesson9</code> 。类里则定义了一个函数 <code>main</code> 。该函数接收一个参数 <code>args</code> 。其中 <code>String[]</code> 标记了参数 <code>args</code> 的类型。它是一个存储字符串对象的<strong>数组类型</strong>。<code>void</code> 代表这个函数没有返回值，也可以认为该函数的返回类型是 <strong>void</strong> 。<strong>main</strong> 函数里是个打印语句，打印出字符串 <code>&quot;Magnifique&quot;</code>。</p>
+<p>  <code>public</code> 表示 <strong>main</strong> 函数在 <strong>Lesson9</strong> 这个类的外面也可以被访问和调用。与之相对的是 <code>private</code> ，表示只能在类内部才能访问调用这个函数。如果两者都没有，那这个函数就有<strong>另外的作用范围</strong>。</p>
+<p>  <code>static</code> 表示 <strong>main</strong> 是一个<strong>普通的函数</strong>（function），而不是类中的<strong>方法</strong>（method），它的调用方式是 <code>main(args)</code> 。如果没有 <code>static</code> 标记，它的调用方式就是 <code>(New Lesson9()).main(args)</code> 了。<br>  Java 默认所有的函数都是方法（method）。方法存在一个内部可用的参数是 <code>this</code> ，用 <code>static</code> 标记的普通函数则没有 <code>this</code> 这个参数。</p>
+<p>  <code>public</code> 和 <code>static</code> 的位置可以互换。</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>编译和运行：</strong><br>  <code>.java</code> 文件里的代码写好之后，需要先用 <code>javac</code> 命令将其编译成 <code>.class</code> 文件（字节码 bytecode）。然后再用 <code>java</code> 命令来运行编译好的 <code>.class</code> 文件。使用 <code>java</code> 命令运行的时候，只需写文件名就行，不用写 <strong>.class</strong> 这个后缀。<br>  比如下面的例子里，<code>java Lesson9</code> 就能运行。</p>
+<pre><code class="lang-bash">  ## 切换回 Terminal
+  $ pwd
+  ~/Documents/prog/lesson9
+
+  ## 可以看到，当前目录下只有一个上面编辑好的文件
+  $ ls
+  Lesson9.java
+
+  ## 编译 .java 文件 - javac 这个命令代表 java compiler
+  $ javac Lesson9.java
+
+  ## 可以看到，当前目录下多了个 .class 文件
+  $ ls
+  Lesson9.class     Lesson9.java
+
+  ## 运行 .class 文件，打印出字符串 &quot;Magnifique！&quot;
+  $ java Lesson9
+  Magnifique！
+</code></pre>
+<p>为什么要把编译和运行分开，而不是像解释器那样直接运行代码？因为直接运行会有很多重复的操作（主要是反复询问程序的结构和类型，比如问这是一个 if 吗？是的话就要计算 condition 表达式的值。编译之后就不用问，而是到这步直接计算 condition 的值）。如果先编译再运行，它会去掉很多重复的操作。这样代码就会快很多。这就是为啥一般这种工业化的语言它都会稍微编译一下。</p>
+</li>
+</ul>
+<hr>
+<h3 id="更顺手的-IntelliJ"><a href="#更顺手的-IntelliJ" class="headerlink" title="更顺手的 IntelliJ"></a>更顺手的 IntelliJ</h3><p>当需要频繁使用 Java 写些严肃点的东西时，上面的方式就不那么好用了。使用 <a href="https://www.jetbrains.com/idea/download/" target="_blank" rel="noopener">IntelliJ IDEA</a> 编程会更加高效。跟着 IntelliJ 的 onboarding 入门教程走一遍就能很快上手，这里主要记录一下常用快捷键和技巧：</p>
+<p><strong>快捷键：</strong></p>
+<ul>
+<li><strong>编译并运行</strong>代码：<code>control + R</code>（ MacOS 系统）；</li>
+<li>快速<strong>排版</strong>（格式化）所有代码：<code>cmd + option + L</code>（ MacOS 系统）；</li>
+<li><strong>注释/取消注释</strong>代码（选中后按）：<code>cmd + /</code>（ MacOS 系统）；</li>
+<li>显示光标位置代码可能的改善操作（常用于处理 warning）：<code>option + Return</code>（ MacOS 系统）；</li>
+<li>搜索（若有选中的内容，则它会自动进入搜索框）：连续按 <strong>2</strong> 次 <code>Shift</code> 键；</li>
+</ul>
+<p><strong>技巧：</strong></p>
+<ul>
+<li>设置缩进空格数：<code>Preferences</code> -&gt; <code>Editor</code> -&gt; <code>Code Style</code> -&gt; <code>Java</code> -&gt; <code>Tabs and Indents</code> -&gt; 设置 <code>Indents</code> 空格数；</li>
+<li>设置 <strong>if-else</strong> 另起一行：<code>Preferences</code> -&gt; <code>Editor</code> -&gt; <code>Code Style</code> -&gt; <code>Java</code> -&gt; <code>Wrapping and Braces</code> -&gt; <code>&#39;if()&#39; statement</code> -&gt; 勾选 <code>&#39;else&#39; on new line</code>；</li>
+<li>关闭类型、变量名等提示：<code>Preferences</code> -&gt; <code>Editor</code> -&gt; <code>Inlay Hints</code> -&gt; 取消勾选 <code>Code vision</code>、<code>Parameter names</code> 和 <code>Types</code>；</li>
+<li><strong>Run with Coverage</strong> 功能可以检查测试代码的覆盖率</li>
+</ul>
+<hr>
+<h3 id="Java-语言基本知识"><a href="#Java-语言基本知识" class="headerlink" title="Java 语言基本知识"></a>Java 语言基本知识</h3><ul>
+<li><p>Java 的文件里要有一个 main 函数</p>
+</li>
+<li><p>语法上，若你的 if 里只有一行，可以不打花括号，但这不是一个好的做法。好一点的编程规则都要求打上花括号，哪怕只有一行。</p>
+</li>
+<li><p>Java 的类要用关键词 <code>new</code> ，这是一个好设计。比如 <code>new Dog()</code> 如果写成 <code>Dog()</code> ，就和普通函数混淆了。加一个 <code>new</code> 就能知道不是普通函数，而是一个类，或者某种构造函数。</p>
+</li>
+<li><p>如果你的值，它的实际的类型是这个变量标记类型的子类型，你就可以用这个父类的变量指向一个子类的对象：<code>Animal dog = new Dog();</code></p>
+</li>
+<li><p>为了通用，变量的类型一般都尽可能标记成上层的父类型（写高一点），这样后期更改实现就简单很多</p>
+</li>
+<li><p>在 Java 中，类的名称通常遵循一种命名约定，即类名的首字母应该大写。这是一种广泛接受的编程规范，被称为“大驼峰命名法”（PascalCase）。按照这个规范，类名的每个单词的首字母都要大写，而单词之间不使用下划线或其他分隔符。</p>
+</li>
+<li><p>虽然在 Java 中，类名的首字母一般应该大写，但从语法上讲，类名的首字母也可以小写。但是，强烈建议遵循命名约定，使用大写字母开头的类名，以便与变量名（小驼峰命名法）等其他命名约定区分开来，并且符合 Java 社区的编程习惯和规范。这样可以增加代码的可读性和可维护性，使代码更符合行业标准。</p>
+</li>
+<li><p>Java 里面，所有不是整数之类那种特别小的类型的，凡是你用 <code>new</code> 创建的那些对象——虽然你没有写那个指针的符号——它全都是指针。Java 里面几乎全都是 <strong><a href="https://www.ibm.com/docs/en/i/7.4?topic=calls-pass-by-reference" target="_blank" rel="noopener">Pass by Reference</a></strong> ，除了 <code>int</code> 之类的它拷贝了一下。</p>
+</li>
+</ul>
+<hr>
+<h3 id="Java-基本数据类型"><a href="#Java-基本数据类型" class="headerlink" title="Java 基本数据类型"></a>Java 基本数据类型</h3><ul>
+<li><p>整数 - <strong>int</strong></p>
+<pre><code class="lang-java">// TO DO
+</code></pre>
+</li>
+<li><p>浮点数 - <strong>float</strong><br>整数和浮点数在电脑里是有差别的，整数和浮点数混合计算会被转化为浮点数，结果也是浮点数</p>
+<pre><code class="lang-java">// TO DO
+</code></pre>
+</li>
+<li><p>字符串 - <strong>string</strong><br>可以用单引号 <code>&#39;hello&#39;</code> ，也可以用双引号 <code>&quot;hello&quot;</code><br>一个常用的字符串方法：<a href="https://docs.python.org/3/library/stdtypes.html#str.split" target="_blank" rel="noopener"><code>str.split()</code></a></p>
+<pre><code class="lang-java">// TO DO
+</code></pre>
+</li>
+<li><p>布尔类型 - <strong>bool</strong></p>
+<pre><code class="lang-java">// TO DO
+</code></pre>
+</li>
+</ul>
+<hr>
+<h3 id="基本的数据结构"><a href="#基本的数据结构" class="headerlink" title="基本的数据结构"></a>基本的数据结构</h3><ul>
+<li><p>列表 - <strong>List</strong></p>
+<pre><code class="lang-java">// TO DO
+</code></pre>
+</li>
+</ul>
+<hr>
+<h3 id="变量定义"><a href="#变量定义" class="headerlink" title="变量定义"></a>变量定义</h3><pre><code class="lang-java">// TO DO
+</code></pre>
+<hr>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><pre><code class="lang-java">// TO DO
+</code></pre>
+<hr>
+<h3 id="条件分支-if-语句"><a href="#条件分支-if-语句" class="headerlink" title="条件分支 - if 语句"></a>条件分支 - if 语句</h3><pre><code class="lang-java">static int fib(int n)
+{
+  if (n == 0)
+  {
+    return 0;
+  }
+  else if (n == 1)
+  {
+    return 1;
+  }
+  else
+  {
+    return fib(n - 1) + fib(n - 2);
+  }
+}
+</code></pre>
+<hr>
+<h3 id="异常-Exception"><a href="#异常-Exception" class="headerlink" title="异常 - Exception"></a>异常 - Exception</h3><pre><code class="lang-java">// // 运行时的 Exception（RuntimeException）表示类型系统不会检查它
+public T get(int index)  // 这行没写 throw IndexOutOfBoundsException ，因为这是运行时的 Exception
+{
+  if (index &gt;= size)
+  {
+    throw new IndexOutOfBoundsException(&quot;Input index: &quot; + index + &quot; is out of bound. &quot;);
+  }
+  else
+  {
+    return this.data[index];
+  }
+}
+</code></pre>
+<p>RuntimeException 就是你无能为力的一些事情，所以不需要去 try-catch 它。</p>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

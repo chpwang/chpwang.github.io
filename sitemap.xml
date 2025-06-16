@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://cps.ninja/2016/10/08/how-to-blog-with-hexo/</loc>
+    
+    <lastmod>2025-06-16T00:49:30.900Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://cps.ninja/2017/03/14/setup-new-mac/</loc>
+    
+    <lastmod>2025-06-16T00:33:25.631Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://cps.ninja/2018/01/02/Git-Basics/</loc>
     
     <lastmod>2025-06-15T23:44:54.926Z</lastmod>
@@ -68,20 +82,6 @@
     <loc>https://cps.ninja/2022/03/24/scheme-basics-and-IDE/</loc>
     
     <lastmod>2024-03-24T07:47:48.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://cps.ninja/2017/03/14/setup-new-mac/</loc>
-    
-    <lastmod>2024-03-23T08:37:07.307Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://cps.ninja/2016/10/08/how-to-blog-with-hexo/</loc>
-    
-    <lastmod>2024-03-23T08:32:08.000Z</lastmod>
     
   </url>
   
@@ -184,7 +184,7 @@
   </url>
   
   <url>
-    <loc>https://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
+    <loc>https://cps.ninja/2020/04/14/ian-cs-basics-assignments/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     
@@ -198,14 +198,14 @@
   </url>
   
   <url>
-    <loc>https://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
+    <loc>https://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://cps.ninja/2018/09/21/keras/</loc>
+    <loc>https://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     
@@ -219,7 +219,7 @@
   </url>
   
   <url>
-    <loc>https://cps.ninja/2020/04/14/ian-cs-basics-assignments/</loc>
+    <loc>https://cps.ninja/2018/09/21/keras/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     

@@ -88,7 +88,7 @@
 <pre><code class="lang-bash">$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
 </code></pre>
 <p>使用 <a href="http://brew.sh" target="_blank" rel="noopener">Hombrew</a> 安装 Node.js</p>
-<pre><code class="lang-bash">$ brew install node
+<pre><code class="lang-bash">## $ brew install node  # 新版 node 和 hexo 不再兼容，需通过 nvm 来安装老版本的 node
 </code></pre>
 <p>Node.js 安装后，会附带 npm（node package manager）工具，可用它来搜索、下载、管理 Node.js 套件。</p>
 <p>使用 <a href="http://brew.sh" target="_blank" rel="noopener">Hombrew</a> 安装 <a href="https://formulae.brew.sh/formula/node-sass" target="_blank" rel="noopener">node-sass</a></p>
@@ -114,7 +114,7 @@ $ brew install node-sass
 </li>
 <li><p>目前使用 <code>npm install xxx</code> 命令安装模块时，似乎不再需要 <code>--save</code> 参数了<a href="http://blog.csdn.net/aaa333qwe/article/details/78021704" target="_blank" rel="noopener">。</a></p>
 </li>
-<li><p>有些版本的 Node 有 Bug（比如 Node 14），和 hexo 不兼容：后续使用 <code>hexo d</code> 命令部署到 Github 的过程会报错。此时等不了更新修复可以先安装旧版（比如 <a href="https://formulae.brew.sh/formula/node@12#default" target="_blank" rel="noopener">Node 12</a> ）来确保 Hexo 能用。具体来说就是，先卸载<strong>当前</strong>版本的 node ，然后安装<strong>旧版本</strong>的 Node ：</p>
+<li><p>最新版本的 Node 有 Bug（Node 14 之后），和 hexo 不兼容：后续使用 <code>hexo d</code> 命令部署到 Github 的过程会报错。此时等不了更新修复可以先安装旧版（比如 <a href="https://formulae.brew.sh/formula/node@12#default" target="_blank" rel="noopener">Node 12</a> ）来确保 Hexo 能用。具体来说就是，先卸载<strong>当前</strong>版本的 node ，然后安装<strong>旧版本</strong>的 Node ：</p>
 <pre><code class="lang-bash"># Node 和 hexo 不兼容后的报错信息
 $ hexo d
 ...
@@ -278,7 +278,8 @@ $ hexo d -debug
 </code></pre>
 <p>部署完毕之后，打开浏览器输入网址 <a href="https://你的用户名.github.io" target="_blank" rel="noopener">https://你的用户名.github.io</a> 就能看到部署上去的博客网页了。</p>
 <p>如果想进阶使用 Hexo 的博客方案，请继续阅读<a href="/2016/10/08/sync-blog-between-multiple-Macs/">多台电脑间的 Hexo 博客同步</a></p>
-<p>PS:<br>有时部署会遇到卡住没反应的问题，当使用 <code>hexo d -debug</code> 命令后，发现日志循环输出 <code>0 files generated in 81 ms</code>， 这可能是开启了 Github 的二次验证（2FA）导致的。解决方案要不就是重新绑定 Github 上的 <strong>SSH Key</strong>，或者根据<a href="http://fezl.me/2017/05/20/GitHub二次验证带来的问题/" target="_blank" rel="noopener">这里</a>设置 Personal access tokens 后用 <strong>https</strong> 地址来部署</p>
+<hr>
+<h3 id="后续可能的问题"><a href="#后续可能的问题" class="headerlink" title="后续可能的问题:"></a>后续可能的问题:</h3><p>有时部署会遇到卡住没反应的问题，当使用 <code>hexo d -debug</code> 命令后，发现日志循环输出 <code>0 files generated in 81 ms</code>， 这可能是开启了 Github 的二次验证（2FA）导致的。解决方案要不就是重新绑定 Github 上的 <strong>SSH Key</strong>，或者根据<a href="http://fezl.me/2017/05/20/GitHub二次验证带来的问题/" target="_blank" rel="noopener">这里</a>设置 Personal access tokens 后用 <strong>https</strong> 地址来部署</p>
 <p>如果还没解决，可以参考以下案例：</p>
 <ul>
 <li><a href="https://github.com/hexojs/hexo/issues/3182" target="_blank" rel="noopener">hexo d 部署卡住</a></li>
@@ -286,12 +287,15 @@ $ hexo d -debug
 <li><a href="https://blog.csdn.net/jingbin_/article/details/80617210" target="_blank" rel="noopener">用 hexo d 命令部署的时候总是会卡住很久，查看日志发现信息一直在循环</a></li>
 <li><a href="https://github.com/hexojs/hexo/issues/1478" target="_blank" rel="noopener">hexo deploy 时不断 Error</a></li>
 </ul>
+<hr>
 <p>另一种常见的报错如下，这是网络连接问题导致的，需要换个网络环境。要注意各种终端（Terminal）的流量默认不走代理。要使用增强模式之类的设置。更多内容参考<a href="https://www.alankeene.com/2019/0702/Connection-reset-by-peer.html" target="_blank" rel="noopener">解决 hexo d 提示：ssh_exchange_identification：read：Connection reset by peer 的问题</a></p>
 <pre><code class="lang-bash">$ hexo d
 ......
 kex_exchange_identification: read: Connection reset by peer
 ......
 </code></pre>
+<hr>
+<p>第三种报错可能是许久不更新博客导致的。具体表现是，久不更新而再次 <code>hexo d</code> 部署推送更新，本来正常的博客页面会因此推送无法正常显示。<br>有可能会看到 <strong>Github</strong> 的报错：<code>There isn&#39;t a GitHub Pages site here.</code><br>此时，去到博客所在的 <strong>Repository</strong>（通常是<code>用户名.github.io</code>）页面，然后 <code>Settings</code> -&gt; <code>Pages</code> -&gt; <code>Custom domain</code> 重新设置一下自定义的网址。然后等个十几分钟的 <code>DNS check</code> 就好了。等待期间，博客页面可能会显示一片空白（前面的报错没有了，但还看不到任何网页内容）。<br>当然，你的自定义域名需要通过 Github 认证：<a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages" target="_blank" rel="noopener">Verifying your custom domain for GitHub Pages</a></p>
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
 

@@ -1,0 +1,295 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>Ruby 基本知识</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="Ruby 基本知识">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Ruby 基本知识
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2018-01-22T04:26:42.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2018-01-22
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Ruby-Rails/">Ruby & Rails</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <h3 id="Ruby-安装"><a href="#Ruby-安装" class="headerlink" title="Ruby 安装"></a>Ruby 安装</h3><p>在 Mac 电脑上，虽然安装好 Xcode 会自带 Ruby ，不过人们通常还是使用 <a href="https://rvm.io" target="_blank" rel="noopener">RVM</a> - Ruby Version Manager 来管理 Ruby 的各种版本</p>
+<pre><code class="lang-bash">## 安装 RVM - Ruby Version Manager 用来管理 Ruby 的版本
+$ \curl -sSL https://get.rvm.io | bash -s stable
+$ source ~/.rvm/scripts/rvm    ## 安装完 rvm 会提示使用该命令来让 rvm 生效 
+
+## 安装所需版本的 Ruby - 以 2.3.1 版本为例
+$ rvm install 2.3.1
+$ rvm list                ## 该命令可查看本地存在的所有 Ruby 的版本
+$ rvm use 2.3.1 --default ## 该命令用于设置默认的 Ruby 版本
+
+$ gem update --system     ## 用于救回安装 rvm 过程中网络等原因造成的中断失败
+$ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/  #设置新的 gem 的来源网站
+</code></pre>
+<hr>
+<h3 id="IRB-Interactive-Ruby-Shell"><a href="#IRB-Interactive-Ruby-Shell" class="headerlink" title="IRB - Interactive Ruby Shell"></a>IRB - Interactive Ruby Shell</h3><p>IRB 一般用于测试 Ruby 的语法<br>安装完某个版本的 Ruby 后，打开 Mac 电脑上的 Terminal.app（终端）输入指令 <code>irb</code> 就可以体验 Ruby 了，有兴趣可到 <a href="http://tryruby.org" target="_blank" rel="noopener">Try Ruby</a> 感受更多操作</p>
+<pre><code class="lang-bash">## 进入 Interactive Ruby
+$ irb 
+2.3.1 :001 &gt;
+</code></pre>
+<hr>
+<h3 id="计算和赋值"><a href="#计算和赋值" class="headerlink" title="计算和赋值"></a>计算和赋值</h3><pre><code class="lang-bash">## 在 irb 使用 Ruby 编程 - 计算和赋值
+$ irb 
+2.3.1 :001 &gt; 3+9
+ =&gt; 12 
+2.3.1 :002 &gt; 1024/8
+ =&gt; 128 
+2.3.1 :003 &gt; my_var=29
+ =&gt; 29 
+2.3.1 :004 &gt; my_var=my_var+2
+ =&gt; 31 
+2.3.1 :005 &gt; my_var=my_var/2
+ =&gt; 15 
+2.3.1 :006 &gt; my_var=my_var/2.0
+ =&gt; 7.5
+</code></pre>
+<hr>
+<h3 id="数组-Array"><a href="#数组-Array" class="headerlink" title="数组 - Array"></a>数组 - Array</h3><pre><code class="lang-bash">2.3.1 :007 &gt; fruits = [&quot;kiwi&quot;, &quot;strawberry&quot;, &quot;plum&quot;]
+ =&gt; [&quot;kiwi&quot;, &quot;strawberry&quot;, &quot;plum&quot;] 
+2.3.1 :008 &gt; fruits = fruits + [&quot;orange&quot;]
+ =&gt; [&quot;kiwi&quot;, &quot;strawberry&quot;, &quot;plum&quot;, &quot;orange&quot;] 
+2.3.1 :009 &gt; fruits = fruits + [&quot;kiwi&quot;]
+ =&gt; [&quot;kiwi&quot;, &quot;strawberry&quot;, &quot;plum&quot;, &quot;orange&quot;, &quot;kiwi&quot;] 
+2.3.1 :010 &gt; fruits = fruits - [&quot;kiwi&quot;]
+ =&gt; [&quot;strawberry&quot;, &quot;plum&quot;, &quot;orange&quot;]
+</code></pre>
+<p>PS：可以观察到 Ruby 里数组的特点：后进的排后面；一删删全部等等</p>
+<pre><code class="lang-ruby">## 数组的一些常用操作
+&gt; [1,2,3] &amp; [2,3,4] &amp; [0,2,6]   ## 多个数组求并集（intersection）
+ =&gt; [2]
+</code></pre>
+<hr>
+<h3 id="类-Class"><a href="#类-Class" class="headerlink" title="类 - Class"></a>类 - Class</h3><p>Ruby 里常见的类有：<strong>Fixnum</strong>、<strong>String</strong> 和 <strong>Array</strong> 等等，可以通过使用 <code>.class</code> 的方式查看某种数据的类</p>
+<pre><code class="lang-bash">2.3.1 :011 &gt; 29.class
+ =&gt; Fixnum 
+2.3.1 :012 &gt; &quot;Twentynight&quot;.class
+ =&gt; String 
+2.3.1 :013 &gt; fruits.class
+ =&gt; Array
+</code></pre>
+<hr>
+<h3 id="方法-Methods"><a href="#方法-Methods" class="headerlink" title="方法 - Methods"></a>方法 - Methods</h3><p>Ruby 里每个<strong>类</strong>（Class）都包含多种<strong>方法</strong>（Methods），可用 <code>.[方法]</code> 的方式调用</p>
+<pre><code class="lang-bash">2.3.1 :014 &gt; fruits
+ =&gt; [&quot;strawberry&quot;, &quot;plum&quot;, &quot;orange&quot;]
+2.3.1 :015 &gt; fruits.length
+ =&gt; 3 
+2.3.1 :016 &gt; fruits.first
+ =&gt; &quot;strawberry&quot;
+</code></pre>
+<p>还可以使用 <code>.methods</code> 的方式查看该<strong>类</strong>所包含的方法，而由于输出结果的类型属于<strong>数组</strong>（Array），所以可以进一步使用 <code>.methods.sort</code> 对结果排序</p>
+<pre><code class="lang-bash">2.3.1 :017 &gt; fruits.methods
+ =&gt; [:fill, :assoc, :rassoc, ... , :instance_exec, :__id__]
+2.3.1 :018 &gt; fruits.methods.sort
+ =&gt; [:!, :!=, :!~, :&amp;, ... , :values_at, :zip, :|]
+</code></pre>
+<p>此外，也可以自行定义<strong>方法</strong>（Methods）</p>
+<pre><code class="lang-bash">2.3.1 :019 &gt; def pluralize(word)
+2.3.1 :020?&gt;   word + &quot;s&quot;
+2.3.1 :021?&gt;   end
+ =&gt; :pluralize 
+2.3.1 :022 &gt; pluralize(&quot;apple&quot;)
+ =&gt; &quot;apples&quot;
+</code></pre>
+<p>注：<br>面向对象的语言里所谓的<strong>方法</strong>（Methods）其实就是函数式语言里的<strong>函数</strong>（Function）</p>
+<hr>
+<h3 id="循环-Loops"><a href="#循环-Loops" class="headerlink" title="循环 - Loops"></a>循环 - Loops</h3><pre><code class="lang-bash">2.3.1 :023 &gt; fruits.each do |fruit|
+2.3.1 :024 &gt;     puts fruit
+2.3.1 :025?&gt;   end
+strawberry
+plum
+orange
+ =&gt; [&quot;strawberry&quot;, &quot;plum&quot;, &quot;orange&quot;]
+</code></pre>
+<pre><code class="lang-ruby">## 带索引（index）的循环
+&gt; fruits.each_with_index do |fruit, index|
+&gt;   puts fruit
+&gt;   puts index
+&gt; end
+strawberry
+0
+plum
+1
+orange
+2
+ =&gt; [&quot;strawberry&quot;, &quot;plum&quot;, &quot;orange&quot;]
+</code></pre>
+<hr>
+<h3 id="条件-Conditional"><a href="#条件-Conditional" class="headerlink" title="条件 - Conditional"></a>条件 - Conditional</h3><pre><code class="lang-bash">2.3.1 :027 &gt; if my_var &gt; 1.0
+2.3.1 :028?&gt;   puts &quot;BigOne&quot;
+2.3.1 :029?&gt;   end
+BigOne
+ =&gt; nil 
+2.3.1 :030 &gt; if my_var &lt; 1.0
+2.3.1 :031?&gt;   puts &quot;OTCBTC&quot;
+2.3.1 :032?&gt;   end
+ =&gt; nil
+</code></pre>
+<hr>
+<h3 id="退出-IRB"><a href="#退出-IRB" class="headerlink" title="退出 IRB"></a>退出 IRB</h3><pre><code class="lang-bash">2.3.1 :033 &gt; exit
+$
+</code></pre>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

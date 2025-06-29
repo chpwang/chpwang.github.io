@@ -1,0 +1,339 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>让 Hexo 搭建的博客支持 LaTeX</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="让 Hexo 搭建的博客支持 LaTeX">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        让 Hexo 搭建的博客支持 LaTeX
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2019-03-16T12:21:59.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2019-03-16
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Hexo/">Hexo</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>数学是个充斥着糟糕符号的领域，这些符号在语义上的随意性给知识的交流和传承带来了巨大的困扰，人们在参与数学活动的时候，超过一半的时间是用来尝试理解这些数学符号，而不是处理数学问题本身。尽管如此，使用这些符号来表达数学思想确实是现阶段不可避免的。</p>
+<p><a href="https://www.latex-project.org/" target="_blank" rel="noopener">LaTeX</a> 可以让我们在博客里使用这些数学符号，它有着特定的语法。下面的教程展示了如何让<a href="/2016/10/08/how-to-blog-with-hexo/">通过 Hexo 技术搭建的博客</a>支持显示使用 LaTeX 语法所描述的数学表达式。</p>
+<hr>
+<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>安装 <a href="https://github.com/hexojs/hexo-math" target="_blank" rel="noopener">hexo-math</a> 插件，该插件（plugin）可支持使用 <a href="https://www.mathjax.org" target="_blank" rel="noopener">MathJax</a> 或 <a href="https://katex.org" target="_blank" rel="noopener">KaTeX</a> 来实现 LaTeX 排版系统，进而在网页上渲染出数学表达式（本文以 MathJax 为例）。</p>
+<pre><code class="lang-bash">## 打开终端，进入 hexo 博客所在文件夹
+$ cd ~/blog
+
+## 安装 hexo ； --save 参数会让 npm 在安装 hexo-math 之后自动将它写入 package.json 文件里，以便之后多电脑同步时使用
+$ npm install hexo-math --save
+</code></pre>
+<p>将 Hexo 默认的 markdown 渲染引擎 <a href="https://github.com/hexojs/hexo-renderer-marked" target="_blank" rel="noopener">hexo-renderer-marked</a> 更换为 <a href="https://github.com/sun11/hexo-renderer-kramed" target="_blank" rel="noopener">hexo-renderer-kramed</a> ，引擎是在默认的渲染引擎的基础上修改了一些 bug 而已。此处不更换也没问题，本文以更换为例。</p>
+<pre><code class="lang-bash">## 卸载默认 markdown 渲染引擎 hexo-renderer-marked；若不卸载，会和新的引擎发生冲突（conflict）
+$ npm uninstall hexo-renderer-marked --save
+
+## 安装新引擎 hexo-renderer-kramed 
+$ npm install hexo-renderer-kramed --save
+</code></pre>
+<hr>
+<h3 id="修改-kramed-配置，解决语义冲突"><a href="#修改-kramed-配置，解决语义冲突" class="headerlink" title="修改 kramed 配置，解决语义冲突"></a>修改 kramed 配置，解决语义冲突</h3><p>由于 LaTeX 与 Markdown 语法存在冲突（例如在 markdown 中，<em>斜体</em>可以用 <code>*</code> 或者 <code>_</code> 表示，而 LaTeX 也会用到 <code>_</code> ），所以我们要对 kramed 默认的语法规则进行修改，否则之后会出现很多奇怪的排版样式。</p>
+<p>打开 <code>~/blog/node_modules\kramed\lib\rules\inline.js</code> 文件（Hexo 博客所在文件夹的根目录下的 <code>node_modules</code> 文件夹），把第 11 行的 <code>escape</code> 变量的值修改为：</p>
+<pre><code class="lang-javascript">escape: /^\\([`*\[\]()#$+\-.!_&gt;])/,
+</code></pre>
+<p>同时把第 20 行的 <code>em</code> 变量修改为：</p>
+<pre><code class="lang-javascript">em: /^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,
+</code></pre>
+<p>改好后的代码块显示如下：</p>
+<pre><code class="lang-javascript">// ~/blog/node_modules\kramed\lib\rules\inline.js
+
+var inline = {
+  //escape: /^\\([\\`*{}\[\]()#$+\-.!_&gt;])/,      // 注释掉的默认规则
+  escape: /^\\([`*\[\]()#$+\-.!_&gt;])/,            // 新增的规则
+  autolink: /^&lt;([^ &gt;]+(@|:\/)[^ &gt;]+)&gt;/,
+  url: noop,
+  html: /^&lt;!--[\s\S]*?--&gt;|^&lt;(\w+(?!:\/|[^\w\s@]*@)\b)*?(?:&quot;[^&quot;]*&quot;|&#39;[^&#39;]*&#39;|[^&#39;&quot;&gt;])*?&gt;([\s\S]*?)?&lt;\/\1&gt;|^&lt;(\w+(?!:\/|[^\w\s@]*@)\b)(?:&quot;[^&quot;]*&quot;|&#39;[^&#39;]*&#39;|[^&#39;&quot;&gt;])*?&gt;/,
+  link: /^!?\[(inside)\]\(href\)/,
+  reflink: /^!?\[(inside)\]\s*\[([^\]]*)\]/,
+  nolink: /^!?\[((?:\[[^\]]*\]|[^\[\]])*)\]/,
+  reffn: /^!?\[\^(inside)\]/,
+  strong: /^__([\s\S]+?)__(?!_)|^\*\*([\s\S]+?)\*\*(?!\*)/,
+  //em: /^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,    // 注释掉的默认规则
+  em: /^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,                               // 新增的规则
+  code: /^(`+)\s*([\s\S]*?[^`])\s*\1(?!`)/,
+  br: /^ {2,}\n(?!\s*$)/,
+  del: noop,
+  text: /^[\s\S]+?(?=[\\&lt;!\[_*`$]| {2,}\n|$)/,
+  math: /^\$\$\s*([\s\S]*?[^\$])\s*\$\$(?!\$)/,
+};
+
+//...
+</code></pre>
+<hr>
+<h3 id="设置-config-yml-开启-MathJax-渲染引擎（重要）"><a href="#设置-config-yml-开启-MathJax-渲染引擎（重要）" class="headerlink" title="设置 _config.yml 开启 MathJax 渲染引擎（重要）"></a>设置 _config.yml 开启 MathJax 渲染引擎<code>（重要）</code></h3><p>在 <code>~/blog/_config.yml</code> 文件（注意，是 Hexo 博客文件夹<strong>根目录</strong>中的 <code>/_config.yml</code> 而不是主题目录下的 <code>/themes/next/_config.yml</code>）中增加 MathJax 的支持，并手动设置下面的 src（这一步很重要，使用默认的 src 会导致数学表达式渲染显示失败。这里的关键是 src 中的 <code>?config=TeX-MML-AM_CHTML</code> 这个字段）</p>
+<pre><code class="lang-yml">...
+...
+
+# MathJax
+math:
+  engine: &#39;mathjax&#39;
+  mathjax:
+    src: https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML   
+
+...
+...
+</code></pre>
+<hr>
+<h3 id="使用-LaTeX-语法显示数学表达式"><a href="#使用-LaTeX-语法显示数学表达式" class="headerlink" title="使用 LaTeX 语法显示数学表达式"></a>使用 LaTeX 语法显示数学表达式</h3><p>经过以上所有设置后，重启 Hexo ，让各种设置生效</p>
+<pre><code class="lang-bash">$ hexo clean   ## 清除缓存 - 让新的 markdown 渲染引擎 hexo-renderer-kramed 生效
+$ hexo s       ## 启动服务器 - 让 _config.yml 文件中的配置生效
+</code></pre>
+<h4 id="LaTeX-的常用语法如下（更多语法请参考基本语法）："><a href="#LaTeX-的常用语法如下（更多语法请参考基本语法）：" class="headerlink" title="LaTeX 的常用语法如下（更多语法请参考基本语法）："></a>LaTeX 的常用语法如下（更多语法请参考基本语法）：</h4><ul>
+<li><p>使用 <code>\\(</code> 和 <code>\\)</code> ，或者 <code>`$</code> 和 <code>$`</code> 来包裹一个内联（inline）的数学表达式，建议优先用后者，前者常出现语法冲突。后者有问题再换用前者。（参见 hexo-renderer-kramed 的<a href="https://github.com/sun11/hexo-renderer-kramed" target="_blank" rel="noopener">官方说明</a>了解更多 <strong>Tips</strong> ）</p>
+<pre><code class="lang-tex hljs">`<span class="hljs-formula">$<span class="hljs-tag">\<span class="hljs-name">pi</span></span>$</span><span class="hljs-tag">`</span>
+`<span class="hljs-formula">$<span class="hljs-tag">\<span class="hljs-name">int_a^b f(x) dx</span></span>$</span><span class="hljs-tag">`</span>
+<span class="hljs-tag">\<span class="hljs-name">\</span></span>(lim_{x<span class="hljs-tag">\<span class="hljs-name">rightarrow</span></span> <span class="hljs-tag">\<span class="hljs-name">infty</span></span>}<span class="hljs-tag">\<span class="hljs-name">frac</span><span class="hljs-string">{1}</span><span class="hljs-string">{\sin x}</span></span><span class="hljs-tag">\<span class="hljs-name">\</span></span>)
+<span class="hljs-tag">\<span class="hljs-name">\</span></span>(lim_{n<span class="hljs-tag">\<span class="hljs-name">rightarrow</span></span> <span class="hljs-tag">\<span class="hljs-name">infty</span></span>}(1+2^n+3^n)^<span class="hljs-tag">\<span class="hljs-name">frac</span><span class="hljs-string">{1}</span><span class="hljs-string">{x+\sin n}</span></span><span class="hljs-tag">\<span class="hljs-name">\</span></span>)
+</code></pre>
+
+<p>上述代码分别显示为： <script type="math/tex">\pi</script> ，<script type="math/tex">\int_a^b f(x) dx</script> ，<script type="math/tex">lim_{x\rightarrow \infty}\frac{1}{\sin x}</script> 和 \(lim_{n\rightarrow \infty}(1+2^n+3^n)^\frac{1}{x + \sin n}\)</p>
+</li>
+</ul>
+<ul>
+<li><p>使用 <code>\\[</code> 和 <code>\\]</code> 或者一对 <code>$$</code> 来包裹一个块状（block）的数学表达式（这类表达式会在页面上居中显示）</p>
+<pre><code class="lang-tex">$$
+A = \begin{bmatrix}
+        a_{11}    &amp; a_{12}    &amp; ...    &amp; a_{1n}\\
+        a_{21}    &amp; a_{22}    &amp; ...    &amp; a_{2n}\\
+        a_{31}    &amp; a_{22}    &amp; ...    &amp; a_{3n}\\
+        \vdots    &amp; \vdots    &amp; \ddots &amp; \vdots\\
+        a_{n1}    &amp; a_{n2}    &amp; ... &amp; a_{nn}\\
+    \end{bmatrix} , b = \begin{bmatrix}
+        b_{1}  \\
+        b_{2}  \\
+        b_{3}  \\
+        \vdots \\
+        b_{n}  \\
+    \end{bmatrix}
+$$
+</code></pre>
+<p>以上代码会显示一个矩阵（居中显示）：</p>
+<script type="math/tex; mode=display">
+A = \begin{bmatrix}
+        a_{11}    & a_{12}    & ...    & a_{1n}\\
+        a_{21}    & a_{22}    & ...    & a_{2n}\\
+        a_{31}    & a_{22}    & ...    & a_{3n}\\
+        \vdots    & \vdots    & \ddots & \vdots\\
+        a_{n1}    & a_{n2}    & ... & a_{nn}\\
+    \end{bmatrix} , b = \begin{bmatrix}
+        b_{1}  \\
+        b_{2}  \\
+        b_{3}  \\
+        \vdots \\
+        b_{n}  \\
+    \end{bmatrix}</script><p>下面是概率界的贝叶斯公式：</p>
+<pre><code class="lang-tex">$$
+P(A_i \mid B) = \frac{P(B\mid A)P(A_i)}{\sum_{j=1}^{n}P(A_j)P(B \mid A_j)}
+$$
+</code></pre>
+<script type="math/tex; mode=display">
+P(A_i \mid B) = \frac{P(B\mid A)P(A_i)}{\sum_{j=1}^{n}P(A_j)P(B \mid A_j)}</script><p><code>sign</code> 函数：</p>
+<pre><code class="lang-tex">\begin{equation}
+  sign(x)=\begin{cases}
+        -1 &amp; \text{if $x&lt;0$},\\
+        0 &amp; \text{if $x=0$},\\
+        1 &amp; \text{if $x&gt;0$}.
+       \end{cases}
+\end{equation}
+</code></pre>
+<script type="math/tex; mode=display">
+\begin{equation}
+  sign(x)=\begin{cases}
+        -1 & \text{if $x<0$},\\
+        0 & \text{if $x=0$},\\
+        1 & \text{if $x>0$}.
+       \end{cases}
+\end{equation}</script><p>其他看起来复杂的数学表达式：</p>
+<pre><code class="lang-tex">$$
+  \begin{split}
+  \frac{\partial{\mathcal{E}}}{\partial{x_l}} &amp; = 
+  \frac{\partial{\mathcal{E}}}{\partial{x_L}}\frac{\partial{x_L}}{\partial{x_l}}\\\\
+  &amp; = \frac{\partial{\mathcal{E}}}{\partial{x_L}}\Big(1+\frac{\partial{}}{\partial{x_l}}\sum_{i=l}^{L-1}   
+  \mathcal{F}(x_i,\mathcal{W}_i)\Big)
+  \end{split}
+$$
+</code></pre>
+<script type="math/tex; mode=display">
+  \begin{split}
+  \frac{\partial{\mathcal{E}}}{\partial{x_l}} & = 
+  \frac{\partial{\mathcal{E}}}{\partial{x_L}}\frac{\partial{x_L}}{\partial{x_l}}\\\\
+  & = \frac{\partial{\mathcal{E}}}{\partial{x_L}}\Big(1+\frac{\partial{}}{\partial{x_l}}\sum_{i=l}^{L-1}
+  \mathcal{F}(x_i,\mathcal{W}_i)\Big)
+  \end{split}</script></li>
+</ul>
+<hr>
+<h3 id="引用与延伸"><a href="#引用与延伸" class="headerlink" title="引用与延伸"></a>引用与延伸</h3><p>有关 Hexo 设置参考资料：</p>
+<ul>
+<li><a href="https://linkinpark213.com/2018/04/24/mathjax/" target="_blank" rel="noopener">MathJax - Use Math in Hexo, Just Like Tex! (Including Common Issue Solutions)</a></li>
+<li><a href="https://www.jianshu.com/p/d95a4795f3a8" target="_blank" rel="noopener">hexo 下 LaTeX 无法显示的解决方案</a></li>
+<li><a href="http://www.sail.name/2018/05/31/use-mathjax-in-hexo/" target="_blank" rel="noopener">在 hexo 使用 mathjax</a></li>
+</ul>
+<p>更多 LaTeX 语法请参考：</p>
+<ul>
+<li><a href="http://data-blog.udacity.com/posts/2016/10/latex-primer/" target="_blank" rel="noopener">A Primer on Using LaTeX in Jupyter Notebooks</a>（写得挺好的，所以尽管原文页面已无法访问，还是写出来做个纪念。网上能搜到该文，我的 Dropbox 里也有保存）</li>
+<li><a href="https://docs.latexbase.com/" target="_blank" rel="noopener">Online LaTeX reference</a>（比上面更详细更多细节）</li>
+</ul>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

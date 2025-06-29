@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>Jupyter Notebook 简易指南</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="Jupyter Notebook 简易指南">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Jupyter Notebook 简易指南
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2018-05-27T20:17:07.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2018-05-28
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Machine-Learning/">Machine Learning</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <h3 id="架构介绍"><a href="#架构介绍" class="headerlink" title="架构介绍"></a>架构介绍</h3><p><a href="http://jupyter.org/" target="_blank" rel="noopener">Jupyter notebook</a> 是一种 Web 应用，能让用户将说明文本、数学方程、代码和可视化内容全部组合到一个易于共享的文档中，其架构如下：<br><img src="https://jupyter.readthedocs.io/en/latest/_images/notebook_components.png" alt="Jupyter notebook 的架构说明图"></p>
+<p>可看到该架构核心是 Notebook 服务器（Server）。你通过浏览器连接到该服务器，而 Notebook 呈现为 Web 应用。你在 Web 应用中编写的代码通过该服务器发送给内核，内核运行代码，并将结果发送回该服务器。之后，任何输出都会返回到浏览器中。保存 Notebook 时，它将作为 JSON 文件（文件扩展名为 <code>.ipynb</code>）写入到该服务器中。</p>
+<p>因此，你可以在任何地方运行 notebook 服务器，并且可通过互联网访问，或者分享给他人。</p>
+<hr>
+<h3 id="安装-Jupyter-notebook"><a href="#安装-Jupyter-notebook" class="headerlink" title="安装 Jupyter notebook"></a>安装 Jupyter notebook</h3><p>我们一般通过终端里运行 <code>conda install jupyter notebook</code> 命令来安装，至于 conda 是什么？如何隔离开不同项目（Project）的开发环境？请参考<a href="/2018/05/27/set-up-anaconda/">安装和配置 Anaconda</a></p>
+<pre><code class="lang-bash">## 此处假定你已经安装设置好了 anaconda 
+## 最左边的 (py36) 显示的是目前所处的开发环境名，参考上面的链接中关于 conda 新建虚拟开发环境的说明
+(py36) $ conda install jupyter notebook
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: /anaconda3/envs/py36
+
+  added / updated specs:
+    - jupyter
+    - notebook
+
+The following NEW packages will be INSTALLED:
+
+    ...
+    ...
+
+Proceed ([y]/n)? y
+
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+(py36) $
+</code></pre>
+<hr>
+<h3 id="启动-Notebook-服务器"><a href="#启动-Notebook-服务器" class="headerlink" title="启动 Notebook 服务器"></a>启动 Notebook 服务器</h3><p>在终端中输入 <code>jupyter notebook</code>，服务器就会在你运行此命令的目录中启动，这意味着任何 notebook 文件都会保存在该目录下</p>
+<pre><code class="lang-bash">## 查看当前所在目录
+(py36) $ pwd
+/Users/user1/Documents/Udacity_Class/temp_test
+
+## 启动 notebooke 服务器 - 此例子里，服务器运行地址是 http://localhost:8888
+## 注意当前所处的环境是 py36 ，notebooke 服务器会使用当前所在环境里的 packages
+(py36) $ jupyter notebook
+[I 06:07:23.978 NotebookApp] Writing notebook server cookie secret to /Users/user1/Library/Jupyter/runtime/notebook_cookie_secret
+[I 06:07:24.147 NotebookApp] Serving notebooks from local directory: /Users/user1/Documents/Udacity_Class/temp_test
+[I 06:07:24.147 NotebookApp] 0 active kernels
+[I 06:07:24.147 NotebookApp] The Jupyter Notebook is running at:
+[I 06:07:24.147 NotebookApp] http://localhost:8888/?token=479961dc55f3f37e3885c81bc4de0cfea8c78d51713d7c21
+[I 06:07:24.147 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 06:07:24.148 NotebookApp]
+</code></pre>
+<p>打开浏览器，输入服务器地址 <a href="http://localhost:8888" target="_blank" rel="noopener">http://localhost:8888</a> 后，进入即可开始使用。若要关掉 Notebook，只需在刚刚的终端里使用 <code>Control + C</code> 组合键终止服务器。</p>
+<hr>
+<h3 id="Jupyter-Notebook-中的数学表达式"><a href="#Jupyter-Notebook-中的数学表达式" class="headerlink" title="Jupyter Notebook 中的数学表达式"></a>Jupyter Notebook 中的数学表达式</h3><p>在 Notebook 的 Markdown 单元格中，可以使用 <a href="https://www.latex-project.org" target="_blank" rel="noopener">LaTeX</a> 符号创建数学表达式。notebook 使用 MathJax 将 LaTeX 符号呈现为数学符号</p>
+<pre><code>## 创建「内联（inline）」性质的数学表达式 - 首尾无换行符号
+$y = mx + b$
+
+## 创建「块（block）」性质的数学表达式 - 首尾添加换行符号
+$$
+y = \frac{a}{b+c}
+$$
+</code></pre><p>关于 LaTex 的更多常用语法请参考 <a href="http://data-blog.udacity.com/posts/2016/10/latex-primer/" target="_blank" rel="noopener">A Primer on Using LaTeX in Jupyter Notebooks</a>（写得挺好的，所以尽管原文页面已无法访问，还是写出来做个纪念。网上能搜到该文，我的 Dropbox 里也有保存），详细一些的可参看这篇 <a href="https://docs.latexbase.com" target="_blank" rel="noopener">Online LaTeX reference</a> ，更加全面的信息可以参考这个 <a href="http://ctan.math.ca/tex-archive/obsolete/info/math/voss/mathmode/Mathmode.pdf" target="_blank" rel="noopener">PDF 文件</a>（尽管该文件似乎有些久远）</p>
+<hr>
+<h3 id="Magic-关键字"><a href="#Magic-关键字" class="headerlink" title="Magic 关键字"></a>Magic 关键字</h3><p>Magic 关键字是可以在单元格中运行的特殊命令，能让你控制 notebook 本身或执行系统调用（例如更改目录）。例如，在 notebook 中可以使用 <code>%matplotlib</code> 将 matplotlib（python 的一个绘图库） 设置为以交互方式工作。</p>
+<p>Magic 命令的前面带有一个或两个百分号（<code>%</code> 或 <code>%%</code>），分别对应「<strong>行 Magic 命令</strong>」和「<strong>单元格 Magic 命令</strong>」。「<strong>行 Magic 命令</strong>」仅应用于编写 Magic 命令时所在的行，而「<strong>单元格 Magic 命令</strong>」应用于整个单元格。</p>
+<p><strong><em>注意：</em></strong><br><em>这些 Magic 关键字是特定于普通 Python 内核的关键字。如果使用其他内核，这些关键字很有可能无效。</em></p>
+<ul>
+<li><p><strong>示例一：运行计时器</strong><br>有时候，你可能希望让代码运行得更快，可以使用 Magic 命令 <code>%timeit</code> 测算代码的运行时间</p>
+<ol>
+<li><p>使用 <code>%timeit</code> 测算某个命令的运行时间：<img src="/2018/05/28/introduce-jupyter-notebook/inline-timeit.png" title="inline timeit"></p>
+</li>
+<li><p>使用 <code>%%timeit</code> 来测算整个单元格的运行时间：<img src="/2018/05/28/introduce-jupyter-notebook/block-timeit.png" title="block timeit"></p>
+</li>
+</ol>
+</li>
+<li><p><strong>示例二：在 notebook 中嵌入可视化内容</strong><br>notebook 允许你将图像与文本和代码一起嵌入。这在你使用 matplotlib 或其他绘图包创建可视化内容时最为有用。在 notebook 中可以使用 <code>%matplotlib</code> 将 matplotlib 设置为以交互方式工作。默认情况下，图形呈现在各自的窗口中。但是，你可以通过命令传递参数，以选择特定的<a href="http://matplotlib.org/faq/usage_faq.html#what-is-a-backend" target="_blank" rel="noopener">后端</a>（呈现图像的软件）。要直接在 notebook 中呈现图形，应将通过命令 <code>%matplotlib inline</code> 内联后端一起使用 <img src="/2018/05/28/introduce-jupyter-notebook/matplotlib-inline.png" title="matplotlib inline"></p>
+</li>
+</ul>
+<p><strong><em>提示</em></strong>：<br>在分辨率较高的屏幕（例如 Retina 显示屏）上，notebook 中的默认图像可能会显得模糊。可以在 <code>%matplotlib inline</code> 之后使用 <code>%config InlineBackend.figure_format = &#39;retina&#39;</code> 来呈现分辨率较高的图像。</p>
+<hr>
+<h3 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h3><p>在 Notebook 里使用库 <a href="https://matplotlib.org" target="_blank" rel="noopener">matplotlib</a> 时：</p>
+<ol>
+<li><p>添加 <code>%matplotlib inline</code> 后可在 Notebook 内容流上显示图表（符号 <code>%</code> 带一串命令在 Notebook 里被称为 <a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html" target="_blank" rel="noopener">magic commands</a>）</p>
+</li>
+<li><p>在代码末尾添加分号 <code>;</code> 可以隐藏输出，参考<a href="https://stackoverflow.com/questions/25790062/how-to-hide-matplotlib-lines-line2d-in-ipython-notebook" target="_blank" rel="noopener">这里</a></p>
+</li>
+<li><p>如果 notebook 中的代码需要和其他网站交互，比如载入 IMDb 网站的数据，但是这些网站由于各种原因无法直接访问，可以尝试在启动 Notebook 服务器的命令前加上一个代理命令，表示该服务器在代理环境下打开，享受上网代理的流量端口：</p>
+<pre><code class="lang-bash">## 注意，代理服务器需要自己进行额外配置，myproxy 这个命令也是自行设置命名的，并不是系统自带命令，比如有些玩家可能用的是 proxychains4  
+$ myproxy jupyter notebook  ## 在配置好的代理环境中运行 notebook
+</code></pre>
+</li>
+</ol>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

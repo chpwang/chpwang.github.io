@@ -1,0 +1,417 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>Keras - 快速搭建神经网络（更新中）</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="Keras - 快速搭建神经网络（更新中）">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Keras - 快速搭建神经网络（更新中）
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2018-09-21T09:05:41.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2018-09-21
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Machine-Learning/">Machine Learning</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>在深度学习中，<a href="https://keras.io" target="_blank" rel="noopener">Keras</a> 是一个常用的函数库，提供了各种神经网络（Neural Network）相关的函数，适合于快速建立一套神经网络。</p>
+<p>关于什么是神经网络，它如何运作，参考<a href="/2018/09/26/intro-to-neural-network/">神经网络入门</a></p>
+<hr>
+<h3 id="安装-Keras"><a href="#安装-Keras" class="headerlink" title="安装 Keras"></a>安装 Keras</h3><p>在安装 <a href="https://keras.io/#installation" target="_blank" rel="noopener">Keras</a> 之前，需要先安装以下其中一个支持它的后端引擎（backend engines）：</p>
+<ol>
+<li><a href="https://www.tensorflow.org/install/" target="_blank" rel="noopener">TensorFlow</a></li>
+<li><a href="http://deeplearning.net/software/theano/install.html#install" target="_blank" rel="noopener">Theano</a></li>
+<li><a href="https://docs.microsoft.com/en-us/cognitive-toolkit/setup-cntk-on-your-machine" target="_blank" rel="noopener">CNTK</a></li>
+</ol>
+<p>本文中选择安装 TensorFlow（至于如何安装 TensorFlow ，可参见<a href="/2018/09/21/TensorFlow/">TensorFlow 介绍</a>）</p>
+<p>通过终端里运行 <code>conda install keras</code> 命令来安装，至于 conda 命令是什么？如何安装和配置？请参考<a href="/2018/05/27/set-up-anaconda/">安装和配置 Anaconda</a></p>
+<pre><code class="lang-bash">## 这里假定你已经安装设置好了 anaconda ，可以使用 conda 相关命令
+## 最左边的 (py36) 显示的是目前所处的开发环境名，参考上面的链接中关于「相互隔离的开发环境」的说明
+(py36) $ conda install keras
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: /anaconda3/envs/py36
+
+  added / updated specs:
+    - keras
+
+
+The following packages will be downloaded:
+
+    ...
+    ...
+
+Proceed ([y]/n)? y
+
+    ...
+    ...
+
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+(py36) $
+</code></pre>
+<hr>
+<h3 id="使用-Keras-建立神经网络"><a href="#使用-Keras-建立神经网络" class="headerlink" title="使用 Keras 建立神经网络"></a>使用 Keras 建立神经网络</h3><p>Keras 的使用非常简单，按照下面的步骤顺序即可制定出想要的「神经网络模型」。接下来只要向「模型」输入数据集就可以训练（training）了。训练完成后，再向「模型」输入数据就能得到预测结果：</p>
+<ol>
+<li><p>选择模型 - 序列模型（Sequential model）<br><a href="https://keras.io/models/sequential/" target="_blank" rel="noopener">Sequential</a> 是常用的神经网络结构模型，所以以它为例，其他都能依此类推</p>
+<pre><code class="lang-python"># 载入 Sequential model
+from keras.models import Sequential
+
+# 创建一个 Sequential model
+model = Sequential()
+</code></pre>
+</li>
+<li><p>添加层（Layer）<br>创建名为 <strong>model</strong> 的 Sequential 后，就可依次添加各种「层」。神经网络由「层」组成，选择需要的「层」的种类，然后通过 <code>.add()</code> 添加。这里以全连接层（Fully Connected Layer）为例</p>
+<pre><code class="lang-python"># 载入构建神经网络的层（layer）的类型
+from keras.layers.core import Dense, Activation
+
+# 第 1 层 - 添加有 29 个节点的全连接层以及 32 个节点的「输入层（Input Layer）」- 也就是每次有 32 个数据要输入 
+model.add(Dense(29, input_dim=32))
+
+# 第 2 层 - 添加使用 ReLU 函数的「激活层（Activation Layer）」
+model.add(Activation(&#39;relu&#39;))
+
+# 第 3，4 层 - 添加具有 10 个节点的「全连接层」，并指定使用 Softmax 函数（相当于同时再增加了一层「激活层」）
+model.add(Dense(10, activation=&#39;softmax&#39;))
+
+##... 层数可以一直添加，层数越多越复杂 ...##
+
+# 第 (n-1) 层 - 添加具有 2 个节点的全连接层（此 n-1 层的节点数为 2 ，说明预测模型最终只输出 2 个值）
+model.add(Dense(2))
+
+# 第 n 层 - 添加使用 Sigmoid 函数的激活层（如果超过 2 个输出值，就要用别的激活函数 比如 softmax 函数）
+model.add(Activation(&#39;sigmoid&#39;))
+</code></pre>
+</li>
+<li><p>编译模型（Compile）<br>经过上面两步设置后，就可以开始编译（compile）了：</p>
+<pre><code class="lang-python">model.compile(loss=&quot;categorical_crossentropy&quot;, optimizer=&quot;adam&quot;, metrics = [&#39;accuracy&#39;])
+</code></pre>
+<p> 编译前还需要设定 <code>loss</code>（损失函数-神经网络中的概念），<code>metrics</code>（评估模型用的指标），还有 <code>optimizer</code>（优化程序 - 概念参考<a href="http://ruder.io/optimizing-gradient-descent/index.html#rmsprop" target="_blank" rel="noopener">此文</a>）。常见的 optimizer 有：</p>
+<ul>
+<li><strong>SGD</strong><br>这是随机梯度下降。它使用了以下参数：<ul>
+<li>学习速率</li>
+<li>动量（获取前几步的加权平均值，以便获得动量而不至于陷在局部最低点）</li>
+<li>Nesterov 动量（当最接近解决方案时，它会减缓梯度）</li>
+</ul>
+</li>
+<li><strong>Adam</strong><br>Adam (Adaptive Moment Estimation) 使用更复杂的指数衰减，不仅仅会考虑平均值（第一个动量），并且会考虑前几步的方差（第二个动量）</li>
+<li><strong>RMSProp</strong><br>RMSProp (RMS 表示均方根误差）通过除以按指数衰减的平方梯度均值来减小学习速率</li>
+</ul>
+</li>
+<li><p>训练模型（Training）<br>将训练集数据 <code>x_train</code> 和 <code>y_train</code> 输入上面编译出来的模型，来进行训练。此处 <code>batch_size</code> 是随机梯度下降（Stochastic Gradient Descent - 神经网络概念）过程中每份数据的数量； <code>epochs</code> 是训练重复的次数，每一次 epoch 都会遍历所有输入数据； <code>validation_data</code> 是验证集数据（神经网络概念）；最后的 <code>verbose</code> 是进度输出设置，0 为不输出进度，1 为输出每次 epoch 的进度条，2 为输出简单进度百分比的信息：</p>
+<pre><code class="lang-python">model.fit(x_train, y_train, batch_size=20, epochs=100, validation_data=(x_vali, y_vali), verbose=2)
+</code></pre>
+</li>
+<li><p>预测（Predict）<br>模型训练好之后，就能对进行预测了。输入测试数据可以看模型的预测效果：</p>
+<pre><code class="lang-python"># 此例中，模型要判断某个事件是否发生，故预测输出只有两个值：[没发生的概率，发生的概率]
+# 不同的情况下，预测模型输出的值的数量不一样，取决于你的神经网络结构
+score = model.evaluate(x_test, y_test, verbose=0)
+print(&quot;Accuracy: &quot;, score[1])  # 输出预测事件发生的正确率
+</code></pre>
+</li>
+</ol>
+<hr>
+<h3 id="Keras-中创建卷积层（Convolutional-Layer）"><a href="#Keras-中创建卷积层（Convolutional-Layer）" class="headerlink" title="Keras 中创建卷积层（Convolutional Layer）"></a>Keras 中创建卷积层（Convolutional Layer）</h3><p>「卷积层」是神经网络的另一种类型的「层」，添加方式和上文的「全连接层」一样，使用 <code>.add()</code> 。<strong>卷积层</strong>的相关概念请参见<a href="/2018/09/26/intro-to-neural-network/">神经网络入门</a>，这里直接说明创建方法：</p>
+<pre><code class="lang-python"># 载入必要的模块 - 此处以 2D 卷积为例
+from keras.layers import Conv2D
+
+# 使用以下格式创建卷积层：
+# Conv2D(filters, kernel_size, strides, padding, activation=&#39;relu&#39;, input_shape)
+</code></pre>
+<p>参数说明（<strong>*</strong> 为<strong>必传</strong>参数）：</p>
+<ul>
+<li><code>filters</code> <strong>*</strong> : 过滤器（ <strong>filter</strong> ）的数量</li>
+<li><code>kernel_size</code> <strong>*</strong> : 指定（方形）卷积窗口的高和宽的数字（即每个 <strong>filter</strong> 的高和宽）</li>
+<li><p><code>strides</code>: <strong>filter</strong> 在输入图片（input image）上每次移动的距离（用像素数量表示），如果不指定任何值，则 strides 设为 1，即以 1 个像素的距离移动<br><strong><em>提示</em></strong>：可以将 kernel_size 和 strides 表示为数字或元组（tuple）</p>
+</li>
+<li><p><code>padding</code>: （输入图片）边界的处理方式，选项包括 ‘valid’（舍弃边界）和 ‘same’（保留边界，filter 超出部分以 0 填充），如果不指定任何值，则 padding 设为 ‘valid’</p>
+</li>
+<li><p><code>activation</code>: 通常为 ‘relu’。如果未指定任何值，则不应用任何激活函数。强烈建议你向网络中的每个卷积层添加一个 ReLU 激活函数</p>
+</li>
+<li><p><code>input_shape</code> <strong>*</strong> : 指定输入的高度、宽度和深度（按此顺序）的<strong>元组（tuple）</strong><br><strong><em>注意</em></strong>：在模型中将卷积层当做第一层级（出现在输入层之后）时，<strong>必须提供</strong> input_shape 参数；如果卷积层不是网络的第一个层级，<strong>请勿包含</strong> input_shape </p>
+</li>
+</ul>
+<p>其他关于<strong>卷积层</strong>的参数设置，参阅官方文档 <a href="https://keras.io/layers/convolutional/" target="_blank" rel="noopener">Convolutional Layers</a></p>
+<p>代码示例：</p>
+<pre><code class="lang-python"># 载入必要模块 - 上文中已载入
+# from keras.models import Sequential
+# from keras.layers import Conv2D
+
+cnn_model_demo_1 = Sequential()   # cnn 为 convolutional neural network（卷积神经网络）的缩写
+
+### 示例 1
+### 假设我要构建一个 CNN，输入层接受的是 200 x 200 像素（对应于高 200、宽 200、深 1 的三维数组）的灰度图片；
+### 假设我希望下一层级是卷积层，具有 15 个过滤器，每个宽和高分别为 2 ；
+### 在进行卷积操作时，我希望过滤器每次跳转 2 个像素；
+### 我不希望过滤器超出图片界限之外，也就是说，我不想用 0 填充图片；
+### 构建此层级的代码如下：
+cnn_CLlayer1 = Conv2D(filters=15, kernel_size=2, strides=2, activation=&#39;relu&#39;, input_shape=(200, 200, 1))
+
+### 示例 2
+### 假设我希望 CNN 的下一层级是卷积层，并将示例 1 中构建的层级作为输入；
+### 假设新层级是 32 个过滤器，每个的宽和高都是 3 ；
+### 在进行卷积操作时，我希望过滤器每次移动 1 个像素；
+### 我希望卷积层查看上一层级的所有区域，因此不介意过滤器在进行卷积操作时是否超过上一层级的边缘；
+### 构建此层级的代码如下：
+cnn_CLlayer2 = Conv2D(filters=32, kernel_size=3, padding=&#39;same&#39;, activation=&#39;relu&#39;)
+
+### 示例 3
+### 如果在线查看代码，经常会在 Keras 中见到以下格式的卷积层：
+cnn_CLlayer3 = Conv2D(64, (2,2), activation=&#39;relu&#39;)   # 该层有 64 个过滤器，每个大小是 2x2，层级具有 ReLU 激活函数。层级中的其他参数使用默认值，因此卷积的 stride 为 1，填充设为 &#39;valid&#39; 
+
+### 示例 4
+### 因为 padding 设置了 valid ，该层输出的数据维度为（63, 63, 32），注意和 same 的输出数据维度对比进而了解两者区别
+cnn_CLlayer4 = Conv2D(filters=32, kernel_size=3, strides=2, padding=&#39;valid&#39;, 
+    activation=&#39;relu&#39;, input_shape=(128, 128, 3))
+
+cnn_model_demo_1.add(cnn_CLlayer4)   # 添加「示例 4」的卷积层
+cnn_model_demo_1.summary()         # 输出查看
+#### summary() 输出结果 - 这里是卷积层 cnn_CLlayer4 的信息 ####
+# Using TensorFlow backend.
+# _________________________________________________________________
+# Layer (type)                 Output Shape              Param #
+# =================================================================
+# conv2d_1 (Conv2D)            (None, 63, 63, 32)        896
+# =================================================================
+# Total params: 896
+# Trainable params: 896
+# Non-trainable params: 0
+# _________________________________________________________________
+</code></pre>
+<hr>
+<h3 id="Keras-中创建最大池化层（Max-Pooling-Layer）"><a href="#Keras-中创建最大池化层（Max-Pooling-Layer）" class="headerlink" title="Keras 中创建最大池化层（Max Pooling Layer）"></a>Keras 中创建最大池化层（Max Pooling Layer）</h3><p>「最大池化层」是神经网络又一种类型的「层」，同样使用 <code>.add()</code> 添加，它通常使用在<strong>卷积神经网络中</strong>排在「卷积层」之后，将「卷积层」的输出作为输入。<strong>池化层</strong>的相关概念请参见<a href="/2018/09/26/intro-to-neural-network/">神经网络入门</a>，这里直接介绍创建方法：</p>
+<pre><code class="lang-python"># 载入必要的模块 - 此处以 2D 卷积为例
+from keras.layers import MaxPooling2D
+
+# 使用以下格式创建最大池化层：
+# MaxPooling2D(pool_size, strides, padding)
+</code></pre>
+<p>参数说明（<strong>*</strong> 为<strong>必传</strong>参数）：</p>
+<ul>
+<li><code>pool_size</code> <strong>*</strong> : 指定池化窗口高度和宽度的数字</li>
+<li><code>strides</code>: 垂直和水平 stride（移动距离），如果不指定任何值，则 strides 默认为 <code>pool_size</code></li>
+<li><code>padding</code>: 选项包括 ‘valid’（舍弃边界）和 ‘same’（保留边界，filter 超出部分以 0 填充），如果不指定任何值，则 padding 设为 ‘valid’<br><strong>注意</strong>：可以将 pool_size 和 strides 表示为数字或元组（tuple）</li>
+</ul>
+<p>其他关于<strong>最大池化层</strong>的参数设置，参阅官方文档 <a href="https://keras.io/layers/pooling/#maxpooling2d" target="_blank" rel="noopener">Max Pooling</a></p>
+<p>代码示例：</p>
+<pre><code class="lang-python"># 载入必要模块 - 上文中已载入
+# from keras.models import Sequential
+# from keras.layers import MaxPooling2D
+cnn_model_demo_2 = Sequential()   # cnn 为 convolutional neural network（卷积神经网络）的缩写
+
+### 示例
+# 假设我要构建一个 CNN，并且我想通过在卷积层后面添加最大池化层，降低卷积层的维度
+# 假设卷积层的输出（output）大小是 (100, 100, 15)，我希望最大池化层的大小为 (50, 50, 15)
+# 要实现这一点，我可以在最大池化层中使用 2x2 窗口，stride 设为 2，代码如下：
+cnn_MPlayer = MaxPooling2D(pool_size=2, strides=2, input_shape=(100, 100, 15))
+
+#「示例 1」的卷积层
+# cnn_CLlayer1 = Conv2D(filters=15, kernel_size=2, strides=2, activation=&#39;relu&#39;, input_shape=(200, 200, 1))
+
+cnn_model_demo_2.add(cnn_CLlayer1)     # 添加上文中「示例 1」的卷积层
+
+cnn_model_demo_2.add(cnn_MPlayer)  # 添加「示例」中的最大池化层
+cnn_model_demo_2.summary()         # 输出查看
+#### summary() 输出结果 - 这里是「最大池化层」cnn_MPlayer 和「卷积层」cnn_CLlayer1 的信息 ####
+# Using TensorFlow backend.
+# _________________________________________________________________
+# Layer (type)                 Output Shape              Param #
+# =================================================================
+# conv2d_1 (Conv2D)            (None, 100, 100, 15)      75
+# _________________________________________________________________
+# max_pooling2d_1 (MaxPooling2 (None, 50, 50, 15)        0
+# =================================================================
+# Total params: 75
+# Trainable params: 75
+# Non-trainable params: 0
+# _________________________________________________________________
+</code></pre>
+<hr>
+<h3 id="用-Keras-建立一个完整的-CNN-模型架构"><a href="#用-Keras-建立一个完整的-CNN-模型架构" class="headerlink" title="用 Keras 建立一个完整的 CNN 模型架构"></a>用 Keras 建立一个完整的 CNN 模型架构</h3><p>下面代码所建立的 CNN 模型例子中，其目标是对输入图片（input image）中所包含的 <strong>10</strong> 个不同种类的对象进行预测，判断图片中含有哪一个对象。<br>该网络以 3 个<code>「卷积层」&amp;「最大池化层」</code>组合开始（共 6 个层）。这 3 个组合（6 个层级）旨在将图片像素数组输入转换为所有空间信息（spacial info - 即像素的位置排列信息）都丢失、仅保留图片内容信息（像素形成的各种对象 Patterns ，比如车轮的 Pattern ，眼睛的 Pattern）的数组 。然后在 CNN 的第七个层级将该数组扁平化为向量。后面跟着两个密集层（Dense Layer - 即全连接层），旨在进一步说明图片中的内容。最后一层针对数据集中的每个对象类别都有一个条目，并具有一个 softmax 激活函数，使其返回概率。</p>
+<pre><code class="lang-python"># 载入必要模块 - 上文中已载入一部分
+# from keras.models import Sequential
+# from keras.layers import Conv2D, MaxPooling2D, Dense  # 要用到三个种类的「层」：「卷积层」，「池化层」，「全连接层」
+from keras.layers import Flatten  # Flattern 函数用于将多维张量（Tensor）转换为 1 维张量，即向量 Vector
+from keras.layers import Dropout  # Dropout 函数用于随机关闭「层」中的节点，缓解模型过拟合效应（over fitting）
+
+cnn_model = Sequential()  # cnn 为 convolutional neural network（卷积神经网络）的缩写
+
+# 添加 3 个「卷积层」&amp;「最大池化层」组合，共 6 个层，不断减小图片中的空间信息（width 和 height），并提取出图片中的 Patterns（不同对象的图形规律）信息 
+cnn_model.add(Conv2D(filters=16, kernel_size=2, padding=&#39;same&#39;, activation=&#39;relu&#39;, input_shape=(32, 32, 3)))
+cnn_model.add(MaxPooling2D(pool_size=2))
+cnn_model.add(Conv2D(filters=32, kernel_size=2, padding=&#39;same&#39;, activation=&#39;relu&#39;))
+cnn_model.add(MaxPooling2D(pool_size=2))
+cnn_model.add(Conv2D(filters=64, kernel_size=2, padding=&#39;same&#39;, activation=&#39;relu&#39;))
+cnn_model.add(MaxPooling2D(pool_size=2))
+
+cnn_model.add(Dropout(0.2))                     # Dropout 值设置为 0.2 代表每个节点都有 20% 的概率被关闭
+cnn_model.add(Flatten())                        # 将多维张量（Tensor）转换为 1 维向量
+cnn_model.add(Dense(500, activation=&#39;relu&#39;))    # 将上面的一维向量 Vector 输入到一个全连接层
+cnn_model.add(Dropout(0.3))                     # Dropout 值设置为 0.3 代表每个节点都有 30% 的概率被关闭
+cnn_model.add(Dense(10, activation=&#39;softmax&#39;))  # 建立一个 10 节点的全连接层作为输出层，用 Softmax 函数输出 10 个种类各自的概率
+
+# 编译 - 采用的误差损失函数为「多类别交叉熵」
+cnn_model.compile(loss=&#39;categorical_crossentropy&#39;, optimizer=&#39;rmsprop&#39;, metrics=[&#39;accuracy&#39;])
+</code></pre>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

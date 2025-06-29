@@ -1,0 +1,391 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>用 Hexo 搭建自定义博客</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="用 Hexo 搭建自定义博客">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        用 Hexo 搭建自定义博客
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2016-10-08T06:45:13.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2016-10-08
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Hexo/">Hexo</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>Hexo 是一个基于 <a href="https://nodejs.org/en/about" target="_blank" rel="noopener">Node.js</a> 的静态网站生成器。它可以将 Markdown、Jade 或者其他模板语言的文件转换成静态网页，并且支持丰富的主题和插件。配合 <a href="https://github.com" target="_blank" rel="noopener">Github</a> 就可以搭建自己的博客。</p>
+<p>如果不是闲，或无法忍受其他商业博客方案，不建议用 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>，因为自由意味着繁琐。</p>
+<p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 博客的步骤思路大同小异，但每一步都有多种实现方法，接下来的操作都是在 Mac 电脑上的 Terminal（终端）里进行的。</p>
+<hr>
+<h3 id="使用-Hexo-前的环境准备"><a href="#使用-Hexo-前的环境准备" class="headerlink" title="使用 Hexo 前的环境准备"></a>使用 Hexo 前的环境准备</h3><p>安装 <a href="http://brew.sh" target="_blank" rel="noopener">Hombrew</a></p>
+<pre><code class="lang-bash">$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre>
+<p>使用 <a href="http://brew.sh" target="_blank" rel="noopener">Hombrew</a> 安装 Node.js</p>
+<pre><code class="lang-bash">## $ brew install node  # 新版 node 和 hexo 不再兼容，需通过 nvm 来安装老版本的 node
+</code></pre>
+<p>Node.js 安装后，会附带 npm（node package manager）工具，可用它来搜索、下载、管理 Node.js 套件。</p>
+<p>使用 <a href="http://brew.sh" target="_blank" rel="noopener">Hombrew</a> 安装 <a href="https://formulae.brew.sh/formula/node-sass" target="_blank" rel="noopener">node-sass</a></p>
+<pre><code class="lang-bash">## 安装 SASS - 将 .scss 文件编译成 .css 文件的工具，后面会用于压缩编译 hexo 博客的 main.scss 文件
+## 压缩命令为: sass --style compressed main.scss:m.min.css    
+$ brew install node-sass
+</code></pre>
+<p>接下来使用 npm 安装 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a></p>
+<pre><code class="lang-bash">$ npm install hexo-cli -g
+</code></pre>
+<p>安装 <a href="https://github.com/hexojs/hexo-deployer-git" target="_blank" rel="noopener">hexo-deployer-git</a> 套件，其用于之后一键部署 blog 到 Github 上</p>
+<pre><code class="lang-bash">$ npm install hexo-deployer-git --save
+</code></pre>
+<p>安装 <a href="https://github.com/hexojs/hexo-generator-index" target="_blank" rel="noopener">hexo-generator-index</a> ，其用于单独设置主页（index）的文章（posts）数量——分页（pagination）功能会用到</p>
+<pre><code class="lang-bash">$ npm install hexo-generator-index --save
+</code></pre>
+<p>安装 <a href="https://github.com/hexojs/hexo-generator-archive" target="_blank" rel="noopener">hexo-generator-archive</a> ，其用于单独设置归档页面（archives）的文章数量——分页功能会用到</p>
+<pre><code class="lang-bash">$ npm install hexo-generator-archive --save
+</code></pre>
+<p><strong>其它补充说明</strong>：</p>
+<ul>
+<li><p>这里的 <code>--save</code> 参数会让 npm 在安装 hexo-deployer-git 之后自动将它写入 package.json 文件里，这样之后我们<a href="/2016/10/08/sync-blog-between-multiple-Macs/">多电脑间同步博客</a>就不需要再单独运行这条命令了，只需要 npm install ，当然了，这条命令是<code>幂等</code>的（即该命令运行若干次和运行一次的效果一样），所以再运行一次问题也不大。该参数的具体描述可参考<a href="http://stackoverflow.com/questions/19578796/what-is-the-save-option-for-npm-install" target="_blank" rel="noopener">这里</a>。</p>
+</li>
+<li><p>目前使用 <code>npm install xxx</code> 命令安装模块时，似乎不再需要 <code>--save</code> 参数了<a href="http://blog.csdn.net/aaa333qwe/article/details/78021704" target="_blank" rel="noopener">。</a></p>
+</li>
+<li><p>最新版本的 Node 有 Bug（Node 14 之后），和 hexo 不兼容：后续使用 <code>hexo d</code> 命令部署到 Github 的过程会报错。此时等不了更新修复可以先安装旧版（比如 <a href="https://formulae.brew.sh/formula/node@12#default" target="_blank" rel="noopener">Node 12</a> ）来确保 Hexo 能用。具体来说就是，先卸载<strong>当前</strong>版本的 node ，然后安装<strong>旧版本</strong>的 Node ：</p>
+<pre><code class="lang-bash"># Node 和 hexo 不兼容后的报错信息
+$ hexo d
+...
+FATAL Something&#39;s wrong. Maybe you can find the solution here: https://hexo.io/docs/troubleshooting.html
+TypeError [ERR_INVALID_ARG_TYPE]: The &quot;mode&quot; argument must be of type number. Received an instance of Object
+...
+...
+</code></pre>
+<p><code>最新说明：当前 node 12 已经 EOL（End Of Life），不能用 homebrew 来安装老版本的 Node.js 了，要用 nvm</code><br><code>此外，兼容 hexo 的最后一版 Node 是 v13.14 ，所以今后就用 v13.14 版的 Node</code></p>
+<pre><code class="lang-bash"># 重新安装 Node 要先删除。从 npm 开始删
+# 若此前 npm 是通过 brew 安装的，就用 brew uninstall npm 指令删除
+$ brew uninstall npm
+
+# 若此前 npm 是单独安装的（比如官网下载安装包），则用 npm uninstall npm -g 指令删除
+$ npm uninstall npm -g
+
+# 删除当前的 Nodejs - 若此前是通过 brew 安装的 node
+$ brew uninstall node
+
+# 删除当前的 Nodejs - 若是自行独立安装（如官网下载）的 node
+$ sudo rm -rf /usr/local/lib/node_modules
+
+# 重新安装指定版本的 Node 来确保兼容性 - 下面是安装 Node 12 的版本
+# $ brew install node@12    # 这行指令已经不能安装 node@12
+</code></pre>
+<p><code>通过 fish 来安装 nvm ，然后再通过 nvm 安装和选用 v13.14 版的 Node</code></p>
+<pre><code class="lang-bash">## 通过 fisher 安装 nvm.fish
+$ fisher install jorgebucaran/nvm.fish
+
+## 安装并使用最新版本的 Node.js
+$ nvm install latest
+
+## 查看远程有哪些 Node.js 版本可以下载
+$ nvm list-remote
+    ...
+    ...
+    v13.14.0 
+     v14.0.0
+     v14.1.0
+    ...
+    ...
+
+## 安装 v13.14.0 版本的 Node.js
+$ nvm install v13.14.0
+
+## 切换到 v13 版本的 Node.js 来使用
+## 由于只安装了 v13.14.0 版本，本地的 v13 只有它，所以会切换到这个版本
+$ nvm use v13
+
+## 显示本地有哪些版本的 Node.js 以及当前正在使用的版本
+$ nvm list
+     system
+ ▶ v13.14.0
+</code></pre>
+<p>参考链接：<br><a href="https://ammomercy.cn/2021/03/08/2021-03-08-解决hexo-d-The-modeargument-must-be-integer.-问题/" target="_blank" rel="noopener">解决 node.js@14+ 与 hexo 不兼容：作者选择安装 Node 13.14</a><br><a href="https://stackoverflow.com/questions/12607155/error-the-brew-link-step-did-not-complete-successfully/12751548" target="_blank" rel="noopener">先用 <code>npm uninstall npm -g</code> 卸载 <strong>npm</strong> 。再 <code>brew install node@12</code> 安装旧版 <strong>node</strong>，最后再 <code>brew link node@12</code></a>【主要看来自 <a href="https://stackoverflow.com/users/3085/jim-geurts" target="_blank" rel="noopener">@Jim Geurts</a> 和 <a href="https://stackoverflow.com/users/179583/natevw" target="_blank" rel="noopener">@natevw</a> 网友的回复】</p>
+</li>
+</ul>
+<hr>
+<h3 id="开始使用-Hexo"><a href="#开始使用-Hexo" class="headerlink" title="开始使用 Hexo"></a>开始使用 Hexo</h3><p>使用 Hexo 新建一个文件夹命名为 blog ，该文件夹将作为你的博客网站</p>
+<pre><code class="lang-bash">$ hexo init ~/Documents/blog      # 在 ~/Document 这个目录下会出现一个新的文件夹叫 blog，里面包含一些关于 hexo 的基础文件
+</code></pre>
+<p>进入新建的文件夹</p>
+<pre><code class="lang-bash">$ cd ~/Documents/blog
+</code></pre>
+<p>刚才 hexo init 命令已经在 blog 文件夹下生成了一个叫 <code>package.json</code> 的文件，npm 会通过它得知需要安装的套件<br>所以接下来使用 npm 安装相关套件</p>
+<pre><code class="lang-bash">$ npm install
+</code></pre>
+<p>使用 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 开启服务器</p>
+<pre><code class="lang-bash">$ hexo s
+</code></pre>
+<p>打开浏览器，输入网址 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 就能查看刚刚建好的博客页面。目前博客只有一篇名为 <code>Hello World</code> 的文章。</p>
+<p>在刚才的 Terminla（终端）中使用 <code>control + C</code> 的组合键即可关闭服务器。</p>
+<hr>
+<h3 id="开始写文章"><a href="#开始写文章" class="headerlink" title="开始写文章"></a>开始写文章</h3><pre><code class="lang-bash">$ pwd
+~/Documents/blog
+</code></pre>
+<p>确保你在 <code>~/Documents/blog</code> 文件夹里之后，便可用 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 新建文章</p>
+<pre><code class="lang-bash"># 这个命令会建立一个文件：~/Documents/blog/source/_posts/java-basics.md
+# 之后就在这个文件里写这篇博客的内容
+$ hexo new &quot;java basics&quot;
+</code></pre>
+<p>之后，在 <code>~/Documents/blog/source</code> 这个文件夹里就能看到刚刚新建的，以文章标题命名的文件。点开编辑即可。</p>
+<p>文件内容会包含自动生成的信息头（front matter），直接在下面的位置编辑博客内容就好：</p>
+<pre><code class="lang-plaintext">---
+title: java basics
+date: 2024-03-23 11:07:28
+tags:
+---
+
+[... 博客内容（支持 Markdown 和 html 进行排版） ...]
+</code></pre>
+<p>这里有两点要注意：</p>
+<ul>
+<li>需要使用 Markdown 格式来排版文章</li>
+<li>我写文章用的编辑器是 <a href="https://www.sublimetext.com" target="_blank" rel="noopener">Sublime Text</a></li>
+</ul>
+<hr>
+<h3 id="预览你的文章"><a href="#预览你的文章" class="headerlink" title="预览你的文章"></a>预览你的文章</h3><p>写好文章之后，使用 <code>hexo s</code> 开启服务器，然后打开浏览器，输入网址 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 便可以预览写好的文章。</p>
+<p>修改文章内容之后，只需要刷新浏览器页面就可以立刻看到效果。</p>
+<hr>
+<h3 id="更改文章标签"><a href="#更改文章标签" class="headerlink" title="更改文章标签"></a>更改文章标签</h3><p>你也许会给你的文章打上标签（tags）进行分类，但是后期如果想更改，会发现用 <code>hexo clean</code> 命令无法更新网页上博客的标签。尤其是当你删除某个标签之后，发现旧标签始终存在。</p>
+<p>这时可以手动删除 <code>/blog/public</code> 文件夹，然后再用 <code>hexo clean</code> 和 <code>hexo g</code> 两个命令就可以了。你过去的各种标签被保存（缓存）在 <code>public/tags</code> 文件夹中，只要这个文件夹不更新，你网页上的旧标签也会继续存在。<br><strong>注意</strong>，更改完后本地也许要 <code>hexo s</code> 重开 server 才能看到改动。</p>
+<pre><code class="lang-plaintext">---
+title: 用 Hexo 搭建自定义博客
+date: 2016-10-08 14:45:13
+tags: 旧标签1 旧标签2 旧标签3
+---
+
+[... 博客内容 ...]
+</code></pre>
+<hr>
+<h3 id="给文章加密"><a href="#给文章加密" class="headerlink" title="给文章加密"></a>给文章加密</h3><p>这里我们使用的是 <a href="https://github.com/D0n9X1n/hexo-blog-encrypt" target="_blank" rel="noopener">hexo-blog-encrypt</a> 这个插件。</p>
+<p><strong>第一步</strong>，使用 npm 来安装 hexo-blog-encrypt：</p>
+<pre><code class="lang-bash"># --save 是确保插件记录在 package.jason 文件中，方便之后多终端同步
+npm install --save hexo-blog-encrypt
+</code></pre>
+<p><strong>第二步</strong>，更改根目录下的文件 <code>~/Documents/blog/_config.yml</code> ，增加 <strong>encrypt</strong> 字段：</p>
+<pre><code class="lang-yml"># Security
+## Docs: https://github.com/D0n9X1n/hexo-blog-encrypt
+encrypt: # hexo-blog-encrypt
+  abstract: 有东西被加密了, 请输入密码查看
+  message: 您好, 这里需要密码
+  wrong_pass_message: 抱歉, 密码不对
+</code></pre>
+<p><strong>第三步</strong>，将 <strong>password</strong> 字段添加到要加密的文章的信息头，就像这样：</p>
+<pre><code class="lang-plaintext">---
+title: Hello World
+date: 2016-03-30 21:18:02
+password: hello
+---
+
+[... 博客内容 ...]
+</code></pre>
+<p><strong>第四步</strong>，重启以激活新插件 <a href="https://github.com/D0n9X1n/hexo-blog-encrypt" target="_blank" rel="noopener">hexo-blog-encrypt</a>：</p>
+<pre><code class="lang-bash">$ hexo clean   ## 清空缓存
+$ hexo g       ## 生成静态页面至 public 目录
+$ hexo s       ## 打开本地服务器预览效果
+</code></pre>
+<p>PS:<br>按照上方文章的信息头添加 <strong>password</strong> 字段后，内容中的代码高亮效果会消失<br>输入密码解密文章之后，可以通过页面最底部的按钮来重新加密文章<br>更多设置请参考 <code>hexo-blog-encrypt</code> 的 Github</p>
+<hr>
+<h3 id="把博客部署到-Github-上"><a href="#把博客部署到-Github-上" class="headerlink" title="把博客部署到 Github 上"></a>把博客部署到 Github 上</h3><p>先到 <a href="https://github.com" target="_blank" rel="noopener">Github</a> 上申请一个账号，然后新建一个 <code>repository</code>，命名为：</p>
+<pre><code>你的用户名.github.io
+</code></pre><p><code>注意！</code>这里需要严格按照这种格式命名，比如我的 Github 用户名是 <code>chpwang</code>，新建的 <code>repository</code> 就要叫：</p>
+<pre><code class="lang-plaintext">chpwang.github.io
+</code></pre>
+<p>然后在 <code>~/Documents/blog</code> 文件夹里找到 <code>_config.yml</code> 文件进行编辑，加入以下设置：</p>
+<pre><code class="lang-yml"># Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  repo: 
+    github: git@github.com:你的用户名/你的用户名.github.io.git
+</code></pre>
+<p>接下来，每次更新自己的文章之后，使用这三条命令进行部署</p>
+<pre><code class="lang-bash">$ hexo clean   ## 清空缓存
+$ hexo g       ## 生成静态页面至 public 目录
+$ hexo d       ## 部署到 GitHub
+
+## 如果部署的时候卡住没反应（no response），可以加上 debug 参数查看输出日志（log）
+$ hexo d -debug
+</code></pre>
+<p>部署完毕之后，打开浏览器输入网址 <a href="https://你的用户名.github.io" target="_blank" rel="noopener">https://你的用户名.github.io</a> 就能看到部署上去的博客网页了。</p>
+<p>如果想进阶使用 Hexo 的博客方案，请继续阅读<a href="/2016/10/08/sync-blog-between-multiple-Macs/">多台电脑间的 Hexo 博客同步</a></p>
+<hr>
+<h3 id="后续可能的问题"><a href="#后续可能的问题" class="headerlink" title="后续可能的问题:"></a>后续可能的问题:</h3><p>有时部署会遇到卡住没反应的问题，当使用 <code>hexo d -debug</code> 命令后，发现日志循环输出 <code>0 files generated in 81 ms</code>， 这可能是开启了 Github 的二次验证（2FA）导致的。解决方案要不就是重新绑定 Github 上的 <strong>SSH Key</strong>，或者根据<a href="http://fezl.me/2017/05/20/GitHub二次验证带来的问题/" target="_blank" rel="noopener">这里</a>设置 Personal access tokens 后用 <strong>https</strong> 地址来部署</p>
+<p>如果还没解决，可以参考以下案例：</p>
+<ul>
+<li><a href="https://github.com/hexojs/hexo/issues/3182" target="_blank" rel="noopener">hexo d 部署卡住</a></li>
+<li><a href="http://duanyifu.com/2016/08/23/hexo-deploy-problem/" target="_blank" rel="noopener">hexo deploy 命令卡住的奇怪问题</a></li>
+<li><a href="https://blog.csdn.net/jingbin_/article/details/80617210" target="_blank" rel="noopener">用 hexo d 命令部署的时候总是会卡住很久，查看日志发现信息一直在循环</a></li>
+<li><a href="https://github.com/hexojs/hexo/issues/1478" target="_blank" rel="noopener">hexo deploy 时不断 Error</a></li>
+</ul>
+<hr>
+<p>另一种常见的报错如下，这是网络连接问题导致的，需要换个网络环境。要注意各种终端（Terminal）的流量默认不走代理。要使用增强模式之类的设置。更多内容参考<a href="https://www.alankeene.com/2019/0702/Connection-reset-by-peer.html" target="_blank" rel="noopener">解决 hexo d 提示：ssh_exchange_identification：read：Connection reset by peer 的问题</a></p>
+<pre><code class="lang-bash">$ hexo d
+......
+kex_exchange_identification: read: Connection reset by peer
+......
+</code></pre>
+<hr>
+<p>第三种报错可能是许久不更新博客导致的。具体表现是，久不更新而再次 <code>hexo d</code> 部署推送更新，本来正常的博客页面会因此推送无法正常显示。<br>有可能会看到 <strong>Github</strong> 的报错：<code>There isn&#39;t a GitHub Pages site here.</code><br>此时，去到博客所在的 <strong>Repository</strong>（通常是<code>用户名.github.io</code>）页面，然后 <code>Settings</code> -&gt; <code>Pages</code> -&gt; <code>Custom domain</code> 重新设置一下自定义的网址。然后等个十几分钟的 <code>DNS check</code> 就好了。等待期间，博客页面可能会显示一片空白（前面的报错没有了，但还看不到任何网页内容）。<br>当然，你的自定义域名需要通过 Github 认证：<a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages" target="_blank" rel="noopener">Verifying your custom domain for GitHub Pages</a></p>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

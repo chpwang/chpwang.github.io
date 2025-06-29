@@ -1,0 +1,391 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>TensorFlow 介绍（更新中）</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="TensorFlow 介绍（更新中）">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        TensorFlow 介绍（更新中）
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2018-09-21T14:05:43.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2018-09-21
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Machine-Learning/">Machine Learning</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p><a href="https://www.tensorflow.org" target="_blank" rel="noopener">TensorFlow</a> 是 Google 的一个开源深度学习框架</p>
+<hr>
+<h3 id="安装-TensorFlow"><a href="#安装-TensorFlow" class="headerlink" title="安装 TensorFlow"></a>安装 TensorFlow</h3><p>可以使用 <code>pip</code> 安装（见<a href="https://www.tensorflow.org/install/" target="_blank" rel="noopener">这里</a>），也可以用 <code>conda</code> ，这里选用 <code>conda</code> 的安装方式。至于 conda 是什么？如何安装和配置？请参考<a href="/2018/05/27/set-up-anaconda/">安装和配置 Anaconda</a></p>
+<pre><code class="lang-bash"># 最左边的 (ai-dl) 表示当前处于虚拟开发环境 ai-dl 中
+(ai-dl) $ conda install -c conda-forge tensorflow
+
+# 查看当前的虚拟开发环境中存在的 tensorflow 以及其版本
+(ai-dl) $ conda list | grep -ir &quot;tensorflow&quot;
+(standard input):tensorflow       1.10.0        py35_0    conda-forge
+</code></pre>
+<p>测试 TensorFlow ，如果安装正确，Console 会打印出 “Hello, world!”</p>
+<pre><code class="lang-python">### tensorflow_test.py ###
+
+import tensorflow as tf
+# Create TensorFlow object called tensor
+hello_constant = tf.constant(&#39;Hello World!&#39;)
+with tf.Session() as sess:
+    # Run the tf.constant operation in the session
+    output = sess.run(hello_constant)
+    print(output)
+</code></pre>
+<p>PS:<br>有可能会遇到以下输出信息，这是因为你的 CPU 有线性加速功能 <strong>AVX2 FMA</strong> 而当前安装的 TensorFlow 不能使用它们（GPU 才能发挥 TensorFlow 的威力，所以 TensorFlow 不太支持 CPU），具体可以参见<a href="https://stackoverflow.com/questions/47068709/your-cpu-supports-instructions-that-this-tensorflow-binary-was-not-compiled-to-u" target="_blank" rel="noopener">这里</a></p>
+<pre><code class="lang-bash">(ai-dl) $ python tensorflow_test.py
+2018-09-21 23:20:36.754440: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+b&#39;Hello World!&#39;
+</code></pre>
+<hr>
+<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><ul>
+<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/placeholder" target="_blank" rel="noopener"><strong>tf.placeholder</strong></a></p>
+<pre><code class="lang-python"># TensorFlow uses arrays rather than tuples. It converts tuples to arrays. Therefore [] and () are equivalent.
+# Placeholder with [] shape takes a single scalar value directly.
+w = tf.placeholder(dtype=tf.int32, shape=(), name=&quot;foo0&quot;)
+x = tf.placeholder(dtype=tf.int32, shape=[], name=&quot;foo1&quot;)
+
+# Placeholder with [None] shape takes a 1-dimensional array
+y = tf.placeholder(dtype=tf.int32, shape=[None], name=&quot;foo2&quot;)
+
+# Placeholder with None shape can take in any value while computation takes place.
+z = tf.placeholder(dtype=tf.int32, shape=None, name=&quot;foo3&quot;)
+
+# Example
+# 创建 rank 4（维度为 4）的 Tensor
+# None 代表该维度可以是任意的数值，在深度学习神经网络中该维度通常代表 batch 的数量 - batch 的数量是超参数 batch size 决定的，因此是可变不固定的  
+inputs_real_img = tf.placeholder(tf.float32, [None, image_width, image_height, image_channels])
+
+# 创建标量（scalar）的 Tensor
+learning_rate = tf.placeholder(tf.float32, [])
+</code></pre>
+</li>
+<li><p><a href="https://www.tensorflow.org/versions/r1.0/api_docs/python/tf/reshape" target="_blank" rel="noopener"><strong>tf.reshape</strong></a><br>MNIST 数据集是由 28px * 28px 单通道图片组成。tf.reshape 函数把 28px * 28px 的矩阵转换成了 784px * 1px 的单行向量 x。tf.reshape()  中 <code>-1</code> 的解释参见<a href="https://www.tensorflow.org/api_docs/python/tf/reshape" target="_blank" rel="noopener">官方文档</a>或<a href="https://blog.csdn.net/zeuseign/article/details/72742559" target="_blank" rel="noopener">这篇博客</a><br>简单来说就是 -1 这个位置的维度由 reshape() 函数自动计算出，到底是多少取决于其他维度的数据，只要所有元素的总和等于前面 x 的元素总和即可 - 可以看到，张量（tensor）x 中一共有 28 * 28 * 1 = 784 个元素，而 n_input = 784 ，所以 -1 这个位置的维度值为 28 * 28 * 1 / n_input = 784 /784 = 1，进而 x_flat 的维度就是 [1, 784]<br>更多关于 Shape 的知识细节可以从这篇延伸阅读开始：<br><a href="https://pgaleone.eu/tensorflow/2018/07/28/understanding-tensorflow-tensors-shape-static-dynamic/" target="_blank" rel="noopener">Understanding Tensorflow’s tensors shape: static and dynamic</a></p>
+<pre><code class="lang-python">import tensorflow as tf
+
+n_input = 784  # MNIST data input (img shape: 28*28)
+n_classes = 10  # MNIST total classes (0-9 digits)
+
+# tf Graph input
+x = tf.placeholder(&quot;float&quot;, [None, 28, 28, 1])
+y = tf.placeholder(&quot;float&quot;, [None, n_classes])
+
+x_flat = tf.reshape(x, [-1, n_input])
+</code></pre>
+</li>
+<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/nn/dropout" target="_blank" rel="noopener"><strong>tf.nn.dropout</strong></a> 和 <a href="https://www.tensorflow.org/api_docs/python/tf/layers/dropout" target="_blank" rel="noopener"><strong>tf.layers.dropout</strong></a> 的区别<br>两者都用于是给神经网络的隐藏层（Hidden Layers）添加 dropout 层的，它们之间的区别仅仅在于接收的参数不同，导致双方对 dropout 层有着不一样的控制能力。具体可参见 <a href="https://stackoverflow.com/questions/44395547/tensorflow-whats-the-difference-between-tf-nn-dropout-and-tf-layers-dropout" target="_blank" rel="noopener">what’s the difference between tf.nn.dropout and tf.layers.dropout</a></p>
+</li>
+</ul>
+<hr>
+<h3 id="基础神经网络-Vanilla"><a href="#基础神经网络-Vanilla" class="headerlink" title="基础神经网络 - Vanilla"></a>基础神经网络 - Vanilla</h3><p>Vanilla 前馈神经网络（Feed Forward Neural Network）<br>TODO</p>
+<hr>
+<h3 id="卷积神经网络-CNN"><a href="#卷积神经网络-CNN" class="headerlink" title="卷积神经网络 - CNN"></a>卷积神经网络 - CNN</h3><p>卷积神经网络（Convolutional Neural Network）<br>TODO</p>
+<hr>
+<h3 id="循环神经网络-RNN"><a href="#循环神经网络-RNN" class="headerlink" title="循环神经网络 - RNN"></a>循环神经网络 - RNN</h3><p>循环神经网络（Recurrent Neural Network）<br>TODO</p>
+<hr>
+<h3 id="生成对抗神经网络-GAN"><a href="#生成对抗神经网络-GAN" class="headerlink" title="生成对抗神经网络 - GAN"></a>生成对抗神经网络 - GAN</h3><p>生成对抗网络（Generative Adversarial Network）</p>
+<pre><code class="lang-python">def model_inputs(real_dim, z_dim):
+    # tf.placeholder 的 shape 参数里值为 None 的维度代表该维度可以是任何值（整数）
+    # 此处该维度是用来放置 Batch 数量的，根据 Batch Size 不同的值，Batch 的数量也会不同，所以这是一个可变的维度   
+    inputs_real = tf.placeholder(tf.float32, shape=(None, real_dim), name=&quot;input_real&quot;)
+    inputs_z = tf.placeholder(tf.float32, shape=(None, z_dim), name=&quot;input_z&quot;)
+
+    return inputs_real, inputs_z
+</code></pre>
+<hr>
+<h3 id="神经网络示例"><a href="#神经网络示例" class="headerlink" title="神经网络示例"></a>神经网络示例</h3><pre><code class="lang-python">### tensorflow_demo.py ###
+import tensorflow as tf
+from tensorflow.examples.tutorials.mnist import input_data
+# 使用 TensorFlow 提供的 MNIST 数据集，其中对数据的分批和 One-Hot 编码已经完成
+mnist = input_data.read_data_sets(&quot;.&quot;, one_hot=True, reshape=False)
+
+# 超参数 Parameters
+learning_rate = 0.001
+training_epochs = 20
+batch_size = 128  # 如果没有足够内存，可以降低 batch size
+display_step = 1
+
+n_input = 784  # MNIST data input (img shape: 28*28 = 784)
+n_classes = 10  # MNIST total classes (0-9 digits)
+n_hidden_layer = 256 # 隐藏层的节点数（本例以一个隐藏层为例，给该层设置了 256 个节点「nodes」）
+
+
+# 设置层权重（Weights）和偏差（Bias）的储存
+weights = {
+    &#39;hidden_layer&#39;: tf.Variable(tf.random_normal([n_input, n_hidden_layer])),
+    &#39;out&#39;: tf.Variable(tf.random_normal([n_hidden_layer, n_classes]))
+}
+biases = {
+    &#39;hidden_layer&#39;: tf.Variable(tf.random_normal([n_hidden_layer])),
+    &#39;out&#39;: tf.Variable(tf.random_normal([n_classes]))
+}
+
+
+# tf Graph input - 输入层设置
+x = tf.placeholder(&quot;float&quot;, [None, 28, 28, 1])
+y = tf.placeholder(&quot;float&quot;, [None, n_classes])
+x_flat = tf.reshape(x, [-1, n_input])
+
+
+# Hidden layer with RELU activation
+# ReLU作为隐藏层激活函数
+layer_1 = tf.add(tf.matmul(x_flat, weights[&#39;hidden_layer&#39;]),\
+    biases[&#39;hidden_layer&#39;])
+layer_1 = tf.nn.relu(layer_1)
+# Output layer with linear activation
+# 输出层的线性激活函数
+logits = tf.add(tf.matmul(layer_1, weights[&#39;out&#39;]), biases[&#39;out&#39;])
+
+
+# Define loss and optimizer
+# 定义误差值和优化器
+cost = tf.reduce_mean(\
+    tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=y))
+optimizer = tf.train.GradientDescentOptimizer(learning_rate=learning_rate)\
+    .minimize(cost)
+
+
+# Initializing the variables
+# 初始化变量
+init = tf.global_variables_initializer()
+
+# Launch the graph
+# 启动图
+with tf.Session() as sess:
+    sess.run(init)
+    # Training cycle
+    # 训练循环
+    for epoch in range(training_epochs):
+        total_batch = int(mnist.train.num_examples/batch_size)
+        # Loop over all batches
+        # 遍历所有 batch
+        for i in range(total_batch):
+            batch_x, batch_y = mnist.train.next_batch(batch_size)
+            # Run optimization op (backprop) and cost op (to get loss value)
+            # 运行优化器进行反向传导、计算 cost（获取 loss 值）
+            sess.run(optimizer, feed_dict={x: batch_x, y: batch_y})
+</code></pre>
+<hr>
+<h3 id="保存训练进度"><a href="#保存训练进度" class="headerlink" title="保存训练进度"></a>保存训练进度</h3><p>在现实中，训练一个模型常常要用很长时间，若是由于某种原因 TensorFlow Session 被关闭，所有当前训练得到的权重（Weights）和偏差（Bias）都会丢失，需要重新训练。针对这种情况，TensorFlow 提供了一个 tf.train.Saver 的类用于把当前进程保存下来，这个过程本质上是把会话（Session）中所有 tf.Variable 存到你的文件系统。</p>
+<pre><code class="lang-python">### tensorflow_save_demo.py ###
+import tensorflow as tf
+
+# The file path to save the data
+# 文件保存路径，保存为 .ckpt 文件
+save_file = &#39;./model.ckpt&#39;
+
+# Two Tensor Variables: weights and bias
+# 两个 Tensor 变量：权重和偏置项
+weights = tf.Variable(tf.truncated_normal([2, 3]))
+bias = tf.Variable(tf.truncated_normal([3]))
+
+# Class used to save and/or restore Tensor Variables
+# 用来存取 Tensor 变量的类
+saver = tf.train.Saver()
+
+with tf.Session() as sess:
+    # Initialize all the Variables
+    # 初始化所有变量
+    sess.run(tf.global_variables_initializer())
+
+    # Show the values of weights and bias
+   # 显示变量和权重
+    print(&#39;Weights:&#39;)
+    print(sess.run(weights))
+    print(&#39;Bias:&#39;)
+    print(sess.run(bias))
+
+    # Save the model
+    # 保存模型
+    saver.save(sess, save_file)
+</code></pre>
+<hr>
+<h3 id="加载训练进度"><a href="#加载训练进度" class="headerlink" title="加载训练进度"></a>加载训练进度</h3><p>把上面的代码所保存的进度（变量的值）加载到新模型里。<br>注意，你依然需要在 Python 中创建 weights 和 bias 两个 Tensor 。<br>使用 <code>tf.train.Saver.restore()</code> 函数把之前保存的数据加载到 weights 和 bias 当中。这里因为 <code>tf.train.Saver.restore()</code> 已经设定了 TensorFlow 变量，所以不需要再调用 <code>tf.global_variables_initializer()</code>了。</p>
+<pre><code class="lang-python">
+# Remove the previous weights and bias
+# 移除之前的权重和偏置项
+tf.reset_default_graph()
+
+# Two Variables: weights and bias
+# 两个变量：权重和偏置项
+weights = tf.Variable(tf.truncated_normal([2, 3]))
+bias = tf.Variable(tf.truncated_normal([3]))
+
+# Class used to save and/or restore Tensor Variables
+# 用来存取 Tensor 变量的类
+saver = tf.train.Saver()
+
+with tf.Session() as sess:
+    # Load the weights and bias
+    # 加载权重和偏置项
+    saver.restore(sess, save_file)
+
+    # Show the values of weights and bias
+    # 显示权重和偏置项
+    print(&#39;Weight:&#39;)
+    print(sess.run(weights))
+    print(&#39;Bias:&#39;)
+    print(sess.run(bias))
+</code></pre>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>多台电脑间的 Hexo 博客同步</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="多台电脑间的 Hexo 博客同步">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        多台电脑间的 Hexo 博客同步
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2016-10-08T13:43:08.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2016-10-08
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Hexo/">Hexo</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>由于文化程度低，所以只能靠使用多台电脑来满足随时写文章的需要。这里记录一下多电脑间同步博客的方法。</p>
+<hr>
+<h3 id="配置第一台电脑"><a href="#配置第一台电脑" class="headerlink" title="配置第一台电脑"></a>配置第一台电脑</h3><p>确保你在 <code>~/Documents/blog</code> 文件夹里</p>
+<pre><code class="lang-bash">$ pwd
+~/Documents/blog    ## 确保在正确的目录下
+</code></pre>
+<p>使用 Mac 自带的 Git 对 <code>~/Documents/blog</code> 文件夹进行追踪</p>
+<pre><code class="lang-bash">$ pwd
+~/Documents/blog    ## 确保在正确的目录下
+
+$ git init
+$ git add .
+$ git commit -m &quot;initial commit&quot;
+</code></pre>
+<p>到 Github 上新建一个 <code>repository</code>，命名为 <code>blog</code>（可以选自己喜欢的名字），然后把本地的 <code>blog</code> 文件夹推送到 Github 上</p>
+<pre><code class="lang-bash">$ pwd
+~/Documents/blog    ## 确保在正确的目录下
+
+$ git remote add origin git@github.com:你的用户名/blog.git
+$ git push -u origin master
+</code></pre>
+<p>找到自己喜欢的 Theme（主题），然后 fork 一份 Theme 的代码到自己的 Github 账户下面<br><img src="/2016/10/08/sync-blog-between-multiple-Macs/how_to_fork.jpg" title="fork a theme project"></p>
+<p>之所以要 fork 一份，是因为你很可能要进一步开发这个 Theme，把它改成你想要的样子。比如我的博客的主题选择的是 <a href="https://github.com/gaoryrt" target="_blank" rel="noopener">Gaoryrt</a> 老师开发出来的主题 <a href="https://github.com/gaoryrt/hexo-theme-pln" target="_blank" rel="noopener">pln</a>，但该主题只有 60% 的部分是我喜欢的，要改的地方非常多。</p>
+<p>有些玩家是主题（Themes）和文章（Posts）混在一起进行版本控制的，我则喜欢将两者分开维护，即<strong>「内容」和「样式」分离</strong>。所以接下来的操作就是要把 Theme 独立成为一个模块，在 Git 的版本控制下进行维护和修改。</p>
+<p>这里使用 Git 的 Submodule 功能，将博客的 Theme（主题样式）模块化出去</p>
+<pre><code class="lang-bash">$ cd ~/Documents/blog/themes
+$ git submodule add git@github.com:你的用户名/hexo-theme-pln.git
+</code></pre>
+<p>上面的两条命令会把你 fork 过来的主题下载到 <code>~/Documents/blog/themes</code> 目录下，由于主题名为 <code>pln</code>，所以我们会看到 <code>~/Documents/blog/themes</code> 目录下多了一个文件夹 <code>pln</code>，主题就存在这个文件夹里。</p>
+<p>此外 <code>git@github.com:你的用户名/hexo-theme-pln.git</code> 这串地址可以在你的 Github 账户下对应的 <code>repository</code> 中找到（当 fork 某个 project 之后，会在你的 Github 账户下生成一个  <code>repository</code> ）<br><img src="/2016/10/08/sync-blog-between-multiple-Macs/find_submodule_address.jpg" title="find submodule address"></p>
+<p>仔细的你可能已经注意到 <code>~/Documents/blog/themes/pln</code> 目录下有个 <code>.git</code> 文件，因为 <code>pln</code> 文件夹在被生成之后就被 Git 追踪了，这也意味着无需再在 <code>pln</code> 文件夹里使用 <code>git init</code> 来对它开启追踪。</p>
+<p><strong>注意！</strong>这时我们面对的是一个普通玩家从未遇到的情况：</p>
+<blockquote>
+<p><code>一个被 Git 追踪的文件夹里（blog 文件夹）存在着另一个同样被 Git 追踪的文件夹（pln 文件夹），这两个文件夹的根目录下都有一个 .git 文件</code></p>
+</blockquote>
+<p>Don’t panic! 这正是 Git 的 Submodule 功能的效果，目前一切正常。现在我们暂时先不管细节，带着这些看起来很重要的不自在继续前行。</p>
+<p>好，我们接着进入 <code>pln</code> 文件夹，并使用 <code>git checkout master</code>切换到 Git 的主分支 Master（之所以需要切换，是因为新生成的 Submodule 文件夹，即 <code>pln</code> 下，默认不在任何分支上，不像平时我们对某个文件夹 <code>git init</code> 之后就默认在主分支 Master）</p>
+<pre><code class="lang-bash">$ cd ~/Documents/blog/themes/pln
+$ git checkout master
+</code></pre>
+<p>然后修改 <code>pln</code> 文件夹里的内容得到满意的风格（如果已经满意可以不修改）</p>
+<pre><code class="lang-bash">$ pwd
+~/Documents/blog/themes/pln  ## 当前在 pln 目录，注意下面 sass 命里涉及到的相关路径
+
+$ git branch
+* master                     ## 确保在 master 分支上，不然 commit 就跑到 detached HEAD 上了
+
+## 对主题的样式做各种改动（和平时的 Git 操作一样）
+## 注意若是修改了 CSS 样式，要压缩生成 m.min.css 才能生效，网站因为最终采用的 CSS 是 m.min.css
+## main.scss 和 m.min.css 文件都在 blog/themes/pln/source/css 目录下
+$ sass --style compressed source/css/main.scss:source/css/m.min.css
+
+$ git add .
+$ git commit -m &quot;change pln theme to meet my taste&quot;
+</code></pre>
+<p>每次修改 <code>pln</code> 文件夹里的 <strong>css</strong> 代码后，只要运行上述 <code>sass</code> 命令，刷新<strong>本地</strong>网站就能看到修改后的 CSS Style 样式效果。还可以借助 <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome</a> 等浏览器的<strong>开发者模式</strong>来辅助探索 CSS 的效果。如此反复修改、运行、观察，直到满意为止。</p>
+<p>在 <code>pln</code> 里各种 <code>commit</code> 之后，我们终于感觉可以 <code>push</code> 了，于是</p>
+<pre><code class="lang-bash">$ pwd
+~/Documents/blog/themes/pln     ## 确保在正确的目录下
+
+$ git push
+</code></pre>
+<p>这样一来，Github 上我们之前 fork 过来的主题 <code>pln</code> 就成功同步更新了。</p>
+<p>这时我们切换到 <code>blog</code> 文件夹，运行 <code>git status</code>，可以看到 Terminal 提示 <code>pln</code> 文件夹有新的改动需要 commit</p>
+<pre><code class="lang-bash">$ cd ~/Documents/blog
+$ git status
+On branch master
+Your branch is up-to-date with &#39;origin/master&#39;.
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+  (commit or discard the untracked or modified content in submodules)
+
+  modified:   themes/pln (modified content)
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre>
+<p>于是我们</p>
+<pre><code class="lang-bash">$ pwd
+~/Documents/blog     ## 注意当前目录是 blog
+
+$ git add themes/pln
+$ git commit -m &quot;change submodule pln theme to meet my taste&quot;
+$ git push
+</code></pre>
+<p>完成后，我们 Github 上 <code>blog</code> 所对应的 <code>repository</code> 也就成功和同步更新了。</p>
+<hr>
+<h3 id="中场解说"><a href="#中场解说" class="headerlink" title="中场解说"></a>中场解说</h3><p>感谢各位玩家勇敢地保持疑惑直到现在，对于已经迷路的各位我准备用一个简单的总结把大家拉回来：</p>
+<ul>
+<li><p>以上对<strong>第一台电脑</strong>的各种操作一共涉及 <code>3</code> 个 Github 上的 <strong><code>Repository</code></strong>：</p>
+<ul>
+<li><code>你的用户名.github.io</code>（如 chpwang.github.io）</li>
+<li><code>blog</code></li>
+<li><code>pln</code></li>
+</ul>
+</li>
+<li><p>Hexo 会把 <code>blog</code> 文件夹里的各种内容转化成 html 文件部署到 <code>你的用户名.github.io</code> 这个 <code>repository</code> 上，所以互联网上通过 <code>http://你的用户名.github.io</code>这个网址看你的博客的人实际上看到的是 <code>你的用户名.github.io</code> 这个 <code>repository</code> 里的内容</p>
+</li>
+<li><p><code>blog</code> 这个 <code>repository</code> 是用来在别的电脑上同步博客内容的。Hexo 每次部署博客都要使用 <code>blog</code> 文件夹里的内容来生成相应的 html 文件。如果我们选择通过 <code>你的用户名.github.io</code> 这个 <code>repo</code> 而不是 <code>blog</code> 来同步博客的话，这意味着我们需要直接编辑 html（<code>你的用户名.github.io</code> 这个 <code>repo</code> 里全是 html 文件），进而无法享受 Markdown 格式排版带来的便利。</p>
+</li>
+<li><p>作为 Submodule 的文件夹（也就是 <code>pln</code>）如果改动了，则需要 commit 两次来保存（<code>pln</code> 文件夹里 commit 一次，<code>blog</code> 文件夹里也要 commit 一次），相应的也要通过两次 <code>git push</code> 来同步远程的两个 <code>repo</code></p>
+</li>
+<li><p><code>blog</code> 文件夹里的改动仅需要 commit 一次保存</p>
+</li>
+</ul>
+<hr>
+<h3 id="配置第二台电脑和之后的电脑"><a href="#配置第二台电脑和之后的电脑" class="headerlink" title="配置第二台电脑和之后的电脑"></a>配置第二台电脑和之后的电脑</h3><p>搞定了第一台电脑的配置，之后就简单多了。</p>
+<p>首先必须确保第二台电脑安装了 <a href="http://brew.sh" target="_blank" rel="noopener">Hombrew</a> , Node.js, <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 和 <a href="http://www.ruanyifeng.com/blog/2012/06/sass.html" target="_blank" rel="noopener">SASS</a></p>
+<pre><code class="lang-bash">## 这条命令安装 Homebrew
+$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+
+## 上条命令完成后，就可以通过 Homebrew 安装 Node.js
+$ brew install node
+
+## Node.js 安装后，会附带 npm（node package manager）工具，可用它来搜索、下载、管理 Node.js 套件
+## 接下来使用 npm 安装 Hexo
+$ npm install hexo-cli -g
+
+## 安装 SASS - 将 .scss 文件编译成 .css 文件的工具，后面会用于压缩整合 main.scss 文件
+## 压缩命令为: sass --style compressed main.scss:m.min.css    
+$ brew install node-sass
+</code></pre>
+<p>然后在第二台电脑上 <code>git clone</code>，先拉 parent repository，也就是 <code>blog</code></p>
+<pre><code class="lang-bash">$ pwd
+~/Documents    
+## 选择一个目录准备 git clone
+
+$ git clone git@github.com:你的用户名/blog.git
+## 这条命令会在当前目录下生成一个 blog 文件夹
+</code></pre>
+<p><strong>注意</strong>，<code>git clone</code> 之后，虽然 <code>~/Documents/blog/themes/pln</code> 文件夹存在，但里面是空的，因为这是我们第一次在这台电脑上建立 <code>blog</code> 这个文件夹。这第一次，需要我们使用以下两条命令同步作为 Submodule 的文件夹，也就是 <code>pln</code></p>
+<pre><code class="lang-bash">$ pwd
+~/Documents/blog
+
+## 注意此时的目录是 blog，我们要在这个 Parent Directory 下运行下两条命令
+
+$ git submodule init       ## 这条命令会读取所有 submodule 的远端地址，这里是 pln 这个 repo 的地址
+$ git submodule update     ## 这条命令会把 pln 这个 repo 的内容从远端拉下来
+</code></pre>
+<p>第一次建立之后，如果远端的 <code>pln</code> 文件夹有更新，只需使用 <code>git submodule update</code> 来同步即可，不必再运行 <code>git submodule init</code> 了</p>
+<pre><code class="lang-bash">## 如果不是第一次建立属于 Submodule 文件夹，只需要运行 git submodule update 命令即可（文件夹已存在，例如本例子中的 pln 文件夹就属于 Submodule 文件夹）
+$ pwd
+~/Documents/blog
+
+## 注意此时的目录是 blog，我们要在这个 Parent Directory 下运行 git submodule update
+$ git submodule update
+</code></pre>
+<p><strong>接下来这步很重要</strong>，因为非常反直觉。<br>第一，第一次使用 <code>git submodule update</code> 同步后，我们需要手动切回 master 分支。</p>
+<p>之所以要运行 <code>git checkout master</code> 手动切分支，是因为<strong>每当</strong>我们运行 <code>git submodule update</code> 后，submodule 文件夹（即文件夹 <code>pln</code>）的 Git 默认会指向一个 detached HEAD，也就是说，我们当前并没有处于任何分支上，所以我们需要 <code>git checkout</code> 切换回 master 分支，否则我们的在 <code>pln</code> 文件夹下的所有 commit 都不在任何分支上。</p>
+<p>如果不是第一次使用 <code>git submodule update</code>，当远端有更新内容被拉下来时，所更新的内容会在一个 detached HEAD 上，我们要通过下面的操作将它合并到 master 分支上。</p>
+<pre><code class="lang-bash">$ cd ~/Documents/blog/themes/pln     ## 注意 pln 是作为 submodule 的文件夹
+$ git status                         ## 查看状态可看到当前处在一个 detached 的 commit 上
+* (HEAD detached at e522ed6)
+  master
+
+$ git checkout master         ## 手动切回 master 分支
+Previous HEAD position was e522ed6... change logo again
+Switched to branch &#39;master&#39;
+
+$ git merge e522ed6           ## 将 detached 的 commit 合并到 master 分支上
+</code></pre>
+<p>假设你忘了切回 master 分支就改动 <code>pln</code>，那怎么办？别怕，先 commit 保存你的改动，然后像上面一样切回 master 分支，再把 commit 合并到分支上</p>
+<pre><code class="lang-bash">$ git add .
+$ git commit -m &quot;make some changes but forget to change to branch master&quot;
+
+$ git checkout master         ## 手动切回 master 分支
+Warning: you are leaving 1 commit behind, not connected to
+any of your branches:
+
+  bcfc7fb make some changes but forget to change to branch master
+
+If you want to keep it by creating a new branch, this may be a good time
+to do so with:
+
+ git branch &lt;new-branch-name&gt; bcfc7fb
+
+Switched to branch &#39;master&#39;
+Your branch is up-to-date with &#39;origin/master&#39;.
+
+$ git merge bcfc7fb           ## 使用 hash 值 bcfc7fb，将其对应的 commit 合并到 master 分支上
+</code></pre>
+<p>这样，就可以救回你对 <code>pln</code> 文件夹的改动了。</p>
+<p>大致对以上有印象后，现在切换回 <code>blog</code> 文件夹运行 <code>npm install</code> 。这里需要注意的是，如果使用代理运行 npm install 可能会报错乃至失败（例如 proxychains4 npm install），如果失败请不要使用代理。一些其他报错可参考<a href="https://zhangangs.github.io/2018/07/10/解决npm警告：WARN%20registry%20Unexpected%20warning%20for%20httpsregistry.npmjs.org%20Miscellaneous%20Warning%20EINTEGRITY/" target="_blank" rel="noopener">这里</a>或<a href="https://blog.csdn.net/genius_yym/article/details/84645915" target="_blank" rel="noopener">这里</a>。</p>
+<pre><code class="lang-bash">$ cd ~/Documents/blog
+$ npm install         ## 执行这条命令，npm 会根据 package.json 文件安装所有需要的套件
+
+## 刚才 git clone 把云端的文件拉下来之后，blog 文件夹下一个叫 package.json 的文件也被拉了下来，npm install 命令会通过它得知需要安装的套件
+
+# 可以使用以下两个命令来更新和查看 package.json 里所记录的套件
+$ npm update    ## 更新套件
+$ npm outdated  ## 查看哪些套件过期（即有新版本）
+</code></pre>
+<p><code>这里要提示一下，npm 这种东西，安全性其实很可疑，个人博客将就着用就行了，但不建议用在敏感产品上，参见</code><a href="https://ruby-china.org/topics/38345" target="_blank" rel="noopener"><code>这篇帖子</code></a></p>
+<p>至此，第二台电脑就同步配置完成，可以继续写文章发布了。总结一下：</p>
+<ol>
+<li><p>使用以下命令写文章和发布</p>
+<pre><code class="lang-bash">$ hexo new &quot;文章标题&quot;
+
+## 编辑文章
+
+......
+
+$ hexo clean   ## 清空缓存
+$ hexo g       ## 生成静态页面至 public 目录
+$ hexo server  ## 开启 Server（默认网址 http://localhost:4000/，&#39;ctrl + c&#39; 退出）
+$ hexo d       ## 部署到 GitHub
+</code></pre>
+</li>
+<li><p>更改 Submodule 文件夹后（比如 <code>pln</code> 文件夹）需要 commit 两次，里外各一次。同样地，此时需要两次 <code>git push</code> 来同步远程的两个 <code>repo</code></p>
+</li>
+<li><p>更改 parent 文件夹 <code>blog</code> 后只需要 <code>git commit</code> 一次，<code>git push</code> 一次</p>
+</li>
+<li><p>更新本地文件时，先在外层文件夹 <code>blog</code> 中运行 <code>git pull</code> 来更新 <code>blog</code>，然后运行 <code>git submodule update</code> 来更新 submodule 文件夹</p>
+</li>
+<li><p>每次运行 <code>git submodule update</code> 后，submodule 文件夹里的 Git 默认会指向一个 <strong>detached HEAD</strong>，要记得切回 master 分支合并一下从远程更新过来的 commits 再继续。确实不小心忘记了可以回到上面的教程看一下怎么救回来。</p>
+</li>
+<li><p>有时运行 <code>git submodule update</code> 同步子模块时会出现以下报错。这是因为前一台设备在改动 submodule 文件夹之后（本例中为 <code>themes/pln</code> ），忘记使用 <code>git push</code> 推送到远程服务器了，所以命令在请求远程 Server 时，就找不到 <code>commit e8e0dc...</code>（总之，更新 submodule 文件夹需要两次 <code>git push</code>，别忘了哈）</p>
+<pre><code class="lang-bash">## 由于只在 blog 文件夹里 git push，忘记在 blog/themes/pln 里 git push，所以 Git 知道 commit e8e0dc... 的存在，但是却找不到它
+$ git submodule update
+error: Server does not allow request for unadvertised object e8e0dc399b38f6ba01720c65bd64a1bdb9b68755
+Fetched in submodule path &#39;themes/pln&#39;, but it did not contain e8e0dc399b38f6ba01720c65bd64a1bdb9b68755. Direct fetching of that commit failed.
+</code></pre>
+</li>
+<li><p>如果 Node.js 的套件在前一台设备上有更新，则意味着 Git 记录了新的 <code>package.json</code> 文件，此时从 submodule 文件夹里切换回 <code>blog</code> 文件夹运行 <code>npm install</code> 更新即可（命令参考上面的代码）</p>
+</li>
+</ol>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

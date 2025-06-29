@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>研讨-计算机科学基础</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="研讨-计算机科学基础">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        研讨-计算机科学基础
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2020-04-14T12:45:23.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2020-04-14
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Programming-Language/">Programming Language</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <h3 id="研讨-1："><a href="#研讨-1：" class="headerlink" title="研讨 1："></a>研讨 1：</h3><p><strong> <code>function f(x) { return x*2; }</code> 是一个语句（statement），而 <code>(x) =&gt; { return x*2; }</code> 却是一个表达式（expression）。为什么？</strong></p>
+<p><strong>我：</strong>这个时代的计算机会对<strong>表达式</strong>求值，于是可以认为<strong>表达式</strong>是有返回值的，进而通过是否有返回值来判断一个（串）符号，对计算机来说是否是<strong>表达式</strong>。<strong>语句</strong>只是声明一件事情，通常没有返回值（计算机一般会对语句的输入返回 <em>undefined</em> 字样，以表示没有返回值）。</p>
+<p><code>function f(x) { return x*2; }</code> 没有返回值，且它的意思是定义（创造）一个函数，所以它是<strong>语句</strong>。<code>(x) =&gt; { return x*2; }</code> 的返回值是 <code>(x) =&gt; { return x*2; }</code> ，所以从返回值的角度它是个典型的<strong>表达式</strong>。</p>
+<p><strong>老师：</strong>“回复 undefined 的都是语句，undefined 的意思是‘没有值’。<code>function f(x) { return x*2; }</code>等价于赋值语句。它创造了一个新的变量<code>f</code>，但这个动作本身没有值。被创造的变量<code>f</code>却是一个表达式，它有值。要区分‘创造变量的动作”和“变量本身’。”</p>
+<p><strong>老师：</strong>“打个比方，‘鞋子’是有值的表达式，‘把鞋放进盒子里’却没有值，它是一个动作。”</p>
+<p><code>注释1：尽管类似</code><a href="https://www.haskell.org" target="_blank" rel="noopener"><code>Haskell</code></a><code>的语言还能看到</code><a href="https://en.wikipedia.org/wiki/Lazy_evaluation" target="_blank" rel="noopener"><code>Lazy evaluation</code></a><code>这样的惰性求值设计，不过老师提到人类在走了很多弯路、踩了很多坑之后总结出的设计结论是：要先对表达式求值，之后再进行下一步计算或者传递。应当认为“活性求值”（</code><a href="https://en.wikipedia.org/wiki/Eager_evaluation" target="_blank" rel="noopener"><code>eager evaluation</code></a><code>）比惰性求值（lazy evaluation）更科学。</code></p>
+<p><code>注释2：有些语言的语句（statement）也有返回值。比如在</code><a href="https://en.wikipedia.org/wiki/History_of_the_Scheme_programming_language" target="_blank" rel="noopener"><code>Scheme</code></a><code>语言中，语句的返回值就是 void 。之所以这样，是因为 Scheme 的设计者希望该语言中不需要区分表达式和语句，这样整个语言的语法结构就非常简洁优雅，其解释器相比其他语言的解释器会少处理很多不必要的东西。</code></p>
+<p><code>注释3：从字符上看虽然表达式 (x) =&gt; { return x*2; } 的返回值是它本身，其实不应简单认为是它本身。真实情况是我们输入了 (x) =&gt; { return x*2; } 这一字符串（a pattern of rules），然后计算机对该字符串求值（解释），就得出这个值是一个函数，于是计算机返回这个值，即这个函数。然后这个函数的输出形式被设计成相同的字符串。就好像我们输入数字 3 ，计算机返回数字 3 ，这两个 3 不是同样的 3 ，前者是以字符形式输入的表达式，后者是值（计算机对输入解释后的结果）。老师给的一个形象的例子是，我们输入的是榨汁机的图纸，计算机给我们的是一个真正的榨汁机（求值的结果）。区别这两者会对今后的思维模型有重要的作用。</code></p>
+<p><code>注释4：该思考题中讨论的代码用的是 Javascript 语言。</code></p>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

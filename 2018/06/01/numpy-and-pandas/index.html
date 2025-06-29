@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>NumPy 和 Pandas 入门</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="NumPy 和 Pandas 入门">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        NumPy 和 Pandas 入门
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2018-05-31T20:08:41.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2018-06-01
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Machine-Learning/">Machine Learning</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><a href="https://docs.scipy.org/doc/numpy/user/quickstart.html" target="_blank" rel="noopener">numpy</a> - Numerical Python 和 <a href="https://pandas.pydata.org" target="_blank" rel="noopener">pandas</a> - Python Data Analysis Library 是 Python 语言处理数据时常用的两个库，专门用来进行诸如线性代数方面的计算。通过 Python 的库管理软件 Anaconda 等可以很容易地安装（进一步查看<a href="/2018/05/27/set-up-anaconda/">安装和配置 Anaconda </a> ）</p>
+<pre><code class="lang-bash">## 同时安装 numpy 和 pandas 两个软件包（Packages）- 左边的 (py3) 表示当前处于 Anaconda 的虚拟环境 py3 中
+(py3) $ conda install numpy pandas
+</code></pre>
+<pre><code class="lang-python"># 载入 numpy 和 pandas - 演示文件 ~/demo_script.py 
+import pandas as pd
+import numpy as np
+
+# code block
+...
+...
+</code></pre>
+<p>NumPy 和 Pandas 包含很多好用的东西，这里只介绍常用的几个数据类型和相应的函数，更多风骚操作还是得看官方文档和 Google 。</p>
+<p>PS：<br>为了在描述过程中区分 numpy 里的 ndArray 数据类型和 Pandas 里的 Series 类型，下文对于 ndArray 将使用 <strong>position</strong> 来称呼它的引用，而对于 Series 则用 <strong>index</strong> （Series 也有 <strong>position</strong>）。你将很快看到两者的不同。</p>
+<hr>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>使用 NumPy 和 Pandas 这两个库时，通常是使用里面的三个数据类型：</p>
+<ul>
+<li>NumPy 里的 <strong>ndArray</strong> 类型（也常被非官方地说成 Numpy 的 Array 类型）</li>
+<li>Pandas 里的 <strong>Series</strong> 类型</li>
+<li>Pandas 里的 <strong>DataFrame</strong> 类型 - 其中每列 (column) 都是一个 Series</li>
+</ul>
+<p>这些数据类型包含了常见的分析计算数据的方法 (methods)，其计算数据的速度比 Python 自带的 list 等类型要快，以下是它们的特点和区别：</p>
+<ol>
+<li>NumPy 里的 <strong>ndArray</strong> 类型要求其中储存的<strong>数据类型必须一致</strong>，所以它主要用来处理大规模类型相同的 2 维或多维数据；</li>
+<li>Pandas 里的 <strong>Series</strong> 类型也要求其中储存的<strong>数据类型必须一致</strong>，不过它储存的数据是一维的；</li>
+<li>Pandas 里的 <strong>DataFrame</strong> 类型允许各个列 (column) 之间的<strong>数据类型不同</strong>（同列数据得相同）- 它的每个列可以看成一个独立的 <strong>Series</strong>；</li>
+</ol>
+<hr>
+<p>要进一步查询 NumPy 使用方法，除了<a href="https://pandas.pydata.org/pandas-docs/stable/" target="_blank" rel="noopener"> NumPy 官方文档</a>，还可参看 <a href="/2018/09/17/numpy-advanced-features/">Numpy 进阶</a></p>
+<p>要进一步查询 Pandas 使用方法，除了<a href="https://docs.scipy.org/doc/numpy/user/quickstart.html" target="_blank" rel="noopener"> Pandas 官方文档</a>，还可参看 <a href="/2018/09/17/pandas-advanced-features/">Pandas 进阶</a></p>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

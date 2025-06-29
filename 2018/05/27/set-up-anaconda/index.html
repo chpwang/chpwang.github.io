@@ -1,0 +1,330 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>安装和配置 Anaconda</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="安装和配置 Anaconda">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        安装和配置 Anaconda
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2018-05-27T06:17:34.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2018-05-27
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Machine-Learning/">Machine Learning</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <h3 id="Anaconda-简介"><a href="#Anaconda-简介" class="headerlink" title="Anaconda 简介"></a>Anaconda 简介</h3><p><strong>Anaconda</strong> 是一个软件分发平台（distribution of software），自带了 <strong>conda</strong> 这个管理环境和软件包的工具，是数据分析行业里常用的工具之一（管理各种工具的工具）。</p>
+<p>不过 <strong>Anaconda</strong> 这个平台上的软件都是专门针对数据分析的，通常会结合 Python 更加一般性的 packages 管理工具 <strong>pip</strong> 来使用，以便能接触到（access）更多的软件和工具。</p>
+<p><strong>Anaconda</strong> 的作用：</p>
+<ol>
+<li>每个项目（Project）有其对应的运行环境，人们用其中的 <strong>conda</strong> 隔离开不同项目的环境，以免相互冲突；</li>
+<li>方便人们下载各种数据分析所需要的库（Libraries）和软件包（Packages），类似软件商店；</li>
+</ol>
+<hr>
+<h3 id="安装-Anaconda-Windows"><a href="#安装-Anaconda-Windows" class="headerlink" title="安装 Anaconda - Windows"></a>安装 Anaconda - Windows</h3><p>Windows 下的 Anaconda 只需去官网下载对应的<a href="https://www.anaconda.com/download/#windows" target="_blank" rel="noopener">软件包</a> ，根据提示安装即可。安装完成打开后是可视化的操作界面，「新建环境」和「安装软件包函数库」都可以使用可视化界面操作完成，唯一要注意的是网络方面如果使用代理上网，或者系统防火墙防护级别过高等，会导致 Anaconda 打开之后卡死在 loading application 这一状态。这时只需要取消代理，或者关掉防火墙即可解决，参见<a href="https://github.com/ContinuumIO/anaconda-issues/issues/9864" target="_blank" rel="noopener">这里</a>。</p>
+<hr>
+<h3 id="安装-Anaconda-macOS"><a href="#安装-Anaconda-macOS" class="headerlink" title="安装 Anaconda - macOS"></a>安装 Anaconda - macOS</h3><p>到 <a href="https://www.anaconda.com/download/#macos" target="_blank" rel="noopener">Anaconda 官网</a> 下载 macOS 系统对应的软件包（一般选择 Python 3.x version 的），然后根据提示安装。</p>
+<p>安装好之后，打开终端 Terminal 查看</p>
+<pre><code class="lang-bash">## 查看 conda 的版本
+$ conda --version
+conda 4.5.4
+
+## 查看 python 的版本 - 安装 Anaconda 不会影响 Mac 电脑里之前安装的 Python ，不过系统默认使用的 Python 会变成 Anaconda 自带的那个版本
+$ python --version
+Python 3.6.4 :: Anaconda, Inc.
+</code></pre>
+<p>PS:<br>虽然 Anaconda 的安装默认会设置 Bash Shell 的环境变量，但若系统仍提示找不到 <code>conda</code> 命令（command not found），则要使用命令 <code>echo $PATH</code> 看路径 <code>/anaconda3/bin/</code> 是否在环境变量 $PATH 里，不在就要自行添加，这样才能顺利识别相关命令</p>
+<p>若终端用的是 <a href="https://fishshell.com" target="_blank" rel="noopener">Fish Shell</a> ，添加 Anaconda 路径到环境变量的方式如下：</p>
+<pre><code class="lang-bash">## 以下命令会将 Anaconda 的路径 /anaconda3/bin/ 添加到 $fish_user_paths ，进而添加到 $PATH 这个环境变量里
+$ set -U fish_user_paths /anaconda3/bin/ $fish_user_paths
+
+## 添加路径之后就能正确识别 conda 这个命令了
+$ conda --version
+conda 4.5.4
+
+## 如果 Anaconda 和 Homebrew 的软件冲突（比如 Curl），可注销 $fish_user_paths 中的 /anaconda3/bin/ 路径来暂时隔离开 Anaconda
+## 变量 $fish_user_paths 是一个 list ，第一个元素是 fish_user_paths[1]
+$ echo $fish_user_paths
+/anaconda3/bin/
+$ set --erase --universal fish_user_paths[1]
+</code></pre>
+<p>此外还需参考 <code>/anaconda3/etc/fish/conf.d/conda.fish</code> 文件的注释设置 <code>~/.config/fish/config.fish</code> 文件，才能够在 Fish Shell 里使用 <code>conda activate [环境名]</code> 激活或切换进入指定环境，使用 <code>conda deactivate</code> 来退出当前环境，进入 <strong>base</strong> 环境（即初始的基本环境）。<br>推荐参考 Github 上的这个 <a href="https://github.com/kalefranz/conda/blob/5dd547f754a52350199dcc975848c1969d6c8931/shell/conda.fish" target="_blank" rel="noopener"><code>conda.fish</code></a> 来调整 Anaconda 自带的 conda.fish 文件，比如设置环境名（env name）显示在左侧。</p>
+<p>PS:<br>Bash Shell 用的是 <code>source activate [环境名]</code> 进入环境，见下文。在 Fish Shell 中，<code>source</code> 这个关键词被占用了，所以只能换别的，默认设置是换成 <code>conda</code></p>
+<hr>
+<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><p>为了保证下载速度，可考虑设置的是 Anaconda 的软件下载源，即编辑 <code>~/.condarc</code> 文件，添加相应的镜像地址，否则每次下载都会访问默认的国外网站下载软件，速度可能会因此很慢。不过如果设置了国内的镜像地址，软件版本可能会滞后于世界。所以设置与否，看个人情况而定。</p>
+<pre><code class="lang-bash">## 使用 vi 编辑 .condarc 文件 - 你也可以使用其他方式编辑
+$ vi ~/.condarc
+
+## 编辑后的 .condarc 文件内容如下 - 这里添加的是清华大学的软件镜像地址，通常会比世界滞后两个代
+$ cat ~/.condarc
+channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+  - defaults
+show_channel_urls: true
+ssl_verify: true
+</code></pre>
+<hr>
+<h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><p>一开始我们所处的是 conda 的默认环境（default conda environment），建议经常升级该默认环境，可以避免一些 Bug 和错误</p>
+<pre><code class="lang-bash">## 升级 conda 本身
+$ conda update conda
+
+## 升级 conda 旗下所有可升级的软件（包括 conda 本身）- 虽然此命令包括 conda 本身的升级，但建议先运行上一命令单独升级 conda 之后再运行这个升级全部，因为有用户直接升级全部软件时会报错 
+$ conda update --all
+$ conda upgrade --all  # conda upgrade is Alias for conda update
+</code></pre>
+<p>接着是 Anaconda 基本的工作流程</p>
+<pre><code class="lang-bash">## 新建一个环境，指定该环境中你希望安装的 Packages ，以便之后在此环境中开发某项目
+$ conda create -n [环境名称] [Package 1] [Package 2] [Package 3] ...
+
+## Examples - 一个 hyphen 代表缩写（如例子里的 -n），两个 hyphens 代表全称（如例子里的 --name）
+$ conda create -n my_env numpy
+$ conda create --name py3 python=3.6 numpy pandas    ## 还可以指定所用 Python 或者 Package 的版本
+</code></pre>
+<p>使用 <code>activate</code> 和 <code>deactivate</code> 来进入和切换不同的环境。特别地，在 Windows 系统下，<code>activate</code> 一个新环境之前，最好先 <code>deactivate</code> 当前环境，参见<a href="https://conda.io/docs/user-guide/tasks/manage-environments.html#deactivating-an-environment" target="_blank" rel="noopener">这里</a></p>
+<pre><code class="lang-bash">## 进入（或者说切换到）某个环境里 - 注意 fish shell 参照上面的官方设置后，命令是 conda activate（没有 source）
+$ source activate [环境名称]
+
+## Example - 切换后，提示符钱的括号里的内容会显示当前所在的环境名称
+$ source activate tea_facts
+(tea_facts) $
+
+## 离开（或者说注销）某个环境里 - 注意 fish shell 里是 conda deactivate（没有 source）
+(tea_facts) $ source deactivate
+$
+
+## 离开（或者说注销）tea_facts 环境后，进入 py3 环境
+$ source activate py3
+(py3) $
+</code></pre>
+<p>接下来就是在环境中安装各种软件库。此过程中， Conda 会自动安装对应的依赖项。例如 <code>pandas</code> 依赖于 <code>numpy</code>（需要有 numpy 才能使用），则安装 <code>pandas</code> 时会同时安装 <code>numpy</code>（如果它之前没被安装的话），即 <code>conda install pandas</code> 和 <code>conda install numpy pandas</code> 的效果一样</p>
+<pre><code class="lang-bash">## 查看当前所处环境 py3 中安装的所有软件 - 会输出一个目录列表用以查看
+(py3) $ conda list
+
+## 查看是否安装了名字含有 &quot;notebook&quot; 的 pakage
+(py3) $ conda list | grep -ir &quot;notebook&quot;
+(standard input):notebook         5.5.0           py3_0
+
+## 在当前环境 py3 里安装所需的软件包（Package）- 此安装命令是幂等的，即多次运行相同的安装命令安装相同的 Package，效果和运行一次一样  
+(py3) $ conda install numpy
+(py3) $ conda install jupyter notebook  # 注意 jupyter notebook 是两个软件包，而不是一个
+
+## 也可以同时安装多个软件包（Packages）- 下面安装的是常用的深度学习软件包组合
+(py3) $ conda install numpy pandas jupyter notebook matplotlib pillow tqdm scikit-learn 
+
+## 还可以指定所装软件包的版本
+(py3) $ conda install numpy=1.10
+
+## 卸载软件
+(py3) $ conda remove numpy
+
+## 更新软件
+(py3) $ conda update numpy
+
+## 搜索名字包含 beautifulsoup 字符串的软件
+(py3) $ conda search &#39;*beautifulsoup*&#39;
+</code></pre>
+<p>PS:<br>一些库或者框架除了可以使用 <code>conda search</code> 之外，还可以去 <a href="https://anaconda.org/conda-forge" target="_blank" rel="noopener">conda-forge</a> 查看安装方法，比如 <a href="https://anaconda.org/conda-forge/tensorflow" target="_blank" rel="noopener">TensorFlow</a> 的安装；</p>
+<hr>
+<h3 id="软件重复问题"><a href="#软件重复问题" class="headerlink" title="软件重复问题"></a>软件重复问题</h3><p>有时候，我们会遇到开发环境中有两个不同版本的软件库：<a href="https://stackoverflow.com/questions/43253884/conda-showing-two-versions-of-requests-library" target="_blank" rel="noopener">Conda showing two versions of library</a></p>
+<pre><code class="lang-bash">## 当前环境安装了两个不同版本的 tensorflow ，一个来源是 pip ，另一个则是 conda-forge
+(py3) $ conda list | grep -ir &quot;tensorflow&quot;
+(standard input):tensorflow       1.0.0          &lt;pip&gt;
+(standard input):tensorflow       1.10.0        py35_0    conda-forge
+</code></pre>
+<p>为了避免问题，我们希望只留其中一个，此处是留使用 conda 安装的那个：</p>
+<pre><code class="lang-bash">## 这里要按顺序移除，然后再重装，如果不按顺序，问题会得不到解决
+## 第一步，先移除 conda 的 tensorflow
+(py3) $ conda remove tensorflow
+
+## 第二步，移除 pip 的 tensorflow
+(py3) $ pip uninstall tensorflow
+
+## 第三步，重新安装 conda 的 tensorflow
+(py3) $ conda install -c conda-forge tensorflow
+
+## 查看确认
+(py3) $ conda list | grep -ir &quot;tensorflow&quot;
+(standard input):tensorflow       1.10.0        py35_0    conda-forge
+</code></pre>
+<hr>
+<h3 id="导出环境配置"><a href="#导出环境配置" class="headerlink" title="导出环境配置"></a>导出环境配置</h3><p>将配置清单保存成 <code>.yml</code> 文件分享给他人能让对方快速搭建出一模一样的运行环境，以便测试和运行我们的代码</p>
+<pre><code class="lang-bash">## 导出当前环境的配置清单，并储存到当前目录下的 environment.yml 文件里
+(py3) $ conda env export &gt; environment.yml
+
+## 导入 environment.yml 文件，读取里面的配置信息，并依照该配置创建一个环境
+## 新建的环境名由 .yml 配置文件中的第一行设定（比如文件第一行是 name: aind-dl，则新环境名为 aind-dl）
+$ conda env create -f environment.yml
+
+## 查看所有环境 - 输出一个列表形式的结果，默认环境的名字叫做 root
+$ conda env list
+
+## 删除一个环境
+$ conda env remove -n env_name
+</code></pre>
+<p>当我们将代码分享在 Github 上的时候，要同时附上 Anaconda 的环境的配置清单文件 <code>*.yml</code> ，甚至要再加上一个 pip 的配置文件 <code>requirements.txt</code> （用 <a href="https://pip.pypa.io/en/stable/reference/pip_freeze/" target="_blank" rel="noopener"><code>pip freeze</code></a> 命令输出该配置文件），以便他人能快速配置出相应的环境，运行我们的代码。</p>
+<hr>
+<p>有关 Anaconda 的更多操作，还可以参考：</p>
+<ul>
+<li><a href="https://www.jianshu.com/p/d2e15200ee9b" target="_blank" rel="noopener">Anaconda 多环境多版本 Python 配置指导</a></li>
+<li><a href="https://foofish.net/compatible-py2-and-py3.html" target="_blank" rel="noopener">用 Anaconda 完美解决 Python2 和 python3 共存问题</a></li>
+</ul>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

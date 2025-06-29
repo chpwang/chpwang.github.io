@@ -1,0 +1,680 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>Scheme 的基本语法和编程操作</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="Scheme 的基本语法和编程操作">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Scheme 的基本语法和编程操作
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2022-03-24T14:59:34.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2022-03-24
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Programming-Language/">Programming Language</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p><a href="https://en.wikipedia.org/wiki/Lisp_(programming_language" target="_blank" rel="noopener"><strong>Lisp</strong></a> 这个语言的家族里包括了 <a href="https://schemers.org" target="_blank" rel="noopener">Scheme</a> 、<a href="https://racket-lang.org" target="_blank" rel="noopener">Racket</a> 、<a href="https://en.wikipedia.org/wiki/Common_Lisp" target="_blank" rel="noopener">Common Lisp</a> 、<a href="https://en.wikipedia.org/wiki/Emacs_Lisp" target="_blank" rel="noopener">Emacs Lisp</a> 等各式各样以「<strong>括号</strong>」、「<strong>lambda</strong>」和「<strong>链表</strong>（list）」为特征的语言。</p>
+<p><a href="https://en.wikipedia.org/wiki/Daniel_P._Friedman" target="_blank" rel="noopener">Daniel Paul Friedman</a> 算是 <strong>Scheme</strong> 的带头人物，尽管 <a href="https://en.wikipedia.org/wiki/History_of_the_Scheme_programming_language" target="_blank" rel="noopener">Scheme</a> 最初不是他发明的。然后这个 <a href="https://racket-lang.org" target="_blank" rel="noopener">Racket</a> 其实本身是属于一种 <a href="https://schemers.org" target="_blank" rel="noopener">Scheme</a> 的（即 <strong>Racket</strong> 应算是 <strong>Scheme</strong> 语言的一个实现）。但是呢，<a href="https://racket-lang.org/plt.html" target="_blank" rel="noopener">PLT</a> 这帮人他们现在不承认他们是 <strong>Scheme</strong> 了，就另外起了一个名叫 <strong>Racket</strong> （以前的名字叫 <strong>PLT Scheme</strong>，改名试图脱离 Scheme 的阴影。实际上，好像并没有比 Scheme 超出多少）。反正这帮人的头目应该就是 <a href="https://mitpress.mit.edu/books/little-schemer-fourth-edition" target="_blank" rel="noopener"><em>The Little Schemer</em></a> 的第二作者、同时也是 <a href="https://en.wikipedia.org/wiki/Daniel_P._Friedman" target="_blank" rel="noopener">Dan Friedman</a> （也许是最厉害）的学生：<a href="https://felleisen.org/matthias/" target="_blank" rel="noopener">Matthias Felleisen</a> 。</p>
+<img src="/2022/03/24/scheme-basics-and-IDE/mit-dnj-2.png" title="Matthias Felleisen">
+<p>早期的 <strong>Lisp</strong> 语言的函数就是一个符号链表，它不会自带一个 <code>env</code>（解释器中的闭包环境，或者说上下文语境），会出现严重的问题：<a href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scope_vs._dynamic_scope" target="_blank" rel="noopener">Dynamic Scoping</a> 。<strong>Scheme</strong> 不是第一个实现针对该问题的 <a href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scope_vs._dynamic_scope" target="_blank" rel="noopener">Lexical Scoping</a> 特性的编程语言，但确实是第一个实现 <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)" target="_blank" rel="noopener">Closure</a>（闭包）的 <strong>Lisp</strong> 语言。</p>
+<p><strong>Scheme</strong> 语言有一个很好的特征，就是你可以把你的「<strong>代码</strong>」，用很简单的方式就变成「<strong>数据</strong>」，这将非常适合用来实现各种语言和语言特性。如果用其他编程语言，比如 <a href="https://www.javascript.com" target="_blank" rel="noopener">JavaScript</a> ，来做这件事的话，那种数据结构的形式（ <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank" rel="noopener">AST</a> 抽象语法树）会让人写得很痛苦，看起来也不像正常的代码。</p>
+<p>其他搜索时的八卦：</p>
+<ul>
+<li>经 <a href="https://github.com/melp" target="_blank" rel="noopener">melp</a> 同学提醒，Racket 从 8.0 版本开始，默认实现（implementation）会变成 <a href="https://blog.racket-lang.org/2021/01/racket-status.html" target="_blank" rel="noopener">Racket on Chez Scheme (Racket CS) </a></li>
+<li>查资料的时候还发现一篇关于 Racket 和 Chez Scheme 的文章：<a href="https://beautifulracket.com/appendix/racket-and-chez-scheme.html" target="_blank" rel="noopener"><em>Thoughts on Racket &amp; Chez Scheme</em></a> 。该文章出自 <a href="https://beautifulracket.com" target="_blank" rel="noopener"><em>Beautiful Racket by Matthew Butterick</em></a> 这本书</li>
+<li><p>还搜到一个 2014 年写的 <a href="https://the-little-schemer.readthedocs.io/zh_CN/latest/index.html#" target="_blank" rel="noopener"><em>The Little Schemer 笔记</em></a> ，作者 <a href="http://chenjiee815.github.io" target="_blank" rel="noopener">chenjiee815</a> 似乎也很久没<a href="https://readthedocs.org/profiles/chenjiee815/" target="_blank" rel="noopener">更新</a>了，2014 年后也不再活跃。由于好奇，尝试继续深入了一下，发现 chenjiee815（<a href="https://www.linkedin.com/in/杰-陈-b55a2285/?originalSubdomain=cn" target="_blank" rel="noopener">陈杰</a>）这家伙 2009 年从南京的中国药科大学毕业，本科专业居然是「中药学」。毕业后工作，一年后考计算机研究生失败，转行进行计算机行业在南京某公司当个 IT 小讲师，然后是 IT 团队小领导（这篇笔记就是做小领导期间写的）。南京公司被阿里巴巴收购后，陈到杭州阿里工作。一年多后进入华为回到南京，至今仍在华为。从中药学到计算机，真是个急速扩张的人生。不过 09 年大学毕业，意味着「华为」、「35岁」双关键词达成。加上这个时代「疫情」、「战争」、「金融去杠杆」等新关键词之后，希望他能加强危机意识，一切顺利。看来我也要抽空去更新一下我的 LinkedIn 了。</p>
+</li>
+<li><p>陈杰 2014 年的这篇笔记在很多地方都被引用，这让我想起自己第一次知道这本书也是 2014 年（李路肯定不知道他的热情分享对我影响很大，他应该不记得我了）。看来 TLS 的出圈时间节点很可能就是 2014 。另一个有意思的细节是，<a href="https://www.yinwang.org/blog-cn/2012/07/04/dan-friedman" target="_blank" rel="noopener"><em>GTF - Great Teacher Friedman</em></a> 的第一版似乎是在 2012 年写的。</p>
+</li>
+</ul>
+<img src="/2022/03/24/scheme-basics-and-IDE/li_lu_promotes_TLS.jpg" title="Li Lu promotes TLS">
+<img src="/2022/03/24/scheme-basics-and-IDE/Li_Lu_s_kindness.jpeg" title="Li Lu and Wang">
+<hr>
+<h3 id="编程软件-DrRacket"><a href="#编程软件-DrRacket" class="headerlink" title="编程软件 - DrRacket"></a>编程软件 - DrRacket</h3><p>直接去 <strong>Racket</strong> 的<a href="https://racket-lang.org" target="_blank" rel="noopener">官网</a>下载对应的安装包到本地即可双击安装。支持 Windows 和 MacOS 。</p>
+<p>常用快捷键：</p>
+<ul>
+<li><strong>运行</strong>代码：<code>cmd + R</code>（ MacOS 系统）；</li>
+<li>快速<strong>缩进排版</strong>所有代码（Reindent All）：<code>cmd + I</code>（ MacOS 系统）；</li>
+<li><strong>注释</strong>代码（块）：<code>control + esc + ;</code>（ MacOS 系统）；<code>Ctrl + Alt + ;</code>（ Win 系统）；</li>
+<li>显示代码整体<strong>轮廓</strong>（Show Program Contour）：<code>cmd + U</code>（ MacOS 系统）；</li>
+<li><strong>取消</strong>注释代码（块）：<code>control + esc + =</code>（ MacOS 系统）；<code>Ctrl + Alt + =</code>（ Win 系统）；</li>
+<li>将<strong>输出</strong>窗口显示在<strong>右侧</strong>，使编辑窗口的区域更大：<code>cmd + shift + L</code>（ MacOS 系统）；<br>也可以通过选择 <code>View</code> -&gt; <code>Use Horizontal Layout</code> 实现；</li>
+<li>在输出窗口测试的时候，调出<strong>上一个</strong>运行的代码：<code>esc + P</code>（ MacOS 系统）；</li>
+<li>在输出窗口测试的时候，调出<strong>下一个</strong>运行的代码：<code>esc + N</code>（ MacOS 系统）；</li>
+<li>光标定位到一个变量，<strong>重命名</strong>所有这个变量（会根据 Scope 来而不是简单的同名）：<code>control + X + M</code>（ MacOS 系统）；</li>
+</ul>
+<p>其他快捷键组合还可以打开 <strong>Keybindings</strong> 窗口查询：<code>Edit</code> -&gt; <code>Keybindings</code> -&gt; <code>Show Active Keybindings</code><br>查询表中 <strong>s:</strong> 代表 <code>Shift</code> 、<strong>c:</strong> 代表 <code>Control</code> 、<strong>a:</strong> 代表 <code>Option</code> 、<strong>m:</strong> 代表 <code>Meta</code> 、<strong>d:</strong> 代表 <code>Command</code> <a href="https://gist.github.com/spdegabrielle/89de48580126592264f3741c4240e917" target="_blank" rel="noopener">……</a></p>
+<p>MacOS 系统里可在 <code>Preferences</code> -&gt; <code>Editing</code> -&gt; <code>General Editing</code> 里勾选 <strong>Treat alt key as meta</strong> ，这样就可以使用 <code>option</code> 键来代替 <code>esc</code> 键。比如上述操作困难的 <code>control + esc + ;</code> 快捷键组合就会变成稍微好点的 <code>control + option + ;</code></p>
+<p>更多使用使用小技巧可参考 <a href="https://rebelsky.cs.grinnell.edu/Courses/CSC151/2018S/handouts/drracket-tips" target="_blank" rel="noopener">Some tips and tricks for DrRacket</a> ，或者查看 <a href="https://docs.racket-lang.org/guide/index.html" target="_blank" rel="noopener"><em>The Racket Guide</em></a> 和 <a href="https://plt.cs.northwestern.edu/snapshots/current/pdf-doc/drracket.pdf" target="_blank" rel="noopener"><em>DrRacket: The Racket Programming Environment</em></a></p>
+<hr>
+<h3 id="编程软件-Emacs"><a href="#编程软件-Emacs" class="headerlink" title="编程软件 - Emacs"></a>编程软件 - Emacs</h3><p>Emacs 可以通过配置，方便地（也没有特别方便啦）使用由 <strong>R. Kent Dybvig</strong> 设计的、当今性能和可靠性都最强的 <a href="https://github.com/cisco/ChezScheme" target="_blank" rel="noopener">Chez Scheme</a> 来运行我们的代码。</p>
+<p>但无论是配置的过程，还是使用的过程，Emacs 的操作对<strong>新手</strong>来说始终不是特别友好。Racket 更适合广大计算新人。而且上文已经说了，Racket 的默认实现今后会变成 <a href="https://blog.racket-lang.org/2021/01/racket-status.html" target="_blank" rel="noopener">Racket on Chez Scheme </a>。</p>
+<p>所以目前的建议是，新手就用 <a href="https://racket-lang.org" target="_blank" rel="noopener">DrRacket</a> 作为主力编辑器写 Scheme 代码。有需要再在终端里用 <a href="https://github.com/cisco/ChezScheme" target="_blank" rel="noopener">Chez Scheme</a> 运行<code>.scm</code> 代码文件。</p>
+<p>如果仍然想使用 Emacs ，可以看我写的<a href="/2022/05/16/emacs-setup/"><em>针对 Scheme 的 Emacs 编程环境设置</em></a>，里面也提到了如何安装和使用 <a href="https://github.com/cisco/ChezScheme" target="_blank" rel="noopener">Chez Scheme</a> 。</p>
+<hr>
+<h3 id="Scheme-常用的语法"><a href="#Scheme-常用的语法" class="headerlink" title="Scheme 常用的语法"></a>Scheme 常用的语法</h3><p>编程语言 Scheme 采用的是前缀表达式的语法。即处于第一位置的就是「操作符」，之后位置的就是「操作数」。计算的<strong>优先级</strong>由「括号」来确定。括号内部的最先计算。具体顺序为：先对括号中的每一个表达式求值，然后再将操作符作用在操作数上，对整个括号的表达式求值。</p>
+<ul>
+<li><p><strong>前缀表达式</strong></p>
+<pre><code class="lang-scheme">(+ 2 3)        ;; 分别对 + 、2 、3 这三个表达式求值，再将 + 的值（操作符）作用在 2 和 3 上
+(* 1 (+ 3 5))
+</code></pre>
+</li>
+<li><p><strong>函数</strong></p>
+<pre><code class="lang-scheme">;; 语法为：(lambda (参数1 参数2 ...) 表达式)
+
+(lambda (x) (* x x x))  ;; x =&gt; x * x * x
+
+(lambda
+  (a b)
+  (+ a b))     ;; (a, b) =&gt; a + b
+</code></pre>
+</li>
+<li><p><strong>定义</strong></p>
+<pre><code class="lang-scheme">;; 定义变量
+(define x 2)
+
+;; 定义 square 函数
+(define square (lambda (x) (* x x)))
+
+;; 调用 square 函数
+(square x)        ;; 输出 4
+</code></pre>
+</li>
+<li><p><strong>赋值操作</strong></p>
+<pre><code class="lang-scheme">;; 语法：
+;; (set! variable-name expression)
+(set! x 6)
+
+(square x)        ;; 输出 36
+</code></pre>
+</li>
+<li><p><strong>逻辑操作符</strong></p>
+<pre><code class="lang-scheme">(and (&lt; 2 3) (&gt; 5 4))
+(or (&lt; 2 3) (&gt; 5 4))
+(not #f)
+(not &#39;(1 2))
+</code></pre>
+</li>
+<li><p><strong>条件分支</strong></p>
+<pre><code class="lang-scheme">;; 普通的 if 语句在 scheme 中和其他前缀表达式的形式相同，由 1 个“操作符”搭配后面 3 个操作数
+;; scheme 中 true 和 false 分别用 #t 和 #f 来表示
+;; 语法为：(if pred true-exp false-exp)
+(if (&lt; 3 5) #t #f)
+
+;; 另一种条件分支的写法是 cond
+;; 语法如下：
+;;(cond
+;;  [pred1 exp1]
+;;  [pred2 exp2]
+;;  [else
+;;   exp3])
+
+;; cond 的例子 fact 和 fib：
+;; scheme 中不需要写 == 了，因为 scheme 中没有赋值语句，所以符号 = 没有被占用
+;; 现代的 scheme 也允许使用方括号 [] ，在 cond 语句中用方括号逻辑结构会看得更清楚
+;; 求 n 的阶乘的函数 fact
+(define fact
+  (lambda (n)
+    (cond [(= n 0) 1]
+          [else
+           (* n (fact (- n 1)))])))
+
+;; 求斐波那契数列中第 n 个数的函数 fib
+(define fib
+  (lambda (n)
+    (cond [(= n 0) 0]
+          [(= n 1) 1]
+          [else
+           (+ (fib (- n 1))
+              (fib (- n 2)))])))
+
+;; 比较两个数字可以用 =
+(= 1 2)          ;; 输出 #f
+
+;; 比较两个符号（symbol）或字符串（String）则要用 eq? 或者 equal?
+(eq? &#39;x &#39;y)      ;; 输出 #f
+(eq? &#39;x &#39;x)      ;; 输出 #t
+(equal? &#39;x &#39;y)   ;; 输出 #f
+
+;; 比较两个字符串（String）的大小
+(string&gt;? &quot;x&quot; &quot;y&quot;)  ;; 输出 #f
+(string&lt;? &quot;x&quot; &quot;y&quot;)  ;; 输出 #t
+(string=? &quot;x&quot; &quot;x&quot;)  ;; 输出 #t - 这里字符串的相等等价于使用 eq?
+
+;; 比较两个符号（Symbol）的大小，可先转成字符串再比较
+;; 若是判断两个符号（Symbol）是否相等，直接用 equal? 或 eq? 就行，不必转换后用 string=?
+(string&lt;? &quot;x&quot; (symbol-&gt;string &#39;y)) ; 输出 #f
+</code></pre>
+</li>
+<li><p><strong>数据结构 pair 及其操作</strong>： pair 属于编程语言里最简单而又最重要的数据结构。</p>
+<pre><code class="lang-scheme">;; 在 scheme 中专门有一组操作符函数来实现 pair 的构造和对它内部负载的访问
+(define p1 (cons 2 3))
+
+;; 也可以这么构造
+&#39;(2 . 3)
+
+;; car 和 cdr 能分别取出 pair 结构的第一个和第二个「有效负载」
+;; 因为早期计算机的寄存器就叫 car 和 cdr - 参见 SCIP 的解释
+(car (cons 3 4))
+(cdr (cons 3 4))
+
+;; 使用 pair? 来判断一个东西是不是 pair
+(pair? p1)
+(pair? null)
+</code></pre>
+</li>
+<li><p><strong>链表</strong>（list）：有了 pair 结构，很自然地就会有链表结构</p>
+<pre><code class="lang-scheme">;; 在 scheme 中专门有一组操作符函数来实现 pair 的构造和对它内部负载的访问
+(cons 1 (cons 2 cons (3 (cons 4)))
+&#39;(1 2 3 4)
+(define ls1 (list 1 2 3 4))
+
+(car (cdr (cdr ls1)))   ;; 3
+</code></pre>
+</li>
+<li><p><strong>quote 操作</strong>：quote 可以把代码变成数据，这将便于运行和测试「语言的实现（implementation）」</p>
+<pre><code class="lang-scheme">(quote (+ 1 (* 2 3)))  ;; 输出 (+ 1 (* 2 3))
+
+&#39;(+ 1 (* 2 3))         ;; 上面的 quote 的操作可以用单引号 &#39; 来更简洁地实现。两者等价。运行输出 (+ 1 (* 2 3))
+
+;; quote 和 &#39; 都可以将代码变成 symbol ，你可以使用 symbol? 来询问判断一个东西是不是 symbol
+;; 注意，symbol（符号）和 string（字符串）是两种不同的数据类型
+(symbol? &#39;(1 2 3))      ;; #f
+(symbol? &#39;x)            ;; #t
+
+;; 对于数字，则可以用 number?
+(number? 2)
+</code></pre>
+<p>下面这串有趣的测试可以运行尝试一下，会对 quote 有深入理解：</p>
+<pre><code class="lang-scheme">(quote ())            ;; 输出 &#39;()
+
+&#39;(quote ())           ;; 输出 &#39;&#39;()
+
+&#39;&#39;()                  ;; 这个和上面的代码等价。运行输出 &#39;&#39;()
+
+(pair? &#39;&#39;())          ;; 输出 #t - 这东西是个 pair
+
+(length &#39;&#39;())         ;; 输出 2 - 这东西包含 2 个「有效负载」
+
+(car &#39;&#39;())            ;; 输出 quote - 这个 pair 的第一个「有效负载」是 quote
+
+(symbol? (car &#39;&#39;()))  ;; 输出 #t - 第一个「有效负载」 quote 是 symbol
+
+(cdr &#39;&#39;())            ;; 输出 &#39;(()) - 第二个「有效负载」是 null
+
+&#39;(1 quote ())         ;; 输出 &#39;(1 quote ())
+
+&#39;(quot ())            ;; 输出 &#39;(quot ())
+</code></pre>
+<p><strong>解答</strong>：<code>&#39;()</code> 其实就是 <code>(quote ())</code> 。当 DrRacket 在输出一个链表时，如果是 <strong>(1 2 3)</strong> 这种普通链表，那就会输出 <code>(1 2 3)</code> 。如果输出的链表中包含 <a href="https://docs.racket-lang.org/guide/quote.html" target="_blank" rel="noopener">quote</a> ，那么，它的输出可能不会显示 <code>(quote ())</code> 这样直观能看到「有效负载」的链表，而是会显示简化后的 <code>&#39;()</code> 。</p>
+<p>这点可以通过观察 <code>&#39;(quote ())</code> 和 <code>&#39;(quot ())</code> 这两个代码的输出结果进一步理解：由于 quot 不再是关键词 identifier ，于是输出结果回复直观显示「有效负载」的 <code>(quot ())</code> 。</p>
+<p>这里涉及到 Scheme 里面字符号（Symbol）和符串（String）两个概念的区别。具体来说 <code>&#39;quote</code> 和 <code>&quot;quote&quot;</code> 这两个表达式的输出结果是不一样的。前者是符号后者是字符串。</p>
+</li>
+<li><p><strong>quasiquote 和 unquote 操作</strong>：如果想读取变量的值，就需要用到 <a href="https://docs.racket-lang.org/guide/qq.html" target="_blank" rel="noopener">quasiquote</a> 操作了</p>
+<pre><code class="lang-scheme">(define x 6) ;; 定义变量 x 为 6
+
+&#39;(1 2 3 x)   ;; 运行输出 (1 2 3 x)
+
+`(1 2 3 x)   ;; 运行输出 (1 2 3 x)
+
+`(1 2 3 ,x)  ;; 运行输出 (1 2 3 6)
+</code></pre>
+</li>
+<li><p><strong>构造类型 struct</strong>：和下面的模式匹配 <code>match</code> 配合使用很厉害。使用 <code>struct</code> 构造数据结构和类型是有好处的，因为是专用的。符号链表（list）构造的类型还是太<strong>通用</strong>，容易弄混淆，尤其是配合 <code>match</code> 的时候。</p>
+<pre><code class="lang-scheme">;; 构造闭包类型（结构） closure - 相当于其他语言里定义一个对象
+;; 闭包包含一个函数 f 和它被创造时的上下文环境 env
+(struct Closure (f env))
+
+;; 构造函数类型（结构） - 函数包含一个参数部分 param 和一个函数体 body
+(struct Fun (param body))
+
+;; 构造二元操作类型（结构）
+(struct Binop (op e1 e2))
+
+;; 使用上面的类型创建实例（instance）
+(Closure (Fun &#39;x (Binop &#39;+ 2 &#39;x)))
+
+(define b1 (Binop &#39;+ 2 3))
+
+;; 取出 struct 里的内容
+(Binop-op b1)  ;; 输出 &#39;+
+(Binop-e1 b1)  ;; 输出 &#39;+
+(Binop-e2 b1)  ;; 输出 &#39;3
+</code></pre>
+</li>
+<li><p><strong>模式匹配</strong>（Pattern Matching）：<a href="https://docs.racket-lang.org/reference/match.html" target="_blank" rel="noopener">match</a> 是属于 <strong>Racket</strong> 特有的，<strong>Scheme</strong> 本身是没有模式匹配的，尽管它可以用宏来实现这个语言特性。</p>
+<pre><code class="lang-scheme">;; 模式匹配的基本语法
+(match val-expr clause ...)
+</code></pre>
+<p>其中 <code>val-expr</code> 代表要匹配的表达式，而 <code>clause</code> 语法的内容如下</p>
+<pre><code class="lang-scheme">;; pat 代表 pattern ，用来判断是否和表达式 val-expr 的值匹配
+;; 若 pat 和 val-expr 匹配成功，就会对表达式 body 求值，并以它的值作为整个 match 的值
+clause    =   [pat body ...+]
+          |   [pat #:when cond-expr body ...+]
+</code></pre>
+<p>下面举例说明上述 <strong>clause</strong> 中 <code>pat</code> 位置的常用语法，更多相关语法可查看文档：<a href="https://docs.racket-lang.org/reference/match.html" target="_blank" rel="noopener">9 Pattern Matching</a></p>
+<pre><code class="lang-scheme">;; [(? number? v) v] 这行的 pat 部分用到的语法为 (? pred pat ...)
+;; 该语法的意思是，如果表达式 (pred val-expr) 值为真，就匹配 pat 这个模式
+;; [(? number? v) v] 会先对表达式 (number? exp) 求值，
+;; 若值为 #t ，就用变量 v 来匹配 exp，然后输出 v 的值（即 exp 的值）
+
+;; [exp #:when (boolean? exp) &quot;boolean&quot;] 这分支的语法为
+;; [pat #:when cond-expr body ...+]
+;; 意思是，如果表达式 cond-expr 值为真，就匹配 pat 这个模式
+;; 应该尽量用 #:when 而不是 (? ...) ，这样 pat 看起来就简洁很多
+;; 不然 pattern 本身里面嵌套了复杂的判断，看起来就不直观了，pattern 的意义就失去了
+
+;; 同理 [(? list? `(,lvp1 ,lvp2 ,lvp3)) lvp3] 会在 (list? exp) 的值为 #t 之后，
+;; 匹配 `(,lvp1 ,lvp2 ,lvp3) ，然后会输出 lvp3 的值
+
+;; [`(+ ,e1 ,e2) (+ (calc e1) (calc e2))] 这行的 pat 部分用到的语法为 (list lvp ...)
+;; 符号 ` 和 , 分别是上文介绍到的 quasiquote 和 unquote 操作
+;; 由于 `(+ ,e1 ,e2) 是一个含有 3 个元素、且第一个元素是 symbol（符号） + 的 list ，
+;; 所以程序会先检查 exp 是不这样的 list，即是否是 (list + lvp2 lvp3)
+;; 如果是，则匹配成功，此时，exp 这个 list 的元素 lvp2 和 lvp3 的值就会分别被赋予 e1 和 e2 ，
+;; 然后在 body 部分 (+ (calc e1) (calc e2)) 就能使用变量 e1 和 e2 进行求值
+
+;; 示例：使用 match 实现简易二元操作的计算器 calc
+(define calc
+(lambda (exp)
+  (match exp
+    [(? number? v) v]                          ; 难以直观看出 pattern 是什么
+    [exp #:when (boolean? exp) &quot;boolean&quot;]      ; 所以应尽量用 #:when 而不是 (? ...)
+    [`(+ ,e1 ,e2) (+ (calc e1) (calc e2))]     ; quasiquote 和 unquote 写的 pattern
+    [`(- ,e1 ,e2) (- (calc e1) (calc e2))]
+    [(list &#39;* e1 e2) (* (calc e1) (calc e2))]  ; list 写的 pattern
+    [(list &#39;/ e1 e2) (/ (calc e1) (calc e2))]
+    [(? list? `(,lvp1 ,lvp2 ,lvp3)) lvp3]
+    [else
+     (error &quot;Error: unsupported operation or illegal expression!&quot;)])))
+
+(calc &#39;(+ 1 (* 9 3)))     ; 输出 28
+(calc &#39;(9 19 29))         ; 输出 29 - 匹配到了倒数第 2 分支
+(calc #f)                 ; 输出 &quot;boolean&quot;
+</code></pre>
+<p><code>match</code> 和 <code>struct</code> 配合可以实现很强大的表达</p>
+<pre><code class="lang-scheme">;; 创建 shoe 和 hat 这两个结构
+(struct shoe (size color))
+(struct hat (size style))
+
+;; 这块代码输出 &quot;top&quot; ；可以看到匹配成功之后，输出了表达式部分的值 &quot;top&quot;
+(match (hat 23 &#39;bowler)
+ [(shoe 10 &#39;white) &quot;bottom&quot;]
+ [(hat 23 &#39;bowler) &quot;top&quot;])
+
+;; 这块代码输出 23 ；可以看到 sz 这个变量成功匹配捕获到了 23 这个数据
+(match (shoe (hat 23 29) &#39;bowler)
+  [(shoe (hat sz stl) col) sz]
+  [else &quot;something else.&quot;])
+</code></pre>
+</li>
+<li><p><strong>注释</strong>：用 <code>;</code> 来注释代码（comment out）。DrRacket 中推荐用快捷键：<code>control + esc + ;</code>（MacOS）</p>
+<pre><code class="lang-scheme">; 代码「行」注释
+
+#|
+代码「块」注释
+|#
+</code></pre>
+</li>
+<li><p><strong>输出与显示</strong><br>在 DrRacket 里，输出代码的结果不需要专门写类似 <code>console.log</code> 的函数，它会在窗口自行显示各表达式的值。但在 Debug 的时候，有可能需要在代码中间显示各种变量的值，这时候下面这些输出函数就很有用了</p>
+<pre><code class="lang-scheme">(newline)           ; 空行（换行）
+(display &quot;\n&quot;)      ; &quot;\n&quot; 代表换行
+
+;; 连续 display 的话，内容之间是连在一起的，没有换行显示
+(display &quot;1st line&quot;)
+(display &quot;2nd line&quot;)
+
+;; 运行输出：
+;; 1st line2nd line
+
+;; 加上 ln 之后的 displayln 会在显示内容完毕后换行，即自动另起一行
+(displayln &quot;1st line&quot;)
+(displayln &quot;2nd line&quot;)
+
+;; 运行输出：
+;; 1st line
+;; 2nd line
+
+;; 使用 println 会把引号也显示出来
+(println &quot;1st line&quot;)
+(println &quot;2nd line&quot;)
+
+;; 使用 fprintf 可以格式化输出
+;; 其中 ~a , ~s 和 ~v 分别是 write , display 和 print 的效果
+;; \n 代表换行。下面例子放在末尾，则代表末尾换行
+(fprintf (current-output-port)
+         &quot;~a as a string is ~s, ~a, ~v.\n&quot;
+         &#39;(3 4)
+         &quot;(3 4)&quot;
+         &quot;(3 4)&quot;
+         &quot;(3 4)&quot;)
+
+;; 运行输出：
+;; (3 4) as a string is &quot;(3 4)&quot;, (3 4), &quot;(3 4)&quot;.
+</code></pre>
+<p>关于输出的更多详细介绍，可以查阅 Racket 的文档 <a href="https://docs.racket-lang.org/reference/Writing.html" target="_blank" rel="noopener">13.5 Writing</a></p>
+</li>
+<li><p><strong>抛出异常</strong></p>
+<pre><code class="lang-scheme">(error &quot;Error: illegal expression!&quot;)  ; 运行会报错，显示 &quot;Error: illegal expression!&quot;
+
+(error &quot;Error: &quot; x (+ 2 x))           ; 还可以输入表达式，显示表达式的值，运行显示 &quot;Error: 6 8&quot;
+</code></pre>
+</li>
+<li><p><strong>call/cc</strong>：这个“奇怪”却影响深远的东西<strong>最早</strong>也是由本篇开头提到的 <a href="https://en.wikipedia.org/wiki/Daniel_P._Friedman" target="_blank" rel="noopener">Daniel Paul Friedman</a> 想出来的，相关 paper 叫 <a href="https://legacy.cs.indiana.edu/ftp/techreports/TR133.pdf" target="_blank" rel="noopener"><em>A Scheme for a Higher-Level Semantic Algebra</em></a>。后来 <a href="https://en.wikipedia.org/wiki/Gerald_Jay_Sussman" target="_blank" rel="noopener">Gerald Susman</a>（SICP 的作者之一） 给了它一个名字 <a href="https://en.wikipedia.org/wiki/Call-with-current-continuation" target="_blank" rel="noopener">call-with-current-continuation</a> ，从那以后 <a href="https://en.wikipedia.org/wiki/Daniel_P._Friedman" target="_blank" rel="noopener">Friedman</a> 的名字就再也没有和 <strong>call/cc</strong> 被人联系在一起过了。之后更先进的 <strong>shift / reset</strong> 这类 <a href="https://en.wikipedia.org/wiki/Delimited_continuation" target="_blank" rel="noopener">Delimited Continuation</a> 则是 Friedman 的学生弄的。</p>
+<p><a href="https://docs.racket-lang.org/reference/cont.html#%28def._%28%28lib._racket%2Fprivate%2Fmore-scheme..rkt%29._call%2Fcc%29%29" target="_blank" rel="noopener">call/cc</a> 虽然没有更先进的 <a href="https://docs.racket-lang.org/reference/cont.html#%28form._%28%28lib._racket%2Fcontrol..rkt%29._reset%29%29" target="_blank" rel="noopener">shift / reset</a> 好用，会逐渐退出历史舞台（参见 <a href="https://okmij.org/ftp/continuations/against-callcc.html" target="_blank" rel="noopener"><em>An argument against call/cc - Oleg Kiselyov</em></a>），但蜡烛和 LED 灯在各自的年代都为人类照亮了方向。何况如果没有 <a href="https://docs.racket-lang.org/reference/cont.html#%28def._%28%28lib._racket%2Fprivate%2Fmore-scheme..rkt%29._call%2Fcc%29%29" target="_blank" rel="noopener">call/cc</a> ，估计也没有 <a href="https://docs.racket-lang.org/reference/cont.html#%28form._%28%28lib._racket%2Fcontrol..rkt%29._reset%29%29" target="_blank" rel="noopener">shift / reset</a> 了。所以我觉得 <a href="https://en.wikipedia.org/wiki/Call-with-current-continuation" target="_blank" rel="noopener">call/cc</a> 应该算里程碑式的东西。</p>
+<pre><code class="lang-scheme">;; call/cc 会接收一个单参数函数，该函数的参数 k 会取得当前位置的 continuation
+;; 这里涉及到一个对新人陌生的概念：continuation 是什么东西？它有什么用？
+;; 关于这个，会新开一篇文章专门介绍。目前简单地理解，continuation 就是接下来要做的所有计算
+;; 调用这个 k ，程序会丢弃上下文
+;; 例子：
+(* 3 (+ 1 (call/cc (lambda (k) (+ 1 (k 2)))))) ;; 输出 9 - 内部的 (+ 1 ... ) 被丢弃了
+
+;; 通常会定义一个变量来存放 call/cc 捕获的 continuation ，共后续调用
+;; 例子：
+(define saved-k #f)
+
+(* 3 (+ 1 (call/cc (lambda (k) (set! saved-k k) (+ 1 (k 2))))))  ;; 输出 9 
+(saved-k 1)          ;; 输出 6 - 此时的 saved-k 相当于函数: (lambda (x) (* 3 (+ 1 x)))
+
+(+ 9 (saved-k 1))    ;; 输出 6 - (+ 9 ...) 这个上下文被忽略了
+</code></pre>
+</li>
+<li><p><strong>宏（Macro）</strong>：宏特别容易被滥用。<strong>第一</strong>使用原则是，你的宏不应该<strong>显著改变</strong>当前编程语言的语义，尽量都只做简单的重新排列组合动作。另一个基本的原则是，如果一个宏它实际上做的是函数的事情，那你都应该尽量使用函数，而不是宏，除非宏相比函数能实现某种<strong>效果更好</strong>的「封装打包」。</p>
+<pre><code class="lang-scheme">;; 这里又涉及到一个对新人陌生的概念：Macro（宏）是什么东西？
+;; 简单地说 Macro 是一个语法转换器（Syntax Transformer）
+;; 宏接收一个 syntax object（语法对象），返回新的 syntax object ，相当于翻译（替换）操作
+;; 于是你可以通过宏定义的自己语法，这些语法是 Scheme 中原本没有的
+;; 比如你可以有 (my-lambda ...) 这样的表达，它和函数的区别是，省略号部分的参数不会被求值
+;; 因为转换（翻译）过程是在 compile time（程序编译阶段），而不是 run time（程序运行阶段）
+;; Macro 有点像在解释器里添加一个分支来支持的新语法，这时，当前语言相当于被扩展了
+;; 从这个意义上，Macro 像个小型解释器
+;; 更多关于 Macro 的概念和作用，可参见本节末尾 Greg Hendershott 的文章
+;; 我稍后也会写一篇关于 Macro 的应用的文章
+
+;; 宏会标记（接收）一串语法，然后根据定义转换成另一串语法返回
+;; 举例来说，下面的 define-syntax 会定义一个名字为 foo 的宏
+;; 当代码中出现 (foo ...) 这样的表达式，程序会根据名字 foo 判断出这是个宏，需要转译整个表达式
+;; 然后表达式 (foo ...) 会在 compile time 先被转换成我们在宏 foo 中所定义的表达式
+;; 即 (foo ...) 被替换成 (syntax &quot;I am foo&quot;)
+;; (syntax &quot;I am foo&quot;) 会在接下来的 run time 阶段被求值
+(define-syntax (foo stx)
+  (syntax &quot;I am foo&quot;))
+
+;; 对返回的 (syntax &quot;I am foo&quot;) 求值，输出 &quot;I am foo&quot;
+(foo (+ 1 2))
+
+;; 宏的定义也可以写成 lambda 形式
+;; 我倾向于这样写，这样子可以清楚区分“参数” stx 和宏的名字，更加「模块化」
+(define-syntax show-stx
+  (lambda (stx)
+    (println (syntax-&gt;datum stx))  ;; stx 的内容是个 syntax ，把它转化成数据后显示出来
+    (datum-&gt;syntax stx             ;; 这里第一个参数先不用管，目前只需知道有它才能顺利转换
+                   (cadr (syntax-&gt;datum stx))))) ;; 宏最终都需要返回一个 syntax object
+
+;; 第一个输出是 &#39;(show-stx (+ 1 2))
+;; 第二个输出是 3
+(show-stx (+ 1 2))
+
+;; 第一个输出是 (println ...) 的输出，代表 stx 中所装载的内容
+;; 第二个输出过程如下：
+;; (syntax-&gt;datum stx) 会转换语法对象 stx 的内容，得到 &#39;(show-stx (+ 1 2))
+;; 用 cadr 取得“参数”部分 &#39;(+ 1 2)
+;; 然后通过 datum-&gt;syntax 把它转成了语法对象 (syntax (+ 1 2)) 作为宏 show-stx 的结果返回
+;; 最后，程序会计算 (syntax (+ 1 2)) 的值，得到结果 3
+;; 总结：
+;; (show-stx (+ 1 2)) 会在编译过程中被翻译（替换）成 (+ 1 2)
+;; (println ...) 是宏 show-stx 的副作用，输出参数 stx 的内容
+
+#&#39;(+ 1 2)     ;; (syntax ...) 像 (quote ...) 一样可简写，这里等价于 (syntax (+ 1 2))
+
+(eval #&#39;(+ 1 2))   ;; 对该语法对象（树）求值，输出 3
+
+;; 通过上面的例子知道了 stx 装的大概就是个链表的结构（主要因为 scheme 的语法也是链表的形式）
+;; 链表的结构，自然会希望有个模式匹配的功能，毕竟定义新语法的常规操作就是重新组合调整各个部分
+;; 虽然能用上面提到的 match ，但是宏的转译是在编译过程中，编译过程默认是看不到 match 的
+;; 于是就有了专门针对宏的模式匹配 syntax-case ，用来匹配第一个参数 stx 的内容
+;; 下面这个例子我们自定义了一个 if 的表达式，功能和 scheme 的 if 一样
+;; 不用函数来实现 if 的原因是函数在调用时会对所有参数求值，但条件分支的俩分支不应该被同时求值
+;; 这里也显示了宏的一个常见用法，就是你需要「惰性求值」的时候就可以考虑使用宏
+(define-syntax my-if-sc
+  (lambda (stx)
+    (syntax-case stx ()             ;; 第二个参数暂时不用管，目前只需知道给个 () 就行
+      [(_ pred true-exp false-exp)  ;; 用 _ 来匹配并忽略 stx 中首位的 my-if-sc
+       (syntax
+        (cond [pred true-exp]       ;; my-if-sc 所在表达式被转译成了相应的 cond 表达式
+              [else false-exp]))]))) 
+
+(my-if-sc (&lt; (* 7 8) 9) &quot;true&quot; &quot;false&quot;)   ;; 输出 &quot;false&quot;
+
+;; 另一个更好用的写法是 syntax-rules ，它更像 match ，所以更便于阅读，推荐优先使用
+;; 在 syntax-case 中，返回的表达式要用 syntax 之类的方式转成一个 syntax object（语法对象）
+;; 而用 syntax-rules 只需直接写要返回的表达式就行了，它在后台会自行帮你转换成 syntax object
+(define-syntax my-if-sr
+  (syntax-rules ()
+    [(_ pred true-exp false-exp)
+     (cond [pred true-exp]
+           [else false-exp])]))
+
+(my-if-sr (&lt; 2 3) &quot;true&quot; &quot;false&quot;)  ;; 输出 &quot;true&quot;
+</code></pre>
+</li>
+</ul>
+<p>Macro（宏）和 Continuation 是两个对新手来说看似难理解，但实际很简单的概念。关于宏除了<a href="https://docs.racket-lang.org/guide/macros.html" target="_blank" rel="noopener">官方文档</a>之外，官方还推荐了另一篇有趣的文章来介绍：<a href="https://www.greghendershott.com/fear-of-macros/index.html" target="_blank" rel="noopener"><em>Fear of Macros - by Greg Hendershott</em></a></p>
+<hr>
+<h3 id="DrRacket-IDE-里的一些常用库"><a href="#DrRacket-IDE-里的一些常用库" class="headerlink" title="DrRacket IDE 里的一些常用库"></a>DrRacket IDE 里的一些常用库</h3><p>在 Racket 里你可以使用 <a href="https://docs.racket-lang.org/guide/module-require.html" target="_blank" rel="noopener">require</a> 来载入各种 <a href="https://docs.racket-lang.org/guide/module-basics.html" target="_blank" rel="noopener">Module</a>（模块/库）。相当于其他语言的 <code>import</code> 操作。你可以自己创造 Module ，不过这里主要介绍一些 DrRaket 自带的常用 Module：</p>
+<ul>
+<li><p>有关数据结构的 Module - 队列 <a href="https://docs.racket-lang.org/data/Imperative_Queues.html" target="_blank" rel="noopener">Queues</a> </p>
+<pre><code class="lang-scheme">;; 调用 require 载入库 data/queue
+(require data/queue)
+
+;; (make-queue) 可以创建一个空队列（empty queue）- 队列创建后开始是空的，之后可往里加东西
+;; 定义一个队列 q1
+(define q1 (make-queue))
+
+;; (enqueue! queue value) 可将元素添加到队列的【末尾】
+;; 往队列 q1 中依次添加数字 1 、2 和 3
+(enqueue! q1 1)
+(enqueue! q1 2)
+(enqueue! q1 3)
+
+;; (enqueue-front! queue value) 可将元素添加到队列的【开头】
+;; 往队列 q1 的开头添加数字 9
+(enqueue-front! q1 9)
+
+;; 调用 queue-&gt;list 可以把队列转换成链表（list）
+(queue-&gt;list q1)          ;; 输出 &#39;(9 1 2 3)
+
+;; (dequeue! queue) 可以将 queue 中的第一个位置的元素移除，并返回
+(dequeue! q1)             ;; 输出 9
+</code></pre>
+</li>
+<li><p><a href="https://en.wikipedia.org/wiki/Delimited_continuation" target="_blank" rel="noopener">Delimited Continuation</a> - <strong>shift / reset</strong></p>
+<pre><code class="lang-scheme">;; 调用 require 载入库 racket/control - 这样就能使用 reset 和 shift 了
+(require racket/control)
+
+;; shift 后面的 k 的内容也是当前位置的 continuation
+
+(reset (shift k (k 1)))  ;; 输出 1 - k 是之后要做的事，之后啥也没做，所以 k 相当于 identity 函数，(k 1) 作为 (reset (shift k ...)) 的结果输出
+
+(reset (shift k 1))      ;; 输出 1 - 没有调用 k ，于是上下文被丢弃，1 作为 (reset (shift k ...)) 的结果输出
+
+(reset (* 3 (+ 1 (shift k (+ 1 (k 2))))))         ;; 输出 10 - 这里内部的 (+ 1 ...) 没被丢弃，可以对比一下 call/cc
+
+(reset (* 3 (+ 1 (shift k (set! saved-k k) 2))))  ;; 输出 2 - 丢弃了 reset 到 shift 之间的计算（上下文）- 没有调用 k ，k 所代表的的上下文也就被抛弃了
+
+(saved-k 3)              ;; 输出 12 - 此时的 saved-k 相当于函数: (lambda (x) (* 3 (+ 1 x)))
+
+(reset (* 3 (+ 1 (shift k1 (+ 17 (shift k2 (k2 2)))))))    ;; 输出 19 - k1 代表前面的操作，算出的 19 作为了前面 reset shift 的值
+
+(reset (* 3 (+ 1 (shift k1 (+ 9 (shift k2 (k2 (k1 2)))))))) ;; 输出 18 - 可以看到，调用 k1 并不会丢弃第二个调用 k2
+
+;; 如果单独用 reset 则 (reset exp)会正常输出表达式 exp 的值
+;; 如果单独使用 shift 则此时的 shift 和 call/cc 类似，调用 k 会丢弃 shift 内部的上下文
+;; 强烈不建议单独使用 shift ，因为程序会出现不符合预期的奇怪行为，reset 和 shift 要成对使用
+
+(+ 1 (* 2 (shift k (k 3))))       ;; 输出 7 - 这里的 k 相当于 (lambda (x) (+ 1 (* 2 x)))
+
+(+ 1 (* 2 (shift k (+ 4 (k 3))))) ;; 输出 7 - 内部的 (+ 4 ...) 被丢弃了
+</code></pre>
+</li>
+</ul>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>Rails 常用指令</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="Rails 常用指令">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Rails 常用指令
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2018-01-31T10:51:58.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2018-01-31
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Ruby-Rails/">Ruby & Rails</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>Rails 的开发环境的搭建参考<a href="/2017/03/14/setup-new-mac/">入手新 Mac 后的环境搭建</a><br>Rails 的关键知识学习请前往 <a href="https://fullstack.qzy.camp/dashboard" target="_blank" rel="noopener">Xdite 的全栈营</a></p>
+<p>PS：<br>人们使用 Ruby 这门语言的原因仅仅是因为要用 Rails ，离开了 Rails , Ruby 这门语言就……所以你知道为啥说到 Ruby 就一定要说 Rails ，或者人们在谈论 Ruby 时，其实说的是 Rails 了吧</p>
+<hr>
+<h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><pre><code class="lang-bash">## 在当前目录下新建 Rails app
+$ rails new [app名]
+
+## Example
+$ rails new first_app
+
+## 打开服务器（网址通常是 http://localhost:3000）
+$ cd first_app
+$ rails s
+$ rails server
+
+## 查看路径
+$ rails routes
+
+## 数据库管理 Migration
+$ rails db:migrate      ## runs (single) migrations that have not run yet. - update schema.rb with all migrations
+$ rails db:create       ## creates the database
+$ rails db:drop         ## deletes the database
+$ rails db:schema:load  ## creates tables and columns within the (existing) database following schema.rb
+$ rails db:seed         ## load seed.rb - 按照 seed.rb 文件里的指令，创造数据并添加到数据库里
+$ rails db:setup        ## does db:create, db:schema:load, db:seed
+$ rails db:reset        ## does db:drop, db:setup
+$ rails db:rollback     ## 取消最近一次 migration 的加载 - 通常不用，改数据库强烈建议新增 Migration 来改，而不是执行 rollback ，rollback 建议最多只运行一次（退后一步）
+
+## 先 drop（删除）掉原先的数据库，再建立新的数据库，最后 migrate 加载所有 migrations
+$ rails db:drop db:create db:migrate
+
+## Example
+$ rails g controller groups
+$ rails g controller account/groups
+$ rails g controller account::groups
+</code></pre>
+<hr>
+<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>可以直接用一行代码新建 <strong>Model</strong>，适合 column 较少的情况</p>
+<pre><code class="lang-bash">## 新建 Model
+$ rails g model [model 的名字] [参数名:参数类型] [参数名:参数类型] ...
+
+## Example
+$ rails g model job title:string description:text wage_upper_bound:decimal wage_lower_bound:decimal contact:text is_hidden:boolean
+</code></pre>
+<p>也可以先生成 <strong>migration</strong> 文件，然后编辑该文件来生成</p>
+<pre><code class="lang-bash">以下命令会生成一个 migration 文件 - db/migrate/20180423162706_create_[model 的名字].rb
+$ rails g model [model 的名字]
+
+# Example
+$ rails g model case
+Running via Spring preloader in process 44069
+      invoke  active_record
+      create    db/migrate/20180423162706_create_cases.rb
+      create    app/models/case.rb
+      invoke    test_unit
+      create      test/models/case_test.rb
+      create      test/fixtures/cases.yml
+</code></pre>
+<p>找到并打开编辑 <code>db/migrate/20180423162706_create_[model 的名字].rb</code> 文件</p>
+<pre><code class="lang-ruby">class CreateCases &lt; ActiveRecord::Migration[5.1]
+  def change
+    create_table :cases do |t|
+      t.string :nickname
+      t.text :summary
+
+      t.timestamps
+    end
+  end
+end
+</code></pre>
+<p>无论采用上述哪种方式，最终都需要执行 <code>rails db:migrate</code> 来完成 <strong>Model</strong> 的建立</p>
+<p>下面是如何给已有的 <strong>Model</strong> 添加 column</p>
+<pre><code class="lang-bash">$ rails g migration [要添加的 migration 的名字]
+
+## Example
+$ rails g migration add_user_id_to_job
+</code></pre>
+<pre><code class="lang-ruby">class AddUserIdToJob &lt; ActiveRecord::Migration[5.0]
+  def change
+    add_column :jobs, :user_id, :integer
+  end
+end
+</code></pre>
+<p>重命名 Column - 注意 job 要复数（之前新建 model 时 Job 用的是单数 - <code>rails g model job title:string</code>）</p>
+<pre><code class="lang-ruby">class ChangeWagesColumnNameInJob &lt; ActiveRecord::Migration[5.1]
+  def change
+    rename_column :jobs, :upper_wage, :wage_upper_bound
+    rename_column :jobs, :lower_wage, :wage_lower_bound
+  end
+end
+</code></pre>
+<hr>
+<h3 id="CRUD-模板"><a href="#CRUD-模板" class="headerlink" title="CRUD 模板"></a>CRUD 模板</h3><pre><code class="lang-ruby">class GroupsController &lt; ApplicationController
+  def index
+    @groups = Group.all
+  end
+
+  def new
+    @group = Group.new
+  end
+
+  def show
+    @group = Group.find(params[:id])
+  end
+
+  def edit
+    @group = Group.find(params[:id])
+  end
+
+  def create
+    @group = Group.new(group_params)
+
+    if @group.save
+      redirect_to groups_path
+    else
+      render :new
+    end
+  end
+
+  def update
+    @group = Group.find(params[:id])
+
+    if @group.update(group_params)
+      redirect_to groups_path, notice: &#39;Update Success&#39;
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @group = Group.find(params[:id])
+
+    @group.destroy
+    redirect_to groups_path, alert: &#39;Group deleted&#39;
+  end
+
+  private
+
+  def group_params
+    params.require(:group).permit(:title, :description)
+  end
+end
+</code></pre>
+<hr>
+<h3 id="新手常用-Gem"><a href="#新手常用-Gem" class="headerlink" title="新手常用 Gem"></a>新手常用 Gem</h3><p><a href="https://github.com/plataformatec/devise" target="_blank" rel="noopener">Devise</a></p>
+<pre><code class="lang-bash">$ rails g devise:install
+$ rails g devise user
+$ rake db:migrate
+</code></pre>
+<p><a href="https://github.com/plataformatec/simple_form" target="_blank" rel="noopener">Simple Form</a></p>
+<pre><code class="lang-bash">$ rails generate simple_form:install --bootstrap
+</code></pre>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

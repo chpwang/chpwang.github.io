@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>为 Github 上的 Hexo 博客绑定个性域名</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="为 Github 上的 Hexo 博客绑定个性域名">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        为 Github 上的 Hexo 博客绑定个性域名
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2016-10-08T21:20:22.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2016-10-09
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Hexo/">Hexo</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>使用 Hexo 部署博客之后，尽管可以通过 <a href="https://你的用户名.github.io" target="_blank" rel="noopener">https://你的用户名.github.io</a> 来访问，但由于各种各样的原因，博主们通常倾向于更换这个教条式的域名，使用属于自己的个性域名。以下就是一个简单的教程。</p>
+<hr>
+<h3 id="域名购买"><a href="#域名购买" class="headerlink" title="域名购买"></a>域名购买</h3><p>推荐到 <a href="https://www.namesilo.com" target="_blank" rel="noopener">namesilo</a> 上注册账号购买，不仅比 <a href="https://www.godaddy.com" target="_blank" rel="noopener">Godaddy</a> 便宜，本身还免费提供隐私服务（即不公开域名持有者的信息）。对了， <a href="https://www.namesilo.com" target="_blank" rel="noopener">namesilo</a> 支持支付宝付款。</p>
+<hr>
+<h3 id="创建-CNAME-文件"><a href="#创建-CNAME-文件" class="headerlink" title="创建 CNAME 文件"></a>创建 CNAME 文件</h3><p>使用 <code>hexo d</code> 命令部署时，实际上是将 <code>~/Documents/blog/public</code> 文件夹的内容 push 到 [username].github.io 上，这样会把 <code>CNAME</code> 文件覆盖掉，而把 <code>CNAME</code> 文件添加到 <code>source</code> 文件夹里，可以避免这种情况。</p>
+<p>在 <code>~/Documents/blog/source</code> 目录下新建 <code>CNAME</code> 文件</p>
+<pre><code class="lang-bash">$ cd ~/Documents/blog/source
+$ touch CNAME
+</code></pre>
+<p>编辑 <code>CNAME</code> 文件，输入你购买的域名，比如 <code>cps.ninja</code>（没错，整个 <code>CNAME</code> 文件只有一个顶级域名，没有别的内容）</p>
+<p>然后把 <code>CNAME</code> 文件部署到 Github 上</p>
+<pre><code class="lang-bash">$ hexo clean
+$ hexo g
+$ hexo d
+</code></pre>
+<hr>
+<h3 id="设置域名"><a href="#设置域名" class="headerlink" title="设置域名"></a>设置域名</h3><p>访问 <a href="https://www.namesilo.com" target="_blank" rel="noopener">namesilo</a>（或是你购买域名的网站），登陆你的账户，进入设置域名的控制台，做如下设置</p>
+<pre><code>@          A             192.30.252.153
+@          A             192.30.252.154
+www      CNAME           chpwang.github.io
+</code></pre><p>效果如图：<br><img src="/2016/10/09/customize-your-blog-domain/domain_settings.jpg" title="domain settings"></p>
+<p>其中 <code>192.30.252.153</code> 和 <code>192.30.252.154</code> 都是 Github 的地址（该地址现已改变，Github 最新的 IP 地址参见<a href="https://help.github.com/en/articles/troubleshooting-custom-domains#dns-configuration-errors" target="_blank" rel="noopener">这里</a>），而最后一行的 <code>chpwang.github.io</code> 你要换成 <code>你的用户名.github.io</code>（更多详细内容参见 Github <a href="https://help.github.com/en/articles/troubleshooting-custom-domains#dns-configuration-errors" target="_blank" rel="noopener">官方文档</a>）。</p>
+<p>至此，个性域名设置完毕，只需等待生效即可。</p>
+<pre><code>上图 Type 一栏说明
+    A：  用来指定域名为 IPv4 的地址（如：8.8.8.8），如果需要将域名指向一个IP地址，就需要添加 A 记录
+ AAAA：  与上述 A 记录的区别是，AAAA 记录用来指定域名为 IPv6 的地址（如：2001:DB8:2de:0:0:0:0:e13）
+CNAME：  如果需要将域名指向另一个域名，再由另一个域名提供 ip 地址，就需要添加 CNAME 记录
+</code></pre><p>解释：</p>
+<ul>
+<li>总的来说，设置 A 记录的意思是，当我输入 <code>cps.ninja</code> 这个域名的时候，访问的是 <code>192.30.252.153</code> 这个地址；</li>
+<li>而设置 <code>CNAME</code> 的意思是说，当我访问 <code>chpwang.github.io</code> 这个地址的时候，会跳转到 <code>cps.ninja</code>，之后的过程就和 A 记录相同了，即访问 <code>192.30.252.153</code></li>
+</ul>
+<hr>
+<p>P.S.<br>1、如果你希望将博客部署在国内，可以考虑使用 <a href="http://coding.net" target="_blank" rel="noopener">Coding</a>；<br>2、部署在国内的博客，要注意 CSS 里的字体调用可能因网络问题加载失败；<br>3、可以用 <a href="https://www.dnspod.cn" target="_blank" rel="noopener">DNSPod</a> 而不是自带的域名解析服务，参考<a href="http://shaojunxiao.com/2017/04/01/Hexo-blog-域名解析/" target="_blank" rel="noopener">这里</a>；<br>4、知乎上的<a href="https://www.zhihu.com/question/31377141/answer/103056861" target="_blank" rel="noopener">这个回答</a>也描述了绑定域名的事，也可以看看；</p>
+<p>关于这里域名设置的更多知识和详情，还可参考以下链接：</p>
+<ul>
+<li><a href="http://winterttr.me/2015/10/23/from-dns-to-github-custom-domain/" target="_blank" rel="noopener">从 DNS 到 github pages 自定义域名 — 漫谈域名那些事</a></li>
+<li><a href="http://stackoverflow.com/questions/23375422/how-to-setup-github-pages-to-redirect-dns-requests-from-subdomain-e-g-www-to" target="_blank" rel="noopener">How to setup Github Pages to redirect DNS requests</a></li>
+<li><a href="https://coolcao.com/2016/10/19/从搭建hexo个人博客过程中理解学习DNS解析/" target="_blank" rel="noopener">从搭建hexo个人博客过程中理解学习DNS解析</a></li>
+<li><a href="https://jums.club/config-ssh-for-github/" target="_blank" rel="noopener">hexo绑定个人域名之后，不能访问，已经解决</a></li>
+</ul>
+<hr>
+<h2 id="后续可能遇到的问题"><a href="#后续可能遇到的问题" class="headerlink" title="后续可能遇到的问题"></a>后续可能遇到的问题</h2><p>有时候使用 <code>hexo d</code> 部署更新博客之后，会出现绑定的域名指向 github 404 的情况。使用 <code>username.github.io</code> 能正常访问博客页面，但使用自定义域名（比如 <code>cps.ninja</code>）则会出现 github 404 页面。</p>
+<p>如果不是上面提到的 <code>CNAME</code> 文件被覆盖掉的问题，那原因可能是 Github Pages 的 Settings 下 Custom domain 清空了，需要重新设置。</p>
+<p>到博客的 repository 页面的 <code>Settings -&gt; Pages -&gt; Custom domain</code> 输入域名，应该就解决了。如果失败提示 <strong>“the CNAME is already taken”</strong>，那就需要去 <a href="https://support.github.com/request/pages" target="_blank" rel="noopener">GitHub Support</a> ，选择 <strong>Help with a custom domain</strong> 发 ticket（工单）求助。</p>
+<p>求助前最好要先认证你的域名，确定这个域名的所有权确实在你那。具体操作是： <code>头像 -&gt; Settings -&gt; Pages -&gt; Add a domain</code> ，然后根据提示，去域名服务商那里新增一个 TXT 的 DNS 解析记录进行验证。<br>更详细的操作请查看 <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages" target="_blank" rel="noopener">Verifying your custom domain for GitHub Pages</a>。</p>
+<p>参考链接：<br><a href="https://preblog.wangqy.top/2018/05/26/CNAME/" target="_blank" rel="noopener">github pages 出现 “the CNAME is already taken” 的解决办法</a><br><a href="https://cloud.tencent.com/developer/article/1452987" target="_blank" rel="noopener">GitHub Pages 对自定义域名支持 HTTPS</a><br><a href="https://senzyo.net/2022-5/" target="_blank" rel="noopener">GitHub Pages使用问题 - 自定义域名已被占用</a></p>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

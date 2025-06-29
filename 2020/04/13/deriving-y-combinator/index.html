@@ -1,0 +1,798 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>推导 Y Combinator</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+
+  <meta property="og:title" content="推导 Y Combinator">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑">
+ <meta property="og:image" content>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
+  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+  <!-- highlight.js代码高亮主题 css 引入-->
+  <link rel="stylesheet" href="/css/m.min.css">
+  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
+  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        推导 Y Combinator
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2020-04-13T11:11:27.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2020-04-13
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Programming-Language/">Programming Language</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>等了好多年，终于能听 Ian 讲课了。一会儿北京时间 20:00 马上开始。这里尝试重新推导一下 Y 算子，纪念这个我一生中历史性的时刻，也顺便找找编程感觉。现在，我已经打开各种可能需要的软件准备就绪了。</p>
+<hr>
+<h3 id="先实现不使用-Define-的情况下能正常递归"><a href="#先实现不使用-Define-的情况下能正常递归" class="headerlink" title="先实现不使用 Define 的情况下能正常递归"></a>先实现不使用 Define 的情况下能正常递归</h3><p><strong>第一步</strong>，正常写出 <code>mylength</code> 函数作为最简单的模型。这是一个接受链表（list）作为参数，返回其长度（一个整数值，显示链表中有效负载的数量）的函数。</p>
+<pre><code class="lang-scheme">(define mylength
+  (lambda (l)
+    (cond [(null? l) 0]
+          [else (+ 1 (mylength (cdr l)))])))
+</code></pre>
+<p>测试 <code>mylength</code> 函数，输出正确的话就可以继续推导。</p>
+<pre><code class="lang-scheme">(mylength &#39;(9 19 29))  ;; 输出 3 (链表有 3 个有效负载：9, 19, 29)
+</code></pre>
+<p><strong>第二步</strong>，思考如果没有 <code>define</code> 来绑定函数名，我们要如何递归？于是，我们只能将上面 <code>mylength</code> 函数绑定在<strong>参数</strong>上。于是 <code>mylength</code> 函数作为参数传进去，以便能被调用。因此我们多加了一层嵌套，用这个嵌套带来的参数 <code>mylength</code> 绑定函数体内容。这样我们就可以使用它了。</p>
+<pre><code class="lang-scheme">(
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (mylength)                           ;;
+    (lambda (l)                                ;;
+      (cond [(null? l) 0]                      ;;
+            [else (+ 1 (mylength (cdr l)))]))) ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (l)                                ;;
+    (cond [(null? l) 0]                      ;;
+          [else (+ 1 (mylength (cdr l)))]))  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p>但是，如果直接调用这个函数就会报错。因为第二小块代码的 <code>mylength</code> 这个变量是没有定义的。于是我们把第二步中的代码（第二小块）修改成下面这样：</p>
+<pre><code class="lang-scheme">(
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (mylength)                           ;;
+    (lambda (l)                                ;;
+      (cond [(null? l) 0]                      ;;
+            [else (+ 1 (mylength (cdr l)))]))) ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (mylength)                           ;;
+    (lambda (l)                                ;;
+      (cond [(null? l) 0]                      ;;
+            [else (+ 1 (mylength (cdr l)))]))) ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p>但这样还不够，因为两块代码要求其输入参数 <code>mylength</code> 是个函数，不能是 <code>(cdr l)</code> 这种链表。运行到 <code>(mylength (cdr l))</code> 这段的代码就会报错。于是我们再改代码，把 <code>(mylength (cdr l))</code> 改为 <code>(mylength mylength)</code> 变成下面这样：</p>
+<p><strong>注释：<br>之所以要这么改动，除了让输入参数符合要求（输入需是个函数）之外，更重要的是让这个作为输入的函数携带足够的信息以便之后的递归。即每次运行到 <code>else</code> 这一分支，函数都会通过 <code>(mylength mylength)</code> 保存一次自己后再进行对 <code>(cdr l)</code> 的运算。而正是因为函数每次都保存了自己（的信息），所以每次都能调用自己，进而实现没有 <code>define</code> 的递归。</strong></p>
+<p><code>PS：使用函数打包（保存）信息后，能实现各种精妙的传递、嵌套和展开，要着重关注和练习这样的数据技巧</code></p>
+<pre><code class="lang-scheme">(
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (mylength)                                      ;;
+    (lambda (l)                                           ;;
+      (cond [(null? l) 0]                                 ;;
+            [else (+ 1 ((mylength mylength) (cdr l)))]))) ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (mylength)                                      ;;
+    (lambda (l)                                           ;;
+      (cond [(null? l) 0]                                 ;;
+            [else (+ 1 ((mylength mylength) (cdr l)))]))) ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p>到这步，我们发现这一大块代码可以直接调用来计算链表（list）的长度了。和之前有 <code>define</code> 时的代码效果一样：</p>
+<pre><code class="lang-scheme">(
+((lambda (mylength)
+  (lambda (l)
+    (cond [(null? l) 0]
+          [else (+ 1 ((mylength mylength) (cdr l)))])))
+
+ (lambda (mylength)
+  (lambda (l)
+    (cond [(null? l) 0]
+          [else (+ 1 ((mylength mylength) (cdr l)))]))))
+
+&#39;(9 19 29))   ;; 输出 3
+</code></pre>
+<p>既然没有 <code>define</code> 代码也已能正确运行，就说明 <strong>Y</strong> 算子已经隐藏在其中了。于是我们可以开始各种调整，想办法提取整理出 <strong>Y</strong> 算子了。</p>
+<hr>
+<h3 id="推导-Y-算子"><a href="#推导-Y-算子" class="headerlink" title="推导 Y 算子"></a>推导 Y 算子</h3><p>我们先观察一下最早有 <code>define</code> 的时候函数的样子：</p>
+<pre><code class="lang-scheme">(define mylength
+  (lambda (l)
+    (cond [(null? l) 0]
+          [else (+ 1 (mylength (cdr l)))])))
+</code></pre>
+<p>我们的目标是把上一节最后看起来很多的代码转化成「一个函数的调用」，将「一块和最开始 define 的代码模式很像的代码」作为参数输入该函数。如果成功，那么该函数就是 <strong>Y</strong> 算子啦。可以用它来作用在其他更多的函数上实现递归。（如果看不明白目标，可以往下看完推导在回来看这段描述）</p>
+<p><strong>第 1 次转换：</strong>我们看到有两小块重复的代码，于是先提取它们</p>
+<pre><code class="lang-scheme">((lambda (f) (f f))
+
+ (lambda (mylength)
+  (lambda (l)
+    (cond [(null? l) 0]
+          [else (+ 1 ((mylength mylength) (cdr l)))]))))
+</code></pre>
+<p>观察发现，第 1 次转换之后，代码已经很像原来有 <code>define</code> 时候的代码了。那么是不是 <code>(lambda (f) (f f))</code> 就是 <strong>Y</strong> 算子呢？不是的，因为目前还不够像。<code>(mylength mylength) (cdr l)</code> 这一块的代码和原来的 <code>(mylength (cdr l))</code> 相比，多了一次函数调用。我们要继续提取，把它变成调用次数一样的模式。也就是一个函数将 <code>(mylength mylength)</code> 想办法变成 <code>mylength</code> 。</p>
+<p><strong>第 2 次转换：</strong>把 <code>(mylength mylength)</code> 提取出来，通过函数调用来将它传入函数体</p>
+<pre><code class="lang-scheme">(
+  (lambda (f) (f f))
+
+  (lambda (mylength)
+    (
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+     (lambda (g)                          ;;
+      (lambda (l)                         ;;
+        (cond [(null? l) 0]               ;;
+              [else (+ 1 (g (cdr l)))]))) ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+      (mylength mylength)
+    )
+  )
+)
+</code></pre>
+<p>我们很高兴地发现，经过第 2 次转换之后，出现了长得很像原来 <code>define</code> 阶段的代码块了（被注释符号“框”起来的那块）。赶紧将这次转换得到的代码输入计算机，看看对不对吧：</p>
+<pre><code class="lang-scheme">(
+  (
+    (lambda (f) (f f))
+
+    (lambda (mylength)
+      (
+      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+       (lambda (g)                          ;;
+        (lambda (l)                         ;;
+          (cond [(null? l) 0]               ;;
+                [else (+ 1 (g (cdr l)))]))) ;;
+      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        (mylength mylength)
+      )
+    )
+  )
+
+&#39;(9 19 29))   ;; 死循环
+</code></pre>
+<p>我们很遗憾发现，输入上面的这段代码，对函数进行调用，计算 <code>(9 19 29)</code> 的长度时，内存溢出，函数进入了死循环。到底是怎么回事呢？</p>
+<hr>
+<h3 id="中场分析"><a href="#中场分析" class="headerlink" title="中场分析"></a>中场分析</h3><p>通过一步一步地拆解函数计算的过程，我们很快就找到了原因：是 <code>(mylength mylength)</code> 这个表达式将我们带入了死循环。但为什么 <code>(mylength mylength)</code> 在前面的代码中没有进入死循环，而当我们将它提取出来之后就进入死循环了呢？我们来好好看一看这个表达式的计算过程吧。</p>
+<p>第 2 次转换之后，<code>mylength</code> 这个参数获取的代码内容变成了下面这样：</p>
+<pre><code class="lang-scheme">;;; mylength ;;;
+
+(lambda (mylength)
+  (
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   (lambda (g)                          ;;
+    (lambda (l)                         ;;
+      (cond [(null? l) 0]               ;;
+            [else (+ 1 (g (cdr l)))]))) ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    (mylength mylength)
+  )
+)
+</code></pre>
+<p>所以 <code>(mylength mylength)</code> 就变成：</p>
+<pre><code class="lang-scheme">(
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(lambda (mylength)                      ;;
+  ((lambda (g)                          ;;
+    (lambda (l)                         ;;
+      (cond [(null? l) 0]               ;;
+            [else (+ 1 (g (cdr l)))]))) ;;
+    (mylength mylength)))               ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(lambda (mylength)                      ;;
+  ((lambda (g)                          ;;
+    (lambda (l)                         ;;
+      (cond [(null? l) 0]               ;;
+            [else (+ 1 (g (cdr l)))]))) ;;
+    (mylength mylength)))               ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p>然后变成：</p>
+<pre><code class="lang-scheme">(
+(lambda (g)                         
+  (lambda (l)                        
+    (cond ((null? l) 0)              
+          (else (+ 1 (g (cdr l)))))))
+
+    (
+      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+      (lambda (mylength)                      ;;
+        ((lambda (g)                          ;;
+          (lambda (l)                         ;;
+            (cond [(null? l) 0]               ;;
+                  [else (+ 1 (g (cdr l)))]))) ;;
+          (mylength mylength)))               ;;
+      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+      (lambda (mylength)                      ;;
+        ((lambda (g)                          ;;
+          (lambda (l)                         ;;
+            (cond [(null? l) 0]               ;;
+                  [else (+ 1 (g (cdr l)))]))) ;;
+          (mylength mylength)))               ;;
+      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    )
+
+)
+</code></pre>
+<p>展开到这一步我们发现了，由于计算机会<strong>优先对表达式求值</strong>，而 <code>(mylength mylength)</code> 这个表达式被提取到外部之后，每一次计算机对它求值，都会生成一个<strong>仍然处于函数体外部</strong>的表达式 <code>(mylength mylength)</code> 需要计算机求值。于是于是计算机又会对 <code>(mylength mylength)</code> 再次进行求值，结果就是出现了不断扩展的，越来越长的表达式。</p>
+<p>而对于把 <code>(mylength mylength)</code> 提取出来之前的代码，<code>(mylength mylength)</code> 这个表达式被求值之后<strong>生成的是一个函数</strong>，没有出现<strong>暴露在函数体外部等待求值的表达式</strong>。它同样会产生表达式 <code>(mylength mylength)</code> ，只不过此时的 <code>(mylength mylength)</code> 被包裹在了所生成的函数里。更准确地说，是被包裹在了函数体中的<strong>一个条件分支</strong>里。只有计算时进入了该条分支，才会触发下一次对表达式 <code>(mylength mylength)</code> 的求值。</p>
+<p>于是，「第 2 次转换」的前后所发生的关键性变化是 <code>(mylength mylength)</code> 表达式的求值步骤由「原来的 <code>cond</code> 条件分支内部」被提取到了「函数外部」。因此导致：</p>
+<ul>
+<li><strong>求值的时间点被提前了；</strong></li>
+<li><strong>求值之后会生成新的，需要继续提前求值的，同样的表达式 <code>(mylength mylength)</code>。</strong></li>
+<li><strong>递归的过程 <code>(mylength mylength)</code> 本来位于条件分支中，于是边界条件（Base Case）所提供的终止功能就会发挥作用：每次先要判断是否到达边界条件终止程序，然后才会进入含有递归的过程 <code>(mylength mylength)</code> 的分支中。这样避免进入死循环。</strong></li>
+<li><strong><code>(mylength mylength)</code> 这一递归过程被提出分支之后，程序运行流就再也触碰不到边界终止条件。没有了终止条件，就会导致死循环。</strong></li>
+</ul>
+<hr>
+<h3 id="继续推导-Y-算子"><a href="#继续推导-Y-算子" class="headerlink" title="继续推导 Y 算子"></a>继续推导 Y 算子</h3><p>上一节我们发现了问题所在，就是表达式 <code>(mylength mylength)</code> 被提取出来之后会导致计算机要先对它求值之后才能进行之后的步骤。而它又会在被求值后中生成新的「自己」，并且这个「自己」也需要同样被求值之后计算机才能进行之后的计算步骤。我们希望它像被提取出来前一样，「对其求值」的这一步骤能再次被放进函数的分支内。</p>
+<p><strong>第 3 次转换：</strong>将表达式 <code>(mylength mylength)</code> 打包进一个函数来延缓对它求值的时间。这种转换被称为 <em>Eta-Expansion</em> ( <em>Eta-Conversion</em> 的反向操作)。</p>
+<pre><code class="lang-scheme">(
+  (lambda (f) (f f))
+
+  (lambda (mylength)
+    (
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+     (lambda (g)                          ;;
+      (lambda (l)                         ;;
+        (cond [(null? l) 0]               ;;
+              [else (+ 1 (g (cdr l)))]))) ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+      (lambda (x) ((mylength mylength) x))
+    )
+  )
+)
+</code></pre>
+<p>我们将上面转换完成的代码再次输入计算机进行测试：</p>
+<pre><code class="lang-scheme">(
+  ((lambda (f) (f f))
+
+   (lambda (mylength)
+    (
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+     (lambda (g)                          ;;
+      (lambda (l)                         ;;
+        (cond [(null? l) 0]               ;;
+              [else (+ 1 (g (cdr l)))]))) ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+      (lambda (x) ((mylength mylength) x))
+    )
+   )
+  )
+
+&#39;(9 19 29) )   ;; 输出 3
+</code></pre>
+<p>成功了。我们可以接着转换了（每一步转换都要保证代码能正确运行才能进行下一步）。</p>
+<p><strong>第 4 次转换：</strong>更改变量名，让内部被注释框选的函数更像 <code>define</code> 阶段的函数（<em>Alpha-Equivalence</em>）</p>
+<pre><code class="lang-scheme">(
+  (lambda (f) (f f))
+
+  (lambda (g)
+    (
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+     (lambda (mylength)                          ;;
+      (lambda (l)                                ;;
+        (cond [(null? l) 0]                      ;;
+              [else (+ 1 (mylength (cdr l)))]))) ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+      (lambda (x) ((g g) x))
+    )
+  )
+)
+</code></pre>
+<p>经过第 4 次转换（已经输入计算机测试了代码），我们得到了和 <code>define</code> 阶段几乎一样的函数。除了 <code>define</code> 的位置使用了 <code>lambda</code> 之外，其他部分几乎一样了。对比如下：</p>
+<pre><code class="lang-scheme">;;; 使用 define 的时候 ;;;
+(define mylength
+  (lambda (l)
+    (cond [(null? l) 0]
+          [else (+ 1 (mylength (cdr l)))])))
+
+;;; 没有 define 的时候 ;;;
+(lambda (mylength)
+  (lambda (l)
+    (cond [(null? l) 0]
+          [else (+ 1 (mylength (cdr l)))])))
+</code></pre>
+<p><strong>第 5 次转换：</strong>把和使用 <code>define</code> 阶段的代码很像的部分提取出来</p>
+<pre><code class="lang-scheme">(
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (y)                                  ;;
+    (                                          ;;
+      (lambda (f) (f f))                       ;;
+                                               ;;
+      (lambda (g)                              ;;
+        ( y                                    ;;  这个函数（块）就是 Y 算子
+          (lambda (x) ((g g) x))               ;;
+        )                                      ;;
+      )                                        ;;
+    )                                          ;;
+  )                                            ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   (lambda (mylength)                          ;;
+    (lambda (l)                                ;;
+      (cond [(null? l) 0]                      ;;
+            [else (+ 1 (mylength (cdr l)))]))) ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p>第 5 次转换后（已经输入计算机测试了代码），我们最终获得 <strong>Y</strong> 算子，整理后（<em>Alpha-Equivalence</em>）如下：</p>
+<pre><code class="lang-scheme">;;; Y 算子 ;;;
+(lambda (g)
+  ((lambda (f) (f f))
+   (lambda (f)
+     (g (lambda (x) ((f f) x))))))
+</code></pre>
+<hr>
+<h3 id="使用-Y-算子"><a href="#使用-Y-算子" class="headerlink" title="使用 Y 算子"></a>使用 Y 算子</h3><p><strong>Y</strong> 算子的使用非常简单，只需要在目标函数外再嵌套一层函数，把这层额外的函数所带来的参数名作为递归函数名就行。</p>
+<p>比如有 <code>define</code> 的时候函数的样子：</p>
+<pre><code class="lang-scheme">(define mylength
+  (lambda (l)
+    (cond [(null? l) 0]
+          [else (+ 1 (mylength (cdr l)))])))
+</code></pre>
+<p>这时候我们把 <code>define</code> 改成 <code>lambda</code>（这样就去掉了 <code>define</code>）变成：</p>
+<pre><code class="lang-scheme">(lambda (mylength)
+  (lambda (l)
+    (cond [(null? l) 0]
+          [else (+ 1 (mylength (cdr l)))])))
+</code></pre>
+<p>然后再用 <strong>Y</strong> 算子作用于这个 <code>lambda</code> 匿名函数就可以得到相应的递归函数 <code>F</code> 了：</p>
+<pre><code class="lang-scheme">(define Y
+  (lambda (g)
+    ((lambda (f) (f f))
+     (lambda (f)
+       (g (lambda (x) ((f f) x)))))))
+
+(define F
+  (Y (lambda (mylength)
+       (lambda (l)
+         (cond [(null? l) 0]
+               [else (+ 1 (mylength (cdr l)))])))))
+
+(F &#39;(9 19 29))  ;; 输出 3 (链表有 3 个有效负载：9, 19, 29)
+</code></pre>
+<p><strong>注释:</strong><br><em>Alpha-Equivalence</em>：不同的变量名可以等价地替换。即 <code>(lambda (x) (+ x x))</code> 和 <code>(lambda (y) (+ y y))</code> 效果一样。<br><em>Eta-Expansion</em>：函数 <code>(lambda (x) (+ x 1))</code> 可以扩展为 <code>(lambda (y) ((lambda (x) (+ x 1)) y))</code>，效果一样。</p>
+<hr>
+<h3 id="用-Javascript-的语法来写出-Y-算子"><a href="#用-Javascript-的语法来写出-Y-算子" class="headerlink" title="用 Javascript 的语法来写出 Y 算子"></a>用 Javascript 的语法来写出 Y 算子</h3><p>在 <a href="https://www.javascript.com" target="_blank" rel="noopener">Javascript</a> 的语法下， <strong>Y</strong> 算子的定义如下，可以利用上面的经验尝试推导</p>
+<pre><code class="lang-javascript">// Y combinator 的定义
+var Y = f =&gt; 
+  (x =&gt; f(v =&gt; x(x)(v)))
+  (x =&gt; f(v =&gt; x(x)(v)));
+</code></pre>
+<p>提示：</p>
+<pre><code class="lang-scheme">;;; 上面推导出的 Y 算子 ;;;
+(lambda (g)
+  ((lambda (f) (f f))
+   (lambda (f)
+     (g (lambda (x) ((f f) x))))))
+
+
+;;; 改一下变量名（Alpha-Equivalence）可以得到 ;;;
+(lambda (f)
+  ((lambda (f) (f f))
+   (lambda (x)
+     (f (lambda (v) ((x x) v))))))
+</code></pre>
+<hr>
+<h3 id="进一步推导针对-Mutual-Recursive-的-Y-算子"><a href="#进一步推导针对-Mutual-Recursive-的-Y-算子" class="headerlink" title="进一步推导针对 Mutual Recursive 的 Y 算子"></a>进一步推导针对 Mutual Recursive 的 Y 算子</h3><p>上面所推导的 <strong>Y</strong> 算子只对 <code>mylength</code> 这样的 <em>Directly Recursive</em> 函数有用，对下面这种 <a href="https://en.wikipedia.org/wiki/Mutual_recursion" target="_blank" rel="noopener"><em>Mutually Recursive</em></a> 函数就没用了：</p>
+<pre><code class="lang-scheme">;; 这里容易下意识认为要判断 0 和 1 这两个边界，其实只需要判断 0 这一个边界即可。
+;; 简洁带来严密。
+
+(define odd?
+  (lambda (n)
+    (cond [(= n 0) #f]
+          [else (even? (- n 1))])))
+
+(define even?
+  (lambda (n)
+    (cond [(= n 0) #t]
+          [else (odd? (- n 1))])))
+</code></pre>
+<p>根据上面的结果，我们来继续推导适用于 <a href="https://en.wikipedia.org/wiki/Mutual_recursion" target="_blank" rel="noopener"><em>Mutually Recursive</em></a> 函数的 <strong>Y</strong> 算子。</p>
+<p><strong>分析</strong></p>
+<p>先明确我们的目的是什么：我们的目的是在没有 <code>define</code> 的情况下实现函数 <code>odd?</code> 和 <code>even?</code> ，然后从这个实现中提取出 <strong>Y</strong> 算子。</p>
+<p>和上面同样的思路，没有了 <code>define</code> ，我们只能将上面 <code>odd?</code> 和 <code>even?</code> 函数绑定在<strong>参数</strong>上。下面我们先来尝试实现 <code>odd?</code> 函数。</p>
+<pre><code class="lang-scheme">(define odd?
+  (lambda (n)
+    (cond [(= n 0) #f]
+          [else (even? (- n 1))])))
+</code></pre>
+<p><strong>推导</strong></p>
+<p>首先我们很容易知道需要在新的 <code>odd?</code> 的函数体内储存 <code>even?</code> 函数的信息，可以得到：</p>
+<pre><code class="lang-scheme">(
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (even?)                       ;;
+    (lambda (n)                         ;; (这是没有 define 的 odd? 函数)
+      (cond [(= n 0) #f]                ;;
+            [else (even? (- n 1))])))   ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (odd?)                        ;;
+    (lambda (n)                         ;; (这是没有 define 的 even? 函数)
+      (cond [(= n 0) #t]                ;;
+            [else (odd? (- n 1))])))    ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p>然后我们要像前面的 <code>(mylength mylength)</code> 一样，设法让 <code>odd?</code> 和 <code>even?</code> 两个函数在进入递归（ <code>else</code> 分支）的时候都打包保存一次自己，以供之后的递归（ <code>else</code> 分支）可以继续保存和调用“自己”。于是代码先做如下修改：</p>
+<pre><code class="lang-scheme">(
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (even?)                              ;;
+    (lambda (n)                                ;; (这是没有 define 的 odd? 函数)
+      (cond [(= n 0) #f]                       ;;
+            [else ((even? even?) (- n 1))])))  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (odd?)                               ;;
+    (lambda (n)                                ;; (这是没有 define 的 even? 函数)
+      (cond [(= n 0) #t]                       ;;
+            [else ((odd? odd?) (- n 1))])))    ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p>观察上面的 <code>odd?</code> 函数体内的 <code>else</code> 分支，可以看到当进入此分支，就要使用 <code>even?</code> 对 <code>(- n 1)</code> 进行计算了。而 <code>even?</code> 函数是要接收 <code>odd?</code>函数作为输入的，这样它的函数体内才有 <code>odd?</code> 函数的信息来实现它的 <code>else</code> 递归分支。所以这里的 <code>(even? even?)</code> 要改成 <code>(even? odd?)</code> ，这样 <code>odd?</code> 函数才能作为参数被输入进 <code>even?</code> ，进而实现传递（保存）。代码修改如下：</p>
+<pre><code class="lang-scheme">(
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (even?)                              ;;
+    (lambda (n)                                ;; (这是没有 define 的 odd? 函数)
+      (cond [(= n 0) #f]                       ;;
+            [else ((even? odd?) (- n 1))])))   ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (odd?)                               ;;
+    (lambda (n)                                ;; (这是没有 define 的 even? 函数)
+      (cond [(= n 0) #t]                       ;;
+            [else ((odd? odd?) (- n 1))])))    ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p>到这步后，目前的代码仍然有问题。因为现在面对的是 <a href="https://en.wikipedia.org/wiki/Mutual_recursion#Conversion_to_direct_recursion" target="_blank" rel="noopener"><em>Mutual Recursion</em></a> ，两个函数相互定义彼此。要想办法在 <code>else</code> 递归分支处保存双方信息。继续观察 <code>odd?</code>（当前正在尝试实现的是没有 <code>define</code> 的 <code>odd?</code> 函数），发现 <code>odd?</code> 函数在获得输入后，已经包含了 <code>even?</code> 函数的信息，还差它自己。所以我们修改代码，让 <code>odd?</code> 函数把包含 <code>even?</code> 的自己一起存入下一次递归，这样下一次递归就同时有了 <code>odd?</code> 和 <code>even?</code>，进而一直传递和递归调用下去，直到触碰边界条件停止。代码如下：</p>
+<pre><code class="lang-scheme">(
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (even?)                                 ;;
+   ((lambda (f) (f f))                            ;; (这是没有 define 的 odd? 函数)
+    (lambda (odd?)                                ;;
+      (lambda (n)                                 ;;
+        (cond [(= n 0) #f]                        ;;
+              [else ((even? odd?) (- n 1))])))))  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (odd?)                               ;;
+    (lambda (n)                                ;; (这是没有 define 的 even? 函数)
+      (cond [(= n 0) #t]                       ;;
+            [else ((odd? odd?) (- n 1))])))    ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p>现在，我们得到了没有 <code>define</code> 的 <code>odd?</code> 函数。可以使用上面这个代码测试一下各种奇偶数了。于是再一次，<strong>Y</strong> 算子已经隐藏在其中，可以开始各种转化提取整理出 Y 算子了。</p>
+<hr>
+<h3 id="整理和提取-Y-算子-Mutual-Recursion"><a href="#整理和提取-Y-算子-Mutual-Recursion" class="headerlink" title="整理和提取 Y 算子 - Mutual Recursion"></a>整理和提取 Y 算子 - Mutual Recursion</h3><p>有了之前的经验，接下来的整理和提取轻车熟路，同样是 <em>Alpha-Equivalence</em> 和 <em>Eta-Expansion</em> 。<br>记得每一步变换都要确认代码能正确运行才继续哈。</p>
+<p><strong>第一步</strong>，分别把 <code>(even? odd?)</code> 和 <code>(odd? odd?)</code> 提取出来：</p>
+<pre><code class="lang-scheme">(
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (even?)                        ;;
+   ((lambda (f) (f f))                   ;;
+    (lambda (odd?)                       ;;
+      ((lambda (g)                       ;; (这是没有 define 的 odd? 函数)
+         (lambda (n)                     ;;
+           (cond [(= n 0) #f]            ;;
+                 [else (g (- n 1))])))   ;;
+       (even? odd?)))))                  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (odd?)                         ;;
+       ((lambda (j)                      ;;
+          (lambda (n)                    ;;
+            (cond [(= n 0) #t]           ;; (这是没有 define 的 even? 函数)
+                  [else (j (- n 1))])))  ;;
+        (lambda (n) ((odd? odd?) n))))   ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p><strong>第二步</strong>，分别两块很像 <code>odd?</code> 和 <code>even?</code> 函数的代码提取出来。</p>
+<pre><code class="lang-scheme">(
+ (lambda (even?)
+   ((lambda (f) (f f))
+    (lambda (odd?)
+      (
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+       (lambda (j)                       ;; (很像 odd? 的代码块)
+         (lambda (n)                     ;;
+           (cond [(= n 0) #f]            ;;
+                 [else (j (- n 1))])))   ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+       (even? odd?)))))                  
+
+  (lambda (odd?)
+       (
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        (lambda (k)                      ;; (很像 even? 的代码块)
+          (lambda (n)                    ;;
+            (cond [(= n 0) #t]           ;; 
+                  [else (k (- n 1))])))  ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        (lambda (n) ((odd? odd?) n))))
+)
+</code></pre>
+<p>提取后：</p>
+<pre><code class="lang-scheme">(
+  (
+   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   (lambda (j)                             ;;
+     (lambda (k)                           ;;
+       (                                   ;;
+        (lambda (even?)                    ;;
+          ((lambda (f) (f f))              ;; (Y 算子)
+           (lambda (odd?)                  ;;
+             (j                            ;;
+              (even? odd?)))))             ;;                  
+                                           ;;
+        (lambda (odd?)                     ;;
+          (k                               ;;
+           (lambda (n) ((odd? odd?) n))))  ;;
+        )))                                ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   (lambda (j)                       ;; (很像 odd? 的代码块)
+     (lambda (n)                     ;;
+       (cond [(= n 0) #f]            ;;
+             [else (j (- n 1))])))   ;;
+   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  )
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (k)                      ;; (很像 even? 的代码块)
+    (lambda (n)                    ;;
+      (cond [(= n 0) #t]           ;; 
+            [else (k (- n 1))])))  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p><strong>第三步</strong>，修改变量名（<em>Alpha-Equivalence</em>），让 Y 算子还有 <code>odd?</code> 和 <code>even?</code> 函数都更加明显：</p>
+<pre><code class="lang-scheme">((
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (j)                            ;;
+    (lambda (k)                          ;;
+      ((lambda (g)                       ;;
+         ((lambda (f) (f f))             ;; (Y 算子)
+          (lambda (h)                    ;;
+            (j (g h)))))                 ;;
+       (lambda (h)                       ;;
+         (k (lambda (x) ((h h) x)))))))  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (lambda (even?)                      ;; (很像 odd? 的代码块)
+    (lambda (n)                        ;;
+      (cond [(= n 0) #f]               ;;
+            [else (even? (- n 1))])))  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  )
+
+ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ (lambda (odd?)                       ;; (很像 even? 的代码块)
+   (lambda (n)                        ;;
+     (cond [(= n 0) #t]               ;; 
+           [else (odd? (- n 1))])))   ;;
+ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)
+</code></pre>
+<p>最终，针对 <strong>Mutual Recursions</strong> 的 <strong>Y</strong> 算子为：</p>
+<pre><code class="lang-scheme">;;; Mutual Recursions 的 Y 算子 ;;;
+(lambda (j)
+  (lambda (k)
+    ((lambda (g)
+       ((lambda (f) (f f)) 
+        (lambda (h)
+          (j (g h)))))
+     (lambda (h)
+       (k (lambda (x) ((h h) x)))))))
+</code></pre>
+<p>可以对比一下 <strong>Direct Recursions</strong> 的 <strong>Y</strong> 算子：</p>
+<pre><code class="lang-scheme">;;; Direct Recursions 的 Y 算子 ;;;
+(lambda (g)
+  ((lambda (f) (f f))
+    (lambda (f)
+      (g (lambda (x) ((f f) x))))))
+</code></pre>
+<p>观察这两个 <strong>Y</strong> 算子，是不是感觉 <strong>Mutual Recursion</strong> 似乎实际上就相当于两个相互定义的函数跑完（递归完？）一个「来回（周期）」之后，再进行针对这个「来回（周期）」的 <strong>Direct Recursion</strong>？</p>
+<hr>
+<h3 id="使用-Y-算子-For-Mutually-Recursive-Functions"><a href="#使用-Y-算子-For-Mutually-Recursive-Functions" class="headerlink" title="使用 Y 算子 - For Mutually Recursive Functions"></a>使用 Y 算子 - For Mutually Recursive Functions</h3><p>为了方便，用 <code>define</code> 来帮助定义，以减少代码符号，让演示更直观：</p>
+<pre><code class="lang-scheme">;;; Mutual Recursions 的 Y 算子 ;;;
+(define Ym
+  (lambda (j)
+    (lambda (k)
+      ((lambda (g)
+         ((lambda (f) (f f)) 
+          (lambda (h)
+            (j (g h)))))
+       (lambda (h)
+         (k (lambda (x) ((h h) x))))))))
+
+;;; 把函数的 define 换成 lambda 然后把参数名变为对方 ;;;
+;;; 注释：此操作可以理解为自己需要对方来定义所以对方要作为输入 ;;;
+(define o
+  (lambda (even?)
+    (lambda (n)                        
+      (cond [(= n 0) #f]               
+            [else (even? (- n 1))]))))
+
+(define e
+  (lambda (odd?)
+    (lambda (n)                        
+      (cond [(= n 0) #t]               
+            [else (odd? (- n 1))]))))
+
+
+;;; 通过 Y 算子可以很容易得到 odd? 和 even? 函数 ;;;
+;;; 输入 Y 算子的先后顺序决定了函数的效果是 odd? 还是 even? ;;;
+(map ((Ym o) e) &#39;(0 1 2 3))          ;; odd? 函数判断是否为奇，输出 (#f #t #f #t)
+(map ((Ym e) o) &#39;(0 1 2 3))          ;; even? 函数判断是否为偶，输出 (#t #f #t #f)
+</code></pre>
+<p>PS：<br>更多关于 <strong>Mutual Recursion</strong> 的信息可查阅维基百科 <a href="https://en.wikipedia.org/wiki/Mutual_recursion" target="_blank" rel="noopener"><em>Mutual Recursion</em></a></p>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+
+
+  </article>
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

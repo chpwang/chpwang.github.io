@@ -296,6 +296,12 @@ kex_exchange_identification: read: Connection reset by peer
 </code></pre>
 <hr>
 <p>第三种报错可能是许久不更新博客导致的。具体表现是，久不更新而再次 <code>hexo d</code> 部署推送更新，本来正常的博客页面会因此推送无法正常显示。<br>有可能会看到 <strong>Github</strong> 的报错：<code>There isn&#39;t a GitHub Pages site here.</code><br>此时，去到博客所在的 <strong>Repository</strong>（通常是<code>用户名.github.io</code>）页面，然后 <code>Settings</code> -&gt; <code>Pages</code> -&gt; <code>Custom domain</code> 重新设置一下自定义的网址。然后等个十几分钟的 <code>DNS check</code> 就好了。等待期间，博客页面可能会显示一片空白（前面的报错没有了，但还看不到任何网页内容）。<br>当然，你的自定义域名需要通过 Github 认证：<a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages" target="_blank" rel="noopener">Verifying your custom domain for GitHub Pages</a></p>
+<p>如果等了半小时网页还是一直显示空白，那就要检查 <code>.deploy_git</code> 这个文件夹里的 <code>index.html</code> 等文件看看有没有内容。如果没有内容，删除该 <code>.deploy_git</code> 文件夹再重新执行命令：</p>
+<pre><code class="lang-bash">$ hexo clean
+$ hexo g     # 生成 public 文件夹内容，包含整个静态网站文件，是本地预览 hexo s 时的文件来源
+$ hexo d     # 将 public 的内容复制到 .deploy_git，并在 .deploy_git 内执行 git add/commit/push，将内容推送到远程仓库
+</code></pre>
+<p>注意，若用 Dropbox 等网盘来同步博客内容，操作前确保整个 <code>/blog</code> 文件夹都下载到了本地电脑上，否则可能由于缺失某些组件导致 <code>.deploy_git</code> 文件夹没内容。</p>
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
 

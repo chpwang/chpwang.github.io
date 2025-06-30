@@ -301,7 +301,7 @@ kex_exchange_identification: read: Connection reset by peer
 $ hexo g     # 生成 public 文件夹内容，包含整个静态网站文件，是本地预览 hexo s 时的文件来源
 $ hexo d     # 将 public 的内容复制到 .deploy_git，并在 .deploy_git 内执行 git add/commit/push，将内容推送到远程仓库
 </code></pre>
-<p>注意，若用 Dropbox 等网盘来同步博客内容，操作前确保整个 <code>/blog</code> 文件夹都下载到了本地电脑上，否则可能由于缺失某些组件导致 <code>.deploy_git</code> 文件夹没内容。</p>
+<p>注意，若用 Dropbox 等网盘来同步博客内容，操作前确保整个 <code>/blog</code> 文件夹都下载到了本地电脑上，比如 <code>node_modules</code> 这个文件夹，否则可能由于缺失某些组件导致 <code>.deploy_git</code> 文件夹没内容，进而导致博客页面空白无显示。</p>
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
 

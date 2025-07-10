@@ -88,19 +88,23 @@
 <p>在熟悉 C++ 之后，可以进一步思考一下 C++ 和 Rust 关于内存做法的各自优缺点。</p>
 <hr>
 <h3 id="C-编程环境设置"><a href="#C-编程环境设置" class="headerlink" title="C++ 编程环境设置"></a>C++ 编程环境设置</h3><p>首推自然是使用友好功能强大的 <a href="https://www.jetbrains.com/clion/" target="_blank" rel="noopener">CLion</a> 作为 <strong>C++</strong> 的 <strong>IDE</strong>。不过这是收费的软件，30 天免费试用期过后就需要付费订阅。适合需要长期使用 C++ 的玩家们。</p>
-<p>作为入门学习体验，也可以退而求其次继续选择免费的 <a href="https://code.visualstudio.com" target="_blank" rel="noopener">VS Code</a> 。此时要先安装 <a href="https://gcc.gnu.org" target="_blank" rel="noopener">GNU C++</a> 或者 <a href="https://clang.llvm.org" target="_blank" rel="noopener">Clang C++</a> 的编译器。对于 MacOS 的用户，推荐用 Clang ，因为它包含在 Xcode 命令行工具里，安装非常方便。</p>
+<p>作为入门学习体验，也可以退而求其次继续选择免费的 <a href="https://code.visualstudio.com" target="_blank" rel="noopener">VS Code</a> 。此时要先安装 <a href="https://gcc.gnu.org" target="_blank" rel="noopener">GNU C++</a> 或者 <a href="https://clang.llvm.org" target="_blank" rel="noopener">Clang C++</a> 的编译器。对于 MacOS 的用户，推荐用 Clang ，因为它包含在 Xcode 命令行工具里，安装非常方便。下面以 MacOS 的 <strong>VS Code</strong>  为例<a href="https://code.visualstudio.com/docs/cpp/config-clang-mac" target="_blank" rel="noopener">配置编程环境</a>： </p>
+<p>首先，关于 <strong>VS Code</strong> 的安装、设置和使用可以参考<a href="/2018/05/25/vscode-intro/">上手 Visual Studio Code</a> ；</p>
+<p>其次，安装 <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools" target="_blank" rel="noopener">C++ extension for VS Code</a>，这个也可以在 <strong>VS Code</strong> 里直接搜索安装；</p>
+<p>然后是安装 C++ 编译器 <a href="https://clang.llvm.org/get_started.html" target="_blank" rel="noopener">Clang</a> （C++ 需要编译之后运行）：</p>
 <pre><code class="lang-bash">## 安装 Command Line Tools - MacOS 编程软件 Xcode 的命令行工具
 $ xcode-select --install
 
 ## 完成后可以使用一下命令查看版本说明安装成功了
 $ clang --version
-Apple clang version 14.0.0 (clang-1400.0.29.202)
-Target: arm64-apple-darwin21.6.0
+Apple clang version 17.0.0 (clang-1700.0.13.5)
+Target: arm64-apple-darwin24.5.0
 Thread model: posix
 InstalledDir: /Library/Developer/CommandLineTools/usr/bin
 </code></pre>
-<p>安装完 Clang 之后，在 VS Code 中新建后缀为 <code>.cpp</code> 的文件比如 <code>demo.cpp</code> 就能开始编程了：</p>
-<pre><code class="lang-c++">#include &lt;iostream&gt;
+<p>安装完 Clang 之后，在 VS Code 中新建后缀为 <code>.cpp</code> 的文件比如 <code>demo.cpp</code> 就能开始编程了（建议建一个文件夹比较好，因为编译会生成新文件）：</p>
+<pre><code class="lang-c++">#include &lt;iostream&gt;   
+// #include &lt;...&gt; 是加载外部代码，上面是引入标准输入输出库（以便使用下面的 std::cout 输出内容）
 
 // C++ 的 main 函数一定要返回 int
 int main()
@@ -109,9 +113,56 @@ int main()
   return 0;
 }
 </code></pre>
-<p>关于 <strong>VS Code</strong> 的安装、设置和使用可以参考<a href="/2018/05/25/vscode-intro/">上手 Visual Studio Code</a> 。</p>
-<p>一些方便的设置：</p>
-<ul>
+<p>注意：MacOS 升级到 <a href="https://www.apple.com/sg/macos/macos-sequoia/" target="_blank" rel="noopener">Sequoia</a> 后，可能需要<a href="https://stackoverflow.com/questions/78999694/cant-compile-c-hello-world-with-clang-on-mac-sequoia-15-0-and-vs-code" target="_blank" rel="noopener">重装 Command Line Tools</a> 才能正确运行代码，否则会有类似 <code>&#39;iostream&#39; file not found</code> 之类找不到标准库头文件的报错：</p>
+<pre><code class="lang-bash">$ sudo rm -rf /Library/Developer/CommandLineTools   # Uninstall - 先卸载 
+
+$ xcode-select --install                            # Reinstall - 再安装
+</code></pre>
+<p>此外，也许你的代码能正常运行，但 <strong>VS Code</strong> 总在各种 <code>#include &lt;...&gt;</code>  的代码下方标记红色波浪线，提示找不到标准库文件的报错。可参考<a href="https://stackoverflow.com/questions/65421161/visual-studio-code-cannot-open-source-file-iostream" target="_blank" rel="noopener">这里</a>解决：</p>
+<ol>
+<li><p>在终端里使用命令 <code>gcc -v -E -x c++ -</code> 来获取所有标准库目录：</p>
+<pre><code class="lang-bash">$ gcc -v -E -x c++ -
+...
+...
+...
+#include &lt;...&gt; search starts here:
+/usr/local/include
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1
+/Library/Developer/CommandLineTools/usr/lib/clang/17/include
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include
+/Library/Developer/CommandLineTools/usr/include
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)
+End of search list.
+</code></pre>
+</li>
+<li><p>打开 <a href="https://code.visualstudio.com/docs/cpp/configure-intellisense#_option-3-edit-the-ccpppropertiesjson-file-directly" target="_blank" rel="noopener"><code>c_cpp_properties.json</code></a> 文件，把上述目录增加到 <code>&quot;includePath&quot;</code> 一栏中保存即可（该文件通常在你当前 VS Code 工作目录下的 <code>.vscode</code> 文件夹中，若没有，参考<a href="https://code.visualstudio.com/docs/cpp/configure-intellisense#_option-3-edit-the-ccpppropertiesjson-file-directly" target="_blank" rel="noopener">这里</a>通过 <strong>Command Palette</strong> 中输入 <code>C/C++ Edit Configurations (JSON)</code> 创建）：</p>
+<pre><code class="lang-json">{
+ &quot;configurations&quot;: [
+   {
+     &quot;name&quot;: &quot;Mac&quot;,
+     &quot;includePath&quot;: [
+         &quot;${workspaceFolder}/**&quot;,
+         &quot;/usr/local/include&quot;,
+         &quot;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1&quot;,
+         &quot;/Library/Developer/CommandLineTools/usr/lib/clang/17/include&quot;,
+         &quot;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include&quot;,
+         &quot;/Library/Developer/CommandLineTools/usr/include&quot;,
+         &quot;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks&quot;
+     ],
+     &quot;defines&quot;: [],
+     &quot;cStandard&quot;: &quot;c17&quot;,
+     &quot;cppStandard&quot;: &quot;c++17&quot;,
+     &quot;intelliSenseMode&quot;: &quot;macos-clang-arm64&quot;,
+     &quot;compilerPath&quot;: &quot;/usr/bin/clang++&quot;
+   }
+ ],
+ &quot;version&quot;: 4
+}
+</code></pre>
+</li>
+</ol>
+<hr>
+<h4 id="其他的一些方便的设置："><a href="#其他的一些方便的设置：" class="headerlink" title="其他的一些方便的设置："></a>其他的一些方便的设置：</h4><ul>
 <li><p><strong>设置花括号另起一行</strong>：<code>Settings</code> -&gt; 搜索 <code>C_Cpp.clang_format_fallbackStyle</code><br>在输入框处填上 <code>&quot;Visual Studio&quot;</code> ，也就是使用 <strong>VS</strong> 的格式<br>这样在编辑完代码后，就可以使用快捷键 <code>option</code> + <code>shift</code> + <code>F</code> 来格式化代码，让花括号另起一行<br>最开始 <strong>C</strong> 语言的时候大家花括号都是写在下一行的，自从有了 <strong>Java</strong> ，大家才开始写埃及括号 Egyptian brackets ，然后代码就挨得太近了<br>要注意的是，该格式化也会把 <code>int* p = ...</code> 改成 <code>int *p = ...</code> ，但 <code>int*</code> 其实是一个「类型」，代表<strong>整数指针</strong>。写成 <code>int *p</code> 会和解引用计算 <code>*p</code> 混淆。正确写法还是要 <code>int* p</code> 表示变量 <strong>p</strong> 是整数指针类型；<br>你如果想抬杠把它理解成先计算 <code>*p</code> ，然后再把计算结果标记为 <code>int</code> 类型，那逻辑就绕了。而且类型标记是标记变量和函数的，不是标记表达式的值的；</p>
 </li>
 <li><p><a href="https://code.visualstudio.com" target="_blank" rel="noopener">VS Code</a> 默认用的是 <code>g++</code> 来编译，最好能加上一个参数 <code>-std=c++17</code> ，这样就能使用 <a href="https://en.wikipedia.org/wiki/C%2B%2B17" target="_blank" rel="noopener">C++17</a> 标准来编译。这意味着你的代码可以用一些新的写法和功能，比如使用 <code>std::make_unique</code> 函数等。<br>参考<a href="/2018/05/25/vscode-intro/">上手 Visual Studio Code</a> 打开配置文件 <em>settings.jason</em> ：<br><code>Extensions Settings</code> -&gt; <code>Code-runner:</code> <strong><code>Executor Map</code></strong> -&gt; <code>Edit in settings.jason</code><br>在 <strong>cpp</strong> 那行的 <code>g++</code> 后面编辑添加 <code>std=c++17</code> 保存即可。编辑完成后这行的文本如下：</p>

@@ -4,7 +4,7 @@
   <url>
     <loc>https://cps.ninja/2024/04/27/cpp-basics/</loc>
     
-    <lastmod>2025-07-10T20:24:35.403Z</lastmod>
+    <lastmod>2025-07-10T20:26:58.748Z</lastmod>
     
   </url>
   
@@ -191,6 +191,13 @@
   </url>
   
   <url>
+    <loc>https://cps.ninja/2018/09/26/intro-to-neural-network/</loc>
+    
+    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://cps.ninja/2018/05/28/introduce-jupyter-notebook/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
@@ -198,7 +205,7 @@
   </url>
   
   <url>
-    <loc>https://cps.ninja/2018/09/26/intro-to-neural-network/</loc>
+    <loc>https://cps.ninja/2018/09/21/keras/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     
@@ -220,13 +227,6 @@
   
   <url>
     <loc>https://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
-    
-    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://cps.ninja/2018/09/21/keras/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     

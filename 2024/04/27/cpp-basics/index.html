@@ -124,7 +124,6 @@ $ xcode-select --install                            # Reinstall - 再安装
 <pre><code class="lang-bash">$ gcc -v -E -x c++ -
 ...
 ...
-...
 #include &lt;...&gt; search starts here:
 /usr/local/include
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1
@@ -172,16 +171,16 @@ End of search list.
 </ul>
 <hr>
 <h3 id="开始编程"><a href="#开始编程" class="headerlink" title="开始编程"></a>开始编程</h3><p>C++ 和 Java 非常相似，对熟悉 Java 的玩家来说，开始的这些代码和概念可以快速通过：</p>
-<pre><code class="lang-c++">#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;memory&gt;
-#include &lt;vector&gt;
-#include &lt;map&gt;
-#include &lt;stdexcept&gt;
-#include &lt;cmath&gt; // &lt;cmath&gt; 库包含开平方的函数 sqrt
+<pre><code class="lang-c++">#include &lt;iostream&gt;       // 标准输入输出 - std::cout 等
+#include &lt;string&gt;         // 字符串拼接、查找、截取等操作 - append 等
+#include &lt;memory&gt;         // 智能指针和内存管理工具 - std::unique_ptr 和 std::shared_ptr 等
+#include &lt;vector&gt;         // 动态数组容器（长度可自动扩展）- resize() 等
+#include &lt;map&gt;            // 键值对映射（有序字典）- std::map 等
+#include &lt;stdexcept&gt;      // 标准异常类型，用于错误处理 - std::runtime_error 等
+#include &lt;cmath&gt;          // 数学函数和常量 - sqrt() 等
 
 // 如果没有 using namespace std; 那 cout 和 endl 等就都要加上 std::
-// 这里我们只有一个 cout ，所以可以不用担心可能导致的命名冲突
+// 以下代码只有一个 cout ，所以可以不用担心可能导致的命名冲突
 using namespace std;
 
 // C++ 不允许你在函数内部定义函数，编译不通过，所以 fact 定义到外面
@@ -199,9 +198,6 @@ int fact(int n)
   }
 }
 
-// int sqrt(int n) {
-//   return n * n;
-// }
 
 // ###########################################################
 //                            基本语法
@@ -212,7 +208,7 @@ void basic_test()
   // 如果没有上面的 using namespace std; 那输出的 cout 和换行 endl 等等就都要加上 std:: 这个前缀
   // std::cout &lt;&lt; &quot;---------------- basic_test ----------------&quot; &lt;&lt; std::endl;
 
-  cout &lt;&lt; &quot;---------------- basic_test ----------------&quot; &lt;&lt; endl;
+  cout &lt;&lt; &quot;---- basic_test ----&quot; &lt;&lt; endl;
 
   cout &lt;&lt; &quot;Hello World!&quot; &lt;&lt; endl;
 
@@ -238,9 +234,13 @@ void basic_test()
   bool d = true;
   cout &lt;&lt; &quot;d = &quot; &lt;&lt; d &lt;&lt; endl;
 
-  string e = &quot;Hello&quot;; // string 类型是小写开头的 Java 是大写 String
+  string e = &quot;Hello&quot;;  // string 类型是小写开头的 Java 是大写 String
   cout &lt;&lt; &quot;e = &quot; &lt;&lt; e &lt;&lt; endl;
   cout &lt;&lt; e + &quot; World!&quot; &lt;&lt; endl;
+
+  // 这种写法是不行的，标记了 string 类型的 e 才有 .append 这个内部函数可调用
+  // &quot;Hello&quot; 没标记类型，C++ 无法自动判断类型
+  // cout &lt;&lt; &quot;Hello&quot;.append(&quot; World!&quot;) &lt;&lt; endl;  
 
   e.append(&quot; World!&quot;);
   cout &lt;&lt; &quot;e = &quot; &lt;&lt; e &lt;&lt; endl;
@@ -249,19 +249,21 @@ void basic_test()
 
   cout &lt;&lt; fact(5) &lt;&lt; endl;
 
-  string arr[] = {&quot;Hello&quot;, &quot;World&quot;, &quot;Good&quot;, &quot;Morning&quot;, &quot;Everyone&quot;};
+  // 注意数组的值用的是花括号 {} 而不是 []，不能写 [1, 2]，要写 {1, 2}
+  string arr[] = {&quot;Hello&quot;, &quot;World&quot;, &quot;Good&quot;, &quot;Morning&quot;, &quot;Everyone&quot;};  
   // C++ 的数组没有 length 函数
-  // sizeof(arr) 得到整个数组占用多少内存，用字节计算，sizeof(string) 则得到 string 对象的大小
+  // sizeof(arr) 得到整个数组占用多少内存(单位：字节)
+  // sizeof(string) 则得到 string 对象的大小(单位：字节)
   // 两者除一下，计算出数组的长度 length
   cout &lt;&lt; &quot;arr length = &quot; &lt;&lt; sizeof(arr) / sizeof(string) &lt;&lt; endl;
 
-  for (int i = 0; i &lt; 5; i++)
+  for (int i = 0; i &lt; 5; i++)   // 打印数组 arr 内容（方法一）
   {
     cout &lt;&lt; &quot;for: &quot; + arr[i] &lt;&lt; endl;
   }
 
   arr[3] = &quot;Evening&quot;;
-  for (string s : arr)
+  for (string s : arr)          // 打印数组 arr 内容（方法二）
   {
     cout &lt;&lt; &quot;for-each: &quot; + s &lt;&lt; endl;
   }
@@ -278,21 +280,28 @@ void basic_test()
 
   cout &lt;&lt; &quot;Total = &quot; &lt;&lt; total &lt;&lt; endl;
 
-  struct User // struct 可以在函数体里定义
+
+  // 如果 struct 内部定义了函数的话，这个函数是单独存放的
+  // 不算 struct 里的 field（struct 里定义的成员变量叫 field，有几个就是几个 field）
+  // 比如你这里定义了一个 printUser() 函数，然后 unique_ptr&lt;User&gt; u1
+  // 然后 move 它：unique_ptr&lt;User&gt; u2 move(u1)，“所有权”转移到 u2
+  // 按理说此时变量 u1 被清零了（地址为 0），但 u1.printUser() 仍然能调用
+  // 除了 struct 外，class 的行为也是如此
+  // 思考：struct 和 class 有什么区别？哪些情况下时候分别用哪个？
+  // class 中，默认的成员访问级别是 private，而在 struct 中，默认的成员访问级别是 public；
+  // class 常用于定义复杂行为和数据封装的对象，如包含多种类方法；
+  // 而 struct 则用于轻量级的简易数据结构，如坐标等：
+  struct Point 
+  {
+    double x;  // 默认 public，Point 的外部可访问 p.x
+    double y;  // 默认 public, Point 的外部可访问 p.y
+  };
+
+  // struct 可以在函数体里定义，当前就在 basic_test 这个函数体内
+  struct User  
   {
     string name;
     int age;
-
-    // 如果 struct 定义函数的话，这个函数是单独存放的
-    // 不算 struct 里的 field
-    // 比如你这里定义了一个 printUser() 函数，然后 unique_ptr&lt;User&gt; u1
-    // 然后 move 它：unique_ptr&lt;User&gt; u2 move(u1)
-    // 按理说此时 u1 被清零了（地址为 0），但 u1.printUser() 仍然能调用
-    // 除了 struct 外 class 的行为也是如此
-    // 思考：struct 和 class 有什么区别？哪些情况下时候分别用哪个？
-    // class 中，默认的成员访问级别是 private，而在 struct 中，默认的成员访问级别是 public；
-    // class 常用于定义复杂行为和数据封装的对象，如包含多种类方法；而 struct 则用于轻量级的数据结构，如坐标；
-
   }; // C++ 这里要加一个分号
 
   // User u1 = {&quot;John&quot;, 25};
@@ -317,19 +326,44 @@ void basic_test()
 
 void pointer_test()
 {
-  cout &lt;&lt; &quot;---------------- pointer_test ----------------&quot; &lt;&lt; endl;
+  cout &lt;&lt; &quot;---- pointer_test ----&quot; &lt;&lt; endl;
 
-  // 直接定义的整数 10 被 C++ 放在栈上 - 和 Java 不同的是，C++ 的「堆」和「栈」分得很清楚的
+  // 先来理解一下「指针」和「引用」两个概念，并区分 * 和 &amp; 符号的不同作用；
+  int num = 42;
+  int* ptr = &amp;num; // int* 是指针类型; &amp;num 中的 &amp; 操作是读取 num 的地址
+  int&amp; ref = num;  // ref 是 num 的引用; int&amp; 是创建引用，和上面的 &amp; 不同
+
+  cout &lt;&lt; &quot;&amp;num = &quot; &lt;&lt; &amp;num &lt;&lt; endl;   // &amp;num = 0x16b532adc
+  cout &lt;&lt; &quot;ptr = &quot; &lt;&lt; ptr &lt;&lt; endl;     // ptr = 0x16b532adc
+  cout &lt;&lt; &quot;*ptr = &quot; &lt;&lt; *ptr &lt;&lt; endl;   // *ptr = 42 // 这里 * 是解引用，读取 ptr 地址里存放的值；
+  cout &lt;&lt; &quot;ref = &quot; &lt;&lt; ref &lt;&lt; endl;     // ref = 42
+
+  cout &lt;&lt; &quot;num = &quot; &lt;&lt; num &lt;&lt; endl;     // num = 42
+  ref = 29;
+  cout &lt;&lt; &quot;num = &quot; &lt;&lt; num &lt;&lt; endl;     // num = 29
+  cout &lt;&lt; &quot;ref = &quot; &lt;&lt; ref &lt;&lt; endl;     // ref = 29
+
+
+  // 直接定义的整数 10 被 C++ 放在栈上（和 Java 不同的是，C++ 的「堆」和「栈」分得很清楚的）
   // x 的数据 2 在 stack 上
   int x = 2;
   cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; endl; // 直接可以打印出 x 的值 2 
   cout &lt;&lt; &quot;&amp;x = &quot; &lt;&lt; &amp;x &lt;&lt; endl; // 打印 x 的地址：符号 &amp; 代表取得该变量的地址
 
-  // 这个定义，数据 int(10) 在 heap 上，指针变量 p 则在 stack 上
+  // 在 C++ 中，你使用 new 关键字在堆（heap）上分配内存，并得到一个指向该内存的指针。
+  // 当不再需要这块内存时，必须使用 delete 关键字将其手动释放。
+  // heap 上的数据不受作用域限制，函数体外仍能继续访问，直到手动释放。
+  // 此处的定义，数据 int(10) 在 heap 上，指针变量 p 则在 stack 上。
+  // int(10) 这一数据在当前函数 pointer_test 之外还能访问（比如通过地址），因为在 heap 上。
+  // 但是变量 p 在 pointer_test 之外则被注销自动释放了，因为 p 在 stack 上。
   // int* 的这个 * 号是 int* 这个类型的一部分，下面的 *p 的 * 号则是解引用操作符，两者不一样
   // Rust 的 * 只是用来 move 改变 ownership 的，虽然也叫 dereference 但和这的 *p 本质不一样
   // C++ 里，看到关键词 new 就要知道它肯定在 heap（堆）上了，因为 new 就是在 heap 上分配内存的操作
-  int* p = new int(10);
+  int* p = new int(10);  // 注意！new int(10) 在 heap 上，但变量 p 则在 stack 上
+
+  // int(10) 这个值为 10 的整数是存放在 heap 上的，有一个对应的 heap 上的地址；
+  // int(10) 在 heap 上的地址被存放在了变量 p 里；
+  // p 的类型是 int* ，p 被存放在 stack 上，有一个对应的 stack 上的地址；
 
   // 直接打印 p 会打印出 p 中数据的内存地址，即 10 存放在作为 heap 的内存的地址（0x开头的16进制数）
   cout &lt;&lt; &quot;p = &quot; &lt;&lt; p &lt;&lt; endl;
@@ -341,38 +375,57 @@ void pointer_test()
   // 使用 VS Code 格式化代码会使得 int** q 被改写为 int **q ，而这样写会和 **q 混淆
 
   // &amp;p 是取得 p 的地址，和 Rust 中作为借用（borrow）的 &amp; 不同
-  int** q = &amp;p;                // q 本身在 stack 上，指向 stack 上的 p 的地址 &amp;p
+  int** q = &amp;p;                // q 本身在 stack 上，指向（存放）同样在 stack 上的 p 的地址 &amp;p
   cout &lt;&lt; &quot;q = &quot; &lt;&lt; q &lt;&lt; endl; // 可发现 &amp;p 和 &amp;x 值很接近，因为 p 和 x 在 stack（栈） 上是相邻的
   cout &lt;&lt; &quot;*q = &quot; &lt;&lt; *q &lt;&lt; endl;
   cout &lt;&lt; &quot;**q = &quot; &lt;&lt; **q &lt;&lt; endl;
 
+  // r 存放 q 的地址
   int*** r = &amp;q;
   cout &lt;&lt; &quot;r = &quot; &lt;&lt; r &lt;&lt; endl;
   cout &lt;&lt; &quot;*r = &quot; &lt;&lt; *r &lt;&lt; endl;
   cout &lt;&lt; &quot;**r = &quot; &lt;&lt; **r &lt;&lt; endl;
   cout &lt;&lt; &quot;***r = &quot; &lt;&lt; ***r &lt;&lt; endl;
 
+  // s 存放 r 的地址
   int**** s = &amp;r;
   cout &lt;&lt; &quot;s = &quot; &lt;&lt; s &lt;&lt; endl;
 
-  // int arr[5] = {3, 5, 7, 9, 11};
-
   // 这里 p2 的类型为什么是 int* 而不是 int[]* ？为什么是 int 的指针类型而不是数组的指针类型？
   // 因为数组里所有元素是挨在一起相邻储存的，故知道了第一个元素的地址，就知道整个数组的所有元素的地址
-  // p2 会指向向数组的第一个数据：3 ，即 *p2 = 3
+  // p2 会指向向数组的第一个数据 3 的地址，即 *p2 = 3
   int* p2 = new int[5] {3, 5, 7, 9, 11};  // 注意，C++11 之前的标准不支持直接使用列表初始化数组
   cout &lt;&lt; &quot;p2 = &quot; &lt;&lt; p2 &lt;&lt; endl;
-  cout &lt;&lt; &quot;*p2 = &quot; &lt;&lt; *p2 &lt;&lt; endl;
+  cout &lt;&lt; &quot;*p2 = &quot; &lt;&lt; *p2 &lt;&lt; endl;             // 数组指针指向数组第一个元素的地址，即 3
   cout &lt;&lt; &quot;p2 + 1 = &quot; &lt;&lt; p2 + 1 &lt;&lt; endl;       // 数组第二元素 5 的地址
   cout &lt;&lt; &quot;*(p2 + 1) = &quot; &lt;&lt; *(p2 + 1) &lt;&lt; endl; // 数组第二元素的值，即 5
 
   int** q2 = &amp;p2;
-  cout &lt;&lt; &quot;q2 = &quot; &lt;&lt; q2 &lt;&lt; endl;
+  cout &lt;&lt; &quot;q2 = &quot; &lt;&lt; q2 &lt;&lt; endl;         // 指针 p2 的地址
+  cout &lt;&lt; &quot;*q2 = &quot; &lt;&lt; *q2 &lt;&lt; endl;       // 指针 p2 存放的内容，即数组的地址
+  cout &lt;&lt; &quot;**q2 = &quot; &lt;&lt; **q2 &lt;&lt; endl;     // 数组的地址对应的内容，即数组第一个元素的内容：3
+
+  // 在 C++ 中，你使用 new 关键字在堆（heap）上分配内存，并得到一个指向该内存的指针。
+  // 当不再需要这块内存时，必须使用 delete 将其手动释放，否则会内存泄漏（(Memory Leak）
+  // 下面分别是释放单个对象和对象数组的方式，分别要用 delete 和 delete[]
+  // delete 操作符后面跟的虽然是指针变量 p，但它的目标不是释放 p 这个变量本身（p 在 stack 上不需要手动释放）
+  // 而是释放 p 变量中所存储的那个地址所指向的堆内存。
+  // 释放完后还要把相关指针设置为 nullptr，防止它们成为悬挂指针（Dangling Pointer）
+  delete p;
+  p = nullptr;
+
+  delete[] p2;
+  p2 = nullptr;
+
+  // 正因为手动管理 new/delete/delete[] 并记得设置 nullptr 非常繁琐且容易出错
+  // 比如忘记 delete、重复 delete、用错 delete[] 等
+  // 现代 C++ (C++11 及以后) 强烈推荐使用智能指针 (std::unique_ptr 和 std::shared_ptr)
+  // 智能指针可以为你自动处理这一切。参见本文接下来的内容。
 }
 
 void address_test()
 {
-  cout &lt;&lt; &quot;---------------- address_test ----------------&quot; &lt;&lt; endl;
+  cout &lt;&lt; &quot;---- address_test ----&quot; &lt;&lt; endl;
 
   int i = 10;
   string s = &quot;Hello&quot;;
@@ -383,6 +436,9 @@ void address_test()
   cout &lt;&lt; &quot;address of i = &quot; &lt;&lt; &amp;i &lt;&lt; endl;  // stack
   cout &lt;&lt; &quot;address of s = &quot; &lt;&lt; &amp;s &lt;&lt; endl;  // stack
   cout &lt;&lt; &quot;pi = &quot; &lt;&lt; pi &lt;&lt; endl;            // heap
+
+  delete pi;     // 手动释放在 heap 上的内存，即 pi 指针指向的地址的内存
+  pi = nullptr;  // 设置为空指针
 }
 
 
@@ -405,7 +461,7 @@ void pass_by_reference_const(const int&amp; x)
 
 void reference_test()
 {
-  cout &lt;&lt; &quot;---------------- reference_test ----------------&quot; &lt;&lt; endl;
+  cout &lt;&lt; &quot;---- reference_test ----&quot; &lt;&lt; endl;
 
   int x = 10;
   int&amp; y = x;  // 同上文的理，int&amp; 是一个类型，&amp; 是 int&amp; 类型的一部分
@@ -422,7 +478,7 @@ void reference_test()
   cout &lt;&lt; &quot;y = &quot; &lt;&lt; y &lt;&lt; endl;
 
   // &amp;x and &amp;y are the same - x 和 y 的地址相同
-  // meaning: x and y is the same variable - //可看出 x 和 y 就是同一个东西
+  // meaning: x and y is the same variable - // 可看出 x 和 y 就是同一个东西
   // y 和 x 的地址一样，说明 stack 上没有分配一个空间位置给 y ，y 只是 x 的一个别名
   // 之后会看到 y 这种东西有什么用 - .borrow_mut()
   cout &lt;&lt; &quot;&amp;x = &quot; &lt;&lt; &amp;x &lt;&lt; endl;
@@ -433,11 +489,30 @@ void reference_test()
   // // 但 z = 100 相当于对 x + 1 赋值，语义上就很奇怪的，所以不能这么写
   // int&amp; z = x + 1;
 
-
   // 但是你可以有下面这样一个引用，因为是 const 所以你后续不能对 z 赋值了：
   const int&amp; z = x + 1;
   cout &lt;&lt; &quot;z = &quot; &lt;&lt; z &lt;&lt; endl;
 
+  // 这里定义了名为 z 的 const int&amp; (对常量整数的引用)，并将其绑定到表达式 x + 1 的结果上
+  // z 不是 x + 1 的别名（Alias）,而是 x + 1 这个表达式的值的别名
+  // z 绑定的是一个临时的、值为 11 的新对象
+  // 由于 z 是 const 的，你不能通过 z 来修改这个值
+  // 即使你后来修改了 x 的值（比如 x = 50;），z 的值仍然是 11
+  // 因为 z 绑定的是那个临时对象，与 x 已经没有关系了
+  // int&amp;：对整数的引用 (Reference to int)
+  // const int&amp;：对常量整数的引用 (Reference to a constant int)
+  // const 引用可以绑定到临时对象（右值 rvalue），而普通的非 const 引用则不能
+
+  // 上面的 const int&amp; z 虽然感觉上不如直接写成 int z
+  // 不过 const int&amp; z 没发生拷贝操作，而是直接让 z 指向表达式 x + 1 的临时对象（右值）
+  // 相当于 heap 上的这个临时对象（右值）的生命周期被延长了，变得和 z 一样
+  // int z 则是将表达式的值（临时对象，或者说右值）拷贝到 stack 上新创建的内存空间上
+  // 然后临时对象的生命周期结束被销毁
+  // 对于 x + 1 这种简单的数来说，拷贝操作不算什么，而对于那些大数据的对象来说，少拷贝更好
+  // 此外 const int&amp; z 定义的 z 是只读的，不能修改，而 int z 的 z 是变量，可修改
+  // 综上，C++ 里的 const T&amp; 主要目的是以只读的方式高效地访问对象，避免不必要的拷贝
+  int z_non_const = x + 1;
+  cout &lt;&lt; &quot;z_non_const = &quot; &lt;&lt; z_non_const &lt;&lt; endl;
 
   int a = 12;
   cout &lt;&lt; &quot;&amp;a = &quot; &lt;&lt; &amp;a &lt;&lt; endl;
@@ -451,46 +526,13 @@ void reference_test()
   pass_by_reference_const(x + 1);  // 参数类型是 const int&amp; ，代表无法更改，所以可允许
 
   // pass_by_reference 和 pass_by_reference_const 这种用法是 C 语言和 C++ 特有的
-}
 
-
-// ###########################################################
-//                            数组
-// ###########################################################
-
-// C++ 的这个类型语法是比较诡异的，数组的类型要写成 int arr[] ，应该是历史遗留问题
-// Java 中的数组就比较有规律 int[] arr ，类型是 int[] ，变量名是 arr
-// 且这里数组传递的是 reference ，但又不像 pass_by_reference 那样写成 int&amp; arr[]
-void pass_array(int arr[])  
-{
-  for (int i = 0; i &lt; 5; i++) 
-  {
-    cout &lt;&lt; &quot;pass_array: &quot; &lt;&lt; arr[i] &lt;&lt; endl;
-  }
-  arr[0] = 100;
-}
-
-
-void pass_array_test()
-{
-  cout &lt;&lt; &quot;---------------- pass_array_test ----------------&quot; &lt;&lt; endl;
-
-  // 在栈（stack）上定义一个 array
-  int arr[] = {1, 2, 3, 4, 5}; // stack 上
-
-  for (int i = 0; i &lt; sizeof(arr)/sizeof(int); i++) 
-  {
-    cout &lt;&lt; &quot;before pass_array: &quot; &lt;&lt; arr[i] &lt;&lt; endl;
-  }
-
-  pass_array(arr);
-
-  // a[0] 的值在函数 pass_array 中被改变了，说明数组传递进去的时候不是复制一份
-  // 而是 arr[] 本身直接进去（很上面的 pass_by_reference 行为相同）
-  for (int i = 0; i &lt; sizeof(arr)/sizeof(int); i++) 
-  {
-    cout &lt;&lt; &quot;after pass_array: &quot; &lt;&lt; arr[i] &lt;&lt; endl;
-  }
+  // 补充知识：
+  // 左值 (lvalue - locator value)指的是一个具有持久身份（identity）和确定内存地址的对象或表达式。
+  // 可以把它想象成一个有“家”（内存地址）的东西，可以被反复访问和修改.比如 int x = 9; 中的 x
+  // 右值 (rvalue - read value)指的是一个没有持久身份、通常是临时的表达式结果。 
+  // 可以把它想象成“一次性用品”，用完即丢，没有固定的“家”。如字面量 (Literals)：10 或算术表达式的结果：x + 1
+  // 由于没有可识别的内存地址：通常不能对右值取地址（&amp;）
 }
 
 
@@ -498,56 +540,98 @@ void pass_array_test()
 //                            面向对象
 // ###########################################################
 
+// 虽然在 C++ 中，class 既可以定义在函数外部，也可以定义在函数体内部；
+// 但是绝大多数（99% 以上）的情况下，你应该将 class 定义在函数外部，这里是定义在 inheritance_test 外；
+// 这是 C++ 编程的标准和推荐做法。将类（如 class Animal）视为一个独立的、可复用的构建模块；
+// 在实际项目中，类的声明通常放在头文件（.h 或 .hpp）中，如 Animal.h
+// 以便被多个源文件（.cpp）包含和使用：.cpp 文件开头写 #include &quot;Animal.h&quot; 类似 #include &lt;iostream&gt;
+// 这天然就要求类（class）的定义位于所有函数之外。
+// 在函数内部定义的类被称为局部类 (Local Class)。这是一种不常见的用法，主要用于实现高度的封装和局部化。
+// 局部类的定义（作用域）只在它所在的函数体内有效。
+// 在现代 C++ (C++11及以后)，很多需要局部类的简单场景已经被 Lambda 表达式所取代
+// 因为 Lambda 更简洁。但如果这个辅助工具逻辑复杂，需要多个成员函数和变量时，局部类依然有其用武之地。
 class Animal
 {
   // 外部能用的成员和方法都写到 public: 后面
   // 不像 Java 那样每个都要写一次 public
   public:
-  // virtual 类似 Java 的 abstract class
-  // 强制继承的子类定义 speak 方法
-  // C++ 中得写成这中奇怪的样子
-  // 如果不加 virtual ，那子类就无法 override 这个 speak 方法了
+  virtual void speak() = 0;
+  // 这里 virtual ... = 0 的写法类似 Java 的 abstract class（抽象类）
+  // 这个 = 0 的 C++ 语法意味着 speak 是个纯虚函数
+  // 纯虚函数没有实现，因此其功能要求由子类来定义
+  // 相当于强制要求继承 Animal 的子类定义 speak 方法（函数）
+  // C++ 中一个类如果包含至少一个纯虚函数（= 0），那么这个类就是一个抽象类
+  // 抽象类不能直接实例化（instantiation），它只能作为基类被继承
+  // C++ 中得写成这种奇怪的样子
+  // 如果不加 virtual ，那子类就无法 override（重写）这个 speak 方法了
   // 如果不写 = 0 ，就无法强制子类定义 speak 函数
-  virtual void speak() = 0;  
+  // 重写（override）父类函数时，参数类型、顺序、数量，函数返回类型必须完全相同，区别与重载（overload）
+  // 重载（overload）是同一作用域内（如同一类中），函数名相同但参数列表必须不同（参数类型、数量或顺序）
+  // 重载（overload）函数的返回值类型可以相同，也可以不同；
+
+  // 与抽象类对应的就是普通类（Concrete Class）。普通类指的是没有任何纯虚函数的类，它可以直接被实例化。
+  // 普通类可以包含虚函数（即实现了虚函数的具体方法），但它不能包含纯虚函数
+  // virtual 关键字代表支持动态绑定（运行时再判断函数调用哪个，比如子类同名函数）
+  // 若不写 virtual，则为普通函数（非虚函数），是静态绑定。意味着在编译时就确定了调用哪个函数
+  // 即基类指针定义 Animal* a = new Dog(); 写了 virtual ，a-&gt;eat() 就调用子类 Dog 的 eat，没写就调用基类 Animal 的
+  virtual void eat() 
+  {
+    cout &lt;&lt; &quot;Animal is eating&quot; &lt;&lt; endl;
+  }
 };
 
 // 要在 Dog 里能访问到 Animal 里的成员，就要写上 public
 class Dog: public Animal
 {
   public:
-  // 重载 speak 方法，更严谨的做法是加上 override 
-  // 类似 Java 的 @Override 标记
   void speak() override
   {
     cout &lt;&lt; &quot;汪！&quot; &lt;&lt; endl;
+  }
+  // 重写 speak 方法
+  // 更严谨的做法是在 speak() 后面加上 override 
+  // 类似 Java 的 @Override 标记
+  // 重写（override）父类函数时，参数类型、顺序、数量，函数返回类型必须完全相同，区别与重载（overload）
+  // 关键字 override 不写也行（编译器可能有警告提示），但写的话编译器会去检查父类的内容
+  // 检查如果父类没有 speak ，那就会编译不通过（父类却没有你要重写的函数时，就会报错）
+
+  // 显式写 override ，明确地表达程序员的意图永远是最好的
+  void eat() override
+  {
+    cout &lt;&lt; &quot;Dog is eating&quot; &lt;&lt; endl;
+  }
+
+  void bark()
+  {
+    cout &lt;&lt; &quot;Dog is barking&quot; &lt;&lt; endl;
   }
 };
 
 class Cat: public Animal
 {
   public:
-  // override 不写也行，但写的话编译器会检查父类的内容
-  // 如果父类没有 speak ，那就会编译不通过（要重载但父类却没有）
-  void speak()
+  void speak() override
   {
     cout &lt;&lt; &quot;喵！&quot; &lt;&lt; endl;
   }
 };
 
+
 void inheritance_test()
 {
-  cout &lt;&lt; &quot;---------------- inheritance_test ----------------&quot; &lt;&lt; endl;
+  cout &lt;&lt; &quot;---- inheritance_test ----&quot; &lt;&lt; endl;
 
   // 栈（stack）上面定义了狗 d 和猫 c
-  // Dog 和 Cat 的实例（instance）在 stack 上
+  // Dog 和 Cat 的实例（instance）在 stack 上（函数的局部变量都在 stack 上）
   Dog d; // stack
   Cat c; // stack
   int i = 9;  // stack
 
-  // 定义在 heap 上的 Dog
+  // 定义在 heap 上的 Dog（用 new 定义的都在 heap 上，返回包含 heap 地址）
   Dog* d2 = new Dog();  // heap allocation
 
   // 不能这么写，因为 new Dog() 在堆上，一定要个指针来指向它，而不能用普通的变量来存放它
+  // new Dog() 返回的是一个 heap 上的地址
   // Dog d2 = new Dog(); // 编译不通过
 
   // 打印变量们的地址，可以看到 c ，d 和 i 离得很近，都在 stack 上
@@ -566,21 +650,36 @@ void inheritance_test()
   c.speak();
 
   (*d2).speak(); // d2 是一个指针，先解引用得到指向的 Dog 实例，再调用 speak 方法
-  d2-&gt;speak();  // C++ 语法里还可以用箭头来访问指针指向的对象里的成员（方法）
+  d2-&gt;speak();   // C++ 语法里还可以用箭头来访问指针指向的对象里的成员（方法）
+  delete d2;     // 手动释放 d2 内存，避免内存泄漏
+
+  unique_ptr&lt;Dog&gt; d3 = make_unique&lt;Dog&gt;();         // 使用智能指针（自动管理内存）定义 heap 上的 Dog
+  cout &lt;&lt; &quot;unique_ptr d3 address: &quot; &lt;&lt; d3 &lt;&lt; endl; // heap 上的地址
+  cout &lt;&lt; &quot;run (*d3).eat(): &quot; &lt;&lt; endl;  
+  (*d3).eat();                                     // 静态调用
+  // 不需要手动调用 delete，unique_ptr 会自动释放内存
 
   // 综上，同一个 Class 可以有 2 种不同的分配方法：栈（stack）上，或者堆（heap）上
 
+  // Animal a1 = d; // 编译不通过 - 为什么不能这么写？
+  // 原因：
+  // 这里将会把一个实际的 Dog 对象转为一个 Animal 对象，即对象切片（Object Slicing）
+  // 对象切片会丢失 Dog 类独有的成员（field），比如会丢失 bark 函数
+  // 然后 Dog 中定义的 speak 函数也会被 Animal 中的 speak 函数替代
+  // 但 Animal 中有纯虚函数（= 0），是个抽象类，意味着 Animal 中的 speak 没有具体实现，是“空”的
+  // 编译器不允许有空的实现，于是无法处理这个赋值
+
   // 用一个 Animal 指针 a1 指向 d
   Animal* a1 = &amp;d;
-  // Animal a1 = d; // 编译不通过 - 为什么不能这么写？
+
   cout &lt;&lt; &quot;Animal pointer to dog: &quot; &lt;&lt; endl;
   cout &lt;&lt; &quot;animal address: &quot; &lt;&lt; a1 &lt;&lt; endl;
-  a1-&gt;speak();
+  a1-&gt;speak();  
 
   // 和 Java 不一样的是，如果上面不是用指针，而是 Animal a = d; 就编译不通过
   // 在 C++ 里「用一个父类的变量指向一个子类」叫做多态，你必须要用指针，不能直接用这个变量
-  // 也就是类型必须是 Animal* 。其实 Java 中父类指向子类也是类似。
-  // 在 Java 里你写 Animal a 的时候，a 其实是一个指针
+  // 也就是类型必须是 Animal* 。必须使用基类指针Animal*指向派生类对象。
+  // 其实 Java 中父类指向子类也是类似。在 Java 里你写 Animal a 的时候，a 其实是一个指针
   // Java 里你可以写 Dog d = new Dog(); 然后这个 new Dog() 实际上是在堆（heap）上
   // 所以 Java 的这个 d 实际上是一个指针，但 Java 的语法不要求写 Dog* 表示指针
   // 同样的表达在 C++ 中要写成：Dog* d = new Dog();
@@ -596,7 +695,21 @@ void inheritance_test()
   cout &lt;&lt; &quot;Animal pointer to cat: &quot; &lt;&lt; endl;
   cout &lt;&lt; &quot;animal address: &quot; &lt;&lt; a1 &lt;&lt; endl;
   a1-&gt;speak();
+  (*a1).eat();  // Animal is eating
+
+  // 关于上述使用智能指针 unique_ptr&lt;Dog&gt; 定义的 d3
+  // Animal* a3 = d3; 不能编译，因为 unique_ptr 是一个智能指针，有自定义的指针行为，不能直接赋值给原始指针 Animal*
+  // 你需要使用 .get() 方法来获取原始指针类型才和 Animal* 匹配
+  Animal* a3 = d3.get();
+  cout &lt;&lt; &quot;a3 gets Animal pointer from d3 . Hence no Object Slicing.&quot; &lt;&lt; endl;
+  a3-&gt;eat();  // Dog is eating
+
+  // // 下面这行代码编译不通过，因为类 Animal 有纯虚函数（= 0），是抽象类，不能实例化
+  // // 如果类 Animal 没有纯虚函数，则可以正常编译，此时 d3 的所有权会被转移给 a4
+  // unique_ptr&lt;Animal&gt; a4 = std::move(d3);  
 }
+
+
 
 // ###########################################################
 //                        模板（Template）

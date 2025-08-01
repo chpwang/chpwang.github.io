@@ -81,7 +81,7 @@
       
     </div>
     <p>像 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript#" target="_blank" rel="noopener">JavaScript</a> 这类语言的设计，适合新手学习理解特别简单编程概念。比如<strong>函数</strong>。但如果要理解<strong>面向对象（Object Oriented）</strong>的概念，用 <strong>JavaScript</strong> 会比较绕。因为它设计比较奇怪，你得去理解一些专门针对 <strong>JavaScript</strong> 设计的东西。</p>
-<p>相比之下，用 <a href="https://www.python.org" target="_blank" rel="noopener">Python</a> 来理解面向对象，思路会清晰很多。</p>
+<p>相比之下，用 <a href="https://www.python.org" target="_blank" rel="noopener">Python</a> 来理解面向对象，思路会清晰很多。而且 Python 也有好的 IDE 支持（PyCharm 挺不错的）。当前 Python 特别流行，也是有一定原因的。</p>
 <hr>
 <h3 id="Python-编程环境"><a href="#Python-编程环境" class="headerlink" title="Python 编程环境"></a>Python 编程环境</h3><p>一般推荐两个编辑器，或者说 IDE ，来快速实践各种代码：</p>
 <ul>
@@ -117,25 +117,21 @@ $
 <li>空格重要，附带语意，即 spacing matters</li>
 <li>运算符号有优先级（比如乘除法 * / 优先级高于加减法 +-）</li>
 <li>运算的优先级可以使用括号来确定：优先级方向为从里往外</li>
-<li>Python 中名为 <code>_</code> 的特殊变量（underscore variable）通常代表忽略这个值，其他详细参见<a href="https://hackernoon.com/understanding-the-underscore-of-python-309d1a029edc" target="_blank" rel="noopener">这里</a></li>
+<li>Python 中名为 <code>_</code> 的变量（underscore variable）多数情况下代表忽略这个值，其他详细参见<a href="https://hackernoon.com/understanding-the-underscore-of-python-309d1a029edc" target="_blank" rel="noopener">这里</a></li>
 <li>Python 变量名的规则不用 listSum 这种大小写混合，而是用下划线分隔多个单词，写成 list_sum 这样</li>
 <li><p>Python 赋值时是「传址（引用）」效果，而不是「传值」效果。见下例：</p>
-<pre><code class="lang-python"># 感受一下「传址」效果
-def li_round_change_value(li):
- for i,l in enumerate(li):
-   li[i] = round(float(l), 3)
+<pre><code class="lang-python">a = [1, 2, 3]
+b = a        # b 和 a 指向同一个列表对象，而不是把 a 的内容复制给 b
+b.append(4)  # 修改 b 的内容，a 也会一起改变
+print(a)     # 输出 [1, 2, 3, 4]
 
-def li_round_doesnt_change_value(li):
- # 使用 map(function_to_apply, list_of_inputs) 将 list 里元素的类型变为浮点（float）型
- li = list(map(lambda k:round(float(k), 3), li))
- return li
+# 如果函数参数有默认值，这个值又是可变对象时，容易出错
+def foo(data=[]):
+ data.append(1)
+ return data
 
-test_li = [9,13,5,2]
-print(li_round_doesnt_change_value(test_li)) # 输出 [9.0, 13.0, 5.0, 2.0] 
-print(test_li) # 输出 [9, 13, 5, 2]
-
-li_round_change_value(test_li)
-print(test_li) # 输出 [9.0, 13.0, 5.0, 2.0]
+print(foo())  # [1]
+print(foo())  # [1, 1] - 意外结果
 </code></pre>
 </li>
 </ol>
@@ -650,13 +646,14 @@ a3 b3
 <hr>
 <h3 id="类-class"><a href="#类-class" class="headerlink" title="类 - class"></a>类 - class</h3><p>这里以实现查找表为例演示 <code>class</code> 的用法：</p>
 <ul>
-<li>类里面的函数的第一个参数都是 <code>self</code> ，也就是自己</li>
-<li>类里面默认要有 <code>__init__</code> 函数作为「构造函数」，如果没写 Python 也会给一个默认的</li>
+<li>python 的类里要有这个 <code>__init__</code> 作为「构造函数」，如果没写 Python 也会给一个默认的：<br><code>def __init__(self): pass</code></li>
+<li>类里面绑定到具体实例的函数，第一个参数通常都是 <code>self</code>，这是个自动接收的参数，代表类的当前实例对象</li>
+<li>@classmethod 和 @staticmethod 标记的函数</li>
 </ul>
 <pre><code class="lang-python">## Map 没有定义 __init__ ，但还是程序还是会给它一个默认的 __init__
 class Map:
   def print_data(self):
-    print(&quot;data: &quot; + str(self.data))
+    print(&quot;&#39;Map&#39; object has no attribute &#39;data&#39;&quot;) 
 
 
 class Table:

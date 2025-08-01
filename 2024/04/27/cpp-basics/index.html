@@ -184,6 +184,7 @@ End of search list.
 using namespace std;
 
 // C++ 不允许你在函数内部定义函数，编译不通过，所以 fact 定义到外面
+// C++ 通过「函数指针」和「Lambda 表达式」来实现类似其他语言的内部函数功能
 // 尽管有编译过程，但是函数要定义在调用的前面才能被识别，否则就会报错 undeclared
 // fact 定义在 basic_test 之前，basic_test 内部才能调用它
 int fact(int n)
@@ -359,7 +360,7 @@ void pointer_test()
   // int* 的这个 * 号是 int* 这个类型的一部分，下面的 *p 的 * 号则是解引用操作符，两者不一样
   // Rust 的 * 只是用来 move 改变 ownership 的，虽然也叫 dereference 但和这的 *p 本质不一样
   // C++ 里，看到关键词 new 就要知道它肯定在 heap（堆）上了，因为 new 就是在 heap 上分配内存的操作
-  int* p = new int(10);  // 注意！new int(10) 在 heap 上，但变量 p 则在 stack 上
+  int* p = new int(10);  // new int(10) 在 heap 上（后续要手动释放内存），但变量 p 则在 stack 上
 
   // int(10) 这个值为 10 的整数是存放在 heap 上的，有一个对应的 heap 上的地址；
   // int(10) 在 heap 上的地址被存放在了变量 p 里；
@@ -394,6 +395,7 @@ void pointer_test()
   // 这里 p2 的类型为什么是 int* 而不是 int[]* ？为什么是 int 的指针类型而不是数组的指针类型？
   // 因为数组里所有元素是挨在一起相邻储存的，故知道了第一个元素的地址，就知道整个数组的所有元素的地址
   // p2 会指向向数组的第一个数据 3 的地址，即 *p2 = 3
+  // 此外 p2 的内容在 heap 上，后续要手动用 delete 释放内存
   int* p2 = new int[5] {3, 5, 7, 9, 11};  // 注意，C++11 之前的标准不支持直接使用列表初始化数组
   cout &lt;&lt; &quot;p2 = &quot; &lt;&lt; p2 &lt;&lt; endl;
   cout &lt;&lt; &quot;*p2 = &quot; &lt;&lt; *p2 &lt;&lt; endl;             // 数组指针指向数组第一个元素的地址，即 3
@@ -609,11 +611,30 @@ class Dog: public Animal
 
 class Cat: public Animal
 {
+  private:
+    int age;      // 定义在 private 下方外部就无法直接访问，比如 c.age 就会失败
+
   public:
-  void speak() override
-  {
-    cout &lt;&lt; &quot;喵！&quot; &lt;&lt; endl;
-  }
+    string name;  // 定义在 public 下方外部就能直接访问，比如 c.name
+
+    // // 构造函数 - 函数体赋值方式 - C++ 不推荐
+    // Cat(string n, int a) : name(n), age(a)
+    // {
+    //     age = a;
+    //     name = n;
+    //     cout &lt;&lt; &quot;Cat Constructor called - Assignment\n&quot;;
+    // }
+
+    // 构造函数 - C++ 惯例推荐用这种「初始化列表」的写法来给 name 和 age 赋值
+    Cat(string n, int a) : name(n), age(a)
+    {
+        cout &lt;&lt; &quot;Cat Constructor called - Initializer List\n&quot;;
+    }
+
+    void speak() override
+    {
+      cout &lt;&lt; &quot;喵！&quot; &lt;&lt; endl;
+    }
 };
 
 
@@ -623,9 +644,9 @@ void inheritance_test()
 
   // 栈（stack）上面定义了狗 d 和猫 c
   // Dog 和 Cat 的实例（instance）在 stack 上（函数的局部变量都在 stack 上）
-  Dog d; // stack
-  Cat c; // stack
-  int i = 9;  // stack
+  Dog d;                // 在 stack 上
+  Cat c(&quot;Alice&quot;, 30);   // 在 stack 上
+  int i = 9;            // 在 stack 上
 
   // 定义在 heap 上的 Dog（用 new 定义的都在 heap 上，返回包含 heap 地址）
   Dog* d2 = new Dog();  // heap allocation
@@ -648,6 +669,8 @@ void inheritance_test()
 
   d.speak();
   c.speak();
+  cout &lt;&lt; &quot;The cat&#39;s name is: &quot; &lt;&lt; c.name &lt;&lt; endl;   // 可以直接访问内部的 name 成员
+  // cout &lt;&lt; &quot;The cat&#39;s age is: &quot; &lt;&lt; c.age &lt;&lt; endl;  // 无法直接访问内部的 age 成员
 
   (*d2).speak(); // d2 是一个指针，先解引用得到指向的 Dog 实例，再调用 speak 方法
   d2-&gt;speak();   // C++ 语法里还可以用箭头来访问指针指向的对象里的成员（方法）
@@ -701,7 +724,7 @@ void inheritance_test()
   // Animal* a3 = d3; 不能编译，因为 unique_ptr 是一个智能指针，有自定义的指针行为，不能直接赋值给原始指针 Animal*
   // 你需要使用 .get() 方法来获取原始指针类型才和 Animal* 匹配
   Animal* a3 = d3.get();
-  cout &lt;&lt; &quot;a3 gets Animal pointer from d3 . Hence no Object Slicing.&quot; &lt;&lt; endl;
+  cout &lt;&lt; &quot;a3 gets Animal pointer from d3. Hence no Object Slicing.&quot; &lt;&lt; endl;
   a3-&gt;eat();  // Dog is eating
 
   // // 下面这行代码编译不通过，因为类 Animal 有纯虚函数（= 0），是抽象类，不能实例化
@@ -715,8 +738,21 @@ void inheritance_test()
 //                        模板（Template）
 // ###########################################################
 
-// template 模板类似 Java 的泛型，使得同一段代码可以适应不同的数据类型，从而增加代码的复用性和灵活性
+// template（模板）类似 Java 的泛型，使得同一段代码可以适应不同的数据类型，从而增加代码的复用性和灵活性
+// C++ 中的模板（Template）的语法主要有两种形式：
+// 一、函数模板
+// template &lt;typename T&gt; 定义了一个模板，T 是占位符类型参数，可以代表任何类型
+// T funName(T param1, T param2) 中 funName 是函数名，函数接受两个 T 类型的参数 param1 和 param2
+// 返回 T 类型的结果
+// 这里也可以使用关键字 class 来代替关键字 typename，它们是等价的：template &lt;class T&gt;
+template &lt;typename T, typename U&gt;  // 这里定义了 2 个类型参数 T 和 U
+T my_add(T a, U b)                 // my_add 函数接收 T 类型的参数 a 和 U 类型的参数 b
+{
+    return a + b;                  // my_add 函数返回 T 类型的结果
+}
 
+
+// 二、类模板（下面就以类模板 Auto_ptr 为例）
 template &lt;typename T&gt;   // T 是类型参数
 class Auto_ptr         // 这里用 template 功能创建智能指针 Auto_ptr 实现在生命周期结束后自动释放
 {

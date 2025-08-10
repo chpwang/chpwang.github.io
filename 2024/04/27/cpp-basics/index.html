@@ -81,6 +81,7 @@
       
     </div>
     <p>在理解 Rust 内存管理的本质之后（参见<a href="/2024/04/22/rust-basics/"> Rust 入门</a> ），再来了解一下 <a href="https://en.wikipedia.org/wiki/C%2B%2B" target="_blank" rel="noopener">C++ 语言</a>和它的内存管理。这样和 Rust 对比一下，就能更加理解 Rust 内存管理方式和特点。进而更好地使用 C++ 进行编程。</p>
+<p>JavaScript, Python, Java 和其它大部分语言都是自动管理内存的。所以写代码时不需要自己去处理内存管理这个事。其中 Java 的自动内存管理依靠的是<a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)" target="_blank" rel="noopener">垃圾回收（Garbage Collection）</a>。所以通常来说，需要自己管理内存的情况不多。内存管理不算是很重要的事情。但了解内存管理的知识也会有助于我们的代码逻辑。</p>
 <p>如果从具有<a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)" target="_blank" rel="noopener">垃圾回收（Garbage Collection）</a>的语言出发来类比和理解，可能到后来你就始终弄不明白 C++ 这样的语言到底要怎么写代码。</p>
 <p>当年 Ian 刚开始学计算机是从 <a href="https://en.wikipedia.org/wiki/Pascal_(programming_language)" target="_blank" rel="noopener">Pascal</a> 语言开始的。之后马上又学了 <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank" rel="noopener">C 语言</a> 。因为传言 C 语言比 Pascal 好。而 C 语言的内存管理都是手动的。所以经常会出现一些很奇怪的问题。但是通过学习 Rust 或者 C++ ，你就能从本质上理解用 C 语言怎么会遇到那么稀奇古怪的一些问题：要么你内存泄漏了，要么你就是出现一些内存错误。比如说有一个地方的值莫名其妙地被人改了，你就不知道哪里的代码在改那个内存。因为内存管理弄错了之后，你的指针就有可能指向它不该指的地方。</p>
 <p>Rust 语言会强制你去思考这些内存问题，所以你就被迫就要把这些事情按照它的规则做对。然后 Rust 的内存管理思路大致上是对的。就是它强制你有个 <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html" target="_blank" rel="noopener">ownership</a> 。这样通常情况下只有一个变量可以指向这个对象。然后如果你需要共享的话，你就得自己显式地使用那个 <a href="https://doc.rust-lang.org/book/ch15-04-rc.html" target="_blank" rel="noopener">Rc</a>（引用计数）的方式。习惯了 Rust 之后再去写 C 语言或者 C++ ，就不会那么容易有问题了——当然，你还是可能会犯错的。</p>
@@ -206,8 +207,8 @@ int fact(int n)
 
 void basic_test()
 {
-  // 如果没有上面的 using namespace std; 那输出的 cout 和换行 endl 等等就都要加上 std:: 这个前缀
-  // std::cout &lt;&lt; &quot;---------------- basic_test ----------------&quot; &lt;&lt; std::endl;
+  // 如果没有上面的 using namespace std; 那输出的 cout 和换行 endl 等等就都要加上 std::
+  // std::cout &lt;&lt; &quot;---- basic_test ----&quot; &lt;&lt; std::endl;
 
   cout &lt;&lt; &quot;---- basic_test ----&quot; &lt;&lt; endl;
 
@@ -269,6 +270,12 @@ void basic_test()
     cout &lt;&lt; &quot;for-each: &quot; + s &lt;&lt; endl;
   }
 
+  // // 上面（方法二）其实建议用 for (const string&amp; s : arr) {...}
+  // for (const string&amp; s : arr)         
+  // {
+  //   cout &lt;&lt; &quot;for-each: &quot; + s &lt;&lt; endl;
+  // }
+
   int arr2[] = {1, 2, 3, 4, 5};
   cout &lt;&lt; &quot;arr2 length = &quot; &lt;&lt; sizeof(arr2) / sizeof(int) &lt;&lt; endl;
 
@@ -296,14 +303,14 @@ void basic_test()
   {
     double x;  // 默认 public，Point 的外部可访问 p.x
     double y;  // 默认 public, Point 的外部可访问 p.y
-  };
+  };           // struct 末尾这里得加一个分号，这点和 class 不同
 
   // struct 可以在函数体里定义，当前就在 basic_test 这个函数体内
   struct User  
   {
     string name;
     int age;
-  }; // C++ 这里要加一个分号
+  };           // C++ 这里要加一个分号
 
   // User u1 = {&quot;John&quot;, 25};
   // User u1 = {name : &quot;John&quot;, age : 25}; // 加上 key 后更明确（这样写和其他语言像一点）
@@ -331,12 +338,12 @@ void pointer_test()
 
   // 先来理解一下「指针」和「引用」两个概念，并区分 * 和 &amp; 符号的不同作用；
   int num = 42;
-  int* ptr = &amp;num; // int* 是指针类型; &amp;num 中的 &amp; 操作是读取 num 的地址
-  int&amp; ref = num;  // ref 是 num 的引用; int&amp; 是创建引用，和上面的 &amp; 不同
+  int* ptr = &amp;num; // int* 是指针类型（整数指针）; &amp;num 中的 &amp; 操作是读取 num 的地址
+  int&amp; ref = num;  // ref 是 num 的引用; int&amp; 是引用类型（整数引用），和上面的 &amp; 不同
 
-  cout &lt;&lt; &quot;&amp;num = &quot; &lt;&lt; &amp;num &lt;&lt; endl;   // &amp;num = 0x16b532adc
-  cout &lt;&lt; &quot;ptr = &quot; &lt;&lt; ptr &lt;&lt; endl;     // ptr = 0x16b532adc
-  cout &lt;&lt; &quot;*ptr = &quot; &lt;&lt; *ptr &lt;&lt; endl;   // *ptr = 42 // 这里 * 是解引用，读取 ptr 地址里存放的值；
+  cout &lt;&lt; &quot;&amp;num = &quot; &lt;&lt; &amp;num &lt;&lt; endl;   // &amp;num = 0x16b532adc // num 指向的内存地址是 0x16b532adc
+  cout &lt;&lt; &quot;ptr = &quot; &lt;&lt; ptr &lt;&lt; endl;     // ptr = 0x16b532adc  // ptr 的值是 0x16b532adc（ptr 是指针类型，值就是地址）
+  cout &lt;&lt; &quot;*ptr = &quot; &lt;&lt; *ptr &lt;&lt; endl;   // *ptr = 42          // 这里 * 是解引用，读取 ptr 地址里存放的值；
   cout &lt;&lt; &quot;ref = &quot; &lt;&lt; ref &lt;&lt; endl;     // ref = 42
 
   cout &lt;&lt; &quot;num = &quot; &lt;&lt; num &lt;&lt; endl;     // num = 42
@@ -360,7 +367,7 @@ void pointer_test()
   // int* 的这个 * 号是 int* 这个类型的一部分，下面的 *p 的 * 号则是解引用操作符，两者不一样
   // Rust 的 * 只是用来 move 改变 ownership 的，虽然也叫 dereference 但和这的 *p 本质不一样
   // C++ 里，看到关键词 new 就要知道它肯定在 heap（堆）上了，因为 new 就是在 heap 上分配内存的操作
-  int* p = new int(10);  // new int(10) 在 heap 上（后续要手动释放内存），但变量 p 则在 stack 上
+  int* p = new int(10);  // new int(10) 在 heap 上（后续要 delete 手动释放内存），但变量 p 则在 stack 上
 
   // int(10) 这个值为 10 的整数是存放在 heap 上的，有一个对应的 heap 上的地址；
   // int(10) 在 heap 上的地址被存放在了变量 p 里；
@@ -475,7 +482,7 @@ void reference_test()
   cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; endl;
   cout &lt;&lt; &quot;y = &quot; &lt;&lt; y &lt;&lt; endl;
 
-  y = 30; // 给 y 赋值 20 ，x 也会改变
+  y = 30; // 给 y 赋值 30 ，x 也会改变
   cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; endl;
   cout &lt;&lt; &quot;y = &quot; &lt;&lt; y &lt;&lt; endl;
 

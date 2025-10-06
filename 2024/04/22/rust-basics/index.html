@@ -88,7 +88,7 @@
 <p>初次使用 Rust 语言编程很可能会非常痛苦，除了没有所见即所得的设计（各种隐式操作），期间还有复杂的内存管理规则要适应。多数时候更是要<strong>连蒙带猜</strong>。不过如果能耐心坚持到成功写出一个解释器，也许对内存管理的理解会上升一个台阶。</p>
 <p>新的理解包括<a href="https://www.yinwang.org/blog-cn/2016/09/18/rust" target="_blank" rel="noopener">也许除了垃圾回收（GC）和引用计数（RC），内存管理没有其它更好更简单的办法</a>。也包括“应该还是有办法避免 GC（这里指定期扫描的GC） 或者 RC。比如给同一种对象一大块空间，只是拿来用，不释放。到这种数据不用的时候一起释放掉就行。这样内存管理几乎没有计算开销，只是多用点内存而已（类似内存池 <a href="https://en.wikipedia.org/wiki/Memory_pool" target="_blank" rel="noopener">memory pool</a>）。”</p>
 <p>总的来说，想完全静态地管理<strong>所有</strong>内存，目前看是不太可能的，除非牺牲程序的表达能力和灵活性。比如 <a href="https://www.jpl.nasa.gov" target="_blank" rel="noopener">Jet Propulsion Laboratory</a>（美国喷气推进实验室）在它的 <a href="https://yurichev.com/mirrors/C/JPL_Coding_Standard_C.pdf" target="_blank" rel="noopener"><em>JPL Institutional Coding Standard for the C Programming Language</em></a> 规范里就禁止使用动态内存分配（malloc 等，见第 10 页）。JPL 在设计阶段就会把所有运行时可能的内存使用情况提前规划好了。让内存行为可预测，规避内存泄漏风险。</p>
-<p>对于一般软件，是灵活性优先（动态分配随时申请）。而对于 JPL 之类的航天软件，则是硬可靠性优先（所有内存行为可预测）。</p>
+<p>对于一般软件，是灵活性优先（动态分配随时申请）。而对于 JPL 之类的航天软件，则是可靠性优先（所有内存行为可预测）。</p>
 <blockquote><p>Do not use dynamic memory allocation after initialization.</p>
 <footer><strong>Gerard J. Holzmann (NASA Jet Propulsion Laboratory)</strong></footer></blockquote>
 <hr>
@@ -118,7 +118,7 @@ $ brew install rustfmt
 </code></pre>
 <hr>
 <h3 id="Rust-的基本操作"><a href="#Rust-的基本操作" class="headerlink" title="Rust 的基本操作"></a>Rust 的基本操作</h3><p>每次接触新的编程语言，基本都可以从「<strong>变量定义</strong>」，「<strong>函数调用</strong>」，「<strong>条件分支</strong>」，「<strong>类型</strong>」和「<strong>常见数据结构</strong>」这几个方向入手快速熟悉。至于语言的一些特有的特性，之后再根据需要补充学习即可。</p>
-<p>由于 <strong>Rust</strong> 代码需要编译，加上期间产生的各式各样的文件，最好专门建一个文件夹 <code>demo</code> 来进行下面的编程操作。以便管理。</p>
+<p><strong>Rust</strong> 代码是需要编译的。期间会产生的各式各样的文件。所以建一个文件夹 <code>demo</code> 来进行下面的编程操作，以便管理。</p>
 <p>在文件夹 <code>demo</code> 中新建后缀为 <code>.rs</code> 的文件，比如 <code>demo.rs</code> ，之后编辑完代码，就能用 <strong>VS Code</strong> 里的 <strong>Code Runner</strong> 来一键调用上面安装的 <code>rustc</code> 完成编译并运行。关于 VS Code 的具体操作和设置参见<a href="/2018/05/25/vscode-intro/">上手 Visual Studio Code</a> 。</p>
 <pre><code class="lang-rust">// 这部分 allow 代码是消除 rust 编译器警告的信息
 // 这样就能只看到代码打印出的结果，没有多余视线干扰
@@ -135,6 +135,7 @@ fn main()
 {
   let x = 2 * 3;
 
+  // Rust 常用 println! 这个宏（Macro）来打印输出（结尾带!号的都是宏）
   // 格式化字符串中的变量有时可以写在花括号里，有时不行
   // 所以统一写到外面比较好，统一视觉，避免写 &quot;x = {x}&quot;
   println!(&quot;x = {}&quot;, x);  
@@ -146,29 +147,80 @@ fn main()
   let y: i32 = 1 + x;
   println!(&quot;y = {}&quot;, y);
 
-  // 定义好的变量默认不能赋值修改
-  // y = &quot;9&quot;;
-  // error: cannot assign twice to immutable variable
-
-  // 用 mut 关键词来定义可赋值的变量（mut 表示 mutable）
-  let mut z = 5;
-  println!(&quot;first z = {z}&quot;);
-
-  // 这样的写法不好，任何变量都应该给一个初始值才对
-  // 设计得好的语言里面没有 variable declaration 这个概念
-  // let mut z;
-
-  z = 10;
-  println!(&quot;first z = {z}&quot;);
 
   // 同名变量在 rust 里可以重复定义，且可以不同类型（这里同样有类型推导 type inferred）
   // 注意！Rust 里，此时 y 的类型不是 String ，而是 &amp;str 类型，该类型是指向字符串的一个“引用”
   let y = &quot;Hello&quot;;
   println!(&quot;y = {}&quot;, y);
 
+  // &amp;str vs.String
+  // &amp;str 类型只读、不拥有数据；
+  // String 类型拥有所有权，支持修改；
+  // 读就用 &amp;str ，改/存/造就用 String
+  // String 可 borrow 成 &amp;str 来传参；&amp;str 需要时再 to_string() 变成 owner
+
+
+  // 定义好的变量默认不能赋值修改
+  // y = &quot;9&quot;;
+  // error: cannot assign twice to immutable variable
+
+  // 用 mut 关键词来定义可赋值修改的变量（mut 表示 mutable）
+  let mut z = 5;
+  println!(&quot;Original z = {z}&quot;);
+
+  // 下面这样没给 z 赋值的写法不好，任何变量都应该给一个初始值
+  // 设计优秀的语言里面没有 variable declaration 这个概念
+  // let mut z: i32; 这种写法在设计优秀的语言里不应该合法
+
+  z = 10;
+  println!(&quot;1st Edited z = {z}&quot;);  // z 的值可被改为 10
+
+  // Borrow 概念（类似 C++ 的引用，但又多了些功能，比如能被静态分析查错）
+  // 变量 z 可以被多个不同变量 unmutable borrow
+  let b1 = &amp;z; 
+  let b2 = &amp;z;
+
+  // 处于 unmutable borrow 的状态下的 z 值不可变
+  // b1，b2 的生命周期没结束，因为后面还要 println! 打印 b1 和 b2
+  // z = 9;  
+
+  // 处于 unmutable borrow 的状态下的 z 值可访问
+  println!(&quot;z = {z}&quot;);  // 10
+
+  println!(&quot;unmutable borrow b1 and b2: {}, {}&quot;, b1, b2);  // 访问 b1 和 b2 
+
+  // 此时 z 值可变了，因为 Rust 静态编译看到后面没有再用到 b1 和 b2
+  // 于是编译器直接判断和决定 b1，b2 的生命周期在上面 println! 后结束
+  // 于是 z 不再处于 unmutable borrow 的状态下，于是可再次修改
+  z = 9;  
+  println!(&quot;2nd Edited z = {}&quot;, z); 
+
+  // 通过 &amp;mut 关键词来进行 mutable borrow ，和 b1，b2 不同，b3 能更改 z 的值
+  // 你只能从一个可变的变量（mutable variable）中获取一个可变的引用（mutable reference）
+  // 所以要实现 &amp;mut z ，首先要有 mut z
+  let b3 = &amp;mut z;
+  println!(&quot;mutable borrow b3: {}&quot;, b3);
+
+  // 注意，通过 b3 更改 z 的值，要解引用（dereference），类似 C++
+  // 因为 b3 是个「引用」。b3 类型为 &amp;mut i32 ，而 z 的类型为 i32
+  *b3 = 29;
+
+  // 处于 mutable borrow 的状态下的 z 值不可访问，也不可赋值修改
+  // println!(&quot;b3 Edited z = {}&quot;, z);
+  // z = 19;
+
+  println!(&quot;Edited b3: {}&quot;, b3);    // b3 = 29
+
+  // 编译器直接判断 b3 的生命周期在上面 println! 后结束
+  // 于是 z 不再处于 mutable borrow 的状态下，于是可再次修改和访问
+  println!(&quot;b3 Edited z = {}&quot;, z);  // z = 29 （被 b3 更改）
+
+
+
   // 数组 - 默认也是不能更改，若要可更改则用 let mut a: [i32; 3] = [1, 2, 3]
+  // 数组类型没实现 Display，但实现了 Debug，故格式打印用 {:?} 而不是 {}
   let a: [i32; 3] = [1, 2, 3];
-  println!(&quot;a = {:?}&quot;, a);
+  println!(&quot;a = {:?}&quot;, a);     
   println!(&quot;a[0] = {}, a[1] = {}, a[2] = {}&quot;, a[0], a[1], a[2]);
 
   // 定义重复数组内容的方便写法 - 全是 5 的数组为例
@@ -182,17 +234,25 @@ fn main()
   println!(&quot;t.0 = {}, t.1 = {}, t.2 = {}&quot;, t.0, t.1, t.2);
   println!(&quot;{}&quot;, (42, false, &#39;X&#39;).1);
 
-  // 匿名函数：x =&gt; x + 1
+  // 匿名函数：x =&gt; x + 1（没标记类型是因为 Rust 有类型推导）
   println!(&quot;(|x| x + 1)(5) = {}&quot;, (|x| x + 1)(5));
 
   // 定义 add1 函数 - 不标记(输入和返回)类型，依赖类型推导
-  // Rust 是从下一行的 println! 里的调用 add1(5) 推导出来的
+  // Rust 是从下一行的 println! 里的调用 add1(5) 推导出来的（在编译过程推导）
+  // 若无调用 add1(5)，Rust 推不出类型会报错，除非标记类型
   let add1 = |x| x + 1;
-  println!(&quot;add1(5) = {}&quot;, add1(5));   // 若无 add1(5)，Rust 推不出类型会报错，除非标记类型
+  println!(&quot;add1(5) = {}&quot;, add1(5));
 
   // 标记类型的函数定义
+  // 注意这里原本的 |x| 变成了 |x: i32| -&gt; i32
+  // -&gt; i32 部分表示函数返回类型是 i32 ，函数体也被包裹在花括号 {} 里
   let add2 = |x: i32| -&gt; i32 { x + 2 };
   println!(&quot;add2(5) = {}&quot;, add2(5));
+
+
+  // 双参数函数
+  let add3 = |x: i32, y: i32| -&gt; i32 { x + y };
+  println!(&quot;add3(9, 29) = {}&quot;, add3(9, 29));
 
   // 上面展示的类型推导有局限，比如 identity 函数
   let id = |x| x;
@@ -214,7 +274,12 @@ fn main()
   // curried functions: x =&gt; y =&gt; x + y
   // 这里需要用到关键词 move 才能让 y 取到 3 这个操作数，这和 Rust 的内存管理有关
   // Rust 制造了这些麻烦设计，是为了能够不用垃圾回收（Garbage Collection）这一语言特性
+  // 垃圾回收内存机制无法实施静态检查，而 Rust 想要编译时（静态检查）就发现内存问题
   println!(&quot;(|x| (move |y| x + y))(2)(3) = {}&quot;, (|x| (move |y| x + y))(2)(3));
+
+  // 代码太长可以换行对齐
+  println!(&quot;((|x, y| (move |z| x + y + z))(1, 2)(3) = {}&quot;, 
+            (|x, y| (move |z| x + y + z))(1, 2)(3));
 
   // 条件分支
   let x = 3;

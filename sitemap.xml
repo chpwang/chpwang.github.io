@@ -4,7 +4,14 @@
   <url>
     <loc>https://cps.ninja/2024/04/22/rust-basics/</loc>
     
-    <lastmod>2025-10-06T07:40:44.742Z</lastmod>
+    <lastmod>2025-10-08T09:08:58.859Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://cps.ninja/2020/04/14/fun-quotes/</loc>
+    
+    <lastmod>2025-10-07T07:10:40.182Z</lastmod>
     
   </url>
   
@@ -19,13 +26,6 @@
     <loc>https://cps.ninja/2024/04/27/cpp-basics/</loc>
     
     <lastmod>2025-08-17T10:57:44.293Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://cps.ninja/2020/04/14/fun-quotes/</loc>
-    
-    <lastmod>2025-08-17T10:57:36.807Z</lastmod>
     
   </url>
   
@@ -205,20 +205,6 @@
   </url>
   
   <url>
-    <loc>https://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
-    
-    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://cps.ninja/2018/09/21/keras/</loc>
-    
-    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
@@ -226,7 +212,21 @@
   </url>
   
   <url>
+    <loc>https://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
+    
+    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
+    
+    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://cps.ninja/2018/09/21/keras/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     

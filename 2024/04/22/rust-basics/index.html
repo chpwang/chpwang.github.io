@@ -292,15 +292,18 @@ fn main()
 
   // 条件分支
   let x = 3;
-  if x &lt; 5 {
+  if x &lt; 5 
+  {
     println!(&quot;condition was true&quot;);
-  } else {
+  } 
+  else 
+  {
     println!(&quot;condition was false&quot;);
   }
 
   fn fib(n: u64) -&gt; u64
   {
-    if (n == 0)
+    if (n == 0)  // 括号也可以不写
     {
       return 0;
     }
@@ -431,7 +434,9 @@ fn main()
   match table.get(&quot;three&quot;) 
   {
     Some(value) =&gt; println!(&quot;value: {}&quot;, value),   // value 在这里直接被取出
-    None =&gt; println!(&quot;one: not found&quot;),
+    None =&gt; println!(&quot;one: not found&quot;), 
+
+    // 最后一个分支末尾的逗号语法上可加可不加
   }
 
   // match 是一种程序语言里通用的构造，有点像 if 的那个分支的构造
@@ -620,6 +625,12 @@ fn main()
   // let ls1 = Box::new(List::Pair(1, Box::new(List::Pair(2, Box::new(List::Pair(3, Box::new(List::Nil)))))));
   let ls1 = List::Pair(1, Box::new(List::Pair(2, Box::new(List::Pair(3, Box::new(List::Nil))))));
   println!(&quot;list length = {}&quot;, length(&amp;ls1));
+
+
+  // 自动解引用只在特定条件下剩下，比如函数传参，不会作用于二元运算符（如 ==, +, - 等）的操作数
+  // T == &amp;T 这样的比较是需要手动写 * 来解引用的
+  // 自动解引用是 Rust 的糟糕设计，很多情况下不是所见即所得
+
 
   // sum 函数，计算输入链表所有成员的和
   fn sum(ls: &amp;List&lt;i32&gt;) -&gt; i32
@@ -1335,8 +1346,14 @@ fn main()
   }
 
   let a = Rc::new(List2::Cons(2, Rc::new(List2::Cons(3, Rc::new(List2::Nil)))));
-  let b = Rc::new(List2::Cons(5, Rc::clone(&amp;a)));    // Rc::clone(arg) 接收的参数类型 arg 必须是一个 Rc 的引用：&amp;Rc&lt;_&gt;
-  let c = Rc::new(List2::Cons(8, Rc::clone(&amp;a)));    // 这里 a 是一个 Rc ，所以 &amp;a 就是一个 &amp;Rc&lt;_&gt;
+
+  // Rc::clone(arg) 的参数 arg 的类型必须是一个 Rc 的引用：&amp;Rc&lt;T&gt;
+  // 这里 a 是一个 Rc&lt;T&gt; ，所以 &amp;a 就是一个 &amp;Rc&lt;T&gt;
+  // 所以，List2 的最外层也得套一层 Rc 才行，不能像上面的 Box 那样，最外层可以不套：
+  // let a = List2::Cons(2, Rc::new(...)); 这样是不行的
+  // 如果这样写，&amp;a 的类型就是 &amp;List2，而不是 &amp;Rc&lt;T&gt; 了，就用不了 Rc::clone 了
+  let b = Rc::new(List2::Cons(5, Rc::clone(&amp;a)));    
+  let c = Rc::new(List2::Cons(8, Rc::clone(&amp;a)));    
 
   println!(&quot;a&#39;s ref count: {}&quot;, Rc::strong_count(&amp;a));  // 查看变量 a 的引用次数
   println!(&quot;b&#39;s ref count: {}&quot;, Rc::strong_count(&amp;b));

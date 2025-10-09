@@ -85,8 +85,8 @@
 <p>Rust 的这些 <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html" target="_blank" rel="noopener">ownership</a>，<a href="https://doc.rust-lang.org/rust-by-example/scope/lifetime.html" target="_blank" rel="noopener">lifetime</a> 之类的<strong>静态检查设计</strong>，主要目的是静态地管理内存的分配和释放。在编译环节而不是运行时环节就解决内存问题，进而减少运行时垃圾回收（<a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)" target="_blank" rel="noopener">GC</a>）的计算开销。不过到了复杂的数据结构，或者说必须用 <a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)" target="_blank" rel="noopener">GC</a> 的地方，基本上还是得用 Rust 的 <a href="https://doc.rust-lang.org/book/ch15-04-rc.html" target="_blank" rel="noopener"><strong>Rc</strong></a>（引用计数），比如<a href="https://en.wikipedia.org/wiki/Interpreter_(computing)" target="_blank" rel="noopener">解释器</a>。只是比较简单的那一部分代码你可以不用 <a href="https://doc.rust-lang.org/book/ch15-04-rc.html" target="_blank" rel="noopener"><strong>Rc</strong></a> 。</p>
 <p>由于 Rust 语言的内存管理通过少用或不用 Rc ，减少了 Rc 的开销，代码性能<strong>据说</strong>在某些情况下会快很多。所以可以稍微重视一下（保持怀疑态度看待 Rust 的性能）。当然，它的这种设计并没有很完善，其中有一些多余而复杂东西（比如 Rust 总有一些自以为方便的隐式操作，而非写什么代码就是什么的所见即所得，类型系统也反直觉地水，因为参杂了利于静态分析的内存规则），但理解它的内存管理思路能给人们提供启发。进而可以改进自己的代码思路。</p>
 <p>像 <a href="https://en.wikipedia.org/wiki/C%2B%2B" target="_blank" rel="noopener">C++</a> 稍微“扩展”一下 <a href="https://en.cppreference.com/w/cpp/memory/unique_ptr" target="_blank" rel="noopener">unique_ptr</a>，也能实现 Rust 的内存管理精髓。但若没有 Rust 这套内存规则的作为大方向指导我们的思路，那我们可能就会不知道如何有效地使用这些 <code>unique_ptr</code> 等指针。不过像这种 <strong>ownership</strong> 的思路可能在 C++ 里就已经有了（<a href="https://en.cppreference.com/w/cpp/memory/unique_ptr" target="_blank" rel="noopener">unique_ptr</a> 和 <a href="https://en.cppreference.com/w/cpp/memory/shared_ptr" target="_blank" rel="noopener">shared_ptr</a>），只不过 C++ 没有类型系统来检查它：比如 C++ 中指针 <code>p1</code> 被 <a href="https://en.cppreference.com/w/cpp/utility/move" target="_blank" rel="noopener">move</a> 之后，仍然能使用，只不过 <code>p1</code> 指向的地址是 <code>0</code> 而已。</p>
-<p>初次使用 Rust 编程很可能会非常痛苦，除了没有所见即所得的设计（Rust 会”帮“你各种自动隐式操作），期间还有复杂的内存管理规则要适应。它的类型检查系统里混杂着内存管理检查系统，也就是你两者都要按照它的规则做对。大多数时候，更是要<strong>连蒙带猜加分析</strong>：。</p>
-<p>有时候你看到编译器报错，说你数据类型弄错了，你以为只是一个类型错误，但实际上还包含着多个内存错误（ownership 没有按照 Rust 做对）。不像其他语言，你改一下类型就能通过。在 Rust 中，除了改对类型，还要做对 ownership 。而且因为 ownership ，很多数据都要封装在各种容器里，导致数据类型也是眼花缭乱。最终，类型系统和内存规则系统会在你脑中纠缠在一起。</p>
+<p>初次使用 Rust 编程很可能会非常痛苦，除了没有所见即所得的设计（Rust 会”帮“你各种自动隐式操作），期间还有复杂的内存管理规则要适应。它的类型检查系统里混杂着内存管理检查系统，也就是你两者都要按照它的规则做对。大多数时候，更是要<strong>连蒙带猜加分析</strong>。</p>
+<p>有时候你看到编译器报错，说你数据类型弄错了，你以为只是一个类型错误，但实际上还包含着多个内存错误（如 ownership 没有按照 Rust 做对）。不像其他语言，你改一下类型就能通过。在 Rust 中，除了改对类型，还要做对 ownership 。而且因为 ownership ，很多数据都要封装在各种容器里，导致数据类型也是眼花缭乱。最终，类型系统和内存规则系统会在你脑中纠缠在一起。</p>
 <p>不过如果能耐心坚持到成功写出一个解释器，也许对内存管理的理解会上升一个台阶。</p>
 <p>新的理解包括<a href="https://www.yinwang.org/blog-cn/2016/09/18/rust" target="_blank" rel="noopener"><em>也许除了垃圾回收（GC）和引用计数（RC），内存管理没有其它更好更简单的办法</em></a>。也包括“应该还是有办法避免 GC（这里指定期扫描的GC） 或者 RC。比如给同一种对象一大块空间，只是拿来用，不释放。到这种数据不用的时候一起释放掉就行。这样内存管理几乎没有计算开销，只是多用点内存而已（类似内存池 <a href="https://en.wikipedia.org/wiki/Memory_pool" target="_blank" rel="noopener">memory pool</a>）”等等。</p>
 <p>总的来说，想完全静态地管理<strong>所有</strong>内存，目前看是不太可能的，除非牺牲程序的表达能力和灵活性。比如 <a href="https://www.jpl.nasa.gov" target="_blank" rel="noopener">Jet Propulsion Laboratory</a>（美国喷气推进实验室）在它的 <a href="https://yurichev.com/mirrors/C/JPL_Coding_Standard_C.pdf" target="_blank" rel="noopener"><em>JPL Institutional Coding Standard for the C Programming Language</em></a> 规范里就禁止使用动态内存分配（malloc 等，见第 10 页）。JPL 在设计阶段就会把所有运行时可能的内存使用情况提前规划好了。让内存行为可预测，规避内存泄漏风险。</p>
@@ -791,7 +791,7 @@ fn main()
 </code></pre>
 <hr>
 <h3 id="Rust-的内存管理"><a href="#Rust-的内存管理" class="headerlink" title="Rust 的内存管理"></a>Rust 的内存管理</h3><p><strong>Rust</strong> 最重要的功能就是「<strong>内存管理</strong>」。它和其他语言（比如 <strong>Java</strong>）不一样。因为它没有<a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)" target="_blank" rel="noopener">垃圾回收(GC)</a> 。它是靠编译器的静态检查来实现内存管理的。<strong>Rust</strong> 可以在编译时就保证大部分的内存不会出问题。</p>
-<p><strong>Rust</strong> 的内存管理导致有很多代码写法上的限制，使得 <strong>Rust</strong> 写一些复杂的代码会有点痛苦。这就是为啥这个语言<strong>很</strong>不适合作为初学者的第一门语言。因为太多这个内存管理的东西夹在里面。你没法思考你的那些逻辑。写一个链表都要想想 <code>Box</code> 。它相当于把底层的一些内存机制暴露给你，让你根据 Rust 的 ownership 规则来处理数据在内存中的流动、共享以及生命周期，并在此过程中同时弄对各种数据类型。否则编译不过。</p>
+<p><strong>Rust</strong> 的内存管理导致代码有很多写法上的限制。使用 <strong>Rust</strong> 写一些复杂的代码会有点痛苦。这就是为啥这个语言<strong>很不适合</strong>作为初学者的第一门语言。因为太多这个内存管理的东西夹在里面。你没法思考你的那些逻辑。写一个链表都要想想 <code>Box</code> 。它相当于把底层的一些内存机制暴露给你，让你根据 Rust 的 ownership 规则来处理数据在内存中的流动、共享以及生命周期，并在此过程中同时弄对各种数据类型。否则编译不过。</p>
 <p>无论如何，总的来说，Rust 内存机制的核心思路有 3 个：</p>
 <ul>
 <li><p>拥有数据所有权 <strong>ownership</strong> 的变量，才能确保数据不会随便失效；borrow 来的数据，别人失效了，你就失效了（所以 Rust 中处于 borrow 状态下的变量是只读的，不可更改）</p>
@@ -1522,7 +1522,7 @@ fn main()
 <li><strong>C/C++</strong>：<br>手动管理内存。给你最大的自由和责任。</li>
 <li><strong>Java/C#/Go</strong>：<br>追踪式垃圾回收（Tracing GC）。用一定的性能和内存开销，换取了极高的开发效率和安全性。</li>
 <li><strong>Python/Swift</strong>：<br>自动引用计数（ARC）。在回收及时性和 GC 暂停之间取得了很好的平衡，但留下了需要手动处理循环引用的问题。</li>
-<li><strong>Rust</strong>：<br>一条全新的道路，通过在<strong>编译时</strong>强制执行一套严格的所有权和借用规则，试图在<strong>零运行时开销</strong>的前提下，同时实现<strong>C++级别的性能</strong>和<strong>Java级别的内存安全</strong>。这使得它的学习曲线最为陡峭，但一旦掌握，就能编写出性能极高且极其安全的系统级软件（当然这点有待观察）。</li>
+<li><strong>Rust</strong>：<br>一条全新的道路，通过在<strong>编译时</strong>强制执行一套严格的所有权（ownership）和借用（borrow）规则，试图在<strong>零运行时开销</strong>的前提下，同时实现<strong>C++级别的性能</strong>和<strong>Java级别的内存安全</strong>。这使得它的学习曲线最为陡峭，但一旦掌握，就能编写出性能极高且极其安全的系统级软件（当然这点有待观察）。</li>
 </ul>
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>

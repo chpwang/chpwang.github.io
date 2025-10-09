@@ -4,7 +4,7 @@
   <url>
     <loc>https://cps.ninja/2024/04/22/rust-basics/</loc>
     
-    <lastmod>2025-10-08T11:32:48.114Z</lastmod>
+    <lastmod>2025-10-09T12:17:31.853Z</lastmod>
     
   </url>
   
@@ -184,6 +184,13 @@
   </url>
   
   <url>
+    <loc>https://cps.ninja/2020/04/14/ian-cs-basics-assignments/</loc>
+    
+    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://cps.ninja/2018/09/26/intro-to-neural-network/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
@@ -198,7 +205,7 @@
   </url>
   
   <url>
-    <loc>https://cps.ninja/2020/04/14/ian-cs-basics-assignments/</loc>
+    <loc>https://cps.ninja/2018/09/21/keras/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     
@@ -219,13 +226,6 @@
   </url>
   
   <url>
-    <loc>https://cps.ninja/2018/09/21/keras/</loc>
-    
-    <lastmod>2022-03-20T16:05:00.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://cps.ninja/2018/06/01/numpy-and-pandas/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
@@ -233,14 +233,14 @@
   </url>
   
   <url>
-    <loc>https://cps.ninja/2018/01/31/rails-cheat-sheet/</loc>
+    <loc>https://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
+    <loc>https://cps.ninja/2018/01/31/rails-cheat-sheet/</loc>
     
     <lastmod>2022-03-20T16:05:00.000Z</lastmod>
     

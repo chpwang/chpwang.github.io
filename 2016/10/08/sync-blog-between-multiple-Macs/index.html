@@ -150,9 +150,7 @@ $ git push -u origin master</code></pre></div>
 $ git submodule add git@github.com:你的用户名/hexo-theme-pln.git</code></pre></div>
 
 <p>上面的两条命令会把你 fork 过来的主题下载到 <code>~/Documents/blog/themes</code> 目录下，由于主题名为 <code>pln</code>，所以我们会看到 <code>~/Documents/blog/themes</code> 目录下多了一个文件夹 <code>pln</code>，主题就存在这个文件夹里。</p>
-<p>此外 <code>git@github.com:你的用户名/hexo-theme-pln.git</code> 这串地址可以在你的 Github 账户下对应的 <code>repository</code> 中找到（当 fork 某个 project 之后，会在你的 Github 账户下生成一个  <code>repository</code> ）</p>
-<img src="/2016/10/08/sync-blog-between-multiple-Macs/find_submodule_address.jpg" class="" title="find submodule address">
-
+<p>此外 <code>git@github.com:你的用户名/hexo-theme-pln.git</code> 这串地址可以在你的 Github 账户下对应的 <code>repository</code> 中找到（当 fork 某个 project 之后，会在你的 Github 账户下生成一个  <code>repository</code> ）<br><img src="/2016/10/08/sync-blog-between-multiple-Macs/find_submodule_address.jpg" alt="find submodule address"></p>
 <p>仔细的你可能已经注意到 <code>~/Documents/blog/themes/pln</code> 目录下有个 <code>.git</code> 文件，因为 <code>pln</code> 文件夹在被生成之后就被 Git 追踪了，这也意味着无需再在 <code>pln</code> 文件夹里使用 <code>git init</code> 来对它开启追踪。</p>
 <p><strong>注意！</strong>这时我们面对的是一个普通玩家从未遇到的情况：</p>
 <blockquote>

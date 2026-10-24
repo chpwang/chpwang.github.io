@@ -1,40 +1,43 @@
 <!DOCTYPE HTML>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<head>
+  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="google-site-verification" content>
+  <meta name="google-site-verification" content="" />
   
   <title>C++ 语言入门</title>
   <meta name="author" content="chpwang">
    <meta name="description" content="王哈哈的修行驿站">
   
-
-  <meta property="og:title" content="C++ 语言入门">
+  
+  <meta property="og:title" content="C++ 语言入门"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:site_name" content="行侠何须仗名剑">
- <meta property="og:image" content>
+  <meta property="og:site_name" content="行侠何须仗名剑"/>
+   <meta property="og:image" content=""/>
   
   <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
   <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
-  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
-  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
-  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+
+  <!-- Apply saved/system color theme before CSS to avoid a light-mode flash. -->
+  <script src="/js/theme-mode.js"></script>
+
+  <!-- Bootstrap 3 and Font Awesome 4.5 are kept local for reliable loading. -->
   <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
-  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
   <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
-  <!-- highlight.js代码高亮主题 css 引入-->
+
+  <!-- Server-side Highlight.js token colors. -->
   <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
-  <!-- highlight.js代码高亮主题 css 引入-->
+
+  <!-- PLN theme CSS. -->
   <link rel="stylesheet" href="/css/m.min.css">
-  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
-  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
-</html>
+
+  <link rel="icon" type="image/x-icon" href="/G.png">
+<meta name="generator" content="Hexo 8.1.2"></head>
+
 <body>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+  <div id="main">
     <div class="behind">
       <div class="back">
         <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -44,7 +47,9 @@
       </div>
     </div>
     <div class="container">
-      
+      <button class="post-theme-toggle" type="button" aria-label="切换深色模式" title="切换深色模式">
+  <i class="fa fa-moon-o" aria-hidden="true"></i>
+</button>
 
   <article class="standard post">
     <div class="title">
@@ -80,1309 +85,1341 @@
     <div class="picture-container">
       
     </div>
-    <p>在理解 Rust 内存管理的本质之后（参见<a href="/2024/04/22/rust-basics/"> Rust 入门</a> ），再来了解一下 <a href="https://en.wikipedia.org/wiki/C%2B%2B" target="_blank" rel="noopener">C++ 语言</a>和它的内存管理。这样和 Rust 对比一下，就能更加理解 Rust 内存管理方式和特点。进而更好地使用 C++ 进行编程。</p>
-<p>JavaScript, Python, Java 和其它大部分语言都是自动管理内存的。所以写代码时不需要自己去处理内存管理这个事。其中 Java 的自动内存管理依靠的是<a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)" target="_blank" rel="noopener">垃圾回收（Garbage Collection）</a>。所以通常来说，需要自己管理内存的情况不多。内存管理不算是很重要的事情。但了解内存管理的知识也会有助于我们的代码逻辑。</p>
-<p>如果从具有<a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)" target="_blank" rel="noopener">垃圾回收（Garbage Collection）</a>的语言出发来类比和理解，可能到后来你就始终弄不明白 C++ 这样的语言到底要怎么写代码。</p>
-<p>当年 Ian 刚开始学计算机是从 <a href="https://en.wikipedia.org/wiki/Pascal_(programming_language)" target="_blank" rel="noopener">Pascal</a> 语言开始的。之后马上又学了 <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank" rel="noopener">C 语言</a> 。因为传言 C 语言比 Pascal 好。而 C 语言的内存管理都是手动的。所以经常会出现一些很奇怪的问题。但是通过学习 Rust 或者 C++ ，你就能从本质上理解用 C 语言怎么会遇到那么稀奇古怪的一些问题：要么你内存泄漏了，要么你就是出现一些内存错误。比如说有一个地方的值莫名其妙地被人改了，你就不知道哪里的代码在改那个内存。因为内存管理弄错了之后，你的指针就有可能指向它不该指的地方。</p>
-<p>Rust 语言会强制你去思考这些内存问题，所以你就被迫就要把这些事情按照它的规则做对。然后 Rust 的内存管理思路大致上是对的。就是它强制你有个 <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html" target="_blank" rel="noopener">ownership</a> 。这样通常情况下只有一个变量可以指向这个对象。然后如果你需要共享的话，你就得自己显式地使用那个 <a href="https://doc.rust-lang.org/book/ch15-04-rc.html" target="_blank" rel="noopener">Rc</a>（引用计数）的方式。习惯了 Rust 之后再去写 C 语言或者 C++ ，就不会那么容易有问题了——当然，你还是可能会犯错的。</p>
-<p>C++ 的 <a href="https://learn.microsoft.com/en-us/cpp/cpp/smart-pointers-modern-cpp?view=msvc-170" target="_blank" rel="noopener">Smart Pointer</a> 设计，其使用的方式稍微改一点，就能实现和 Rust 同样的目标，而不太增加思维负担。不过 C++ 有一个<strong>讨厌</strong>的地方是，它的出错信息太难以阅读了。写错代码之后的报错信息令人困惑，不知哪里错了。因为它的 <a href="https://learn.microsoft.com/en-us/cpp/cpp/smart-pointers-modern-cpp?view=msvc-170" target="_blank" rel="noopener">Smart Pointer</a> 这些东西是靠 <a href="https://en.wikipedia.org/wiki/Template_(C%2B%2B)" target="_blank" rel="noopener">Template</a> 和<a href="https://learn.microsoft.com/en-us/cpp/preprocessor/macros-c-cpp?view=msvc-170" target="_blank" rel="noopener">宏</a>展开之后实现出来的，它并不是 C++ 语言直接实现了这些东西。所以你一旦出点错，它是展开了一堆内部实现的代码，最后给你说展开之后的代码哪里错了。但展开之后的代码跟你写的代码完全是两码事了。这就是 C++ 的一个问题。</p>
+
+    
+      
+      
+        <button
+          class="post-toc-toggle"
+          type="button"
+          aria-controls="post-toc-drawer"
+          aria-expanded="false"
+          aria-label="打开文章目录"
+          title="目录">
+        </button>
+
+        <div class="post-toc-backdrop" data-toc-close aria-hidden="true"></div>
+
+        <aside
+          id="post-toc-drawer"
+          class="post-toc post-toc-drawer"
+          aria-label="文章目录"
+          aria-hidden="true">
+          <div class="post-toc-drawer-header">
+            <div class="post-toc-title">目录</div>
+            <button class="post-toc-close" type="button" data-toc-close aria-label="关闭文章目录">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="post-toc-drawer-content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#C-%E7%BC%96%E7%A8%8B%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE"><span class="toc-text">C++ 编程环境设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E4%BE%BF%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="toc-text">其他的一些方便的设置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E7%BC%96%E7%A8%8B"><span class="toc-text">开始编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E8%B5%8F"><span class="toc-text">打赏</span></a></li></ol>
+          </div>
+        </aside>
+
+        <script src="/js/toc.js" defer></script>
+      
+    
+
+    
+    <p>在理解 Rust 内存管理的本质之后（参见<a href="/2024/04/22/rust-basics/"> Rust 入门</a> ），再来了解一下 <a href="https://en.wikipedia.org/wiki/C%2B%2B">C++ 语言</a>和它的内存管理。这样和 Rust 对比一下，就能更加理解 Rust 内存管理方式和特点。进而更好地使用 C++ 进行编程。</p>
+<p>JavaScript, Python, Java 和其它大部分语言都是自动管理内存的。所以写代码时不需要自己去处理内存管理这个事。其中 Java 的自动内存管理依靠的是<a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)">垃圾回收（Garbage Collection）</a>。所以通常来说，需要自己管理内存的情况不多。内存管理不算是很重要的事情。但了解内存管理的知识也会有助于我们的代码逻辑。</p>
+<p>如果从具有<a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)">垃圾回收（Garbage Collection）</a>的语言出发来类比和理解，可能到后来你就始终弄不明白 C++ 这样的语言到底要怎么写代码。</p>
+<p>当年 Ian 刚开始学计算机是从 <a href="https://en.wikipedia.org/wiki/Pascal_(programming_language)">Pascal</a> 语言开始的。之后马上又学了 <a href="https://en.wikipedia.org/wiki/C_(programming_language)">C 语言</a> 。因为传言 C 语言比 Pascal 好。而 C 语言的内存管理都是手动的。所以经常会出现一些很奇怪的问题。但是通过学习 Rust 或者 C++ ，你就能从本质上理解用 C 语言怎么会遇到那么稀奇古怪的一些问题：要么你内存泄漏了，要么你就是出现一些内存错误。比如说有一个地方的值莫名其妙地被人改了，你就不知道哪里的代码在改那个内存。因为内存管理弄错了之后，你的指针就有可能指向它不该指的地方。</p>
+<p>Rust 语言会强制你去思考这些内存问题，所以你就被迫就要把这些事情按照它的规则做对。然后 Rust 的内存管理思路大致上是对的。就是它强制你有个 <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html">ownership</a> 。这样通常情况下只有一个变量可以指向这个对象。然后如果你需要共享的话，你就得自己显式地使用那个 <a href="https://doc.rust-lang.org/book/ch15-04-rc.html">Rc</a>（引用计数）的方式。习惯了 Rust 之后再去写 C 语言或者 C++ ，就不会那么容易有问题了——当然，你还是可能会犯错的。</p>
+<p>C++ 的 <a href="https://learn.microsoft.com/en-us/cpp/cpp/smart-pointers-modern-cpp?view=msvc-170">Smart Pointer</a> 设计，其使用的方式稍微改一点，就能实现和 Rust 同样的目标，而不太增加思维负担。不过 C++ 有一个<strong>讨厌</strong>的地方是，它的出错信息太难以阅读了。写错代码之后的报错信息令人困惑，不知哪里错了。因为它的 <a href="https://learn.microsoft.com/en-us/cpp/cpp/smart-pointers-modern-cpp?view=msvc-170">Smart Pointer</a> 这些东西是靠 <a href="https://en.wikipedia.org/wiki/Template_(C%2B%2B)">Template</a> 和<a href="https://learn.microsoft.com/en-us/cpp/preprocessor/macros-c-cpp?view=msvc-170">宏</a>展开之后实现出来的，它并不是 C++ 语言直接实现了这些东西。所以你一旦出点错，它是展开了一堆内部实现的代码，最后给你说展开之后的代码哪里错了。但展开之后的代码跟你写的代码完全是两码事了。这就是 C++ 的一个问题。</p>
 <p>在熟悉 C++ 之后，可以进一步思考一下 C++ 和 Rust 关于内存做法的各自优缺点。</p>
 <hr>
-<h3 id="C-编程环境设置"><a href="#C-编程环境设置" class="headerlink" title="C++ 编程环境设置"></a>C++ 编程环境设置</h3><p>首推自然是使用友好功能强大的 <a href="https://www.jetbrains.com/clion/" target="_blank" rel="noopener">CLion</a> 作为 <strong>C++</strong> 的 <strong>IDE</strong>。不过这是收费的软件，30 天免费试用期过后就需要付费订阅。适合需要长期使用 C++ 的玩家们。</p>
-<p>作为入门学习体验，也可以退而求其次继续选择免费的 <a href="https://code.visualstudio.com" target="_blank" rel="noopener">VS Code</a> 。此时要先安装 <a href="https://gcc.gnu.org" target="_blank" rel="noopener">GNU C++</a> 或者 <a href="https://clang.llvm.org" target="_blank" rel="noopener">Clang C++</a> 的编译器。对于 MacOS 的用户，推荐用 Clang ，因为它包含在 Xcode 命令行工具里，安装非常方便。下面以 MacOS 的 <strong>VS Code</strong>  为例<a href="https://code.visualstudio.com/docs/cpp/config-clang-mac" target="_blank" rel="noopener">配置编程环境</a>： </p>
+<h3 id="C-编程环境设置"><a href="#C-编程环境设置" class="headerlink" title="C++ 编程环境设置"></a>C++ 编程环境设置</h3><p>首推自然是使用友好功能强大的 <a href="https://www.jetbrains.com/clion/">CLion</a> 作为 <strong>C++</strong> 的 <strong>IDE</strong>。不过这是收费的软件，30 天免费试用期过后就需要付费订阅。适合需要长期使用 C++ 的玩家们。</p>
+<p>作为入门学习体验，也可以退而求其次继续选择免费的 <a href="https://code.visualstudio.com/">VS Code</a> 。此时要先安装 <a href="https://gcc.gnu.org/">GNU C++</a> 或者 <a href="https://clang.llvm.org/">Clang C++</a> 的编译器。对于 MacOS 的用户，推荐用 Clang ，因为它包含在 Xcode 命令行工具里，安装非常方便。下面以 MacOS 的 <strong>VS Code</strong>  为例<a href="https://code.visualstudio.com/docs/cpp/config-clang-mac">配置编程环境</a>： </p>
 <p>首先，安装和配置 <strong>VS Code</strong> ，可以参考这篇<a href="/2018/05/25/vscode-intro/">上手 Visual Studio Code</a> ；</p>
-<p>其次，安装 <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools" target="_blank" rel="noopener">C++ extension for VS Code</a>，这个也可以在 <strong>VS Code</strong> 里直接搜索安装；</p>
-<p>然后是安装 C++ 编译器 <a href="https://clang.llvm.org/get_started.html" target="_blank" rel="noopener">Clang</a> （C++ 需要编译之后运行）：</p>
-<pre><code class="lang-bash">## 安装 Command Line Tools - MacOS 编程软件 Xcode 的命令行工具
+<p>其次，安装 <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools">C++ extension for VS Code</a>，这个也可以在 <strong>VS Code</strong> 里直接搜索安装；</p>
+<p>然后是安装 C++ 编译器 <a href="https://clang.llvm.org/get_started.html">Clang</a> （C++ 需要编译之后运行）：</p>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-comment">## 安装 Command Line Tools - MacOS 编程软件 Xcode 的命令行工具</span>
 $ xcode-select --install
 
-## 完成后可以使用一下命令查看版本说明安装成功了
+<span class="hljs-comment">## 完成后可以使用一下命令查看版本说明安装成功了</span>
 $ clang --version
 Apple clang version 17.0.0 (clang-1700.0.13.5)
 Target: arm64-apple-darwin24.5.0
 Thread model: posix
-InstalledDir: /Library/Developer/CommandLineTools/usr/bin
-</code></pre>
+InstalledDir: /Library/Developer/CommandLineTools/usr/bin</code></pre></div>
+
 <p>安装完 Clang 之后，在 VS Code 中新建后缀为 <code>.cpp</code> 的文件比如 <code>demo.cpp</code> 就能开始编程了（建议建一个文件夹比较好，因为编译会生成新文件）：</p>
-<pre><code class="lang-c++">#include &lt;iostream&gt;   
-// #include &lt;...&gt; 是加载外部代码，上面是引入标准输入输出库（以便使用下面的 std::cout 输出内容）
+<div class="code-block" data-code-language="C++"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span>   </span>
+<span class="hljs-comment">// #include &lt;...&gt; 是加载外部代码，上面是引入标准输入输出库（以便使用下面的 std::cout 输出内容）</span>
 
-// C++ 的 main 函数一定要返回 int
-int main()
-{
-  std::cout &lt;&lt; &quot;Hello C++&quot; ;
-  return 0;
-}
-</code></pre>
-<p>注意：MacOS 升级到 <a href="https://www.apple.com/sg/macos/macos-sequoia/" target="_blank" rel="noopener">Sequoia</a> 后，可能需要<a href="https://stackoverflow.com/questions/78999694/cant-compile-c-hello-world-with-clang-on-mac-sequoia-15-0-and-vs-code" target="_blank" rel="noopener">重装 Command Line Tools</a> 才能正确运行代码，否则会有类似 <code>&#39;iostream&#39; file not found</code> 之类找不到标准库头文件的报错：</p>
-<pre><code class="lang-bash">$ sudo rm -rf /Library/Developer/CommandLineTools   # Uninstall - 先卸载 
+<span class="hljs-comment">// C++ 的 main 函数一定要返回 int</span>
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  std::cout &lt;&lt; <span class="hljs-string">&quot;Hello C++&quot;</span> ;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
 
-$ xcode-select --install                            # Reinstall - 再安装
-</code></pre>
-<p>此外，也许你的代码能正常运行，但 <strong>VS Code</strong> 总在各种 <code>#include &lt;...&gt;</code>  的代码下方标记红色波浪线，提示找不到标准库文件的报错。可参考<a href="https://stackoverflow.com/questions/65421161/visual-studio-code-cannot-open-source-file-iostream" target="_blank" rel="noopener">这里</a>解决：</p>
+<p>注意：MacOS 升级到 <a href="https://www.apple.com/sg/macos/macos-sequoia/">Sequoia</a> 后，可能需要<a href="https://stackoverflow.com/questions/78999694/cant-compile-c-hello-world-with-clang-on-mac-sequoia-15-0-and-vs-code">重装 Command Line Tools</a> 才能正确运行代码，否则会有类似 <code>&#39;iostream&#39; file not found</code> 之类找不到标准库头文件的报错：</p>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf /Library/Developer/CommandLineTools   <span class="hljs-comment"># Uninstall - 先卸载 </span>
+
+$ xcode-select --install                            <span class="hljs-comment"># Reinstall - 再安装</span></code></pre></div>
+
+<p>此外，也许你的代码能正常运行，但 <strong>VS Code</strong> 总在各种 <code>#include &lt;...&gt;</code>  的代码下方标记红色波浪线，提示找不到标准库文件的报错。可参考<a href="https://stackoverflow.com/questions/65421161/visual-studio-code-cannot-open-source-file-iostream">这里</a>解决：</p>
 <ol>
-<li><p>在终端里使用命令 <code>gcc -v -E -x c++ -</code> 来获取所有标准库目录：</p>
-<pre><code class="lang-bash">$ gcc -v -E -x c++ -
-...
-...
-#include &lt;...&gt; search starts here:
-/usr/local/include
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1
-/Library/Developer/CommandLineTools/usr/lib/clang/17/include
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include
-/Library/Developer/CommandLineTools/usr/include
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)
-End of search list.
-</code></pre>
-</li>
-<li><p>打开 <a href="https://code.visualstudio.com/docs/cpp/configure-intellisense#_option-3-edit-the-ccpppropertiesjson-file-directly" target="_blank" rel="noopener"><code>c_cpp_properties.json</code></a> 文件，把上述目录增加到 <code>&quot;includePath&quot;</code> 一栏中保存即可（该文件通常在你当前 VS Code 工作目录下的 <code>.vscode</code> 文件夹中，若没有，参考<a href="https://code.visualstudio.com/docs/cpp/configure-intellisense#_option-3-edit-the-ccpppropertiesjson-file-directly" target="_blank" rel="noopener">这里</a>通过 <strong>Command Palette</strong> 中输入 <code>C/C++ Edit Configurations (JSON)</code> 创建）：</p>
-<pre><code class="lang-json">{
- &quot;configurations&quot;: [
-   {
-     &quot;name&quot;: &quot;Mac&quot;,
-     &quot;includePath&quot;: [
-         &quot;${workspaceFolder}/**&quot;,
-         &quot;/usr/local/include&quot;,
-         &quot;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1&quot;,
-         &quot;/Library/Developer/CommandLineTools/usr/lib/clang/17/include&quot;,
-         &quot;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include&quot;,
-         &quot;/Library/Developer/CommandLineTools/usr/include&quot;,
-         &quot;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks&quot;
-     ],
-     &quot;defines&quot;: [],
-     &quot;cStandard&quot;: &quot;c17&quot;,
-     &quot;cppStandard&quot;: &quot;c++17&quot;,
-     &quot;intelliSenseMode&quot;: &quot;macos-clang-arm64&quot;,
-     &quot;compilerPath&quot;: &quot;/usr/bin/clang++&quot;
-   }
- ],
- &quot;version&quot;: 4
-}
-</code></pre>
-</li>
+<li>在终端里使用命令 <code>gcc -v -E -x c++ -</code> 来获取所有标准库目录：</li>
 </ol>
+  <div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">$ gcc -v -E -x c++ -
+...
+...
+<span class="hljs-comment">#include &lt;...&gt; search starts here:</span>
+ /usr/local/include
+ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1
+ /Library/Developer/CommandLineTools/usr/lib/clang/17/include
+ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include
+ /Library/Developer/CommandLineTools/usr/include
+ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)
+End of search list.</code></pre></div>
+
+<ol start="2">
+<li>打开 <a href="https://code.visualstudio.com/docs/cpp/configure-intellisense#_option-3-edit-the-ccpppropertiesjson-file-directly"><code>c_cpp_properties.json</code></a> 文件，把上述目录增加到 <code>&quot;includePath&quot;</code> 一栏中保存即可（该文件通常在你当前 VS Code 工作目录下的 <code>.vscode</code> 文件夹中，若没有，参考<a href="https://code.visualstudio.com/docs/cpp/configure-intellisense#_option-3-edit-the-ccpppropertiesjson-file-directly">这里</a>通过 <strong>Command Palette</strong> 中输入 <code>C/C++ Edit Configurations (JSON)</code> 创建）：</li>
+</ol>
+  <div class="code-block" data-code-language="JSON"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+  <span class="hljs-attr">&quot;configurations&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">&#123;</span>
+      <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Mac&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;includePath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+          <span class="hljs-string">&quot;$&#123;workspaceFolder&#125;/**&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-string">&quot;/usr/local/include&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-string">&quot;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-string">&quot;/Library/Developer/CommandLineTools/usr/lib/clang/17/include&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-string">&quot;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-string">&quot;/Library/Developer/CommandLineTools/usr/include&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-string">&quot;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks&quot;</span>
+      <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;defines&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;cStandard&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;c17&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;cppStandard&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;c++17&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;intelliSenseMode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;macos-clang-arm64&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;compilerPath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/usr/bin/clang++&quot;</span>
+    <span class="hljs-punctuation">&#125;</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+
 <hr>
-<h4 id="其他的一些方便的设置："><a href="#其他的一些方便的设置：" class="headerlink" title="其他的一些方便的设置："></a>其他的一些方便的设置：</h4><ul>
+<h4 id="其他的一些方便的设置"><a href="#其他的一些方便的设置" class="headerlink" title="其他的一些方便的设置"></a>其他的一些方便的设置</h4><ul>
 <li><p><strong>设置花括号另起一行</strong>：<code>Settings</code> -&gt; 搜索 <code>C_Cpp.clang_format_fallbackStyle</code><br>在输入框处填上 <code>&quot;Visual Studio&quot;</code> ，也就是使用 <strong>VS</strong> 的格式<br>这样在编辑完代码后，就可以使用快捷键 <code>option</code> + <code>shift</code> + <code>F</code> 来格式化代码，让花括号另起一行<br>最开始 <strong>C</strong> 语言的时候大家花括号都是写在下一行的，自从有了 <strong>Java</strong> ，大家才开始写埃及括号 Egyptian brackets ，然后代码就挨得太近了<br>要注意的是，该格式化也会把 <code>int* p = ...</code> 改成 <code>int *p = ...</code> ，但 <code>int*</code> 其实是一个「类型」，代表<strong>整数指针</strong>。写成 <code>int *p</code> 会和解引用计算 <code>*p</code> 混淆。正确写法还是要 <code>int* p</code> 表示变量 <strong>p</strong> 是整数指针类型；<br>你如果想抬杠把它理解成先计算 <code>*p</code> ，然后再把计算结果标记为 <code>int</code> 类型，那逻辑就绕了。而且类型标记是标记变量和函数的，不是标记表达式的值的；</p>
 </li>
-<li><p><a href="https://code.visualstudio.com" target="_blank" rel="noopener">VS Code</a> 默认用的是 <code>g++</code> 来编译，最好能加上一个参数 <code>-std=c++17</code> ，这样就能使用 <a href="https://en.wikipedia.org/wiki/C%2B%2B17" target="_blank" rel="noopener">C++17</a> 标准来编译。这意味着你的代码可以用一些新的写法和功能，比如使用 <code>std::make_unique</code> 函数等。<br>参考<a href="/2018/05/25/vscode-intro/">上手 Visual Studio Code</a> 打开配置文件 <em>settings.jason</em> ：<br><code>Extensions Settings</code> -&gt; <code>Code-runner:</code> <strong><code>Executor Map</code></strong> -&gt; <code>Edit in settings.jason</code><br>在 <strong>cpp</strong> 那行的 <code>g++</code> 后面编辑添加 <code>std=c++17</code> 保存即可。编辑完成后这行的文本如下：</p>
-<pre><code class="lang-jason">&quot;cpp&quot;: &quot;cd $dir &amp;&amp; g++ -std=c++17 $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&quot;,
-</code></pre>
-</li>
+<li><p><a href="https://code.visualstudio.com/">VS Code</a> 默认用的是 <code>g++</code> 来编译，最好能加上一个参数 <code>-std=c++17</code> ，这样就能使用 <a href="https://en.wikipedia.org/wiki/C%2B%2B17">C++17</a> 标准来编译。这意味着你的代码可以用一些新的写法和功能，比如使用 <code>std::make_unique</code> 函数等。<br>参考<a href="/2018/05/25/vscode-intro/">上手 Visual Studio Code</a> 打开配置文件 <em>settings.jason</em> ：<br><code>Extensions Settings</code> -&gt; <code>Code-runner:</code> <strong><code>Executor Map</code></strong> -&gt; <code>Edit in settings.jason</code><br>在 <strong>cpp</strong> 那行的 <code>g++</code> 后面编辑添加 <code>std=c++17</code> 保存即可。编辑完成后这行的文本如下：</p>
+<div class="code-block" data-code-language="Jason"><pre><code class="hljs jason">&quot;cpp&quot;: &quot;cd $dir &amp;&amp; g++ -std=c++17 $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&quot;,</code></pre></div></li>
 </ul>
 <hr>
 <h3 id="开始编程"><a href="#开始编程" class="headerlink" title="开始编程"></a>开始编程</h3><p>C++ 和 Java 非常相似，对熟悉 Java 的玩家来说，开始的这些代码和概念可以快速通过：</p>
-<pre><code class="lang-c++">#include &lt;iostream&gt;       // 标准输入输出 - std::cout 等
-#include &lt;string&gt;         // 字符串拼接、查找、截取等操作 - append 等
-#include &lt;memory&gt;         // 智能指针和内存管理工具 - std::unique_ptr 和 std::shared_ptr 等
-#include &lt;vector&gt;         // 动态数组容器（长度可自动扩展）- resize() 等
-#include &lt;map&gt;            // 键值对映射（有序字典）- std::map 等
-#include &lt;stdexcept&gt;      // 标准异常类型，用于错误处理 - std::runtime_error 等
-#include &lt;cmath&gt;          // 数学函数和常量 - sqrt() 等
+<div class="code-block" data-code-language="C++"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span>       <span class="hljs-comment">// 标准输入输出 - std::cout 等</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span>         <span class="hljs-comment">// 字符串拼接、查找、截取等操作 - append 等</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;memory&gt;</span>         <span class="hljs-comment">// 智能指针和内存管理工具 - std::unique_ptr 和 std::shared_ptr 等</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span>         <span class="hljs-comment">// 动态数组容器（长度可自动扩展）- resize() 等</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span>            <span class="hljs-comment">// 键值对映射（有序字典）- std::map 等</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span>      <span class="hljs-comment">// 标准异常类型，用于错误处理 - std::runtime_error 等</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span>          <span class="hljs-comment">// 数学函数和常量 - sqrt() 等</span></span>
 
-// 如果没有 using namespace std; 那 cout 和 endl 等就都要加上 std::
-// 以下代码只有一个 cout ，所以可以不用担心可能导致的命名冲突
-using namespace std;
+<span class="hljs-comment">// 如果没有 using namespace std; 那 cout 和 endl 等就都要加上 std::</span>
+<span class="hljs-comment">// 以下代码只有一个 cout ，所以可以不用担心可能导致的命名冲突</span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
 
-// C++ 不允许你在函数内部定义函数，编译不通过，所以 fact 定义到外面
-// C++ 通过「函数指针」和「Lambda 表达式」来实现类似其他语言的内部函数功能
-// 尽管有编译过程，但是函数要定义在调用的前面才能被识别，否则就会报错 undeclared
-// fact 定义在 basic_test 之前，basic_test 内部才能调用它
-int fact(int n)
-{
-  if (n == 0)
-  {
-    return 1;
-  }
-  else
-  {
-    return n * fact(n - 1);
-  }
-}
+<span class="hljs-comment">// C++ 不允许你在函数内部定义函数，编译不通过，所以 fact 定义到外面</span>
+<span class="hljs-comment">// C++ 通过「函数指针」和「Lambda 表达式」来实现类似其他语言的内部函数功能</span>
+<span class="hljs-comment">// 尽管有编译过程，但是函数要定义在调用的前面才能被识别，否则就会报错 undeclared</span>
+<span class="hljs-comment">// fact 定义在 basic_test 之前，basic_test 内部才能调用它</span>
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">fact</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span></span>
+<span class="hljs-function"></span>&#123;
+  <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>)
+  &#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+  &#125;
+  <span class="hljs-keyword">else</span>
+  &#123;
+    <span class="hljs-keyword">return</span> n * <span class="hljs-built_in">fact</span>(n - <span class="hljs-number">1</span>);
+  &#125;
+&#125;
 
 
-// ###########################################################
-//                            基本语法
-// ###########################################################
+<span class="hljs-comment">// ###########################################################</span>
+<span class="hljs-comment">//                            基本语法</span>
+<span class="hljs-comment">// ###########################################################</span>
 
-void basic_test()
-{
-  // 如果没有上面的 using namespace std; 那输出的 cout 和换行 endl 等等就都要加上 std::
-  // std::cout &lt;&lt; &quot;---- basic_test ----&quot; &lt;&lt; std::endl;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">basic_test</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  <span class="hljs-comment">// 如果没有上面的 using namespace std; 那输出的 cout 和换行 endl 等等就都要加上 std::</span>
+  <span class="hljs-comment">// std::cout &lt;&lt; &quot;---- basic_test ----&quot; &lt;&lt; std::endl;</span>
 
-  cout &lt;&lt; &quot;---- basic_test ----&quot; &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;---- basic_test ----&quot;</span> &lt;&lt; endl;
 
-  cout &lt;&lt; &quot;Hello World!&quot; &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;Hello World!&quot;</span> &lt;&lt; endl;
 
-  int x = 2 * 3;
-  cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; endl;
+  <span class="hljs-type">int</span> x = <span class="hljs-number">2</span> * <span class="hljs-number">3</span>;
+  cout &lt;&lt; <span class="hljs-string">&quot;x = &quot;</span> &lt;&lt; x &lt;&lt; endl;
 
-  int y = 1 + x;
-  cout &lt;&lt; &quot;y = &quot; &lt;&lt; y &lt;&lt; endl;
+  <span class="hljs-type">int</span> y = <span class="hljs-number">1</span> + x;
+  cout &lt;&lt; <span class="hljs-string">&quot;y = &quot;</span> &lt;&lt; y &lt;&lt; endl;
 
-  const int z = 5; // const 代表常数，不能改动
-  cout &lt;&lt; &quot;z = &quot; &lt;&lt; z &lt;&lt; endl;
-  // z = 10; // Error: assignment of read-only variable &#39;z&#39;
+  <span class="hljs-type">const</span> <span class="hljs-type">int</span> z = <span class="hljs-number">5</span>; <span class="hljs-comment">// const 代表常数，不能改动</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;z = &quot;</span> &lt;&lt; z &lt;&lt; endl;
+  <span class="hljs-comment">// z = 10; // Error: assignment of read-only variable &#x27;z&#x27;</span>
 
-  float a = 3.14;
-  cout &lt;&lt; &quot;a(float) = &quot; &lt;&lt; a &lt;&lt; endl;
+  <span class="hljs-type">float</span> a = <span class="hljs-number">3.14</span>;
+  cout &lt;&lt; <span class="hljs-string">&quot;a(float) = &quot;</span> &lt;&lt; a &lt;&lt; endl;
 
-  double b = 3.14;
-  cout &lt;&lt; &quot;b(double) = &quot; &lt;&lt; b &lt;&lt; endl;
+  <span class="hljs-type">double</span> b = <span class="hljs-number">3.14</span>;
+  cout &lt;&lt; <span class="hljs-string">&quot;b(double) = &quot;</span> &lt;&lt; b &lt;&lt; endl;
 
-  char c = &#39;A&#39;;
-  cout &lt;&lt; &quot;c = &quot; &lt;&lt; c &lt;&lt; endl;
+  <span class="hljs-type">char</span> c = <span class="hljs-string">&#x27;A&#x27;</span>;
+  cout &lt;&lt; <span class="hljs-string">&quot;c = &quot;</span> &lt;&lt; c &lt;&lt; endl;
 
-  bool d = true;
-  cout &lt;&lt; &quot;d = &quot; &lt;&lt; d &lt;&lt; endl;
+  <span class="hljs-type">bool</span> d = <span class="hljs-literal">true</span>;
+  cout &lt;&lt; <span class="hljs-string">&quot;d = &quot;</span> &lt;&lt; d &lt;&lt; endl;
 
-  string e = &quot;Hello&quot;;  // string 类型是小写开头的 Java 是大写 String
-  cout &lt;&lt; &quot;e = &quot; &lt;&lt; e &lt;&lt; endl;
-  cout &lt;&lt; e + &quot; World!&quot; &lt;&lt; endl;
+  string e = <span class="hljs-string">&quot;Hello&quot;</span>;  <span class="hljs-comment">// string 类型是小写开头的 Java 是大写 String</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;e = &quot;</span> &lt;&lt; e &lt;&lt; endl;
+  cout &lt;&lt; e + <span class="hljs-string">&quot; World!&quot;</span> &lt;&lt; endl;
 
-  // 这种写法是不行的，标记了 string 类型的 e 才有 .append 这个内部函数可调用
-  // &quot;Hello&quot; 没标记类型，C++ 无法自动判断类型
-  // cout &lt;&lt; &quot;Hello&quot;.append(&quot; World!&quot;) &lt;&lt; endl;  
+  <span class="hljs-comment">// 这种写法是不行的，标记了 string 类型的 e 才有 .append 这个内部函数可调用</span>
+  <span class="hljs-comment">// &quot;Hello&quot; 没标记类型，C++ 无法自动判断类型</span>
+  <span class="hljs-comment">// cout &lt;&lt; &quot;Hello&quot;.append(&quot; World!&quot;) &lt;&lt; endl;  </span>
 
-  e.append(&quot; World!&quot;);
-  cout &lt;&lt; &quot;e = &quot; &lt;&lt; e &lt;&lt; endl;
+  e.<span class="hljs-built_in">append</span>(<span class="hljs-string">&quot; World!&quot;</span>);
+  cout &lt;&lt; <span class="hljs-string">&quot;e = &quot;</span> &lt;&lt; e &lt;&lt; endl;
 
-  cout &lt;&lt; sqrt(25) &lt;&lt; endl; // sqrt function is defined in the cmath header file.
+  cout &lt;&lt; <span class="hljs-built_in">sqrt</span>(<span class="hljs-number">25</span>) &lt;&lt; endl; <span class="hljs-comment">// sqrt function is defined in the cmath header file.</span>
 
-  cout &lt;&lt; fact(5) &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-built_in">fact</span>(<span class="hljs-number">5</span>) &lt;&lt; endl;
 
-  // 注意数组的值用的是花括号 {} 而不是 []，不能写 [1, 2]，要写 {1, 2}
-  string arr[] = {&quot;Hello&quot;, &quot;World&quot;, &quot;Good&quot;, &quot;Morning&quot;, &quot;Everyone&quot;};  
-  // C++ 的数组没有 length 函数
-  // sizeof(arr) 得到整个数组占用多少内存(单位：字节)
-  // sizeof(string) 则得到 string 对象的大小(单位：字节)
-  // 两者除一下，计算出数组的长度 length
-  cout &lt;&lt; &quot;arr length = &quot; &lt;&lt; sizeof(arr) / sizeof(string) &lt;&lt; endl;
+  <span class="hljs-comment">// 注意数组的值用的是花括号 &#123;&#125; 而不是 []，不能写 [1, 2]，要写 &#123;1, 2&#125;</span>
+  string arr[] = &#123;<span class="hljs-string">&quot;Hello&quot;</span>, <span class="hljs-string">&quot;World&quot;</span>, <span class="hljs-string">&quot;Good&quot;</span>, <span class="hljs-string">&quot;Morning&quot;</span>, <span class="hljs-string">&quot;Everyone&quot;</span>&#125;;  
+  <span class="hljs-comment">// C++ 的数组没有 length 函数</span>
+  <span class="hljs-comment">// sizeof(arr) 得到整个数组占用多少内存(单位：字节)</span>
+  <span class="hljs-comment">// sizeof(string) 则得到 string 对象的大小(单位：字节)</span>
+  <span class="hljs-comment">// 两者除一下，计算出数组的长度 length</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;arr length = &quot;</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(arr) / <span class="hljs-keyword">sizeof</span>(string) &lt;&lt; endl;
 
-  for (int i = 0; i &lt; 5; i++)   // 打印数组 arr 内容（方法一）
-  {
-    cout &lt;&lt; &quot;for: &quot; + arr[i] &lt;&lt; endl;
-  }
+  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++)   <span class="hljs-comment">// 打印数组 arr 内容（方法一）</span>
+  &#123;
+    cout &lt;&lt; <span class="hljs-string">&quot;for: &quot;</span> + arr[i] &lt;&lt; endl;
+  &#125;
 
-  arr[3] = &quot;Evening&quot;;
-  for (string s : arr)          // 打印数组 arr 内容（方法二）
-  {
-    cout &lt;&lt; &quot;for-each: &quot; + s &lt;&lt; endl;
-  }
+  arr[<span class="hljs-number">3</span>] = <span class="hljs-string">&quot;Evening&quot;</span>;
+  <span class="hljs-keyword">for</span> (string s : arr)          <span class="hljs-comment">// 打印数组 arr 内容（方法二）</span>
+  &#123;
+    cout &lt;&lt; <span class="hljs-string">&quot;for-each: &quot;</span> + s &lt;&lt; endl;
+  &#125;
 
-  // // 上面（方法二）其实建议用 for (const string&amp; s : arr) {...}
-  // for (const string&amp; s : arr)         
-  // {
-  //   cout &lt;&lt; &quot;for-each: &quot; + s &lt;&lt; endl;
-  // }
+  <span class="hljs-comment">// // 上面（方法二）其实建议用 for (const string&amp; s : arr) &#123;...&#125;</span>
+  <span class="hljs-comment">// for (const string&amp; s : arr)         </span>
+  <span class="hljs-comment">// &#123;</span>
+  <span class="hljs-comment">//   cout &lt;&lt; &quot;for-each: &quot; + s &lt;&lt; endl;</span>
+  <span class="hljs-comment">// &#125;</span>
 
-  int arr2[] = {1, 2, 3, 4, 5};
-  cout &lt;&lt; &quot;arr2 length = &quot; &lt;&lt; sizeof(arr2) / sizeof(int) &lt;&lt; endl;
+  <span class="hljs-type">int</span> arr2[] = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;
+  cout &lt;&lt; <span class="hljs-string">&quot;arr2 length = &quot;</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(arr2) / <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">int</span>) &lt;&lt; endl;
 
-  int total = 0;
+  <span class="hljs-type">int</span> total = <span class="hljs-number">0</span>;
 
-  for (int i = 0; i &lt; 5; i++)
-  {
+  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++)
+  &#123;
     total += arr2[i];
-  }
+  &#125;
 
-  cout &lt;&lt; &quot;Total = &quot; &lt;&lt; total &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;Total = &quot;</span> &lt;&lt; total &lt;&lt; endl;
 
 
-  // 如果 struct 内部定义了函数的话，这个函数是单独存放的
-  // 不算 struct 里的 field（struct 里定义的成员变量叫 field，有几个就是几个 field）
-  // 比如你这里定义了一个 printUser() 函数，然后 unique_ptr&lt;User&gt; u1
-  // 然后 move 它：unique_ptr&lt;User&gt; u2 move(u1)，“所有权”转移到 u2
-  // 按理说此时变量 u1 被清零了（地址为 0），但 u1.printUser() 仍然能调用
-  // 除了 struct 外，class 的行为也是如此
-  // 思考：struct 和 class 有什么区别？哪些情况下时候分别用哪个？
-  // class 中，默认的成员访问级别是 private，而在 struct 中，默认的成员访问级别是 public；
-  // class 常用于定义复杂行为和数据封装的对象，如包含多种类方法；
-  // 而 struct 则用于轻量级的简易数据结构，如坐标等：
-  struct Point 
-  {
-    double x;  // 默认 public，Point 的外部可访问 p.x
-    double y;  // 默认 public, Point 的外部可访问 p.y
-  };           // struct 末尾这里得加一个分号，这点和 class 不同
+  <span class="hljs-comment">// 如果 struct 内部定义了函数的话，这个函数是单独存放的</span>
+  <span class="hljs-comment">// 不算 struct 里的 field（struct 里定义的成员变量叫 field，有几个就是几个 field）</span>
+  <span class="hljs-comment">// 比如你这里定义了一个 printUser() 函数，然后 unique_ptr&lt;User&gt; u1</span>
+  <span class="hljs-comment">// 然后 move 它：unique_ptr&lt;User&gt; u2 move(u1)，“所有权”转移到 u2</span>
+  <span class="hljs-comment">// 按理说此时变量 u1 被清零了（地址为 0），但 u1.printUser() 仍然能调用</span>
+  <span class="hljs-comment">// 除了 struct 外，class 的行为也是如此</span>
+  <span class="hljs-comment">// 思考：struct 和 class 有什么区别？哪些情况下时候分别用哪个？</span>
+  <span class="hljs-comment">// class 中，默认的成员访问级别是 private，而在 struct 中，默认的成员访问级别是 public；</span>
+  <span class="hljs-comment">// class 常用于定义复杂行为和数据封装的对象，如包含多种类方法；</span>
+  <span class="hljs-comment">// 而 struct 则用于轻量级的简易数据结构，如坐标等：</span>
+  <span class="hljs-keyword">struct</span> <span class="hljs-title class_">Point</span> 
+  &#123;
+    <span class="hljs-type">double</span> x;  <span class="hljs-comment">// 默认 public，Point 的外部可访问 p.x</span>
+    <span class="hljs-type">double</span> y;  <span class="hljs-comment">// 默认 public, Point 的外部可访问 p.y</span>
+  &#125;;           <span class="hljs-comment">// struct 末尾这里得加一个分号，这点和 class 不同</span>
 
-  // struct 可以在函数体里定义，当前就在 basic_test 这个函数体内
-  struct User  
-  {
+  <span class="hljs-comment">// struct 可以在函数体里定义，当前就在 basic_test 这个函数体内</span>
+  <span class="hljs-keyword">struct</span> <span class="hljs-title class_">User</span>  
+  &#123;
     string name;
-    int age;
-  };           // C++ 这里要加一个分号
+    <span class="hljs-type">int</span> age;
+  &#125;;           <span class="hljs-comment">// C++ 这里要加一个分号</span>
 
-  // User u1 = {&quot;John&quot;, 25};
-  // User u1 = {name : &quot;John&quot;, age : 25}; // 加上 key 后更明确（这样写和其他语言像一点）
-  User u1 = {.name = &quot;John&quot;, .age = 25};  // C++ 编译器推荐用这种 .name 的写法
-  cout &lt;&lt; &quot;u1.name = &quot; &lt;&lt; u1.name &lt;&lt; endl;
-  cout &lt;&lt; &quot;u1.age = &quot; &lt;&lt; u1.age &lt;&lt; endl;
+  <span class="hljs-comment">// User u1 = &#123;&quot;John&quot;, 25&#125;;</span>
+  <span class="hljs-comment">// User u1 = &#123;name : &quot;John&quot;, age : 25&#125;; // 加上 key 后更明确（这样写和其他语言像一点）</span>
+  User u1 = &#123;.name = <span class="hljs-string">&quot;John&quot;</span>, .age = <span class="hljs-number">25</span>&#125;;  <span class="hljs-comment">// C++ 编译器推荐用这种 .name 的写法</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;u1.name = &quot;</span> &lt;&lt; u1.name &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;u1.age = &quot;</span> &lt;&lt; u1.age &lt;&lt; endl;
 
-  // 匿名的 struct ，直接作为变量的类型
-  struct
-  {
+  <span class="hljs-comment">// 匿名的 struct ，直接作为变量的类型</span>
+  <span class="hljs-keyword">struct</span>
+  &#123;
     string name;
-    int age;
-  } u2 = {&quot;John-2&quot;, 25};
-  cout &lt;&lt; &quot;u2.name = &quot; &lt;&lt; u2.name &lt;&lt; endl;
-  cout &lt;&lt; &quot;u2.age = &quot; &lt;&lt; u2.age &lt;&lt; endl;
-}
-
-// ###########################################################
-//                           指针和地址
-// ###########################################################
-
-void pointer_test()
-{
-  cout &lt;&lt; &quot;---- pointer_test ----&quot; &lt;&lt; endl;
-
-  // 先来理解一下「指针」和「引用」两个概念，并区分 * 和 &amp; 符号的不同作用；
-  int num = 42;
-  int* ptr = &amp;num; // int* 是指针类型（整数指针）; &amp;num 中的 &amp; 操作是读取 num 的地址
-  int&amp; ref = num;  // ref 是 num 的引用; int&amp; 是引用类型（整数引用），和上面的 &amp; 不同
-
-  cout &lt;&lt; &quot;&amp;num = &quot; &lt;&lt; &amp;num &lt;&lt; endl;   // &amp;num = 0x16b532adc // num 指向的内存地址是 0x16b532adc
-  cout &lt;&lt; &quot;ptr = &quot; &lt;&lt; ptr &lt;&lt; endl;     // ptr = 0x16b532adc  // ptr 的值是 0x16b532adc（ptr 是指针类型，值就是地址）
-  cout &lt;&lt; &quot;*ptr = &quot; &lt;&lt; *ptr &lt;&lt; endl;   // *ptr = 42          // 这里 * 是解引用，读取 ptr 地址里存放的值；
-  cout &lt;&lt; &quot;ref = &quot; &lt;&lt; ref &lt;&lt; endl;     // ref = 42
-
-  cout &lt;&lt; &quot;num = &quot; &lt;&lt; num &lt;&lt; endl;     // num = 42
-  ref = 29;
-  cout &lt;&lt; &quot;num = &quot; &lt;&lt; num &lt;&lt; endl;     // num = 29
-  cout &lt;&lt; &quot;ref = &quot; &lt;&lt; ref &lt;&lt; endl;     // ref = 29
-
-
-  // 直接定义的整数 10 被 C++ 放在栈上（和 Java 不同的是，C++ 的「堆」和「栈」分得很清楚的）
-  // x 的数据 2 在 stack 上
-  int x = 2;
-  cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; endl; // 直接可以打印出 x 的值 2 
-  cout &lt;&lt; &quot;&amp;x = &quot; &lt;&lt; &amp;x &lt;&lt; endl; // 打印 x 的地址：符号 &amp; 代表取得该变量的地址
-
-  // 在 C++ 中，你使用 new 关键字在堆（heap）上分配内存，并得到一个指向该内存的指针。
-  // 当不再需要这块内存时，必须使用 delete 关键字将其手动释放。
-  // heap 上的数据不受作用域限制，函数体外仍能继续访问，直到手动释放。
-  // 此处的定义，数据 int(10) 在 heap 上，指针变量 p 则在 stack 上。
-  // int(10) 这一数据在当前函数 pointer_test 之外还能访问（比如通过地址），因为在 heap 上。
-  // 但是变量 p 在 pointer_test 之外则被注销自动释放了，因为 p 在 stack 上。
-  // int* 的这个 * 号是 int* 这个类型的一部分，下面的 *p 的 * 号则是解引用操作符，两者不一样
-  // Rust 的 * 只是用来 move 改变 ownership 的，虽然也叫 dereference 但和这的 *p 本质不一样
-  // C++ 里，看到关键词 new 就要知道它肯定在 heap（堆）上了，因为 new 就是在 heap 上分配内存的操作
-  int* p = new int(10);  // new int(10) 在 heap 上（后续要 delete 手动释放内存），但变量 p 则在 stack 上
-
-  // int(10) 这个值为 10 的整数是存放在 heap 上的，有一个对应的 heap 上的地址；
-  // int(10) 在 heap 上的地址被存放在了变量 p 里；
-  // p 的类型是 int* ，p 被存放在 stack 上，有一个对应的 stack 上的地址；
-
-  // 直接打印 p 会打印出 p 中数据的内存地址，即 10 存放在作为 heap 的内存的地址（0x开头的16进制数）
-  cout &lt;&lt; &quot;p = &quot; &lt;&lt; p &lt;&lt; endl;
-  cout &lt;&lt; &quot;*p = &quot; &lt;&lt; *p &lt;&lt; endl;
-
-  // int* 是一个「类型」，而 *p 表示「解引用 p」，* 在这两者中的意思是不同的
-  // 同理，int** 也是一个「类型」，所以虽然 int **q 和 int ** q 也能编译通过，
-  // 但建议写 int** q ，这样就能反应出 int** 是一个类型标记，这也是它的本质
-  // 使用 VS Code 格式化代码会使得 int** q 被改写为 int **q ，而这样写会和 **q 混淆
-
-  // &amp;p 是取得 p 的地址，和 Rust 中作为借用（borrow）的 &amp; 不同
-  int** q = &amp;p;                // q 本身在 stack 上，指向（存放）同样在 stack 上的 p 的地址 &amp;p
-  cout &lt;&lt; &quot;q = &quot; &lt;&lt; q &lt;&lt; endl; // 可发现 &amp;p 和 &amp;x 值很接近，因为 p 和 x 在 stack（栈） 上是相邻的
-  cout &lt;&lt; &quot;*q = &quot; &lt;&lt; *q &lt;&lt; endl;
-  cout &lt;&lt; &quot;**q = &quot; &lt;&lt; **q &lt;&lt; endl;
-
-  // r 存放 q 的地址
-  int*** r = &amp;q;
-  cout &lt;&lt; &quot;r = &quot; &lt;&lt; r &lt;&lt; endl;
-  cout &lt;&lt; &quot;*r = &quot; &lt;&lt; *r &lt;&lt; endl;
-  cout &lt;&lt; &quot;**r = &quot; &lt;&lt; **r &lt;&lt; endl;
-  cout &lt;&lt; &quot;***r = &quot; &lt;&lt; ***r &lt;&lt; endl;
-
-  // s 存放 r 的地址
-  int**** s = &amp;r;
-  cout &lt;&lt; &quot;s = &quot; &lt;&lt; s &lt;&lt; endl;
-
-  // 这里 p2 的类型为什么是 int* 而不是 int[]* ？为什么是 int 的指针类型而不是数组的指针类型？
-  // 因为数组里所有元素是挨在一起相邻储存的，故知道了第一个元素的地址，就知道整个数组的所有元素的地址
-  // p2 会指向向数组的第一个数据 3 的地址，即 *p2 = 3
-  // 此外 p2 的内容在 heap 上，后续要手动用 delete 释放内存
-  int* p2 = new int[5] {3, 5, 7, 9, 11};  // 注意，C++11 之前的标准不支持直接使用列表初始化数组
-  cout &lt;&lt; &quot;p2 = &quot; &lt;&lt; p2 &lt;&lt; endl;
-  cout &lt;&lt; &quot;*p2 = &quot; &lt;&lt; *p2 &lt;&lt; endl;             // 数组指针指向数组第一个元素的地址，即 3
-  cout &lt;&lt; &quot;p2 + 1 = &quot; &lt;&lt; p2 + 1 &lt;&lt; endl;       // 数组第二元素 5 的地址
-  cout &lt;&lt; &quot;*(p2 + 1) = &quot; &lt;&lt; *(p2 + 1) &lt;&lt; endl; // 数组第二元素的值，即 5
-
-  int** q2 = &amp;p2;
-  cout &lt;&lt; &quot;q2 = &quot; &lt;&lt; q2 &lt;&lt; endl;         // 指针 p2 的地址
-  cout &lt;&lt; &quot;*q2 = &quot; &lt;&lt; *q2 &lt;&lt; endl;       // 指针 p2 存放的内容，即数组的地址
-  cout &lt;&lt; &quot;**q2 = &quot; &lt;&lt; **q2 &lt;&lt; endl;     // 数组的地址对应的内容，即数组第一个元素的内容：3
-
-  // 在 C++ 中，你使用 new 关键字在堆（heap）上分配内存，并得到一个指向该内存的指针。
-  // 当不再需要这块内存时，必须使用 delete 将其手动释放，否则会内存泄漏（(Memory Leak）
-  // 下面分别是释放单个对象和对象数组的方式，分别要用 delete 和 delete[]
-  // delete 操作符后面跟的虽然是指针变量 p，但它的目标不是释放 p 这个变量本身（p 在 stack 上不需要手动释放）
-  // 而是释放 p 变量中所存储的那个地址所指向的堆内存。
-  // 释放完后还要把相关指针设置为 nullptr，防止它们成为悬挂指针（Dangling Pointer）
-  delete p;
-  p = nullptr;
-
-  delete[] p2;
-  p2 = nullptr;
-
-  // 正因为手动管理 new/delete/delete[] 并记得设置 nullptr 非常繁琐且容易出错
-  // 比如忘记 delete、重复 delete、用错 delete[] 等
-  // 现代 C++ (C++11 及以后) 强烈推荐使用智能指针 (std::unique_ptr 和 std::shared_ptr)
-  // 智能指针可以为你自动处理这一切。参见本文接下来的内容。
-}
-
-void address_test()
-{
-  cout &lt;&lt; &quot;---- address_test ----&quot; &lt;&lt; endl;
-
-  int i = 10;
-  string s = &quot;Hello&quot;;
-  int* pi = new int(10);
-
-  // i 和 s 的地址是挨在一块的，都在 栈（stack） 上
-  // pi 则在堆（heap）上，打印出的地址上可以看到距离 i 和 s 较远
-  cout &lt;&lt; &quot;address of i = &quot; &lt;&lt; &amp;i &lt;&lt; endl;  // stack
-  cout &lt;&lt; &quot;address of s = &quot; &lt;&lt; &amp;s &lt;&lt; endl;  // stack
-  cout &lt;&lt; &quot;pi = &quot; &lt;&lt; pi &lt;&lt; endl;            // heap
-
-  delete pi;     // 手动释放在 heap 上的内存，即 pi 指针指向的地址的内存
-  pi = nullptr;  // 设置为空指针
-}
-
-
-// ###########################################################
-//                            传递引用
-// ###########################################################
-
-void pass_by_reference(int&amp; x)  // x 会成为传入参数的别名
-{
-  cout &lt;&lt; &quot;pass_by_reference: x = &quot; &lt;&lt; x &lt;&lt; endl;
-  cout &lt;&lt; &quot;address of x: &quot; &lt;&lt; &amp;x &lt;&lt; endl;
-  x += 1;   // 修改 x 就是修改传入的变量
-}
-
-void pass_by_reference_const(const int&amp; x)
-{
-  cout &lt;&lt; &quot;pass_by_reference_const: x = &quot; &lt;&lt; x &lt;&lt; endl;
-  cout &lt;&lt; &quot;pass_by_reference_const: address of x: &quot; &lt;&lt; &amp;x &lt;&lt; endl;
-}
-
-void reference_test()
-{
-  cout &lt;&lt; &quot;---- reference_test ----&quot; &lt;&lt; endl;
-
-  int x = 10;
-  int&amp; y = x;  // 同上文的理，int&amp; 是一个类型，&amp; 是 int&amp; 类型的一部分
-
-  cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; endl;
-  cout &lt;&lt; &quot;y = &quot; &lt;&lt; y &lt;&lt; endl;
-
-  x = 20; // 给 x 赋值 20 ，y 也会改变
-  cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; endl;
-  cout &lt;&lt; &quot;y = &quot; &lt;&lt; y &lt;&lt; endl;
-
-  y = 30; // 给 y 赋值 30 ，x 也会改变
-  cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; endl;
-  cout &lt;&lt; &quot;y = &quot; &lt;&lt; y &lt;&lt; endl;
-
-  // &amp;x and &amp;y are the same - x 和 y 的地址相同
-  // meaning: x and y is the same variable - // 可看出 x 和 y 就是同一个东西
-  // y 和 x 的地址一样，说明 stack 上没有分配一个空间位置给 y ，y 只是 x 的一个别名
-  // 之后会看到 y 这种东西有什么用 - .borrow_mut()
-  cout &lt;&lt; &quot;&amp;x = &quot; &lt;&lt; &amp;x &lt;&lt; endl;
-  cout &lt;&lt; &quot;&amp;y = &quot; &lt;&lt; &amp;y &lt;&lt; endl;
-
-  // // Can&#39;t take non-const reference of temporary
-  // // 如果这个能通过，那 z 就是 x + 1 的别名，那 z = 100 这样的赋值就能写
-  // // 但 z = 100 相当于对 x + 1 赋值，语义上就很奇怪的，所以不能这么写
-  // int&amp; z = x + 1;
-
-  // 但是你可以有下面这样一个引用，因为是 const 所以你后续不能对 z 赋值了：
-  const int&amp; z = x + 1;
-  cout &lt;&lt; &quot;z = &quot; &lt;&lt; z &lt;&lt; endl;
-
-  // 这里定义了名为 z 的 const int&amp; (对常量整数的引用)，并将其绑定到表达式 x + 1 的结果上
-  // z 不是 x + 1 的别名（Alias）,而是 x + 1 这个表达式的值的别名
-  // z 绑定的是一个临时的、值为 11 的新对象
-  // 由于 z 是 const 的，你不能通过 z 来修改这个值
-  // 即使你后来修改了 x 的值（比如 x = 50;），z 的值仍然是 11
-  // 因为 z 绑定的是那个临时对象，与 x 已经没有关系了
-  // int&amp;：对整数的引用 (Reference to int)
-  // const int&amp;：对常量整数的引用 (Reference to a constant int)
-  // const 引用可以绑定到临时对象（右值 rvalue），而普通的非 const 引用则不能
-
-  // 上面的 const int&amp; z 虽然感觉上不如直接写成 int z
-  // 不过 const int&amp; z 没发生拷贝操作，而是直接让 z 指向表达式 x + 1 的临时对象（右值）
-  // 相当于 heap 上的这个临时对象（右值）的生命周期被延长了，变得和 z 一样
-  // int z 则是将表达式的值（临时对象，或者说右值）拷贝到 stack 上新创建的内存空间上
-  // 然后临时对象的生命周期结束被销毁
-  // 对于 x + 1 这种简单的数来说，拷贝操作不算什么，而对于那些大数据的对象来说，少拷贝更好
-  // 此外 const int&amp; z 定义的 z 是只读的，不能修改，而 int z 的 z 是变量，可修改
-  // 综上，C++ 里的 const T&amp; 主要目的是以只读的方式高效地访问对象，避免不必要的拷贝
-  int z_non_const = x + 1;
-  cout &lt;&lt; &quot;z_non_const = &quot; &lt;&lt; z_non_const &lt;&lt; endl;
-
-  int a = 12;
-  cout &lt;&lt; &quot;&amp;a = &quot; &lt;&lt; &amp;a &lt;&lt; endl;
-  cout &lt;&lt; &quot;before a = &quot; &lt;&lt; a &lt;&lt; endl;
-  pass_by_reference(a);
-  cout &lt;&lt; &quot;after a = &quot; &lt;&lt; a &lt;&lt; endl;
-
-  // Doesn&#39;t work because pass_by_reference takes a non-const int&amp;
-  // 原理和上面的 const int&amp; z = x + 1; 一样
-  // pass_by_reference(x + 1);
-  pass_by_reference_const(x + 1);  // 参数类型是 const int&amp; ，代表无法更改，所以可允许
-
-  // pass_by_reference 和 pass_by_reference_const 这种用法是 C 语言和 C++ 特有的
-
-  // 补充知识：
-  // 左值 (lvalue - locator value)指的是一个具有持久身份（identity）和确定内存地址的对象或表达式。
-  // 可以把它想象成一个有“家”（内存地址）的东西，可以被反复访问和修改.比如 int x = 9; 中的 x
-  // 右值 (rvalue - read value)指的是一个没有持久身份、通常是临时的表达式结果。 
-  // 可以把它想象成“一次性用品”，用完即丢，没有固定的“家”。如字面量 (Literals)：10 或算术表达式的结果：x + 1
-  // 由于没有可识别的内存地址：通常不能对右值取地址（&amp;）
-}
-
-
-// ###########################################################
-//                            面向对象
-// ###########################################################
-
-// 虽然在 C++ 中，class 既可以定义在函数外部，也可以定义在函数体内部；
-// 但是绝大多数（99% 以上）的情况下，你应该将 class 定义在函数外部，这里是定义在 inheritance_test 外；
-// 这是 C++ 编程的标准和推荐做法。将类（如 class Animal）视为一个独立的、可复用的构建模块；
-// 在实际项目中，类的声明通常放在头文件（.h 或 .hpp）中，如 Animal.h
-// 以便被多个源文件（.cpp）包含和使用：.cpp 文件开头写 #include &quot;Animal.h&quot; 类似 #include &lt;iostream&gt;
-// 这天然就要求类（class）的定义位于所有函数之外。
-// 在函数内部定义的类被称为局部类 (Local Class)。这是一种不常见的用法，主要用于实现高度的封装和局部化。
-// 局部类的定义（作用域）只在它所在的函数体内有效。
-// 在现代 C++ (C++11及以后)，很多需要局部类的简单场景已经被 Lambda 表达式所取代
-// 因为 Lambda 更简洁。但如果这个辅助工具逻辑复杂，需要多个成员函数和变量时，局部类依然有其用武之地。
-class Animal
-{
-  // 外部能用的成员和方法都写到 public: 后面
-  // 不像 Java 那样每个都要写一次 public
-  public:
-  virtual void speak() = 0;
-  // 这里 virtual ... = 0 的写法类似 Java 的 abstract class（抽象类）
-  // 这个 = 0 的 C++ 语法意味着 speak 是个纯虚函数
-  // 纯虚函数没有实现，因此其功能要求由子类来定义
-  // 相当于强制要求继承 Animal 的子类定义 speak 方法（函数）
-  // C++ 中一个类如果包含至少一个纯虚函数（= 0），那么这个类就是一个抽象类
-  // 抽象类不能直接实例化（instantiation），它只能作为基类被继承
-  // C++ 中得写成这种奇怪的样子
-  // 如果不加 virtual ，那子类就无法 override（重写）这个 speak 方法了
-  // 如果不写 = 0 ，就无法强制子类定义 speak 函数
-  // 重写（override）父类函数时，参数类型、顺序、数量，函数返回类型必须完全相同，区别与重载（overload）
-  // 重载（overload）是同一作用域内（如同一类中），函数名相同但参数列表必须不同（参数类型、数量或顺序）
-  // 重载（overload）函数的返回值类型可以相同，也可以不同；
-
-  // 与抽象类对应的就是普通类（Concrete Class）。普通类指的是没有任何纯虚函数的类，它可以直接被实例化。
-  // 普通类可以包含虚函数（即实现了虚函数的具体方法），但它不能包含纯虚函数
-  // virtual 关键字代表支持动态绑定（运行时再判断函数调用哪个，比如子类同名函数）
-  // 若不写 virtual，则为普通函数（非虚函数），是静态绑定。意味着在编译时就确定了调用哪个函数
-  // 即基类指针定义 Animal* a = new Dog(); 写了 virtual ，a-&gt;eat() 就调用子类 Dog 的 eat，没写就调用基类 Animal 的
-  virtual void eat() 
-  {
-    cout &lt;&lt; &quot;Animal is eating&quot; &lt;&lt; endl;
-  }
-};
-
-// 要在 Dog 里能访问到 Animal 里的成员，就要写上 public
-class Dog: public Animal
-{
-  public:
-  void speak() override
-  {
-    cout &lt;&lt; &quot;汪！&quot; &lt;&lt; endl;
-  }
-  // 重写 speak 方法
-  // 更严谨的做法是在 speak() 后面加上 override 
-  // 类似 Java 的 @Override 标记
-  // 重写（override）父类函数时，参数类型、顺序、数量，函数返回类型必须完全相同，区别与重载（overload）
-  // 关键字 override 不写也行（编译器可能有警告提示），但写的话编译器会去检查父类的内容
-  // 检查如果父类没有 speak ，那就会编译不通过（父类却没有你要重写的函数时，就会报错）
-
-  // 显式写 override ，明确地表达程序员的意图永远是最好的
-  void eat() override
-  {
-    cout &lt;&lt; &quot;Dog is eating&quot; &lt;&lt; endl;
-  }
-
-  void bark()
-  {
-    cout &lt;&lt; &quot;Dog is barking&quot; &lt;&lt; endl;
-  }
-};
-
-class Cat: public Animal
-{
-  private:
-    int age;      // 定义在 private 下方外部就无法直接访问，比如 c.age 就会失败
-
-  public:
-    string name;  // 定义在 public 下方外部就能直接访问，比如 c.name
-
-    // // 构造函数 - 函数体赋值方式 - C++ 不推荐
-    // Cat(string n, int a) : name(n), age(a)
-    // {
-    //     age = a;
-    //     name = n;
-    //     cout &lt;&lt; &quot;Cat Constructor called - Assignment\n&quot;;
-    // }
-
-    // 构造函数 - C++ 惯例推荐用这种「初始化列表」的写法来给 name 和 age 赋值
-    Cat(string n, int a) : name(n), age(a)
-    {
-        cout &lt;&lt; &quot;Cat Constructor called - Initializer List\n&quot;;
-    }
-
-    void speak() override
-    {
-      cout &lt;&lt; &quot;喵！&quot; &lt;&lt; endl;
-    }
-};
-
-
-void inheritance_test()
-{
-  cout &lt;&lt; &quot;---- inheritance_test ----&quot; &lt;&lt; endl;
-
-  // 栈（stack）上面定义了狗 d 和猫 c
-  // Dog 和 Cat 的实例（instance）在 stack 上（函数的局部变量都在 stack 上）
-  Dog d;                // 在 stack 上
-  Cat c(&quot;Alice&quot;, 30);   // 在 stack 上
-  int i = 9;            // 在 stack 上
-
-  // 定义在 heap 上的 Dog（用 new 定义的都在 heap 上，返回包含 heap 地址）
-  Dog* d2 = new Dog();  // heap allocation
-
-  // 不能这么写，因为 new Dog() 在堆上，一定要个指针来指向它，而不能用普通的变量来存放它
-  // new Dog() 返回的是一个 heap 上的地址
-  // Dog d2 = new Dog(); // 编译不通过
-
-  // 打印变量们的地址，可以看到 c ，d 和 i 离得很近，都在 stack 上
-  // 而 d2 则是在 heap 上
-  // 注意，这里容易有歧义
-  // 这里说的在 stack 上或者在 heap 上指的是数据内容，即 Dog 和 Cat 的实例（instance）
-  // d , c , i , d2 这些变量本身都是在 stack 上的
-  // 然后以 d 为例，d 的内容是一个 Dog 实例，也就是数据本身，所以此时数据本身在 stack
-  // 但是 d2 的内容不是一个 Dog 实例，它的内容是 heap 上的地址
-  cout &lt;&lt; &quot;dog address: &quot; &lt;&lt; &amp;d &lt;&lt; endl;
-  cout &lt;&lt; &quot;cat address: &quot; &lt;&lt; &amp;c &lt;&lt; endl;
-  cout &lt;&lt; &quot;i address: &quot; &lt;&lt; &amp;i &lt;&lt; endl;
-  cout &lt;&lt; &quot;d2 address: &quot; &lt;&lt; d2 &lt;&lt; endl; // heap 上的地址
-
-  d.speak();
-  c.speak();
-  cout &lt;&lt; &quot;The cat&#39;s name is: &quot; &lt;&lt; c.name &lt;&lt; endl;   // 可以直接访问内部的 name 成员
-  // cout &lt;&lt; &quot;The cat&#39;s age is: &quot; &lt;&lt; c.age &lt;&lt; endl;  // 无法直接访问内部的 age 成员
-
-  (*d2).speak(); // d2 是一个指针，先解引用得到指向的 Dog 实例，再调用 speak 方法
-  d2-&gt;speak();   // C++ 语法里还可以用箭头来访问指针指向的对象里的成员（方法）
-  delete d2;     // 手动释放 d2 内存，避免内存泄漏
-
-  unique_ptr&lt;Dog&gt; d3 = make_unique&lt;Dog&gt;();         // 使用智能指针（自动管理内存）定义 heap 上的 Dog
-  cout &lt;&lt; &quot;unique_ptr d3 address: &quot; &lt;&lt; d3 &lt;&lt; endl; // heap 上的地址
-  cout &lt;&lt; &quot;run (*d3).eat(): &quot; &lt;&lt; endl;  
-  (*d3).eat();                                     // 静态调用
-  // 不需要手动调用 delete，unique_ptr 会自动释放内存
-
-  // 综上，同一个 Class 可以有 2 种不同的分配方法：栈（stack）上，或者堆（heap）上
-
-  // Animal a1 = d; // 编译不通过 - 为什么不能这么写？
-  // 原因：
-  // 这里将会把一个实际的 Dog 对象转为一个 Animal 对象，即对象切片（Object Slicing）
-  // 对象切片会丢失 Dog 类独有的成员（field），比如会丢失 bark 函数
-  // 然后 Dog 中定义的 speak 函数也会被 Animal 中的 speak 函数替代
-  // 但 Animal 中有纯虚函数（= 0），是个抽象类，意味着 Animal 中的 speak 没有具体实现，是“空”的
-  // 编译器不允许有空的实现，于是无法处理这个赋值
-
-  // 用一个 Animal 指针 a1 指向 d
+    <span class="hljs-type">int</span> age;
+  &#125; u2 = &#123;<span class="hljs-string">&quot;John-2&quot;</span>, <span class="hljs-number">25</span>&#125;;
+  cout &lt;&lt; <span class="hljs-string">&quot;u2.name = &quot;</span> &lt;&lt; u2.name &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;u2.age = &quot;</span> &lt;&lt; u2.age &lt;&lt; endl;
+&#125;
+
+<span class="hljs-comment">// ###########################################################</span>
+<span class="hljs-comment">//                           指针和地址</span>
+<span class="hljs-comment">// ###########################################################</span>
+
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pointer_test</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;---- pointer_test ----&quot;</span> &lt;&lt; endl;
+
+  <span class="hljs-comment">// 先来理解一下「指针」和「引用」两个概念，并区分 * 和 &amp; 符号的不同作用；</span>
+  <span class="hljs-type">int</span> num = <span class="hljs-number">42</span>;
+  <span class="hljs-type">int</span>* ptr = &amp;num; <span class="hljs-comment">// int* 是指针类型（整数指针）; &amp;num 中的 &amp; 操作是读取 num 的地址</span>
+  <span class="hljs-type">int</span>&amp; ref = num;  <span class="hljs-comment">// ref 是 num 的引用; int&amp; 是引用类型（整数引用），和上面的 &amp; 不同</span>
+
+  cout &lt;&lt; <span class="hljs-string">&quot;&amp;num = &quot;</span> &lt;&lt; &amp;num &lt;&lt; endl;   <span class="hljs-comment">// &amp;num = 0x16b532adc // num 指向的内存地址是 0x16b532adc</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;ptr = &quot;</span> &lt;&lt; ptr &lt;&lt; endl;     <span class="hljs-comment">// ptr = 0x16b532adc  // ptr 的值是 0x16b532adc（ptr 是指针类型，值就是地址）</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;*ptr = &quot;</span> &lt;&lt; *ptr &lt;&lt; endl;   <span class="hljs-comment">// *ptr = 42          // 这里 * 是解引用，读取 ptr 地址里存放的值；</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;ref = &quot;</span> &lt;&lt; ref &lt;&lt; endl;     <span class="hljs-comment">// ref = 42</span>
+
+  cout &lt;&lt; <span class="hljs-string">&quot;num = &quot;</span> &lt;&lt; num &lt;&lt; endl;     <span class="hljs-comment">// num = 42</span>
+  ref = <span class="hljs-number">29</span>;
+  cout &lt;&lt; <span class="hljs-string">&quot;num = &quot;</span> &lt;&lt; num &lt;&lt; endl;     <span class="hljs-comment">// num = 29</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;ref = &quot;</span> &lt;&lt; ref &lt;&lt; endl;     <span class="hljs-comment">// ref = 29</span>
+
+
+  <span class="hljs-comment">// 直接定义的整数 10 被 C++ 放在栈上（和 Java 不同的是，C++ 的「堆」和「栈」分得很清楚的）</span>
+  <span class="hljs-comment">// x 的数据 2 在 stack 上</span>
+  <span class="hljs-type">int</span> x = <span class="hljs-number">2</span>;
+  cout &lt;&lt; <span class="hljs-string">&quot;x = &quot;</span> &lt;&lt; x &lt;&lt; endl; <span class="hljs-comment">// 直接可以打印出 x 的值 2 </span>
+  cout &lt;&lt; <span class="hljs-string">&quot;&amp;x = &quot;</span> &lt;&lt; &amp;x &lt;&lt; endl; <span class="hljs-comment">// 打印 x 的地址：符号 &amp; 代表取得该变量的地址</span>
+
+  <span class="hljs-comment">// 在 C++ 中，你使用 new 关键字在堆（heap）上分配内存，并得到一个指向该内存的指针。</span>
+  <span class="hljs-comment">// 当不再需要这块内存时，必须使用 delete 关键字将其手动释放。</span>
+  <span class="hljs-comment">// heap 上的数据不受作用域限制，函数体外仍能继续访问，直到手动释放。</span>
+  <span class="hljs-comment">// 此处的定义，数据 int(10) 在 heap 上，指针变量 p 则在 stack 上。</span>
+  <span class="hljs-comment">// int(10) 这一数据在当前函数 pointer_test 之外还能访问（比如通过地址），因为在 heap 上。</span>
+  <span class="hljs-comment">// 但是变量 p 在 pointer_test 之外则被注销自动释放了，因为 p 在 stack 上。</span>
+  <span class="hljs-comment">// int* 的这个 * 号是 int* 这个类型的一部分，下面的 *p 的 * 号则是解引用操作符，两者不一样</span>
+  <span class="hljs-comment">// Rust 的 * 只是用来 move 改变 ownership 的，虽然也叫 dereference 但和这的 *p 本质不一样</span>
+  <span class="hljs-comment">// C++ 里，看到关键词 new 就要知道它肯定在 heap（堆）上了，因为 new 就是在 heap 上分配内存的操作</span>
+  <span class="hljs-type">int</span>* p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">10</span>);  <span class="hljs-comment">// new int(10) 在 heap 上（后续要 delete 手动释放内存），但变量 p 则在 stack 上</span>
+
+  <span class="hljs-comment">// int(10) 这个值为 10 的整数是存放在 heap 上的，有一个对应的 heap 上的地址；</span>
+  <span class="hljs-comment">// int(10) 在 heap 上的地址被存放在了变量 p 里；</span>
+  <span class="hljs-comment">// p 的类型是 int* ，p 被存放在 stack 上，有一个对应的 stack 上的地址；</span>
+
+  <span class="hljs-comment">// 直接打印 p 会打印出 p 中数据的内存地址，即 10 存放在作为 heap 的内存的地址（0x开头的16进制数）</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;p = &quot;</span> &lt;&lt; p &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;*p = &quot;</span> &lt;&lt; *p &lt;&lt; endl;
+
+  <span class="hljs-comment">// int* 是一个「类型」，而 *p 表示「解引用 p」，* 在这两者中的意思是不同的</span>
+  <span class="hljs-comment">// 同理，int** 也是一个「类型」，所以虽然 int **q 和 int ** q 也能编译通过，</span>
+  <span class="hljs-comment">// 但建议写 int** q ，这样就能反应出 int** 是一个类型标记，这也是它的本质</span>
+  <span class="hljs-comment">// 使用 VS Code 格式化代码会使得 int** q 被改写为 int **q ，而这样写会和 **q 混淆</span>
+
+  <span class="hljs-comment">// &amp;p 是取得 p 的地址，和 Rust 中作为借用（borrow）的 &amp; 不同</span>
+  <span class="hljs-type">int</span>** q = &amp;p;                <span class="hljs-comment">// q 本身在 stack 上，指向（存放）同样在 stack 上的 p 的地址 &amp;p</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;q = &quot;</span> &lt;&lt; q &lt;&lt; endl; <span class="hljs-comment">// 可发现 &amp;p 和 &amp;x 值很接近，因为 p 和 x 在 stack（栈） 上是相邻的</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;*q = &quot;</span> &lt;&lt; *q &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;**q = &quot;</span> &lt;&lt; **q &lt;&lt; endl;
+
+  <span class="hljs-comment">// r 存放 q 的地址</span>
+  <span class="hljs-type">int</span>*** r = &amp;q;
+  cout &lt;&lt; <span class="hljs-string">&quot;r = &quot;</span> &lt;&lt; r &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;*r = &quot;</span> &lt;&lt; *r &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;**r = &quot;</span> &lt;&lt; **r &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;***r = &quot;</span> &lt;&lt; ***r &lt;&lt; endl;
+
+  <span class="hljs-comment">// s 存放 r 的地址</span>
+  <span class="hljs-type">int</span>**** s = &amp;r;
+  cout &lt;&lt; <span class="hljs-string">&quot;s = &quot;</span> &lt;&lt; s &lt;&lt; endl;
+
+  <span class="hljs-comment">// 这里 p2 的类型为什么是 int* 而不是 int[]* ？为什么是 int 的指针类型而不是数组的指针类型？</span>
+  <span class="hljs-comment">// 因为数组里所有元素是挨在一起相邻储存的，故知道了第一个元素的地址，就知道整个数组的所有元素的地址</span>
+  <span class="hljs-comment">// p2 会指向向数组的第一个数据 3 的地址，即 *p2 = 3</span>
+  <span class="hljs-comment">// 此外 p2 的内容在 heap 上，后续要手动用 delete 释放内存</span>
+  <span class="hljs-type">int</span>* p2 = <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[<span class="hljs-number">5</span>] &#123;<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>, <span class="hljs-number">11</span>&#125;;  <span class="hljs-comment">// 注意，C++11 之前的标准不支持直接使用列表初始化数组</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;p2 = &quot;</span> &lt;&lt; p2 &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;*p2 = &quot;</span> &lt;&lt; *p2 &lt;&lt; endl;             <span class="hljs-comment">// 数组指针指向数组第一个元素的地址，即 3</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;p2 + 1 = &quot;</span> &lt;&lt; p2 + <span class="hljs-number">1</span> &lt;&lt; endl;       <span class="hljs-comment">// 数组第二元素 5 的地址</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;*(p2 + 1) = &quot;</span> &lt;&lt; *(p2 + <span class="hljs-number">1</span>) &lt;&lt; endl; <span class="hljs-comment">// 数组第二元素的值，即 5</span>
+
+  <span class="hljs-type">int</span>** q2 = &amp;p2;
+  cout &lt;&lt; <span class="hljs-string">&quot;q2 = &quot;</span> &lt;&lt; q2 &lt;&lt; endl;         <span class="hljs-comment">// 指针 p2 的地址</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;*q2 = &quot;</span> &lt;&lt; *q2 &lt;&lt; endl;       <span class="hljs-comment">// 指针 p2 存放的内容，即数组的地址</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;**q2 = &quot;</span> &lt;&lt; **q2 &lt;&lt; endl;     <span class="hljs-comment">// 数组的地址对应的内容，即数组第一个元素的内容：3</span>
+
+  <span class="hljs-comment">// 在 C++ 中，你使用 new 关键字在堆（heap）上分配内存，并得到一个指向该内存的指针。</span>
+  <span class="hljs-comment">// 当不再需要这块内存时，必须使用 delete 将其手动释放，否则会内存泄漏（(Memory Leak）</span>
+  <span class="hljs-comment">// 下面分别是释放单个对象和对象数组的方式，分别要用 delete 和 delete[]</span>
+  <span class="hljs-comment">// delete 操作符后面跟的虽然是指针变量 p，但它的目标不是释放 p 这个变量本身（p 在 stack 上不需要手动释放）</span>
+  <span class="hljs-comment">// 而是释放 p 变量中所存储的那个地址所指向的堆内存。</span>
+  <span class="hljs-comment">// 释放完后还要把相关指针设置为 nullptr，防止它们成为悬挂指针（Dangling Pointer）</span>
+  <span class="hljs-keyword">delete</span> p;
+  p = <span class="hljs-literal">nullptr</span>;
+
+  <span class="hljs-keyword">delete</span>[] p2;
+  p2 = <span class="hljs-literal">nullptr</span>;
+
+  <span class="hljs-comment">// 正因为手动管理 new/delete/delete[] 并记得设置 nullptr 非常繁琐且容易出错</span>
+  <span class="hljs-comment">// 比如忘记 delete、重复 delete、用错 delete[] 等</span>
+  <span class="hljs-comment">// 现代 C++ (C++11 及以后) 强烈推荐使用智能指针 (std::unique_ptr 和 std::shared_ptr)</span>
+  <span class="hljs-comment">// 智能指针可以为你自动处理这一切。参见本文接下来的内容。</span>
+&#125;
+
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">address_test</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;---- address_test ----&quot;</span> &lt;&lt; endl;
+
+  <span class="hljs-type">int</span> i = <span class="hljs-number">10</span>;
+  string s = <span class="hljs-string">&quot;Hello&quot;</span>;
+  <span class="hljs-type">int</span>* pi = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">10</span>);
+
+  <span class="hljs-comment">// i 和 s 的地址是挨在一块的，都在 栈（stack） 上</span>
+  <span class="hljs-comment">// pi 则在堆（heap）上，打印出的地址上可以看到距离 i 和 s 较远</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;address of i = &quot;</span> &lt;&lt; &amp;i &lt;&lt; endl;  <span class="hljs-comment">// stack</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;address of s = &quot;</span> &lt;&lt; &amp;s &lt;&lt; endl;  <span class="hljs-comment">// stack</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;pi = &quot;</span> &lt;&lt; pi &lt;&lt; endl;            <span class="hljs-comment">// heap</span>
+
+  <span class="hljs-keyword">delete</span> pi;     <span class="hljs-comment">// 手动释放在 heap 上的内存，即 pi 指针指向的地址的内存</span>
+  pi = <span class="hljs-literal">nullptr</span>;  <span class="hljs-comment">// 设置为空指针</span>
+&#125;
+
+
+<span class="hljs-comment">// ###########################################################</span>
+<span class="hljs-comment">//                            传递引用</span>
+<span class="hljs-comment">// ###########################################################</span>
+
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pass_by_reference</span><span class="hljs-params">(<span class="hljs-type">int</span>&amp; x)</span>  <span class="hljs-comment">// x 会成为传入参数的别名</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;pass_by_reference: x = &quot;</span> &lt;&lt; x &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;address of x: &quot;</span> &lt;&lt; &amp;x &lt;&lt; endl;
+  x += <span class="hljs-number">1</span>;   <span class="hljs-comment">// 修改 x 就是修改传入的变量</span>
+&#125;
+
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pass_by_reference_const</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">int</span>&amp; x)</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;pass_by_reference_const: x = &quot;</span> &lt;&lt; x &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;pass_by_reference_const: address of x: &quot;</span> &lt;&lt; &amp;x &lt;&lt; endl;
+&#125;
+
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">reference_test</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;---- reference_test ----&quot;</span> &lt;&lt; endl;
+
+  <span class="hljs-type">int</span> x = <span class="hljs-number">10</span>;
+  <span class="hljs-type">int</span>&amp; y = x;  <span class="hljs-comment">// 同上文的理，int&amp; 是一个类型，&amp; 是 int&amp; 类型的一部分</span>
+
+  cout &lt;&lt; <span class="hljs-string">&quot;x = &quot;</span> &lt;&lt; x &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;y = &quot;</span> &lt;&lt; y &lt;&lt; endl;
+
+  x = <span class="hljs-number">20</span>; <span class="hljs-comment">// 给 x 赋值 20 ，y 也会改变</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;x = &quot;</span> &lt;&lt; x &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;y = &quot;</span> &lt;&lt; y &lt;&lt; endl;
+
+  y = <span class="hljs-number">30</span>; <span class="hljs-comment">// 给 y 赋值 30 ，x 也会改变</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;x = &quot;</span> &lt;&lt; x &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;y = &quot;</span> &lt;&lt; y &lt;&lt; endl;
+
+  <span class="hljs-comment">// &amp;x and &amp;y are the same - x 和 y 的地址相同</span>
+  <span class="hljs-comment">// meaning: x and y is the same variable - // 可看出 x 和 y 就是同一个东西</span>
+  <span class="hljs-comment">// y 和 x 的地址一样，说明 stack 上没有分配一个空间位置给 y ，y 只是 x 的一个别名</span>
+  <span class="hljs-comment">// 之后会看到 y 这种东西有什么用 - .borrow_mut()</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;&amp;x = &quot;</span> &lt;&lt; &amp;x &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;&amp;y = &quot;</span> &lt;&lt; &amp;y &lt;&lt; endl;
+
+  <span class="hljs-comment">// // Can&#x27;t take non-const reference of temporary</span>
+  <span class="hljs-comment">// // 如果这个能通过，那 z 就是 x + 1 的别名，那 z = 100 这样的赋值就能写</span>
+  <span class="hljs-comment">// // 但 z = 100 相当于对 x + 1 赋值，语义上就很奇怪的，所以不能这么写</span>
+  <span class="hljs-comment">// int&amp; z = x + 1;</span>
+
+  <span class="hljs-comment">// 但是你可以有下面这样一个引用，因为是 const 所以你后续不能对 z 赋值了：</span>
+  <span class="hljs-type">const</span> <span class="hljs-type">int</span>&amp; z = x + <span class="hljs-number">1</span>;
+  cout &lt;&lt; <span class="hljs-string">&quot;z = &quot;</span> &lt;&lt; z &lt;&lt; endl;
+
+  <span class="hljs-comment">// 这里定义了名为 z 的 const int&amp; (对常量整数的引用)，并将其绑定到表达式 x + 1 的结果上</span>
+  <span class="hljs-comment">// z 不是 x + 1 的别名（Alias）,而是 x + 1 这个表达式的值的别名</span>
+  <span class="hljs-comment">// z 绑定的是一个临时的、值为 11 的新对象</span>
+  <span class="hljs-comment">// 由于 z 是 const 的，你不能通过 z 来修改这个值</span>
+  <span class="hljs-comment">// 即使你后来修改了 x 的值（比如 x = 50;），z 的值仍然是 11</span>
+  <span class="hljs-comment">// 因为 z 绑定的是那个临时对象，与 x 已经没有关系了</span>
+  <span class="hljs-comment">// int&amp;：对整数的引用 (Reference to int)</span>
+  <span class="hljs-comment">// const int&amp;：对常量整数的引用 (Reference to a constant int)</span>
+  <span class="hljs-comment">// const 引用可以绑定到临时对象（右值 rvalue），而普通的非 const 引用则不能</span>
+
+  <span class="hljs-comment">// 上面的 const int&amp; z 虽然感觉上不如直接写成 int z</span>
+  <span class="hljs-comment">// 不过 const int&amp; z 没发生拷贝操作，而是直接让 z 指向表达式 x + 1 的临时对象（右值）</span>
+  <span class="hljs-comment">// 相当于 heap 上的这个临时对象（右值）的生命周期被延长了，变得和 z 一样</span>
+  <span class="hljs-comment">// int z 则是将表达式的值（临时对象，或者说右值）拷贝到 stack 上新创建的内存空间上</span>
+  <span class="hljs-comment">// 然后临时对象的生命周期结束被销毁</span>
+  <span class="hljs-comment">// 对于 x + 1 这种简单的数来说，拷贝操作不算什么，而对于那些大数据的对象来说，少拷贝更好</span>
+  <span class="hljs-comment">// 此外 const int&amp; z 定义的 z 是只读的，不能修改，而 int z 的 z 是变量，可修改</span>
+  <span class="hljs-comment">// 综上，C++ 里的 const T&amp; 主要目的是以只读的方式高效地访问对象，避免不必要的拷贝</span>
+  <span class="hljs-type">int</span> z_non_const = x + <span class="hljs-number">1</span>;
+  cout &lt;&lt; <span class="hljs-string">&quot;z_non_const = &quot;</span> &lt;&lt; z_non_const &lt;&lt; endl;
+
+  <span class="hljs-type">int</span> a = <span class="hljs-number">12</span>;
+  cout &lt;&lt; <span class="hljs-string">&quot;&amp;a = &quot;</span> &lt;&lt; &amp;a &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;before a = &quot;</span> &lt;&lt; a &lt;&lt; endl;
+  <span class="hljs-built_in">pass_by_reference</span>(a);
+  cout &lt;&lt; <span class="hljs-string">&quot;after a = &quot;</span> &lt;&lt; a &lt;&lt; endl;
+
+  <span class="hljs-comment">// Doesn&#x27;t work because pass_by_reference takes a non-const int&amp;</span>
+  <span class="hljs-comment">// 原理和上面的 const int&amp; z = x + 1; 一样</span>
+  <span class="hljs-comment">// pass_by_reference(x + 1);</span>
+  <span class="hljs-built_in">pass_by_reference_const</span>(x + <span class="hljs-number">1</span>);  <span class="hljs-comment">// 参数类型是 const int&amp; ，代表无法更改，所以可允许</span>
+
+  <span class="hljs-comment">// pass_by_reference 和 pass_by_reference_const 这种用法是 C 语言和 C++ 特有的</span>
+
+  <span class="hljs-comment">// 补充知识：</span>
+  <span class="hljs-comment">// 左值 (lvalue - locator value)指的是一个具有持久身份（identity）和确定内存地址的对象或表达式。</span>
+  <span class="hljs-comment">// 可以把它想象成一个有“家”（内存地址）的东西，可以被反复访问和修改.比如 int x = 9; 中的 x</span>
+  <span class="hljs-comment">// 右值 (rvalue - read value)指的是一个没有持久身份、通常是临时的表达式结果。 </span>
+  <span class="hljs-comment">// 可以把它想象成“一次性用品”，用完即丢，没有固定的“家”。如字面量 (Literals)：10 或算术表达式的结果：x + 1</span>
+  <span class="hljs-comment">// 由于没有可识别的内存地址：通常不能对右值取地址（&amp;）</span>
+&#125;
+
+
+<span class="hljs-comment">// ###########################################################</span>
+<span class="hljs-comment">//                            面向对象</span>
+<span class="hljs-comment">// ###########################################################</span>
+
+<span class="hljs-comment">// 虽然在 C++ 中，class 既可以定义在函数外部，也可以定义在函数体内部；</span>
+<span class="hljs-comment">// 但是绝大多数（99% 以上）的情况下，你应该将 class 定义在函数外部，这里是定义在 inheritance_test 外；</span>
+<span class="hljs-comment">// 这是 C++ 编程的标准和推荐做法。将类（如 class Animal）视为一个独立的、可复用的构建模块；</span>
+<span class="hljs-comment">// 在实际项目中，类的声明通常放在头文件（.h 或 .hpp）中，如 Animal.h</span>
+<span class="hljs-comment">// 以便被多个源文件（.cpp）包含和使用：.cpp 文件开头写 #include &quot;Animal.h&quot; 类似 #include &lt;iostream&gt;</span>
+<span class="hljs-comment">// 这天然就要求类（class）的定义位于所有函数之外。</span>
+<span class="hljs-comment">// 在函数内部定义的类被称为局部类 (Local Class)。这是一种不常见的用法，主要用于实现高度的封装和局部化。</span>
+<span class="hljs-comment">// 局部类的定义（作用域）只在它所在的函数体内有效。</span>
+<span class="hljs-comment">// 在现代 C++ (C++11及以后)，很多需要局部类的简单场景已经被 Lambda 表达式所取代</span>
+<span class="hljs-comment">// 因为 Lambda 更简洁。但如果这个辅助工具逻辑复杂，需要多个成员函数和变量时，局部类依然有其用武之地。</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Animal</span>
+&#123;
+  <span class="hljs-comment">// 外部能用的成员和方法都写到 public: 后面</span>
+  <span class="hljs-comment">// 不像 Java 那样每个都要写一次 public</span>
+  <span class="hljs-keyword">public</span>:
+  <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">speak</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;
+  <span class="hljs-comment">// 这里 virtual ... = 0 的写法类似 Java 的 abstract class（抽象类）</span>
+  <span class="hljs-comment">// 这个 = 0 的 C++ 语法意味着 speak 是个纯虚函数</span>
+  <span class="hljs-comment">// 纯虚函数没有实现，因此其功能要求由子类来定义</span>
+  <span class="hljs-comment">// 相当于强制要求继承 Animal 的子类定义 speak 方法（函数）</span>
+  <span class="hljs-comment">// C++ 中一个类如果包含至少一个纯虚函数（= 0），那么这个类就是一个抽象类</span>
+  <span class="hljs-comment">// 抽象类不能直接实例化（instantiation），它只能作为基类被继承</span>
+  <span class="hljs-comment">// C++ 中得写成这种奇怪的样子</span>
+  <span class="hljs-comment">// 如果不加 virtual ，那子类就无法 override（重写）这个 speak 方法了</span>
+  <span class="hljs-comment">// 如果不写 = 0 ，就无法强制子类定义 speak 函数</span>
+  <span class="hljs-comment">// 重写（override）父类函数时，参数类型、顺序、数量，函数返回类型必须完全相同，区别与重载（overload）</span>
+  <span class="hljs-comment">// 重载（overload）是同一作用域内（如同一类中），函数名相同但参数列表必须不同（参数类型、数量或顺序）</span>
+  <span class="hljs-comment">// 重载（overload）函数的返回值类型可以相同，也可以不同；</span>
+
+  <span class="hljs-comment">// 与抽象类对应的就是普通类（Concrete Class）。普通类指的是没有任何纯虚函数的类，它可以直接被实例化。</span>
+  <span class="hljs-comment">// 普通类可以包含虚函数（即实现了虚函数的具体方法），但它不能包含纯虚函数</span>
+  <span class="hljs-comment">// virtual 关键字代表支持动态绑定（运行时再判断函数调用哪个，比如子类同名函数）</span>
+  <span class="hljs-comment">// 若不写 virtual，则为普通函数（非虚函数），是静态绑定。意味着在编译时就确定了调用哪个函数</span>
+  <span class="hljs-comment">// 即基类指针定义 Animal* a = new Dog(); 写了 virtual ，a-&gt;eat() 就调用子类 Dog 的 eat，没写就调用基类 Animal 的</span>
+  <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">eat</span><span class="hljs-params">()</span> </span>
+<span class="hljs-function">  </span>&#123;
+    cout &lt;&lt; <span class="hljs-string">&quot;Animal is eating&quot;</span> &lt;&lt; endl;
+  &#125;
+&#125;;
+
+<span class="hljs-comment">// 要在 Dog 里能访问到 Animal 里的成员，就要写上 public</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Dog</span>: <span class="hljs-keyword">public</span> Animal
+&#123;
+  <span class="hljs-keyword">public</span>:
+  <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">speak</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span>
+<span class="hljs-function">  </span>&#123;
+    cout &lt;&lt; <span class="hljs-string">&quot;汪！&quot;</span> &lt;&lt; endl;
+  &#125;
+  <span class="hljs-comment">// 重写 speak 方法</span>
+  <span class="hljs-comment">// 更严谨的做法是在 speak() 后面加上 override </span>
+  <span class="hljs-comment">// 类似 Java 的 @Override 标记</span>
+  <span class="hljs-comment">// 重写（override）父类函数时，参数类型、顺序、数量，函数返回类型必须完全相同，区别与重载（overload）</span>
+  <span class="hljs-comment">// 关键字 override 不写也行（编译器可能有警告提示），但写的话编译器会去检查父类的内容</span>
+  <span class="hljs-comment">// 检查如果父类没有 speak ，那就会编译不通过（父类却没有你要重写的函数时，就会报错）</span>
+
+  <span class="hljs-comment">// 显式写 override ，明确地表达程序员的意图永远是最好的</span>
+  <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">eat</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span>
+<span class="hljs-function">  </span>&#123;
+    cout &lt;&lt; <span class="hljs-string">&quot;Dog is eating&quot;</span> &lt;&lt; endl;
+  &#125;
+
+  <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">bark</span><span class="hljs-params">()</span></span>
+<span class="hljs-function">  </span>&#123;
+    cout &lt;&lt; <span class="hljs-string">&quot;Dog is barking&quot;</span> &lt;&lt; endl;
+  &#125;
+&#125;;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Cat</span>: <span class="hljs-keyword">public</span> Animal
+&#123;
+  <span class="hljs-keyword">private</span>:
+    <span class="hljs-type">int</span> age;      <span class="hljs-comment">// 定义在 private 下方外部就无法直接访问，比如 c.age 就会失败</span>
+
+  <span class="hljs-keyword">public</span>:
+    string name;  <span class="hljs-comment">// 定义在 public 下方外部就能直接访问，比如 c.name</span>
+
+    <span class="hljs-comment">// // 构造函数 - 函数体赋值方式 - C++ 不推荐</span>
+    <span class="hljs-comment">// Cat(string n, int a) : name(n), age(a)</span>
+    <span class="hljs-comment">// &#123;</span>
+    <span class="hljs-comment">//     age = a;</span>
+    <span class="hljs-comment">//     name = n;</span>
+    <span class="hljs-comment">//     cout &lt;&lt; &quot;Cat Constructor called - Assignment\n&quot;;</span>
+    <span class="hljs-comment">// &#125;</span>
+
+    <span class="hljs-comment">// 构造函数 - C++ 惯例推荐用这种「初始化列表」的写法来给 name 和 age 赋值</span>
+    <span class="hljs-built_in">Cat</span>(string n, <span class="hljs-type">int</span> a) : <span class="hljs-built_in">name</span>(n), <span class="hljs-built_in">age</span>(a)
+    &#123;
+        cout &lt;&lt; <span class="hljs-string">&quot;Cat Constructor called - Initializer List\n&quot;</span>;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">speak</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span>
+<span class="hljs-function">    </span>&#123;
+      cout &lt;&lt; <span class="hljs-string">&quot;喵！&quot;</span> &lt;&lt; endl;
+    &#125;
+&#125;;
+
+
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">inheritance_test</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;---- inheritance_test ----&quot;</span> &lt;&lt; endl;
+
+  <span class="hljs-comment">// 栈（stack）上面定义了狗 d 和猫 c</span>
+  <span class="hljs-comment">// Dog 和 Cat 的实例（instance）在 stack 上（函数的局部变量都在 stack 上）</span>
+  Dog d;                <span class="hljs-comment">// 在 stack 上</span>
+  <span class="hljs-function">Cat <span class="hljs-title">c</span><span class="hljs-params">(<span class="hljs-string">&quot;Alice&quot;</span>, <span class="hljs-number">30</span>)</span></span>;   <span class="hljs-comment">// 在 stack 上</span>
+  <span class="hljs-type">int</span> i = <span class="hljs-number">9</span>;            <span class="hljs-comment">// 在 stack 上</span>
+
+  <span class="hljs-comment">// 定义在 heap 上的 Dog（用 new 定义的都在 heap 上，返回包含 heap 地址）</span>
+  Dog* d2 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Dog</span>();  <span class="hljs-comment">// heap allocation</span>
+
+  <span class="hljs-comment">// 不能这么写，因为 new Dog() 在堆上，一定要个指针来指向它，而不能用普通的变量来存放它</span>
+  <span class="hljs-comment">// new Dog() 返回的是一个 heap 上的地址</span>
+  <span class="hljs-comment">// Dog d2 = new Dog(); // 编译不通过</span>
+
+  <span class="hljs-comment">// 打印变量们的地址，可以看到 c ，d 和 i 离得很近，都在 stack 上</span>
+  <span class="hljs-comment">// 而 d2 则是在 heap 上</span>
+  <span class="hljs-comment">// 注意，这里容易有歧义</span>
+  <span class="hljs-comment">// 这里说的在 stack 上或者在 heap 上指的是数据内容，即 Dog 和 Cat 的实例（instance）</span>
+  <span class="hljs-comment">// d , c , i , d2 这些变量本身都是在 stack 上的</span>
+  <span class="hljs-comment">// 然后以 d 为例，d 的内容是一个 Dog 实例，也就是数据本身，所以此时数据本身在 stack</span>
+  <span class="hljs-comment">// 但是 d2 的内容不是一个 Dog 实例，它的内容是 heap 上的地址</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;dog address: &quot;</span> &lt;&lt; &amp;d &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;cat address: &quot;</span> &lt;&lt; &amp;c &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;i address: &quot;</span> &lt;&lt; &amp;i &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;d2 address: &quot;</span> &lt;&lt; d2 &lt;&lt; endl; <span class="hljs-comment">// heap 上的地址</span>
+
+  d.<span class="hljs-built_in">speak</span>();
+  c.<span class="hljs-built_in">speak</span>();
+  cout &lt;&lt; <span class="hljs-string">&quot;The cat&#x27;s name is: &quot;</span> &lt;&lt; c.name &lt;&lt; endl;   <span class="hljs-comment">// 可以直接访问内部的 name 成员</span>
+  <span class="hljs-comment">// cout &lt;&lt; &quot;The cat&#x27;s age is: &quot; &lt;&lt; c.age &lt;&lt; endl;  // 无法直接访问内部的 age 成员</span>
+
+  (*d2).<span class="hljs-built_in">speak</span>(); <span class="hljs-comment">// d2 是一个指针，先解引用得到指向的 Dog 实例，再调用 speak 方法</span>
+  d2-&gt;<span class="hljs-built_in">speak</span>();   <span class="hljs-comment">// C++ 语法里还可以用箭头来访问指针指向的对象里的成员（方法）</span>
+  <span class="hljs-keyword">delete</span> d2;     <span class="hljs-comment">// 手动释放 d2 内存，避免内存泄漏</span>
+
+  unique_ptr&lt;Dog&gt; d3 = <span class="hljs-built_in">make_unique</span>&lt;Dog&gt;();         <span class="hljs-comment">// 使用智能指针（自动管理内存）定义 heap 上的 Dog</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;unique_ptr d3 address: &quot;</span> &lt;&lt; d3 &lt;&lt; endl; <span class="hljs-comment">// heap 上的地址</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;run (*d3).eat(): &quot;</span> &lt;&lt; endl;  
+  (*d3).<span class="hljs-built_in">eat</span>();                                     <span class="hljs-comment">// 静态调用</span>
+  <span class="hljs-comment">// 不需要手动调用 delete，unique_ptr 会自动释放内存</span>
+
+  <span class="hljs-comment">// 综上，同一个 Class 可以有 2 种不同的分配方法：栈（stack）上，或者堆（heap）上</span>
+
+  <span class="hljs-comment">// Animal a1 = d; // 编译不通过 - 为什么不能这么写？</span>
+  <span class="hljs-comment">// 原因：</span>
+  <span class="hljs-comment">// 这里将会把一个实际的 Dog 对象转为一个 Animal 对象，即对象切片（Object Slicing）</span>
+  <span class="hljs-comment">// 对象切片会丢失 Dog 类独有的成员（field），比如会丢失 bark 函数</span>
+  <span class="hljs-comment">// 然后 Dog 中定义的 speak 函数也会被 Animal 中的 speak 函数替代</span>
+  <span class="hljs-comment">// 但 Animal 中有纯虚函数（= 0），是个抽象类，意味着 Animal 中的 speak 没有具体实现，是“空”的</span>
+  <span class="hljs-comment">// 编译器不允许有空的实现，于是无法处理这个赋值</span>
+
+  <span class="hljs-comment">// 用一个 Animal 指针 a1 指向 d</span>
   Animal* a1 = &amp;d;
 
-  cout &lt;&lt; &quot;Animal pointer to dog: &quot; &lt;&lt; endl;
-  cout &lt;&lt; &quot;animal address: &quot; &lt;&lt; a1 &lt;&lt; endl;
-  a1-&gt;speak();  
+  cout &lt;&lt; <span class="hljs-string">&quot;Animal pointer to dog: &quot;</span> &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;animal address: &quot;</span> &lt;&lt; a1 &lt;&lt; endl;
+  a1-&gt;<span class="hljs-built_in">speak</span>();  
 
-  // 和 Java 不一样的是，如果上面不是用指针，而是 Animal a = d; 就编译不通过
-  // 在 C++ 里「用一个父类的变量指向一个子类」叫做多态，你必须要用指针，不能直接用这个变量
-  // 也就是类型必须是 Animal* 。必须使用基类指针Animal*指向派生类对象。
-  // 其实 Java 中父类指向子类也是类似。在 Java 里你写 Animal a 的时候，a 其实是一个指针
-  // Java 里你可以写 Dog d = new Dog(); 然后这个 new Dog() 实际上是在堆（heap）上
-  // 所以 Java 的这个 d 实际上是一个指针，但 Java 的语法不要求写 Dog* 表示指针
-  // 同样的表达在 C++ 中要写成：Dog* d = new Dog();
+  <span class="hljs-comment">// 和 Java 不一样的是，如果上面不是用指针，而是 Animal a = d; 就编译不通过</span>
+  <span class="hljs-comment">// 在 C++ 里「用一个父类的变量指向一个子类」叫做多态，你必须要用指针，不能直接用这个变量</span>
+  <span class="hljs-comment">// 也就是类型必须是 Animal* 。必须使用基类指针Animal*指向派生类对象。</span>
+  <span class="hljs-comment">// 其实 Java 中父类指向子类也是类似。在 Java 里你写 Animal a 的时候，a 其实是一个指针</span>
+  <span class="hljs-comment">// Java 里你可以写 Dog d = new Dog(); 然后这个 new Dog() 实际上是在堆（heap）上</span>
+  <span class="hljs-comment">// 所以 Java 的这个 d 实际上是一个指针，但 Java 的语法不要求写 Dog* 表示指针</span>
+  <span class="hljs-comment">// 同样的表达在 C++ 中要写成：Dog* d = new Dog();</span>
 
-  // 根据上面 reference_test 函数体里的写法，这里还可以这样写
+  <span class="hljs-comment">// 根据上面 reference_test 函数体里的写法，这里还可以这样写</span>
   Animal&amp; a2 = d;
-  cout &lt;&lt; &quot;Animal pointer to dog: &quot; &lt;&lt; endl;
-  cout &lt;&lt; &quot;animal address: &quot; &lt;&lt; &amp;a2 &lt;&lt; endl;
-  a2.speak();
+  cout &lt;&lt; <span class="hljs-string">&quot;Animal pointer to dog: &quot;</span> &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;animal address: &quot;</span> &lt;&lt; &amp;a2 &lt;&lt; endl;
+  a2.<span class="hljs-built_in">speak</span>();
 
-  // 变量 a1 指向猫
+  <span class="hljs-comment">// 变量 a1 指向猫</span>
   a1 = &amp;c;
-  cout &lt;&lt; &quot;Animal pointer to cat: &quot; &lt;&lt; endl;
-  cout &lt;&lt; &quot;animal address: &quot; &lt;&lt; a1 &lt;&lt; endl;
-  a1-&gt;speak();
-  (*a1).eat();  // Animal is eating
+  cout &lt;&lt; <span class="hljs-string">&quot;Animal pointer to cat: &quot;</span> &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;animal address: &quot;</span> &lt;&lt; a1 &lt;&lt; endl;
+  a1-&gt;<span class="hljs-built_in">speak</span>();
+  (*a1).<span class="hljs-built_in">eat</span>();  <span class="hljs-comment">// Animal is eating</span>
 
-  // 关于上述使用智能指针 unique_ptr&lt;Dog&gt; 定义的 d3
-  // Animal* a3 = d3; 不能编译，因为 unique_ptr 是一个智能指针，有自定义的指针行为，不能直接赋值给原始指针 Animal*
-  // 你需要使用 .get() 方法来获取原始指针类型才和 Animal* 匹配
-  Animal* a3 = d3.get();
-  cout &lt;&lt; &quot;a3 gets Animal pointer from d3. Hence no Object Slicing.&quot; &lt;&lt; endl;
-  a3-&gt;eat();  // Dog is eating
+  <span class="hljs-comment">// 关于上述使用智能指针 unique_ptr&lt;Dog&gt; 定义的 d3</span>
+  <span class="hljs-comment">// Animal* a3 = d3; 不能编译，因为 unique_ptr 是一个智能指针，有自定义的指针行为，不能直接赋值给原始指针 Animal*</span>
+  <span class="hljs-comment">// 你需要使用 .get() 方法来获取原始指针类型才和 Animal* 匹配</span>
+  Animal* a3 = d3.<span class="hljs-built_in">get</span>();
+  cout &lt;&lt; <span class="hljs-string">&quot;a3 gets Animal pointer from d3. Hence no Object Slicing.&quot;</span> &lt;&lt; endl;
+  a3-&gt;<span class="hljs-built_in">eat</span>();  <span class="hljs-comment">// Dog is eating</span>
 
-  // // 下面这行代码编译不通过，因为类 Animal 有纯虚函数（= 0），是抽象类，不能实例化
-  // // 如果类 Animal 没有纯虚函数，则可以正常编译，此时 d3 的所有权会被转移给 a4
-  // unique_ptr&lt;Animal&gt; a4 = std::move(d3);  
-}
-
-
-
-// ###########################################################
-//                        模板（Template）
-// ###########################################################
-
-// template（模板）类似 Java 的泛型，使得同一段代码可以适应不同的数据类型，从而增加代码的复用性和灵活性
-// C++ 中的模板（Template）的语法主要有两种形式：
-// 一、函数模板
-// template &lt;typename T&gt; 定义了一个模板，T 是占位符类型参数，可以代表任何类型
-// T funName(T param1, T param2) 中 funName 是函数名，函数接受两个 T 类型的参数 param1 和 param2
-// 返回 T 类型的结果
-// 这里也可以使用关键字 class 来代替关键字 typename，它们是等价的：template &lt;class T&gt;
-template &lt;typename T, typename U&gt;  // 这里定义了 2 个类型参数 T 和 U
-T my_add(T a, U b)                 // my_add 函数接收 T 类型的参数 a 和 U 类型的参数 b
-{
-    return a + b;                  // my_add 函数返回 T 类型的结果
-}
+  <span class="hljs-comment">// // 下面这行代码编译不通过，因为类 Animal 有纯虚函数（= 0），是抽象类，不能实例化</span>
+  <span class="hljs-comment">// // 如果类 Animal 没有纯虚函数，则可以正常编译，此时 d3 的所有权会被转移给 a4</span>
+  <span class="hljs-comment">// unique_ptr&lt;Animal&gt; a4 = std::move(d3);  </span>
+&#125;
 
 
-// 二、类模板（下面就以类模板 Auto_ptr 为例）
-template &lt;typename T&gt;   // T 是类型参数
-class Auto_ptr         // 这里用 template 功能创建智能指针 Auto_ptr 实现在生命周期结束后自动释放
-{
+
+<span class="hljs-comment">// ###########################################################</span>
+<span class="hljs-comment">//                        模板（Template）</span>
+<span class="hljs-comment">// ###########################################################</span>
+
+<span class="hljs-comment">// template（模板）类似 Java 的泛型，使得同一段代码可以适应不同的数据类型，从而增加代码的复用性和灵活性</span>
+<span class="hljs-comment">// C++ 中的模板（Template）的语法主要有两种形式：</span>
+<span class="hljs-comment">// 一、函数模板</span>
+<span class="hljs-comment">// template &lt;typename T&gt; 定义了一个模板，T 是占位符类型参数，可以代表任何类型</span>
+<span class="hljs-comment">// T funName(T param1, T param2) 中 funName 是函数名，函数接受两个 T 类型的参数 param1 和 param2</span>
+<span class="hljs-comment">// 返回 T 类型的结果</span>
+<span class="hljs-comment">// 这里也可以使用关键字 class 来代替关键字 typename，它们是等价的：template &lt;class T&gt;</span>
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T, <span class="hljs-keyword">typename</span> U&gt;  <span class="hljs-comment">// 这里定义了 2 个类型参数 T 和 U</span>
+<span class="hljs-function">T <span class="hljs-title">my_add</span><span class="hljs-params">(T a, U b)</span>                 <span class="hljs-comment">// my_add 函数接收 T 类型的参数 a 和 U 类型的参数 b</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">return</span> a + b;                  <span class="hljs-comment">// my_add 函数返回 T 类型的结果</span>
+&#125;
+
+
+<span class="hljs-comment">// 二、类模板（下面就以类模板 Auto_ptr 为例）</span>
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T&gt;   <span class="hljs-comment">// T 是类型参数</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Auto_ptr</span>         <span class="hljs-comment">// 这里用 template 功能创建智能指针 Auto_ptr 实现在生命周期结束后自动释放</span>
+&#123;
   T* m_ptr;
-public:
-  // Pass in a pointer to &quot;own&quot; via the constructor
-  Auto_ptr(T* ptr=nullptr)
-  {
-    this-&gt;m_ptr = ptr;
-  }
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-comment">// Pass in a pointer to &quot;own&quot; via the constructor</span>
+  <span class="hljs-built_in">Auto_ptr</span>(T* ptr=<span class="hljs-literal">nullptr</span>)
+  &#123;
+    <span class="hljs-keyword">this</span>-&gt;m_ptr = ptr;
+  &#125;
 
-  // Copy constructor to handle ownership transfer
-  Auto_ptr(Auto_ptr &amp;a)
-  {
-    this-&gt;m_ptr = a.m_ptr;
-    a.m_ptr = nullptr;
-    cout &lt;&lt; &quot;ownership transfer (copy constructor)&quot; &lt;&lt; endl;
-  }
+  <span class="hljs-comment">// Copy constructor to handle ownership transfer</span>
+  <span class="hljs-built_in">Auto_ptr</span>(Auto_ptr &amp;a)
+  &#123;
+    <span class="hljs-keyword">this</span>-&gt;m_ptr = a.m_ptr;
+    a.m_ptr = <span class="hljs-literal">nullptr</span>;
+    cout &lt;&lt; <span class="hljs-string">&quot;ownership transfer (copy constructor)&quot;</span> &lt;&lt; endl;
+  &#125;
 
-  Auto_ptr&amp; operator = (Auto_ptr &amp;a)
-  {
-    if (&amp;a == this) {
-      return *this;
-    }
+  Auto_ptr&amp; <span class="hljs-keyword">operator</span> = (Auto_ptr &amp;a)
+  &#123;
+    <span class="hljs-keyword">if</span> (&amp;a == <span class="hljs-keyword">this</span>) &#123;
+      <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;
+    &#125;
 
-    delete m_ptr;
+    <span class="hljs-keyword">delete</span> m_ptr;
     m_ptr = a.m_ptr;
-    a.m_ptr = nullptr;
-    cout &lt;&lt; &quot;ownership transfer (assignment)&quot; &lt;&lt; endl;
-    return *this;
-  }
+    a.m_ptr = <span class="hljs-literal">nullptr</span>;
+    cout &lt;&lt; <span class="hljs-string">&quot;ownership transfer (assignment)&quot;</span> &lt;&lt; endl;
+    <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;
+  &#125;
 
-  // The destructor will make sure it gets deallocated
-  ~Auto_ptr()
-  {
-    delete m_ptr;
-  }
+  <span class="hljs-comment">// The destructor will make sure it gets deallocated</span>
+  ~<span class="hljs-built_in">Auto_ptr</span>()
+  &#123;
+    <span class="hljs-keyword">delete</span> m_ptr;
+  &#125;
 
-  // Overload dereference and operator-&gt; so we can use Auto_ptr like m_ptr.
-  T&amp; operator * () const { return *m_ptr; }
-  T* operator -&gt; () const { return m_ptr; }
-};
+  <span class="hljs-comment">// Overload dereference and operator-&gt; so we can use Auto_ptr like m_ptr.</span>
+  T&amp; <span class="hljs-keyword">operator</span> * () <span class="hljs-type">const</span> &#123; <span class="hljs-keyword">return</span> *m_ptr; &#125;
+  T* <span class="hljs-keyword">operator</span> -&gt; () <span class="hljs-type">const</span> &#123; <span class="hljs-keyword">return</span> m_ptr; &#125;
+&#125;;
 
-// A sample class to prove the above works
-class Resource
-{
-public:
-  int x = 42;
-    Resource() { cout &lt;&lt; &quot;Resource acquired\n&quot;; }
-    ~Resource() { cout &lt;&lt; &quot;Resource destroyed\n&quot;; }
-    void sayHi() { cout &lt;&lt; &quot;Hi &quot; &lt;&lt; x &lt;&lt; endl; }
-};
+<span class="hljs-comment">// A sample class to prove the above works</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Resource</span>
+&#123;
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-type">int</span> x = <span class="hljs-number">42</span>;
+    <span class="hljs-built_in">Resource</span>() &#123; cout &lt;&lt; <span class="hljs-string">&quot;Resource acquired\n&quot;</span>; &#125;
+    ~<span class="hljs-built_in">Resource</span>() &#123; cout &lt;&lt; <span class="hljs-string">&quot;Resource destroyed\n&quot;</span>; &#125;
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">sayHi</span><span class="hljs-params">()</span> </span>&#123; cout &lt;&lt; <span class="hljs-string">&quot;Hi &quot;</span> &lt;&lt; x &lt;&lt; endl; &#125;
+&#125;;
 
-void pass_by_value(Auto_ptr&lt;Resource&gt; ptr)
-{
-  cout &lt;&lt; &quot;pass_by_value&quot; &lt;&lt; endl;
-}
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pass_by_value</span><span class="hljs-params">(Auto_ptr&lt;Resource&gt; ptr)</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;pass_by_value&quot;</span> &lt;&lt; endl;
+&#125;
 
-void smart_ptr_test()
-{
-  cout &lt;&lt; &quot;---------------- smart_ptr_test ----------------&quot; &lt;&lt; endl;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">smart_ptr_test</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;---------------- smart_ptr_test ----------------&quot;</span> &lt;&lt; endl;
 
-  Auto_ptr&lt;Resource&gt; r1(new Resource());
-  r1-&gt;sayHi();
+  <span class="hljs-function">Auto_ptr&lt;Resource&gt; <span class="hljs-title">r1</span><span class="hljs-params">(<span class="hljs-keyword">new</span> Resource())</span></span>;
+  r1-&gt;<span class="hljs-built_in">sayHi</span>();
 
-  // Auto_ptr&lt;Resource&gt; r2(r1);
-  // pass_by_value(r1);
+  <span class="hljs-comment">// Auto_ptr&lt;Resource&gt; r2(r1);</span>
+  <span class="hljs-comment">// pass_by_value(r1);</span>
 
   Auto_ptr&lt;Resource&gt; r2;
   r2 = r1;
-  r2-&gt;sayHi();
-}
+  r2-&gt;<span class="hljs-built_in">sayHi</span>();
+&#125;
 
-int** pointer_of_pointer()
-{
-  int** p = nullptr;
-  {
-    int* x = new int(10);
+<span class="hljs-function"><span class="hljs-type">int</span>** <span class="hljs-title">pointer_of_pointer</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  <span class="hljs-type">int</span>** p = <span class="hljs-literal">nullptr</span>;
+  &#123;
+    <span class="hljs-type">int</span>* x = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">10</span>);
     p = &amp;x;
-  }
+  &#125;
 
-  cout &lt;&lt; &quot;inside function: p = &quot; &lt;&lt; p &lt;&lt; endl;
-  cout &lt;&lt; &quot;inside function: *p = &quot; &lt;&lt; *p &lt;&lt; endl;
-  cout &lt;&lt; &quot;inside function: **p = &quot; &lt;&lt; **p &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;inside function: p = &quot;</span> &lt;&lt; p &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;inside function: *p = &quot;</span> &lt;&lt; *p &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;inside function: **p = &quot;</span> &lt;&lt; **p &lt;&lt; endl;
 
-  return p;
-}
+  <span class="hljs-keyword">return</span> p;
+&#125;
 
-void pointer_of_pointer_test()
-{
-  cout &lt;&lt; &quot;---------------- pointer_of_pointer_test ----------------&quot; &lt;&lt; endl;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pointer_of_pointer_test</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;---------------- pointer_of_pointer_test ----------------&quot;</span> &lt;&lt; endl;
 
-  int** p = pointer_of_pointer();
-  cout &lt;&lt; &quot;outside function: p = &quot; &lt;&lt; p &lt;&lt; endl;
-  cout &lt;&lt; &quot;outside function: *p = &quot; &lt;&lt; *p &lt;&lt; endl;
-  cout &lt;&lt; &quot;outside function: **p = &quot; &lt;&lt; **p &lt;&lt; endl;  // wrong result
-}
-
-
-// ###########################################################
-//                  智能指针之 Unique Pointer
-// ###########################################################
-
-// 智能指针的“智能”体现在于它们在生命周期结束时自动释放资源，避免手动管理内存带来的问题，提高代码的安全性和可靠性
-// 普通指针需要手动释放内存 delete rawPtr; 而智能指针会在不再需要使用时自动释放分配的内存，从而避免了内存泄漏的风险
-// 智能指针还会在底层实现一些机制，如引用计数或所有权管理，以确保内存安全性，避免悬垂指针或重复释放内存等问题
-
-int* pass_pointer(int* p)
-{
-  cout &lt;&lt; &quot;----- pass_pointer(int* p) -----&quot; &lt;&lt; endl;
-  cout &lt;&lt; &quot;inside function: p = &quot; &lt;&lt; p &lt;&lt; endl;
-  cout &lt;&lt; &quot;inside function: *p = &quot; &lt;&lt; *p &lt;&lt; endl;
-  cout &lt;&lt; &quot;----- outside pass_pointer -----&quot; &lt;&lt; endl;
-
-  return p;
-}
-
-struct IntOwner
-{
-public:
-  unique_ptr&lt;int&gt; p;
-  ~IntOwner()
-  {
-
-    // 符号 ~ 标记的函数是析构函数（Destructor）
-    // 它一个特殊的成员函数，它在对象生命周期结束时被调用
-    // 这里是打印输出字符串 &quot;IntOwner destructor&quot;
-    cout &lt;&lt; &quot;IntOwner destructor&quot; &lt;&lt; endl;
-  }
-};
-
-unique_ptr&lt;IntOwner&gt; create_int_owner(unique_ptr&lt;int&gt; p)
-{
-  // 这一行代码创建了一个 unique_ptr 智能指针对象 owner
-  // &lt;IntOwner&gt; 表示 owner 指针所指向的数据类型是 IntOwner
-  // new IntOwner() 作为参数传入构造类型为 unique_ptr&lt;IntOwner&gt; 的指针
-  // 所以 owner(new IntOwner()) 是将其初始化为指向 heap 上 new IntOwner() 实例的地址
-  // 下文的 shared_ptr&lt;int&gt; p4(p3); 也用到类似语法
-  unique_ptr&lt;IntOwner&gt; owner(new IntOwner());
-  owner-&gt;p = std::move(p);
-  return owner;
-}
+  <span class="hljs-type">int</span>** p = <span class="hljs-built_in">pointer_of_pointer</span>();
+  cout &lt;&lt; <span class="hljs-string">&quot;outside function: p = &quot;</span> &lt;&lt; p &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;outside function: *p = &quot;</span> &lt;&lt; *p &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;outside function: **p = &quot;</span> &lt;&lt; **p &lt;&lt; endl;  <span class="hljs-comment">// wrong result</span>
+&#125;
 
 
-void unique_ptr_test()
-{
-  cout &lt;&lt; &quot;---------------- unique_ptr_test ----------------&quot; &lt;&lt; endl;
+<span class="hljs-comment">// ###########################################################</span>
+<span class="hljs-comment">//                  智能指针之 Unique Pointer</span>
+<span class="hljs-comment">// ###########################################################</span>
 
-  // 相当于 Rust 的：let p1 = String::from(&quot;Hello&quot;);
-  // Rust 里的变量默认就是 unique 的，因为只能有一个 owner
-  // C++ 里要实现 Rust 这种 unique 的单 owner 效果就要用 unique_ptr
-  // 对比普通指针写法：
-  int* p = new int(10);  // 普通指针，类型是 int*
-  unique_ptr&lt;int&gt; p1 = make_unique&lt;int&gt;(10); // unique 指针，“类型”是 unique_ptr&lt;int&gt;
+<span class="hljs-comment">// 智能指针的“智能”体现在于它们在生命周期结束时自动释放资源，避免手动管理内存带来的问题，提高代码的安全性和可靠性</span>
+<span class="hljs-comment">// 普通指针需要手动释放内存 delete rawPtr; 而智能指针会在不再需要使用时自动释放分配的内存，从而避免了内存泄漏的风险</span>
+<span class="hljs-comment">// 智能指针还会在底层实现一些机制，如引用计数或所有权管理，以确保内存安全性，避免悬垂指针或重复释放内存等问题</span>
 
-  // 为啥 unique 指针是这种奇怪的写法？
-  // 因为它不是 C++ 语言本身（编译器）直接实现的，而是用宏（macro）和模版（template）实现的
-  // 算是一片自定义的用户代码
+<span class="hljs-function"><span class="hljs-type">int</span>* <span class="hljs-title">pass_pointer</span><span class="hljs-params">(<span class="hljs-type">int</span>* p)</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;----- pass_pointer(int* p) -----&quot;</span> &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;inside function: p = &quot;</span> &lt;&lt; p &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;inside function: *p = &quot;</span> &lt;&lt; *p &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;----- outside pass_pointer -----&quot;</span> &lt;&lt; endl;
 
-  cout &lt;&lt; &quot;unique_ptr: p1 = &quot; &lt;&lt; p1 &lt;&lt; endl;
-  cout &lt;&lt; &quot;unique_ptr: *p1 = &quot; &lt;&lt; *p1 &lt;&lt; endl;
+  <span class="hljs-keyword">return</span> p;
+&#125;
 
-  // 编译不通过，因为 p1 是 unique 的，不能和 p2 共享数据
-  // unique_ptr&lt;int&gt; p2 = p1;
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">IntOwner</span>
+&#123;
+<span class="hljs-keyword">public</span>:
+  unique_ptr&lt;<span class="hljs-type">int</span>&gt; p;
+  ~<span class="hljs-built_in">IntOwner</span>()
+  &#123;
 
-  // 如果要 p2 取得 p1 的值，就要用 std::move 转移 “ownership”
-  // Rust 中默认就是 move ，所以可以直接写 let p2 = p1;
-  // 在这行之后，上面的 p1 变量就不能用了
-  unique_ptr&lt;int&gt; p2 = std::move(p1);   // 这里明显能看到是 move（比 Rust 清晰）
-  cout &lt;&lt; &quot;unique_ptr: p2 = &quot; &lt;&lt; p2 &lt;&lt; endl;
-  cout &lt;&lt; &quot;unique_ptr: *p2 = &quot; &lt;&lt; *p2 &lt;&lt; endl;
-  cout &lt;&lt; &quot;unique_ptr: p1 = &quot; &lt;&lt; p1 &lt;&lt; endl;  // nullptr 在 C++ 中 0x0 表示 null
+    <span class="hljs-comment">// 符号 ~ 标记的函数是析构函数（Destructor）</span>
+    <span class="hljs-comment">// 它一个特殊的成员函数，它在对象生命周期结束时被调用</span>
+    <span class="hljs-comment">// 这里是打印输出字符串 &quot;IntOwner destructor&quot;</span>
+    cout &lt;&lt; <span class="hljs-string">&quot;IntOwner destructor&quot;</span> &lt;&lt; endl;
+  &#125;
+&#125;;
 
-  // 解引用 null pointer 会让程序崩溃中断
-  // cout &lt;&lt; &quot;*p1 = &quot; &lt;&lt; *p1 &lt;&lt; endl;  // Error: dereferencing nullptr
+<span class="hljs-function">unique_ptr&lt;IntOwner&gt; <span class="hljs-title">create_int_owner</span><span class="hljs-params">(unique_ptr&lt;<span class="hljs-type">int</span>&gt; p)</span></span>
+<span class="hljs-function"></span>&#123;
+  <span class="hljs-comment">// 这一行代码创建了一个 unique_ptr 智能指针对象 owner</span>
+  <span class="hljs-comment">// &lt;IntOwner&gt; 表示 owner 指针所指向的数据类型是 IntOwner</span>
+  <span class="hljs-comment">// new IntOwner() 作为参数传入构造类型为 unique_ptr&lt;IntOwner&gt; 的指针</span>
+  <span class="hljs-comment">// 所以 owner(new IntOwner()) 是将其初始化为指向 heap 上 new IntOwner() 实例的地址</span>
+  <span class="hljs-comment">// 下文的 shared_ptr&lt;int&gt; p4(p3); 也用到类似语法</span>
+  <span class="hljs-function">unique_ptr&lt;IntOwner&gt; <span class="hljs-title">owner</span><span class="hljs-params">(<span class="hljs-keyword">new</span> IntOwner())</span></span>;
+  owner-&gt;p = std::<span class="hljs-built_in">move</span>(p);
+  <span class="hljs-keyword">return</span> owner;
+&#125;
 
-  // std::move 实现了类似 Rust 这样转移 ownership 的目的
-  // 只不过变量 p1 仍然存在，它的值变为了 null ，要注意不要再使用它
-  // Rust 中 p1 会直接用不了
-  // C++ 里也可以释放 p1 的内存
-  delete p1.get();
 
-  // 读取 p2 的值，类似 Rust 的 borrow :
-  // let p3 = &amp;p2;
-  int* p3 = p2.get();
-  cout &lt;&lt; &quot;normal pointer: p3 = &quot; &lt;&lt; p3 &lt;&lt; endl;
-  cout &lt;&lt; &quot;normal pointer: *p3 = &quot; &lt;&lt; *p3 &lt;&lt; endl;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">unique_ptr_test</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;---------------- unique_ptr_test ----------------&quot;</span> &lt;&lt; endl;
 
-  // Rust 里是 let p4 = p3; // p4 也是 borrow 的，owner 还是 p2
-  int* p4 = pass_pointer(p3);
-  cout &lt;&lt; &quot;normal pointer: p4 = &quot; &lt;&lt; p4 &lt;&lt; endl;
-  cout &lt;&lt; &quot;normal pointer: *p4 = &quot; &lt;&lt; *p4 &lt;&lt; endl;
+  <span class="hljs-comment">// 相当于 Rust 的：let p1 = String::from(&quot;Hello&quot;);</span>
+  <span class="hljs-comment">// Rust 里的变量默认就是 unique 的，因为只能有一个 owner</span>
+  <span class="hljs-comment">// C++ 里要实现 Rust 这种 unique 的单 owner 效果就要用 unique_ptr</span>
+  <span class="hljs-comment">// 对比普通指针写法：</span>
+  <span class="hljs-type">int</span>* p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">10</span>);  <span class="hljs-comment">// 普通指针，类型是 int*</span>
+  unique_ptr&lt;<span class="hljs-type">int</span>&gt; p1 = <span class="hljs-built_in">make_unique</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">10</span>); <span class="hljs-comment">// unique 指针，“类型”是 unique_ptr&lt;int&gt;</span>
 
-  { // 花括号指定了一个 scope（作用域），int_owner 只在这个范围内有效
-    unique_ptr&lt;IntOwner&gt; int_owner = create_int_owner(std::move(p2));
-    cout &lt;&lt; &quot;unique_ptr: int_owner-&gt;p = &quot; &lt;&lt; int_owner-&gt;p &lt;&lt; endl;
-    cout &lt;&lt; &quot;unique_ptr: *int_owner-&gt;p = &quot; &lt;&lt; *int_owner-&gt;p &lt;&lt; endl;
-  }
-  // 作为 unique pointer 的 int_owner 出了花括号之外就会被释放，内存被回收
+  <span class="hljs-comment">// 为啥 unique 指针是这种奇怪的写法？</span>
+  <span class="hljs-comment">// 因为它不是 C++ 语言本身（编译器）直接实现的，而是用宏（macro）和模版（template）实现的</span>
+  <span class="hljs-comment">// 算是一片自定义的用户代码</span>
 
-  cout &lt;&lt; &quot;unique_ptr: p2 = &quot; &lt;&lt; p2 &lt;&lt; endl; // p2 被 move 了，所以成了 null pointer
-}
+  cout &lt;&lt; <span class="hljs-string">&quot;unique_ptr: p1 = &quot;</span> &lt;&lt; p1 &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;unique_ptr: *p1 = &quot;</span> &lt;&lt; *p1 &lt;&lt; endl;
 
-// ###########################################################
-//                   智能指针之 Shared Pointer
-// ###########################################################
+  <span class="hljs-comment">// 编译不通过，因为 p1 是 unique 的，不能和 p2 共享数据</span>
+  <span class="hljs-comment">// unique_ptr&lt;int&gt; p2 = p1;</span>
 
-void shared_ptr_test()
-{
-  cout &lt;&lt; &quot;---------------- shared_ptr_test ----------------&quot; &lt;&lt; endl;
+  <span class="hljs-comment">// 如果要 p2 取得 p1 的值，就要用 std::move 转移 “ownership”</span>
+  <span class="hljs-comment">// Rust 中默认就是 move ，所以可以直接写 let p2 = p1;</span>
+  <span class="hljs-comment">// 在这行之后，上面的 p1 变量就不能用了</span>
+  unique_ptr&lt;<span class="hljs-type">int</span>&gt; p2 = std::<span class="hljs-built_in">move</span>(p1);   <span class="hljs-comment">// 这里明显能看到是 move（比 Rust 清晰）</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;unique_ptr: p2 = &quot;</span> &lt;&lt; p2 &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;unique_ptr: *p2 = &quot;</span> &lt;&lt; *p2 &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;unique_ptr: p1 = &quot;</span> &lt;&lt; p1 &lt;&lt; endl;  <span class="hljs-comment">// nullptr 在 C++ 中 0x0 表示 null</span>
 
-  // shared pointer 实际上就是 Rust 里面的 Rc
-  // shared_ptr 的使用语法和 unique_ptr 类似
-  shared_ptr&lt;int&gt; p1 = make_shared&lt;int&gt;(10);  // 在 heap 里造出 shared pointer
-  cout &lt;&lt; &quot;shared_ptr: p1 = &quot; &lt;&lt; p1 &lt;&lt; endl;  // 指针 p1 指向（存放） heap 里的地址
-  cout &lt;&lt; &quot;shared_ptr: *p1 = &quot; &lt;&lt; *p1 &lt;&lt; endl;
+  <span class="hljs-comment">// 解引用 null pointer 会让程序崩溃中断</span>
+  <span class="hljs-comment">// cout &lt;&lt; &quot;*p1 = &quot; &lt;&lt; *p1 &lt;&lt; endl;  // Error: dereferencing nullptr</span>
 
-  // 调用 .use_count() 可以查看引用计数
-  cout &lt;&lt; &quot;in scope shared_ptr: p1.use_count() = &quot; &lt;&lt; p1.use_count() &lt;&lt; endl;
+  <span class="hljs-comment">// std::move 实现了类似 Rust 这样转移 ownership 的目的</span>
+  <span class="hljs-comment">// 只不过变量 p1 仍然存在，它的值变为了 null ，要注意不要再使用它</span>
+  <span class="hljs-comment">// Rust 中 p1 会直接用不了</span>
+  <span class="hljs-comment">// C++ 里也可以释放 p1 的内存</span>
+  <span class="hljs-keyword">delete</span> p1.<span class="hljs-built_in">get</span>();
 
-  {
-    // C++ 的赋值依靠一个 copy constructor
-    // 由于 p1 是 shared pointer ，所以它有一个引用计数在这
-    // 当这里做这个赋值操作的时候，copy constructor 会增加这个引用计数
-    // 思考：为何不用其他比如 int&amp; y = x; 的方式来共享，而要用看起来更复杂的 shared_ptr ？
-    shared_ptr&lt;int&gt; p2 = p1;  
-    cout &lt;&lt; &quot;shared_ptr: p2 = &quot; &lt;&lt; p2 &lt;&lt; endl;
-    cout &lt;&lt; &quot;shared_ptr: *p2 = &quot; &lt;&lt; *p2 &lt;&lt; endl;
-    cout &lt;&lt; &quot;shared_ptr: p1 = &quot; &lt;&lt; p1 &lt;&lt; endl;
-    cout &lt;&lt; &quot;shared_ptr: *p1 = &quot; &lt;&lt; *p1 &lt;&lt; endl;
+  <span class="hljs-comment">// 读取 p2 的值，类似 Rust 的 borrow :</span>
+  <span class="hljs-comment">// let p3 = &amp;p2;</span>
+  <span class="hljs-type">int</span>* p3 = p2.<span class="hljs-built_in">get</span>();
+  cout &lt;&lt; <span class="hljs-string">&quot;normal pointer: p3 = &quot;</span> &lt;&lt; p3 &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;normal pointer: *p3 = &quot;</span> &lt;&lt; *p3 &lt;&lt; endl;
 
-    // 查看引用计数
-    cout &lt;&lt; &quot;in scope shared_ptr: p1.use_count() = &quot; &lt;&lt; p1.use_count() &lt;&lt; endl;
-    cout &lt;&lt; &quot;in scope shared_ptr: p2.use_count() = &quot; &lt;&lt; p2.use_count() &lt;&lt; endl;
-  }
+  <span class="hljs-comment">// Rust 里是 let p4 = p3; // p4 也是 borrow 的，owner 还是 p2</span>
+  <span class="hljs-type">int</span>* p4 = <span class="hljs-built_in">pass_pointer</span>(p3);
+  cout &lt;&lt; <span class="hljs-string">&quot;normal pointer: p4 = &quot;</span> &lt;&lt; p4 &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;normal pointer: *p4 = &quot;</span> &lt;&lt; *p4 &lt;&lt; endl;
 
-  // 出了花括号，p2 会被释放掉，引用计数再次减小为 1
-  cout &lt;&lt; &quot;out scope shared_ptr: p1.use_count() = &quot; &lt;&lt; p1.use_count() &lt;&lt; endl;
+  &#123; <span class="hljs-comment">// 花括号指定了一个 scope（作用域），int_owner 只在这个范围内有效</span>
+    unique_ptr&lt;IntOwner&gt; int_owner = <span class="hljs-built_in">create_int_owner</span>(std::<span class="hljs-built_in">move</span>(p2));
+    cout &lt;&lt; <span class="hljs-string">&quot;unique_ptr: int_owner-&gt;p = &quot;</span> &lt;&lt; int_owner-&gt;p &lt;&lt; endl;
+    cout &lt;&lt; <span class="hljs-string">&quot;unique_ptr: *int_owner-&gt;p = &quot;</span> &lt;&lt; *int_owner-&gt;p &lt;&lt; endl;
+  &#125;
+  <span class="hljs-comment">// 作为 unique pointer 的 int_owner 出了花括号之外就会被释放，内存被回收</span>
 
-  // convert normal pointer to shared_ptr
-  int* p3 = new int(20);
-  int* p5w;
-  {
-    // p4(p3) 是一种初始化 shared_ptr 的语法
-    // 通过将 p3 作为参数传递给 p4 的构造函数，p4 将获取对这个动态分配的整数对象的所有权
-    // 并在 p4 生命周期结束时，会自动释放这个对象
-    shared_ptr&lt;int&gt; p4(p3); // 把普通指针转换为 Rc 的指针，但这样做不是对的
-    cout &lt;&lt; &quot;shared_ptr: p4 = &quot; &lt;&lt; p4 &lt;&lt; endl;
-    cout &lt;&lt; &quot;shared_ptr: *p4 = &quot; &lt;&lt; *p4 &lt;&lt; endl;
-    cout &lt;&lt; &quot;shared_ptr: p4.use_count() = &quot; &lt;&lt; p4.use_count() &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;unique_ptr: p2 = &quot;</span> &lt;&lt; p2 &lt;&lt; endl; <span class="hljs-comment">// p2 被 move 了，所以成了 null pointer</span>
+&#125;
 
-    // // Can&#39;t have two of them converted from raw pointer
-    // // 上面从 p3 造了一个 shared pointer 指针 p4
-    // // 这里又从 p3 造了一个 shared pointer 指针 p4w
-    // // p4 和 p4w 都认为自己的引用计数是 1，这就有问题了：
-    // // 当 p4 出了作用域之后，由于引用计数是 1 ，所以它会回收一次这个内存
-    // // 等到 p4w 出了作用域之后，由于引用计数也是 1 ，于是它会再回收一次
-    // // 然后 p4w 发现没有内存可以回收，于是程序就崩溃了
-    // shared_ptr&lt;int&gt; p4w(p3);
-    // cout &lt;&lt; &quot;shared_ptr: p4 = &quot; &lt;&lt; p4w &lt;&lt; endl;
-    // cout &lt;&lt; &quot;shared_ptr: *p4 = &quot; &lt;&lt; *p4w &lt;&lt; endl;
-    // cout &lt;&lt; &quot;shared_ptr: p4.use_count() = &quot; &lt;&lt; p4w.use_count() &lt;&lt; endl;
+<span class="hljs-comment">// ###########################################################</span>
+<span class="hljs-comment">//                   智能指针之 Shared Pointer</span>
+<span class="hljs-comment">// ###########################################################</span>
 
-    // // 所以在 C++ 里面，永远不应该从一个普通的 pointer 造出一个 shared pointer
-    // // 就像在 Rust 里面你不能把一个 borrow 的引用变成一个 owned 的
-    // // 比如下面的 Rust 代码就是这样的表达，无法通过编译：
-    // // cannot move out of `*x` which is behind a shared reference
-    // let s = String::from(&quot;hello&quot;);
-    // let x = &amp;s;
-    // let y = *x;
-    // // C++ 的这些智能指针不是语言自己实现的，所以它没法阻止你这样写，所以程序会崩溃
-    // // 用 make_shared 来创建 shared pointer 就能避免上述问题，因为会编译不过
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">shared_ptr_test</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;---------------- shared_ptr_test ----------------&quot;</span> &lt;&lt; endl;
 
-    // convert shared_ptr to normal pointer
-    // int* p5 = p4.get(); 这个操作相当于 borrow
-    // 你可以读取 p4 ，但不能释放 p4 ，你也不能在 p4 出了作用域之外还使用 p5
-    int* p5 = p4.get();
+  <span class="hljs-comment">// shared pointer 实际上就是 Rust 里面的 Rc</span>
+  <span class="hljs-comment">// shared_ptr 的使用语法和 unique_ptr 类似</span>
+  shared_ptr&lt;<span class="hljs-type">int</span>&gt; p1 = <span class="hljs-built_in">make_shared</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">10</span>);  <span class="hljs-comment">// 在 heap 里造出 shared pointer</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;shared_ptr: p1 = &quot;</span> &lt;&lt; p1 &lt;&lt; endl;  <span class="hljs-comment">// 指针 p1 指向（存放） heap 里的地址</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;shared_ptr: *p1 = &quot;</span> &lt;&lt; *p1 &lt;&lt; endl;
+
+  <span class="hljs-comment">// 调用 .use_count() 可以查看引用计数</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;in scope shared_ptr: p1.use_count() = &quot;</span> &lt;&lt; p1.<span class="hljs-built_in">use_count</span>() &lt;&lt; endl;
+
+  &#123;
+    <span class="hljs-comment">// C++ 的赋值依靠一个 copy constructor</span>
+    <span class="hljs-comment">// 由于 p1 是 shared pointer ，所以它有一个引用计数在这</span>
+    <span class="hljs-comment">// 当这里做这个赋值操作的时候，copy constructor 会增加这个引用计数</span>
+    <span class="hljs-comment">// 思考：为何不用其他比如 int&amp; y = x; 的方式来共享，而要用看起来更复杂的 shared_ptr ？</span>
+    shared_ptr&lt;<span class="hljs-type">int</span>&gt; p2 = p1;  
+    cout &lt;&lt; <span class="hljs-string">&quot;shared_ptr: p2 = &quot;</span> &lt;&lt; p2 &lt;&lt; endl;
+    cout &lt;&lt; <span class="hljs-string">&quot;shared_ptr: *p2 = &quot;</span> &lt;&lt; *p2 &lt;&lt; endl;
+    cout &lt;&lt; <span class="hljs-string">&quot;shared_ptr: p1 = &quot;</span> &lt;&lt; p1 &lt;&lt; endl;
+    cout &lt;&lt; <span class="hljs-string">&quot;shared_ptr: *p1 = &quot;</span> &lt;&lt; *p1 &lt;&lt; endl;
+
+    <span class="hljs-comment">// 查看引用计数</span>
+    cout &lt;&lt; <span class="hljs-string">&quot;in scope shared_ptr: p1.use_count() = &quot;</span> &lt;&lt; p1.<span class="hljs-built_in">use_count</span>() &lt;&lt; endl;
+    cout &lt;&lt; <span class="hljs-string">&quot;in scope shared_ptr: p2.use_count() = &quot;</span> &lt;&lt; p2.<span class="hljs-built_in">use_count</span>() &lt;&lt; endl;
+  &#125;
+
+  <span class="hljs-comment">// 出了花括号，p2 会被释放掉，引用计数再次减小为 1</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;out scope shared_ptr: p1.use_count() = &quot;</span> &lt;&lt; p1.<span class="hljs-built_in">use_count</span>() &lt;&lt; endl;
+
+  <span class="hljs-comment">// convert normal pointer to shared_ptr</span>
+  <span class="hljs-type">int</span>* p3 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">20</span>);
+  <span class="hljs-type">int</span>* p5w;
+  &#123;
+    <span class="hljs-comment">// p4(p3) 是一种初始化 shared_ptr 的语法</span>
+    <span class="hljs-comment">// 通过将 p3 作为参数传递给 p4 的构造函数，p4 将获取对这个动态分配的整数对象的所有权</span>
+    <span class="hljs-comment">// 并在 p4 生命周期结束时，会自动释放这个对象</span>
+    <span class="hljs-function">shared_ptr&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">p4</span><span class="hljs-params">(p3)</span></span>; <span class="hljs-comment">// 把普通指针转换为 Rc 的指针，但这样做不是对的</span>
+    cout &lt;&lt; <span class="hljs-string">&quot;shared_ptr: p4 = &quot;</span> &lt;&lt; p4 &lt;&lt; endl;
+    cout &lt;&lt; <span class="hljs-string">&quot;shared_ptr: *p4 = &quot;</span> &lt;&lt; *p4 &lt;&lt; endl;
+    cout &lt;&lt; <span class="hljs-string">&quot;shared_ptr: p4.use_count() = &quot;</span> &lt;&lt; p4.<span class="hljs-built_in">use_count</span>() &lt;&lt; endl;
+
+    <span class="hljs-comment">// // Can&#x27;t have two of them converted from raw pointer</span>
+    <span class="hljs-comment">// // 上面从 p3 造了一个 shared pointer 指针 p4</span>
+    <span class="hljs-comment">// // 这里又从 p3 造了一个 shared pointer 指针 p4w</span>
+    <span class="hljs-comment">// // p4 和 p4w 都认为自己的引用计数是 1，这就有问题了：</span>
+    <span class="hljs-comment">// // 当 p4 出了作用域之后，由于引用计数是 1 ，所以它会回收一次这个内存</span>
+    <span class="hljs-comment">// // 等到 p4w 出了作用域之后，由于引用计数也是 1 ，于是它会再回收一次</span>
+    <span class="hljs-comment">// // 然后 p4w 发现没有内存可以回收，于是程序就崩溃了</span>
+    <span class="hljs-comment">// shared_ptr&lt;int&gt; p4w(p3);</span>
+    <span class="hljs-comment">// cout &lt;&lt; &quot;shared_ptr: p4 = &quot; &lt;&lt; p4w &lt;&lt; endl;</span>
+    <span class="hljs-comment">// cout &lt;&lt; &quot;shared_ptr: *p4 = &quot; &lt;&lt; *p4w &lt;&lt; endl;</span>
+    <span class="hljs-comment">// cout &lt;&lt; &quot;shared_ptr: p4.use_count() = &quot; &lt;&lt; p4w.use_count() &lt;&lt; endl;</span>
+
+    <span class="hljs-comment">// // 所以在 C++ 里面，永远不应该从一个普通的 pointer 造出一个 shared pointer</span>
+    <span class="hljs-comment">// // 就像在 Rust 里面你不能把一个 borrow 的引用变成一个 owned 的</span>
+    <span class="hljs-comment">// // 比如下面的 Rust 代码就是这样的表达，无法通过编译：</span>
+    <span class="hljs-comment">// // cannot move out of `*x` which is behind a shared reference</span>
+    <span class="hljs-comment">// let s = String::from(&quot;hello&quot;);</span>
+    <span class="hljs-comment">// let x = &amp;s;</span>
+    <span class="hljs-comment">// let y = *x;</span>
+    <span class="hljs-comment">// // C++ 的这些智能指针不是语言自己实现的，所以它没法阻止你这样写，所以程序会崩溃</span>
+    <span class="hljs-comment">// // 用 make_shared 来创建 shared pointer 就能避免上述问题，因为会编译不过</span>
+
+    <span class="hljs-comment">// convert shared_ptr to normal pointer</span>
+    <span class="hljs-comment">// int* p5 = p4.get(); 这个操作相当于 borrow</span>
+    <span class="hljs-comment">// 你可以读取 p4 ，但不能释放 p4 ，你也不能在 p4 出了作用域之外还使用 p5</span>
+    <span class="hljs-type">int</span>* p5 = p4.<span class="hljs-built_in">get</span>();
     p5w = p5;
-    cout &lt;&lt; &quot;normal pointer: p5 = &quot; &lt;&lt; p5 &lt;&lt; endl;
-    cout &lt;&lt; &quot;normal pointer: *p5 = &quot; &lt;&lt; *p5 &lt;&lt; endl;
-  }
+    cout &lt;&lt; <span class="hljs-string">&quot;normal pointer: p5 = &quot;</span> &lt;&lt; p5 &lt;&lt; endl;
+    cout &lt;&lt; <span class="hljs-string">&quot;normal pointer: *p5 = &quot;</span> &lt;&lt; *p5 &lt;&lt; endl;
+  &#125;
 
-  // // p5w 指针的值（地址）还是 p5 的值，但是内容已经变了
-  // // p4 除了作用域被释放了，所以内存的内容变了，所以 *p5w 的值是错的
-  // cout &lt;&lt; &quot;p5w = &quot; &lt;&lt; p5w &lt;&lt; endl;
-  // cout &lt;&lt; &quot;*p5w = &quot; &lt;&lt; *p5w &lt;&lt; endl; 
+  <span class="hljs-comment">// // p5w 指针的值（地址）还是 p5 的值，但是内容已经变了</span>
+  <span class="hljs-comment">// // p4 除了作用域被释放了，所以内存的内容变了，所以 *p5w 的值是错的</span>
+  <span class="hljs-comment">// cout &lt;&lt; &quot;p5w = &quot; &lt;&lt; p5w &lt;&lt; endl;</span>
+  <span class="hljs-comment">// cout &lt;&lt; &quot;*p5w = &quot; &lt;&lt; *p5w &lt;&lt; endl; </span>
 
-  // // 出了作用域之后，p5w 竟然还能用，说明 C++ 内存的安全保障没有 Rust 那么强
+  <span class="hljs-comment">// // 出了作用域之后，p5w 竟然还能用，说明 C++ 内存的安全保障没有 Rust 那么强</span>
 
-}
+&#125;
 
-void shared_ptr_bug()
-{
-  // 和上文的 p4w 一样，不应该把普通指针转为 shared pointer
-  // C++ 里，永远不应该从一个普通的 pointer 造出一个 shared pointer
-  int* x = new int(10);
-  shared_ptr&lt;int&gt; p1(x);    // 能编译通过，但埋下隐患
-  // shared_ptr&lt;int&gt; p2(x);  // can&#39;t have this
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">shared_ptr_bug</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  <span class="hljs-comment">// 和上文的 p4w 一样，不应该把普通指针转为 shared pointer</span>
+  <span class="hljs-comment">// C++ 里，永远不应该从一个普通的 pointer 造出一个 shared pointer</span>
+  <span class="hljs-type">int</span>* x = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">10</span>);
+  <span class="hljs-function">shared_ptr&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">p1</span><span class="hljs-params">(x)</span></span>;    <span class="hljs-comment">// 能编译通过，但埋下隐患</span>
+  <span class="hljs-comment">// shared_ptr&lt;int&gt; p2(x);  // can&#x27;t have this</span>
 
-  // This can be avoided by using make_shared
-  // 使用 make_shared 来创造 shared pointer 可以让编译器检查出此类错误
-  // shared_ptr&lt;int&gt; p1 = make_shared&lt;int&gt;(x);  // 编译不通过
-}
+  <span class="hljs-comment">// This can be avoided by using make_shared</span>
+  <span class="hljs-comment">// 使用 make_shared 来创造 shared pointer 可以让编译器检查出此类错误</span>
+  <span class="hljs-comment">// shared_ptr&lt;int&gt; p1 = make_shared&lt;int&gt;(x);  // 编译不通过</span>
+&#125;
 
-void add1(int* x)
-{
-  *x += 1;
-}
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add1</span><span class="hljs-params">(<span class="hljs-type">int</span>* x)</span></span>
+<span class="hljs-function"></span>&#123;
+  *x += <span class="hljs-number">1</span>;
+&#125;
 
-void shared_ptr_mutation()
-{
-  cout &lt;&lt; &quot;---------------- shared_ptr_mutation ----------------&quot; &lt;&lt; endl;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">shared_ptr_mutation</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;---------------- shared_ptr_mutation ----------------&quot;</span> &lt;&lt; endl;
 
-  // 你可以对 pointer 指向的对象进行修改，这和 Rust 有点不同
-  // Rust 的 Rc 你是不能修改它的值的，你必须要在 Rc 里套一个 RefCell 才能改它的值
-  // C++ 没有这类读写锁来防止多个人同时修改同一个内存上的数据
-  // C++ 只管这些内存到最后被释放掉，而且只能释放一次
-  // 至于多线程的时候，你要怎么处理这些读写冲突问题，那就是你自己的事情，C++ 不管
-  shared_ptr&lt;int&gt; p = make_shared&lt;int&gt;(10);
-  cout &lt;&lt; &quot;shared_ptr: p = &quot; &lt;&lt; p &lt;&lt; endl;
-  cout &lt;&lt; &quot;shared_ptr: *p = &quot; &lt;&lt; *p &lt;&lt; endl;
+  <span class="hljs-comment">// 你可以对 pointer 指向的对象进行修改，这和 Rust 有点不同</span>
+  <span class="hljs-comment">// Rust 的 Rc 你是不能修改它的值的，你必须要在 Rc 里套一个 RefCell 才能改它的值</span>
+  <span class="hljs-comment">// C++ 没有这类读写锁来防止多个人同时修改同一个内存上的数据</span>
+  <span class="hljs-comment">// C++ 只管这些内存到最后被释放掉，而且只能释放一次</span>
+  <span class="hljs-comment">// 至于多线程的时候，你要怎么处理这些读写冲突问题，那就是你自己的事情，C++ 不管</span>
+  shared_ptr&lt;<span class="hljs-type">int</span>&gt; p = <span class="hljs-built_in">make_shared</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">10</span>);
+  cout &lt;&lt; <span class="hljs-string">&quot;shared_ptr: p = &quot;</span> &lt;&lt; p &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;shared_ptr: *p = &quot;</span> &lt;&lt; *p &lt;&lt; endl;
 
-  // Can use function that takes normal pointer
-  // and can mutate the value
-  add1(p.get());
-  cout &lt;&lt; &quot;shared_ptr (after add1): *p = &quot; &lt;&lt; *p &lt;&lt; endl;
+  <span class="hljs-comment">// Can use function that takes normal pointer</span>
+  <span class="hljs-comment">// and can mutate the value</span>
+  <span class="hljs-built_in">add1</span>(p.<span class="hljs-built_in">get</span>());
+  cout &lt;&lt; <span class="hljs-string">&quot;shared_ptr (after add1): *p = &quot;</span> &lt;&lt; *p &lt;&lt; endl;
 
-  *p += 1;
-  cout &lt;&lt; &quot;shared_ptr (after +=1): *p = &quot; &lt;&lt; *p &lt;&lt; endl;
-}
+  *p += <span class="hljs-number">1</span>;
+  cout &lt;&lt; <span class="hljs-string">&quot;shared_ptr (after +=1): *p = &quot;</span> &lt;&lt; *p &lt;&lt; endl;
+&#125;
 
-class Example 
-{
-  public:
-    void sayHello() { cout &lt;&lt; &quot;Hello, world!\n&quot;; }
-};
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Example</span> 
+&#123;
+  <span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">sayHello</span><span class="hljs-params">()</span> </span>&#123; cout &lt;&lt; <span class="hljs-string">&quot;Hello, world!\n&quot;</span>; &#125;
+&#125;;
 
-void misuseSharedPtr() 
-{
-  Example example; // example 是 stack 上的对象，不是指针
-  // std::shared_ptr&lt;Example&gt; ptr(&amp;example); // 错误用法！
-  // shared_ptr&lt;Example&gt; ptr(&amp;example, [](Example*){});  // OK
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">misuseSharedPtr</span><span class="hljs-params">()</span> </span>
+<span class="hljs-function"></span>&#123;
+  Example example; <span class="hljs-comment">// example 是 stack 上的对象，不是指针</span>
+  <span class="hljs-comment">// std::shared_ptr&lt;Example&gt; ptr(&amp;example); // 错误用法！</span>
+  <span class="hljs-comment">// shared_ptr&lt;Example&gt; ptr(&amp;example, [](Example*)&#123;&#125;);  // OK</span>
 
-  // make_shared&lt;Example&gt;(example) 在 heap 上复制了一份 example 的数据，所以看起来没问题
-  // 但是一般也不要这么写
-  shared_ptr&lt;Example&gt; ptr = make_shared&lt;Example&gt;(example);  // seems OK, used copy constructor?
-  ptr-&gt;sayHello();
-}
+  <span class="hljs-comment">// make_shared&lt;Example&gt;(example) 在 heap 上复制了一份 example 的数据，所以看起来没问题</span>
+  <span class="hljs-comment">// 但是一般也不要这么写</span>
+  shared_ptr&lt;Example&gt; ptr = <span class="hljs-built_in">make_shared</span>&lt;Example&gt;(example);  <span class="hljs-comment">// seems OK, used copy constructor?</span>
+  ptr-&gt;<span class="hljs-built_in">sayHello</span>();
+&#125;
 
-class Example2 
-{
-public:
-  shared_ptr&lt;int&gt; data;
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Example2</span> 
+&#123;
+<span class="hljs-keyword">public</span>:
+  shared_ptr&lt;<span class="hljs-type">int</span>&gt; data;
 
-  Example2(shared_ptr&lt;int&gt; data) : data(data) 
-  {
-    cout &lt;&lt; &quot;Example2 created with value: &quot; &lt;&lt; *data &lt;&lt; endl;
-  }
+  <span class="hljs-built_in">Example2</span>(shared_ptr&lt;<span class="hljs-type">int</span>&gt; data) : <span class="hljs-built_in">data</span>(data) 
+  &#123;
+    cout &lt;&lt; <span class="hljs-string">&quot;Example2 created with value: &quot;</span> &lt;&lt; *data &lt;&lt; endl;
+  &#125;
 
-  // 使用默认的拷贝构造函数：
-  // 这个构造函数的作用是用于创建一个新的 Example2 对象
-  // 其成员变量 data 的值与另一个 Example2 对象相同
-  // 使用 = default 来声明拷贝构造函数，表示使用编译器生成的默认实现
-  // 这种语法通常用于避免手动实现拷贝构造函数，特别是当类中没有需要手动管理的资源时。
-  Example2(const Example2&amp; other) = default;
+  <span class="hljs-comment">// 使用默认的拷贝构造函数：</span>
+  <span class="hljs-comment">// 这个构造函数的作用是用于创建一个新的 Example2 对象</span>
+  <span class="hljs-comment">// 其成员变量 data 的值与另一个 Example2 对象相同</span>
+  <span class="hljs-comment">// 使用 = default 来声明拷贝构造函数，表示使用编译器生成的默认实现</span>
+  <span class="hljs-comment">// 这种语法通常用于避免手动实现拷贝构造函数，特别是当类中没有需要手动管理的资源时。</span>
+  <span class="hljs-built_in">Example2</span>(<span class="hljs-type">const</span> Example2&amp; other) = <span class="hljs-keyword">default</span>;
 
-  ~Example2() 
-  {
-    cout &lt;&lt; &quot;Example2 destroyed, value was: &quot; &lt;&lt; *data &lt;&lt; endl;
-  }
-};
+  ~<span class="hljs-built_in">Example2</span>() 
+  &#123;
+    cout &lt;&lt; <span class="hljs-string">&quot;Example2 destroyed, value was: &quot;</span> &lt;&lt; *data &lt;&lt; endl;
+  &#125;
+&#125;;
 
-void shared_ptr_test2()
-{
-  cout &lt;&lt; &quot;---------------- shared_ptr_test2 ----------------&quot; &lt;&lt; endl;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">shared_ptr_test2</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;---------------- shared_ptr_test2 ----------------&quot;</span> &lt;&lt; endl;
 
-  shared_ptr&lt;int&gt; data = make_shared&lt;int&gt;(42);
-  Example2 a(data);
-  Example2 b = a; // 拷贝构造
+  shared_ptr&lt;<span class="hljs-type">int</span>&gt; data = <span class="hljs-built_in">make_shared</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">42</span>);
+  <span class="hljs-function">Example2 <span class="hljs-title">a</span><span class="hljs-params">(data)</span></span>;
+  Example2 b = a; <span class="hljs-comment">// 拷贝构造</span>
 
-  // 修改 b 的 data，a 的 data 也会看到改变
-  *b.data = 100;
+  <span class="hljs-comment">// 修改 b 的 data，a 的 data 也会看到改变</span>
+  *b.data = <span class="hljs-number">100</span>;
 
-  cout &lt;&lt; &quot;a&#39;s value: &quot; &lt;&lt; *a.data &lt;&lt; endl; // 输出 100
-  cout &lt;&lt; &quot;b&#39;s value: &quot; &lt;&lt; *b.data &lt;&lt; endl; // 输出 100
-  cout &lt;&lt; &quot;data&#39;s value: &quot; &lt;&lt; *data &lt;&lt; endl; // 输出 100
-}
+  cout &lt;&lt; <span class="hljs-string">&quot;a&#x27;s value: &quot;</span> &lt;&lt; *a.data &lt;&lt; endl; <span class="hljs-comment">// 输出 100</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;b&#x27;s value: &quot;</span> &lt;&lt; *b.data &lt;&lt; endl; <span class="hljs-comment">// 输出 100</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;data&#x27;s value: &quot;</span> &lt;&lt; *data &lt;&lt; endl; <span class="hljs-comment">// 输出 100</span>
+&#125;
 
-// ###########################################################
-//                        其他代码行为测试
-// ###########################################################
+<span class="hljs-comment">// ###########################################################</span>
+<span class="hljs-comment">//                        其他代码行为测试</span>
+<span class="hljs-comment">// ###########################################################</span>
 
-void ref_of_ref()
-{
-  cout &lt;&lt; &quot;---------------- ref_of_ref ----------------&quot; &lt;&lt; endl;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ref_of_ref</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;---------------- ref_of_ref ----------------&quot;</span> &lt;&lt; endl;
 
-  unique_ptr&lt;string&gt; s = make_unique&lt;string&gt;(&quot;Hello&quot;);
-  string* r1 = s.get(); // 把 unique_ptr 的指针拿出来
+  unique_ptr&lt;string&gt; s = <span class="hljs-built_in">make_unique</span>&lt;string&gt;(<span class="hljs-string">&quot;Hello&quot;</span>);
+  string* r1 = s.<span class="hljs-built_in">get</span>(); <span class="hljs-comment">// 把 unique_ptr 的指针拿出来</span>
   string** r2 = &amp;r1;
 
-  cout &lt;&lt; &quot;s = &quot; &lt;&lt; s &lt;&lt; endl;
-  cout &lt;&lt; &quot;*s = &quot; &lt;&lt; *s &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;s = &quot;</span> &lt;&lt; s &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;*s = &quot;</span> &lt;&lt; *s &lt;&lt; endl;
 
-  cout &lt;&lt; &quot;r1 = &quot; &lt;&lt; r1 &lt;&lt; endl;
-  cout &lt;&lt; &quot;*r1 = &quot; &lt;&lt; *r1 &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;r1 = &quot;</span> &lt;&lt; r1 &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;*r1 = &quot;</span> &lt;&lt; *r1 &lt;&lt; endl;
 
-  cout &lt;&lt; &quot;r2 = &quot; &lt;&lt; r2 &lt;&lt; endl;
-  cout &lt;&lt; &quot;*r2 = &quot; &lt;&lt; *r2 &lt;&lt; endl;
-  cout &lt;&lt; &quot;**r2 = &quot; &lt;&lt; **r2 &lt;&lt; endl;
-}
+  cout &lt;&lt; <span class="hljs-string">&quot;r2 = &quot;</span> &lt;&lt; r2 &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;*r2 = &quot;</span> &lt;&lt; *r2 &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;**r2 = &quot;</span> &lt;&lt; **r2 &lt;&lt; endl;
+&#125;
 
-void pass_unique_ptr(unique_ptr&lt;int&gt; p)
-{
-  cout &lt;&lt; &quot;pass_unique_ptr: p = &quot; &lt;&lt; p &lt;&lt; endl;
-  cout &lt;&lt; &quot;pass_unique_ptr: *p = &quot; &lt;&lt; *p &lt;&lt; endl;
-}
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pass_unique_ptr</span><span class="hljs-params">(unique_ptr&lt;<span class="hljs-type">int</span>&gt; p)</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;pass_unique_ptr: p = &quot;</span> &lt;&lt; p &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;pass_unique_ptr: *p = &quot;</span> &lt;&lt; *p &lt;&lt; endl;
+&#125;
 
-void pass_unique_ptr_test()
-{
-  cout &lt;&lt; &quot;---------------- pass_unique_ptr_test ----------------&quot; &lt;&lt; endl;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pass_unique_ptr_test</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;---------------- pass_unique_ptr_test ----------------&quot;</span> &lt;&lt; endl;
 
-  unique_ptr&lt;int&gt; p = make_unique&lt;int&gt;(10);
-  cout &lt;&lt; &quot;unique_ptr: p = &quot; &lt;&lt; p &lt;&lt; endl;
-  cout &lt;&lt; &quot;unique_ptr: *p = &quot; &lt;&lt; *p &lt;&lt; endl;
+  unique_ptr&lt;<span class="hljs-type">int</span>&gt; p = <span class="hljs-built_in">make_unique</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">10</span>);
+  cout &lt;&lt; <span class="hljs-string">&quot;unique_ptr: p = &quot;</span> &lt;&lt; p &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;unique_ptr: *p = &quot;</span> &lt;&lt; *p &lt;&lt; endl;
 
-  pass_unique_ptr(std::move(p));
-  cout &lt;&lt; &quot;unique_ptr: p = &quot; &lt;&lt; p &lt;&lt; endl;  // nullptr
-  // cout &lt;&lt; &quot;unique_ptr: *p = &quot; &lt;&lt; *p &lt;&lt; endl;  // Error: dereferencing nullptr
-}
+  <span class="hljs-built_in">pass_unique_ptr</span>(std::<span class="hljs-built_in">move</span>(p));
+  cout &lt;&lt; <span class="hljs-string">&quot;unique_ptr: p = &quot;</span> &lt;&lt; p &lt;&lt; endl;  <span class="hljs-comment">// nullptr</span>
+  <span class="hljs-comment">// cout &lt;&lt; &quot;unique_ptr: *p = &quot; &lt;&lt; *p &lt;&lt; endl;  // Error: dereferencing nullptr</span>
+&#125;
 
-unique_ptr&lt;int&gt; output_unique_ptr()
-{
-  unique_ptr&lt;int&gt; p = make_unique&lt;int&gt;(10);
-  return p;
-}
+<span class="hljs-function">unique_ptr&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">output_unique_ptr</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  unique_ptr&lt;<span class="hljs-type">int</span>&gt; p = <span class="hljs-built_in">make_unique</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">10</span>);
+  <span class="hljs-keyword">return</span> p;
+&#125;
 
-void output_unique_ptr_test()
-{
-  cout &lt;&lt; &quot;---------------- output_unique_ptr_test ----------------&quot; &lt;&lt; endl;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">output_unique_ptr_test</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;---------------- output_unique_ptr_test ----------------&quot;</span> &lt;&lt; endl;
 
-  unique_ptr&lt;int&gt; p = output_unique_ptr();
-  cout &lt;&lt; &quot;output_unique_ptr_test: p = &quot; &lt;&lt; p &lt;&lt; endl;
-  cout &lt;&lt; &quot;output_unique_ptr_test: *p = &quot; &lt;&lt; *p &lt;&lt; endl;
-}
+  unique_ptr&lt;<span class="hljs-type">int</span>&gt; p = <span class="hljs-built_in">output_unique_ptr</span>();
+  cout &lt;&lt; <span class="hljs-string">&quot;output_unique_ptr_test: p = &quot;</span> &lt;&lt; p &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;output_unique_ptr_test: *p = &quot;</span> &lt;&lt; *p &lt;&lt; endl;
+&#125;
 
-unique_ptr&lt;int&gt; pass_through_unique_ptr(unique_ptr&lt;int&gt; p)
-{
-  return p;
-}
+<span class="hljs-function">unique_ptr&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">pass_through_unique_ptr</span><span class="hljs-params">(unique_ptr&lt;<span class="hljs-type">int</span>&gt; p)</span></span>
+<span class="hljs-function"></span>&#123;
+  <span class="hljs-keyword">return</span> p;
+&#125;
 
-void pass_through_unique_ptr_test()
-{
-  cout &lt;&lt; &quot;---------------- pass_through_unique_ptr_test ----------------&quot; &lt;&lt; endl;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pass_through_unique_ptr_test</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;---------------- pass_through_unique_ptr_test ----------------&quot;</span> &lt;&lt; endl;
 
-  unique_ptr&lt;int&gt; p = make_unique&lt;int&gt;(10);
-  cout &lt;&lt; &quot;pass_through_unique_ptr_test: p = &quot; &lt;&lt; p &lt;&lt; endl;
-  cout &lt;&lt; &quot;pass_through_unique_ptr_test: *p = &quot; &lt;&lt; *p &lt;&lt; endl;
+  unique_ptr&lt;<span class="hljs-type">int</span>&gt; p = <span class="hljs-built_in">make_unique</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">10</span>);
+  cout &lt;&lt; <span class="hljs-string">&quot;pass_through_unique_ptr_test: p = &quot;</span> &lt;&lt; p &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;pass_through_unique_ptr_test: *p = &quot;</span> &lt;&lt; *p &lt;&lt; endl;
 
-  unique_ptr&lt;int&gt; p2 = pass_through_unique_ptr(std::move(p));
-  cout &lt;&lt; &quot;pass_through_unique_ptr_test: p2 = &quot; &lt;&lt; p2 &lt;&lt; endl;
-  cout &lt;&lt; &quot;pass_through_unique_ptr_test: *p2 = &quot; &lt;&lt; *p2 &lt;&lt; endl;
+  unique_ptr&lt;<span class="hljs-type">int</span>&gt; p2 = <span class="hljs-built_in">pass_through_unique_ptr</span>(std::<span class="hljs-built_in">move</span>(p));
+  cout &lt;&lt; <span class="hljs-string">&quot;pass_through_unique_ptr_test: p2 = &quot;</span> &lt;&lt; p2 &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;pass_through_unique_ptr_test: *p2 = &quot;</span> &lt;&lt; *p2 &lt;&lt; endl;
 
-  cout &lt;&lt; &quot;pass_through_unique_ptr_test: p = &quot; &lt;&lt; p &lt;&lt; endl;  // nullptr
-  // cout &lt;&lt; &quot;pass_through_unique_ptr_test: *p = &quot; &lt;&lt; *p &lt;&lt; endl;  // Error: dereferencing nullptr
-}
+  cout &lt;&lt; <span class="hljs-string">&quot;pass_through_unique_ptr_test: p = &quot;</span> &lt;&lt; p &lt;&lt; endl;  <span class="hljs-comment">// nullptr</span>
+  <span class="hljs-comment">// cout &lt;&lt; &quot;pass_through_unique_ptr_test: *p = &quot; &lt;&lt; *p &lt;&lt; endl;  // Error: dereferencing nullptr</span>
+&#125;
 
-template &lt;typename T&gt;
-T pass_through(const T&amp; x)
-{
-  return x;
-}
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T&gt;
+<span class="hljs-function">T <span class="hljs-title">pass_through</span><span class="hljs-params">(<span class="hljs-type">const</span> T&amp; x)</span></span>
+<span class="hljs-function"></span>&#123;
+  <span class="hljs-keyword">return</span> x;
+&#125;
 
-void pass_through_test()
-{
-  cout &lt;&lt; &quot;---------------- pass_through_test ----------------&quot; &lt;&lt; endl;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pass_through_test</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;---------------- pass_through_test ----------------&quot;</span> &lt;&lt; endl;
 
-  int x = 10;
-  int y = pass_through(x);
-  cout &lt;&lt; &quot;pass_through_test: y = &quot; &lt;&lt; y &lt;&lt; endl;
+  <span class="hljs-type">int</span> x = <span class="hljs-number">10</span>;
+  <span class="hljs-type">int</span> y = <span class="hljs-built_in">pass_through</span>(x);
+  cout &lt;&lt; <span class="hljs-string">&quot;pass_through_test: y = &quot;</span> &lt;&lt; y &lt;&lt; endl;
 
-  string s = &quot;Hello&quot;;
-  string t = pass_through(s);
-  cout &lt;&lt; &quot;pass_through_test: t = &quot; &lt;&lt; t &lt;&lt; endl;
+  string s = <span class="hljs-string">&quot;Hello&quot;</span>;
+  string t = <span class="hljs-built_in">pass_through</span>(s);
+  cout &lt;&lt; <span class="hljs-string">&quot;pass_through_test: t = &quot;</span> &lt;&lt; t &lt;&lt; endl;
 
-  unique_ptr&lt;int&gt; p = make_unique&lt;int&gt;(10);
-  // unique_ptr&lt;int&gt; q = pass_through(p);  // doesn&#39;t work
-  // cout &lt;&lt; &quot;pass_through_test: q = &quot; &lt;&lt; q &lt;&lt; endl;
-}
+  unique_ptr&lt;<span class="hljs-type">int</span>&gt; p = <span class="hljs-built_in">make_unique</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">10</span>);
+  <span class="hljs-comment">// unique_ptr&lt;int&gt; q = pass_through(p);  // doesn&#x27;t work</span>
+  <span class="hljs-comment">// cout &lt;&lt; &quot;pass_through_test: q = &quot; &lt;&lt; q &lt;&lt; endl;</span>
+&#125;
 
-class IntContainer
-{
-public:
-  int* x;
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">IntContainer</span>
+&#123;
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-type">int</span>* x;
 
-  IntContainer(int* x) : x(x) {}
+  <span class="hljs-built_in">IntContainer</span>(<span class="hljs-type">int</span>* x) : <span class="hljs-built_in">x</span>(x) &#123;&#125;
 
-  ~IntContainer()
-  {
-    cout &lt;&lt; &quot;IntContainer destructor: x = &quot; &lt;&lt; x &lt;&lt; endl;
-  }
-};
+  ~<span class="hljs-built_in">IntContainer</span>()
+  &#123;
+    cout &lt;&lt; <span class="hljs-string">&quot;IntContainer destructor: x = &quot;</span> &lt;&lt; x &lt;&lt; endl;
+  &#125;
+&#125;;
 
-class RawContainer
-{
-public:
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">RawContainer</span>
+&#123;
+<span class="hljs-keyword">public</span>:
   IntContainer* ic;
-  RawContainer(IntContainer* ic) : ic(ic) {}
-  ~RawContainer()
-  {
-    cout &lt;&lt; &quot;RawContainer destructor: ic = &quot; &lt;&lt; ic &lt;&lt; endl;
-  }
-};
+  <span class="hljs-built_in">RawContainer</span>(IntContainer* ic) : <span class="hljs-built_in">ic</span>(ic) &#123;&#125;
+  ~<span class="hljs-built_in">RawContainer</span>()
+  &#123;
+    cout &lt;&lt; <span class="hljs-string">&quot;RawContainer destructor: ic = &quot;</span> &lt;&lt; ic &lt;&lt; endl;
+  &#125;
+&#125;;
 
-void raw_container_test()
-{
-  cout &lt;&lt; &quot;---------------- raw_container_test ----------------&quot; &lt;&lt; endl;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">raw_container_test</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  cout &lt;&lt; <span class="hljs-string">&quot;---------------- raw_container_test ----------------&quot;</span> &lt;&lt; endl;
 
-  unique_ptr&lt;int&gt; int_unique = make_unique&lt;int&gt;(10);
-  int* int_raw = int_unique.get();  // 读取出 int_unique 的指针放到 int_raw 里 - 相当于 Rust 里的 borrow
+  unique_ptr&lt;<span class="hljs-type">int</span>&gt; int_unique = <span class="hljs-built_in">make_unique</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">10</span>);
+  <span class="hljs-type">int</span>* int_raw = int_unique.<span class="hljs-built_in">get</span>();  <span class="hljs-comment">// 读取出 int_unique 的指针放到 int_raw 里 - 相当于 Rust 里的 borrow</span>
 
-  // 造出一个 IntContainer 对象，然后把 int_raw 包在里面，然后各种嵌套
-  // 下面的代码显示这里的内存分配和释放没有问题 - 通过各种 ~ 标记的 destructor 打印确认对象被回收释放
-  unique_ptr&lt;IntContainer&gt; int_container_unique = make_unique&lt;IntContainer&gt;(int_raw);
-  IntContainer* int_container_raw = int_container_unique.get();
+  <span class="hljs-comment">// 造出一个 IntContainer 对象，然后把 int_raw 包在里面，然后各种嵌套</span>
+  <span class="hljs-comment">// 下面的代码显示这里的内存分配和释放没有问题 - 通过各种 ~ 标记的 destructor 打印确认对象被回收释放</span>
+  unique_ptr&lt;IntContainer&gt; int_container_unique = <span class="hljs-built_in">make_unique</span>&lt;IntContainer&gt;(int_raw);
+  IntContainer* int_container_raw = int_container_unique.<span class="hljs-built_in">get</span>();
 
-  unique_ptr&lt;RawContainer&gt; raw_container = make_unique&lt;RawContainer&gt;(int_container_raw);
+  unique_ptr&lt;RawContainer&gt; raw_container = <span class="hljs-built_in">make_unique</span>&lt;RawContainer&gt;(int_container_raw);
 
-  cout &lt;&lt; &quot;raw_container_test: int_unique = &quot; &lt;&lt; int_unique &lt;&lt; endl;
-  cout &lt;&lt; &quot;raw_container_test: int_raw = &quot; &lt;&lt; int_raw &lt;&lt; endl;
-  cout &lt;&lt; &quot;raw_container_test: int_container_unique = &quot; &lt;&lt; int_container_unique &lt;&lt; endl;
-  cout &lt;&lt; &quot;raw_container_test: *int_container_unique-&gt;x = &quot; &lt;&lt; *int_container_unique-&gt;x &lt;&lt; endl;
-  cout &lt;&lt; &quot;raw_container_test: int_container_raw = &quot; &lt;&lt; int_container_raw &lt;&lt; endl;
-  cout &lt;&lt; &quot;raw_container_test: raw_container = &quot; &lt;&lt; raw_container &lt;&lt; endl;
-}
+  cout &lt;&lt; <span class="hljs-string">&quot;raw_container_test: int_unique = &quot;</span> &lt;&lt; int_unique &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;raw_container_test: int_raw = &quot;</span> &lt;&lt; int_raw &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;raw_container_test: int_container_unique = &quot;</span> &lt;&lt; int_container_unique &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;raw_container_test: *int_container_unique-&gt;x = &quot;</span> &lt;&lt; *int_container_unique-&gt;x &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;raw_container_test: int_container_raw = &quot;</span> &lt;&lt; int_container_raw &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;raw_container_test: raw_container = &quot;</span> &lt;&lt; raw_container &lt;&lt; endl;
+&#125;
 
-class UniqueContainer
-{
-public:
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">UniqueContainer</span>
+&#123;
+<span class="hljs-keyword">public</span>:
   unique_ptr&lt;IntContainer&gt; ic;
 
-  // must pass reference _and_ move because no copy constructor for unique_ptr
-  UniqueContainer(unique_ptr&lt;IntContainer&gt;&amp; ic) : ic(std::move(ic)) {}
+  <span class="hljs-comment">// must pass reference _and_ move because no copy constructor for unique_ptr</span>
+  <span class="hljs-built_in">UniqueContainer</span>(unique_ptr&lt;IntContainer&gt;&amp; ic) : <span class="hljs-built_in">ic</span>(std::<span class="hljs-built_in">move</span>(ic)) &#123;&#125;
 
-  ~UniqueContainer()
-  {
-    cout &lt;&lt; &quot;UniqueContainer destructor: ic = &quot; &lt;&lt; ic &lt;&lt; endl;
-  }
-};
+  ~<span class="hljs-built_in">UniqueContainer</span>()
+  &#123;
+    cout &lt;&lt; <span class="hljs-string">&quot;UniqueContainer destructor: ic = &quot;</span> &lt;&lt; ic &lt;&lt; endl;
+  &#125;
+&#125;;
 
-void unique_container_test()
-{
-  // 这个例子和上面的 raw_container_test 类似，只不过两个对象里面放的是 unique pointer
-  // 在 C++ 中，函数调用的参数传递会调用 copy structor ，但是 unique pointer 是没有 copy structor 的
-  // 所以期间会需要 &amp; 符号和 std::move 操作
-  // 最后通过 destructor 来观察判断内存被正确回收释放
-  cout &lt;&lt; &quot;---------------- unqiue_container_test ----------------&quot; &lt;&lt; endl;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">unique_container_test</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  <span class="hljs-comment">// 这个例子和上面的 raw_container_test 类似，只不过两个对象里面放的是 unique pointer</span>
+  <span class="hljs-comment">// 在 C++ 中，函数调用的参数传递会调用 copy structor ，但是 unique pointer 是没有 copy structor 的</span>
+  <span class="hljs-comment">// 所以期间会需要 &amp; 符号和 std::move 操作</span>
+  <span class="hljs-comment">// 最后通过 destructor 来观察判断内存被正确回收释放</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;---------------- unqiue_container_test ----------------&quot;</span> &lt;&lt; endl;
 
-  unique_ptr&lt;int&gt; int_unique = make_unique&lt;int&gt;(10);
-  int* int_raw = int_unique.get();
+  unique_ptr&lt;<span class="hljs-type">int</span>&gt; int_unique = <span class="hljs-built_in">make_unique</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">10</span>);
+  <span class="hljs-type">int</span>* int_raw = int_unique.<span class="hljs-built_in">get</span>();
 
-  unique_ptr&lt;IntContainer&gt; int_container_unique = make_unique&lt;IntContainer&gt;(int_raw);
-//  unique_ptr&lt;IntContainer&gt; int_container_unique2 = std::move(int_container_unique);
+  unique_ptr&lt;IntContainer&gt; int_container_unique = <span class="hljs-built_in">make_unique</span>&lt;IntContainer&gt;(int_raw);
+<span class="hljs-comment">//  unique_ptr&lt;IntContainer&gt; int_container_unique2 = std::move(int_container_unique);</span>
 
-  unique_ptr&lt;UniqueContainer&gt; unique_container = make_unique&lt;UniqueContainer&gt;(int_container_unique);
-//  unique_ptr&lt;UniqueContainer&gt; unique_container = make_unique&lt;UniqueContainer&gt;(std::move(int_container_unique));
+  unique_ptr&lt;UniqueContainer&gt; unique_container = <span class="hljs-built_in">make_unique</span>&lt;UniqueContainer&gt;(int_container_unique);
+<span class="hljs-comment">//  unique_ptr&lt;UniqueContainer&gt; unique_container = make_unique&lt;UniqueContainer&gt;(std::move(int_container_unique));</span>
 
-  // After move, int_container_unique is nullptr
-  cout &lt;&lt; &quot;int_unique owns = &quot; &lt;&lt; (int_unique ? &quot;Yes&quot; : &quot;No&quot;) &lt;&lt; &quot;, value = &quot; &lt;&lt; *int_unique &lt;&lt; endl;
-  cout &lt;&lt; &quot;int_raw points to = &quot; &lt;&lt; int_raw &lt;&lt; endl;
-  cout &lt;&lt; &quot;int_container_unique has been moved = &quot; &lt;&lt; (int_container_unique ? &quot;No, not null&quot; : &quot;Yes, nullptr&quot;) &lt;&lt; endl;
+  <span class="hljs-comment">// After move, int_container_unique is nullptr</span>
+  cout &lt;&lt; <span class="hljs-string">&quot;int_unique owns = &quot;</span> &lt;&lt; (int_unique ? <span class="hljs-string">&quot;Yes&quot;</span> : <span class="hljs-string">&quot;No&quot;</span>) &lt;&lt; <span class="hljs-string">&quot;, value = &quot;</span> &lt;&lt; *int_unique &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;int_raw points to = &quot;</span> &lt;&lt; int_raw &lt;&lt; endl;
+  cout &lt;&lt; <span class="hljs-string">&quot;int_container_unique has been moved = &quot;</span> &lt;&lt; (int_container_unique ? <span class="hljs-string">&quot;No, not null&quot;</span> : <span class="hljs-string">&quot;Yes, nullptr&quot;</span>) &lt;&lt; endl;
 
-  if (unique_container &amp;&amp; unique_container-&gt;ic) 
-  {
-    cout &lt;&lt; &quot;unique_container-&gt;ic-&gt;x points to = &quot; &lt;&lt; unique_container-&gt;ic-&gt;x &lt;&lt; endl;
-    cout &lt;&lt; &quot;*unique_container-&gt;ic-&gt;x = &quot; &lt;&lt; *unique_container-&gt;ic-&gt;x &lt;&lt; endl;
-  }
+  <span class="hljs-keyword">if</span> (unique_container &amp;&amp; unique_container-&gt;ic) 
+  &#123;
+    cout &lt;&lt; <span class="hljs-string">&quot;unique_container-&gt;ic-&gt;x points to = &quot;</span> &lt;&lt; unique_container-&gt;ic-&gt;x &lt;&lt; endl;
+    cout &lt;&lt; <span class="hljs-string">&quot;*unique_container-&gt;ic-&gt;x = &quot;</span> &lt;&lt; *unique_container-&gt;ic-&gt;x &lt;&lt; endl;
+  &#125;
 
-  cout &lt;&lt; &quot;unique_container owns = &quot; &lt;&lt; (unique_container ? &quot;Yes&quot; : &quot;No&quot;) &lt;&lt; endl;
-}
+  cout &lt;&lt; <span class="hljs-string">&quot;unique_container owns = &quot;</span> &lt;&lt; (unique_container ? <span class="hljs-string">&quot;Yes&quot;</span> : <span class="hljs-string">&quot;No&quot;</span>) &lt;&lt; endl;
+&#125;
 
-int main() // C++ 中规定 main 函数一定要返回整数，所以是 int main()
-{
-  // basic_test();
-  // pointer_test();
-  // address_test();
-  // reference_test();
-  // pass_array_test();
-  // inheritance_test();
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> <span class="hljs-comment">// C++ 中规定 main 函数一定要返回整数，所以是 int main()</span></span>
+<span class="hljs-function"></span>&#123;
+  <span class="hljs-comment">// basic_test();</span>
+  <span class="hljs-comment">// pointer_test();</span>
+  <span class="hljs-comment">// address_test();</span>
+  <span class="hljs-comment">// reference_test();</span>
+  <span class="hljs-comment">// pass_array_test();</span>
+  <span class="hljs-comment">// inheritance_test();</span>
 
-  // smart_ptr_test();
-  // pointer_of_pointer_test();
+  <span class="hljs-comment">// smart_ptr_test();</span>
+  <span class="hljs-comment">// pointer_of_pointer_test();</span>
 
-  // unique_ptr_test();
-  // shared_ptr_test();
+  <span class="hljs-comment">// unique_ptr_test();</span>
+  <span class="hljs-comment">// shared_ptr_test();</span>
 
-  // shared_ptr_bug();
+  <span class="hljs-comment">// shared_ptr_bug();</span>
 
-  // misuseSharedPtr();
+  <span class="hljs-comment">// misuseSharedPtr();</span>
 
-  // shared_ptr_test2();
+  <span class="hljs-comment">// shared_ptr_test2();</span>
 
-  // shared_ptr_mutation();
+  <span class="hljs-comment">// shared_ptr_mutation();</span>
 
-  // ref_of_ref();
+  <span class="hljs-comment">// ref_of_ref();</span>
 
-  // pass_unique_ptr_test();
-  // output_unique_ptr_test();
-  // pass_through_unique_ptr_test();
+  <span class="hljs-comment">// pass_unique_ptr_test();</span>
+  <span class="hljs-comment">// output_unique_ptr_test();</span>
+  <span class="hljs-comment">// pass_through_unique_ptr_test();</span>
 
-  // pass_through_test();
+  <span class="hljs-comment">// pass_through_test();</span>
 
-  // raw_container_test();
-  // unique_container_test();
+  <span class="hljs-comment">// raw_container_test();</span>
+  <span class="hljs-comment">// unique_container_test();</span>
 
-  return 0;  
-}
-</code></pre>
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  
+&#125;</code></pre></div>
+
 <hr>
-<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
-
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation">
 
   </article>
-
 
 
     </div>
@@ -1409,8 +1446,6 @@ int main() // C++ 中规定 main 函数一定要返回整数，所以是 int mai
 <!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/search.js"></script>
-<script src="/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
 
 // comments below to disable loading animation
@@ -1449,24 +1484,7 @@ $("a[href='#top']").click(function() {
 var path = "/search.xml";
 searchFunc(path, 'local-search-input', 'local-search-result');
 
-</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
 </script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
 
 </body>
 </html>

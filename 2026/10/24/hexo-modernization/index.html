@@ -1,0 +1,330 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>升级了一下博客</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+  
+  <meta property="og:title" content="升级了一下博客"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑"/>
+   <meta property="og:image" content=""/>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+
+  <!-- Apply saved/system color theme before CSS to avoid a light-mode flash. -->
+  <script src="/js/theme-mode.js"></script>
+
+  <!-- Bootstrap 3 and Font Awesome 4.5 are kept local for reliable loading. -->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+
+  <!-- Server-side Highlight.js token colors. -->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+
+  <!-- PLN theme CSS. -->
+  <link rel="stylesheet" href="/css/m.min.css">
+
+  <link rel="icon" type="image/x-icon" href="/G.png">
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      <button class="post-theme-toggle" type="button" aria-label="切换深色模式" title="切换深色模式">
+  <i class="fa fa-moon-o" aria-hidden="true"></i>
+</button>
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        升级了一下博客
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2026-10-24T02:55:00.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2026-10-24
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Hexo/">Hexo</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+
+    
+      
+      
+        <button
+          class="post-toc-toggle"
+          type="button"
+          aria-controls="post-toc-drawer"
+          aria-expanded="false"
+          aria-label="打开文章目录"
+          title="目录">
+        </button>
+
+        <div class="post-toc-backdrop" data-toc-close aria-hidden="true"></div>
+
+        <aside
+          id="post-toc-drawer"
+          class="post-toc post-toc-drawer"
+          aria-label="文章目录"
+          aria-hidden="true">
+          <div class="post-toc-drawer-header">
+            <div class="post-toc-title">目录</div>
+            <button class="post-toc-close" type="button" data-toc-close aria-label="关闭文章目录">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="post-toc-drawer-content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A7%E7%89%88%E5%92%8C%E6%96%B0%E7%89%88%E7%9A%84%E6%95%B4%E4%BD%93%E5%8C%BA%E5%88%AB"><span class="toc-text">旧版和新版的整体区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-js-%E5%92%8C-Hexo"><span class="toc-text">Node.js 和 Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E7%9A%84%E7%BB%88%E7%AB%AF%E6%B5%81%E7%A8%8B"><span class="toc-text">新的终端流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E5%8D%9A%E5%AE%A2%E6%BA%90%E7%A0%81"><span class="toc-text">提交博客源码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E7%BD%91%E7%AB%99-GitHub-Pages"><span class="toc-text">更新网站 - GitHub Pages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%90%8E"><span class="toc-text">最后</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E8%B5%8F"><span class="toc-text">打赏</span></a></li></ol>
+          </div>
+        </aside>
+
+        <script src="/js/toc.js" defer></script>
+      
+    
+
+    
+    <p>博客最早运行在一套比较老的 Hexo 环境上。后来 Mac、Node.js、Hexo 和各种插件都升级了很多代，旧环境虽然还能勉强运行，但越来越依赖历史版本的软件，维护成本也越来越高。</p>
+<p>这次把底层运行环境、Markdown 渲染、数学公式、代码高亮、CSS 构建和响应式布局更新到现在还能长期维护的状态。</p>
+<hr>
+<h3 id="旧版和新版的整体区别"><a href="#旧版和新版的整体区别" class="headerlink" title="旧版和新版的整体区别"></a>旧版和新版的整体区别</h3><p>旧版大致是：</p>
+<div class="code-block" data-code-language="Text"><pre><code class="hljs text">Markdown
+  ↓
+Hexo 3.9.0
+  ↓
+Kramed / 旧版插件
+  ↓
+PLN 主题
+  ↓
+Stylus / node-sass / 浏览器端 Highlight.js 等旧链路
+  ↓
+静态网页</code></pre></div>
+
+<p>新版大致是：</p>
+<div class="code-block" data-code-language="Text"><pre><code class="hljs text">Markdown
+  ↓
+Hexo 8.1.2
+  ↓
+Marked + CJK 兼容处理
+  ↓
+hexo-math / Hexo 内置 Highlight.js
+  ↓
+PLN EJS 模板
+  ↓
+Dart Sass 编译 SCSS
+  ↓
+静态 HTML + CSS + 少量 JavaScript
+  ↓
+GitHub Pages</code></pre></div>
+
+<p>最大的区别不是页面看起来完全不同，而是<strong>生成网页的链路更简单、更现代，也更容易继续维护</strong>。</p>
+<hr>
+<h3 id="Node-js-和-Hexo"><a href="#Node-js-和-Hexo" class="headerlink" title="Node.js 和 Hexo"></a>Node.js 和 Hexo</h3><p>旧版最后使用的本地环境是：</p>
+<div class="code-block" data-code-language="Text"><pre><code class="hljs text">Node.js 13.14.0
+npm 6.14.4
+Hexo 3.9.0
+hexo-cli 2.0.0</code></pre></div>
+
+<p>在 Apple Silicon Mac 上，这套环境实际依赖过 x64 &#x2F; Rosetta。</p>
+<p>新版改为：</p>
+<div class="code-block" data-code-language="Text"><pre><code class="hljs text">Node.js 24 LTS
+Hexo 8.1.2
+hexo-cli 4.3.2</code></pre></div>
+
+<hr>
+<h3 id="新的终端流程"><a href="#新的终端流程" class="headerlink" title="新的终端流程"></a>新的终端流程</h3><p>写文章：</p>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/blog                 <span class="hljs-comment"># 进入博客目录</span>
+nvm use                   <span class="hljs-comment"># 依据 .nvmrc 文件切换到对应的 Node.js 版本</span>
+npx hexo new <span class="hljs-string">&quot;new post&quot;</span>   <span class="hljs-comment"># 创建新博文 - 链接格式 /2026/10/24/new-post/</span>
+
+<span class="hljs-comment"># npx 代表调用项目对应版本的 hexo ，和项目依赖严格一致，避免不兼容</span>
+<span class="hljs-comment">#（先运行当前目录中的 hexo ，没有就临时下载对应版本，执行完自动清理）</span></code></pre></div>
+
+<p>本地预览效果：</p>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/blog
+nvm use
+
+npm run build  <span class="hljs-comment"># package.json 设置了 &quot;build&quot;: &quot;hexo clean &amp;&amp; hexo generate&quot;</span>
+npx hexo s     <span class="hljs-comment"># 启动服务器，在 http://localhost:4000/ 预览博客</span></code></pre></div>
+
+<p>如果改了 PLN 主题内容，则需要先更新 <code>m.min.css</code> 再 <code>npm run build</code>：</p>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">npm run css   <span class="hljs-comment"># package.json 设置了 &quot;css&quot;: &quot;sass ... .../css/m.min.css&quot;</span></code></pre></div>
+
+<p>完整流程：</p>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">npm run css
+npm run build
+npx hexo s</code></pre></div>
+
+<hr>
+<h3 id="提交博客源码"><a href="#提交博客源码" class="headerlink" title="提交博客源码"></a>提交博客源码</h3><p>如果只是新增或修改文章：</p>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/blog
+
+git status
+git add <span class="hljs-built_in">source</span>
+git commit -m <span class="hljs-string">&quot;Update blog posts&quot;</span>
+git push origin master</code></pre></div>
+
+<p>修改 PLN 后要 commit 两次，push 两次：</p>
+<ul>
+<li><p>第一次，先提交 PLN：</p>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/blog/themes/pln
+
+git status
+git add -A
+git commit -m <span class="hljs-string">&quot;Update PLN theme&quot;</span>
+git push origin HEAD</code></pre></div>
+</li>
+<li><p>第二次，回到 blog 提交：</p>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/blog
+
+git add themes/pln
+git commit -m <span class="hljs-string">&quot;Update PLN theme revision&quot;</span>
+git push origin master</code></pre></div></li>
+</ul>
+<p>必须先 push PLN，再 push blog 的 submodule pointer。</p>
+<hr>
+<h3 id="更新网站-GitHub-Pages"><a href="#更新网站-GitHub-Pages" class="headerlink" title="更新网站 - GitHub Pages"></a>更新网站 - GitHub Pages</h3><p>博客源码仓库和最终网页不是同一个东西。日常发布可以理解为两步：</p>
+<div class="code-block" data-code-language="Text"><pre><code class="hljs text">Git push
+→ 保存博客源码
+
+Hexo deploy
+→ 更新 GitHub Pages 网页</code></pre></div>
+
+<p>Hexo 会把生成后的静态网站部署到：</p>
+<div class="code-block" data-code-language="Text"><pre><code class="hljs text">git@github.com:chpwang/chpwang.github.io.git</code></pre></div>
+
+<p>分支：</p>
+<div class="code-block" data-code-language="Text"><pre><code class="hljs text">master</code></pre></div>
+
+<p>发布：</p>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/blog
+nvm use        <span class="hljs-comment"># 依据 .nvmrc 文件切换到对应的 Node.js 版本</span>
+
+npm run build  <span class="hljs-comment"># package.json 设置了 &quot;build&quot;: &quot;hexo clean &amp;&amp; hexo generate&quot;</span>
+npx hexo d</code></pre></div>
+
+<p>发布后再打开：</p>
+<div class="code-block" data-code-language="Text"><pre><code class="hljs text">https://cps.ninja</code></pre></div>
+
+<p>检查一次最终线上效果即可。</p>
+<hr>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这次迁移没有把博客改造成另一个东西。</p>
+<p>文章仍然是 Markdown，主题仍然是 PLN，部署仍然是静态网页和 GitHub Pages。</p>
+<p>主要改变的是底层：</p>
+<div class="code-block" data-code-language="Text"><pre><code class="hljs text">旧版本依赖历史环境才能勉强运行
+↓
+新版使用当前 Node.js / Hexo / Sass / Marked
+↓
+主题和内容继续保留原来的结构</code></pre></div>
+
+<p>其他延伸阅读：<br><a href="/2019/09/18/markdown-cheat-sheet/">本博客常用的语法、排版和技巧</a></p>
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation">
+
+
+  </article>
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

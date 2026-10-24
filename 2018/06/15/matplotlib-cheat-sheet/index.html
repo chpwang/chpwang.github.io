@@ -1,40 +1,43 @@
 <!DOCTYPE HTML>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<head>
+  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="google-site-verification" content>
+  <meta name="google-site-verification" content="" />
   
   <title>Matplotlib 使用指南</title>
   <meta name="author" content="chpwang">
    <meta name="description" content="王哈哈的修行驿站">
   
-
-  <meta property="og:title" content="Matplotlib 使用指南">
+  
+  <meta property="og:title" content="Matplotlib 使用指南"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:site_name" content="行侠何须仗名剑">
- <meta property="og:image" content>
+  <meta property="og:site_name" content="行侠何须仗名剑"/>
+   <meta property="og:image" content=""/>
   
   <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
   <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
-  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
-  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
-  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+
+  <!-- Apply saved/system color theme before CSS to avoid a light-mode flash. -->
+  <script src="/js/theme-mode.js"></script>
+
+  <!-- Bootstrap 3 and Font Awesome 4.5 are kept local for reliable loading. -->
   <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
-  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
   <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
-  <!-- highlight.js代码高亮主题 css 引入-->
+
+  <!-- Server-side Highlight.js token colors. -->
   <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
-  <!-- highlight.js代码高亮主题 css 引入-->
+
+  <!-- PLN theme CSS. -->
   <link rel="stylesheet" href="/css/m.min.css">
-  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
-  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
-</html>
+
+  <link rel="icon" type="image/x-icon" href="/G.png">
+<meta name="generator" content="Hexo 8.1.2"></head>
+
 <body>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+  <div id="main">
     <div class="behind">
       <div class="back">
         <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -44,7 +47,9 @@
       </div>
     </div>
     <div class="container">
-      
+      <button class="post-theme-toggle" type="button" aria-label="切换深色模式" title="切换深色模式">
+  <i class="fa fa-moon-o" aria-hidden="true"></i>
+</button>
 
   <article class="standard post">
     <div class="title">
@@ -80,83 +85,124 @@
     <div class="picture-container">
       
     </div>
-    <p>Matplotlib 是 python 世界里常用的绘图函数库，包含很多好用的方法，此处只展示几个简单的示例，更多绘图方式参见<a href="https://pandas.pydata.org/pandas-docs/stable/visualization.html" target="_blank" rel="noopener">这里</a></p>
+
+    
+      
+      
+        <button
+          class="post-toc-toggle"
+          type="button"
+          aria-controls="post-toc-drawer"
+          aria-expanded="false"
+          aria-label="打开文章目录"
+          title="目录">
+        </button>
+
+        <div class="post-toc-backdrop" data-toc-close aria-hidden="true"></div>
+
+        <aside
+          id="post-toc-drawer"
+          class="post-toc post-toc-drawer"
+          aria-label="文章目录"
+          aria-hidden="true">
+          <div class="post-toc-drawer-header">
+            <div class="post-toc-title">目录</div>
+            <button class="post-toc-close" type="button" data-toc-close aria-label="关闭文章目录">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="post-toc-drawer-content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B1-%E7%94%A8-Matplotlib-%E5%88%9B%E5%BB%BA%E6%9F%B1%E7%8A%B6%E5%9B%BE"><span class="toc-text">示例1 - 用 Matplotlib 创建柱状图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B2-%E6%8A%98%E7%BA%BF%E5%9B%BE%EF%BC%88%E8%AE%BE%E5%AE%9A-x-%E5%92%8C-y-%E6%9B%B4%E4%B8%80%E8%88%AC%E6%80%A7%E7%9A%84%E4%BD%9C%E5%9B%BE%EF%BC%89"><span class="toc-text">示例2 - 折线图（设定 x 和 y 更一般性的作图）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B3-%E6%9F%B1%E7%8A%B6%E5%9B%BE%EF%BC%88Bar-chart%EF%BC%89"><span class="toc-text">示例3 - 柱状图（Bar chart）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%98%E5%9B%BE"><span class="toc-text">绘图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E8%B5%8F"><span class="toc-text">打赏</span></a></li></ol>
+          </div>
+        </aside>
+
+        <script src="/js/toc.js" defer></script>
+      
+    
+
+    
+    <p>Matplotlib 是 python 世界里常用的绘图函数库，包含很多好用的方法，此处只展示几个简单的示例，更多绘图方式参见<a href="https://pandas.pydata.org/pandas-docs/stable/visualization.html">这里</a></p>
 <hr>
-<h3 id="示例1-用-Matplotlib-创建柱状图"><a href="#示例1-用-Matplotlib-创建柱状图" class="headerlink" title="示例1 - 用 Matplotlib 创建柱状图"></a>示例1 - 用 Matplotlib 创建柱状图</h3><pre><code class="lang-python">import matplotlib.pyplot as plt
-import seaborn as sns    # seaborn 的载入是为了让图像更好看，通常都会搭配 matplotlib.pyplot 一同载入使用
-</code></pre>
-<p>pyplot 的 <a href="https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.bar" target="_blank" rel="noopener">bar</a> 功能中有两个必要参数：条柱的 x 坐标和条柱的高度。</p>
-<pre><code class="lang-python">plt.bar([1, 2, 3], [224, 620, 425])
-</code></pre>
+<h3 id="示例1-用-Matplotlib-创建柱状图"><a href="#示例1-用-Matplotlib-创建柱状图" class="headerlink" title="示例1 - 用 Matplotlib 创建柱状图"></a>示例1 - 用 Matplotlib 创建柱状图</h3><div class="code-block" data-code-language="Python"><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns    <span class="hljs-comment"># seaborn 的载入是为了让图像更好看，通常都会搭配 matplotlib.pyplot 一同载入使用</span></code></pre></div>
+
+<p>pyplot 的 <a href="https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.bar">bar</a> 功能中有两个必要参数：条柱的 x 坐标和条柱的高度。</p>
+<div class="code-block" data-code-language="Python"><pre><code class="hljs python">plt.bar([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">224</span>, <span class="hljs-number">620</span>, <span class="hljs-number">425</span>])</code></pre></div>
+
+
 <p>可以利用 pyplot 的 <code>xticks</code> 功能，或通过在 <code>bar</code> 功能中指定另一个参数，指定 x 轴刻度标签。以下两个框的结果相同。</p>
-<pre><code class="lang-python"># 绘制条柱
-plt.bar([1, 2, 3], [224, 620, 425])
+<div class="code-block" data-code-language="Python"><pre><code class="hljs python"><span class="hljs-comment"># 绘制条柱</span>
+plt.bar([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">224</span>, <span class="hljs-number">620</span>, <span class="hljs-number">425</span>])
 
-# 为 x 轴指定刻度标签及其标签
-plt.xticks([1, 2, 3], [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])
-</code></pre>
-<pre><code class="lang-python"># 用 x 轴的刻度标签绘制条柱
-plt.bar([1, 2, 3], [224, 620, 425], tick_label=[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])
-</code></pre>
+<span class="hljs-comment"># 为 x 轴指定刻度标签及其标签</span>
+plt.xticks([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>])</code></pre></div>
+
+<div class="code-block" data-code-language="Python"><pre><code class="hljs python"><span class="hljs-comment"># 用 x 轴的刻度标签绘制条柱</span>
+plt.bar([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">224</span>, <span class="hljs-number">620</span>, <span class="hljs-number">425</span>], tick_label=[<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>])</code></pre></div>
+
+
 <p>用以下方法设置轴标题和标签。</p>
-<pre><code class="lang-python">plt.bar([1, 2, 3], [224, 620, 425], tick_label=[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])
-plt.title(&#39;Some Title&#39;)
-plt.xlabel(&#39;Some X Label&#39;)
-plt.ylabel(&#39;Some Y Label&#39;)
-</code></pre>
-<hr>
-<h3 id="示例2-折线图（设定-x-和-y-更一般性的作图）"><a href="#示例2-折线图（设定-x-和-y-更一般性的作图）" class="headerlink" title="示例2 - 折线图（设定 x 和 y 更一般性的作图）"></a>示例2 - 折线图（设定 x 和 y 更一般性的作图）</h3><pre><code class="lang-python"># 用合适的标签创建线图
-y_axis = df.groupby(&#39;acidity_levels&#39;)[&quot;quality&quot;].mean()
-labels = [&#39;Extreme&#39;, &#39;High&#39;, &#39;Moderate&#39;, &#39;Low acidic&#39;]
-x_axis = range(len(labels))
-plt.plot(x_axis, y_axis)
-plt.title(&#39;Average Quality Ratings by Acidic Levels&#39;)
-plt.xlabel(&#39;Acidic Levels&#39;)
-plt.ylabel(&#39;Average Quality Rating&#39;);
-plt.xticks(x_axis, labels);      # 设定 x 轴上的标签（不是 x 轴变量的名字，而是把原先 x_axis 的每个值对应地换成相应的 label）
-</code></pre>
-<hr>
-<h3 id="示例3-柱状图（Bar-chart）"><a href="#示例3-柱状图（Bar-chart）" class="headerlink" title="示例3 - 柱状图（Bar chart）"></a>示例3 - 柱状图（Bar chart）</h3><pre><code class="lang-python"># genre_counts 的类型是 Series
-&#39;&#39;&#39;
-genre_counts :
-    Action             57
-    Adventure          56
-    Science Fiction    41
-    Thriller           31
-    Fantasy            28
-    Drama              28
-    Family             20
-    Crime              15
-    Comedy             13
-    Animation           7
-    Mystery             7
-    War                 4
-    Western             3
-    Romance             2
-    Horror              2
-    History             1
-    dtype: int64
-&#39;&#39;&#39;
+<div class="code-block" data-code-language="Python"><pre><code class="hljs python">plt.bar([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">224</span>, <span class="hljs-number">620</span>, <span class="hljs-number">425</span>], tick_label=[<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>])
+plt.title(<span class="hljs-string">&#x27;Some Title&#x27;</span>)
+plt.xlabel(<span class="hljs-string">&#x27;Some X Label&#x27;</span>)
+plt.ylabel(<span class="hljs-string">&#x27;Some Y Label&#x27;</span>)</code></pre></div>
 
-labels = list(genre_counts.index)
-# 使用 pandas 自带的 .plot() 快速出图后，再用 plt 进行细节设置
-genre_counts.plot(kind=&quot;bar&quot;, title=&quot;Top Popular Movie Genres&quot;);
-plt.xlabel(&#39;Genre&#39;)
-plt.ylabel(&#39;Movies Count&#39;);
-</code></pre>
 <hr>
-<h3 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h3><pre><code class="lang-python"># 设置显示说明图例（legend）
+<h3 id="示例2-折线图（设定-x-和-y-更一般性的作图）"><a href="#示例2-折线图（设定-x-和-y-更一般性的作图）" class="headerlink" title="示例2 - 折线图（设定 x 和 y 更一般性的作图）"></a>示例2 - 折线图（设定 x 和 y 更一般性的作图）</h3><div class="code-block" data-code-language="Python"><pre><code class="hljs python"><span class="hljs-comment"># 用合适的标签创建线图</span>
+y_axis = df.groupby(<span class="hljs-string">&#x27;acidity_levels&#x27;</span>)[<span class="hljs-string">&quot;quality&quot;</span>].mean()
+labels = [<span class="hljs-string">&#x27;Extreme&#x27;</span>, <span class="hljs-string">&#x27;High&#x27;</span>, <span class="hljs-string">&#x27;Moderate&#x27;</span>, <span class="hljs-string">&#x27;Low acidic&#x27;</span>]
+x_axis = <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(labels))
+plt.plot(x_axis, y_axis)
+plt.title(<span class="hljs-string">&#x27;Average Quality Ratings by Acidic Levels&#x27;</span>)
+plt.xlabel(<span class="hljs-string">&#x27;Acidic Levels&#x27;</span>)
+plt.ylabel(<span class="hljs-string">&#x27;Average Quality Rating&#x27;</span>);
+plt.xticks(x_axis, labels);      <span class="hljs-comment"># 设定 x 轴上的标签（不是 x 轴变量的名字，而是把原先 x_axis 的每个值对应地换成相应的 label）</span></code></pre></div>
+
+<hr>
+<h3 id="示例3-柱状图（Bar-chart）"><a href="#示例3-柱状图（Bar-chart）" class="headerlink" title="示例3 - 柱状图（Bar chart）"></a>示例3 - 柱状图（Bar chart）</h3><div class="code-block" data-code-language="Python"><pre><code class="hljs python"><span class="hljs-comment"># genre_counts 的类型是 Series</span>
+<span class="hljs-string">&#x27;&#x27;&#x27;</span>
+<span class="hljs-string">genre_counts :</span>
+<span class="hljs-string">    Action             57</span>
+<span class="hljs-string">    Adventure          56</span>
+<span class="hljs-string">    Science Fiction    41</span>
+<span class="hljs-string">    Thriller           31</span>
+<span class="hljs-string">    Fantasy            28</span>
+<span class="hljs-string">    Drama              28</span>
+<span class="hljs-string">    Family             20</span>
+<span class="hljs-string">    Crime              15</span>
+<span class="hljs-string">    Comedy             13</span>
+<span class="hljs-string">    Animation           7</span>
+<span class="hljs-string">    Mystery             7</span>
+<span class="hljs-string">    War                 4</span>
+<span class="hljs-string">    Western             3</span>
+<span class="hljs-string">    Romance             2</span>
+<span class="hljs-string">    Horror              2</span>
+<span class="hljs-string">    History             1</span>
+<span class="hljs-string">    dtype: int64</span>
+<span class="hljs-string">&#x27;&#x27;&#x27;</span>
+
+labels = <span class="hljs-built_in">list</span>(genre_counts.index)
+<span class="hljs-comment"># 使用 pandas 自带的 .plot() 快速出图后，再用 plt 进行细节设置</span>
+genre_counts.plot(kind=<span class="hljs-string">&quot;bar&quot;</span>, title=<span class="hljs-string">&quot;Top Popular Movie Genres&quot;</span>);
+plt.xlabel(<span class="hljs-string">&#x27;Genre&#x27;</span>)
+plt.ylabel(<span class="hljs-string">&#x27;Movies Count&#x27;</span>);</code></pre></div>
+
+<hr>
+<h3 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h3><div class="code-block" data-code-language="Python"><pre><code class="hljs python"><span class="hljs-comment"># 设置显示说明图例（legend）</span>
 plt.legend()
 
-# 设置好各种参数后，用以下指令生成图像
+<span class="hljs-comment"># 设置好各种参数后，用以下指令生成图像</span>
 plt.show()
-</code></pre>
+</code></pre></div>
+
 <hr>
-<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation">
+
+
+
 
 
   </article>
-
 
 
     </div>
@@ -183,8 +229,6 @@ plt.show()
 <!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/search.js"></script>
-<script src="/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
 
 // comments below to disable loading animation
@@ -223,24 +267,7 @@ $("a[href='#top']").click(function() {
 var path = "/search.xml";
 searchFunc(path, 'local-search-input', 'local-search-result');
 
-</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
 </script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
 
 </body>
 </html>

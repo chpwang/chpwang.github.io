@@ -1,40 +1,43 @@
 <!DOCTYPE HTML>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<head>
+  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="google-site-verification" content>
+  <meta name="google-site-verification" content="" />
   
   <title>快速上手 Python</title>
   <meta name="author" content="chpwang">
    <meta name="description" content="王哈哈的修行驿站">
   
-
-  <meta property="og:title" content="快速上手 Python">
+  
+  <meta property="og:title" content="快速上手 Python"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:site_name" content="行侠何须仗名剑">
- <meta property="og:image" content>
+  <meta property="og:site_name" content="行侠何须仗名剑"/>
+   <meta property="og:image" content=""/>
   
   <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
   <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
-  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
-  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
-  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+
+  <!-- Apply saved/system color theme before CSS to avoid a light-mode flash. -->
+  <script src="/js/theme-mode.js"></script>
+
+  <!-- Bootstrap 3 and Font Awesome 4.5 are kept local for reliable loading. -->
   <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
-  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
   <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
-  <!-- highlight.js代码高亮主题 css 引入-->
+
+  <!-- Server-side Highlight.js token colors. -->
   <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
-  <!-- highlight.js代码高亮主题 css 引入-->
+
+  <!-- PLN theme CSS. -->
   <link rel="stylesheet" href="/css/m.min.css">
-  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
-  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
-</html>
+
+  <link rel="icon" type="image/x-icon" href="/G.png">
+<meta name="generator" content="Hexo 8.1.2"></head>
+
 <body>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+  <div id="main">
     <div class="behind">
       <div class="back">
         <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -44,7 +47,9 @@
       </div>
     </div>
     <div class="container">
-      
+      <button class="post-theme-toggle" type="button" aria-label="切换深色模式" title="切换深色模式">
+  <i class="fa fa-moon-o" aria-hidden="true"></i>
+</button>
 
   <article class="standard post">
     <div class="title">
@@ -80,94 +85,126 @@
     <div class="picture-container">
       
     </div>
-    <p>像 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript#" target="_blank" rel="noopener">JavaScript</a> 这类语言的设计，适合新手学习理解特别简单编程概念。比如<strong>函数</strong>。但如果要理解<strong>面向对象（Object Oriented）</strong>的概念，用 <strong>JavaScript</strong> 会比较绕。因为它设计比较奇怪，你得去理解一些专门针对 <strong>JavaScript</strong> 设计的东西。</p>
-<p>相比之下，用 <a href="https://www.python.org" target="_blank" rel="noopener">Python</a> 来理解面向对象，思路会清晰很多。而且 Python 也有好的 IDE 支持（PyCharm 挺不错的）。当前 Python 特别流行，也是有一定原因的。</p>
+
+    
+      
+      
+        <button
+          class="post-toc-toggle"
+          type="button"
+          aria-controls="post-toc-drawer"
+          aria-expanded="false"
+          aria-label="打开文章目录"
+          title="目录">
+        </button>
+
+        <div class="post-toc-backdrop" data-toc-close aria-hidden="true"></div>
+
+        <aside
+          id="post-toc-drawer"
+          class="post-toc post-toc-drawer"
+          aria-label="文章目录"
+          aria-hidden="true">
+          <div class="post-toc-drawer-header">
+            <div class="post-toc-title">目录</div>
+            <button class="post-toc-close" type="button" data-toc-close aria-label="关闭文章目录">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="post-toc-drawer-content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Python-%E7%BC%96%E7%A8%8B%E7%8E%AF%E5%A2%83"><span class="toc-text">Python 编程环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python-%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E8%A7%84%E5%88%99"><span class="toc-text">Python 的一些基本规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">基本数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">基本的数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python-%E4%B8%AD%E7%9A%84%E6%B3%A8%E9%87%8A"><span class="toc-text">Python 中的注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89"><span class="toc-text">变量定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%86%E6%94%AF-if-%E8%AF%AD%E5%8F%A5"><span class="toc-text">条件分支 - if 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF"><span class="toc-text">循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB-class"><span class="toc-text">类 - class</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E8%A7%A3%E9%87%8A%E5%99%A8"><span class="toc-text">自解释器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%8E%E5%AF%BC%E5%85%A5%E8%84%9A%E6%9C%AC"><span class="toc-text">创建与导入脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E7%B1%BB-%E5%A4%8D%E6%9D%82%E4%BE%8B%E5%AD%90"><span class="toc-text">自定义一个类 - 复杂例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%A8%A1%E7%BB%84-Module"><span class="toc-text">常用模组 - Module</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E8%B5%8F"><span class="toc-text">打赏</span></a></li></ol>
+          </div>
+        </aside>
+
+        <script src="/js/toc.js" defer></script>
+      
+    
+
+    
+    <p>像 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript#">JavaScript</a> 这类语言的设计，适合新手学习理解特别简单编程概念。比如<strong>函数</strong>。但如果要理解<strong>面向对象（Object Oriented）</strong>的概念，用 <strong>JavaScript</strong> 会比较绕。因为它设计比较奇怪，你得去理解一些专门针对 <strong>JavaScript</strong> 设计的东西。</p>
+<p>相比之下，用 <a href="https://www.python.org/">Python</a> 来理解面向对象，思路会清晰很多。而且 Python 也有好的 IDE 支持（PyCharm 挺不错的）。当前 Python 特别流行，也是有一定原因的。</p>
 <hr>
 <h3 id="Python-编程环境"><a href="#Python-编程环境" class="headerlink" title="Python 编程环境"></a>Python 编程环境</h3><p>一般推荐两个编辑器，或者说 IDE ，来快速实践各种代码：</p>
 <ul>
-<li><a href="https://code.visualstudio.com" target="_blank" rel="noopener">VS Code</a>：微软开发的一款超轻量 IDE ，<a href="http://teahour.fm/2017/12/12/why-vscode-is-better-than-atom.html" target="_blank" rel="noopener">Teahour 91期</a> 有介绍，使用方法参考 <a href="/2018/05/25/vscode-intro/">快速上手 VS Code</a></li>
-<li><a href="https://www.jetbrains.com/pycharm/" target="_blank" rel="noopener">PyCharm</a>：JetBrains 团队开发的一款 Python 的 IDE ，安装和使用方法参考这个 <a href="https://www.youtube.com/watch?v=BPC-bGdBSM8" target="_blank" rel="noopener">YouTube 视频</a> </li>
+<li><a href="https://code.visualstudio.com/">VS Code</a>：微软开发的一款超轻量 IDE ，<a href="http://teahour.fm/2017/12/12/why-vscode-is-better-than-atom.html">Teahour 91期</a> 有介绍，使用方法参考 <a href="/2018/05/25/vscode-intro/">快速上手 VS Code</a></li>
+<li><a href="https://www.jetbrains.com/pycharm/">PyCharm</a>：JetBrains 团队开发的一款 Python 的 IDE ，安装和使用方法参考这个 <a href="https://www.youtube.com/watch?v=BPC-bGdBSM8">YouTube 视频</a></li>
 </ul>
 <p>此外，还可以选择 <a href="/2018/05/27/set-up-anaconda/">安装配置 Anaconda</a> ，以使用 Anaconda 附带的 Python 在终端里运行。</p>
-<pre><code class="lang-bash">## 通过 Homebrew 安装 python
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-comment">## 通过 Homebrew 安装 python</span>
 $ brew install python3
 
-## 查看 Python 的版本
+<span class="hljs-comment">## 查看 Python 的版本</span>
 $ python3 --version
 Python 3.6.5 :: Anaconda custom (64-bit)
 
-## 运行 *.py 的 Python 脚本文件
-$ cat ~/scripts/first_script.py         # 显示 first_script.py 文件里的内容
-print(&#39;Congratulations on running this script!!&#39;)
+<span class="hljs-comment">## 运行 *.py 的 Python 脚本文件</span>
+$ <span class="hljs-built_in">cat</span> ~/scripts/first_script.py         <span class="hljs-comment"># 显示 first_script.py 文件里的内容</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Congratulations on running this script!!&#x27;</span>)
 
-$ python3 ~/scripts/first_script.py     # 用 python3 运行 first_script.py 文件
+$ python3 ~/scripts/first_script.py     <span class="hljs-comment"># 用 python3 运行 first_script.py 文件</span>
 Congratulations on running this script!!
 
-## 直接输入命令 python ，不带任何文件和参数，会进入 interactive interpreter（交互式解释器），可进行各种 Python 的语法测试
+<span class="hljs-comment">## 直接输入命令 python ，不带任何文件和参数，会进入 interactive interpreter（交互式解释器），可进行各种 Python 的语法测试</span>
 $ python3
 [GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)] on darwin
-Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
-&gt;&gt;&gt;exit()
-$
-</code></pre>
-<p>PS:<br>个人推荐新手使用 <a href="https://code.visualstudio.com" target="_blank" rel="noopener"><strong>VS Code</strong></a> ，这东西介于编辑器和 IDE（Integrated Development Environment）之间，既有编辑器的简洁，又有 IDE 的强大功能，关键是安装配置起来特别简单，最适合新手。<br>可以参考这篇<a href="/2018/05/25/vscode-intro/">上手 Visual Studio Code</a> 设置 Python 的运行环境。</p>
+Type <span class="hljs-string">&quot;help&quot;</span>, <span class="hljs-string">&quot;copyright&quot;</span>, <span class="hljs-string">&quot;credits&quot;</span> or <span class="hljs-string">&quot;license&quot;</span> <span class="hljs-keyword">for</span> more information.
+&gt;&gt;&gt;<span class="hljs-built_in">exit</span>()
+$</code></pre></div>
+
+<p>PS:<br>个人推荐新手使用 <a href="https://code.visualstudio.com/"><strong>VS Code</strong></a> ，这东西介于编辑器和 IDE（Integrated Development Environment）之间，既有编辑器的简洁，又有 IDE 的强大功能，关键是安装配置起来特别简单，最适合新手。<br>可以参考这篇<a href="/2018/05/25/vscode-intro/">上手 Visual Studio Code</a> 设置 Python 的运行环境。</p>
 <hr>
 <h3 id="Python-的一些基本规则"><a href="#Python-的一些基本规则" class="headerlink" title="Python 的一些基本规则"></a>Python 的一些基本规则</h3><ol>
 <li>变量区分大小写，即 case sensitive</li>
 <li>空格重要，附带语意，即 spacing matters</li>
-<li>运算符号有优先级（比如乘除法 * / 优先级高于加减法 +-）</li>
+<li>运算符号有优先级（比如乘除法 * &#x2F; 优先级高于加减法 +-）</li>
 <li>运算的优先级可以使用括号来确定：优先级方向为从里往外</li>
-<li>Python 中名为 <code>_</code> 的变量（underscore variable）多数情况下代表忽略这个值，其他详细参见<a href="https://hackernoon.com/understanding-the-underscore-of-python-309d1a029edc" target="_blank" rel="noopener">这里</a></li>
+<li>Python 中名为 <code>_</code> 的变量（underscore variable）多数情况下代表忽略这个值，其他详细参见<a href="https://hackernoon.com/understanding-the-underscore-of-python-309d1a029edc">这里</a></li>
 <li>Python 变量名的规则不用 listSum 这种大小写混合，而是用下划线分隔多个单词，写成 list_sum 这样</li>
-<li><p>Python 赋值时是「传址（引用）」效果，而不是「传值」效果。见下例：</p>
-<pre><code class="lang-python">a = [1, 2, 3]
-b = a        # b 和 a 指向同一个列表对象，而不是把 a 的内容复制给 b
-b.append(4)  # 修改 b 的内容，a 也会一起改变
-print(a)     # 输出 [1, 2, 3, 4]
-
-# 如果函数参数有默认值，这个值又是可变对象时，容易出错
-def foo(data=[]):
- data.append(1)
- return data
-
-print(foo())  # [1]
-print(foo())  # [1, 1] - 意外结果
-</code></pre>
-</li>
+<li>Python 赋值时是「传址（引用）」效果，而不是「传值」效果。见下例：</li>
 </ol>
-<p>附：<br><a href="https://www.jianshu.com/p/a793c0d960fe" target="_blank" rel="noopener">Python 命名规范</a></p>
+  <div class="code-block" data-code-language="Python"><pre><code class="hljs python">a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
+b = a        <span class="hljs-comment"># b 和 a 指向同一个列表对象，而不是把 a 的内容复制给 b</span>
+b.append(<span class="hljs-number">4</span>)  <span class="hljs-comment"># 修改 b 的内容，a 也会一起改变</span>
+<span class="hljs-built_in">print</span>(a)     <span class="hljs-comment"># 输出 [1, 2, 3, 4]</span>
+
+<span class="hljs-comment"># 如果函数参数有默认值，这个值又是可变对象时，容易出错</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">foo</span>(<span class="hljs-params">data=[]</span>):
+  data.append(<span class="hljs-number">1</span>)
+  <span class="hljs-keyword">return</span> data
+
+<span class="hljs-built_in">print</span>(foo())  <span class="hljs-comment"># [1]</span>
+<span class="hljs-built_in">print</span>(foo())  <span class="hljs-comment"># [1, 1] - 意外结果</span></code></pre></div>
+
+
+<p>附：<br><a href="https://www.jianshu.com/p/a793c0d960fe">Python 命名规范</a></p>
 <hr>
 <h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><ul>
 <li><p>整数 - <strong>int</strong></p>
-<pre><code class="lang-bash">&gt;&gt;&gt; 2 * 3
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">&gt;&gt;&gt; 2 * 3
 6
-&gt;&gt;&gt; 3 // 2  # 取整
-1
-</code></pre>
+&gt;&gt;&gt; 3 // 2  <span class="hljs-comment"># 取整</span>
+1</code></pre></div>
 </li>
 <li><p>浮点数 - <strong>float</strong><br>整数和浮点数在电脑里是有差别的，整数和浮点数混合计算会被转化为浮点数，结果也是浮点数</p>
-<pre><code class="lang-bash">&gt;&gt;&gt; 3 / 2
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">&gt;&gt;&gt; 3 / 2
 1.5
 &gt;&gt;&gt; 1.5 * 2
-3.0
-</code></pre>
+3.0</code></pre></div>
 </li>
 <li><p>复数 - <strong>complex</strong><br>这是一种用于数学计算的数据类型，Python 中用 <code>j</code> 来表示虚数</p>
-<pre><code class="lang-bash">&gt;&gt;&gt; (1 + 2j) * (1 + 2j)
-(-3+4j)
-</code></pre>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">&gt;&gt;&gt; (1 + 2j) * (1 + 2j)
+(-3+4j)</code></pre></div>
 </li>
-<li><p>字符串 - <strong>string</strong><br>可以用单引号 <code>&#39;hello&#39;</code> ，也可以用双引号 <code>&quot;hello&quot;</code><br>一个常用的字符串方法：<a href="https://docs.python.org/3/library/stdtypes.html#str.split" target="_blank" rel="noopener"><code>str.split()</code></a></p>
-<pre><code class="lang-bash">&gt;&gt;&gt; &#39;1,2,3&#39;.split(&#39;,&#39;)
-[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
-&gt;&gt;&gt; &#39;1,2,3&#39;.split(&#39;,&#39;, maxsplit=1)
-[&#39;1&#39;, &#39;2,3&#39;]
-&gt;&gt;&gt; &quot;1,2,,3,&quot;.split(&#39;,&#39;)
-[&#39;1&#39;, &#39;2&#39;, &#39;&#39;, &#39;3&#39;, &#39;&#39;]
-</code></pre>
+<li><p>字符串 - <strong>string</strong><br>可以用单引号 <code>&#39;hello&#39;</code> ，也可以用双引号 <code>&quot;hello&quot;</code><br>一个常用的字符串方法：<a href="https://docs.python.org/3/library/stdtypes.html#str.split"><code>str.split()</code></a></p>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">&gt;&gt;&gt; <span class="hljs-string">&#x27;1,2,3&#x27;</span>.<span class="hljs-built_in">split</span>(<span class="hljs-string">&#x27;,&#x27;</span>)
+[<span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>]
+&gt;&gt;&gt; <span class="hljs-string">&#x27;1,2,3&#x27;</span>.<span class="hljs-built_in">split</span>(<span class="hljs-string">&#x27;,&#x27;</span>, maxsplit=1)
+[<span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;2,3&#x27;</span>]
+&gt;&gt;&gt; <span class="hljs-string">&quot;1,2,,3,&quot;</span>.<span class="hljs-built_in">split</span>(<span class="hljs-string">&#x27;,&#x27;</span>)
+[<span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>]</code></pre></div>
 </li>
 <li><p>布尔类型 - <strong>bool</strong><br>Python 中不用 <code>&amp;&amp;</code> 而是用 <code>and</code> 来代表「<strong>且</strong>」<br>其实 <code>&amp;&amp;</code> 并不是一个好设计，因为这个符号没有 <code>and</code> 直观易懂</p>
-<pre><code class="lang-bash">&gt;&gt;&gt; 1&lt;2 and 3&gt;4
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">&gt;&gt;&gt; 1&lt;2 and 3&gt;4
 False
 &gt;&gt;&gt; 1&lt;2 or 3&gt;4
 True
@@ -175,391 +212,382 @@ True
 False
 &gt;&gt;&gt; 1 == 2
 False
-&gt;&gt;&gt; type(1==2)
-&lt;class &#39;bool&#39;&gt;                # 注意这里返回的类型，不是「字符串」
-&gt;&gt;&gt; type(type(1==2))
-&lt;class &#39;type&#39;&gt;                # 它是一个 type 类，即 class &#39;type&#39;
-&gt;&gt;&gt; type(1==2) == &quot;bool&quot;      # 所以不能用这种方式来判断数据的类型
+&gt;&gt;&gt; <span class="hljs-built_in">type</span>(1==2)
+&lt;class <span class="hljs-string">&#x27;bool&#x27;</span>&gt;                <span class="hljs-comment"># 注意这里返回的类型，不是「字符串」</span>
+&gt;&gt;&gt; <span class="hljs-built_in">type</span>(<span class="hljs-built_in">type</span>(1==2))
+&lt;class <span class="hljs-string">&#x27;type&#x27;</span>&gt;                <span class="hljs-comment"># 它是一个 type 类，即 class &#x27;type&#x27;</span>
+&gt;&gt;&gt; <span class="hljs-built_in">type</span>(1==2) == <span class="hljs-string">&quot;bool&quot;</span>      <span class="hljs-comment"># 所以不能用这种方式来判断数据的类型</span>
 False
-&gt;&gt;&gt; type(1==2) == type(1&lt;2)   # 对应地，可以用这种方式来判断数据类型
+&gt;&gt;&gt; <span class="hljs-built_in">type</span>(1==2) == <span class="hljs-built_in">type</span>(1&lt;2)   <span class="hljs-comment"># 对应地，可以用这种方式来判断数据类型</span>
 True
-&gt;&gt;&gt; type(1==2) == type(False) # Python 的类型设计是要比 JavaScript 严格很多的
-True                          # 所以做科学计算或者 AI 用的就是 Python 而不是 JavaScript
+&gt;&gt;&gt; <span class="hljs-built_in">type</span>(1==2) == <span class="hljs-built_in">type</span>(False) <span class="hljs-comment"># Python 的类型设计是要比 JavaScript 严格很多的</span>
+True                          <span class="hljs-comment"># 所以做科学计算或者 AI 用的就是 Python 而不是 JavaScript</span>
 
-## 正规判断类型的方法是用 isinstance(object, type)
+<span class="hljs-comment">## 正规判断类型的方法是用 isinstance(object, type)</span>
 &gt;&gt;&gt; isinstance(2, bool)
 False
 &gt;&gt;&gt; isinstance(2 &lt; 3, bool)
-True
-</code></pre>
+True</code></pre></div>
 </li>
 <li><p><strong>None</strong><br>这是 Python 里面的一种专门的数据类型，代表「没有」，类似 JavaScript 里的 Null</p>
-<pre><code class="lang-bash">&gt;&gt;&gt; None         # 注意第一个字母 N 是大写
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">&gt;&gt;&gt; None         <span class="hljs-comment"># 注意第一个字母 N 是大写</span>
 &gt;&gt;&gt; x = None
-&gt;&gt;&gt; x            # 没输出不显示
-&gt;&gt;&gt; print(x)     # 用 print 能打印出来
+&gt;&gt;&gt; x            <span class="hljs-comment"># 没输出不显示</span>
+&gt;&gt;&gt; <span class="hljs-built_in">print</span>(x)     <span class="hljs-comment"># 用 print 能打印出来</span>
 None
-&gt;&gt;&gt; print(None)
-None
-</code></pre>
-</li>
+&gt;&gt;&gt; <span class="hljs-built_in">print</span>(None)
+None</code></pre></div></li>
 </ul>
 <hr>
 <h3 id="基本的数据结构"><a href="#基本的数据结构" class="headerlink" title="基本的数据结构"></a>基本的数据结构</h3><ul>
 <li><p>列表 - <strong>List</strong><br>在编程中，「<code>链表（Linked List）</code>」和「<code>列表（List）</code>」通常不是同一个概念：<br><strong>链表</strong>是一种数据结构，由一系列节点组成，每个节点包含数据以及指向下一个节点的指针；<br><strong>列表</strong>是一种抽象数据类型（ADT），用来存储一系列元素的有序集合。列表可以有不同的实现方式，包括数组、链表等，甚至可以是其他数据结构的组合。<strong>链表</strong>是<strong>列表</strong>的一种实现方式；<br>在编程中，「<strong>列表</strong>」通常更广泛地指代一种抽象数据类型，而「<strong>链表</strong>」则更具体地指代一种特定的数据结构。<br>因此，它们的主要区别在于抽象性和具体性；</p>
-<pre><code class="lang-bash">&gt;&gt;&gt; li = [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">&gt;&gt;&gt; li = [<span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>]
 
-## li 的定义看起来像数组，但其实不是，它的类型是 class &#39;list&#39;
-## 但你可以认为它就是一个数组
-&gt;&gt;&gt; type(li)
-&lt;class &#39;list&#39;&gt;
+<span class="hljs-comment">## li 的定义看起来像数组，但其实不是，它的类型是 class &#x27;list&#x27;</span>
+<span class="hljs-comment">## 但你可以认为它就是一个数组</span>
+&gt;&gt;&gt; <span class="hljs-built_in">type</span>(li)
+&lt;class <span class="hljs-string">&#x27;list&#x27;</span>&gt;
 
-## 所以你可以用下标访问 - 下标从 0 开始
+<span class="hljs-comment">## 所以你可以用下标访问 - 下标从 0 开始</span>
 &gt;&gt;&gt; li[0]
 1
 
-## slice 操作
-## 访问 list 中下标从 0 到 2 的部分 - 注意这里不包括 li[2]
-## 相当于 [0, 2) 的感觉
+<span class="hljs-comment">## slice 操作</span>
+<span class="hljs-comment">## 访问 list 中下标从 0 到 2 的部分 - 注意这里不包括 li[2]</span>
+<span class="hljs-comment">## 相当于 [0, 2) 的感觉</span>
 &gt;&gt;&gt; li[0:2]
 [1, 2]
 
-## 访问从头到某个下标（不包括 li[1]）
+<span class="hljs-comment">## 访问从头到某个下标（不包括 li[1]）</span>
 &gt;&gt;&gt; li[:1]
 [1]
 
-## 访问从某个下标到最后
+<span class="hljs-comment">## 访问从某个下标到最后</span>
 &gt;&gt;&gt; li[1:]
 [2, 3]
 
-## 赋值或者定义的时候，传递的是引用，而不是复制一份
+<span class="hljs-comment">## 赋值或者定义的时候，传递的是引用，而不是复制一份</span>
 &gt;&gt;&gt; li
 [1, 2, 3]
 &gt;&gt;&gt; li2 = li
-&gt;&gt;&gt; li2[1] = 9    # 可以看到 li2 改变的同时，li 也被改变了
+&gt;&gt;&gt; li2[1] = 9    <span class="hljs-comment"># 可以看到 li2 改变的同时，li 也被改变了</span>
 &gt;&gt;&gt; li
 [1, 9, 3]
 
-## 如果要复制一份而不是传递引用，需要用 .copy() 这个方法
+<span class="hljs-comment">## 如果要复制一份而不是传递引用，需要用 .copy() 这个方法</span>
 &gt;&gt;&gt; li2 = li.copy()
 &gt;&gt;&gt; li[1] = 2
 &gt;&gt;&gt; li2
 [1, 9, 3]
 &gt;&gt;&gt; li
-[1, 2, 3]     # 所以在使用 python 的时候你要注意它是同一个对象还是不同的
+[1, 2, 3]     <span class="hljs-comment"># 所以在使用 python 的时候你要注意它是同一个对象还是不同的</span>
 
-## 越界访问会报错 - 这是个好设计
-## 如果返回 undefined 之类的数据，就有可能被到处传递引发潜在问题而难以被定位纠正
+<span class="hljs-comment">## 越界访问会报错 - 这是个好设计</span>
+<span class="hljs-comment">## 如果返回 undefined 之类的数据，就有可能被到处传递引发潜在问题而难以被定位纠正</span>
 &gt;&gt;&gt; li[3]
 Traceback (most recent call last):
-  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+  File <span class="hljs-string">&quot;&lt;stdin&gt;&quot;</span>, line 1, <span class="hljs-keyword">in</span> &lt;module&gt;
 IndexError: list index out of range
 
-## 计算列表长度
+<span class="hljs-comment">## 计算列表长度</span>
 &gt;&gt;&gt; len(li)
 3
 
-## 使用 dir 可以看到一个类型（对象）里有哪些方法（methods）
-&gt;&gt;&gt; dir(li)
-[&#39;__add__&#39;, &#39;__class__&#39;, &#39;__class_getitem__&#39;, &#39;__contains__&#39;, &#39;__delattr__&#39;, &#39;__delitem__&#39;, &#39;__dir__&#39;, &#39;__doc__&#39;, 
-&#39;__eq__&#39;, &#39;__format__&#39;, &#39;__ge__&#39;, &#39;__getattribute__&#39;, &#39;__getitem__&#39;, &#39;__gt__&#39;, &#39;__hash__&#39;, &#39;__iadd__&#39;, &#39;__imul__&#39;, 
-&#39;__init__&#39;, &#39;__init_subclass__&#39;, &#39;__iter__&#39;, &#39;__le__&#39;, &#39;__len__&#39;, &#39;__lt__&#39;, &#39;__mul__&#39;, &#39;__ne__&#39;, &#39;__new__&#39;, 
-&#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__reversed__&#39;, &#39;__rmul__&#39;, &#39;__setattr__&#39;, &#39;__setitem__&#39;, &#39;__sizeof__&#39;, 
-&#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;append&#39;, &#39;clear&#39;, &#39;copy&#39;, &#39;count&#39;, &#39;extend&#39;, &#39;index&#39;, &#39;insert&#39;, &#39;pop&#39;, &#39;remove&#39;, 
-&#39;reverse&#39;, &#39;sort&#39;]
+<span class="hljs-comment">## 使用 dir 可以看到一个类型（对象）里有哪些方法（methods）</span>
+&gt;&gt;&gt; <span class="hljs-built_in">dir</span>(li)
+[<span class="hljs-string">&#x27;__add__&#x27;</span>, <span class="hljs-string">&#x27;__class__&#x27;</span>, <span class="hljs-string">&#x27;__class_getitem__&#x27;</span>, <span class="hljs-string">&#x27;__contains__&#x27;</span>, <span class="hljs-string">&#x27;__delattr__&#x27;</span>, <span class="hljs-string">&#x27;__delitem__&#x27;</span>, <span class="hljs-string">&#x27;__dir__&#x27;</span>, <span class="hljs-string">&#x27;__doc__&#x27;</span>, 
+<span class="hljs-string">&#x27;__eq__&#x27;</span>, <span class="hljs-string">&#x27;__format__&#x27;</span>, <span class="hljs-string">&#x27;__ge__&#x27;</span>, <span class="hljs-string">&#x27;__getattribute__&#x27;</span>, <span class="hljs-string">&#x27;__getitem__&#x27;</span>, <span class="hljs-string">&#x27;__gt__&#x27;</span>, <span class="hljs-string">&#x27;__hash__&#x27;</span>, <span class="hljs-string">&#x27;__iadd__&#x27;</span>, <span class="hljs-string">&#x27;__imul__&#x27;</span>, 
+<span class="hljs-string">&#x27;__init__&#x27;</span>, <span class="hljs-string">&#x27;__init_subclass__&#x27;</span>, <span class="hljs-string">&#x27;__iter__&#x27;</span>, <span class="hljs-string">&#x27;__le__&#x27;</span>, <span class="hljs-string">&#x27;__len__&#x27;</span>, <span class="hljs-string">&#x27;__lt__&#x27;</span>, <span class="hljs-string">&#x27;__mul__&#x27;</span>, <span class="hljs-string">&#x27;__ne__&#x27;</span>, <span class="hljs-string">&#x27;__new__&#x27;</span>, 
+<span class="hljs-string">&#x27;__reduce__&#x27;</span>, <span class="hljs-string">&#x27;__reduce_ex__&#x27;</span>, <span class="hljs-string">&#x27;__repr__&#x27;</span>, <span class="hljs-string">&#x27;__reversed__&#x27;</span>, <span class="hljs-string">&#x27;__rmul__&#x27;</span>, <span class="hljs-string">&#x27;__setattr__&#x27;</span>, <span class="hljs-string">&#x27;__setitem__&#x27;</span>, <span class="hljs-string">&#x27;__sizeof__&#x27;</span>, 
+<span class="hljs-string">&#x27;__str__&#x27;</span>, <span class="hljs-string">&#x27;__subclasshook__&#x27;</span>, <span class="hljs-string">&#x27;append&#x27;</span>, <span class="hljs-string">&#x27;clear&#x27;</span>, <span class="hljs-string">&#x27;copy&#x27;</span>, <span class="hljs-string">&#x27;count&#x27;</span>, <span class="hljs-string">&#x27;extend&#x27;</span>, <span class="hljs-string">&#x27;index&#x27;</span>, <span class="hljs-string">&#x27;insert&#x27;</span>, <span class="hljs-string">&#x27;pop&#x27;</span>, <span class="hljs-string">&#x27;remove&#x27;</span>, 
+<span class="hljs-string">&#x27;reverse&#x27;</span>, <span class="hljs-string">&#x27;sort&#x27;</span>]
 
-## 按 2 次 Tab 键进行补全，它就会提示你当前可用的所有方法（methods）
+<span class="hljs-comment">## 按 2 次 Tab 键进行补全，它就会提示你当前可用的所有方法（methods）</span>
 &gt;&gt;&gt; li.
 li.append(  li.copy(    li.extend(  li.insert(  li.remove(  li.sort(
 li.clear(   li.count(   li.index(   li.pop(     li.reverse(
 
-## 插入元素 - 这里 insert 元素到开头还是比较费事的，不像 pair 那种 list 时间复杂度只有 O(1)
-## 为了程序的效率，一般不会把东西插到中间
+<span class="hljs-comment">## 插入元素 - 这里 insert 元素到开头还是比较费事的，不像 pair 那种 list 时间复杂度只有 O(1)</span>
+<span class="hljs-comment">## 为了程序的效率，一般不会把东西插到中间</span>
 &gt;&gt;&gt; li.insert(0, 9)
 &gt;&gt;&gt; li
 [9, 1, 2, 3]
 
-## 排序
+<span class="hljs-comment">## 排序</span>
 &gt;&gt;&gt; li.sort()
 &gt;&gt;&gt; li
 [1, 2, 3, 9]
 
-## 取出最后一个元素
+<span class="hljs-comment">## 取出最后一个元素</span>
 &gt;&gt;&gt; li.pop()
 9
 &gt;&gt;&gt; li
 [1, 2, 3]
 
-## 列表里增加新元素（element）
-## 效果一
+<span class="hljs-comment">## 列表里增加新元素（element）</span>
+<span class="hljs-comment">## 效果一</span>
 &gt;&gt;&gt; li.append([4])
 &gt;&gt;&gt; li
-[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, [4]]  # 可以看到 list 里每个元素的类型不一定要相同 
+[<span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>, [4]]  <span class="hljs-comment"># 可以看到 list 里每个元素的类型不一定要相同 </span>
 
-## 效果二
+<span class="hljs-comment">## 效果二</span>
 &gt;&gt;&gt; li.extend([4])
 &gt;&gt;&gt; li
-[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, [4], 4]
+[<span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>, [4], 4]
 
-## 效果三
+<span class="hljs-comment">## 效果三</span>
 &gt;&gt;&gt; li + [5]
-[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, [4], 4, 5]
+[<span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>, [4], 4, 5]
 &gt;&gt;&gt; li
-[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, [4], 4]
+[<span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>, [4], 4]
 
-## 使用「列表推导式（List Comprehension）」来生成 List
-&gt;&gt;&gt; li_c = [x**2 for x in range(10)]
+<span class="hljs-comment">## 使用「列表推导式（List Comprehension）」来生成 List</span>
+&gt;&gt;&gt; li_c = [x**2 <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(10)]
 &gt;&gt;&gt; li_c
 [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
 
-# 「列表推导式」中的 if
-&gt;&gt;&gt; [x for x in li_c if x % 2 == 0]
+<span class="hljs-comment"># 「列表推导式」中的 if</span>
+&gt;&gt;&gt; [x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> li_c <span class="hljs-keyword">if</span> x % 2 == 0]
 [0, 4, 16, 36, 64]
 
-## 「列表推导式」中的 if-else
-## 注意这里用了跟上面单纯的 if 不同的结构，所以 if 和 for 的位置顺序也不一样  
-## The expression 「 x if C else y 」 first evaluates the condition, C rather than x. 
-## If C is true, x is evaluated and its value is returned.
-## Otherwise, y is evaluated and its value is returned.
-&gt;&gt;&gt; [x if x % 2 == 0 else 3 for x in li_c]
+<span class="hljs-comment">## 「列表推导式」中的 if-else</span>
+<span class="hljs-comment">## 注意这里用了跟上面单纯的 if 不同的结构，所以 if 和 for 的位置顺序也不一样  </span>
+<span class="hljs-comment">## The expression 「 x if C else y 」 first evaluates the condition, C rather than x. </span>
+<span class="hljs-comment">## If C is true, x is evaluated and its value is returned.</span>
+<span class="hljs-comment">## Otherwise, y is evaluated and its value is returned.</span>
+&gt;&gt;&gt; [x <span class="hljs-keyword">if</span> x % 2 == 0 <span class="hljs-keyword">else</span> 3 <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> li_c]
 [0, 3, 4, 3, 16, 3, 36, 3, 64, 3]
 
-## 「列表推导式」中的「列表推导式」- 嵌套
-&gt;&gt;&gt; [ [x**2 for x in li] for li in [[1,3,5], [2,4,6]] ]
+<span class="hljs-comment">## 「列表推导式」中的「列表推导式」- 嵌套</span>
+&gt;&gt;&gt; [ [x**2 <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> li] <span class="hljs-keyword">for</span> li <span class="hljs-keyword">in</span> [[1,3,5], [2,4,6]] ]
 [[1, 9, 25], [4, 16, 36]]
 
-## 对 List 中的元素进行 map 操作
+<span class="hljs-comment">## 对 List 中的元素进行 map 操作</span>
 &gt;&gt;&gt; list(map(lambda x:x+1, li_c))
-[1, 2, 5, 10, 17, 26, 37, 50, 65, 82]
-</code></pre>
+[1, 2, 5, 10, 17, 26, 37, 50, 65, 82]</code></pre></div>
 </li>
 <li><p>元组 - <strong>tuple</strong><br><code>tuple</code> 和 <code>list</code> 的区别在于，<code>tuple</code> 是不可更改的</p>
-<pre><code class="lang-bash">## Tuple 用的是括号来表示，区别于 list 的方括号 []
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-comment">## Tuple 用的是括号来表示，区别于 list 的方括号 []</span>
 &gt;&gt;&gt; t = (1, 2, 3, 4, 5, 5, 5)
 &gt;&gt;&gt; t[1]
 2
 
-## 无法更改
+<span class="hljs-comment">## 无法更改</span>
 &gt;&gt;&gt; t[1] = 0
 Traceback (most recent call last):
-  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
-TypeError: &#39;tuple&#39; object does not support item assignment
+  File <span class="hljs-string">&quot;&lt;stdin&gt;&quot;</span>, line 1, <span class="hljs-keyword">in</span> &lt;module&gt;
+TypeError: <span class="hljs-string">&#x27;tuple&#x27;</span> object does not support item assignment
 
-## len 函数可以接收多种数据类型 - 这里是一个面向对象语言好的地方
+<span class="hljs-comment">## len 函数可以接收多种数据类型 - 这里是一个面向对象语言好的地方</span>
 &gt;&gt;&gt; len(t)
-7
-</code></pre>
+7</code></pre></div>
 </li>
 <li><p>字典 - <strong>dict</strong><br>字典本质上就是哈希表，即键值对（key-value pair）。比如对于 <code>{&#39;Ace&#39;: 1, &#39;Queen&#39;: 12}</code> 这一字典来说，<strong>‘Ace’</strong> 和 <strong>‘Queen’</strong> 就是<strong>键</strong>（Key），而对应的 <strong>1</strong> 和 <strong>12</strong> 就是<strong>值</strong>（Value）</p>
-<pre><code class="lang-bash">## dict 用花括号来表示，类型是 class &#39;dict&#39;
-&gt;&gt;&gt; d = {&#39;a&#39;: 1, &#39;b&#39;: 2}
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-comment">## dict 用花括号来表示，类型是 class &#x27;dict&#x27;</span>
+&gt;&gt;&gt; d = &#123;<span class="hljs-string">&#x27;a&#x27;</span>: 1, <span class="hljs-string">&#x27;b&#x27;</span>: 2&#125;
 &gt;&gt;&gt; d
-{&#39;a&#39;: 1, &#39;b&#39;: 2}
-&gt;&gt;&gt; type(d)
-&lt;class &#39;dict&#39;&gt;
+&#123;<span class="hljs-string">&#x27;a&#x27;</span>: 1, <span class="hljs-string">&#x27;b&#x27;</span>: 2&#125;
+&gt;&gt;&gt; <span class="hljs-built_in">type</span>(d)
+&lt;class <span class="hljs-string">&#x27;dict&#x27;</span>&gt;
 
-## 你需要用下标来访问，而不能当成对象（object）来用
-## Python 里把 dict 和 object 区分开了 - 这是一个好设计
-&gt;&gt;&gt; d[&#39;a&#39;]
+<span class="hljs-comment">## 你需要用下标来访问，而不能当成对象（object）来用</span>
+<span class="hljs-comment">## Python 里把 dict 和 object 区分开了 - 这是一个好设计</span>
+&gt;&gt;&gt; d[<span class="hljs-string">&#x27;a&#x27;</span>]
 1
-&gt;&gt;&gt; d.a                                # 用 .a 来访问会报错
+&gt;&gt;&gt; d.a                                <span class="hljs-comment"># 用 .a 来访问会报错</span>
 Traceback (most recent call last):
-  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
-AttributeError: &#39;dict&#39; object has no attribute &#39;a&#39;
+  File <span class="hljs-string">&quot;&lt;stdin&gt;&quot;</span>, line 1, <span class="hljs-keyword">in</span> &lt;module&gt;
+AttributeError: <span class="hljs-string">&#x27;dict&#x27;</span> object has no attribute <span class="hljs-string">&#x27;a&#x27;</span>
 
-## 修改和添加
-&gt;&gt;&gt; d[&#39;a&#39;] = 5         # 赋值
-&gt;&gt;&gt; d[&#39;c&#39;] = 12        # 添加新的 key
+<span class="hljs-comment">## 修改和添加</span>
+&gt;&gt;&gt; d[<span class="hljs-string">&#x27;a&#x27;</span>] = 5         <span class="hljs-comment"># 赋值</span>
+&gt;&gt;&gt; d[<span class="hljs-string">&#x27;c&#x27;</span>] = 12        <span class="hljs-comment"># 添加新的 key</span>
 &gt;&gt;&gt; d
-{&#39;a&#39;: 5, &#39;b&#39;: 2, &#39;c&#39;: 12}
+&#123;<span class="hljs-string">&#x27;a&#x27;</span>: 5, <span class="hljs-string">&#x27;b&#x27;</span>: 2, <span class="hljs-string">&#x27;c&#x27;</span>: 12&#125;
 
-## 判断某个 key 是否存在与某个字典中（注：case sensitive）
-&gt;&gt;&gt; &quot;ace&quot; in {&#39;ace&#39;: 1}
+<span class="hljs-comment">## 判断某个 key 是否存在与某个字典中（注：case sensitive）</span>
+&gt;&gt;&gt; <span class="hljs-string">&quot;ace&quot;</span> <span class="hljs-keyword">in</span> &#123;<span class="hljs-string">&#x27;ace&#x27;</span>: 1&#125;
 True
 
-## 计算字典长度
-&gt;&gt;&gt; state_value = {(6, 10, False): -1.0, (15, 10, False): -1.0}
+<span class="hljs-comment">## 计算字典长度</span>
+&gt;&gt;&gt; state_value = &#123;(6, 10, False): -1.0, (15, 10, False): -1.0&#125;
 &gt;&gt;&gt; len(state_value)
 2
 
-## 使用「列表推导式（List Comprehension）」来生成字典（dictionary）
-&gt;&gt;&gt; vocab_to_int = {word: ii for ii, word in int_to_vocab.items()}
+<span class="hljs-comment">## 使用「列表推导式（List Comprehension）」来生成字典（dictionary）</span>
+&gt;&gt;&gt; vocab_to_int = &#123;word: ii <span class="hljs-keyword">for</span> ii, word <span class="hljs-keyword">in</span> int_to_vocab.items()&#125;
 
-## 这里也可以用「列表推导式（List Comprehension）」来实现使用函数 f 来对字典的内容进行 Map
-{k: f(v) for k, v in my_dictionary.items()}
-</code></pre>
-<p>模组 <a href="https://docs.python.org/3/library/collections.html" target="_blank" rel="noopener"><strong>collections</strong></a> 中的 <strong>defaultdict</strong> 类能更方便地处理 value 为列表（list）、字典（dictionary）的情况，其用法参见<a href="https://www.accelebrate.com/blog/using-defaultdict-python/" target="_blank" rel="noopener">Using defaultdict in Python</a></p>
-<pre><code class="lang-bash">&gt;&gt;&gt; from collections import defaultdict
-&gt;&gt;&gt; city_list = [(&#39;TX&#39;,&#39;Austin&#39;), (&#39;TX&#39;,&#39;Houston&#39;), (&#39;NY&#39;,&#39;Albany&#39;), (&#39;NY&#39;, &#39;Syracuse&#39;), (&#39;NY&#39;, &#39;Buffalo&#39;), (&#39;NY&#39;, &#39;Rochester&#39;), (&#39;TX&#39;, &#39;Dallas&#39;), (&#39;CA&#39;,&#39;Sacramento&#39;), (&#39;CA&#39;, &#39;Palo Alto&#39;), (&#39;GA&#39;, &#39;Atlanta&#39;)]
+<span class="hljs-comment">## 这里也可以用「列表推导式（List Comprehension）」来实现使用函数 f 来对字典的内容进行 Map</span>
+&#123;k: f(v) <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> my_dictionary.items()&#125;</code></pre></div>
+
+<p>模组 <a href="https://docs.python.org/3/library/collections.html"><strong>collections</strong></a> 中的 <strong>defaultdict</strong> 类能更方便地处理 value 为列表（list）、字典（dictionary）的情况，其用法参见<a href="https://www.accelebrate.com/blog/using-defaultdict-python/">Using defaultdict in Python</a></p>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">&gt;&gt;&gt; from collections import defaultdict
+&gt;&gt;&gt; city_list = [(<span class="hljs-string">&#x27;TX&#x27;</span>,<span class="hljs-string">&#x27;Austin&#x27;</span>), (<span class="hljs-string">&#x27;TX&#x27;</span>,<span class="hljs-string">&#x27;Houston&#x27;</span>), (<span class="hljs-string">&#x27;NY&#x27;</span>,<span class="hljs-string">&#x27;Albany&#x27;</span>), (<span class="hljs-string">&#x27;NY&#x27;</span>, <span class="hljs-string">&#x27;Syracuse&#x27;</span>), (<span class="hljs-string">&#x27;NY&#x27;</span>, <span class="hljs-string">&#x27;Buffalo&#x27;</span>), (<span class="hljs-string">&#x27;NY&#x27;</span>, <span class="hljs-string">&#x27;Rochester&#x27;</span>), (<span class="hljs-string">&#x27;TX&#x27;</span>, <span class="hljs-string">&#x27;Dallas&#x27;</span>), (<span class="hljs-string">&#x27;CA&#x27;</span>,<span class="hljs-string">&#x27;Sacramento&#x27;</span>), (<span class="hljs-string">&#x27;CA&#x27;</span>, <span class="hljs-string">&#x27;Palo Alto&#x27;</span>), (<span class="hljs-string">&#x27;GA&#x27;</span>, <span class="hljs-string">&#x27;Atlanta&#x27;</span>)]
 &gt;&gt;&gt;
 &gt;&gt;&gt; cities_by_state = defaultdict(list)
-&gt;&gt;&gt; for state, city in city_list:
+&gt;&gt;&gt; <span class="hljs-keyword">for</span> state, city <span class="hljs-keyword">in</span> city_list:
 ...     cities_by_state[state].append(city)
 ...
-for state, cities in cities_by_state.iteritems():
-...     print state, &#39;, &#39;.join(cities)
+<span class="hljs-keyword">for</span> state, cities <span class="hljs-keyword">in</span> cities_by_state.iteritems():
+...     <span class="hljs-built_in">print</span> state, <span class="hljs-string">&#x27;, &#x27;</span>.<span class="hljs-built_in">join</span>(cities)
 ...
 NY Albany, Syracuse, Buffalo, Rochester
 CA Sacramento, Palo Alto
 GA Atlanta
-TX Austin, Houston, Dallas
-</code></pre>
+TX Austin, Houston, Dallas</code></pre></div>
 </li>
 <li><p>集合 - <strong>set</strong><br>集合也是数学计算中会常用到的数据结构：</p>
-<pre><code class="lang-bash">## Set 也是花括号，可以注意到内部的顺序是乱的
-&gt;&gt;&gt; s = {&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;t&#39;, &#39;hello&#39;}
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-comment">## Set 也是花括号，可以注意到内部的顺序是乱的</span>
+&gt;&gt;&gt; s = &#123;<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;t&#x27;</span>, <span class="hljs-string">&#x27;hello&#x27;</span>&#125;
 &gt;&gt;&gt; s
-{&#39;t&#39;, &#39;b&#39;, &#39;hello&#39;, &#39;c&#39;, &#39;a&#39;}
+&#123;<span class="hljs-string">&#x27;t&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;hello&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;a&#x27;</span>&#125;
 
-## 增加元素
-&gt;&gt;&gt; s.add(&#39;world&#39;)
+<span class="hljs-comment">## 增加元素</span>
+&gt;&gt;&gt; s.add(<span class="hljs-string">&#x27;world&#x27;</span>)
 &gt;&gt;&gt; s
-{&#39;world&#39;, &#39;t&#39;, &#39;b&#39;, &#39;hello&#39;, &#39;c&#39;, &#39;a&#39;}
+&#123;<span class="hljs-string">&#x27;world&#x27;</span>, <span class="hljs-string">&#x27;t&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;hello&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;a&#x27;</span>&#125;
 
-## 判断某个元素是否存在 - 可以认为这是个二元操作（binop）
-&gt;&gt;&gt; &#39;t&#39; in s
+<span class="hljs-comment">## 判断某个元素是否存在 - 可以认为这是个二元操作（binop）</span>
+&gt;&gt;&gt; <span class="hljs-string">&#x27;t&#x27;</span> <span class="hljs-keyword">in</span> s
 True
-&gt;&gt;&gt; &#39;hi&#39; in s
+&gt;&gt;&gt; <span class="hljs-string">&#x27;hi&#x27;</span> <span class="hljs-keyword">in</span> s
 False
 
-## set 的相关运算
-&gt;&gt;&gt; s2 = {&#39;a&#39;, &#39;t&#39;, &#39;world&#39;, &#39;y&#39;, &#39;i&#39;}
+<span class="hljs-comment">## set 的相关运算</span>
+&gt;&gt;&gt; s2 = &#123;<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;t&#x27;</span>, <span class="hljs-string">&#x27;world&#x27;</span>, <span class="hljs-string">&#x27;y&#x27;</span>, <span class="hljs-string">&#x27;i&#x27;</span>&#125;
 &gt;&gt;&gt; s - s2
-{&#39;b&#39;, &#39;hello&#39;, &#39;c&#39;}
+&#123;<span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;hello&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>&#125;
 &gt;&gt;&gt; s
-{&#39;world&#39;, &#39;t&#39;, &#39;b&#39;, &#39;hello&#39;, &#39;c&#39;, &#39;a&#39;}             # 不会改变原来的集合 s
+&#123;<span class="hljs-string">&#x27;world&#x27;</span>, <span class="hljs-string">&#x27;t&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;hello&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;a&#x27;</span>&#125;             <span class="hljs-comment"># 不会改变原来的集合 s</span>
 &gt;&gt;&gt; s.intersection(s2)
-{&#39;world&#39;, &#39;t&#39;, &#39;a&#39;}                                # 交集
+&#123;<span class="hljs-string">&#x27;world&#x27;</span>, <span class="hljs-string">&#x27;t&#x27;</span>, <span class="hljs-string">&#x27;a&#x27;</span>&#125;                                <span class="hljs-comment"># 交集</span>
 &gt;&gt;&gt; s.union(s2)
-{&#39;world&#39;, &#39;t&#39;, &#39;b&#39;, &#39;c&#39;, &#39;i&#39;, &#39;y&#39;, &#39;hello&#39;, &#39;a&#39;}   # 并集
-</code></pre>
-</li>
+&#123;<span class="hljs-string">&#x27;world&#x27;</span>, <span class="hljs-string">&#x27;t&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;i&#x27;</span>, <span class="hljs-string">&#x27;y&#x27;</span>, <span class="hljs-string">&#x27;hello&#x27;</span>, <span class="hljs-string">&#x27;a&#x27;</span>&#125;   <span class="hljs-comment"># 并集</span></code></pre></div></li>
 </ul>
 <hr>
 <h3 id="Python-中的注释"><a href="#Python-中的注释" class="headerlink" title="Python 中的注释"></a>Python 中的注释</h3><ul>
 <li>以 <code>#</code> 开头的行</li>
 <li>以 <code>&quot;&quot;&quot;</code>（三个双引号）包裹的代码块（Code Block）</li>
 </ul>
-<pre><code class="lang-python">## codes by chpwang - 2018-05-17 04:57:56
+<div class="code-block" data-code-language="Python"><pre><code class="hljs python"><span class="hljs-comment">## codes by chpwang - 2018-05-17 04:57:56</span>
 
-&quot;&quot;&quot;
-任务3:
-xxxxxx
-&quot;&quot;&quot;
-</code></pre>
+<span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">任务3:</span>
+<span class="hljs-string">xxxxxx</span>
+<span class="hljs-string">&quot;&quot;&quot;</span></code></pre></div>
+
 <hr>
 <h3 id="变量定义"><a href="#变量定义" class="headerlink" title="变量定义"></a>变量定义</h3><p>Python 里面定义变量不需要 <code>var</code> 这类关键词，直接写就行，末尾也不用分号。</p>
-<pre><code class="lang-python">## 变量定义
-x = 2 * 3
+<div class="code-block" data-code-language="Python"><pre><code class="hljs python"><span class="hljs-comment">## 变量定义</span>
+x = <span class="hljs-number">2</span> * <span class="hljs-number">3</span>
 
-## 赋值
-x = 12
+<span class="hljs-comment">## 赋值</span>
+x = <span class="hljs-number">12</span>
 
-## 变量定义还可以解析结构
-l1 = [9, 8]
+<span class="hljs-comment">## 变量定义还可以解析结构</span>
+l1 = [<span class="hljs-number">9</span>, <span class="hljs-number">8</span>]
 [u, v] = l1
 
-print(u)  # 9
-print(v)  # 8
-</code></pre>
+<span class="hljs-built_in">print</span>(u)  <span class="hljs-comment"># 9</span>
+<span class="hljs-built_in">print</span>(v)  <span class="hljs-comment"># 8</span></code></pre></div>
+
 <hr>
 <h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>Python 里面经常用「冒号」来分隔语言的各个部分。这里参数后面是冒号。新手要注意，冒号容易忘记写。</p>
-<pre><code class="lang-python">## 匿名函数 x =&gt; x * x
-lambda x: x * x
+<div class="code-block" data-code-language="Python"><pre><code class="hljs python"><span class="hljs-comment">## 匿名函数 x =&gt; x * x</span>
+<span class="hljs-keyword">lambda</span> x: x * x
 
-## 函数调用
-(lambda x: x * x)(3)
+<span class="hljs-comment">## 函数调用</span>
+(<span class="hljs-keyword">lambda</span> x: x * x)(<span class="hljs-number">3</span>)
 
-## 函数定义
-square1 = lambda x: x*x
+<span class="hljs-comment">## 函数定义</span>
+square1 = <span class="hljs-keyword">lambda</span> x: x*x
 
-def square2(x): return x*x
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">square2</span>(<span class="hljs-params">x</span>): <span class="hljs-keyword">return</span> x*x
 
-## 这里「缩进」很重要，python 靠缩进来判断函数体
-## 如果函数体语句多，注意缩进要对齐，不能有的缩进 2 格，有的只缩进 1 格
-## 「缩进」是一种危险的糟糕设计，容易出错，比如有时 return 缩进错了，可能就跑到外部去了
-## 缩进设计似乎只是为了少写一些括号
-def square3(x):
-  return x*x
+<span class="hljs-comment">## 这里「缩进」很重要，python 靠缩进来判断函数体</span>
+<span class="hljs-comment">## 如果函数体语句多，注意缩进要对齐，不能有的缩进 2 格，有的只缩进 1 格</span>
+<span class="hljs-comment">## 「缩进」是一种危险的糟糕设计，容易出错，比如有时 return 缩进错了，可能就跑到外部去了</span>
+<span class="hljs-comment">## 缩进设计似乎只是为了少写一些括号</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">square3</span>(<span class="hljs-params">x</span>):
+  <span class="hljs-keyword">return</span> x*x
 
 
-result1 = 10
-result2 = 10
+result1 = <span class="hljs-number">10</span>
+result2 = <span class="hljs-number">10</span>
 
-## square4 中的 result 是局部变量，不改变外面的 result
-def square4(x):
+<span class="hljs-comment">## square4 中的 result 是局部变量，不改变外面的 result</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">square4</span>(<span class="hljs-params">x</span>):
   result1 = x*x
-  return result
+  <span class="hljs-keyword">return</span> result
 
-## 加了 global 关键词后，square5 中的 result 就是全局变量了
-## 调用 square5 会改变外面的 result
-def square5(x):
-  global result
+<span class="hljs-comment">## 加了 global 关键词后，square5 中的 result 就是全局变量了</span>
+<span class="hljs-comment">## 调用 square5 会改变外面的 result</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">square5</span>(<span class="hljs-params">x</span>):
+  <span class="hljs-keyword">global</span> result
   result = x*x
-  return result
+  <span class="hljs-keyword">return</span> result
 
-print(square4(4))  # 16
-print(result1)     # 10
-print(square5(4))  # 16
-print(result1)     # 16
+<span class="hljs-built_in">print</span>(square4(<span class="hljs-number">4</span>))  <span class="hljs-comment"># 16</span>
+<span class="hljs-built_in">print</span>(result1)     <span class="hljs-comment"># 10</span>
+<span class="hljs-built_in">print</span>(square5(<span class="hljs-number">4</span>))  <span class="hljs-comment"># 16</span>
+<span class="hljs-built_in">print</span>(result1)     <span class="hljs-comment"># 16</span>
 
 
-## 函数也可以什么都不做，但要写一个 pass ，不能什么都不写
-def do_nothing(x):
-  pass
-</code></pre>
-<pre><code class="lang-bash">&gt;&gt;&gt; def minus(x, y): return x - y
+<span class="hljs-comment">## 函数也可以什么都不做，但要写一个 pass ，不能什么都不写</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">do_nothing</span>(<span class="hljs-params">x</span>):
+  <span class="hljs-keyword">pass</span></code></pre></div>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">&gt;&gt;&gt; def minus(x, y): <span class="hljs-built_in">return</span> x - y
 ...
 &gt;&gt;&gt; minus(9, 6)
 3
-&gt;&gt;&gt; minus(y=9, x=6)  # python 的函数调用可以指定参数的值，这样可以无视参数的调用顺序
--3                   # 好处是如果参数比较多，把各参数名和值写上，代码阅读起来就很直观 - 这是个好设计
-</code></pre>
+&gt;&gt;&gt; minus(y=9, x=6)  <span class="hljs-comment"># python 的函数调用可以指定参数的值，这样可以无视参数的调用顺序</span>
+-3                   <span class="hljs-comment"># 好处是如果参数比较多，把各参数名和值写上，代码阅读起来就很直观 - 这是个好设计</span></code></pre></div>
+
 <hr>
 <h3 id="条件分支-if-语句"><a href="#条件分支-if-语句" class="headerlink" title="条件分支 - if 语句"></a>条件分支 - if 语句</h3><p><strong>注意</strong>，<code>else if</code> 分支在这里写作 <code>elif</code></p>
-<pre><code class="lang-python">def fib(n):
-  if n == 0:
-    return 0
-  elif n == 1:
-    return 1
-  else:
-    return fib(n-1) + fib(n-2)
+<div class="code-block" data-code-language="Python"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">fib</span>(<span class="hljs-params">n</span>):
+  <span class="hljs-keyword">if</span> n == <span class="hljs-number">0</span>:
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>
+  <span class="hljs-keyword">elif</span> n == <span class="hljs-number">1</span>:
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>
+  <span class="hljs-keyword">else</span>:
+    <span class="hljs-keyword">return</span> fib(n-<span class="hljs-number">1</span>) + fib(n-<span class="hljs-number">2</span>)
 
 
-if season == &#39;spring&#39;:
-    print(&#39;plant the garden!&#39;)
-elif season == &#39;summer&#39;:
-    print(&#39;water the garden!&#39;)
-else:
-    print(&#39;unrecognized season&#39;)
+<span class="hljs-keyword">if</span> season == <span class="hljs-string">&#x27;spring&#x27;</span>:
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;plant the garden!&#x27;</span>)
+<span class="hljs-keyword">elif</span> season == <span class="hljs-string">&#x27;summer&#x27;</span>:
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;water the garden!&#x27;</span>)
+<span class="hljs-keyword">else</span>:
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;unrecognized season&#x27;</span>)
 
 
-## 三元操作符（Ternary Operator）写法
-x = true_value if condition else false_value
+<span class="hljs-comment">## 三元操作符（Ternary Operator）写法</span>
+x = true_value <span class="hljs-keyword">if</span> condition <span class="hljs-keyword">else</span> false_value
 
-## lambda 中的 if - 无法在 lambda 匿名函数中使用 print 打印，或者 raise 报错
-lambda x: True if x % 2 == 0 else False
-</code></pre>
+<span class="hljs-comment">## lambda 中的 if - 无法在 lambda 匿名函数中使用 print 打印，或者 raise 报错</span>
+<span class="hljs-keyword">lambda</span> x: <span class="hljs-literal">True</span> <span class="hljs-keyword">if</span> x % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-literal">False</span></code></pre></div>
+
 <hr>
-<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><pre><code class="lang-bash">## Python 中的循环一般不用下标
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-comment">## Python 中的循环一般不用下标</span>
 &gt;&gt;&gt; a = [2, 3, 4, 6]
-&gt;&gt;&gt; for x in a:
-...  print(x)
+&gt;&gt;&gt; <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> a:
+...  <span class="hljs-built_in">print</span>(x)
 ...
 2
 3
 4
 6
 
-## 可以使用这种模式匹配来直接取出 key 和 value 而不用后续访问下标 - 这是好设计
-&gt;&gt;&gt; for [k, v] in [[&quot;dog&quot;, 1], [&quot;cat&quot;, 2], [&quot;fish&quot;, 3]]:
-...     print(f&quot;{k}: {v}&quot;)
+<span class="hljs-comment">## 可以使用这种模式匹配来直接取出 key 和 value 而不用后续访问下标 - 这是好设计</span>
+&gt;&gt;&gt; <span class="hljs-keyword">for</span> [k, v] <span class="hljs-keyword">in</span> [[<span class="hljs-string">&quot;dog&quot;</span>, 1], [<span class="hljs-string">&quot;cat&quot;</span>, 2], [<span class="hljs-string">&quot;fish&quot;</span>, 3]]:
+...     <span class="hljs-built_in">print</span>(f<span class="hljs-string">&quot;&#123;k&#125;: &#123;v&#125;&quot;</span>)
 ...
 dog: 1
-cat: 2
+<span class="hljs-built_in">cat</span>: 2
 fish: 3
 
-## 模式匹配（pattern match）还可以用于赋值，比如交换变量的数据
+<span class="hljs-comment">## 模式匹配（pattern match）还可以用于赋值，比如交换变量的数据</span>
 &gt;&gt;&gt; [x, y] = [3, 4]
 &gt;&gt;&gt; x
 3
@@ -571,33 +599,33 @@ fish: 3
 &gt;&gt;&gt; y
 3
 
-## 和 range(start, stop, step) 函数结合使用
-&gt;&gt;&gt; for i in range(0, 2, 1):
-...     print(i)
+<span class="hljs-comment">## 和 range(start, stop, step) 函数结合使用</span>
+&gt;&gt;&gt; <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(0, 2, 1):
+...     <span class="hljs-built_in">print</span>(i)
 ...
 0
 1
 
-## 这里说明一下这个 range
-## 可以认为 range(5) 的效果就相当于生成了一个 [0, 1, 2, 3, 4] 这样的 list
-## 然后我们就可以 for i in range(5)
-## 虽然效果上是一样的，但实际上 range 不会真的生成一个 list
-## range 多用于循环，如果真生成一个 list ，就会影响计算性能并占用空间
-## 比如这样一来 range(1000000) 就很吃计算资源了
-## range 实际上生成的是一种 lazy list（惰性列表）
-## 惰性列表的意思是，它不会真的给你放到内存里面去
-## range(5) 会返回一个 range 对象，按需计算元素的值，内存高效（memory efficient）
+<span class="hljs-comment">## 这里说明一下这个 range</span>
+<span class="hljs-comment">## 可以认为 range(5) 的效果就相当于生成了一个 [0, 1, 2, 3, 4] 这样的 list</span>
+<span class="hljs-comment">## 然后我们就可以 for i in range(5)</span>
+<span class="hljs-comment">## 虽然效果上是一样的，但实际上 range 不会真的生成一个 list</span>
+<span class="hljs-comment">## range 多用于循环，如果真生成一个 list ，就会影响计算性能并占用空间</span>
+<span class="hljs-comment">## 比如这样一来 range(1000000) 就很吃计算资源了</span>
+<span class="hljs-comment">## range 实际上生成的是一种 lazy list（惰性列表）</span>
+<span class="hljs-comment">## 惰性列表的意思是，它不会真的给你放到内存里面去</span>
+<span class="hljs-comment">## range(5) 会返回一个 range 对象，按需计算元素的值，内存高效（memory efficient）</span>
 
-## python 中的 for 循环都要用 for x in ... 这种形式，如果 x 是是数字，就要用这个 range
-## 有人认为这样的 for 循环表达能力有限，不能表达复杂的逻辑，range 只能表达简单的数字
-## 比如无法写出类似 for(var i=0, j=array.length; i &lt; j; i++, j--) 的代码
-## 但其实这是 python 的一个好设计。当表达不了的时候，就不应该使用 for 循环，而要改用 while 循环
-## 上述复杂的 for 循环需要思考到底是先判断 i &lt; j 还是先计算 i++ 和 j--，不利于代码阅读理解
+<span class="hljs-comment">## python 中的 for 循环都要用 for x in ... 这种形式，如果 x 是是数字，就要用这个 range</span>
+<span class="hljs-comment">## 有人认为这样的 for 循环表达能力有限，不能表达复杂的逻辑，range 只能表达简单的数字</span>
+<span class="hljs-comment">## 比如无法写出类似 for(var i=0, j=array.length; i &lt; j; i++, j--) 的代码</span>
+<span class="hljs-comment">## 但其实这是 python 的一个好设计。当表达不了的时候，就不应该使用 for 循环，而要改用 while 循环</span>
+<span class="hljs-comment">## 上述复杂的 for 循环需要思考到底是先判断 i &lt; j 还是先计算 i++ 和 j--，不利于代码阅读理解</span>
 
-## 用 reversed 配合 range 倒数
-## 写成 for i in range(4, -1, -1) 虽然是同样的效果，但阅读理解上不直观
-&gt;&gt;&gt; for i in reversed(range(0, 5)):
-...     print(i)
+<span class="hljs-comment">## 用 reversed 配合 range 倒数</span>
+<span class="hljs-comment">## 写成 for i in range(4, -1, -1) 虽然是同样的效果，但阅读理解上不直观</span>
+&gt;&gt;&gt; <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> reversed(range(0, 5)):
+...     <span class="hljs-built_in">print</span>(i)
 ...
 4
 3
@@ -605,44 +633,44 @@ fish: 3
 1
 0
 
-# 和 zip() 函数结合使用
-&gt;&gt;&gt; alist = [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;]
-&gt;&gt;&gt; blist = [&#39;b1&#39;, &#39;b2&#39;, &#39;b3&#39;]
-&gt;&gt;&gt; for a, b in zip(alist, blist):
-...     print(a, b)
+<span class="hljs-comment"># 和 zip() 函数结合使用</span>
+&gt;&gt;&gt; alist = [<span class="hljs-string">&#x27;a1&#x27;</span>, <span class="hljs-string">&#x27;a2&#x27;</span>, <span class="hljs-string">&#x27;a3&#x27;</span>]
+&gt;&gt;&gt; blist = [<span class="hljs-string">&#x27;b1&#x27;</span>, <span class="hljs-string">&#x27;b2&#x27;</span>, <span class="hljs-string">&#x27;b3&#x27;</span>]
+&gt;&gt;&gt; <span class="hljs-keyword">for</span> a, b <span class="hljs-keyword">in</span> zip(alist, blist):
+...     <span class="hljs-built_in">print</span>(a, b)
 ...
 a1 b1
 a2 b2
 a3 b3
 
-## upack 一个 list 也是常用的循环 - 若觉得下行的说明不清楚就开终端试一试
-## 此例第 1 次循环取出第一个元素 [1, 3]，然后把第一项和第二项分别赋值给 a 和 b
-&gt;&gt;&gt; for a, b in [[1,3],[2,4]]:
-...     print(a)
-...     print(b)
+<span class="hljs-comment">## upack 一个 list 也是常用的循环 - 若觉得下行的说明不清楚就开终端试一试</span>
+<span class="hljs-comment">## 此例第 1 次循环取出第一个元素 [1, 3]，然后把第一项和第二项分别赋值给 a 和 b</span>
+&gt;&gt;&gt; <span class="hljs-keyword">for</span> a, b <span class="hljs-keyword">in</span> [[1,3],[2,4]]:
+...     <span class="hljs-built_in">print</span>(a)
+...     <span class="hljs-built_in">print</span>(b)
 ...
 1
 3
 2
 4
 
-## 使用 * （星号 star）和 zip 来操作 list
-## 下划线符号：_ 在 Python 中代表占位符，相当于吃掉这两个位置的输出 - 下面的代码原本会输出 3 个结果，但只想要其中最后一个结果，所以使用下划线来抛弃前两个结果 
-&gt;&gt;&gt; _, _, rewards = zip(*[((6, 10, False), 1, 0), ((17, 10, True), 1, 0), ((21, 10, True), 0, 1.0)])
+<span class="hljs-comment">## 使用 * （星号 star）和 zip 来操作 list</span>
+<span class="hljs-comment">## 下划线符号：_ 在 Python 中代表占位符，相当于吃掉这两个位置的输出 - 下面的代码原本会输出 3 个结果，但只想要其中最后一个结果，所以使用下划线来抛弃前两个结果 </span>
+&gt;&gt;&gt; _, _, rewards = zip(*[((<span class="hljs-number">6</span>, <span class="hljs-number">10</span>, False), <span class="hljs-number">1</span>, <span class="hljs-number">0</span>), ((<span class="hljs-number">17</span>, <span class="hljs-number">10</span>, True), <span class="hljs-number">1</span>, <span class="hljs-number">0</span>), ((<span class="hljs-number">21</span>, <span class="hljs-number">10</span>, True), <span class="hljs-number">0</span>, <span class="hljs-number">1.0</span>)])
 &gt;&gt;&gt; rewards
-(0, 0, 1.0)
+(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1.0</span>)
 
 ## while 循环
-&gt;&gt;&gt; while i &lt; 6:
+&gt;&gt;&gt; while i &lt; <span class="hljs-number">6</span>:
 ...   print(i)
-...   if i==3:
+...   if i==<span class="hljs-number">3</span>:
 ...     break
-...   i += 1
+...   i += <span class="hljs-number">1</span>
 ...
-1
-2
-3
-</code></pre>
+<span class="hljs-number">1</span>
+<span class="hljs-number">2</span>
+<span class="hljs-number">3</span></code></pre></div>
+
 <hr>
 <h3 id="类-class"><a href="#类-class" class="headerlink" title="类 - class"></a>类 - class</h3><p>这里以实现查找表为例演示 <code>class</code> 的用法：</p>
 <ul>
@@ -650,316 +678,308 @@ a3 b3
 <li>类里面绑定到具体实例的函数，第一个参数通常都是 <code>self</code>，这是个自动接收的参数，代表类的当前实例对象</li>
 <li>@classmethod 和 @staticmethod 标记的函数</li>
 </ul>
-<pre><code class="lang-python">## Map 没有定义 __init__ ，但还是程序还是会给它一个默认的 __init__
-class Map:
-  def print_data(self):
-    print(&quot;&#39;Map&#39; object has no attribute &#39;data&#39;&quot;) 
+<div class="code-block" data-code-language="Python"><pre><code class="hljs python"><span class="hljs-comment">## Map 没有定义 __init__ ，但还是程序还是会给它一个默认的 __init__</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Map</span>:
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">print_data</span>(<span class="hljs-params">self</span>):
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;&#x27;Map&#x27; object has no attribute &#x27;data&#x27;&quot;</span>) 
 
 
-class Table:
-  def __init__(self):
-    self.data = []
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Table</span>:
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+    <span class="hljs-variable language_">self</span>.data = []
 
-  def add(self, key, value):
-    self.data.insert(0, [key, value])
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">self, key, value</span>):
+    <span class="hljs-variable language_">self</span>.data.insert(<span class="hljs-number">0</span>, [key, value])
 
-  def lookup(self, key):
-    for [k, v] in self.data:
-      if k == key:
-        return v
-    return None
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">lookup</span>(<span class="hljs-params">self, key</span>):
+    <span class="hljs-keyword">for</span> [k, v] <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.data:
+      <span class="hljs-keyword">if</span> k == key:
+        <span class="hljs-keyword">return</span> v
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span>
 
 
-class Hash:
-  def __init__(self):
-    self.data = {}
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Hash</span>:
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+    <span class="hljs-variable language_">self</span>.data = &#123;&#125;
 
-  def add(self, key, value):
-    self.data[key] = value
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">self, key, value</span>):
+    <span class="hljs-variable language_">self</span>.data[key] = value
 
-  def lookup(self, key):
-    return self.data[key]
-</code></pre>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">lookup</span>(<span class="hljs-params">self, key</span>):
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.data[key]</code></pre></div>
+
 <hr>
-<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><p>这里介绍的是常用的输出语法，更详细的介绍可以参考这篇 <a href="https://www.digitalocean.com/community/tutorials/how-to-use-string-formatters-in-python-3" target="_blank" rel="noopener">How to use <strong><em>str.format()</em></strong></a></p>
-<pre><code class="lang-bash">## 普通输出 - 使用 {} 占位，.format() 填充占位符
-&gt;&gt;&gt; print(&quot;{} ~ {}% dog wins.&quot;.format(3, 9))
+<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><p>这里介绍的是常用的输出语法，更详细的介绍可以参考这篇 <a href="https://www.digitalocean.com/community/tutorials/how-to-use-string-formatters-in-python-3">How to use <em><strong>str.format()</strong></em></a></p>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-comment">## 普通输出 - 使用 &#123;&#125; 占位，.format() 填充占位符</span>
+&gt;&gt;&gt; <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;&#123;&#125; ~ &#123;&#125;% dog wins.&quot;</span>.format(3, 9))
 3 ~ 9% dog wins.
 
-## 保留 5 位小数
-&gt;&gt;&gt; print(&quot;{} - {:.5f}&quot;.format(3,9.0/3.5))
+<span class="hljs-comment">## 保留 5 位小数</span>
+&gt;&gt;&gt; <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;&#123;&#125; - &#123;:.5f&#125;&quot;</span>.format(3,9.0/3.5))
 3 - 2.57143
 
-## 保留 1 位小数
-&gt;&gt;&gt; print(&quot;{} - {:.1f}&quot;.format(3,9.0/3.5))
-3 - 2.6
-</code></pre>
+<span class="hljs-comment">## 保留 1 位小数</span>
+&gt;&gt;&gt; <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;&#123;&#125; - &#123;:.1f&#125;&quot;</span>.format(3,9.0/3.5))
+3 - 2.6</code></pre></div>
+
 <p>在 Python 中，还可以使用 <code>f-string</code> 这种种字符串格式化的方法来输出。只需在<strong>字符串</strong>前加上字母 <code>f</code> 或 <code>F</code> ，然后在字符串中使用花括号 <code>{}</code> 包裹要插入的变量或表达式：</p>
-<pre><code class="lang-python">name = &quot;Alice&quot;
-age = 30
-height = 1.75
+<div class="code-block" data-code-language="Python"><pre><code class="hljs python">name = <span class="hljs-string">&quot;Alice&quot;</span>
+age = <span class="hljs-number">30</span>
+height = <span class="hljs-number">1.75</span>
 
-print(f&quot;My name is {name}, I am {age} years old.&quot;)    # 使用 f-string 插入变量值
-# My name is Alice, I am 30 years old.
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;My name is <span class="hljs-subst">&#123;name&#125;</span>, I am <span class="hljs-subst">&#123;age&#125;</span> years old.&quot;</span>)    <span class="hljs-comment"># 使用 f-string 插入变量值</span>
+<span class="hljs-comment"># My name is Alice, I am 30 years old.</span>
 
-print(f&quot;Next year, I will be {age + 1} years old.&quot;)   # 可以在 f-string 中进行简单的表达式计算
-# Next year, I will be 31 years old.
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Next year, I will be <span class="hljs-subst">&#123;age + <span class="hljs-number">1</span>&#125;</span> years old.&quot;</span>)   <span class="hljs-comment"># 可以在 f-string 中进行简单的表达式计算</span>
+<span class="hljs-comment"># Next year, I will be 31 years old.</span>
 
-print(f&quot;My height is {height:.2f} meters.&quot;)           # 使用 f-string 格式化浮点数
-# My height is 1.75 meters.
-</code></pre>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;My height is <span class="hljs-subst">&#123;height:<span class="hljs-number">.2</span>f&#125;</span> meters.&quot;</span>)           <span class="hljs-comment"># 使用 f-string 格式化浮点数</span>
+<span class="hljs-comment"># My height is 1.75 meters.</span></code></pre></div>
+
 <hr>
 <h3 id="自解释器"><a href="#自解释器" class="headerlink" title="自解释器"></a>自解释器</h3><p>Python 中的内置函数 <code>eval</code> 可以将字符串解析成 Python 的代码</p>
-<pre><code class="lang-python">## test.py
-num = 30
-x = eval(&quot;num + 29&quot;)
-print(x)
-</code></pre>
-<pre><code class="lang-bash">$ python test.py
-59
-</code></pre>
+<div class="code-block" data-code-language="Python"><pre><code class="hljs python"><span class="hljs-comment">## test.py</span>
+num = <span class="hljs-number">30</span>
+x = <span class="hljs-built_in">eval</span>(<span class="hljs-string">&quot;num + 29&quot;</span>)
+<span class="hljs-built_in">print</span>(x)</code></pre></div>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">$ python test.py
+59</code></pre></div>
+
 <hr>
 <h3 id="创建与导入脚本"><a href="#创建与导入脚本" class="headerlink" title="创建与导入脚本"></a>创建与导入脚本</h3><p>处理大型项目时，可以将代码分割，整理成多个 <code>*.py</code> 文件以便重复利用这些文件中的代码。这些 <code>*.py</code> 文件称为脚本（script）。如果你要导入的 Python 脚本与当前脚本位于同一个目录下，只需输入 import，然后是文件名，无需扩展名 <code>.py</code></p>
-<pre><code class="lang-python">## demo.py
-import useful_functions as uf
+<div class="code-block" data-code-language="Python"><pre><code class="hljs python"><span class="hljs-comment">## demo.py</span>
+<span class="hljs-keyword">import</span> useful_functions <span class="hljs-keyword">as</span> uf
 
-scores = [88, 92, 79, 93, 85]
+scores = [<span class="hljs-number">88</span>, <span class="hljs-number">92</span>, <span class="hljs-number">79</span>, <span class="hljs-number">93</span>, <span class="hljs-number">85</span>]
 mean = uf.mean(scores)
 
-print(&quot;Demo Mean:&quot;, mean)
-print(&quot;__name__ value:&quot;, __name__)
-print(&quot;uf.__name__ value:&quot;, uf.__name__)
-</code></pre>
-<pre><code class="lang-python">## useful_functions.py
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Demo Mean:&quot;</span>, mean)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;__name__ value:&quot;</span>, __name__)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;uf.__name__ value:&quot;</span>, uf.__name__)</code></pre></div>
 
-def mean(num_list):
-    return sum(num_list) / len(num_list)
+<div class="code-block" data-code-language="Python"><pre><code class="hljs python"><span class="hljs-comment">## useful_functions.py</span>
 
-def main():
-    n_list = [34, 44, 23, 46, 12, 24]
-    print(&quot;Useful Functions&#39; Mean:&quot;, mean(n_list))
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">mean</span>(<span class="hljs-params">num_list</span>):
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">sum</span>(num_list) / <span class="hljs-built_in">len</span>(num_list)
 
-# 检测当前脚本（即 useful_functions.py）是否做为主模块被运行
-# 当前脚本若是被其他脚本的 import 语句导入，则下面的 if main 块代码不运行
-if __name__ == &#39;__main__&#39;:
-    main()
-</code></pre>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():
+    n_list = [<span class="hljs-number">34</span>, <span class="hljs-number">44</span>, <span class="hljs-number">23</span>, <span class="hljs-number">46</span>, <span class="hljs-number">12</span>, <span class="hljs-number">24</span>]
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Useful Functions&#x27; Mean:&quot;</span>, mean(n_list))
+
+<span class="hljs-comment"># 检测当前脚本（即 useful_functions.py）是否做为主模块被运行</span>
+<span class="hljs-comment"># 当前脚本若是被其他脚本的 import 语句导入，则下面的 if main 块代码不运行</span>
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    main()</code></pre></div>
 <p>运行结果如下：</p>
-<pre><code class="lang-bash">$ ls
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">$ <span class="hljs-built_in">ls</span>
 demo.py             useful_functions.py
 $ python demo.py
 Demo Mean: 87.4
 __name__ value: __main__
-uf.__name__ value: useful_functions
-</code></pre>
+uf.__name__ value: useful_functions</code></pre></div>
 <p>人们通常只希望重复使用被导入脚本里的「函数」或「类」，而不是其他可执行代码（如 <code>print()</code>），所以为避免「<strong>脚本A</strong>」被导入后，其中的可执行语句被运行，应该要将这些语句包含在 <code>if __name__ == &quot;__main__&quot;</code>块中，或者，将它们包含在函数 <code>main()</code> 中并在上述 <code>if main</code> 块中调用该函数。</p>
 <p>每当运行脚本时（<code>*.py</code> 文件），Python 会为所有模块（module）设置一个特殊的内置变量 <code>__name__</code>。这些模块包含导入模块（用 <code>import</code> 语句导入的），还有主模块（即当前脚本）。主模块的 <code>__name__</code> 变量值会被设为字符串 <code>&quot;__main__&quot;</code>，而对于被导入的模块，<code>__name__</code> 变量会设为该模块的名称。因此 <code>if main</code> 代码块常用来判断是否为主模块。</p>
 <p>PS：<br>从输出结果可看到，上述例子中，被导入模块的 <code>__name__</code> 值为 <code>&quot;useful_functions&quot;</code></p>
 <hr>
-<h3 id="自定义一个类-复杂例子"><a href="#自定义一个类-复杂例子" class="headerlink" title="自定义一个类 - 复杂例子"></a>自定义一个类 - 复杂例子</h3><pre><code class="lang-python">import math
-from decimal import Decimal, getcontext
+<h3 id="自定义一个类-复杂例子"><a href="#自定义一个类-复杂例子" class="headerlink" title="自定义一个类 - 复杂例子"></a>自定义一个类 - 复杂例子</h3><div class="code-block" data-code-language="Python"><pre><code class="hljs python"><span class="hljs-keyword">import</span> math
+<span class="hljs-keyword">from</span> decimal <span class="hljs-keyword">import</span> Decimal, getcontext
 
-## 设置 Decimal 数据类型的小数点后保留的位数
-getcontext().prec = 19
-## 用来辅助判断一个数是否为零（小于此值则为零）
-TOLERANCE = 1e-10
+<span class="hljs-comment">## 设置 Decimal 数据类型的小数点后保留的位数</span>
+getcontext().prec = <span class="hljs-number">19</span>
+<span class="hljs-comment">## 用来辅助判断一个数是否为零（小于此值则为零）</span>
+TOLERANCE = <span class="hljs-number">1e-10</span>
 
-class Vector(object):
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Vector</span>(<span class="hljs-title class_ inherited__">object</span>):
+  
+  <span class="hljs-comment">## 设置报错信息</span>
+  ALL_ELEMENT_MUST_BE_NUM_MSG = <span class="hljs-string">&quot;Element must be number!&quot;</span>
 
-  ## 设置报错信息
-  ALL_ELEMENT_MUST_BE_NUM_MSG = &quot;Element must be number!&quot;
+  <span class="hljs-comment">## 实例（instance）的创建</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, coordinates</span>):
+    <span class="hljs-keyword">try</span>:
+      <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> coordinates:
+          <span class="hljs-keyword">raise</span> ValueError
+      <span class="hljs-variable language_">self</span>.coordinates = <span class="hljs-built_in">tuple</span>([Decimal(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> coordinates])
+      <span class="hljs-variable language_">self</span>.dimension = <span class="hljs-built_in">len</span>(coordinates)
 
-  ## 实例（instance）的创建
-  def __init__(self, coordinates):
-    try:
-      if not coordinates:
-          raise ValueError
-      self.coordinates = tuple([Decimal(x) for x in coordinates])
-      self.dimension = len(coordinates)
+    <span class="hljs-keyword">except</span> ValueError:
+      <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&#x27;The coordinates must be nonempty&#x27;</span>)
 
-    except ValueError:
-      raise ValueError(&#39;The coordinates must be nonempty&#39;)
+    <span class="hljs-keyword">except</span> TypeError:
+      <span class="hljs-keyword">raise</span> TypeError(<span class="hljs-string">&#x27;The coordinates must be an iterable&#x27;</span>)
 
-    except TypeError:
-      raise TypeError(&#39;The coordinates must be an iterable&#39;)
+  <span class="hljs-comment">## print 输出内容</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">__str__</span>(<span class="hljs-params">self</span>):
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Vector: &#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-variable language_">self</span>.coordinates)
 
-  ## print 输出内容
-  def __str__(self):
-    return &#39;Vector: {}&#39;.format(self.coordinates)
+  <span class="hljs-comment">## 定义相等</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">__eq__</span>(<span class="hljs-params">self, v</span>):
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.coordinates == v.coordinates
 
-  ## 定义相等
-  def __eq__(self, v):
-    return self.coordinates == v.coordinates
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">__len__</span>(<span class="hljs-params">self</span>):
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.planes)
 
-  def __len__(self):
-    return len(self.planes)
+  <span class="hljs-comment">## __getitem__ 这个函数使得对于 v = Vector([5, 3, -2]) ，可使用索引方式 v[1] 得到数字 3</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">__getitem__</span>(<span class="hljs-params">self, i</span>):
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.coordinates[i]
 
-  ## __getitem__ 这个函数使得对于 v = Vector([5, 3, -2]) ，可使用索引方式 v[1] 得到数字 3
-  def __getitem__(self, i):
-    return self.coordinates[i]
+  <span class="hljs-comment">## __setitem__ 这个函数使得对于 v = Vector([5, 3, -2]) ，可使用索引方式 v[1] = 9 将 v[1] 的值设置为 9</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">__setitem__</span>(<span class="hljs-params">self, i, x</span>):
+    <span class="hljs-keyword">try</span>:
+      <span class="hljs-keyword">assert</span> x.dimension == <span class="hljs-variable language_">self</span>.dimension  <span class="hljs-comment"># 如果设置的 x 不是数字，则报错</span>
+      <span class="hljs-variable language_">self</span>.coordinates[i] = x
 
-  ## __setitem__ 这个函数使得对于 v = Vector([5, 3, -2]) ，可使用索引方式 v[1] = 9 将 v[1] 的值设置为 9
-  def __setitem__(self, i, x):
-    try:
-      assert x.dimension == self.dimension  # 如果设置的 x 不是数字，则报错
-      self.coordinates[i] = x
+    <span class="hljs-keyword">except</span> AssertionError:
+      <span class="hljs-keyword">raise</span> Exception(<span class="hljs-variable language_">self</span>.ALL_ELEMENT_MUST_BE_NUM_MSG)
 
-    except AssertionError:
-      raise Exception(self.ALL_ELEMENT_MUST_BE_NUM_MSG)
+  <span class="hljs-comment">## 计算向量的加法</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">plus</span>(<span class="hljs-params">self, v</span>):
+    new_coordinates = [x+y <span class="hljs-keyword">for</span> x,y <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(<span class="hljs-variable language_">self</span>.coordinates, v.coordinates)]
+    <span class="hljs-keyword">return</span> Vector(new_coordinates)
 
-  ## 计算向量的加法
-  def plus(self, v):
-    new_coordinates = [x+y for x,y in zip(self.coordinates, v.coordinates)]
-    return Vector(new_coordinates)
+  <span class="hljs-comment">## 计算向量的减法</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">minus</span>(<span class="hljs-params">self, v</span>):
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.plus(v.times_scalar(-<span class="hljs-number">1</span>))
 
-  ## 计算向量的减法
-  def minus(self, v):
-    return self.plus(v.times_scalar(-1))
+  <span class="hljs-comment">## 计算向量的数乘</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">times_scalar</span>(<span class="hljs-params">self, c</span>):
+    new_coordinates = [x*c <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.coordinates]
+    <span class="hljs-keyword">return</span> Vector(new_coordinates)
 
-  ## 计算向量的数乘
-  def times_scalar(self, c):
-    new_coordinates = [x*c for x in self.coordinates]
-    return Vector(new_coordinates)
+  <span class="hljs-comment">## 计算向量与另一向量的点积（内积）</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">dot_product_with</span>(<span class="hljs-params">self, v</span>):
+    new_coordinates = [x*y <span class="hljs-keyword">for</span> x,y <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(<span class="hljs-variable language_">self</span>.coordinates, v.coordinates)]
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">sum</span>(new_coordinates)
 
-  ## 计算向量与另一向量的点积（内积）
-  def dot_product_with(self, v):
-    new_coordinates = [x*y for x,y in zip(self.coordinates, v.coordinates)]
-    return sum(new_coordinates)
+  <span class="hljs-comment">## 计算向量的模</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">magnitude</span>(<span class="hljs-params">self</span>):
+    <span class="hljs-keyword">return</span> Decimal(math.sqrt(<span class="hljs-variable language_">self</span>.dot_product_with(<span class="hljs-variable language_">self</span>)))
 
-  ## 计算向量的模
-  def magnitude(self):
-    return Decimal(math.sqrt(self.dot_product_with(self)))
+  <span class="hljs-comment">## 计算向量标准化后的向量（同方向上的单位向量）</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">normalization</span>(<span class="hljs-params">self</span>):
+    <span class="hljs-keyword">try</span>:
+      mag = <span class="hljs-variable language_">self</span>.magnitude()
+      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.times_scalar(Decimal(<span class="hljs-number">1</span>)/mag)
+    <span class="hljs-keyword">except</span> ZeroDivisionError:
+      <span class="hljs-comment">#print(&quot;You can&#x27;t normalize Zero Vector!&quot;)</span>
+      <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">&quot;You can&#x27;t normalize Zero Vector!&quot;</span>)
 
-  ## 计算向量标准化后的向量（同方向上的单位向量）
-  def normalization(self):
-    try:
-      mag = self.magnitude()
-      return self.times_scalar(Decimal(1)/mag)
-    except ZeroDivisionError:
-      #print(&quot;You can&#39;t normalize Zero Vector!&quot;)
-      raise Exception(&quot;You can&#39;t normalize Zero Vector!&quot;)
+  <span class="hljs-comment">## 计算向量与另一向量的夹角</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">angle_with</span>(<span class="hljs-params">self, v, in_degrees=<span class="hljs-literal">False</span></span>):
+    <span class="hljs-keyword">try</span>:
 
-  ## 计算向量与另一向量的夹角
-  def angle_with(self, v, in_degrees=False):
-    try:
-
-      mag_1 = self.magnitude()
+      mag_1 = <span class="hljs-variable language_">self</span>.magnitude()
       mag_2 = v.magnitude()
-      if in_degrees:
-        return math.degrees(math.acos(self.dot_product_with(v)/(mag_1*mag_2)))
-      else:
-        return math.acos(self.dot_product_with(v)/(mag_1*mag_2))
+      <span class="hljs-keyword">if</span> in_degrees:
+        <span class="hljs-keyword">return</span> math.degrees(math.acos(<span class="hljs-variable language_">self</span>.dot_product_with(v)/(mag_1*mag_2)))
+      <span class="hljs-keyword">else</span>:
+        <span class="hljs-keyword">return</span> math.acos(<span class="hljs-variable language_">self</span>.dot_product_with(v)/(mag_1*mag_2))
 
-    except ZeroDivisionError:
-      #print(&quot;At least one of the vector is Zero Vector! No angle defined.&quot;)
-      raise Exception(&quot;One of the vector is Zero Vector! No angle defined.&quot;)
+    <span class="hljs-keyword">except</span> ZeroDivisionError:
+      <span class="hljs-comment">#print(&quot;At least one of the vector is Zero Vector! No angle defined.&quot;)</span>
+      <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">&quot;One of the vector is Zero Vector! No angle defined.&quot;</span>)
 
-  ## 私有函数（private function）和变量，以两个下划线开头来命名
-  def __is_zero_vector(self):
-    return self.magnitude() &lt; TOLERANCE
-
-  def is_parallel_to(self, v):
-    if v.__is_zero_vector() or self.__is_zero_vector():
-      return True
-    else:
-      s_m = self.normalization()
+  <span class="hljs-comment">## 私有函数（private function）和变量，以两个下划线开头来命名</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">__is_zero_vector</span>(<span class="hljs-params">self</span>):
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.magnitude() &lt; TOLERANCE
+  
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">is_parallel_to</span>(<span class="hljs-params">self, v</span>):
+    <span class="hljs-keyword">if</span> v.__is_zero_vector() <span class="hljs-keyword">or</span> <span class="hljs-variable language_">self</span>.__is_zero_vector():
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>
+    <span class="hljs-keyword">else</span>:
+      s_m = <span class="hljs-variable language_">self</span>.normalization()
       v_m = v.normalization()
-      return s_m.minus(v_m).__is_zero_vector() or s_m.plus(v_m).__is_zero_vector() 
+      <span class="hljs-keyword">return</span> s_m.minus(v_m).__is_zero_vector() <span class="hljs-keyword">or</span> s_m.plus(v_m).__is_zero_vector() 
 
-  def is_orthogonal_to(self, v):
-    return abs(self.dot_product_with(v)) &lt; TOLERANCE
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">is_orthogonal_to</span>(<span class="hljs-params">self, v</span>):
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">abs</span>(<span class="hljs-variable language_">self</span>.dot_product_with(v)) &lt; TOLERANCE
 
-  ## 向量的分解 - 计算向量水平方向的分量
-  def component_parallel_to(self, base_vactor):
+  <span class="hljs-comment">## 向量的分解 - 计算向量水平方向的分量</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">component_parallel_to</span>(<span class="hljs-params">self, base_vactor</span>):
     u_b = base_vactor.normalization()
-    mag = self.dot_product_with(u_b)
-    return u_b.times_scalar(mag)
+    mag = <span class="hljs-variable language_">self</span>.dot_product_with(u_b)
+    <span class="hljs-keyword">return</span> u_b.times_scalar(mag)
 
-  ## 向量的分解 - 计算向量竖直方向的分量
-  def component_orthogonal_to(self, base_vactor):
-    c_p = self.component_parallel_to(base_vactor)
-    return self.minus(c_p)
+  <span class="hljs-comment">## 向量的分解 - 计算向量竖直方向的分量</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">component_orthogonal_to</span>(<span class="hljs-params">self, base_vactor</span>):
+    c_p = <span class="hljs-variable language_">self</span>.component_parallel_to(base_vactor)
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.minus(c_p)
 
-  ## 计算向量与另一向量的叉乘
-  def cross_product_with(self, v):
-    if self.dimension != 3 or v.dimension != 3:
-      raise Exception(&quot;Both cross product vectors must be three dimensional&quot;)
-
-    if self.is_parallel_to(v):
-      return Vector([0 for i in range(self.dimension)])
-    else:
-      x = self.coordinates[1]*v.coordinates[2] - self.coordinates[2]*v.coordinates[1]
-      y = self.coordinates[2]*v.coordinates[0] - self.coordinates[0]*v.coordinates[2]
-      z = self.coordinates[0]*v.coordinates[1] - self.coordinates[1]*v.coordinates[0]
-      return Vector([x, y, z])
-
-  ## 计算向量与另一向量的所围成的四边形的面积
-  def area_of_parallelogram_spanned_with(self, v):
-    new_self = self
+  <span class="hljs-comment">## 计算向量与另一向量的叉乘</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">cross_product_with</span>(<span class="hljs-params">self, v</span>):
+    <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.dimension != <span class="hljs-number">3</span> <span class="hljs-keyword">or</span> v.dimension != <span class="hljs-number">3</span>:
+      <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">&quot;Both cross product vectors must be three dimensional&quot;</span>)
+    
+    <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.is_parallel_to(v):
+      <span class="hljs-keyword">return</span> Vector([<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-variable language_">self</span>.dimension)])
+    <span class="hljs-keyword">else</span>:
+      x = <span class="hljs-variable language_">self</span>.coordinates[<span class="hljs-number">1</span>]*v.coordinates[<span class="hljs-number">2</span>] - <span class="hljs-variable language_">self</span>.coordinates[<span class="hljs-number">2</span>]*v.coordinates[<span class="hljs-number">1</span>]
+      y = <span class="hljs-variable language_">self</span>.coordinates[<span class="hljs-number">2</span>]*v.coordinates[<span class="hljs-number">0</span>] - <span class="hljs-variable language_">self</span>.coordinates[<span class="hljs-number">0</span>]*v.coordinates[<span class="hljs-number">2</span>]
+      z = <span class="hljs-variable language_">self</span>.coordinates[<span class="hljs-number">0</span>]*v.coordinates[<span class="hljs-number">1</span>] - <span class="hljs-variable language_">self</span>.coordinates[<span class="hljs-number">1</span>]*v.coordinates[<span class="hljs-number">0</span>]
+      <span class="hljs-keyword">return</span> Vector([x, y, z])
+  
+  <span class="hljs-comment">## 计算向量与另一向量的所围成的四边形的面积</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">area_of_parallelogram_spanned_with</span>(<span class="hljs-params">self, v</span>):
+    new_self = <span class="hljs-variable language_">self</span>
     new_v = v
-    if self.dimension == 2:
-      new_self = Vector(self.coordinates + (0,))
-    if v.dimension == 2:
-      new_v = Vector(v.coordinates + (0,))
+    <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.dimension == <span class="hljs-number">2</span>:
+      new_self = Vector(<span class="hljs-variable language_">self</span>.coordinates + (<span class="hljs-number">0</span>,))
+    <span class="hljs-keyword">if</span> v.dimension == <span class="hljs-number">2</span>:
+      new_v = Vector(v.coordinates + (<span class="hljs-number">0</span>,))
 
-    return new_self.cross_product_with(new_v).magnitude()
+    <span class="hljs-keyword">return</span> new_self.cross_product_with(new_v).magnitude()
+  
+  <span class="hljs-comment">## 计算向量与另一向量的所围成的三角形的面积</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">area_of_triangle_spanned_with</span>(<span class="hljs-params">self, v</span>):
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.area_of_parallelogram_spanned_with(v) / Decimal(<span class="hljs-number">2</span>)</code></pre></div>
 
-  ## 计算向量与另一向量的所围成的三角形的面积
-  def area_of_triangle_spanned_with(self, v):
-    return self.area_of_parallelogram_spanned_with(v) / Decimal(2)
-</code></pre>
 <hr>
-<h3 id="常用模组-Module"><a href="#常用模组-Module" class="headerlink" title="常用模组 - Module"></a>常用模组 - Module</h3><p><a href="https://docs.python.org/3/library/" target="_blank" rel="noopener">Python 的标准库</a>里包含了常用的 Module ，使用 <code>import</code> 语句可导入</p>
+<h3 id="常用模组-Module"><a href="#常用模组-Module" class="headerlink" title="常用模组 - Module"></a>常用模组 - Module</h3><p><a href="https://docs.python.org/3/library/">Python 的标准库</a>里包含了常用的 Module ，使用 <code>import</code> 语句可导入</p>
 <p>以下是一些实用的模组（Module）：</p>
 <ul>
-<li><p><a href="https://docs.python.org/3/library/sys.html" target="_blank" rel="noopener">sys</a>：内建了很多好用的工具</p>
-<pre><code class="lang-python">import sys
+<li><p><a href="https://docs.python.org/3/library/sys.html">sys</a>：内建了很多好用的工具</p>
+<div class="code-block" data-code-language="Python"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys
 
-## 工具一：sys.stdout.flush() 
-## 不断更新输出内容，而不是叠加输出（即每次删除上次的「显示结果」，然后显示当次的「显示结果」）
-for i_episode in range(1, num_episodes+1):
-        # monitor progress
-        if i_episode % 1000 == 0:
-            print(&quot;\rEpisode {}/{}.&quot;.format(i_episode, num_episodes), end=&quot;&quot;)
-            sys.stdout.flush()
-</code></pre>
+<span class="hljs-comment">## 工具一：sys.stdout.flush() </span>
+<span class="hljs-comment">## 不断更新输出内容，而不是叠加输出（即每次删除上次的「显示结果」，然后显示当次的「显示结果」）</span>
+<span class="hljs-keyword">for</span> i_episode <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, num_episodes+<span class="hljs-number">1</span>):
+        <span class="hljs-comment"># monitor progress</span>
+        <span class="hljs-keyword">if</span> i_episode % <span class="hljs-number">1000</span> == <span class="hljs-number">0</span>:
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\rEpisode &#123;&#125;/&#123;&#125;.&quot;</span>.<span class="hljs-built_in">format</span>(i_episode, num_episodes), end=<span class="hljs-string">&quot;&quot;</span>)
+            sys.stdout.flush()</code></pre></div>
 </li>
-<li><p><a href="https://docs.python.org/3/library/re.html" target="_blank" rel="noopener">re</a> ：通过正则表达式在字符串中进行模式匹配</p>
+<li><p><a href="https://docs.python.org/3/library/re.html">re</a> ：通过正则表达式在字符串中进行模式匹配</p>
 </li>
-<li><p><a href="https://docs.python.org/3/library/math.html" target="_blank" rel="noopener">math</a> ：一些标准数学函数</p>
+<li><p><a href="https://docs.python.org/3/library/math.html">math</a> ：一些标准数学函数</p>
 </li>
-<li><p><a href="https://docs.python.org/3.6/library/fractions.html" target="_blank" rel="noopener">fractions</a>：此库最常用的是里面的 <code>Fraction</code>，分数（有理数）计算超方便</p>
-<pre><code class="lang-python">from fractions import Fraction
-</code></pre>
+<li><p><a href="https://docs.python.org/3.6/library/fractions.html">fractions</a>：此库最常用的是里面的 <code>Fraction</code>，分数（有理数）计算超方便</p>
+<div class="code-block" data-code-language="Python"><pre><code class="hljs python"><span class="hljs-keyword">from</span> fractions <span class="hljs-keyword">import</span> Fraction</code></pre></div>
 </li>
-<li><p><a href="https://docs.python.org/3/library/random.html" target="_blank" rel="noopener">random</a> ：生成假随机数字，随机打乱序列并选择随机项 </p>
+<li><p><a href="https://docs.python.org/3/library/random.html">random</a> ：生成假随机数字，随机打乱序列并选择随机项 </p>
 </li>
-<li><p><a href="https://docs.python.org/3/library/json.html" target="_blank" rel="noopener">json</a> ：适用于读写 json 文件（面向网络开发）</p>
+<li><p><a href="https://docs.python.org/3/library/json.html">json</a> ：适用于读写 json 文件（面向网络开发）</p>
 </li>
-<li><p><a href="https://docs.python.org/3/library/datetime.html" target="_blank" rel="noopener">datime</a> ：读取当前时间和日期</p>
+<li><p><a href="https://docs.python.org/3/library/datetime.html">datime</a> ：读取当前时间和日期</p>
 </li>
-<li><p><a href="https://docs.python.org/3/library/os.html" target="_blank" rel="noopener">os</a> ：与操作系统交互的操作</p>
-<pre><code class="lang-python">import os
-os.chdir(path)  # 更改当前的工作目录（working directory）
-</code></pre>
+<li><p><a href="https://docs.python.org/3/library/os.html">os</a> ：与操作系统交互的操作</p>
+<div class="code-block" data-code-language="Python"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os
+os.chdir(path)  <span class="hljs-comment"># 更改当前的工作目录（working directory）</span></code></pre></div>
 </li>
-<li><p><a href="https://docs.python.org/3/library/csv.html" target="_blank" rel="noopener">csv</a> ：处理 <code>.csv</code> 类型的文件</p>
+<li><p><a href="https://docs.python.org/3/library/csv.html">csv</a> ：处理 <code>.csv</code> 类型的文件</p>
 </li>
-<li><p><a href="https://docs.python.org/3/library/zipfile.html" target="_blank" rel="noopener">zipfile</a> ：处理 <code>.zip</code> 压缩文件</p>
+<li><p><a href="https://docs.python.org/3/library/zipfile.html">zipfile</a> ：处理 <code>.zip</code> 压缩文件</p>
 </li>
-<li><p><a href="https://docs.python.org/3/library/collections.html" target="_blank" rel="noopener">collections</a> ：常见数据类型的实用扩展，包括 OrderedDict、defaultdict 和 namedtuple</p>
+<li><p><a href="https://docs.python.org/3/library/collections.html">collections</a> ：常见数据类型的实用扩展，包括 OrderedDict、defaultdict 和 namedtuple</p>
 </li>
-<li><p><a href="https://docs.python.org/3/library/timeit.html" target="_blank" rel="noopener">timeit</a> ：显示<strong>简短的代码</strong>运行所花费的时间</p>
+<li><p><a href="https://docs.python.org/3/library/timeit.html">timeit</a> ：显示<strong>简短的代码</strong>运行所花费的时间</p>
 </li>
-<li><p><a href="https://docs.python.org/3/library/profile.html" target="_blank" rel="noopener">cProfile 或 profile</a> ：显示<strong>大型项目</strong>运行所花费的时间</p>
+<li><p><a href="https://docs.python.org/3/library/profile.html">cProfile 或 profile</a> ：显示<strong>大型项目</strong>运行所花费的时间</p>
 </li>
 </ul>
 <hr>
-<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
-
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation">
 
   </article>
-
 
 
     </div>
@@ -986,8 +1006,6 @@ os.chdir(path)  # 更改当前的工作目录（working directory）
 <!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/search.js"></script>
-<script src="/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
 
 // comments below to disable loading animation
@@ -1026,24 +1044,7 @@ $("a[href='#top']").click(function() {
 var path = "/search.xml";
 searchFunc(path, 'local-search-input', 'local-search-result');
 
-</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
 </script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
 
 </body>
 </html>

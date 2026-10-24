@@ -1,40 +1,43 @@
 <!DOCTYPE HTML>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<head>
+  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="google-site-verification" content>
+  <meta name="google-site-verification" content="" />
   
   <title>Rails 常用指令</title>
   <meta name="author" content="chpwang">
    <meta name="description" content="王哈哈的修行驿站">
   
-
-  <meta property="og:title" content="Rails 常用指令">
+  
+  <meta property="og:title" content="Rails 常用指令"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:site_name" content="行侠何须仗名剑">
- <meta property="og:image" content>
+  <meta property="og:site_name" content="行侠何须仗名剑"/>
+   <meta property="og:image" content=""/>
   
   <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
   <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
-  <!-- link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
-  <!-- link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" -->
-  <!-- 把 bootstrap 3.3.6 本地化，免得连不上它的服务器，相关文件放在了 pln/source/bootstrap 里-->
+
+  <!-- Apply saved/system color theme before CSS to avoid a light-mode flash. -->
+  <script src="/js/theme-mode.js"></script>
+
+  <!-- Bootstrap 3 and Font Awesome 4.5 are kept local for reliable loading. -->
   <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
-  <!-- 把 font-awesome 4.5.0 本地化，免得连不上它的服务器，相关文件放在了 pln/source/font-awesome 里 -->
   <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
-  <!-- highlight.js代码高亮主题 css 引入-->
+
+  <!-- Server-side Highlight.js token colors. -->
   <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
-  <!-- highlight.js代码高亮主题 css 引入-->
+
+  <!-- PLN theme CSS. -->
   <link rel="stylesheet" href="/css/m.min.css">
-  <!--link rel="icon" type="image/x-icon" href="/favicon.ico"-->
-  <link rel="icon" type="image/x-icon" href="/G.png"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
-</html>
+
+  <link rel="icon" type="image/x-icon" href="/G.png">
+<meta name="generator" content="Hexo 8.1.2"></head>
+
 <body>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main">
+  <div id="main">
     <div class="behind">
       <div class="back">
         <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -44,7 +47,9 @@
       </div>
     </div>
     <div class="container">
-      
+      <button class="post-theme-toggle" type="button" aria-label="切换深色模式" title="切换深色模式">
+  <i class="fa fa-moon-o" aria-hidden="true"></i>
+</button>
 
   <article class="standard post">
     <div class="title">
@@ -80,163 +85,201 @@
     <div class="picture-container">
       
     </div>
-    <p>Rails 的开发环境的搭建参考<a href="/2017/03/14/setup-new-mac/">入手新 Mac 后的环境搭建</a><br>Rails 的关键知识学习请前往 <a href="https://fullstack.qzy.camp/dashboard" target="_blank" rel="noopener">Xdite 的全栈营</a></p>
+
+    
+      
+      
+        <button
+          class="post-toc-toggle"
+          type="button"
+          aria-controls="post-toc-drawer"
+          aria-expanded="false"
+          aria-label="打开文章目录"
+          title="目录">
+        </button>
+
+        <div class="post-toc-backdrop" data-toc-close aria-hidden="true"></div>
+
+        <aside
+          id="post-toc-drawer"
+          class="post-toc post-toc-drawer"
+          aria-label="文章目录"
+          aria-hidden="true">
+          <div class="post-toc-drawer-header">
+            <div class="post-toc-title">目录</div>
+            <button class="post-toc-close" type="button" data-toc-close aria-label="关闭文章目录">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="post-toc-drawer-content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4"><span class="toc-text">基本指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Model"><span class="toc-text">Model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CRUD-%E6%A8%A1%E6%9D%BF"><span class="toc-text">CRUD 模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E6%89%8B%E5%B8%B8%E7%94%A8-Gem"><span class="toc-text">新手常用 Gem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E8%B5%8F"><span class="toc-text">打赏</span></a></li></ol>
+          </div>
+        </aside>
+
+        <script src="/js/toc.js" defer></script>
+      
+    
+
+    
+    <p>Rails 的开发环境的搭建参考<a href="/2017/03/14/setup-new-mac/">入手新 Mac 后的环境搭建</a><br>Rails 的关键知识学习请前往 <a href="https://fullstack.qzy.camp/dashboard">Xdite 的全栈营</a></p>
 <p>PS：<br>人们使用 Ruby 这门语言的原因仅仅是因为要用 Rails ，离开了 Rails , Ruby 这门语言就……所以你知道为啥说到 Ruby 就一定要说 Rails ，或者人们在谈论 Ruby 时，其实说的是 Rails 了吧</p>
 <hr>
-<h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><pre><code class="lang-bash">## 在当前目录下新建 Rails app
+<h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-comment">## 在当前目录下新建 Rails app</span>
 $ rails new [app名]
 
-## Example
+<span class="hljs-comment">## Example</span>
 $ rails new first_app
 
-## 打开服务器（网址通常是 http://localhost:3000）
-$ cd first_app
+<span class="hljs-comment">## 打开服务器（网址通常是 http://localhost:3000）</span>
+$ <span class="hljs-built_in">cd</span> first_app
 $ rails s
 $ rails server
 
-## 查看路径
+<span class="hljs-comment">## 查看路径</span>
 $ rails routes
 
-## 数据库管理 Migration
-$ rails db:migrate      ## runs (single) migrations that have not run yet. - update schema.rb with all migrations
-$ rails db:create       ## creates the database
-$ rails db:drop         ## deletes the database
-$ rails db:schema:load  ## creates tables and columns within the (existing) database following schema.rb
-$ rails db:seed         ## load seed.rb - 按照 seed.rb 文件里的指令，创造数据并添加到数据库里
-$ rails db:setup        ## does db:create, db:schema:load, db:seed
-$ rails db:reset        ## does db:drop, db:setup
-$ rails db:rollback     ## 取消最近一次 migration 的加载 - 通常不用，改数据库强烈建议新增 Migration 来改，而不是执行 rollback ，rollback 建议最多只运行一次（退后一步）
+<span class="hljs-comment">## 数据库管理 Migration</span>
+$ rails db:migrate      <span class="hljs-comment">## runs (single) migrations that have not run yet. - update schema.rb with all migrations</span>
+$ rails db:create       <span class="hljs-comment">## creates the database</span>
+$ rails db:drop         <span class="hljs-comment">## deletes the database</span>
+$ rails db:schema:load  <span class="hljs-comment">## creates tables and columns within the (existing) database following schema.rb</span>
+$ rails db:seed         <span class="hljs-comment">## load seed.rb - 按照 seed.rb 文件里的指令，创造数据并添加到数据库里</span>
+$ rails db:setup        <span class="hljs-comment">## does db:create, db:schema:load, db:seed</span>
+$ rails db:reset        <span class="hljs-comment">## does db:drop, db:setup</span>
+$ rails db:rollback     <span class="hljs-comment">## 取消最近一次 migration 的加载 - 通常不用，改数据库强烈建议新增 Migration 来改，而不是执行 rollback ，rollback 建议最多只运行一次（退后一步）</span>
 
-## 先 drop（删除）掉原先的数据库，再建立新的数据库，最后 migrate 加载所有 migrations
+<span class="hljs-comment">## 先 drop（删除）掉原先的数据库，再建立新的数据库，最后 migrate 加载所有 migrations</span>
 $ rails db:drop db:create db:migrate
 
-## Example
-$ rails g controller groups
+<span class="hljs-comment">## Example</span>
+$ rails g controller <span class="hljs-built_in">groups</span>
 $ rails g controller account/groups
-$ rails g controller account::groups
-</code></pre>
+$ rails g controller account::<span class="hljs-built_in">groups</span>
+</code></pre></div>
+
+
 <hr>
 <h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>可以直接用一行代码新建 <strong>Model</strong>，适合 column 较少的情况</p>
-<pre><code class="lang-bash">## 新建 Model
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-comment">## 新建 Model</span>
 $ rails g model [model 的名字] [参数名:参数类型] [参数名:参数类型] ...
 
-## Example
-$ rails g model job title:string description:text wage_upper_bound:decimal wage_lower_bound:decimal contact:text is_hidden:boolean
-</code></pre>
+<span class="hljs-comment">## Example</span>
+$ rails g model job title:string description:text wage_upper_bound:decimal wage_lower_bound:decimal contact:text is_hidden:boolean</code></pre></div>
+
 <p>也可以先生成 <strong>migration</strong> 文件，然后编辑该文件来生成</p>
-<pre><code class="lang-bash">以下命令会生成一个 migration 文件 - db/migrate/20180423162706_create_[model 的名字].rb
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">以下命令会生成一个 migration 文件 - db/migrate/20180423162706_create_[model 的名字].rb
 $ rails g model [model 的名字]
 
-# Example
-$ rails g model case
-Running via Spring preloader in process 44069
+<span class="hljs-comment"># Example</span>
+$ rails g model <span class="hljs-keyword">case</span>
+Running via Spring preloader <span class="hljs-keyword">in</span> process 44069
       invoke  active_record
       create    db/migrate/20180423162706_create_cases.rb
       create    app/models/case.rb
       invoke    test_unit
-      create      test/models/case_test.rb
-      create      test/fixtures/cases.yml
-</code></pre>
+      create      <span class="hljs-built_in">test</span>/models/case_test.rb
+      create      <span class="hljs-built_in">test</span>/fixtures/cases.yml</code></pre></div>
+
 <p>找到并打开编辑 <code>db/migrate/20180423162706_create_[model 的名字].rb</code> 文件</p>
-<pre><code class="lang-ruby">class CreateCases &lt; ActiveRecord::Migration[5.1]
-  def change
-    create_table :cases do |t|
-      t.string :nickname
-      t.text :summary
+<div class="code-block" data-code-language="Ruby"><pre><code class="hljs ruby"><span class="hljs-keyword">class</span> <span class="hljs-title class_">CreateCases</span> &lt; <span class="hljs-title class_ inherited__">ActiveRecord::Migration</span>[<span class="hljs-number">5.1</span>]
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">change</span>
+    create_table <span class="hljs-symbol">:cases</span> <span class="hljs-keyword">do</span> |<span class="hljs-params">t</span>|
+      t.string <span class="hljs-symbol">:nickname</span>
+      t.text <span class="hljs-symbol">:summary</span>
 
       t.timestamps
-    end
-  end
-end
-</code></pre>
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span></code></pre></div>
+
 <p>无论采用上述哪种方式，最终都需要执行 <code>rails db:migrate</code> 来完成 <strong>Model</strong> 的建立</p>
 <p>下面是如何给已有的 <strong>Model</strong> 添加 column</p>
-<pre><code class="lang-bash">$ rails g migration [要添加的 migration 的名字]
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">$ rails g migration [要添加的 migration 的名字]
 
-## Example
-$ rails g migration add_user_id_to_job
-</code></pre>
-<pre><code class="lang-ruby">class AddUserIdToJob &lt; ActiveRecord::Migration[5.0]
-  def change
-    add_column :jobs, :user_id, :integer
-  end
-end
-</code></pre>
+<span class="hljs-comment">## Example</span>
+$ rails g migration add_user_id_to_job</code></pre></div>
+
+
+
+<div class="code-block" data-code-language="Ruby"><pre><code class="hljs ruby"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AddUserIdToJob</span> &lt; <span class="hljs-title class_ inherited__">ActiveRecord::Migration</span>[<span class="hljs-number">5.0</span>]
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">change</span>
+    add_column <span class="hljs-symbol">:jobs</span>, <span class="hljs-symbol">:user_id</span>, <span class="hljs-symbol">:integer</span>
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span></code></pre></div>
+
 <p>重命名 Column - 注意 job 要复数（之前新建 model 时 Job 用的是单数 - <code>rails g model job title:string</code>）</p>
-<pre><code class="lang-ruby">class ChangeWagesColumnNameInJob &lt; ActiveRecord::Migration[5.1]
-  def change
-    rename_column :jobs, :upper_wage, :wage_upper_bound
-    rename_column :jobs, :lower_wage, :wage_lower_bound
-  end
-end
-</code></pre>
+<div class="code-block" data-code-language="Ruby"><pre><code class="hljs ruby"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ChangeWagesColumnNameInJob</span> &lt; <span class="hljs-title class_ inherited__">ActiveRecord::Migration</span>[<span class="hljs-number">5.1</span>]
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">change</span>
+    rename_column <span class="hljs-symbol">:jobs</span>, <span class="hljs-symbol">:upper_wage</span>, <span class="hljs-symbol">:wage_upper_bound</span>
+    rename_column <span class="hljs-symbol">:jobs</span>, <span class="hljs-symbol">:lower_wage</span>, <span class="hljs-symbol">:wage_lower_bound</span>
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span></code></pre></div>
+
 <hr>
-<h3 id="CRUD-模板"><a href="#CRUD-模板" class="headerlink" title="CRUD 模板"></a>CRUD 模板</h3><pre><code class="lang-ruby">class GroupsController &lt; ApplicationController
-  def index
-    @groups = Group.all
-  end
+<h3 id="CRUD-模板"><a href="#CRUD-模板" class="headerlink" title="CRUD 模板"></a>CRUD 模板</h3><div class="code-block" data-code-language="Ruby"><pre><code class="hljs ruby"><span class="hljs-keyword">class</span> <span class="hljs-title class_">GroupsController</span> &lt; <span class="hljs-title class_ inherited__">ApplicationController</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">index</span>
+    <span class="hljs-variable">@groups</span> = <span class="hljs-title class_">Group</span>.all
+  <span class="hljs-keyword">end</span>
 
-  def new
-    @group = Group.new
-  end
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">new</span>
+    <span class="hljs-variable">@group</span> = <span class="hljs-title class_">Group</span>.new
+  <span class="hljs-keyword">end</span>
 
-  def show
-    @group = Group.find(params[:id])
-  end
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">show</span>
+    <span class="hljs-variable">@group</span> = <span class="hljs-title class_">Group</span>.find(params[<span class="hljs-symbol">:id</span>])
+  <span class="hljs-keyword">end</span>
 
-  def edit
-    @group = Group.find(params[:id])
-  end
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">edit</span>
+    <span class="hljs-variable">@group</span> = <span class="hljs-title class_">Group</span>.find(params[<span class="hljs-symbol">:id</span>])
+  <span class="hljs-keyword">end</span>
 
-  def create
-    @group = Group.new(group_params)
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">create</span>
+    <span class="hljs-variable">@group</span> = <span class="hljs-title class_">Group</span>.new(group_params)
 
-    if @group.save
+    <span class="hljs-keyword">if</span> <span class="hljs-variable">@group</span>.save
       redirect_to groups_path
-    else
-      render :new
-    end
-  end
+    <span class="hljs-keyword">else</span>
+      render <span class="hljs-symbol">:new</span>
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
 
-  def update
-    @group = Group.find(params[:id])
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>
+    <span class="hljs-variable">@group</span> = <span class="hljs-title class_">Group</span>.find(params[<span class="hljs-symbol">:id</span>])
 
-    if @group.update(group_params)
-      redirect_to groups_path, notice: &#39;Update Success&#39;
-    else
-      render :edit
-    end
-  end
+    <span class="hljs-keyword">if</span> <span class="hljs-variable">@group</span>.update(group_params)
+      redirect_to groups_path, <span class="hljs-symbol">notice:</span> <span class="hljs-string">&#x27;Update Success&#x27;</span>
+    <span class="hljs-keyword">else</span>
+      render <span class="hljs-symbol">:edit</span>
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
 
-  def destroy
-    @group = Group.find(params[:id])
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">destroy</span>
+    <span class="hljs-variable">@group</span> = <span class="hljs-title class_">Group</span>.find(params[<span class="hljs-symbol">:id</span>])
 
-    @group.destroy
-    redirect_to groups_path, alert: &#39;Group deleted&#39;
-  end
+    <span class="hljs-variable">@group</span>.destroy
+    redirect_to groups_path, <span class="hljs-symbol">alert:</span> <span class="hljs-string">&#x27;Group deleted&#x27;</span>
+  <span class="hljs-keyword">end</span>
 
-  private
+  <span class="hljs-keyword">private</span>
 
-  def group_params
-    params.require(:group).permit(:title, :description)
-  end
-end
-</code></pre>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">group_params</span>
+    params.<span class="hljs-keyword">require</span>(<span class="hljs-symbol">:group</span>).permit(<span class="hljs-symbol">:title</span>, <span class="hljs-symbol">:description</span>)
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span></code></pre></div>
+
 <hr>
-<h3 id="新手常用-Gem"><a href="#新手常用-Gem" class="headerlink" title="新手常用 Gem"></a>新手常用 Gem</h3><p><a href="https://github.com/plataformatec/devise" target="_blank" rel="noopener">Devise</a></p>
-<pre><code class="lang-bash">$ rails g devise:install
+<h3 id="新手常用-Gem"><a href="#新手常用-Gem" class="headerlink" title="新手常用 Gem"></a>新手常用 Gem</h3><p><a href="https://github.com/plataformatec/devise">Devise</a></p>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">$ rails g devise:install
 $ rails g devise user
-$ rake db:migrate
-</code></pre>
-<p><a href="https://github.com/plataformatec/simple_form" target="_blank" rel="noopener">Simple Form</a></p>
-<pre><code class="lang-bash">$ rails generate simple_form:install --bootstrap
-</code></pre>
-<hr>
-<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><p><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation"></p>
+$ rake db:migrate</code></pre></div>
 
+<p><a href="https://github.com/plataformatec/simple_form">Simple Form</a></p>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash">$ rails generate simple_form:install --bootstrap</code></pre></div>
+
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a><code>打赏</code></h3><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation">
 
   </article>
-
 
 
     </div>
@@ -263,8 +306,6 @@ $ rake db:migrate
 <!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/search.js"></script>
-<script src="/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
 
 // comments below to disable loading animation
@@ -303,24 +344,7 @@ $("a[href='#top']").click(function() {
 var path = "/search.xml";
 searchFunc(path, 'local-search-input', 'local-search-result');
 
-</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
 </script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
 
 </body>
 </html>

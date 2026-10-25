@@ -112,7 +112,7 @@
             </button>
           </div>
           <div class="post-toc-drawer-content">
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E6%97%A7%E5%8C%BA%E5%88%AB"><span class="toc-text">新旧区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-js-%E5%92%8C-Hexo"><span class="toc-text">Node.js 和 Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E7%9A%84%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4"><span class="toc-text">新的终端命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E6%BA%90%E7%A0%81"><span class="toc-text">提交源码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E7%BD%91%E7%AB%99-GitHub-Pages"><span class="toc-text">更新网站 - GitHub Pages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E5%8D%9A%E6%96%87%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93"><span class="toc-text">完整博文流程总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E8%B5%8F"><span class="toc-text">打赏</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E6%97%A7%E5%8C%BA%E5%88%AB"><span class="toc-text">新旧区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-js-%E5%92%8C-Hexo"><span class="toc-text">Node.js 和 Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E7%9A%84%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4"><span class="toc-text">新的终端命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E6%BA%90%E7%A0%81"><span class="toc-text">提交源码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E7%BD%91%E7%AB%99-GitHub-Pages"><span class="toc-text">更新网站 - GitHub Pages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0-Mac-%E4%BB%8E%E9%9B%B6%E6%81%A2%E5%A4%8D%E7%8E%AF%E5%A2%83"><span class="toc-text">新 Mac 从零恢复环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E8%B5%8F"><span class="toc-text">打赏</span></a></li></ol>
           </div>
         </aside>
 
@@ -154,7 +154,11 @@ Dart Sass 编译 SCSS
   ↓
 GitHub Pages</code></pre></div>
 
-<p>最大的区别不是页面看起来完全不同，而是<strong>生成网页的链路更简单、更现代，也更容易继续维护</strong>。</p>
+<p>最大的区别不是页面看起来完全不同，而是<strong>生成网页的链路更简单、更现代，也更容易继续维护</strong>。维护的便利，除了架构，还体现在 AI 时代特有的 Checkpoint 文件 <code>AI_CONTEXT.md</code>。每次改动只需提交文件并表示：</p>
+<blockquote>
+<p>这是项目 Checkpoint。请先阅读了解架构和设计约束。</p>
+</blockquote>
+<p>就能再次安全可靠地出发。</p>
 <hr>
 <h3 id="Node-js-和-Hexo"><a href="#Node-js-和-Hexo" class="headerlink" title="Node.js 和 Hexo"></a>Node.js 和 Hexo</h3><p>旧版最后使用的本地环境是：</p>
 <div class="code-block" data-code-language="Text"><pre><code class="hljs text">Node.js 13.14.0
@@ -234,12 +238,90 @@ nvm use        <span class="hljs-comment"># 依据 .nvmrc 文件切换到对应�
 npm run build  <span class="hljs-comment"># package.json 设置了 &quot;build&quot;: &quot;hexo clean &amp;&amp; hexo generate&quot;</span>
 npx hexo d     <span class="hljs-comment"># 部署静态网页到 GitHub Pages</span></code></pre></div>
 
-<p>发布后打开博客链接检查最终线上效果：</p>
-<div class="code-block" data-code-language="Text"><pre><code class="hljs text">https://cps.ninja</code></pre></div>
-
+<p>发布后打开<a href="https://cps.ninja/">博客链接</a>检查最终线上效果。</p>
 <hr>
-<h3 id="完整博文流程总结"><a href="#完整博文流程总结" class="headerlink" title="完整博文流程总结"></a>完整博文流程总结</h3><div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/blog                 <span class="hljs-comment"># 进入博客文件夹目录</span>
+<h3 id="新-Mac-从零恢复环境"><a href="#新-Mac-从零恢复环境" class="headerlink" title="新 Mac 从零恢复环境"></a>新 Mac 从零恢复环境</h3><p>打开终端先安装 Command Line Tools（Git 等工具）：</p>
+<div class="code-block" data-code-language="Zsh"><pre><code class="hljs zsh">xcode-select --install</code></pre></div>
+
+<p>安装 <a href="http://brew.sh/">Hombrew</a>：</p>
+<div class="code-block" data-code-language="Zsh"><pre><code class="hljs zsh">/bin/bash -c <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)</span>&quot;</span></code></pre></div>
+
+<p><strong>须完成安装器末尾打印的 <code>Next steps</code> 配置</strong>，使 <code>brew</code> 可以使用。Apple Silicon Mac 通常执行以下两行；Intel Mac 请按安装器提示改为 <code>/usr/local/bin/brew</code>：</p>
+<div class="code-block" data-code-language="Zsh"><pre><code class="hljs zsh"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;eval &quot;$(/opt/homebrew/bin/brew shellenv)&quot;&#x27;</span> &gt;&gt; ~/.zprofile
+<span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(/opt/homebrew/bin/brew shellenv)</span>&quot;</span></code></pre></div>
+
+<p>检查：</p>
+<div class="code-block" data-code-language="Zsh"><pre><code class="hljs zsh">brew --version
+git --version</code></pre></div>
+
+<p>安装 iTerm2、<a href="https://fishshell.com/">Fish Shell</a>、GitHub CLI（仍在 zsh）</p>
+<div class="code-block" data-code-language="Zsh"><pre><code class="hljs zsh">brew install fish gh
+brew install --cask iterm2</code></pre></div>
+
+<p>将 <a href="https://fishshell.com/">Fish</a> 设为登录 shell（需输登录密码）：</p>
+<div class="code-block" data-code-language="Zsh"><pre><code class="hljs zsh">FISH_PATH=<span class="hljs-string">&quot;<span class="hljs-subst">$(brew --prefix)</span>/bin/fish&quot;</span>
+grep -Fxq <span class="hljs-string">&quot;<span class="hljs-variable">$FISH_PATH</span>&quot;</span> /etc/shells || <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$FISH_PATH</span>&quot;</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> -a /etc/shells
+chsh -s <span class="hljs-string">&quot;<span class="hljs-variable">$FISH_PATH</span>&quot;</span></code></pre></div>
+
+<p>关闭旧 Terminal，打开 iTerm2，确认进入 fish：</p>
+<div class="code-block" data-code-language="Fish"><pre><code class="hljs fish"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$version</span></code></pre></div>
+
+<p>添加路径，让 fish 始终能找到 Homebrew：</p>
+<div class="code-block" data-code-language="Fish"><pre><code class="hljs fish"><span class="hljs-comment"># Intel Mac 则为 `/usr/local/bin /usr/local/sbin`</span>
+<span class="hljs-built_in">fish_add_path</span> /opt/homebrew/bin /opt/homebrew/sbin</code></pre></div>
+
+<p>在 fish 中安装 nvm.fish（<code>nvm</code> 命令）</p>
+<div class="code-block" data-code-language="Fish"><pre><code class="hljs fish"><span class="hljs-built_in">curl</span> -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | <span class="hljs-keyword">source</span>; <span class="hljs-keyword">and</span> fisher install jorgebucaran/fisher
+<span class="hljs-built_in">fisher</span> install jorgebucaran/nvm.fish</code></pre></div>
+
+<p>此时先不要随意安装最新 Node。项目根目录的 <code>.nvmrc</code> 有记录；等克隆完成后在项目目录使用 <code>nvm install</code>，会自动安装正确的 Node 主版本。</p>
+<p>连接 GitHub，并配置 Git 作者身份</p>
+<div class="code-block" data-code-language="Fish"><pre><code class="hljs fish"><span class="hljs-built_in">gh</span> auth login --git-protocol ssh --web</code></pre></div>
+
+<p>根据终端提示，在浏览器中登录<strong>有权访问 Blog、PLN、Pages 仓库</strong>的 GitHub 账户，并允许 <code>gh</code> 创建／上传 SSH 公钥（如出现提示）。无需手工复制 SSH key 到网页。然后检查：</p>
+<div class="code-block" data-code-language="Fish"><pre><code class="hljs fish"><span class="hljs-built_in">gh</span> auth status</code></pre></div>
+
+<p>从旧电脑读取原来的作者姓名和邮箱（<code>git config --global user.name</code>、<code>git config --global user.email</code>），在新电脑设置相同信息：</p>
+<div class="code-block" data-code-language="Fish"><pre><code class="hljs fish"><span class="hljs-built_in">git</span> config --global user.name <span class="hljs-string">&quot;你的 Git 提交姓名&quot;</span>
+<span class="hljs-built_in">git</span> config --global user.email <span class="hljs-string">&quot;你的 Git 提交邮箱&quot;</span></code></pre></div>
+
+<p>克隆 Blog，并取回 PLN 子模块：</p>
+<div class="code-block" data-code-language="Fish"><pre><code class="hljs fish"><span class="hljs-built_in">cd</span> ~    <span class="hljs-comment"># 切换到目标目录，即希望 blog 文件夹放的位置</span>
+<span class="hljs-built_in">git</span> clone --recurse-submodules git@github.com:chpwang/blog.git blog
+<span class="hljs-built_in">cd</span> ~/blog</code></pre></div>
+
+<p><code>--recurse-submodules</code> 会在克隆 Blog 的同时取回 Blog 当前提交所指向的 PLN 版本。<strong>不要单独把最新版 PLN <code>master</code> 强行覆盖进去</strong>。</p>
+<p>确认：</p>
+<div class="code-block" data-code-language="Fish"><pre><code class="hljs fish"><span class="hljs-built_in">git</span> status -sb
+<span class="hljs-built_in">git</span> submodule status
+<span class="hljs-built_in">git</span> -C themes/pln status -sb</code></pre></div>
+
+<p>子模块默认可能显示 <code>HEAD detached at ...</code>，这是 Git 通过精确 commit 还原子模块时的<strong>正常情况</strong>。仅为了写文章和发布，无须将 PLN 强行切回 <code>master</code>；以后真的要修改 PLN 时，先检查其分支和指针再切换。</p>
+<p>如果首次克隆因子模块网络问题未成功，可在 Blog 根目录执行：</p>
+<div class="code-block" data-code-language="Fish"><pre><code class="hljs fish"><span class="hljs-built_in">git</span> submodule update --init --recursive</code></pre></div>
+
+<p>安装正确 Node、依赖，生成网站并本地预览</p>
+<div class="code-block" data-code-language="Fish"><pre><code class="hljs fish"><span class="hljs-built_in">cd</span> ~/blog
+<span class="hljs-built_in">nvm</span> install     <span class="hljs-comment"># 读取 .nvmrc（Node 24）并安装/启用</span>
+<span class="hljs-built_in">nvm</span> use         <span class="hljs-comment"># 依据 .nvmrc 文件切换到对应的 Node.js 版本</span>
+
+<span class="hljs-built_in">npm</span> ci          <span class="hljs-comment"># 根据 package-lock.json 精确安装依赖（Continuous Integration）</span>
+<span class="hljs-built_in">npm</span> run build   <span class="hljs-comment"># hexo clean + hexo generate</span>
+<span class="hljs-built_in">npx</span> hexo s      <span class="hljs-comment"># 本地预览；按 Ctrl+C 结束</span></code></pre></div>
+
+<p>在浏览器访问 <strong><a href="http://localhost:4000/">http://localhost:4000/</a></strong> 。</p>
+<p>验证部署配置并发布：</p>
+<div class="code-block" data-code-language="Fish"><pre><code class="hljs fish"><span class="hljs-built_in">npx</span> hexo deploy  <span class="hljs-comment"># 发布更新博客网页</span></code></pre></div>
+
+<p>部署成功后访问<a href="https://cps.ninja/">博客网站</a>。如果 Safari 与 Chrome 的行为不一致，先检查 CSS&#x2F;JS 缓存，不要立即重做主题。</p>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>单台电脑上完整的博文流程如下</p>
+<div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/blog                 <span class="hljs-comment"># 进入博客文件夹目录</span>
 nvm use                   <span class="hljs-comment"># 切到对应的 Node.js</span>
+
+<span class="hljs-comment"># 多设备可先同步进度再开始（fast-forward only）</span>
+git pull --ff-only
+
 npx hexo new <span class="hljs-string">&quot;new post&quot;</span>   <span class="hljs-comment"># 创建新博文</span>
 
 <span class="hljs-comment">## 对 source/_posts/new-post.md 文件进行各种编辑 ##</span>
@@ -248,12 +330,25 @@ npm run build  <span class="hljs-comment"># 生成静态网页 - &quot;build&quo
 npx hexo s     <span class="hljs-comment"># 本地预览效果</span>
 
 <span class="hljs-comment"># 保存 - save &amp; push</span>
-git add .                           
+git add <span class="hljs-built_in">source</span>/_posts                       
 git commit -m <span class="hljs-string">&quot;Update blog posts&quot;</span>
 git push origin master
 
-npx hexo d     <span class="hljs-comment"># 部署静态网页到 GitHub Pages</span></code></pre></div>
+<span class="hljs-comment">## 若更改了主题样式 pln 则要两个仓库依次 commit/push</span>
 
+<span class="hljs-comment"># 第一次 commit/push</span>
+<span class="hljs-built_in">cd</span> ~/blog/themes/pln
+git add -A
+git commit -m <span class="hljs-string">&quot;Update PLN theme&quot;</span>
+git push origin HEAD
+
+<span class="hljs-comment"># 第二次 commit/push</span>
+<span class="hljs-built_in">cd</span> ~/blog
+git add themes/pln
+git commit -m <span class="hljs-string">&quot;Update PLN theme revision&quot;</span>
+git push origin master
+
+npx hexo d     <span class="hljs-comment"># 部署静态网页到 GitHub Pages</span></code></pre></div>
 
 <p>其他延伸阅读：<br><a href="/2019/09/18/markdown-cheat-sheet/">常用的 Markdown 语法、排版和技巧</a><br><a href="/2019/03/16/hexo-with-latex/">常用的 LaTex 语法</a></p>
 <hr>

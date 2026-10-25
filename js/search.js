@@ -1,99 +1,165 @@
-var searchFunc = function(path, search_id, content_id) {
+/* PLN local search: load the full-text index only when search is used.
+ * Kept the historical searchFunc(path, inputId, resultsId) public API so
+ * existing EJS templates need no changes.
+ */
+var searchFunc = function (path, searchId, resultId) {
     'use strict';
-    $.ajax({
-        url: path,
-        dataType: "xml",
-        success: function( xmlResponse ) {
-            // get the contents from search data
-            var datas = $( "entry", xmlResponse ).map(function() {
-                return {
-                    title: $( "title", this ).text(),
-                    content: $("content",this).text(),
-                    url: $( "url" , this).text()
-                };
-            }).get();
 
-            var $input = document.getElementById(search_id);
-            var $resultContent = document.getElementById(content_id);
+    var input = document.getElementById(searchId);
+    var result = document.getElementById(resultId);
 
-            $input.addEventListener('input', function(){
-                var str='<ul class=\"search-result-list\">';
-                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                $resultContent.innerHTML = "";
-                if (this.value.trim().length <= 0) {
-                    return;
-                }
-                // perform local searching
-                datas.forEach(function(data) {
-                    var isMatch = true;
-                    var content_index = [];
-                    if (!data.title || data.title.trim() === '') {
-                        data.title = "Untitled";
-                    }
-                    var data_title = data.title.trim().toLowerCase();
-                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
-                    var index_title = -1;
-                    var index_content = -1;
-                    var first_occur = -1;
-                    // only match artiles with not empty contents
-                    if (data_content !== '') {
-                        keywords.forEach(function(keyword, i) {
-                            index_title = data_title.indexOf(keyword);
-                            index_content = data_content.indexOf(keyword);
+    // Post pages call searchFunc too, but have no search field. In that case
+    // do not download search.xml or attach listeners.
+    if (!input || !result) return;
 
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
-                                if (index_content < 0) {
-                                    index_content = 0;
-                                }
-                                if (i == 0) {
-                                    first_occur = index_content;
-                                }
-                                // content_index.push({index_content:index_content, keyword_len:keyword_len});
-                            }
-                        });
-                    } else {
-                        isMatch = false;
-                    }
-                    // show search results
-                    if (isMatch) {
-                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                        var content = data.content.trim().replace(/<[^>]+>/g,"");
-                        if (first_occur >= 0) {
-                            // cut out 100 characters
-                            var start = first_occur - 20;
-                            var end = first_occur + 80;
+    var entries = null;
+    var pending = null;
 
-                            if(start < 0){
-                                start = 0;
-                            }
+    function plainText(html) {
+        // The generated XML stores Markdown content as escaped HTML. Parsing
+        // it in an inert document removes tags and decodes HTML entities.
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        return doc.body.textContent || '';
+    }
 
-                            if(start == 0){
-                                end = 100;
-                            }
-
-                            if(end > content.length){
-                                end = content.length;
-                            }
-
-                            var match_content = content.substr(start, end);
-
-                            // highlight all keywords
-                            keywords.forEach(function(keyword){
-                                var regS = new RegExp(keyword, "gi");
-                                match_content = match_content.replace(regS, "<em class=\"search-keyword\">"+keyword+"</em>");
-                            });
-
-                            str += "<p class=\"search-result\">" + match_content +"...</p>"
-                        }
-                        str += "</li>";
-                    }
-                });
-                str += "</ul>";
-                $resultContent.innerHTML = str;
-            });
+    function parseIndex(xmlText) {
+        var xml = new DOMParser().parseFromString(xmlText, 'application/xml');
+        if (xml.querySelector('parsererror')) {
+            throw new Error('Invalid search.xml');
         }
+        return Array.prototype.map.call(xml.getElementsByTagName('entry'), function (entry) {
+            function field(tag) {
+                var element = entry.getElementsByTagName(tag)[0];
+                return element ? element.textContent : '';
+            }
+            var title = field('title').trim() || 'Untitled';
+            var content = plainText(field('content')).trim();
+            return {
+                title: title,
+                titleLower: title.toLowerCase(),
+                content: content,
+                contentLower: content.toLowerCase(),
+                url: field('url').trim()
+            };
+        });
+    }
+
+    function loadIndex() {
+        if (entries) return Promise.resolve(entries);
+        if (pending) return pending;
+
+        pending = fetch(path, { credentials: 'same-origin' })
+            .then(function (response) {
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                return response.text();
+            })
+            .then(function (text) {
+                entries = parseIndex(text);
+                return entries;
+            })
+            .catch(function (error) {
+                pending = null; // Allow a retry on the next focus/input.
+                throw error;
+            });
+        return pending;
+    }
+
+    function highlight(target, source, keywords) {
+        var lower = source.toLowerCase();
+        var cursor = 0;
+        while (cursor < source.length) {
+            var nearest = -1;
+            var word = '';
+            keywords.forEach(function (keyword) {
+                var index = lower.indexOf(keyword, cursor);
+                if (index !== -1 && (nearest === -1 || index < nearest)) {
+                    nearest = index;
+                    word = keyword;
+                }
+            });
+            if (nearest === -1) {
+                target.appendChild(document.createTextNode(source.slice(cursor)));
+                break;
+            }
+            if (nearest > cursor) {
+                target.appendChild(document.createTextNode(source.slice(cursor, nearest)));
+            }
+            var em = document.createElement('em');
+            em.className = 'search-keyword';
+            em.textContent = source.slice(nearest, nearest + word.length);
+            target.appendChild(em);
+            cursor = nearest + word.length;
+        }
+    }
+
+    function render() {
+        var query = input.value.trim();
+        result.replaceChildren();
+        if (!query || !entries) return;
+
+        var words = query.toLowerCase().split(/[\s\-]+/).filter(Boolean);
+        if (!words.length) return;
+
+        var list = document.createElement('ul');
+        list.className = 'search-result-list';
+
+        entries.forEach(function (item) {
+            // Match title and full-text, with every search term required.
+            if (!words.every(function (w) {
+                return item.titleLower.includes(w) || item.contentLower.includes(w);
+            })) return;
+
+            var li = document.createElement('li');
+            var link = document.createElement('a');
+            link.className = 'search-result-title';
+            link.href = item.url;
+            highlight(link, item.title, words);
+            li.appendChild(link);
+
+            if (item.content) {
+                // Prefer a snippet around the first content match; for a
+                // title-only match, show the beginning of the article.
+                var first = -1;
+                words.forEach(function (word) {
+                    var at = item.contentLower.indexOf(word);
+                    if (at !== -1 && (first === -1 || at < first)) first = at;
+                });
+                var start = Math.max(0, (first === -1 ? 0 : first - 20));
+                var snippet = item.content.slice(start, start + 100);
+                var description = document.createElement('p');
+                description.className = 'search-result';
+                highlight(description, snippet, words);
+                description.appendChild(document.createTextNode('…'));
+                li.appendChild(description);
+            }
+            list.appendChild(li);
+        });
+
+        result.appendChild(list);
+    }
+
+    function showFailure() {
+        if (input.value.trim()) {
+            result.textContent = '搜索索引加载失败，请稍后重新输入。';
+        }
+    }
+
+    function beginSearch() {
+        // Focus prefetches; input can arrive before the XML has finished
+        // downloading. Always render the *latest* input after it arrives.
+        if (input.value.trim() && !entries) {
+            result.textContent = '正在加载搜索索引…';
+        }
+        loadIndex().then(render, showFailure);
+    }
+
+    input.addEventListener('focus', beginSearch);
+    input.addEventListener('input', function () {
+        if (!input.value.trim()) {
+            result.replaceChildren();
+            return;
+        }
+        if (entries) render();
+        else beginSearch();
     });
-}
+};

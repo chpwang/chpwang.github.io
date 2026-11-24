@@ -182,7 +182,8 @@ $ git <span class="hljs-built_in">clone</span> git@github.com:webyrd/miniKanren.
 $ git <span class="hljs-built_in">clone</span> [版本库的网址] [本地目录名]</code></pre></div>
 
 <hr>
-<h3 id="临时缓存"><a href="#临时缓存" class="headerlink" title="临时缓存"></a>临时缓存</h3><div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-comment">## 缓存当前进度（只能缓存 tracked files，不能缓存 untracked files）- 以下两条命令效果一样</span>
+<h3 id="临时缓存"><a href="#临时缓存" class="headerlink" title="临时缓存"></a>临时缓存</h3><div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-comment">## 缓存当前进度（只能缓存 tracked files，不能缓存 untracked files）</span>
+<span class="hljs-comment">## 以下两条命令效果一样</span>
 $ git stash
 $ git stash save
 
@@ -192,7 +193,7 @@ $ git stash save --include-untracked
 <span class="hljs-comment">## 只缓存 Unstaged Area 的文件改动，保留 Staging Area</span>
 $ git stash save --keep-index
 
-<span class="hljs-comment">## 只缓存 Unstaged Area（包含 untracked files 在内）的文件改动，保留 Staging Area</span>
+<span class="hljs-comment">## 只缓存 Unstaged Area（包含 untracked files）的文件改动，保留 Staging Area</span>
 $ git stash save --keep-index --include-untracked
 
 <span class="hljs-comment">## 缓存当前进度的同时增加对该缓存的描述，以便之后恢复时查看</span>

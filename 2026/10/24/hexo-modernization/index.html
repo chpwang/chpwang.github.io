@@ -154,7 +154,7 @@ Dart Sass 编译 SCSS
   ↓
 GitHub Pages</code></pre></div>
 
-<p>最大的区别不是页面看起来完全不同，而是<strong>生成网页的链路更简单、更现代，也更容易继续维护</strong>。维护的便利，除了架构，还体现在 AI 时代特有的 Checkpoint 文件 <code>AI_CONTEXT.md</code>。每次改动只需提交文件并表示：</p>
+<p>除了页面样式进行了更利于阅读的调整，新架构主要体现在<strong>生成网页的链路更简单、更易维护</strong>。维护的便利，还体现在 AI 时代特有的 Checkpoint 文件 <code>AI_CONTEXT.md</code>。每次改动只需提交文件并表示：</p>
 <blockquote>
 <p>这是项目 Checkpoint。请先阅读了解架构和设计约束。</p>
 </blockquote>
@@ -194,7 +194,7 @@ npm run build
 npx hexo s</code></pre></div>
 
 <hr>
-<h3 id="提交源码"><a href="#提交源码" class="headerlink" title="提交源码"></a>提交源码</h3><p>如果只是新增或修改文章：</p>
+<h3 id="提交源码"><a href="#提交源码" class="headerlink" title="提交源码"></a>提交源码</h3><p>如果只是新增或修改文章，只需 <code>push</code> 一次：</p>
 <div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/blog
 
 git status
@@ -202,9 +202,9 @@ git add <span class="hljs-built_in">source</span>
 git commit -m <span class="hljs-string">&quot;Update blog posts&quot;</span>
 git push origin master</code></pre></div>
 
-<p>修改 PLN 后要 commit 两次，push 两次：</p>
+<p>但若修改 PLN ，则要 <code>commit</code> 两次，<code>push</code> 两次：</p>
 <ul>
-<li><p>第一次，先提交 PLN：</p>
+<li><p>第一次 <code>commit</code> 和 <code>push</code> 提交 PLN 文件夹的改动：</p>
 <div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/blog/themes/pln
 
 git status
@@ -212,7 +212,7 @@ git add -A
 git commit -m <span class="hljs-string">&quot;Update PLN theme&quot;</span>
 git push origin HEAD</code></pre></div>
 </li>
-<li><p>第二次，回到 blog 提交：</p>
+<li><p>第二次 <code>commit</code> 和 <code>push</code>，回到 blog 提交：</p>
 <div class="code-block" data-code-language="Bash"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/blog
 
 git add themes/pln

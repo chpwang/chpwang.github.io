@@ -1,0 +1,1068 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>重学《The Little Schemer》</title>
+  <meta name="author" content="chpwang">
+   <meta name="description" content="王哈哈的修行驿站">
+  
+  
+  <meta property="og:title" content="重学《The Little Schemer》"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="行侠何须仗名剑"/>
+   <meta property="og:image" content=""/>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="行侠何须仗名剑" type="application/atom+xml">
+
+  <!-- Apply saved/system color theme before CSS to avoid a light-mode flash. -->
+  <script src="/js/theme-mode.js"></script>
+
+  <!-- Bootstrap 3 and Font Awesome 4.5 are kept local for reliable loading. -->
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+
+  <!-- Server-side Highlight.js token colors. -->
+  <link rel="stylesheet" href="/css/highlight/styles/vs2015.css">
+
+  <!-- PLN theme CSS. -->
+  <link rel="stylesheet" href="/css/m.min.css">
+
+  <link rel="icon" type="image/x-icon" href="/G.png">
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      <button class="post-theme-toggle" type="button" aria-label="切换深色模式" title="切换深色模式">
+  <i class="fa fa-moon-o" aria-hidden="true"></i>
+</button>
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        重学《The Little Schemer》
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2026-10-27T20:58:15.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2026-10-28
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/Programming-Language/">Programming Language</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+
+    
+      
+      
+        <button
+          class="post-toc-toggle"
+          type="button"
+          aria-controls="post-toc-drawer"
+          aria-expanded="false"
+          aria-label="打开文章目录"
+          title="目录">
+        </button>
+
+        <div class="post-toc-backdrop" data-toc-close aria-hidden="true"></div>
+
+        <aside
+          id="post-toc-drawer"
+          class="post-toc post-toc-drawer"
+          aria-label="文章目录"
+          aria-hidden="true">
+          <div class="post-toc-drawer-header">
+            <div class="post-toc-title">目录</div>
+            <button class="post-toc-close" type="button" data-toc-close aria-label="关闭文章目录">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="post-toc-drawer-content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Preface"><span class="toc-text">Preface</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Notational-Conventions"><span class="toc-text">Notational Conventions</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-1-Toys"><span class="toc-text">Chapter 1 - Toys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-2-Do-It-Do-It-Again-and-Again-and-Again%E2%80%A6"><span class="toc-text">Chapter 2 - Do It, Do It Again, and Again, and Again…</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-3-Cons-the-Magnificent"><span class="toc-text">Chapter 3 - Cons the Magnificent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-4-Numbers-Games"><span class="toc-text">Chapter 4 - Numbers Games</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-5-Oh-My-Gawd-It%E2%80%99s-Full-of-Stars"><span class="toc-text">Chapter 5 - *Oh My Gawd*: It’s Full of Stars</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-6-Shadows"><span class="toc-text">Chapter 6 - Shadows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E8%B5%8F"><span class="toc-text">打赏</span></a></li></ol>
+          </div>
+        </aside>
+
+        <script src="/js/toc.js" defer></script>
+      
+    
+
+    
+    <p>重构博客之后，突然就想弥补一下学生时代的遗憾：学习 <a href="https://en.wikipedia.org/wiki/Daniel_P._Friedman">Daniel P. Friedman</a> 写的系列书籍。以前时间没有那么充裕，Friedman 的书很多地方没时间琢磨，现在感觉是时候了。</p>
+<p>在人工智能时代，还有学习程序语言的强烈意愿，不知道是一种无知还是一种睿智。就当成一场轻松的旅途，走到哪算哪吧。</p>
+<p>虽然本书的编程语言用的是 <a href="https://schemers.org/">Scheme</a>，但我学习过程准备用 <a href="https://racket-lang.org/">Racket</a> 语言，即 <a href="https://download.racket-lang.org/">DrRacket</a> 这个 IDE 默认的语言。首先因为合著者 <a href="https://felleisen.org/matthias/">Matthias Felleisen</a> 在<a href="https://groups.google.com/g/racket-users/c/xQZtk_cY14c?utm_source=chatgpt.com&pli=1">邮件</a>中肯定了这个做法（当然，他是 <code>Racket</code> 语言的领头人）。其次，掌握书中思想更重要，而不是纠结语言实现上细节的一致性。</p>
+<p>如果真的想使用严格传统的 <code>Scheme</code> 标准，应该考虑用 <code>#lang r5rs</code>，而不是 <code>#lang scheme</code>，因为在 DrRackt 中，<code>scheme</code> 也只是 <code>racket</code> 旧名称 <code>PLT Scheme</code> 的兼容入口而已。但就算是 <a href="https://docs.racket-lang.org/r5rs/index.html">R5RS</a> 也不是 <em>The Little Schemer</em> 的完全对应物。本书用的其实是一种为了教学而精心简化、甚至部分理想化的 <code>Lisp</code> 语言。</p>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs racket"><span class="hljs-keyword">#lang</span> racket                <span class="hljs-comment">; 用 racket 语言</span>
+
+(<span class="hljs-keyword">define</span> atom?
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">x</span>)
+    (<span class="hljs-built_in">and</span> (<span class="hljs-built_in">not</span> (<span class="hljs-built_in">pair?</span> x))
+         (<span class="hljs-built_in">not</span> (<span class="hljs-built_in">null?</span> x)))))
+
+(atom? (<span class="hljs-built_in">quote</span> ()))          <span class="hljs-comment">; #f</span></code></pre></div>
+
+<p>关于 <a href="https://racket-lang.org/">DrRacket</a> IDE 编辑器，可以参考<a href="http://localhost:4000/2022/03/24/scheme-basics-and-IDE/#%E7%BC%96%E7%A8%8B%E8%BD%AF%E4%BB%B6-DrRacket">这篇文章</a>进行配置。</p>
+<p>此外，Friedman 的系列书籍中总会有一些奇怪的符号作为变量名，而 DrRacket 恰好自带了一个相当方便的功能：LaTeX 风格的 Unicode 符号输入。这些符号可让我们的代码尽可能与书中保持一致。输入方法如下：</p>
+<p>例如，要输入 <code>↑</code></p>
+<ol>
+<li>在编辑器中输入 <code>\uparrow</code></li>
+<li>按 <code>Ctrl + \</code></li>
+<li>DrRacket 会把它转换成 <code>↑</code></li>
+</ol>
+<p>更多符号参见 DrRacket 官方手册：<a href="https://docs.racket-lang.org/drracket/Keyboard_Shortcuts.html?utm_source=chatgpt.com#(part._.La.Te.X_and_.Te.X_inspired_keybindings)">LaTeX and TeX inspired keybindings</a></p>
+<hr>
+<h3 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h3><blockquote><p>The goal of this book is to teach the reader to think recursively.</p>
+<footer><strong>Daniel P. Friedman</strong></footer></blockquote>
+
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">Language</th>
+<th align="left">Characteristics</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Natural<br>Language</td>
+<td align="left">Ambiguous, imprecise, and verbose; effective for general communication.</td>
+</tr>
+<tr>
+<td align="center">Formal<br>Mathematics</td>
+<td align="left">Precise and concise, but cryptic and difficult to learn.</td>
+</tr>
+<tr>
+<td align="center">Programming<br>Language</td>
+<td align="left">Formally precise like mathematics, but executable, observable, and modifiable. <br> <em>An Ideal choice to communicate the concept of recursion.</em></td>
+</tr>
+</tbody></table></div>
+<blockquote><p>The reader must be comfortable reading English, recognizing numbers, and counting.</p>
+<footer><strong>Daniel P. Friedman</strong></footer></blockquote>
+
+<h4 id="Notational-Conventions"><a href="#Notational-Conventions" class="headerlink" title="Notational Conventions"></a>Notational Conventions</h4><div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">Symbol Class</th>
+<th>Typeface</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Variables<br>&amp;<br>primitive operations</td>
+<td><em>Italic</em></td>
+<td><em>x</em>, <em>car</em>, <em>cons</em></td>
+</tr>
+<tr>
+<td align="center">Basic data</td>
+<td>Sans serif</td>
+<td>Numbers, truth and falsehood</td>
+</tr>
+<tr>
+<td align="center">Keywords</td>
+<td><strong>Boldface</strong></td>
+<td><strong>define</strong>, <strong>lambda</strong>, <strong>cond</strong>, <strong>else</strong>, <strong>and</strong>, <strong>or</strong>, <strong>quote</strong></td>
+</tr>
+<tr>
+<td align="center">Programs in framenotes</td>
+<td><code>Typewriter</code></td>
+<td>Executable code</td>
+</tr>
+</tbody></table></div>
+<p><strong>Note:</strong><br>Typeface distinctions can be ignored until Chapter 10, where programs are treated as data. However, the framenotes should not be ignored.</p>
+<blockquote><p>The key to learning scheme is “pattern recognition.”</p>
+<footer><strong>Daniel P. Friedman</strong></footer></blockquote>
+
+<hr>
+<h3 id="Chapter-1-Toys"><a href="#Chapter-1-Toys" class="headerlink" title="Chapter 1 - Toys"></a>Chapter 1 - Toys</h3><p>这章介绍表达式的各种基础概念和后续要用的操作符（primitive operations）：<br><code>car</code> ，<code>cdr</code> ，<code>cons</code> ，<code>null?</code> 和 <code>eq?</code><br>本章标题 <strong>Toys</strong> 也许就指这些 <em>primitive operations</em> ，后续的概念和代码都会用到</p>
+<blockquote><p>An S-expression is either an atom or a collection of S-expressions enclosed by parentheses.</p>
+<footer><strong>W’s summary</strong></footer></blockquote>
+
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The Law of Car</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">The primitive <code>car</code> is defined only for non-empty lists.</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The Law of Cdr</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">The primitive <code>cdr</code> is defined only for non-empty lists.<br>The <code>cdr</code> of any non-empty is always another list.</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The Law of Cons</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">The primitive <code>cons</code> takes two arguments.<br>The second argument to <code>cons</code> must be a list.<br>The result is a list.</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The Law of Null?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">The primitive <code>null?</code> is defined only for lists.</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The Law of Eq?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">The primitive <code>eq?</code> takes two arguments.<br>Each must be a non-numeric atom.</td>
+</tr>
+</tbody></table></div>
+<p><strong>Note:</strong><br>“cdr” is pronounced “could-er”.<br><code>(cons a l)</code> is read: “cons the atom <code>a</code> onto the list <code>l</code>.”</p>
+<hr>
+<h3 id="Chapter-2-Do-It-Do-It-Again-and-Again-and-Again…"><a href="#Chapter-2-Do-It-Do-It-Again-and-Again-and-Again…" class="headerlink" title="Chapter 2 - Do It, Do It Again, and Again, and Again…"></a>Chapter 2 - Do It, Do It Again, and Again, and Again…</h3><p>本章用各种递归函数一步步引导普及递归的概念<br>「递归」正如章节名所描述的那样：again and again …</p>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs racket">(<span class="hljs-keyword">define</span> lat?    <span class="hljs-comment">; a lat is a list of atoms</span>
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">l</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> l) <span class="hljs-keyword">#t</span>]
+      [(atom? (<span class="hljs-built_in">car</span> l)) (lat? (<span class="hljs-built_in">cdr</span> l))]
+      [<span class="hljs-built_in">else</span> <span class="hljs-keyword">#f</span>])))
+
+
+(<span class="hljs-keyword">define</span> member?
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">a</span> <span class="hljs-variable">lat</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-keyword">#f</span>]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">or</span> (<span class="hljs-built_in">eq?</span> a (<span class="hljs-built_in">car</span> lat))
+           (member? a (<span class="hljs-built_in">cdr</span> lat)))])))</code></pre></div>
+
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The First Commandament<br> ( <em>preliminary</em> )</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Always ask <code>null?</code> as first question in expressing any function.</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="Chapter-3-Cons-the-Magnificent"><a href="#Chapter-3-Cons-the-Magnificent" class="headerlink" title="Chapter 3 - Cons the Magnificent"></a>Chapter 3 - Cons the Magnificent</h3><p>本章通过各种函数学习如何用 <code>cons</code> <strong>递归</strong>地构建 <code>list</code>：</p>
+<blockquote>
+<p>describe the first typical element, and then cons it onto the natural recursion.</p>
+</blockquote>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs racket">(<span class="hljs-keyword">define</span> rember        <span class="hljs-comment">; &quot;rember&quot; stands for remove [a] member</span>
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">a</span> <span class="hljs-variable">lat</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-built_in">&#39;</span>()]
+      [(<span class="hljs-built_in">eq?</span> a (<span class="hljs-built_in">car</span> lat))
+       (<span class="hljs-built_in">cdr</span> lat)]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat)
+             (rember a (<span class="hljs-built_in">cdr</span> lat)))])))</code></pre></div>
+
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The Second Commandament</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Use <code>cons</code> to build lists.</td>
+</tr>
+</tbody></table></div>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs racket">(<span class="hljs-keyword">define</span> firsts             <span class="hljs-comment">; firsts takes one argument, a list,</span>
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">l</span>)              <span class="hljs-comment">; which is either a null list or contains</span>
+    (<span class="hljs-built_in">cond</span>                  <span class="hljs-comment">; only non-empty lists. It builds another</span>
+      [(<span class="hljs-built_in">null?</span> l) <span class="hljs-built_in">&#39;</span>()]      <span class="hljs-comment">; list composed of the first S-expression</span>
+      [<span class="hljs-built_in">else</span>                <span class="hljs-comment">; of each internal list.</span>
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> (<span class="hljs-built_in">car</span> l))
+             (firsts (<span class="hljs-built_in">cdr</span> l)))])))</code></pre></div>
+
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The Third Commandament</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">When building a lists, describe the first typical element, <br>and then <code>cons</code> it onto the natural recursion.</td>
+</tr>
+</tbody></table></div>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs racket">(<span class="hljs-keyword">define</span> insertR
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">new</span> <span class="hljs-variable">old</span> <span class="hljs-variable">lat</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-built_in">&#39;</span>()]
+      [(<span class="hljs-built_in">eq?</span> old (<span class="hljs-built_in">car</span> lat))
+       (<span class="hljs-built_in">cons</span> old
+             (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">new</span>
+                   (<span class="hljs-built_in">cdr</span> lat)))]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat)
+             (insertR <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> lat)))])))
+
+
+(<span class="hljs-keyword">define</span> insertL
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">new</span> <span class="hljs-variable">old</span> <span class="hljs-variable">lat</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-built_in">&#39;</span>()]
+      [(<span class="hljs-built_in">eq?</span> old (<span class="hljs-built_in">car</span> lat))
+       (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">new</span> lat)]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat)
+             (insertL <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> lat)))])))
+
+
+(<span class="hljs-keyword">define</span> subst
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">new</span> <span class="hljs-variable">old</span> <span class="hljs-variable">lat</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-built_in">&#39;</span>()]
+      [(<span class="hljs-built_in">eq?</span> old (<span class="hljs-built_in">car</span> lat))
+       (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">new</span> (<span class="hljs-built_in">cdr</span> lat))]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat)
+             (subst <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> lat)))])))
+
+
+(<span class="hljs-keyword">define</span> subst2             <span class="hljs-comment">; replace either the first ocurrence of </span>
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">new</span> <span class="hljs-variable">o1</span> <span class="hljs-variable">o2</span> <span class="hljs-variable">lat</span>)  <span class="hljs-comment">; o1 or the first ocurrence of o2 by new</span>
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-built_in">&#39;</span>()]
+      [(<span class="hljs-built_in">or</span> (<span class="hljs-built_in">eq?</span> o1 (<span class="hljs-built_in">car</span> lat))
+           (<span class="hljs-built_in">eq?</span> o2 (<span class="hljs-built_in">car</span> lat)))
+       (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">new</span> (<span class="hljs-built_in">cdr</span> lat))]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat)
+             (subst2 <span class="hljs-built_in">new</span> o1 o2 (<span class="hljs-built_in">cdr</span> lat)))])))
+
+
+(<span class="hljs-keyword">define</span> multirember
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">a</span> <span class="hljs-variable">lat</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-built_in">&#39;</span>()]
+      [(<span class="hljs-built_in">eq?</span> a (<span class="hljs-built_in">car</span> lat))
+       (multirember a (<span class="hljs-built_in">cdr</span> lat))]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat)
+             (multirember a (<span class="hljs-built_in">cdr</span> lat)))])))
+
+
+(<span class="hljs-keyword">define</span> multiinsertR
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">new</span> <span class="hljs-variable">old</span> <span class="hljs-variable">lat</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-built_in">&#39;</span>()]
+      [(<span class="hljs-built_in">eq?</span> old (<span class="hljs-built_in">car</span> lat))
+       (<span class="hljs-built_in">cons</span> old
+             (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">new</span>
+                   (multiinsertR <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> lat))))]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat)
+             (multiinsertR <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> lat)))])))
+
+
+
+(<span class="hljs-keyword">define</span> multiinsertL
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">new</span> <span class="hljs-variable">old</span> <span class="hljs-variable">lat</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-built_in">&#39;</span>()]
+      [(<span class="hljs-built_in">eq?</span> old (<span class="hljs-built_in">car</span> lat))
+       (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">new</span>
+             (<span class="hljs-built_in">cons</span> old
+                   (multiinsertL <span class="hljs-built_in">new</span> old
+                                 (<span class="hljs-built_in">cdr</span> lat))))]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat)
+             (multiinsertL <span class="hljs-built_in">new</span> old
+                           (<span class="hljs-built_in">cdr</span> lat)))])))</code></pre></div>
+
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The Fourth Commandament<br> ( <em>preliminary</em> )</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Always change at least one argument while recurring. <br> It must be changed to be closer to termination. <br> The changing argument must be tested in the termination condition: <br> when using <code>cdr</code>, test termination with <code>null?</code>.</td>
+</tr>
+</tbody></table></div>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs racket">(<span class="hljs-keyword">define</span> multisubst
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">new</span> <span class="hljs-variable">old</span> <span class="hljs-variable">lat</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-built_in">&#39;</span>()]
+      [(<span class="hljs-built_in">eq?</span> old (<span class="hljs-built_in">car</span> lat))
+       (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">new</span>
+             (multisubst <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> lat)))]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat)
+             (multisubst <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> lat)))])))</code></pre></div>
+
+<hr>
+<h3 id="Chapter-4-Numbers-Games"><a href="#Chapter-4-Numbers-Games" class="headerlink" title="Chapter 4 - Numbers Games"></a>Chapter 4 - Numbers Games</h3><p>将递归的概念从链表（list）扩展到数字（当前局限于自然数）。<br>继续用各种函数（数量很多）强化认知递归函数的模式（pattern）：<br>terminating line ，typical element 和 natural recursion</p>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs racket">(<span class="hljs-keyword">define</span> o+
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">n</span> <span class="hljs-variable">m</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">zero?</span> m) n]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">add1</span> (o+ n (<span class="hljs-built_in">sub1</span> m)))])))
+
+
+(<span class="hljs-keyword">define</span> o-
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">n</span> <span class="hljs-variable">m</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">zero?</span> m) n]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">sub1</span> (o- n (<span class="hljs-built_in">sub1</span> m)))])))
+
+
+(<span class="hljs-keyword">define</span> addtup
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">tup</span>)   <span class="hljs-comment">; tup is short for tuple, a list of numbers</span>
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> tup) <span class="hljs-number">0</span>]
+      [<span class="hljs-built_in">else</span>
+       (o+ (<span class="hljs-built_in">car</span> tup)
+           (addtup (<span class="hljs-built_in">cdr</span> tup)))])))</code></pre></div>
+
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The First Commandament<br> ( <em>first revision</em> )</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">When recurring on a list of atoms, <code>lat</code>, ask two questions about it:<br> <code>(null? lat)</code> and else.<br>When recurring on a number, <code>n</code>, ask two questions about it:<br> <code>(zero? n)</code> and else.</td>
+</tr>
+</tbody></table></div>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs racket">(<span class="hljs-keyword">define</span> ×
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">n</span> <span class="hljs-variable">m</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">zero?</span> m) <span class="hljs-number">0</span>]
+      [<span class="hljs-built_in">else</span>
+       (o+ n (× n (<span class="hljs-built_in">sub1</span> m)))])))</code></pre></div>
+
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The Fourth Commandament<br> ( <em>first revision</em> )</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Always change at least one argument while recurring. <br> It must be changed to be closer to termination. <br> The changing argument must be tested in the termination condition: <br>when using <code>cdr</code>, test termination with <code>null?</code>.<br>when using <code>sub1</code>, test termination with <code>zero?</code>.</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The Fifth Commandament</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">When building a value with <code>o+</code>, always use <code>0</code> for the value of the terminating line, <br>for adding <code>0</code> does not change the value of an addition.<br>When building a value with <code>o*</code>, always use <code>1</code> for the value of the terminating line, <br>for multiplying by <code>1</code> does not change the value of a mutiplication.<br>When building a value with <code>cons</code>, always consider <code>()</code> for the value of the terminating line.</td>
+</tr>
+</tbody></table></div>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs racket">(<span class="hljs-keyword">define</span> tup+
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">tup1</span> <span class="hljs-variable">tup2</span>)    <span class="hljs-comment">; can be any length</span>
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> tup1) tup2]
+      [(<span class="hljs-built_in">null?</span> tup2) tup1]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (o+ (<span class="hljs-built_in">car</span> tup1)
+                 (<span class="hljs-built_in">car</span> tup2))
+             (tup+ (<span class="hljs-built_in">cdr</span> tup1)
+                   (<span class="hljs-built_in">cdr</span> tup2)))])))
+
+
+(<span class="hljs-keyword">define</span> o&gt;
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">n</span> <span class="hljs-variable">m</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">zero?</span> n) <span class="hljs-keyword">#f</span>]
+      [(<span class="hljs-built_in">zero?</span> m) <span class="hljs-keyword">#t</span>]
+      [<span class="hljs-built_in">else</span>
+       (o&gt; (<span class="hljs-built_in">sub1</span> n)
+           (<span class="hljs-built_in">sub1</span> m))])))
+
+
+(<span class="hljs-keyword">define</span> o&lt;
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">n</span> <span class="hljs-variable">m</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">zero?</span> m) <span class="hljs-keyword">#f</span>]
+      [(<span class="hljs-built_in">zero?</span> n) <span class="hljs-keyword">#t</span>]
+      [<span class="hljs-built_in">else</span>
+       (o&lt; (<span class="hljs-built_in">sub1</span> n)
+           (<span class="hljs-built_in">sub1</span> m))])))
+
+
+<span class="hljs-comment">;(define o=</span>
+<span class="hljs-comment">;  (lambda (n m)</span>
+<span class="hljs-comment">;    (cond</span>
+<span class="hljs-comment">;      [(zero? m) (zero? n)]</span>
+<span class="hljs-comment">;      [(zero? n) #f]</span>
+<span class="hljs-comment">;      [else</span>
+<span class="hljs-comment">;       (o= (sub1 n)</span>
+<span class="hljs-comment">;           (sub1 m))])))</span>
+
+
+(<span class="hljs-keyword">define</span> o=
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">n</span> <span class="hljs-variable">m</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(o&lt; n m) <span class="hljs-keyword">#f</span>]
+      [(o&gt; n m) <span class="hljs-keyword">#f</span>]
+      [<span class="hljs-built_in">else</span>
+       <span class="hljs-keyword">#t</span>])))
+
+
+(<span class="hljs-keyword">define</span> ↑
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">n</span> <span class="hljs-variable">m</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">zero?</span> m) <span class="hljs-number">1</span>]
+      [<span class="hljs-built_in">else</span>
+       (× n (↑ n (<span class="hljs-built_in">sub1</span> m)))])))
+
+
+(<span class="hljs-keyword">define</span> ÷
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">n</span> <span class="hljs-variable">m</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(o&lt; n m) <span class="hljs-number">0</span>]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">add1</span> (÷ (o- n m) m))])))
+
+
+(<span class="hljs-keyword">define</span> length
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">lat</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-number">0</span>]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">add1</span> (<span class="hljs-built_in">length</span> (<span class="hljs-built_in">cdr</span> lat)))])))
+
+
+<span class="hljs-comment">;(define pick</span>
+<span class="hljs-comment">;  (lambda (n lat)    ; 0 &lt; n &lt;= (length lat)</span>
+<span class="hljs-comment">;    (cond</span>
+<span class="hljs-comment">;      [(zero? (sub1 n)) (car lat)]</span>
+<span class="hljs-comment">;      [else</span>
+<span class="hljs-comment">;       (pick (sub1 n)</span>
+<span class="hljs-comment">;             (cdr lat))])))</span>
+
+
+<span class="hljs-comment">;(define rempick</span>
+<span class="hljs-comment">;  (lambda (n lat)     ; 0 &lt; n &lt;= (length lat)</span>
+<span class="hljs-comment">;    (cond</span>
+<span class="hljs-comment">;      [(zero? (sub1 n)) (cdr lat)]</span>
+<span class="hljs-comment">;      [else</span>
+<span class="hljs-comment">;       (cons (car lat)</span>
+<span class="hljs-comment">;             (rempick (sub1 n)</span>
+<span class="hljs-comment">;                      (cdr lat)))])))</span>
+
+
+(<span class="hljs-keyword">define</span> no-nums
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">lat</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-built_in">&#39;</span>()]
+      [(<span class="hljs-built_in">number?</span> (<span class="hljs-built_in">car</span> lat))
+       (no-nums (<span class="hljs-built_in">cdr</span> lat))]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat)
+             (no-nums (<span class="hljs-built_in">cdr</span> lat)))])))
+
+
+(<span class="hljs-keyword">define</span> all-nums
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">lat</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-built_in">&#39;</span>()]
+      [(<span class="hljs-built_in">number?</span> (<span class="hljs-built_in">car</span> lat))
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat)
+             (all-nums (<span class="hljs-built_in">cdr</span> lat)))]
+      [<span class="hljs-built_in">else</span>
+       (all-nums (<span class="hljs-built_in">cdr</span> lat))])))
+
+
+(<span class="hljs-keyword">define</span> eqan?
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">a1</span> <span class="hljs-variable">a2</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">and</span> (<span class="hljs-built_in">number?</span> a1)
+            (<span class="hljs-built_in">number?</span> a2))
+       (o= a1 a2)]
+      [(<span class="hljs-built_in">or</span> (<span class="hljs-built_in">number?</span> a1)
+           (<span class="hljs-built_in">number?</span> a2))
+       <span class="hljs-keyword">#f</span>]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">eq?</span> a1 a2)])))
+
+
+(<span class="hljs-keyword">define</span> occur
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">a</span> <span class="hljs-variable">lat</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-number">0</span>]
+      [(eqan? a (<span class="hljs-built_in">car</span> lat))
+       (<span class="hljs-built_in">add1</span> (occur a (<span class="hljs-built_in">cdr</span> lat)))]
+      [<span class="hljs-built_in">else</span>
+       (occur a (<span class="hljs-built_in">cdr</span> lat))])))
+
+
+<span class="hljs-comment">;(define one?</span>
+<span class="hljs-comment">;  (lambda (n)</span>
+<span class="hljs-comment">;    (cond</span>
+<span class="hljs-comment">;      [(number? n) (zero? (sub1 n))]</span>
+<span class="hljs-comment">;      [else</span>
+<span class="hljs-comment">;       #f])))</span>
+
+
+(<span class="hljs-keyword">define</span> one?
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">n</span>)       <span class="hljs-comment">; n is a nonnegative integer</span>
+    (o= n <span class="hljs-number">1</span>)))
+
+
+(<span class="hljs-keyword">define</span> pick
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">n</span> <span class="hljs-variable">lat</span>)   <span class="hljs-comment">; 0 &lt; n &lt;= (length lat)</span>
+    (<span class="hljs-built_in">cond</span>
+      [(one? n) (<span class="hljs-built_in">car</span> lat)]
+      [<span class="hljs-built_in">else</span>
+       (pick (<span class="hljs-built_in">sub1</span> n)
+             (<span class="hljs-built_in">cdr</span> lat))])))
+
+
+(<span class="hljs-keyword">define</span> rempick
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">n</span> <span class="hljs-variable">lat</span>)    <span class="hljs-comment">; 0 &lt; n &lt;= (length lat)</span>
+    (<span class="hljs-built_in">cond</span>
+      [(one? n) (<span class="hljs-built_in">cdr</span> lat)]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat)
+             (rempick (<span class="hljs-built_in">sub1</span> n)
+                      (<span class="hljs-built_in">cdr</span> lat)))])))</code></pre></div>
+
+<hr>
+<h3 id="Chapter-5-Oh-My-Gawd-It’s-Full-of-Stars"><a href="#Chapter-5-Oh-My-Gawd-It’s-Full-of-Stars" class="headerlink" title="Chapter 5 - *Oh My Gawd*: It’s Full of Stars"></a>Chapter 5 - *Oh My Gawd*: It’s Full of Stars</h3><p>前面章节的递归函数处理的是链表结构的数据：<code>list</code> 内元素都是 <code>atom</code> ；<br>本章开始是树结构（tree）：<code>list</code> 内元素都是 <code>list</code> 了；<br>因此 <code>(car l)</code> 和 <code>(cdr l)</code> 两部分都要递归；<br>处理这类链表中包含链表的数据结构的递归函数都带星号 <strong>*</strong> ，如 <code>rember*</code> ；</p>
+<blockquote>
+<p>All *-functions work on lists that are either</p>
+<ul>
+<li>empty,</li>
+<li>an atom consed onto a list, or</li>
+<li>a list consed onto a list</li>
+</ul>
+</blockquote>
+<p>基本上就是把前几个章节的递归函数都改成星号函数</p>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs racket">(<span class="hljs-keyword">define</span> rember*      <span class="hljs-comment">; &quot;rember*&quot; is pronounced &quot;rember-star&quot;</span>
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">a</span> <span class="hljs-variable">l</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> l) <span class="hljs-built_in">&#39;</span>()]
+      [(atom? (<span class="hljs-built_in">car</span> l))
+       (<span class="hljs-built_in">cond</span>
+         [(eqan? a (<span class="hljs-built_in">car</span> l))
+          (rember* a (<span class="hljs-built_in">cdr</span> l))]
+         [<span class="hljs-built_in">else</span>
+          (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> l)
+                (rember* a (<span class="hljs-built_in">cdr</span> l)))])]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (rember* a (<span class="hljs-built_in">car</span> l))
+             (rember* a (<span class="hljs-built_in">cdr</span> l)))])))
+
+
+(<span class="hljs-keyword">define</span> insertR*
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">new</span> <span class="hljs-variable">old</span> <span class="hljs-variable">l</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> l) <span class="hljs-built_in">&#39;</span>()]
+      [(atom? (<span class="hljs-built_in">car</span> l))
+       (<span class="hljs-built_in">cond</span>
+         [(eqan? old (<span class="hljs-built_in">car</span> l))
+          (<span class="hljs-built_in">cons</span> old
+                (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">new</span>
+                      (insertR* <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> l))))]
+         [<span class="hljs-built_in">else</span>
+          (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> l)
+                (insertR* <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> l)))])]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (insertR* <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">car</span> l))
+             (insertR* <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> l)))])))</code></pre></div>
+
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The First Commandament<br> ( <em>final version</em> )</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">When recurring on a list of atoms, <code>lat</code>, ask two questions about it:<br> <code>(null? lat)</code> and else.<br>When recurring on a number, <code>n</code>, ask two questions about it:<br> <code>(zero? n)</code> and else.<br>When recurring on a list of S-expressions, <code>l</code>, ask three questions about it:<br> <code>(null? l)</code> ,  <code>(atom? (car l))</code> and else.</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The Fourth Commandament<br> ( <em>final version</em> )</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Always change at least one argument while recurring. <br>When recurring on a list of atoms, <code>lat</code>, use <code>(cdr lat)</code>. <br>When recurring on a number, <code>n</code>, use <code>(sub1 n)</code>. <br>And when recurring on a list of S-expressions, <code>l</code>, use <code>(car l)</code> and <br><code>(cdr l)</code> if neither <code>(null? l)</code> nor <code>(atom? (car l))</code> are true.<br> It must be changed to be closer to termination. <br> The changing argument must be tested in the termination condition: <br>when using <code>cdr</code>, test termination with <code>null?</code>.<br>when using <code>sub1</code>, test termination with <code>zero?</code>.</td>
+</tr>
+</tbody></table></div>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs racket">(<span class="hljs-keyword">define</span> occur*
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">a</span> <span class="hljs-variable">l</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> l) <span class="hljs-number">0</span>]
+      [(atom? (<span class="hljs-built_in">car</span> l))
+       (<span class="hljs-built_in">cond</span>
+         [(eqan? a (<span class="hljs-built_in">car</span> l))
+          (<span class="hljs-built_in">add1</span> (occur* a (<span class="hljs-built_in">cdr</span> l)))]
+         [<span class="hljs-built_in">else</span>
+          (occur* a (<span class="hljs-built_in">cdr</span> l))])]
+      [<span class="hljs-built_in">else</span>
+       (o+ (occur* a (<span class="hljs-built_in">car</span> l))
+           (occur* a (<span class="hljs-built_in">cdr</span> l)))])))
+
+
+(<span class="hljs-keyword">define</span> subst*
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">new</span> <span class="hljs-variable">old</span> <span class="hljs-variable">l</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> l) <span class="hljs-built_in">&#39;</span>()]
+      [(atom? (<span class="hljs-built_in">car</span> l))
+       (<span class="hljs-built_in">cond</span>
+         [(eqan? old (<span class="hljs-built_in">car</span> l))
+          (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">new</span>
+                (subst* <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> l)))]
+         [<span class="hljs-built_in">else</span>
+          (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> l)
+                (subst* <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> l)))])]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (subst* <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">car</span> l))
+             (subst* <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> l)))])))
+
+
+(<span class="hljs-keyword">define</span> insertL*
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">new</span> <span class="hljs-variable">old</span> <span class="hljs-variable">l</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> l) <span class="hljs-built_in">&#39;</span>()]
+      [(atom? (<span class="hljs-built_in">car</span> l))
+       (<span class="hljs-built_in">cond</span>
+         [(eqan? old (<span class="hljs-built_in">car</span> l))
+          (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">new</span>
+                (<span class="hljs-built_in">cons</span> old
+                      (insertL* <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> l))))]
+         [<span class="hljs-built_in">else</span>
+          (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> l)
+                (insertL* <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> l)))])]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (insertL* <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">car</span> l))
+             (insertL* <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> l)))])))
+
+
+(<span class="hljs-keyword">define</span> member*
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">a</span> <span class="hljs-variable">l</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> l) <span class="hljs-keyword">#f</span>]
+      [(atom? (<span class="hljs-built_in">car</span> l))
+       (<span class="hljs-built_in">or</span> (eqan? a (<span class="hljs-built_in">car</span> l))
+           (member* a (<span class="hljs-built_in">cdr</span> l)))]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">or</span> (member* a (<span class="hljs-built_in">car</span> l))
+           (member* a (<span class="hljs-built_in">cdr</span> l)))])))
+
+
+<span class="hljs-comment">; finds the left most atom in a non-empty list of</span>
+<span class="hljs-comment">; S-expressions that does not contain the empty list.</span>
+(<span class="hljs-keyword">define</span> leftmost
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">l</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(atom? (<span class="hljs-built_in">car</span> l)) (<span class="hljs-built_in">car</span> l)]
+      [<span class="hljs-built_in">else</span>
+       (leftmost (<span class="hljs-built_in">car</span> l))])))
+
+
+(<span class="hljs-keyword">define</span> eqlist?
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">l1</span> <span class="hljs-variable">l2</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">and</span> (<span class="hljs-built_in">null?</span> l1)
+            (<span class="hljs-built_in">null?</span> l2))
+       <span class="hljs-keyword">#t</span>]
+      [(<span class="hljs-built_in">or</span> (<span class="hljs-built_in">null?</span> l1)
+           (<span class="hljs-built_in">null?</span> l2))
+       <span class="hljs-keyword">#f</span>]
+      [(<span class="hljs-built_in">and</span> (atom? (<span class="hljs-built_in">car</span> l1))
+            (atom? (<span class="hljs-built_in">car</span> l2)))
+       (<span class="hljs-built_in">and</span> (eqan? (<span class="hljs-built_in">car</span> l1)
+                   (<span class="hljs-built_in">car</span> l2))
+            (eqlist? (<span class="hljs-built_in">cdr</span> l1)
+                     (<span class="hljs-built_in">cdr</span> l2)))]
+      [(<span class="hljs-built_in">or</span> (atom? (<span class="hljs-built_in">car</span> l1))
+           (atom? (<span class="hljs-built_in">car</span> l2)))
+       <span class="hljs-keyword">#f</span>]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">and</span> (eqlist? (<span class="hljs-built_in">car</span> l1)
+                     (<span class="hljs-built_in">car</span> l2))
+            (eqlist? (<span class="hljs-built_in">cdr</span> l1)
+                     (<span class="hljs-built_in">cdr</span> l2)))])))</code></pre></div>
+
+<p>前面的递归函数都是 <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)#direct_recursion"><em>Directly Recursion</em></a>（函数定义中调用自己）<br>下面首次出现 <a href="https://en.wikipedia.org/wiki/Mutual_recursion"><em>Mutually Recursion</em></a>（多个函数在定义中相互调用）</p>
+<blockquote>
+<p><code>eqlist?</code> 和 <code>equal?</code> 相互调用</p>
+</blockquote>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs racket"><span class="hljs-comment">; An S-expression is either an atom or </span>
+<span class="hljs-comment">; a (possibly empty) list of S-expressions</span>
+<span class="hljs-comment">; equal? determines whether two S-expressions are the same</span>
+
+<span class="hljs-comment">; define equal? in terms of eqlist?</span>
+(<span class="hljs-keyword">define</span> equal?
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">s1</span> <span class="hljs-variable">s2</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">and</span> (atom? s1)
+            (atom? s2))
+       (eqan? s1 s2)]
+      [(<span class="hljs-built_in">or</span> (atom? s1)
+           (atom? s2))
+       <span class="hljs-keyword">#f</span>]
+      [<span class="hljs-built_in">else</span>
+       (eqlist? s1 s2)])))
+
+
+<span class="hljs-comment">; now rewrite eqlist? using equal?</span>
+(<span class="hljs-keyword">define</span> eqlist?
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">l1</span> <span class="hljs-variable">l2</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">and</span> (<span class="hljs-built_in">null?</span> l1)
+            (<span class="hljs-built_in">null?</span> l2))
+       <span class="hljs-keyword">#t</span>]
+      [(<span class="hljs-built_in">or</span> (<span class="hljs-built_in">null?</span> l1)
+           (<span class="hljs-built_in">null?</span> l2))
+       <span class="hljs-keyword">#f</span>]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">and</span> (<span class="hljs-built_in">equal?</span> (<span class="hljs-built_in">car</span> l1)
+                    (<span class="hljs-built_in">car</span> l2))
+            (eqlist? (<span class="hljs-built_in">cdr</span> l1)       <span class="hljs-comment">; equal? works too here</span>
+                     (<span class="hljs-built_in">cdr</span> l2)))]))) <span class="hljs-comment">; for all lists are S-expressions</span>
+                                    <span class="hljs-comment">; and for equal? calls eqlist? in else</span></code></pre></div>
+
+<p>有了 <code>equal?</code> 之后，当前除了 <code>eqan?</code> 之外的所有函数中的 <code>eq?</code>（非数字比较） 和 <code>=</code>（数字比较）都可以用 <code>equal?</code> 来替换了。因为 <code>equal?</code> 里调用的 <code>eqan?</code> 就覆盖了数字和非数字两种情况的比较。</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The Sixth Commandament</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Simply only after the function is correct.</td>
+</tr>
+</tbody></table></div>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs racket"><span class="hljs-comment">; rewrite rember to remove a S-expression</span>
+<span class="hljs-comment">; from a list of S-expressions</span>
+<span class="hljs-comment">; this new rember fully supersedes the original one</span>
+(<span class="hljs-keyword">define</span> rember     
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">s</span> <span class="hljs-variable">l</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> l) <span class="hljs-built_in">&#39;</span>()]
+      [(<span class="hljs-built_in">equal?</span> s (<span class="hljs-built_in">car</span> l))  <span class="hljs-comment">; simply swap eq? for equal? in rember</span>
+       (<span class="hljs-built_in">cdr</span> l)]            
+      [<span class="hljs-built_in">else</span>                
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> l)
+             (rember s (<span class="hljs-built_in">cdr</span> l)))])))</code></pre></div>
+
+<hr>
+<h3 id="Chapter-6-Shadows"><a href="#Chapter-6-Shadows" class="headerlink" title="Chapter 6 - Shadows"></a>Chapter 6 - Shadows</h3><p>这章讲<strong>算术表达式</strong>（arithmetic expression）。</p>
+<blockquote>
+<p>An arithmetic expression is either an atom (including numbers), or two arithmetic expressions combined by <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex;" xmlns="http://www.w3.org/2000/svg" width="1.76ex" height="1.505ex" role="img" focusable="false" viewBox="0 -583 778 665" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="MJX-4-TEX-N-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><use data-c="2B" xlink:href="#MJX-4-TEX-N-2B"></use></g></g></g></svg></mjx-container> , <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0.02ex;" xmlns="http://www.w3.org/2000/svg" width="1.76ex" height="1.09ex" role="img" focusable="false" viewBox="0 -491 778 482" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="MJX-4-TEX-N-D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><use data-c="D7" xlink:href="#MJX-4-TEX-N-D7"></use></g></g></g></svg></mjx-container> or <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.437ex;" xmlns="http://www.w3.org/2000/svg" width="1.131ex" height="2.007ex" role="img" focusable="false" viewBox="0 -694 500 887" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="MJX-3-TEX-N-2191" d="M27 414Q17 414 17 433Q17 437 17 439T17 444T19 447T20 450T22 452T26 453T30 454T36 456Q80 467 120 494T180 549Q227 607 238 678Q240 694 251 694Q259 694 261 684Q261 677 265 659T284 608T320 549Q340 525 363 507T405 479T440 463T467 455T479 451Q483 447 483 433Q483 413 472 413Q467 413 458 416Q342 448 277 545L270 555V-179Q262 -193 252 -193H250H248Q236 -193 230 -179V555L223 545Q192 499 146 467T70 424T27 414Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><use data-c="2191" xlink:href="#MJX-3-TEX-N-2191"></use></g></g></g></svg></mjx-container></p>
+</blockquote>
+<p><strong>算数表达式</strong>是后续的解释器（interpreter）要支持的基本语言结构之一。其他基本语言结构还包括<strong>变量</strong>（variable），<strong>函数</strong>（function），<strong>调用</strong>（call）和<strong>数字常量</strong>（numbers）。书中从日常常见的<strong>中缀</strong>表达式（infix）开始介绍，然后过渡到<strong>前缀</strong>表达式（prefix）。<br>前缀表达式正是 Scheme 的表达式语法（S-expression）所采用的方式，因为它让语法更具统一性和规律性（所有操作符都在第一个位置），解释器也会因此变得非常简单。</p>
+<blockquote>
+<p><strong>中</strong>缀表达式：(9 + 19 + 29)<br><strong>前</strong>缀表达式：(+ 9 19 29)</p>
+</blockquote>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs racket"><span class="hljs-comment">; numbered? determines whether a representation of</span>
+<span class="hljs-comment">; an arithmetic expression contains only numbers besides</span>
+<span class="hljs-comment">; +, × and ↑</span>
+(<span class="hljs-keyword">define</span> numbered?
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">aexp</span>)    <span class="hljs-comment">; aexp stands for &quot;arithmetic expression&quot;</span>
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">number?</span> aexp) <span class="hljs-keyword">#t</span>]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">and</span> (numbered? (<span class="hljs-built_in">car</span> aexp))  <span class="hljs-comment">; here use infix notation</span>
+            (numbered? (<span class="hljs-built_in">car</span> (<span class="hljs-built_in">cdr</span> (<span class="hljs-built_in">cdr</span> aexp)))))])))</code></pre></div>
+
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The Seventh Commandament</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Recur on the <em>subparts</em> that are of the same nature:<br> • On the sublists of a list.<br> • On the subexpressions of an arithmetic expression.</td>
+</tr>
+</tbody></table></div>
+<p>本章出现了最简易的解释器函数 <code>value</code> ，后面复杂的解释器就是通过 <code>value</code> 来逐步扩展的。</p>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs racket">(<span class="hljs-keyword">define</span> value
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">nexp</span>)    <span class="hljs-comment">; nexp stands for &quot;numbered arithmetic expression&quot;</span>
+    (<span class="hljs-built_in">cond</span>
+      [(atom? nexp) nexp]
+      [(<span class="hljs-built_in">eq?</span> (operator nexp) <span class="hljs-string">&#39;+</span>)
+       (<span class="hljs-built_in">+</span> (value (1st-sub-exp nexp))
+          (value (2nd-sub-exp nexp)))]
+      [(<span class="hljs-built_in">eq?</span> (operator nexp) <span class="hljs-string">&#39;×</span>)
+       (× (value (1st-sub-exp nexp))
+          (value (2nd-sub-exp nexp)))]
+      [<span class="hljs-built_in">else</span>
+       (↑ (value (1st-sub-exp nexp))
+          (value (2nd-sub-exp nexp)))])))
+
+
+<span class="hljs-comment">; use help functions to hide the representation</span>
+<span class="hljs-comment">; so we can change notation to infix or prefix (or others)</span>
+<span class="hljs-comment">; without affecting upper-level code (in this case: value)</span>
+(<span class="hljs-keyword">define</span> 1st-sub-exp
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">aexp</span>)
+    (<span class="hljs-built_in">car</span> (<span class="hljs-built_in">cdr</span> aexp))))
+
+(<span class="hljs-keyword">define</span> 2nd-sub-exp
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">aexp</span>)
+    (<span class="hljs-built_in">car</span> (<span class="hljs-built_in">cdr</span> (<span class="hljs-built_in">cdr</span> aexp)))))
+
+(<span class="hljs-keyword">define</span> operator
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">aexp</span>)
+    (<span class="hljs-built_in">car</span> aexp)))</code></pre></div>
+
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The Eighth Commandament</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Use help functions to abstract from representation.</td>
+</tr>
+</tbody></table></div>
+<p>这里还展示了如何使用帮助函数（help function）建立抽象层。这样就不必考虑底层的语法到底是中缀还是前缀表达式了。帮助函数会取到对应的部分。语法的改变不影响上层代码，即 <code>value</code> 不受影响。</p>
+<p>从帮助函数的抽象概念进一步引出，我们之前用的数字（numbers）和布尔值（<code>#f</code> 与 <code>#t</code>）也都是抽象，或者说都是一种符号（representation）。我们可以用阿拉伯数字（arabic representation）以外的符号表达数字，比如括号：</p>
+<blockquote>
+<p><code>()</code> 表示数字 0 的概念<br><code>(())</code> 表示数字 1 的概念<br><code>(() ())</code> 表示数字 2 的概念<br><code>(() () ())</code> 表示数字 3 的概念</p>
+</blockquote>
+<p>用了新的符号（representation）后，对应的函数也会发生变化：</p>
+<blockquote>
+<p><code>zero?</code> , <code>add1</code> 和 <code>sub1</code></p>
+</blockquote>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs racket">(<span class="hljs-keyword">define</span> sero?
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">n</span>)
+    (<span class="hljs-built_in">null?</span> n)))
+
+
+(<span class="hljs-keyword">define</span> edd1
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">n</span>)
+    (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">&#39;</span>() n)))
+
+
+(<span class="hljs-keyword">define</span> zub1
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">n</span>)   <span class="hljs-comment">; n can&#39;t be sero (null)</span>
+    (<span class="hljs-built_in">cdr</span> n)))</code></pre></div>
+
+<p>这里其实开始涉及<strong>计算的本质</strong>了：计算的本质就是解释。</p>
+<p>观察可以发现，我们的新符号（括号列表）之所以能表示数字的概念，其实是依靠我们同时定义的 <code>sero?</code> , <code>edd1</code> 和 <code>zub1</code> 这些函数来建立的。我们靠这三个函数<strong>解释</strong>了它（括号列表），于是它有了数字的概念。进一步地，有了计算的概念和对应的计算结果。</p>
+<p>要注意区分符号（representation）和它指代的意义这两个概念。</p>
+<blockquote><p>You must beware of shadows.</p>
+<footer><strong>Daniel P. Friedman</strong></footer></blockquote>
+
+<hr>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a>打赏</h3><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation">
+
+
+  </article>
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" >
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        
+    </div>
+    <div class="secondrow">
+        <a href="">
+        
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <!-- jquery.min.js 导致网页加载时间特别长，更换使用本地的 jquery.min.js  -->
+<!-- script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+
+// comments below to disable loading animation
+function revealOnScroll() {
+  var scrolled = $(window).scrollTop();
+  $(".excerpt, .index-title, .index-meta, p").each(function() {
+    var current = $(this),
+      height = $(window).outerHeight(),
+      offsetTop = current.offset().top;
+    (scrolled + height + 50 > offsetTop) ? current.addClass("animation"):'';
+  });
+}
+$(window).on("scroll", revealOnScroll);
+$(document).ready(revealOnScroll)
+
+// disqus scripts
+/**/
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+// back to top scripts
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+  return false;
+});
+
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

@@ -112,7 +112,7 @@
             </button>
           </div>
           <div class="post-toc-drawer-content">
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E8%BD%AF%E4%BB%B6-DrRacket"><span class="toc-text">编程软件 - DrRacket</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E8%BD%AF%E4%BB%B6-Emacs"><span class="toc-text">编程软件 - Emacs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scheme-%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AF%AD%E6%B3%95"><span class="toc-text">Scheme 常用的语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DrRacket-IDE-%E9%87%8C%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%BA%93"><span class="toc-text">DrRacket IDE 里的一些常用库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E8%B5%8F"><span class="toc-text">打赏</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#DrRacket-%E7%BC%96%E8%BE%91%E5%99%A8"><span class="toc-text">DrRacket 编辑器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-text">安装软件包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-text">其他常用快捷键</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Emacs-%E7%BC%96%E8%BE%91%E5%99%A8"><span class="toc-text">Emacs 编辑器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scheme-%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AF%AD%E6%B3%95"><span class="toc-text">Scheme 常用的语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DrRacket-IDE-%E9%87%8C%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%BA%93"><span class="toc-text">DrRacket IDE 里的一些常用库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E8%B5%8F"><span class="toc-text">打赏</span></a></li></ol>
           </div>
         </aside>
 
@@ -122,10 +122,9 @@
 
     
     <p><a href="https://en.wikipedia.org/wiki/Lisp_(programming_language"><strong>Lisp</strong></a> 这个语言的家族里包括了 <a href="https://schemers.org/">Scheme</a> 、<a href="https://racket-lang.org/">Racket</a> 、<a href="https://en.wikipedia.org/wiki/Common_Lisp">Common Lisp</a> 、<a href="https://en.wikipedia.org/wiki/Emacs_Lisp">Emacs Lisp</a> 等各式各样以「<strong>括号</strong>」、「<strong>lambda</strong>」和「<strong>链表</strong>（list）」为特征的语言。</p>
-<p><a href="https://en.wikipedia.org/wiki/Daniel_P._Friedman">Daniel Paul Friedman</a> 算是 <strong>Scheme</strong> 的带头人物，尽管 <a href="https://en.wikipedia.org/wiki/History_of_the_Scheme_programming_language">Scheme</a> 最初不是他发明的。然后这个 <a href="https://racket-lang.org/">Racket</a> 其实本身是属于一种 <a href="https://schemers.org/">Scheme</a> 的（即 <strong>Racket</strong> 应算是 <strong>Scheme</strong> 语言的一个实现）。但是呢，<a href="https://racket-lang.org/plt.html">PLT</a> 这帮人他们现在不承认他们是 <strong>Scheme</strong> 了，就另外起了一个名叫 <strong>Racket</strong> （以前的名字叫 <strong>PLT Scheme</strong>，改名试图脱离 Scheme 的阴影。实际上，好像并没有比 Scheme 超出多少）。反正这帮人的头目应该就是 <a href="https://mitpress.mit.edu/books/little-schemer-fourth-edition"><em>The Little Schemer</em></a> 的第二作者、同时也是 <a href="https://en.wikipedia.org/wiki/Daniel_P._Friedman">Dan Friedman</a> （也许是最厉害）的学生：<a href="https://felleisen.org/matthias/">Matthias Felleisen</a> 。</p>
-<img src="/2022/03/24/scheme-basics-and-IDE/mit-dnj-2.png" class="" title="Matthias Felleisen">
-
-<p>早期的 <strong>Lisp</strong> 语言的函数就是一个符号链表，它不会自带一个 <code>env</code>（解释器中的闭包环境，或者说上下文语境），会出现严重的问题：<a href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scope_vs._dynamic_scope" target="_blank" rel="noopener">Dynamic Scoping</a> 。<strong>Scheme</strong> 不是第一个实现针对该问题的 <a href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scope_vs._dynamic_scope" target="_blank" rel="noopener">Lexical Scoping</a> 特性的编程语言，但确实是第一个实现 <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)" target="_blank" rel="noopener">Closure</a>（闭包）的 <strong>Lisp</strong> 语言。</p>
+<p><a href="https://en.wikipedia.org/wiki/Daniel_P._Friedman">Daniel Paul Friedman</a> 算是 <strong>Scheme</strong> 的带头人物，尽管 <a href="https://en.wikipedia.org/wiki/History_of_the_Scheme_programming_language">Scheme</a> 最初不是他发明的。然后这个 <a href="https://racket-lang.org/">Racket</a> 其实本身是属于一种 <a href="https://schemers.org/">Scheme</a> 的（即 <strong>Racket</strong> 应算是 <strong>Scheme</strong> 语言的一个实现）。但是呢，<a href="https://racket-lang.org/plt.html">PLT</a> 这帮人他们现在不承认他们是 <strong>Scheme</strong> 了，就另外起了一个名叫 <strong>Racket</strong> （以前的名字叫 <strong>PLT Scheme</strong>，改名试图脱离 Scheme 的阴影。实际上，好像并没有比 Scheme 超出多少）。反正这帮人的头目应该就是 <em><a href="https://mitpress.mit.edu/books/little-schemer-fourth-edition">The Little Schemer</a></em> 的第二作者、同时也是 <a href="https://en.wikipedia.org/wiki/Daniel_P._Friedman">Dan Friedman</a> （也许是最厉害）的学生：<a href="https://felleisen.org/matthias/">Matthias Felleisen</a> 。</p>
+<p><img src="/2022/03/24/scheme-basics-and-IDE/mit-dnj-2.png" alt="Matthias Felleisen"></p>
+<p>早期的 <strong>Lisp</strong> 语言的函数就是一个符号链表，它不会自带一个 <code>env</code>（解释器中的闭包环境，或者说上下文），会出现严重的问题：<a href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scope_vs._dynamic_scope">Dynamic Scoping</a> 。<strong>Scheme</strong> 不是第一个实现针对该问题的 <a href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scope_vs._dynamic_scope">Lexical Scoping</a> 特性的编程语言，但确实是第一个实现 <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">Closure</a>（闭包）的 <strong>Lisp</strong> 语言。</p>
 <p><strong>Scheme</strong> 语言有一个很好的特征，就是你可以把你的「<strong>代码</strong>」，用很简单的方式就变成「<strong>数据</strong>」，这将非常适合用来实现各种语言和语言特性。如果用其他编程语言，比如 <a href="https://www.javascript.com/">JavaScript</a> ，来做这件事的话，那种数据结构的形式（ <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">AST</a> 抽象语法树）会让人写得很痛苦，看起来也不像正常的代码。</p>
 <p>其他搜索时的八卦：</p>
 <ul>
@@ -142,27 +141,66 @@
 <img src="/2022/03/24/scheme-basics-and-IDE/Li_Lu_s_kindness.jpeg" class="" title="Li Lu and Wang">
 
 <hr>
-<h3 id="编程软件-DrRacket"><a href="#编程软件-DrRacket" class="headerlink" title="编程软件 - DrRacket"></a>编程软件 - DrRacket</h3><p>直接去 <strong>Racket</strong> 的<a href="https://racket-lang.org/">官网</a>下载对应的安装包到本地即可双击安装。支持 Windows 和 MacOS 。</p>
-<p>常用快捷键：</p>
-<ul>
-<li><strong>运行</strong>代码：<code>cmd + R</code>（ MacOS 系统）；</li>
-<li>快速<strong>缩进排版</strong>所有代码（Reindent All）：<code>cmd + I</code>（ MacOS 系统）；</li>
-<li><strong>注释</strong>代码（块）：<code>control + esc + ;</code>（ MacOS 系统）；<code>Ctrl + Alt + ;</code>（ Win 系统）；</li>
-<li>显示代码整体<strong>轮廓</strong>（Show Program Contour）：<code>cmd + U</code>（ MacOS 系统）；</li>
-<li><strong>取消</strong>注释代码（块）：<code>control + esc + =</code>（ MacOS 系统）；<code>Ctrl + Alt + =</code>（ Win 系统）；</li>
-<li>将<strong>输出</strong>窗口显示在<strong>右侧</strong>，使编辑窗口的区域更大：<code>cmd + shift + L</code>（ MacOS 系统）；<br>也可以通过选择 <code>View</code> -&gt; <code>Use Horizontal Layout</code> 实现；</li>
-<li>在输出窗口测试的时候，调出<strong>上一个</strong>运行的代码：<code>esc + P</code>（ MacOS 系统）；</li>
-<li>在输出窗口测试的时候，调出<strong>下一个</strong>运行的代码：<code>esc + N</code>（ MacOS 系统）；</li>
-<li>光标定位到一个变量，<strong>重命名</strong>所有这个变量（会根据 Scope 来而不是简单的同名）：<code>control + X + M</code>（ MacOS 系统）；</li>
+<h3 id="DrRacket-编辑器"><a href="#DrRacket-编辑器" class="headerlink" title="DrRacket 编辑器"></a>DrRacket 编辑器</h3><p>直接去 <strong>Racket</strong> 的<a href="https://racket-lang.org/">官网</a>下载对应的安装包到本地即可安装。支持 Windows 和 MacOS 等版本。</p>
+<p>安装好后先去 <code>Preferences → Editing → General Editing</code> 里勾选 <strong>Treat alt key as meta</strong>。用 <code>Option</code> 键来代替 <code>Meta</code> 键的功能。</p>
+<h4 id="安装软件包"><a href="#安装软件包" class="headerlink" title="安装软件包"></a>安装<a href="https://pkgs.racket-lang.org/index.html">软件包</a></h4><p>打开 DrRacket 后，通过 <code>File</code> → <code>Install Package...</code>，输入包名安装。装完需要 <code>Cmd + Q</code> 完全退出，再重新打开 DrRacket 使之生效。<br>下图以安装 Everforest 主题为例（我用的是 <a href="https://pkgs.racket-lang.org/package/catppuccin-theme">Catppuccin Macchiato</a>）：</p>
+<p><img src="/2022/03/24/scheme-basics-and-IDE/drracket_install_package.png" alt="Install Package"></p>
+<p>卸载 <code>File → Package Manager... → Currently Installed → Remove</code></p>
+<p>除上述主题之外，推荐再装个编辑插件 <a href="https://github.com/yjqww6/drracket-paredit?utm_source=chatgpt.com">drracket-paredit</a>。先安装它，之后再导入我这个<a href="/downloads/fixed-raise.zip">补丁</a>：<code>Edit → Keybindings → Add User-defined Keybindings...</code>（<a href="https://github.com/yjqww6/drracket-paredit?utm_source=chatgpt.com">drracket-paredit</a> 的 Raise 操作有 Bug ，加载我的补丁后可修复）。<br><a href="https://paredit.org/">paredit</a> 源自 <a href="https://www.gnu.org/software/emacs/">Emacs</a> ，它提供 4 种面向 S-expression 语法结构的编辑操作：</p>
+<ol>
+<li>Slurp：把相邻表达式吞进来 <code>control + &#125; 或 &#123;</code><br><div class="code-block" data-code-language="scheme"><pre><code class="hljs scheme"><span class="hljs-comment">; Before Slurp Forward : control + &#125;</span>
+(<span class="hljs-name"><span class="hljs-built_in">list</span></span> a) b
+
+<span class="hljs-comment">; After Slurp Forward</span>
+(<span class="hljs-name"><span class="hljs-built_in">list</span></span> a b)
+
+<span class="hljs-comment">; Before Slurp Backward : control + &#123;</span>
+a (<span class="hljs-name">b</span> c)
+
+<span class="hljs-comment">; After Slurp Backward</span>
+(<span class="hljs-name">a</span> b c)</code></pre></div></li>
+<li>Barf：把表达式吐出去 <code>control + shift + &#125; 或 &#123;</code><br><div class="code-block" data-code-language="scheme"><pre><code class="hljs scheme"><span class="hljs-comment">; Before Barf Forward : control + shift + &#125;</span>
+(<span class="hljs-name"><span class="hljs-built_in">list</span></span> a b)
+
+<span class="hljs-comment">; After Barf Forward</span>
+(<span class="hljs-name"><span class="hljs-built_in">list</span></span> a) b
+
+<span class="hljs-comment">; Before Barf Backward : control + shift + &#123;</span>
+(<span class="hljs-name"><span class="hljs-built_in">list</span></span> a b)
+
+<span class="hljs-comment">; After Barf Backward</span>
+list (<span class="hljs-name">a</span> b)</code></pre></div></li>
+<li>Splice：去掉包裹一组表达式的括号 <code>Option + S</code><br><div class="code-block" data-code-language="scheme"><pre><code class="hljs scheme"><span class="hljs-comment">; Before</span>
+(<span class="hljs-name">f</span> (<span class="hljs-name">g</span> a b) c)
+
+<span class="hljs-comment">; After - splice (g a b)</span>
+(<span class="hljs-name">f</span> g a b c)</code></pre></div></li>
+<li>Raise：用子表达式替换其父表达式 <code>Option + R</code><br><div class="code-block" data-code-language="scheme"><pre><code class="hljs scheme"><span class="hljs-comment">; Before</span>
+(<span class="hljs-name">f</span> (<span class="hljs-name">g</span> a b) c)
+
+<span class="hljs-comment">; After — raise (g a b)</span>
+(<span class="hljs-name">g</span> a b)</code></pre></div></li>
+</ol>
+<h4 id="其他常用快捷键"><a href="#其他常用快捷键" class="headerlink" title="其他常用快捷键"></a>其他常用快捷键</h4><ul>
+<li><strong>运行</strong>代码：<code>cmd + R</code>（MacOS）；</li>
+<li><strong>删除一个词而非一个字母</strong>：<code>control + Option + Backspace</code></li>
+<li>快速<strong>缩进排版</strong>所有代码（Reindent All）：<code>cmd + I</code>（MacOS）；</li>
+<li><strong>注释</strong>代码（块）：<code>control + esc + ;</code>（MacOS）；<code>Ctrl + Alt + ;</code>（ Win 系统）；</li>
+<li>显示代码整体<strong>轮廓</strong>（Show Program Contour）：<code>cmd + U</code>（MacOS）；</li>
+<li><strong>取消</strong>注释代码（块）：<code>control + esc + =</code>（MacOS）；<code>Ctrl + Alt + =</code>（ Win 系统）；</li>
+<li>将<strong>输出</strong>窗口显示在<strong>右侧</strong>，使编辑窗口的区域更大：<code>cmd + shift + L</code>（MacOS）；<br>也可以通过选择 <code>View</code> -&gt; <code>Use Horizontal Layout</code> 实现；</li>
+<li>在输出窗口测试的时候，调出<strong>上一个</strong>运行的代码：<code>esc + P</code>（MacOS）；</li>
+<li>在输出窗口测试的时候，调出<strong>下一个</strong>运行的代码：<code>esc + N</code>（MacOS）；</li>
+<li>光标定位到一个变量，<strong>重命名</strong>所有这个变量（会根据 Scope 来而不是简单的同名）：<code>control + X + M</code>（MacOS）；</li>
 </ul>
 <p>其他快捷键组合还可以打开 <strong>Keybindings</strong> 窗口查询：<code>Edit</code> -&gt; <code>Keybindings</code> -&gt; <code>Show Active Keybindings</code><br>查询表中 <strong>s:</strong> 代表 <code>Shift</code> 、<strong>c:</strong> 代表 <code>Control</code> 、<strong>a:</strong> 代表 <code>Option</code> 、<strong>m:</strong> 代表 <code>Meta</code> 、<strong>d:</strong> 代表 <code>Command</code> <a href="https://gist.github.com/spdegabrielle/89de48580126592264f3741c4240e917">……</a></p>
-<p>MacOS 系统里可在 <code>Preferences</code> -&gt; <code>Editing</code> -&gt; <code>General Editing</code> 里勾选 <strong>Treat alt key as meta</strong> ，这样就可以使用 <code>option</code> 键来代替 <code>esc</code> 键。比如上述操作困难的 <code>control + esc + ;</code> 快捷键组合就会变成稍微好点的 <code>control + option + ;</code></p>
-<p>更多使用使用小技巧可参考 <a href="https://rebelsky.cs.grinnell.edu/Courses/CSC151/2018S/handouts/drracket-tips">Some tips and tricks for DrRacket</a> ，或者查看 <a href="https://docs.racket-lang.org/guide/index.html"><em>The Racket Guide</em></a> 和 <a href="https://plt.cs.northwestern.edu/snapshots/current/pdf-doc/drracket.pdf"><em>DrRacket: The Racket Programming Environment</em></a></p>
+<p>如果之前勾选了设置里的 <strong>Treat alt key as meta</strong>，那上述操作困难的 <code>control + esc + ;</code> 快捷键组合就会变成稍微好点的 <code>control + option + ;</code></p>
+<p>更多使用使用小技巧可参考 <a href="https://rebelsky.cs.grinnell.edu/Courses/CSC151/2018S/handouts/drracket-tips">Some tips and tricks for DrRacket</a> ，或者查看 <em><a href="https://docs.racket-lang.org/guide/index.html">The Racket Guide</a></em> 和 <em><a href="https://plt.cs.northwestern.edu/snapshots/current/pdf-doc/drracket.pdf">DrRacket: The Racket Programming Environment</a></em></p>
 <hr>
-<h3 id="编程软件-Emacs"><a href="#编程软件-Emacs" class="headerlink" title="编程软件 - Emacs"></a>编程软件 - Emacs</h3><p>Emacs 可以通过配置，方便地（也没有特别方便啦）使用由 <strong>R. Kent Dybvig</strong> 设计的、当今性能和可靠性都最强的 <a href="https://github.com/cisco/ChezScheme">Chez Scheme</a> 来运行我们的代码。</p>
+<h3 id="Emacs-编辑器"><a href="#Emacs-编辑器" class="headerlink" title="Emacs 编辑器"></a>Emacs 编辑器</h3><p>Emacs 可以通过配置，方便地（也没有特别方便啦）使用由 <strong>R. Kent Dybvig</strong> 设计的、当今性能和可靠性都最强的 <a href="https://github.com/cisco/ChezScheme">Chez Scheme</a> 来运行我们的代码。</p>
 <p>但无论是配置的过程，还是使用的过程，Emacs 的操作对<strong>新手</strong>来说始终不是特别友好。Racket 更适合广大计算新人。而且上文已经说了，Racket 的默认实现今后会变成 <a href="https://blog.racket-lang.org/2021/01/racket-status.html">Racket on Chez Scheme </a>。</p>
 <p>所以目前的建议是，新手就用 <a href="https://racket-lang.org/">DrRacket</a> 作为主力编辑器写 Scheme 代码。有需要再在终端里用 <a href="https://github.com/cisco/ChezScheme">Chez Scheme</a> 运行<code>.scm</code> 代码文件。</p>
-<p>如果仍然想使用 Emacs ，可以看我写的<a href="/2022/05/16/emacs-setup/"><em>针对 Scheme 的 Emacs 编程环境设置</em></a>，里面也提到了如何安装和使用 <a href="https://github.com/cisco/ChezScheme">Chez Scheme</a> 。</p>
+<p>如果仍然想使用 Emacs ，可以看我写的 <em><a href="/2022/05/16/emacs-setup/">针对 Scheme 的 Emacs 编程环境设置</a></em>，里面也提到了如何安装和使用 <a href="https://github.com/cisco/ChezScheme">Chez Scheme</a> 。</p>
 <hr>
 <h3 id="Scheme-常用的语法"><a href="#Scheme-常用的语法" class="headerlink" title="Scheme 常用的语法"></a>Scheme 常用的语法</h3><p>编程语言 Scheme 采用的是前缀表达式的语法。即处于第一位置的就是「操作符」，之后位置的就是「操作数」。计算的<strong>优先级</strong>由「括号」来确定。括号内部的最先计算。具体顺序为：先对括号中的每一个表达式求值，然后再将操作符作用在操作数上，对整个括号的表达式求值。</p>
 <ul>
@@ -280,10 +318,14 @@
 
 &#x27;(+ <span class="hljs-number">1</span> (* <span class="hljs-number">2</span> <span class="hljs-number">3</span>))         <span class="hljs-comment">;; 上面的 quote 的操作可以用单引号 &#x27; 来更简洁地实现。两者等价。运行输出 (+ 1 (* 2 3))</span>
 
-<span class="hljs-comment">;; quote 和 &#x27; 都可以将代码变成 symbol ，你可以使用 symbol? 来询问判断一个东西是不是 symbol</span>
-<span class="hljs-comment">;; 注意，symbol（符号）和 string（字符串）是两种不同的数据类型</span>
+<span class="hljs-comment">;; quote 和单引号 &#x27; 都可以将代码变成 symbol</span>
+<span class="hljs-comment">;; 你可以使用 symbol? 来询问判断一个东西是不是 symbol</span>
 (<span class="hljs-name"><span class="hljs-built_in">symbol?</span></span> &#x27;(<span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span>))      <span class="hljs-comment">;; #f</span>
 (<span class="hljs-name"><span class="hljs-built_in">symbol?</span></span> <span class="hljs-symbol">&#x27;x</span>)            <span class="hljs-comment">;; #t</span>
+
+<span class="hljs-comment">;; 注意，symbol（符号）和 string（字符串）是两种不同的数据类型</span>
+(<span class="hljs-name"><span class="hljs-built_in">eq?</span></span> <span class="hljs-symbol">&#x27;x</span> <span class="hljs-string">&quot;x&quot;</span>)     <span class="hljs-comment">;; 输出 #f -（当然，不同类型比较是坏习惯）</span>
+(<span class="hljs-name"><span class="hljs-built_in">eq?</span></span> <span class="hljs-symbol">&#x27;x</span> <span class="hljs-symbol">&#x27;x</span>)      <span class="hljs-comment">;; 输出 #t</span>
 
 <span class="hljs-comment">;; 对于数字，则可以用 number?</span>
 (<span class="hljs-name"><span class="hljs-built_in">number?</span></span> <span class="hljs-number">2</span>)</code></pre></div>

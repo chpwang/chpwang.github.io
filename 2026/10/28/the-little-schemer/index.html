@@ -112,7 +112,7 @@
             </button>
           </div>
           <div class="post-toc-drawer-content">
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Preface"><span class="toc-text">Preface</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Notational-Conventions"><span class="toc-text">Notational Conventions</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-1-Toys"><span class="toc-text">Chapter 1 - Toys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-2-Do-It-Do-It-Again-and-Again-and-Again%E2%80%A6"><span class="toc-text">Chapter 2 - Do It, Do It Again, and Again, and Again…</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-3-Cons-the-Magnificent"><span class="toc-text">Chapter 3 - Cons the Magnificent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-4-Numbers-Games"><span class="toc-text">Chapter 4 - Numbers Games</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-5-Oh-My-Gawd-It%E2%80%99s-Full-of-Stars"><span class="toc-text">Chapter 5 - *Oh My Gawd*: It’s Full of Stars</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-6-Shadows"><span class="toc-text">Chapter 6 - Shadows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E8%B5%8F"><span class="toc-text">打赏</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Preface"><span class="toc-text">Preface</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Notational-Conventions"><span class="toc-text">Notational Conventions</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-1-Toys"><span class="toc-text">Chapter 1 - Toys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-2-Do-It-Do-It-Again-and-Again-and-Again%E2%80%A6"><span class="toc-text">Chapter 2 - Do It, Do It Again, and Again, and Again…</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-3-Cons-the-Magnificent"><span class="toc-text">Chapter 3 - Cons the Magnificent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-4-Numbers-Games"><span class="toc-text">Chapter 4 - Numbers Games</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-5-Oh-My-Gawd-It%E2%80%99s-Full-of-Stars"><span class="toc-text">Chapter 5 - *Oh My Gawd*: It’s Full of Stars</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-6-Shadows"><span class="toc-text">Chapter 6 - Shadows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chapter-7-Friends-and-Relations"><span class="toc-text">Chapter 7 - Friends and Relations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E8%B5%8F"><span class="toc-text">打赏</span></a></li></ol>
           </div>
         </aside>
 
@@ -199,7 +199,9 @@
 <td>Executable code</td>
 </tr>
 </tbody></table></div>
+<blockquote>
 <p><strong>Note:</strong><br>Typeface distinctions can be ignored until Chapter 10, where programs are treated as data. However, the framenotes should not be ignored.</p>
+</blockquote>
 <blockquote><p>The key to learning scheme is “pattern recognition.”</p>
 <footer><strong>Daniel P. Friedman</strong></footer></blockquote>
 
@@ -274,8 +276,8 @@
     (<span class="hljs-built_in">cond</span>
       [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-keyword">#f</span>]
       [<span class="hljs-built_in">else</span>
-       (<span class="hljs-built_in">or</span> (<span class="hljs-built_in">eq?</span> a (<span class="hljs-built_in">car</span> lat))
-           (member? a (<span class="hljs-built_in">cdr</span> lat)))])))</code></pre></div>
+       (<span class="hljs-built_in">or</span> (<span class="hljs-built_in">equal?</span> a (<span class="hljs-built_in">car</span> lat))       <span class="hljs-comment">; eq? → equal? </span>
+           (member? a (<span class="hljs-built_in">cdr</span> lat)))]))) <span class="hljs-comment">; for numeric comparison</span></code></pre></div>
 
 <div class="table-wrapper"><table>
 <thead>
@@ -381,8 +383,8 @@
   (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">a</span> <span class="hljs-variable">lat</span>)
     (<span class="hljs-built_in">cond</span>
       [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-built_in">&#39;</span>()]
-      [(<span class="hljs-built_in">eq?</span> a (<span class="hljs-built_in">car</span> lat))
-       (multirember a (<span class="hljs-built_in">cdr</span> lat))]
+      [(<span class="hljs-built_in">equal?</span> a (<span class="hljs-built_in">car</span> lat))       <span class="hljs-comment">; eq? → equal? </span>
+       (multirember a (<span class="hljs-built_in">cdr</span> lat))] <span class="hljs-comment">; for numeric comparison</span>
       [<span class="hljs-built_in">else</span>
        (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat)
              (multirember a (<span class="hljs-built_in">cdr</span> lat)))])))
@@ -965,11 +967,11 @@
 </tr>
 </tbody></table></div>
 <p>这里还展示了如何使用帮助函数（help function）建立抽象层。这样就不必考虑底层的语法到底是中缀还是前缀表达式了。帮助函数会取到对应的部分。语法的改变不影响上层代码，即 <code>value</code> 不受影响。</p>
-<p>从帮助函数的抽象概念进一步引出，我们之前用的数字（numbers）和布尔值（<code>#f</code> 与 <code>#t</code>）也都是抽象，或者说都是一种符号（representation）。我们可以用阿拉伯数字（arabic representation）以外的符号表达数字，比如括号：</p>
+<p>从帮助函数的抽象（Data Abstraction）进一步引出，我们之前用的数字（numbers）和布尔值（<code>#f</code> 与 <code>#t</code>）也都是抽象，或者说都是一种符号（representation）。我们可以用阿拉伯数字（arabic representation）以外的符号表达数字，比如括号：</p>
 <blockquote>
 <p><code>()</code> 表示数字 0 的概念<br><code>(())</code> 表示数字 1 的概念<br><code>(() ())</code> 表示数字 2 的概念<br><code>(() () ())</code> 表示数字 3 的概念</p>
 </blockquote>
-<p>用了新的符号（representation）后，对应的函数也会发生变化：</p>
+<p>用了新符号（representation）后，只要改抽象层函数即可，上层代码无需改：</p>
 <blockquote>
 <p><code>zero?</code> , <code>add1</code> 和 <code>sub1</code></p>
 </blockquote>
@@ -988,10 +990,226 @@
     (<span class="hljs-built_in">cdr</span> n)))</code></pre></div>
 
 <p>这里其实开始涉及<strong>计算的本质</strong>了：计算的本质就是解释。</p>
-<p>观察可以发现，我们的新符号（括号列表）之所以能表示数字的概念，其实是依靠我们同时定义的 <code>sero?</code> , <code>edd1</code> 和 <code>zub1</code> 这些函数来建立的。我们靠这三个函数<strong>解释</strong>了它（括号列表），于是它有了数字的概念。进一步地，有了计算的概念和对应的计算结果。</p>
-<p>要注意区分符号（representation）和它指代的意义这两个概念。</p>
+<p>观察可以发现，我们的新符号（括号列表）之所以能表示数字的概念，其实是依靠我们同时定义的 <code>sero?</code> , <code>edd1</code> 和 <code>zub1</code> 这些（帮助）函数来建立的。我们靠这三个函数<strong>解释</strong>了它（括号列表），于是它有了数字的概念。进一步地，有了计算的概念和对应的计算结果。</p>
+<p>要注意区分符号（representation）和它指代的意义这两个概念。符号不是数据或概念本身。<br>符号可以变（比如可中缀、可前缀），但 <code>1st-sub-exp</code> 的概念是不变的。它永远能取到对应的内容。<br>如果没有做好这种区分（抽象），改变符号（representation）就可能破坏上层代码。</p>
 <blockquote><p>You must beware of shadows.</p>
 <footer><strong>Daniel P. Friedman</strong></footer></blockquote>
+
+<blockquote>
+<p>下一本书 <em>The Seasoned Schemer</em> 的 <a href="">Chapter 19</a> 会再次提到这个 <code>Shadows</code><br><code>Shadow</code> 是要注意别混淆 Representation 和概念本身，不是编程中的 <code>variable shadowing</code> 这一概念</p>
+</blockquote>
+<div class="code-block" data-code-language="JavaScript"><pre><code class="hljs JavaScript"><span class="hljs-comment">// The inner variable x shadows the outer one.</span>
+x =&gt; <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x + x</code></pre></div>
+
+<hr>
+<h3 id="Chapter-7-Friends-and-Relations"><a href="#Chapter-7-Friends-and-Relations" class="headerlink" title="Chapter 7 - Friends and Relations"></a>Chapter 7 - Friends and Relations</h3><div class="code-block" data-code-language="Racket"><pre><code class="hljs Racket">(<span class="hljs-keyword">define</span> set?
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">lat</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-keyword">#t</span>]
+      [(member? (<span class="hljs-built_in">car</span> lat)
+                (<span class="hljs-built_in">cdr</span> lat))
+       <span class="hljs-keyword">#f</span>]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">set?</span> (<span class="hljs-built_in">cdr</span> lat))])))
+
+
+<span class="hljs-comment">;(define makeset</span>
+<span class="hljs-comment">;  (lambda (lat)</span>
+<span class="hljs-comment">;    (cond</span>
+<span class="hljs-comment">;      [(null? lat) &#39;()]</span>
+<span class="hljs-comment">;      [(member? (car lat)</span>
+<span class="hljs-comment">;                (cdr lat))</span>
+<span class="hljs-comment">;       (makeset (cdr lat))]</span>
+<span class="hljs-comment">;      [else</span>
+<span class="hljs-comment">;       (cons (car lat)</span>
+<span class="hljs-comment">;             (makeset (cdr lat)))])))</span>
+
+
+<span class="hljs-comment">; write makeset using multirember</span>
+(<span class="hljs-keyword">define</span> makeset
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">lat</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-built_in">&#39;</span>()]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat)
+             (makeset (multirember (<span class="hljs-built_in">car</span> lat)
+                                   (<span class="hljs-built_in">cdr</span> lat))))])))
+
+
+(<span class="hljs-keyword">define</span> subset?
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">set1</span> <span class="hljs-variable">set2</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> set1) <span class="hljs-keyword">#t</span>]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">and</span> (member? (<span class="hljs-built_in">car</span> set1)
+                     set2)
+            (<span class="hljs-built_in">subset?</span> (<span class="hljs-built_in">cdr</span> set1)
+                     set2))])))
+
+
+<span class="hljs-comment">; remember to use subset? above</span>
+(<span class="hljs-keyword">define</span> eqset?
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">set1</span> <span class="hljs-variable">set2</span>)
+    (<span class="hljs-built_in">and</span> (<span class="hljs-built_in">subset?</span> set1 set2)
+         (<span class="hljs-built_in">subset?</span> set2 set1))))
+
+
+<span class="hljs-comment">; compare subset? and intersect?</span>
+(<span class="hljs-keyword">define</span> intersect?
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">set1</span> <span class="hljs-variable">set2</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> set1) <span class="hljs-keyword">#f</span>]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">or</span> (member? (<span class="hljs-built_in">car</span> set1)
+                    set2)
+           (intersect? (<span class="hljs-built_in">cdr</span> set1)
+                       set2))])))
+
+
+(<span class="hljs-keyword">define</span> intersect
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">set1</span> <span class="hljs-variable">set2</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> set1) <span class="hljs-built_in">&#39;</span>()]
+      [(member? (<span class="hljs-built_in">car</span> set1)
+                set2)
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> set1)
+             (intersect (<span class="hljs-built_in">cdr</span> set1)
+                        set2))]
+      [<span class="hljs-built_in">else</span>
+       (intersect (<span class="hljs-built_in">cdr</span> set1)
+                  set2)])))
+
+
+(<span class="hljs-keyword">define</span> union
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">set1</span> <span class="hljs-variable">set2</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> set1) set2]
+      [(member? (<span class="hljs-built_in">car</span> set1)
+                set2)
+       (union (<span class="hljs-built_in">cdr</span> set1)
+              set2)]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> set1)
+             (union (<span class="hljs-built_in">cdr</span> set1)
+                    set2))])))
+
+
+<span class="hljs-comment">; xxx returns all the atoms in</span>
+<span class="hljs-comment">; set1 that are not in set 2</span>
+<span class="hljs-comment">; Set Difference（差集）</span>
+(<span class="hljs-keyword">define</span> xxx
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">set1</span> <span class="hljs-variable">set2</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> set1) <span class="hljs-built_in">&#39;</span>()]
+      [(member? (<span class="hljs-built_in">car</span> set1)
+                set2)
+       (xxx (<span class="hljs-built_in">cdr</span> set1) set2)]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> set1)
+             (xxx (<span class="hljs-built_in">cdr</span> set1) set2))])))
+
+
+(<span class="hljs-keyword">define</span> intersectall
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">l-set</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> (<span class="hljs-built_in">cdr</span> l-set))  <span class="hljs-comment">; assume l-set is non-empty</span>
+       (<span class="hljs-built_in">car</span> l-set)]
+      [<span class="hljs-built_in">else</span>
+       (intersect (<span class="hljs-built_in">car</span> l-set)
+                  (intersectall (<span class="hljs-built_in">cdr</span> l-set)))])))</code></pre></div>
+
+<p>如果说上面的函数都是进一步练习和熟悉递归的概念，那下面这个 <code>pair</code> 就很重要了。<code>pair</code> 是最简单的数据结构，储存两个元素。它可以有很多种实现方式（如数组、对象等），本书是用函数来实现 <code>pair</code>，可以重塑新人对于函数的认知：</p>
+<blockquote>
+<p>函数也是可以储存数据的</p>
+</blockquote>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs Racket"><span class="hljs-comment">; a pair is a list with only two elements</span>
+(<span class="hljs-keyword">define</span> a-pair?
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">l</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(atom? l) <span class="hljs-keyword">#f</span>]
+      [(<span class="hljs-built_in">null?</span> l) <span class="hljs-keyword">#f</span>]
+      [(<span class="hljs-built_in">null?</span> (<span class="hljs-built_in">cdr</span> l)) <span class="hljs-keyword">#f</span>]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">null?</span> (<span class="hljs-built_in">cdr</span> (<span class="hljs-built_in">cdr</span> l)))])))
+
+
+(<span class="hljs-keyword">define</span> build
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">s1</span> <span class="hljs-variable">s2</span>)
+    (<span class="hljs-built_in">cons</span> s1 (<span class="hljs-built_in">cons</span> s2 <span class="hljs-built_in">&#39;</span>()))))
+
+(<span class="hljs-keyword">define</span> first  <span class="hljs-comment">; don&#39;t confuse with firsts in Chapter 3</span>
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">p</span>)
+    (<span class="hljs-built_in">car</span> p)))
+
+(<span class="hljs-keyword">define</span> second
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">p</span>)
+    (<span class="hljs-built_in">car</span> (<span class="hljs-built_in">cdr</span> p))))
+
+
+(<span class="hljs-keyword">define</span> third
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">p</span>)
+    (<span class="hljs-built_in">car</span> (<span class="hljs-built_in">cdr</span> (<span class="hljs-built_in">cdr</span> p)))))
+
+
+<span class="hljs-comment">; a finite function is a list of pairs</span>
+<span class="hljs-comment">; in which no first element of any pair</span>
+<span class="hljs-comment">; is the same as any other first element</span>
+<span class="hljs-comment">; distinguish finite function from partial </span>
+<span class="hljs-comment">; and total function in Page 151</span>
+(<span class="hljs-keyword">define</span> fun?
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">rel</span>)
+    (<span class="hljs-built_in">set?</span> (firsts rel))))
+
+
+<span class="hljs-comment">;; revrel stands for reverse rel</span>
+<span class="hljs-comment">;(define revrel</span>
+<span class="hljs-comment">;  (lambda (rel)</span>
+<span class="hljs-comment">;    (cond</span>
+<span class="hljs-comment">;      [(null? rel) &#39;()]</span>
+<span class="hljs-comment">;      [else</span>
+<span class="hljs-comment">;       (cons (build (second (car rel))  ; don&#39;t forget build</span>
+<span class="hljs-comment">;                    (first (car rel)))  ; representation aids readability</span>
+<span class="hljs-comment">;             (revrel (cdr rel)))])))</span>
+
+
+
+<span class="hljs-comment">; suppose we had the function revpair</span>
+(<span class="hljs-keyword">define</span> revpair
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">pair</span>)
+    (build (<span class="hljs-built_in">second</span> pair)
+           (<span class="hljs-built_in">first</span> pair))))
+
+
+<span class="hljs-comment">; it&#39;s even easier to read</span>
+(<span class="hljs-keyword">define</span> revrel
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">rel</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> rel) <span class="hljs-built_in">&#39;</span>()]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (revpair (<span class="hljs-built_in">car</span> rel))  <span class="hljs-comment">; representation aids readability</span>
+             (revrel (<span class="hljs-built_in">cdr</span> rel)))])))
+
+
+<span class="hljs-comment">; it&#39;s just like firsts</span>
+(<span class="hljs-keyword">define</span> seconds
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">l</span>)
+    (<span class="hljs-built_in">cond</span>            
+      [(<span class="hljs-built_in">null?</span> l) <span class="hljs-built_in">&#39;</span>()] 
+      [<span class="hljs-built_in">else</span>                
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> (<span class="hljs-built_in">cdr</span> (<span class="hljs-built_in">car</span> l)))
+             (seconds (<span class="hljs-built_in">cdr</span> l)))])))
+
+
+(<span class="hljs-keyword">define</span> fullfun?
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">fun</span>)
+    (<span class="hljs-built_in">set?</span> (seconds fun))))
+
+
+<span class="hljs-comment">; one-to-one? is another name for fullfun?</span>
+<span class="hljs-comment">; there&#39;s another way to write one-to-one?</span>
+(<span class="hljs-keyword">define</span> one-to-one?
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">fun</span>)
+    (fun? (revrel fun))))</code></pre></div>
 
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a>打赏</h3><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation">

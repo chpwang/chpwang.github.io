@@ -4,7 +4,7 @@
   <url>
     <loc>https://cps.ninja/2026/10/28/the-little-schemer/</loc>
     
-    <lastmod>2026-11-24</lastmod>
+    <lastmod>2026-11-25</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -317,6 +317,15 @@
   </url>
   
   <url>
+    <loc>https://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
+    
+    <lastmod>2022-03-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://cps.ninja/2018/09/17/numpy-advanced-features/</loc>
     
     <lastmod>2022-03-20</lastmod>
@@ -335,7 +344,7 @@
   </url>
   
   <url>
-    <loc>https://cps.ninja/2018/06/15/matplotlib-cheat-sheet/</loc>
+    <loc>https://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
     
     <lastmod>2022-03-20</lastmod>
     
@@ -345,15 +354,6 @@
   
   <url>
     <loc>https://cps.ninja/2018/01/31/rails-cheat-sheet/</loc>
-    
-    <lastmod>2022-03-20</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://cps.ninja/2018/09/17/pandas-advanced-features/</loc>
     
     <lastmod>2022-03-20</lastmod>
     
@@ -409,57 +409,57 @@
 
   <url>
     <loc>https://cps.ninja/</loc>
-    <lastmod>2026-11-24</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://cps.ninja/tags/Ruby-Rails/</loc>
-    <lastmod>2026-11-24</lastmod>
+    <loc>https://cps.ninja/tags/Miscellaneous/</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://cps.ninja/tags/Miscellaneous/</loc>
-    <lastmod>2026-11-24</lastmod>
+    <loc>https://cps.ninja/tags/Ruby-Rails/</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://cps.ninja/tags/Mac-Tools/</loc>
-    <lastmod>2026-11-24</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://cps.ninja/tags/Machine-Learning/</loc>
-    <lastmod>2026-11-24</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://cps.ninja/tags/Hexo/</loc>
-    <lastmod>2026-11-24</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://cps.ninja/tags/Blockchain/</loc>
-    <lastmod>2026-11-24</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://cps.ninja/tags/Programming-Language/</loc>
-    <lastmod>2026-11-24</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

@@ -1245,17 +1245,17 @@ x =&gt; <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</sp
 </tr>
 <tr>
 <td align="left">Partial Function</td>
-<td align="center">每个合法的输入不一定都有对应输出，有些输入可能会死循环</td>
+<td align="center">合法的输入不一定有对应输出，有些输入可能会死循环</td>
 </tr>
 <tr>
 <td align="left">Total Function</td>
-<td align="center">每个合法的输入都确定有对应输出（程序终止性）</td>
+<td align="center">每个合法的输入都<strong>确定</strong>有对应输出（程序终止性）</td>
 </tr>
 </tbody></table></div>
 <p><code>Partial Function</code> 和 <code>Total Function</code> 会在第九章节才出现，不过此时已经可以列在一起进行理解。</p>
-<p>这些概念不是为了数学分类而分类。它们会在后续学习编程语言、数据结构、类型系统乃至形式化证明时反复出现。</p>
+<p>这些概念不是数学上的分类，而是程序语言领域的分类。它们会在后续学习编程语言、数据结构、类型系统乃至形式化证明时反复出现。</p>
 <hr>
-<h3 id="Chapter-8-Lambda-the-Ultimate"><a href="#Chapter-8-Lambda-the-Ultimate" class="headerlink" title="Chapter 8 - Lambda the Ultimate"></a>Chapter 8 - Lambda the Ultimate</h3><p>本章开始高能，因为函数要作为值传递了。即调用（Call）的操作数（Operand）是一个函数。</p>
+<h3 id="Chapter-8-Lambda-the-Ultimate"><a href="#Chapter-8-Lambda-the-Ultimate" class="headerlink" title="Chapter 8 - Lambda the Ultimate"></a>Chapter 8 - Lambda the Ultimate</h3><p>本章学习函数作为值传递，这对新手来说开始进入高能烧脑的领域。函数调用（Call）的操作数（Operand）是一个函数。</p>
 <div class="code-block" data-code-language="Racket"><pre><code class="hljs Racket">(<span class="hljs-keyword">define</span> rember-f     
   (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">test?</span> <span class="hljs-variable">a</span> <span class="hljs-variable">l</span>)
     (<span class="hljs-built_in">cond</span>
@@ -1273,7 +1273,7 @@ x =&gt; <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</sp
 <li><p>Haskell Brooks Curry（1900–1982）：美国数学家、逻辑学家，进一步发展了组合逻辑。后来这种函数转换技术以他的姓氏命名为 Currying。Curry 本人也承认这一思想来自 Schönfinkel。</p>
 </li>
 </ul>
-<div class="code-block" data-code-language="Racket"><pre><code class="hljs Racket">(<span class="hljs-keyword">define</span> eq?-c
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs Racket">(<span class="hljs-keyword">define</span> eq?-c     <span class="hljs-comment">; c stands for Curried</span>
   (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">a</span>)
     (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">x</span>)
       (<span class="hljs-built_in">eq?</span> x a))))</code></pre></div>
@@ -1292,7 +1292,316 @@ x =&gt; <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</sp
          (<span class="hljs-built_in">cdr</span> l)]            
         [<span class="hljs-built_in">else</span>                
          (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> l)
-               (rember-f test? a (<span class="hljs-built_in">cdr</span> l)))]))))</code></pre></div>
+               ((rember-f test?) a (<span class="hljs-built_in">cdr</span> l)))]))))
+
+
+(<span class="hljs-keyword">define</span> insertL-f
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">test?</span>)
+    (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">new</span> <span class="hljs-variable">old</span> <span class="hljs-variable">l</span>)
+      (<span class="hljs-built_in">cond</span>
+        [(<span class="hljs-built_in">null?</span> l) <span class="hljs-built_in">&#39;</span>()]
+        [(test? old (<span class="hljs-built_in">car</span> l))
+         (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">new</span> l)]
+        [<span class="hljs-built_in">else</span>
+         (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> l)
+               ((insertL-f test?) <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> l)))]))))
+
+
+(<span class="hljs-keyword">define</span> seqL
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">new</span> <span class="hljs-variable">old</span> <span class="hljs-variable">l</span>)
+    (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">new</span> (<span class="hljs-built_in">cons</span> old l))))
+
+(<span class="hljs-keyword">define</span> seqR
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">new</span> <span class="hljs-variable">old</span> <span class="hljs-variable">l</span>)
+    (<span class="hljs-built_in">cons</span> old (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">new</span> l))))
+
+
+(<span class="hljs-keyword">define</span> insert-g      <span class="hljs-comment">; g stands for general or generic</span>
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">seq</span>)       <span class="hljs-comment">; seq stands for sequence</span>
+    (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">new</span> <span class="hljs-variable">old</span> <span class="hljs-variable">l</span>)
+      (<span class="hljs-built_in">cond</span>
+        [(<span class="hljs-built_in">null?</span> l) <span class="hljs-built_in">&#39;</span>()]
+        [(<span class="hljs-built_in">eq?</span> old (<span class="hljs-built_in">car</span> l))
+         (seq <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> l))]
+        [<span class="hljs-built_in">else</span>
+         (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> l)
+               ((insert-g seq) <span class="hljs-built_in">new</span> old (<span class="hljs-built_in">cdr</span> l)))]))))
+
+(<span class="hljs-keyword">define</span> seqS
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">new</span> <span class="hljs-variable">old</span> <span class="hljs-variable">l</span>)
+    (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">new</span> l)))
+
+<span class="hljs-comment">; rewrite insertL, insertR and subst with insert-g</span>
+(<span class="hljs-keyword">define</span> insertL (insert-g seqL))
+(<span class="hljs-keyword">define</span> insertR (insert-g seqR))
+(<span class="hljs-keyword">define</span> subst (insert-g seqS))
+
+
+(<span class="hljs-keyword">define</span> seqrem
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">new</span> <span class="hljs-variable">old</span> <span class="hljs-variable">l</span>)
+    l))
+
+(<span class="hljs-keyword">define</span> yyy                       <span class="hljs-comment">; It&#39;s our old friend rember</span>
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">a</span> <span class="hljs-variable">l</span>)
+    ((insert-g seqrem) <span class="hljs-keyword">#f</span> a l)))  <span class="hljs-comment">; #f is just a dummy value</span>
+
+<span class="hljs-comment">; 注意，虽然 #f 会被忽略，但这里也不是随便放什么参数都行的</span>
+<span class="hljs-comment">; 比如把 #f 换成 (/ 1 0) 就会报错，因为在被忽略前，会先被求值</span></code></pre></div>
+
+<blockquote><p>What you have just seen is the power of abstraction.</p>
+<footer><strong>Daniel P. Friedman</strong></footer></blockquote>
+
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The Ninth Commandament</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Abstract common patterns with a new function</td>
+</tr>
+</tbody></table></div>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs Racket">(<span class="hljs-keyword">define</span> atom-to-function
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">x</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">eq?</span> x <span class="hljs-string">&#39;+</span>) o+]
+      [(<span class="hljs-built_in">eq?</span> x <span class="hljs-string">&#39;×</span>) ×]
+      [<span class="hljs-built_in">else</span> ↑])))
+
+
+<span class="hljs-comment">; use atom-to-function to rewrite value</span>
+(<span class="hljs-keyword">define</span> value
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">nexp</span>)    <span class="hljs-comment">; nexp stands for &quot;numbered arithmetic expression&quot;</span>
+    (<span class="hljs-built_in">cond</span>
+      [(atom? nexp) nexp]
+      [<span class="hljs-built_in">else</span>
+       ((atom-to-function (operator nexp))
+        (value (1st-sub-exp nexp))
+        (value (2nd-sub-exp nexp)))])))
+
+
+(<span class="hljs-keyword">define</span> multirember-f
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">test?</span>)
+    (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">a</span> <span class="hljs-variable">lat</span>)
+      (<span class="hljs-built_in">cond</span>
+        [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-built_in">&#39;</span>()]
+        [(test? a (<span class="hljs-built_in">car</span> lat))
+         ((multirember-f test?) a (<span class="hljs-built_in">cdr</span> lat))]
+        [<span class="hljs-built_in">else</span>
+         (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat)
+               ((multirember-f test?) a (<span class="hljs-built_in">cdr</span> lat)))]))))
+
+
+(<span class="hljs-keyword">define</span> multirember-eq? (multirember-f <span class="hljs-built_in">eq?</span>))
+
+
+(<span class="hljs-keyword">define</span> eq?-tuna
+  (eq?-c <span class="hljs-string">&#39;tuna</span>))
+
+(<span class="hljs-keyword">define</span> multiremberT    <span class="hljs-comment">; T stands for Test</span>
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">test?</span> <span class="hljs-variable">lat</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-built_in">&#39;</span>()]
+      [(test? (<span class="hljs-built_in">car</span> lat))
+       (multiremberT test? (<span class="hljs-built_in">cdr</span> lat))]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat)
+             (multiremberT test? (<span class="hljs-built_in">cdr</span> lat)))])))</code></pre></div>
+
+<p>了解了函数作为值传递后，接下来是更烧脑也更重要的 <code>collector</code> 概念</p>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs Racket">(<span class="hljs-keyword">define</span> multirember&amp;co
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">a</span> <span class="hljs-variable">lat</span> <span class="hljs-variable">col</span>)   <span class="hljs-comment">; col is short for collector</span>
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat)
+       (col <span class="hljs-built_in">&#39;</span>() <span class="hljs-built_in">&#39;</span>())]
+      [(<span class="hljs-built_in">eq?</span> a (<span class="hljs-built_in">car</span> lat))
+       (multirember&amp;co
+        a
+        (<span class="hljs-built_in">cdr</span> lat)
+        (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">newlat</span> <span class="hljs-variable">seen</span>)
+          (col newlat
+               (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat) seen))))]
+      [<span class="hljs-built_in">else</span>
+       (multirember&amp;co
+        a
+        (<span class="hljs-built_in">cdr</span> lat)
+        (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">newlat</span> <span class="hljs-variable">seen</span>)
+          (col (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat) newlat)
+               seen)))])))
+
+<span class="hljs-comment">; 上面的函数乍看之下很复杂，其实关键是在于理解 col 这个参数，它是个 collector</span>
+<span class="hljs-comment">; 之前的 pair 已展示函数存放数据的能力，这个 collector 就是收集和存放数据的</span>
+
+
+(<span class="hljs-keyword">define</span> a-friend
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">x</span> <span class="hljs-variable">y</span>)
+    (<span class="hljs-built_in">null?</span> y)))
+
+
+(multirember&amp;co <span class="hljs-string">&#39;tuna</span> <span class="hljs-built_in">&#39;</span>(strawberries tuna <span class="hljs-built_in">and</span> swordfish tuna) a-friend)
+
+<span class="hljs-comment">; 通过 a-friend 函数来理解 collector 的工作原理</span>
+<span class="hljs-comment">; multirember&amp;co 的 collector 就是通过 2 个参数</span>
+<span class="hljs-comment">; 把根据条件“收集”的元素构建成链表往上层的 col 传递</span>
+<span class="hljs-comment">; 可以看到 a-friend 的两个参数最终会获取到两个链表</span>
+<span class="hljs-comment">; 然后判断第二个链表 y 是否为空（你也可以改成输出 y）</span></code></pre></div>
+
+<blockquote><p>A collector is sometimes called a “continuation”.</p>
+<footer><strong>Daniel P. Friedman</strong></footer></blockquote>
+
+<p>Continuation 的是计算领域的一个重要而强大的概念，在这里建议新手能保持耐心，尽可能吃透 <code>collector</code> 的运作原理，熟悉这种思考方式。</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th align="center">The Tenth Commandament</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Build functions to collect more than one value at a time.</td>
+</tr>
+</tbody></table></div>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs Racket">(<span class="hljs-keyword">define</span> multiinsertLR
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">new</span> <span class="hljs-variable">oldL</span> <span class="hljs-variable">oldR</span> <span class="hljs-variable">lat</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat) <span class="hljs-built_in">&#39;</span>()]
+      [(<span class="hljs-built_in">eq?</span> oldL (<span class="hljs-built_in">car</span> lat))
+       (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">new</span>
+             (<span class="hljs-built_in">cons</span> oldL
+                   (multiinsertLR <span class="hljs-built_in">new</span> oldL oldR
+                                  (<span class="hljs-built_in">cdr</span> lat))))]
+      [(<span class="hljs-built_in">eq?</span> oldR (<span class="hljs-built_in">car</span> lat))
+       (<span class="hljs-built_in">cons</span> oldR
+             (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">new</span>
+                   (multiinsertLR <span class="hljs-built_in">new</span> oldL oldR
+                                  (<span class="hljs-built_in">cdr</span> lat))))]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat)
+             (multiinsertLR <span class="hljs-built_in">new</span> oldL oldR
+                            (<span class="hljs-built_in">cdr</span> lat)))])))
+
+
+
+(<span class="hljs-keyword">define</span> multiinsertLR&amp;co
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">new</span> <span class="hljs-variable">oldL</span> <span class="hljs-variable">oldR</span> <span class="hljs-variable">lat</span> <span class="hljs-variable">col</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> lat)
+       (col <span class="hljs-built_in">&#39;</span>() <span class="hljs-number">0</span> <span class="hljs-number">0</span>)]
+      [(<span class="hljs-built_in">eq?</span> oldL (<span class="hljs-built_in">car</span> lat))
+       (multiinsertLR&amp;co <span class="hljs-built_in">new</span> oldL oldR (<span class="hljs-built_in">cdr</span> lat)
+                         (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">newlat</span> <span class="hljs-variable">L</span> <span class="hljs-variable">R</span>)
+                           (col (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">new</span> (<span class="hljs-built_in">cons</span> oldL newlat))
+                                (<span class="hljs-built_in">add1</span> L)
+                                R)))]
+      [(<span class="hljs-built_in">eq?</span> oldR (<span class="hljs-built_in">car</span> lat))
+       (multiinsertLR&amp;co <span class="hljs-built_in">new</span> oldL oldR (<span class="hljs-built_in">cdr</span> lat)
+                         (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">newlat</span> <span class="hljs-variable">L</span> <span class="hljs-variable">R</span>)
+                           (col (<span class="hljs-built_in">cons</span> oldR (<span class="hljs-built_in">cons</span> <span class="hljs-built_in">new</span> newlat))
+                                L
+                                (<span class="hljs-built_in">add1</span> R))))]
+      [<span class="hljs-built_in">else</span>
+       (multiinsertLR&amp;co <span class="hljs-built_in">new</span> oldL oldR (<span class="hljs-built_in">cdr</span> lat)
+                         (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">newlat</span> <span class="hljs-variable">L</span> <span class="hljs-variable">R</span>)
+                           (col (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> lat) newlat)
+                                L
+                                R)))])))
+
+
+<span class="hljs-comment">; evens-only* is just another *-function which </span>
+<span class="hljs-comment">; removes all odd numbers from a list of nested lists</span>
+(<span class="hljs-keyword">define</span> evens-only*
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">ls</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> ls) <span class="hljs-built_in">&#39;</span>()]
+      [(atom? (<span class="hljs-built_in">car</span> ls))
+       (<span class="hljs-built_in">cond</span>
+         [(<span class="hljs-built_in">even?</span> (<span class="hljs-built_in">car</span> ls))
+          (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> ls)
+                (evens-only* (<span class="hljs-built_in">cdr</span> ls)))]
+         [<span class="hljs-built_in">else</span>
+          (evens-only* (<span class="hljs-built_in">cdr</span> ls))])]
+      [<span class="hljs-built_in">else</span>
+       (<span class="hljs-built_in">cons</span> (evens-only* (<span class="hljs-built_in">car</span> ls))
+             (evens-only* (<span class="hljs-built_in">cdr</span> ls)))])))</code></pre></div>
+
+<p>烧脑再升级，本章最难函数 <code>evens-only*&amp;co</code> 先根据 <code>evens-only*</code> 搭出框架</p>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs Racket">(<span class="hljs-keyword">define</span> evens-only*&amp;co
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">l</span> <span class="hljs-variable">col</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> l)
+       (col <span class="hljs-built_in">&#39;</span>() <span class="hljs-number">1</span> <span class="hljs-number">0</span>)]
+      [(atom? (<span class="hljs-built_in">car</span> l))
+       (<span class="hljs-built_in">cond</span>
+         [(<span class="hljs-built_in">even?</span> (<span class="hljs-built_in">car</span> l))
+          (evens-only*&amp;co
+           (<span class="hljs-built_in">cdr</span> l)
+           (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">newl</span> <span class="hljs-variable">p</span> <span class="hljs-variable">s</span>)
+             (col (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> l) newl)
+                  (× (<span class="hljs-built_in">car</span> l) p)
+                  s)))]
+         [<span class="hljs-built_in">else</span>
+          (evens-only*&amp;co
+           (<span class="hljs-built_in">cdr</span> l)
+           (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">newl</span> <span class="hljs-variable">p</span> <span class="hljs-variable">s</span>)
+             (col newl
+                  p
+                  (o+ (<span class="hljs-built_in">car</span> l) s))))])]
+      [<span class="hljs-built_in">else</span>
+       (evens-only*&amp;co
+        ......
+        ......)])))</code></pre></div>
+
+<p>大部分代码依照前面的 <code>collector</code> 模式写即可，最后的 <code>else</code> 分支最难<br>突破点在于要先想到我们最后要交给 <code>col</code> 的是什么？应该是下面这个东西</p>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs Racket">(col (<span class="hljs-built_in">cons</span> car-evenlat cdr-evenlat)
+     (× car-even-product cdr-even-product)
+     (o+ car-odd-sum cdr-odd-sum))</code></pre></div>
+
+<p>于是只需要找到 <code>car-evenlat</code> ，<code>cdr-evenlat</code> ，<code>car-even-product</code> ，<code>cdr-even-product</code> ，<code>car-odd-sum</code> 和 <code>cdr-odd-sum</code> 即可。<br>如何获取它们呢？那自然是来自于我们设计好的 <code>collector</code> 了：</p>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs Racket">(<span class="hljs-keyword">define</span> evens-only*&amp;co
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">l</span> <span class="hljs-variable">col</span>)
+    (<span class="hljs-built_in">cond</span>
+      [(<span class="hljs-built_in">null?</span> l)
+       (col <span class="hljs-built_in">&#39;</span>() <span class="hljs-number">1</span> <span class="hljs-number">0</span>)]
+      [(atom? (<span class="hljs-built_in">car</span> l))
+       (<span class="hljs-built_in">cond</span>
+         [(<span class="hljs-built_in">even?</span> (<span class="hljs-built_in">car</span> l))
+          (evens-only*&amp;co
+           (<span class="hljs-built_in">cdr</span> l)
+           (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">newl</span> <span class="hljs-variable">p</span> <span class="hljs-variable">s</span>)
+             (col (<span class="hljs-built_in">cons</span> (<span class="hljs-built_in">car</span> l) newl)
+                  (× (<span class="hljs-built_in">car</span> l) p)
+                  s)))]
+         [<span class="hljs-built_in">else</span>
+          (evens-only*&amp;co
+           (<span class="hljs-built_in">cdr</span> l)
+           (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">newl</span> <span class="hljs-variable">p</span> <span class="hljs-variable">s</span>)
+             (col newl
+                  p
+                  (o+ (<span class="hljs-built_in">car</span> l) s))))])]
+      [<span class="hljs-built_in">else</span>
+       (evens-only*&amp;co
+        (<span class="hljs-built_in">car</span> l)
+        (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">car-lat</span> <span class="hljs-variable">car-p</span> <span class="hljs-variable">car-s</span>)
+          (evens-only*&amp;co
+           (<span class="hljs-built_in">cdr</span> l)
+           (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">cdr-lat</span> <span class="hljs-variable">cdr-p</span> <span class="hljs-variable">cdr-s</span>)
+             (col (<span class="hljs-built_in">cons</span> car-lat cdr-lat)
+                  (× car-p cdr-p)
+                  (o+ car-s cdr-s))))))])))</code></pre></div>
+
+<p><code>else</code> 分支也可以是下面这样，不过这会先递归 <code>(cdr l)</code> 再递归 <code>(car l)</code></p>
+<div class="code-block" data-code-language="Racket"><pre><code class="hljs Racket">[<span class="hljs-built_in">else</span>
+ (evens-only*&amp;co
+  (<span class="hljs-built_in">cdr</span> l)
+  (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">cdr-lat</span> <span class="hljs-variable">cdr-p</span> <span class="hljs-variable">cdr-s</span>)
+    (evens-only*&amp;co
+     (<span class="hljs-built_in">car</span> l)
+     (<span class="hljs-keyword">lambda</span> (<span class="hljs-variable">car-lat</span> <span class="hljs-variable">car-p</span> <span class="hljs-variable">car-s</span>)
+       (col (<span class="hljs-built_in">cons</span> car-lat cdr-lat)
+            (× car-p cdr-p)
+            (o+ car-s cdr-s))))))]</code></pre></div>
+
+<blockquote><p>Whew! Is your brain twisted up now? Go eat a pretzel; don’t forget the mustard.</p>
+<footer><strong>Daniel P. Friedman</strong></footer></blockquote>
 
 <hr>
 <h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a>打赏</h3><img id="donate_QR_Code" src="/images/donate.jpg" alt="QR Code for donation">
